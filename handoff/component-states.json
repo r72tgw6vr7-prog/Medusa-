@@ -1,0 +1,541 @@
+{
+  "metadata": {
+    "projectName": "Medusa Tattoo München",
+    "description": "Component state specifications and interactive behavior patterns",
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-09"
+  },
+  
+  "buttons": {
+    "primary": {
+      "name": "Primary CTA Button (Gold)",
+      "states": {
+        "default": {
+          "background": "#D4AF37",
+          "color": "#222222",
+          "border": "none",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)",
+          "transform": "none",
+          "cursor": "pointer"
+        },
+        "hover": {
+          "background": "#C19B26",
+          "color": "#222222",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3)",
+          "transform": "translateY(-1px)",
+          "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "active": {
+          "background": "#A8821A",
+          "color": "#222222",
+          "transform": "translateY(0) scale(0.98)",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3)"
+        },
+        "disabled": {
+          "background": "rgba(212, 175, 55, 0.3)",
+          "color": "rgba(34, 34, 34, 0.5)",
+          "cursor": "not-allowed",
+          "boxShadow": "none"
+        }
+      },
+      "dimensions": {
+        "minHeight": "44px",
+        "minHeightMobile": "48px",
+        "padding": "12px 24px",
+        "borderRadius": "10px"
+      }
+    },
+    
+    "secondary": {
+      "name": "Secondary Button (Chrome Outline)",
+      "states": {
+        "default": {
+          "background": "transparent",
+          "color": "#C0C0C0",
+          "border": "1px solid #C0C0C0",
+          "boxShadow": "none"
+        },
+        "hover": {
+          "background": "rgba(212, 175, 55, 0.05)",
+          "color": "#D4AF37",
+          "border": "1px solid #D4AF37",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)"
+        },
+        "active": {
+          "background": "rgba(212, 175, 55, 0.1)",
+          "transform": "scale(0.98)"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px"
+        },
+        "disabled": {
+          "background": "transparent",
+          "color": "rgba(192, 192, 192, 0.3)",
+          "border": "1px solid rgba(192, 192, 192, 0.3)",
+          "cursor": "not-allowed"
+        }
+      },
+      "dimensions": {
+        "minHeight": "44px",
+        "minHeightMobile": "48px",
+        "padding": "12px 24px",
+        "borderRadius": "10px"
+      }
+    },
+    
+    "text": {
+      "name": "Text Button / Link",
+      "states": {
+        "default": {
+          "background": "transparent",
+          "color": "#FFFFFF",
+          "textDecoration": "none"
+        },
+        "hover": {
+          "color": "#D4AF37",
+          "textDecoration": "underline",
+          "textUnderlineOffset": "4px"
+        },
+        "active": {
+          "color": "#C19B26"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px",
+          "borderRadius": "4px"
+        }
+      }
+    }
+  },
+  
+  "cards": {
+    "serviceCard": {
+      "name": "Premium Service Card",
+      "states": {
+        "default": {
+          "background": "linear-gradient(145deg, rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.95))",
+          "backdropFilter": "blur(8px)",
+          "border": "1px solid rgba(192, 192, 192, 0.15)",
+          "borderRadius": "12px",
+          "boxShadow": "none",
+          "transform": "none"
+        },
+        "hover": {
+          "border": "1px solid rgba(212, 175, 55, 0.4)",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3), 0 8px 32px rgba(0, 0, 0, 0.3)",
+          "transform": "translateY(-4px)",
+          "transition": "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px"
+        }
+      }
+    },
+    
+    "artistCard": {
+      "name": "Artist Showcase Card",
+      "states": {
+        "default": {
+          "background": "linear-gradient(145deg, rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.95))",
+          "backdropFilter": "blur(8px)",
+          "border": "1px solid rgba(192, 192, 192, 0.15)",
+          "borderRadius": "12px",
+          "transform": "none"
+        },
+        "hover": {
+          "border": "1px solid rgba(212, 175, 55, 0.4)",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3), 0 8px 32px rgba(0, 0, 0, 0.3)",
+          "transform": "translateY(-2px)"
+        },
+        "featured": {
+          "border": "2px solid #C0C0C0",
+          "boxShadow": "0 0 30px rgba(192, 192, 192, 0.2)"
+        }
+      }
+    }
+  },
+  
+  "inputs": {
+    "textInput": {
+      "name": "Text Input Field",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.8)",
+          "border": "1px solid rgba(192, 192, 192, 0.3)",
+          "color": "#FFFFFF",
+          "borderRadius": "8px",
+          "minHeight": "44px",
+          "padding": "12px 16px"
+        },
+        "hover": {
+          "border": "1px solid rgba(192, 192, 192, 0.5)"
+        },
+        "focus": {
+          "border": "2px solid #D4AF37",
+          "outline": "none",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)"
+        },
+        "error": {
+          "border": "2px solid rgba(212, 175, 55, 0.6)",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.3)"
+        },
+        "disabled": {
+          "background": "rgba(34, 34, 34, 0.5)",
+          "border": "1px solid rgba(192, 192, 192, 0.2)",
+          "color": "rgba(255, 255, 255, 0.4)",
+          "cursor": "not-allowed"
+        }
+      }
+    },
+    
+    "textarea": {
+      "name": "Textarea Field",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.8)",
+          "border": "1px solid rgba(192, 192, 192, 0.3)",
+          "color": "#FFFFFF",
+          "borderRadius": "8px",
+          "minHeight": "120px",
+          "padding": "12px 16px",
+          "resize": "vertical"
+        },
+        "focus": {
+          "border": "2px solid #D4AF37",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)"
+        }
+      }
+    },
+    
+    "select": {
+      "name": "Select Dropdown",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.8)",
+          "border": "1px solid rgba(192, 192, 192, 0.3)",
+          "color": "#FFFFFF",
+          "borderRadius": "8px",
+          "minHeight": "44px",
+          "padding": "12px 16px"
+        },
+        "open": {
+          "border": "2px solid #D4AF37",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.2)"
+        },
+        "option": {
+          "background": "#222222",
+          "color": "#FFFFFF",
+          "hover": {
+            "background": "rgba(212, 175, 55, 0.1)",
+            "color": "#D4AF37"
+          }
+        }
+      }
+    },
+    
+    "checkbox": {
+      "name": "Checkbox",
+      "states": {
+        "unchecked": {
+          "background": "transparent",
+          "border": "2px solid #C0C0C0",
+          "width": "20px",
+          "height": "20px",
+          "borderRadius": "4px"
+        },
+        "checked": {
+          "background": "#D4AF37",
+          "border": "2px solid #D4AF37",
+          "color": "#222222"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px"
+        }
+      }
+    }
+  },
+  
+  "navigation": {
+    "glassmorphicNav": {
+      "name": "Glassmorphic Navigation Bar",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.7)",
+          "backdropFilter": "blur(14px)",
+          "border": "1px solid rgba(212, 175, 55, 0.1)",
+          "position": "sticky",
+          "top": "0",
+          "zIndex": "1000"
+        },
+        "scrolled": {
+          "background": "rgba(34, 34, 34, 0.85)",
+          "boxShadow": "0 4px 20px rgba(0, 0, 0, 0.3)"
+        }
+      }
+    },
+    
+    "navLink": {
+      "name": "Navigation Link",
+      "states": {
+        "default": {
+          "color": "#FFFFFF",
+          "textDecoration": "none",
+          "padding": "8px 16px",
+          "borderRadius": "8px"
+        },
+        "hover": {
+          "color": "#D4AF37",
+          "background": "rgba(212, 175, 55, 0.1)"
+        },
+        "active": {
+          "color": "#D4AF37",
+          "background": "rgba(212, 175, 55, 0.15)",
+          "borderBottom": "2px solid #D4AF37"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px"
+        }
+      }
+    }
+  },
+  
+  "modals": {
+    "dialog": {
+      "name": "Modal Dialog",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.95)",
+          "backdropFilter": "blur(20px)",
+          "border": "1px solid rgba(212, 175, 55, 0.2)",
+          "borderRadius": "16px",
+          "padding": "32px",
+          "boxShadow": "0 20px 60px rgba(0, 0, 0, 0.6)"
+        }
+      },
+      "overlay": {
+        "background": "rgba(0, 0, 0, 0.7)",
+        "backdropFilter": "blur(8px)"
+      }
+    }
+  },
+  
+  "gallery": {
+    "tile": {
+      "name": "Gallery Image Tile",
+      "states": {
+        "default": {
+          "filter": "none",
+          "transform": "scale(1)",
+          "cursor": "pointer"
+        },
+        "hover": {
+          "filter": "brightness(1.1)",
+          "transform": "scale(1.02)",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3)",
+          "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        "focus": {
+          "outline": "2px solid #D4AF37",
+          "outlineOffset": "2px"
+        }
+      }
+    },
+    
+    "lightbox": {
+      "name": "Gallery Lightbox",
+      "states": {
+        "overlay": {
+          "background": "rgba(0, 0, 0, 0.95)",
+          "backdropFilter": "blur(10px)"
+        },
+        "image": {
+          "maxWidth": "90vw",
+          "maxHeight": "90vh",
+          "boxShadow": "0 0 40px rgba(212, 175, 55, 0.2)"
+        }
+      }
+    }
+  },
+  
+  "progress": {
+    "stepIndicator": {
+      "name": "Booking Flow Step Indicator",
+      "states": {
+        "incomplete": {
+          "background": "transparent",
+          "border": "2px solid #C0C0C0",
+          "color": "#C0C0C0"
+        },
+        "active": {
+          "background": "#D4AF37",
+          "border": "2px solid #D4AF37",
+          "color": "#222222",
+          "boxShadow": "0 0 20px rgba(212, 175, 55, 0.3)"
+        },
+        "complete": {
+          "background": "#D4AF37",
+          "border": "2px solid #D4AF37",
+          "color": "#222222"
+        }
+      }
+    },
+    
+    "progressBar": {
+      "name": "Progress Bar",
+      "states": {
+        "track": {
+          "background": "rgba(192, 192, 192, 0.2)",
+          "height": "4px",
+          "borderRadius": "2px"
+        },
+        "fill": {
+          "background": "linear-gradient(90deg, #D4AF37, #C19B26)",
+          "boxShadow": "0 0 10px rgba(212, 175, 55, 0.3)"
+        }
+      }
+    }
+  },
+  
+  "badges": {
+    "default": {
+      "name": "Default Badge",
+      "states": {
+        "default": {
+          "background": "rgba(192, 192, 192, 0.2)",
+          "color": "#C0C0C0",
+          "border": "1px solid rgba(192, 192, 192, 0.3)",
+          "borderRadius": "9999px",
+          "padding": "4px 12px",
+          "fontSize": "14px"
+        }
+      }
+    },
+    
+    "gold": {
+      "name": "Gold Accent Badge",
+      "states": {
+        "default": {
+          "background": "rgba(212, 175, 55, 0.15)",
+          "color": "#D4AF37",
+          "border": "1px solid rgba(212, 175, 55, 0.3)",
+          "borderRadius": "9999px",
+          "padding": "4px 12px",
+          "fontSize": "14px"
+        }
+      }
+    }
+  },
+  
+  "tooltips": {
+    "default": {
+      "name": "Tooltip",
+      "states": {
+        "default": {
+          "background": "rgba(34, 34, 34, 0.95)",
+          "backdropFilter": "blur(8px)",
+          "color": "#FFFFFF",
+          "border": "1px solid rgba(212, 175, 55, 0.2)",
+          "borderRadius": "8px",
+          "padding": "8px 12px",
+          "fontSize": "14px",
+          "boxShadow": "0 4px 12px rgba(0, 0, 0, 0.3)",
+          "zIndex": "9999"
+        }
+      },
+      "arrow": {
+        "fill": "rgba(34, 34, 34, 0.95)",
+        "stroke": "rgba(212, 175, 55, 0.2)"
+      }
+    }
+  },
+  
+  "loading": {
+    "spinner": {
+      "name": "Loading Spinner",
+      "states": {
+        "default": {
+          "borderColor": "rgba(212, 175, 55, 0.2)",
+          "borderTopColor": "#D4AF37",
+          "animation": "spin 1s linear infinite",
+          "width": "40px",
+          "height": "40px"
+        }
+      }
+    },
+    
+    "skeleton": {
+      "name": "Skeleton Loader",
+      "states": {
+        "default": {
+          "background": "linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, rgba(212, 175, 55, 0.1) 50%, rgba(192, 192, 192, 0.1) 100%)",
+          "backgroundSize": "200% 100%",
+          "animation": "shimmer 2s ease-in-out infinite"
+        }
+      }
+    }
+  },
+  
+  "microInteractions": {
+    "goldGlow": {
+      "name": "Magnetic Gold Glow Effect",
+      "description": "Proximity-based glow that intensifies as cursor approaches",
+      "parameters": {
+        "radius": "32px",
+        "intensity": "0.4",
+        "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    },
+    
+    "parallax": {
+      "name": "Parallax Scroll Effect",
+      "parameters": {
+        "mainLayer": "0.08",
+        "backgroundLayer": "0.04",
+        "description": "Subtle depth effect on scroll (8% main, 4% background)"
+      }
+    },
+    
+    "breathing": {
+      "name": "Breathing Animation",
+      "description": "Subtle pulsing effect for attention",
+      "parameters": {
+        "duration": "3s",
+        "timing": "cubic-bezier(0.37, 0, 0.63, 1)",
+        "scale": "1.0 to 1.02"
+      }
+    }
+  },
+  
+  "animations": {
+    "fadeIn": {
+      "name": "Fade In",
+      "keyframes": "opacity 0 to 1",
+      "duration": "0.5s",
+      "timing": "ease-in-out"
+    },
+    
+    "slideUp": {
+      "name": "Slide Up",
+      "keyframes": "transform translateY(20px) to translateY(0), opacity 0 to 1",
+      "duration": "0.5s",
+      "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    
+    "goldPulse": {
+      "name": "Gold Pulse",
+      "keyframes": "box-shadow 0 0 10px rgba(212, 175, 55, 0.2) to 0 0 30px rgba(212, 175, 55, 0.4)",
+      "duration": "2s",
+      "timing": "ease-in-out",
+      "iteration": "infinite"
+    }
+  }
+}

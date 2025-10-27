@@ -1,0 +1,724 @@
+{
+  "metadata": {
+    "projectName": "Medusa Tattoo München",
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-09",
+    "description": "Complete design token system for luxury tattoo salon website",
+    "designPhilosophy": "Strict minimalism with cinematic photography, golden ratio layouts, and WCAG AA accessibility"
+  },
+  
+  "colors": {
+    "brand": {
+      "background": {
+        "value": "#222222",
+        "rgb": "34, 34, 34",
+        "usage": "EXCLUSIVE background color - appears ONLY as backgrounds, never for text or UI elements",
+        "cssVariable": "--brand-background",
+        "mandatoryRule": "ZERO TOLERANCE - This color is forbidden for any use except backgrounds"
+      },
+      "white": {
+        "value": "#FFFFFF",
+        "rgb": "255, 255, 255",
+        "usage": "Pure white for all body text, headings, and primary content",
+        "cssVariable": "--brand-white",
+        "contrastRatio": "12.63:1 (WCAG AAA)"
+      },
+      "gold": {
+        "value": "#D4AF37",
+        "rgb": "212, 175, 55",
+        "usage": "Primary accent color for CTAs, highlights, active states, and brand accents",
+        "cssVariable": "--brand-gold",
+        "contrastRatio": "6.4:1 on dark background (WCAG AA)"
+      },
+      "chrome": {
+        "value": "#C0C0C0",
+        "rgb": "192, 192, 192",
+        "usage": "Secondary accent for details, borders, inactive states, and chrome elements",
+        "cssVariable": "--brand-chrome",
+        "contrastRatio": "7.8:1 on dark background (WCAG AA)"
+      }
+    },
+    
+    "semantic": {
+      "background": {
+        "primary": {
+          "value": "#222222",
+          "usage": "Main page background"
+        },
+        "overlay": {
+          "value": "rgba(34, 34, 34, 0.9)",
+          "usage": "Modal and overlay backgrounds"
+        },
+        "glassmorphic": {
+          "value": "rgba(34, 34, 34, 0.7)",
+          "usage": "Navigation bar glassmorphic effect",
+          "backdropBlur": "14px"
+        }
+      },
+      
+      "text": {
+        "primary": {
+          "value": "#FFFFFF",
+          "usage": "Primary heading and body text"
+        },
+        "secondary": {
+          "value": "rgba(255, 255, 255, 0.8)",
+          "usage": "Secondary text, captions, metadata"
+        },
+        "tertiary": {
+          "value": "rgba(255, 255, 255, 0.6)",
+          "usage": "Disabled text, placeholders"
+        }
+      },
+      
+      "accent": {
+        "primary": {
+          "value": "#D4AF37",
+          "usage": "Primary CTA buttons, active links, highlights"
+        },
+        "hover": {
+          "value": "#C19B26",
+          "usage": "Hover state for gold elements"
+        },
+        "active": {
+          "value": "#A8821A",
+          "usage": "Active/pressed state for gold elements"
+        }
+      },
+      
+      "chrome": {
+        "primary": {
+          "value": "#C0C0C0",
+          "usage": "Secondary buttons, borders, icons"
+        },
+        "hover": {
+          "value": "#A8A8A8",
+          "usage": "Hover state for chrome elements"
+        }
+      },
+      
+      "borders": {
+        "default": {
+          "value": "rgba(192, 192, 192, 0.15)",
+          "usage": "Default card and component borders"
+        },
+        "hover": {
+          "value": "rgba(212, 175, 55, 0.4)",
+          "usage": "Hover state borders"
+        },
+        "focus": {
+          "value": "#D4AF37",
+          "usage": "Keyboard focus indicator borders",
+          "width": "2px",
+          "wcagCompliant": true
+        },
+        "navigation": {
+          "value": "rgba(212, 175, 55, 0.1)",
+          "usage": "Glassmorphic navigation border"
+        }
+      }
+    },
+    
+    "effects": {
+      "goldGlow": {
+        "subtle": {
+          "value": "0 0 10px rgba(212, 175, 55, 0.2)",
+          "cssVariable": "--gold-glow-subtle",
+          "usage": "Subtle hover glow on interactive elements"
+        },
+        "standard": {
+          "value": "0 0 20px rgba(212, 175, 55, 0.3)",
+          "cssVariable": "--gold-glow",
+          "usage": "Standard CTA button glow"
+        },
+        "strong": {
+          "value": "0 0 30px rgba(212, 175, 55, 0.4)",
+          "cssVariable": "--gold-glow-strong",
+          "usage": "Strong emphasis on primary CTAs"
+        },
+        "medium": {
+          "value": "0 4px 20px rgba(212, 175, 55, 0.3)",
+          "cssVariable": "--shadow-gold-medium",
+          "usage": "Elevated card shadows"
+        }
+      },
+      "mandatoryRule": "ONLY gold glows are permitted - NO drop shadows, NO generic shadows, NO other glow colors"
+    },
+    
+    "forbiddenColors": {
+      "notice": "The following colors are STRICTLY FORBIDDEN and must never appear in the design",
+      "list": [
+        "Blue (#0000FF or any variant)",
+        "Green (#00FF00 or any variant)",
+        "Purple (#800080 or any variant)",
+        "Red (#FF0000 or any variant)",
+        "Any color not in the 4-color brand palette"
+      ],
+      "enforcement": "Immediate correction required for any violation"
+    }
+  },
+  
+  "typography": {
+    "fonts": {
+      "heading": {
+        "family": "Playfair Display",
+        "fallback": "serif",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');",
+        "cssVariable": "--font-headline",
+        "usage": "ALL headlines (H1, H2, H3, H4, H5, H6)",
+        "mandatoryRule": "NO generic fonts, NO Cormorant Garamond, ONLY Playfair Display for headlines"
+      },
+      "body": {
+        "family": "Inter",
+        "fallback": "sans-serif",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');",
+        "cssVariable": "--font-body",
+        "usage": "ALL body text, buttons, labels, captions, navigation"
+      }
+    },
+    
+    "scale": {
+      "desktop": {
+        "breakpoint": "1200px+",
+        "sizes": {
+          "displayXL": {
+            "size": "72px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-xl-desktop",
+            "usage": "Hero headlines, display text"
+          },
+          "headlineLG": {
+            "size": "48px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-lg-desktop",
+            "usage": "H1, H2 section headlines"
+          },
+          "headlineMD": {
+            "size": "36px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "600",
+            "cssVariable": "--text-headline-md-desktop",
+            "usage": "H3 subsection headlines"
+          },
+          "bodyLarge": {
+            "size": "24px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-large-desktop",
+            "usage": "Hero subheadings, large body text"
+          },
+          "bodyStandard": {
+            "size": "20px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-desktop",
+            "usage": "Standard paragraph text"
+          },
+          "bodySmall": {
+            "size": "18px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-small-desktop",
+            "usage": "Captions, metadata, small text"
+          },
+          "label": {
+            "size": "16px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "500",
+            "cssVariable": "--text-label-desktop",
+            "usage": "Form labels, button text"
+          },
+          "caption": {
+            "size": "14px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-caption-desktop",
+            "usage": "Fine print, metadata"
+          }
+        }
+      },
+      
+      "tablet": {
+        "breakpoint": "768px - 1199px",
+        "scalingMethod": "Desktop × 0.78 (display), Desktop × 0.83 (headings), Desktop × 1.0 (body)",
+        "sizes": {
+          "displayXL": {
+            "size": "56px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-xl-tablet",
+            "calculation": "72px × 0.78 = 56px"
+          },
+          "headlineLG": {
+            "size": "40px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-lg-tablet",
+            "calculation": "48px × 0.83 = 40px"
+          },
+          "headlineMD": {
+            "size": "32px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "600",
+            "cssVariable": "--text-headline-md-tablet",
+            "calculation": "36px × 0.83 = 32px"
+          },
+          "bodyLarge": {
+            "size": "24px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-large-tablet",
+            "calculation": "24px × 1.0 = 24px"
+          },
+          "bodyStandard": {
+            "size": "20px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-tablet",
+            "calculation": "20px × 1.0 = 20px"
+          },
+          "bodySmall": {
+            "size": "18px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-small-tablet",
+            "calculation": "18px × 1.0 = 18px"
+          }
+        }
+      },
+      
+      "mobile": {
+        "breakpoint": "320px - 767px",
+        "scalingMethod": "Desktop × 0.56 (display), Desktop × 0.72 (headings), max(Desktop × 0.89, 16px minimum)",
+        "minimumFontSize": "16px",
+        "sizes": {
+          "displayXL": {
+            "size": "40px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-xl-mobile",
+            "calculation": "72px × 0.56 = 40px"
+          },
+          "headlineLG": {
+            "size": "32px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "700",
+            "cssVariable": "--text-headline-lg-mobile",
+            "calculation": "48px × 0.72 = 32px"
+          },
+          "headlineMD": {
+            "size": "24px",
+            "lineHeight": "1.1",
+            "fontFamily": "Playfair Display",
+            "fontWeight": "600",
+            "cssVariable": "--text-headline-md-mobile",
+            "calculation": "36px × 0.72 = 24px"
+          },
+          "bodyLarge": {
+            "size": "24px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-large-mobile",
+            "calculation": "max(24px × 0.89, 16px) = 24px"
+          },
+          "bodyStandard": {
+            "size": "16px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-mobile",
+            "calculation": "max(20px × 0.89, 16px) = 16px (minimum enforced)"
+          },
+          "bodySmall": {
+            "size": "16px",
+            "lineHeight": "1.4",
+            "fontFamily": "Inter",
+            "fontWeight": "400",
+            "cssVariable": "--text-body-small-mobile",
+            "calculation": "max(18px × 0.89, 16px) = 16px (minimum enforced)"
+          }
+        }
+      }
+    },
+    
+    "lineHeights": {
+      "headlines": {
+        "value": "1.1",
+        "usage": "Tight line height for headlines (Playfair Display)",
+        "reason": "Creates visual impact and luxury feel"
+      },
+      "body": {
+        "value": "1.4",
+        "usage": "Comfortable reading line height for body text (Inter)",
+        "reason": "Optimal readability while maintaining elegance"
+      }
+    },
+    
+    "fontWeights": {
+      "playfairDisplay": {
+        "regular": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700",
+        "extrabold": "800",
+        "black": "900"
+      },
+      "inter": {
+        "light": "300",
+        "regular": "400",
+        "medium": "500",
+        "semibold": "600",
+        "bold": "700",
+        "extrabold": "800"
+      }
+    }
+  },
+  
+  "spacing": {
+    "system": {
+      "base": "8px",
+      "description": "8-point grid system - ALL spacing must be multiples of 8px",
+      "methodology": "Modular scale with golden ratio proportions (1.618) for major sections"
+    },
+    
+    "tokens": {
+      "quarter": {
+        "value": "2px",
+        "usage": "Fine adjustments only",
+        "cssVariable": "--spacing-quarter"
+      },
+      "half": {
+        "value": "4px",
+        "usage": "Micro spacing",
+        "cssVariable": "--spacing-half"
+      },
+      "1": {
+        "value": "8px",
+        "usage": "Base unit",
+        "cssVariable": "--spacing-1"
+      },
+      "1.5": {
+        "value": "12px",
+        "usage": "Tight spacing",
+        "cssVariable": "--spacing-1p5"
+      },
+      "2": {
+        "value": "16px",
+        "usage": "Standard component padding",
+        "cssVariable": "--spacing-2"
+      },
+      "2.5": {
+        "value": "20px",
+        "usage": "Card padding mobile",
+        "cssVariable": "--spacing-2p5"
+      },
+      "3": {
+        "value": "24px",
+        "usage": "Medium gaps",
+        "cssVariable": "--spacing-3"
+      },
+      "4": {
+        "value": "32px",
+        "usage": "Large gaps, card padding desktop",
+        "cssVariable": "--spacing-4"
+      },
+      "5": {
+        "value": "40px",
+        "usage": "Section padding tablet",
+        "cssVariable": "--spacing-5"
+      },
+      "6": {
+        "value": "48px",
+        "usage": "Large section gaps",
+        "cssVariable": "--spacing-6"
+      },
+      "8": {
+        "value": "64px",
+        "usage": "Major section spacing",
+        "cssVariable": "--spacing-8"
+      },
+      "10": {
+        "value": "80px",
+        "usage": "Primary section padding desktop",
+        "cssVariable": "--spacing-10"
+      },
+      "12": {
+        "value": "96px",
+        "usage": "Extra large section spacing",
+        "cssVariable": "--spacing-12"
+      },
+      "15": {
+        "value": "120px",
+        "usage": "Hero section spacing",
+        "cssVariable": "--spacing-15"
+      },
+      "16": {
+        "value": "128px",
+        "usage": "Maximum spacing between major blocks",
+        "cssVariable": "--spacing-16"
+      }
+    },
+    
+    "responsive": {
+      "desktop": {
+        "breakpoint": "1200px+",
+        "sectionPadding": "80px",
+        "componentGap": "32px",
+        "cardGap": "24px",
+        "gridGutter": "16px",
+        "cssVariables": {
+          "sectionPadding": "--section-padding-desktop",
+          "componentGap": "--component-gap-desktop",
+          "cardGap": "--card-gap-desktop",
+          "gridGutter": "--grid-gutter-desktop"
+        }
+      },
+      "tablet": {
+        "breakpoint": "768px - 1199px",
+        "sectionPadding": "40px",
+        "componentGap": "24px",
+        "cardGap": "16px",
+        "gridGutter": "16px",
+        "scalingMethod": "Section padding: Desktop × 0.50, Internal gaps: Desktop × 0.75",
+        "cssVariables": {
+          "sectionPadding": "--section-padding-tablet",
+          "componentGap": "--component-gap-tablet",
+          "cardGap": "--card-gap-tablet",
+          "gridGutter": "--grid-gutter-tablet"
+        }
+      },
+      "mobile": {
+        "breakpoint": "320px - 767px",
+        "sectionPadding": "24px",
+        "componentGap": "16px",
+        "cardGap": "12px",
+        "gridGutter": "16px",
+        "scalingMethod": "Section padding: Desktop × 0.30, Internal gaps: Desktop × 0.50",
+        "cssVariables": {
+          "sectionPadding": "--section-padding-mobile",
+          "componentGap": "--component-gap-mobile",
+          "cardGap": "--card-gap-mobile",
+          "gridGutter": "--grid-gutter-mobile"
+        }
+      }
+    }
+  },
+  
+  "layout": {
+    "grid": {
+      "columns": {
+        "desktop": 12,
+        "tablet": 12,
+        "mobile": 4,
+        "description": "12-column grid for desktop/tablet, 4-column for mobile"
+      },
+      "maxWidth": {
+        "value": "1200px",
+        "usage": "Maximum container width for content"
+      },
+      "gutter": {
+        "desktop": "32px",
+        "tablet": "24px",
+        "mobile": "16px"
+      }
+    },
+    
+    "breakpoints": {
+      "mobile": {
+        "min": "320px",
+        "max": "767px",
+        "description": "Mobile portrait and landscape",
+        "testPoints": ["320px", "375px", "414px", "767px"]
+      },
+      "tablet": {
+        "min": "768px",
+        "max": "1199px",
+        "description": "Tablet portrait and landscape",
+        "testPoints": ["768px", "1024px", "1199px"]
+      },
+      "desktop": {
+        "min": "1200px",
+        "description": "Desktop and large screens",
+        "testPoints": ["1200px", "1440px", "1920px"]
+      }
+    },
+    
+    "componentDimensions": {
+      "navigation": {
+        "height": {
+          "desktop": "152px",
+          "tablet": "120px",
+          "mobile": "80px"
+        },
+        "description": "Glassmorphic navigation bar height"
+      },
+      
+      "cards": {
+        "service": {
+          "desktop": {
+            "width": "280px",
+            "height": "320px"
+          },
+          "tablet": {
+            "width": "240px",
+            "height": "280px"
+          },
+          "mobile": {
+            "width": "163px",
+            "height": "217px"
+          }
+        },
+        "artist": {
+          "desktop": {
+            "width": "260px",
+            "height": "320px"
+          },
+          "tablet": {
+            "width": "200px",
+            "height": "250px"
+          },
+          "mobile": {
+            "width": "163px",
+            "height": "217px"
+          }
+        }
+      },
+      
+      "buttons": {
+        "primary": {
+          "minHeight": "44px",
+          "padding": "12px 24px",
+          "borderRadius": "10px"
+        },
+        "mobile": {
+          "minHeight": "48px",
+          "padding": "14px 24px",
+          "borderRadius": "10px",
+          "note": "Larger touch targets for mobile"
+        }
+      }
+    }
+  },
+  
+  "borderRadius": {
+    "tokens": {
+      "xs": {
+        "value": "4px",
+        "usage": "Subtle rounding",
+        "cssVariable": "--radius-xs"
+      },
+      "sm": {
+        "value": "8px",
+        "usage": "Standard buttons",
+        "cssVariable": "--radius-sm"
+      },
+      "md": {
+        "value": "12px",
+        "usage": "Cards, artist cards",
+        "cssVariable": "--radius-md"
+      },
+      "lg": {
+        "value": "16px",
+        "usage": "Large cards",
+        "cssVariable": "--radius-lg"
+      },
+      "xl": {
+        "value": "24px",
+        "usage": "Hero elements",
+        "cssVariable": "--radius-xl"
+      },
+      "full": {
+        "value": "9999px",
+        "usage": "Pills, circles, avatars",
+        "cssVariable": "--radius-full"
+      }
+    }
+  },
+  
+  "transitions": {
+    "duration": {
+      "fast": "0.15s",
+      "standard": "0.3s",
+      "slow": "0.5s"
+    },
+    "timing": {
+      "interaction": {
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "cssVariable": "--interaction-timing",
+        "usage": "Standard UI interactions"
+      },
+      "luxury": {
+        "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "cssVariable": "--luxury-timing",
+        "usage": "Smooth, elegant transitions"
+      },
+      "breathing": {
+        "value": "cubic-bezier(0.37, 0, 0.63, 1)",
+        "cssVariable": "--breathing-timing",
+        "usage": "Subtle animations"
+      }
+    }
+  },
+  
+  "accessibility": {
+    "wcagLevel": "AA",
+    "requirements": {
+      "touchTargets": {
+        "minimum": "44px",
+        "mobile": "48px",
+        "description": "All interactive elements must meet minimum touch target sizes"
+      },
+      "contrast": {
+        "normalText": "4.5:1 minimum",
+        "largeText": "3:1 minimum",
+        "achieved": {
+          "whiteOnDark": "12.63:1 (AAA)",
+          "goldOnDark": "6.4:1 (AA)",
+          "chromeOnDark": "7.8:1 (AA)"
+        }
+      },
+      "focusIndicators": {
+        "color": "#D4AF37",
+        "width": "2px",
+        "style": "solid",
+        "offset": "2px",
+        "glow": "0 0 10px rgba(212, 175, 55, 0.3)",
+        "mandatory": "All interactive elements must have visible focus states"
+      },
+      "keyboardNavigation": {
+        "requirement": "100% keyboard accessible",
+        "skipLinks": "Required for screen readers",
+        "ariaLabels": "All interactive elements properly labeled"
+      }
+    }
+  },
+  
+  "goldenRatio": {
+    "value": 1.618,
+    "application": {
+      "layout": "Used for proportional scaling across breakpoints",
+      "typography": "Modular scale based on golden ratio",
+      "spacing": "Section spacing follows golden ratio proportions",
+      "components": "Card dimensions use golden ratio (e.g., 260×320px ≈ 1:1.23)"
+    }
+  }
+}

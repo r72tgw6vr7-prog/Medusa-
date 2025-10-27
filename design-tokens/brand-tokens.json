@@ -1,0 +1,91 @@
+{
+  "medusa": {
+    "brand": {
+      "name": "Medusa Tattoo München",
+      "tagline": "Luxury Tattoo Artistry Since 1998"
+    },
+    "colors": {
+      "primary": {
+        "gold": {
+          "value": "#D4AF37",
+          "description": "Primary brand gold for CTAs, accents, and highlights"
+        },
+        "background": {
+          "value": "#222222",
+          "description": "Brand background - NOT #0A0A0A"
+        },
+        "white": {
+          "value": "#FFFFFF",
+          "description": "Pure white for text - NOT #F5F5F0"
+        },
+        "chrome": {
+          "value": "#C0C0C0",
+          "description": "Chrome silver for secondary accents"
+        }
+      },
+      "semantic": {
+        "background": {
+          "primary": "#222222",
+          "overlay": "rgba(34, 34, 34, 0.9)"
+        },
+        "text": {
+          "primary": "#FFFFFF",
+          "secondary": "rgba(255, 255, 255, 0.8)",
+          "tertiary": "rgba(255, 255, 255, 0.6)"
+        },
+        "accent": {
+          "primary": "#D4AF37",
+          "hover": "#C19B26",
+          "active": "#A8821A"
+        },
+        "chrome": {
+          "primary": "#C0C0C0",
+          "hover": "#A8A8A8"
+        }
+      }
+    },
+    "typography": {
+      "fonts": {
+        "heading": {
+          "family": "'Playfair Display', serif",
+          "fallback": "serif",
+          "description": "Luxury serif for headlines - NOT Cormorant Garamond"
+        },
+        "body": {
+          "family": "'Inter', sans-serif",
+          "fallback": "sans-serif"
+        }
+      }
+    },
+    "spacing": {
+      "base": "0.5rem",
+      "note": "8px increment system - base is 8px not 4px",
+      "scale": {
+        "1": "0.5rem",
+        "2": "1rem",
+        "3": "1.5rem",
+        "4": "2rem",
+        "6": "3rem",
+        "8": "4rem",
+        "10": "5rem",
+        "12": "6rem"
+      }
+    },
+    "layout": {
+      "breakpoints": {
+        "mobile": {
+          "min": "320px",
+          "max": "767px"
+        },
+        "tablet": {
+          "min": "768px",
+          "max": "1199px"
+        },
+        "desktop": {
+          "min": "1200px",
+          "note": "Desktop starts at 1200px NOT 1024px"
+        }
+      }
+    }
+  }
+}

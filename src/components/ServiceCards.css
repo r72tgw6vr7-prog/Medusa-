@@ -1,0 +1,34 @@
+/* ServiceCards - Additional Styles */
+
+/* Ensure Playfair Display for struck titles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* Ensure Poppins for headings and CTAs */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Ensure Inter for body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Custom line-through decoration for struck titles */
+.line-through {
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: none;
+}
+
+/* Smooth hover transitions for cards */
+.group:hover {
+  transform: scale(1.02);
+}
+
+/* Focus visible states for accessibility */
+a:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 2px;
+}
+
+/* Ensure proper contrast for text on backgrounds */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(10px);
+  }
+}

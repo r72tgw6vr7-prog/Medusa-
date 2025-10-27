@@ -1,0 +1,89 @@
+File Path,Line Number,Issue Category (1-9),Current Code Snippet,Expected Fix,Severity (Critical/High/Medium/Low),Fix Instructions
+
+components/TabletLuxuryShowcase.tsx,946,#6 Non-standard Line-Height,line-height: 1.4,line-height: 1.2 or 1.5,Medium,"Change line-height to 1.2 for headings or 1.5 for body text. 1.4 is non-standard."
+
+components/TabletLuxuryShowcase.tsx,958,#3 Inconsistent Button Sizing,height: 40px,height: 44px (touch target),High,"Change button height to 44px minimum for WCAG compliance and touch target standards."
+
+components/TabletLuxuryShowcase.tsx,959,#1 Vertical Centering Failure,padding: 0 16px,padding: 10px 20px (symmetric),High,"Use symmetric padding: V(10px) = H(20px) ÷ 2 for perfect text centering."
+
+components/TabletLuxuryShowcase.tsx,1043,#6 Non-standard Line-Height,line-height: 1,line-height: 1.0,Low,"Use consistent line-height: 1.0 notation instead of 1 for clarity."
+
+components/TabletLuxuryShowcase.tsx,1063,#2 Hardcoded Spacing,padding: 12px 20px,padding: var(--spacing-1p5) var(--spacing-2p5),Medium,"Replace hardcoded values with 8-pt grid tokens: 12px=1.5×8, 20px=2.5×8."
+
+components/TabletLuxuryShowcase.tsx,1084,#2 Hardcoded Spacing,height: 2px,height: var(--spacing-quarter),Low,"Use spacing token for 2px: var(--spacing-quarter) = 0.125rem."
+
+components/TabletLuxuryShowcase.tsx,1124,#2 Hardcoded Spacing,padding: 8px 16px,padding: var(--spacing-1) var(--spacing-2),Medium,"Replace with spacing tokens: 8px=var(--spacing-1), 16px=var(--spacing-2)."
+
+components/TabletLuxuryShowcase.tsx,1143,#3 Inconsistent Button Sizing,height: 44px,Standard touch target,Low,"Height is correct but ensure consistent implementation across all buttons."
+
+components/TabletLuxuryShowcase.tsx,1163,#3 Inconsistent Button Sizing,height: 44px,Standard touch target,Low,"Height is correct but verify symmetric padding."
+
+components/TabletLuxuryShowcase.tsx,1164,#1 Vertical Centering Failure,padding: 0 20px,padding: 10px 20px (symmetric),High,"Add vertical padding: V(10px) = H(20px) ÷ 2 for perfect text centering."
+
+components/TabletLuxuryShowcase.tsx,1191,#2 Hardcoded Spacing,padding: 16px 32px,padding: var(--spacing-2) var(--spacing-4),Medium,"Use spacing tokens: 16px=var(--spacing-2), 32px=var(--spacing-4)."
+
+components/TabletLuxuryShowcase.tsx,1200,#2 Hardcoded Spacing,padding: 10px 16px,padding: var(--spacing-1p25) var(--spacing-2),Medium,"Use spacing tokens for 10px and 16px values."
+
+components/TabletLuxuryShowcase.tsx,1232,#2 Hardcoded Spacing,padding-top: 152px,padding-top: var(--nav-height-total),Medium,"Use CSS variable for calculated navigation heights instead of magic number."
+
+components/CTAButton.tsx,39,#9 Color Token Violations,backgroundColor: '#D4AF37',backgroundColor: 'var(--brand-gold)',High,"Replace hardcoded hex color with CSS custom property."
+
+components/CTAButton.tsx,40,#9 Color Token Violations,color: '#222222',color: 'var(--brand-background)',High,"Replace hardcoded hex color with CSS custom property."
+
+components/CTAButton.tsx,47,#9 Color Token Violations,color: '#D4AF37',color: 'var(--brand-gold)',High,"Replace hardcoded hex color with CSS custom property."
+
+components/CTAButton.tsx,47,#9 Color Token Violations,border: '2px solid #D4AF37',border: '2px solid var(--brand-gold)',High,"Replace hardcoded border color with CSS custom property."
+
+components/ServicesPage.tsx,229,#3 Inconsistent Button Sizing,Height: 60px,Height: 56px (desktop) or 48px (mobile),High,"Use standard button heights: 56px desktop, 48px mobile/tablet."
+
+components/ServicesPage.tsx,775,#2 Hardcoded Spacing,padding-left: 20px,padding-left: var(--mobile-section-padding),Medium,"Use mobile section padding token instead of hardcoded 20px."
+
+components/ServicesPage.tsx,776,#2 Hardcoded Spacing,padding-right: 20px,padding-right: var(--mobile-section-padding),Medium,"Use mobile section padding token instead of hardcoded 20px."
+
+components/ServicesPage.tsx,782,#2 Hardcoded Spacing,padding-left: 32px,padding-left: var(--section-padding-tablet),Medium,"Use tablet section padding token instead of hardcoded 32px."
+
+components/ServicesPage.tsx,783,#2 Hardcoded Spacing,padding-right: 32px,padding-right: var(--section-padding-tablet),Medium,"Use tablet section padding token instead of hardcoded 32px."
+
+components/ArtistsPage.tsx,486,#7 Missing Accessibility,className only,Add aria-label for screen readers,High,"Button has good aria-label but ensure all interactive elements have proper ARIA attributes."
+
+components/ArtistsPage.tsx,498,#7 Missing Accessibility,className only,Add aria-label for screen readers,High,"Verify portfolio button has descriptive aria-label for screen readers."
+
+components/ui/progress.tsx,25,#8 Manual Positioning,style={{ transform: translateX }},Use CSS classes with transform utilities,Medium,"Move inline transform to CSS class for better performance and maintainability."
+
+components/ui/chart.tsx,294,#9 Color Token Violations,style={{ backgroundColor: item.color }},Use standardized color system,Medium,"Ensure chart colors follow brand color palette when possible."
+
+styles/globals.css,2718,#6 Non-standard Line-Height,line-height: 1.1,Standard 1.1 for headlines,Low,"Line-height is appropriate for headlines but ensure consistency."
+
+styles/globals.css,2725,#6 Non-standard Line-Height,line-height: 1.4,line-height: 1.5 (standard body),Medium,"Change to standard 1.5 line-height for body text readability."
+
+styles/globals.css,2708,#4 Missing Responsive Logic,min-height: 60vh,Responsive min-height values,Medium,"Use responsive min-height: 68vh mobile, 75vh tablet, 85vh desktop."
+
+styles/globals.css,2743,#8 Manual Positioning,transform: scale(1.1),Use responsive transform values,Low,"Transform is appropriate but ensure consistent across breakpoints."
+
+components/GlassmorphicNavigation.tsx,282,#7 Missing Accessibility,Accessibility size={20},Ensure proper focus states,Medium,"Verify accessibility button has proper focus management and keyboard navigation."
+
+components/GlassmorphicNavigation.tsx,318,#8 Manual Button Implementation,Manual button mapping,Use consistent button component,Medium,"Consider extracting repeated button pattern to reusable component."
+
+components/CookieConsentBanner.tsx,143,#7 Missing Accessibility,className='cookie-consent-banner',Add ARIA live region,High,"Add aria-live='polite' for screen reader announcement when banner appears."
+
+components/CookieConsentBanner.tsx,150,#7 Missing Accessibility,onClick handler only,Add keyboard event handling,Medium,"Ensure button works with keyboard navigation (Enter/Space keys)."
+
+Multiple Files,Multiple,#10 Naming Convention Violations,Inconsistent class naming patterns,Use BEM or consistent naming,Low,"Standardize CSS class naming: use either BEM (.block__element--modifier) or consistent prefix pattern."
+
+Multiple Files,Multiple,#1 Vertical Centering Issues,Various line-height values,Standardize to 1.0 for buttons,Critical,"All buttons MUST use line-height: 1.0 and symmetric padding for perfect text centering."
+
+Multiple Files,Multiple,#2 Off-Grid Spacing,Various hardcoded px values,Use 8-pt grid tokens only,High,"Replace all hardcoded spacing with CSS custom properties based on 8-pt grid system."
+
+Multiple Files,Multiple,#3 Button Height Inconsistency,Mixed button heights,Standardize: 44px mobile, 48-56px desktop,Critical,"Enforce consistent button heights across all components for touch targets and visual consistency."
+
+Multiple Files,Multiple,#4 Responsive Visibility,Manual breakpoint handling,Use CSS-first responsive design,Medium,"Implement responsive visibility using CSS media queries instead of JavaScript where possible."
+
+Multiple Files,Multiple,#5 Z-Index Conflicts,Random z-index values,Systematic z-index scale,Medium,"Implement z-index system: nav=1000, modal=2000, toast=3000 to prevent conflicts."
+
+Multiple Files,Multiple,#6 Line-Height Violations,Non-standard line-height values,Use 1.0/1.2/1.5 only,Medium,"Standardize line-heights: 1.0 for buttons, 1.2 for headings, 1.5 for body text."
+
+Multiple Files,Multiple,#7 Accessibility Gaps,Missing ARIA attributes,Complete ARIA implementation,High,"Add comprehensive ARIA labels, live regions, and keyboard navigation support."
+
+Multiple Files,Multiple,#8 Manual Positioning,Absolute positioning patterns,Use flexbox/grid auto-layout,Medium,"Replace manual positioning with modern CSS layout methods for better responsiveness."
+
+Multiple Files,Multiple,#9 Token Violations,Hardcoded colors and spacing,Complete token system,High,"Replace ALL hardcoded values with CSS custom properties from design token system."

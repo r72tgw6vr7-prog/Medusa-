@@ -1,0 +1,40 @@
+<!-- SVG Studio Interior Placeholder -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <!-- Gradient Background -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#444444;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Rectangle -->
+  <rect width="100%" height="100%" fill="url(#bg-gradient)" />
+  
+  <!-- Studio Elements -->
+  <!-- Marble columns -->
+  <rect x="200" y="100" width="50" height="700" fill="#e6e6e6" rx="5" />
+  <rect x="950" y="100" width="50" height="700" fill="#e6e6e6" rx="5" />
+  
+  <!-- Floor -->
+  <rect x="0" y="700" width="1200" height="100" fill="#d4d4d4" />
+  
+  <!-- Display cases -->
+  <rect x="300" y="500" width="200" height="100" fill="#222" stroke="#D4AF37" stroke-width="2" rx="5" />
+  <rect x="700" y="500" width="200" height="100" fill="#222" stroke="#D4AF37" stroke-width="2" rx="5" />
+  
+  <!-- Stairs suggestion -->
+  <rect x="550" y="650" width="100" height="10" fill="#ccc" />
+  <rect x="560" y="660" width="80" height="10" fill="#bbb" />
+  <rect x="570" y="670" width="60" height="10" fill="#aaa" />
+  <rect x="580" y="680" width="40" height="10" fill="#999" />
+  
+  <!-- Luxury details - gold accents -->
+  <circle cx="600" cy="200" r="50" fill="none" stroke="#D4AF37" stroke-width="3" />
+  <circle cx="400" cy="350" r="30" fill="none" stroke="#D4AF37" stroke-width="2" />
+  <circle cx="800" cy="350" r="30" fill="none" stroke="#D4AF37" stroke-width="2" />
+  
+  <!-- Text indicating this is a placeholder -->
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="24" fill="#D4AF37" text-anchor="middle">Studio Interior Placeholder</text>
+  <text x="600" y="440" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle">Replace with actual studio interior photo</text>
+</svg>

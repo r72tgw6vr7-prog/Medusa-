@@ -1,0 +1,83 @@
+/* Responsive adjustments for ServiceCards layout on narrow viewports */
+
+.service-card-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .service-card-grid {
+    gap: 32px;
+  }
+}
+
+.service-card-padding {
+  padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .service-card-padding {
+    padding: 32px;
+  }
+}
+
+.service-card-content {
+  display: grid;
+  row-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .service-card-content {
+    row-gap: 32px;
+  }
+}
+
+.service-card-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .service-card-list {
+    margin-top: 32px;
+  }
+}
+
+.service-card-footer {
+  display: grid;
+  row-gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .service-card-footer {
+    row-gap: 32px;
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+}
+
+.service-card-cta {
+  width: 100%;
+  max-width: 220px;
+}
+
+.service-card-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+}
+
+.service-card-list-item::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--brand-gold);
+  flex-shrink: 0;
+}

@@ -1,0 +1,15 @@
+<svg width="1024" height="512" viewBox="0 0 1024 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="1024" height="512" fill="#1a1a1a"/>
+  
+  <!-- Gold circles at top -->
+  <circle cx="120" cy="120" r="70" fill="#D4AF37"/>
+  <circle cx="300" cy="180" r="80" fill="#D4AF37"/>
+  <circle cx="420" cy="140" r="50" fill="#D4AF37"/>
+  <circle cx="580" cy="200" r="60" fill="#D4AF37"/>
+  <circle cx="740" cy="160" r="90" fill="#D4AF37"/>
+  <circle cx="900" cy="100" r="120" fill="#D4AF37"/>
+  
+  <!-- BOUNCE text in gold -->
+  <text x="512" y="400" font-family="Arial, sans-serif" font-size="140" font-weight="bold" fill="#D4AF37" text-anchor="middle" letter-spacing="10">BOUNCE</text>
+</svg>

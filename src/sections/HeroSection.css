@@ -1,0 +1,234 @@
+/* ============================================
+   TRUST BADGES CAROUSEL - INFINITE LOOP FIX
+   ============================================ */
+
+/* Define keyframes at the top of the file */
+@keyframes scrollBadges {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+.trust-badges-wrapper {
+  position: absolute;
+  bottom: 15vh;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.trust-badges-container {
+  /* REFINEMENT #1: 1020×92px container with 96px fade gradients */
+  --gap: 24px;
+  --item-width: 240px;
+  width: min(100%, 1020px);
+  max-width: 1020px;
+  overflow: hidden !important;
+  position: relative;
+  height: 92px;
+  /* Smooth gradient fade left/right - MORE GRADUAL */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 20px,
+    rgba(0, 0, 0, 0.4) 60px,
+    black 120px,
+    black calc(100% - 120px),
+    rgba(0, 0, 0, 0.4) calc(100% - 60px),
+    rgba(0, 0, 0, 0.1) calc(100% - 20px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 20px,
+    rgba(0, 0, 0, 0.4) 60px,
+    black 120px,
+    black calc(100% - 120px),
+    rgba(0, 0, 0, 0.4) calc(100% - 60px),
+    rgba(0, 0, 0, 0.1) calc(100% - 20px),
+    transparent 100%
+  );
+}
+
+.trust-badges-track {
+  display: flex;
+  gap: var(--gap);
+  will-change: transform;
+  /* Animation now applied via Tailwind class: animate-[scrollBadges_30s_linear_infinite] */
+}
+
+/* Infinite scroll animation - Removing since we already have one at the bottom */
+/* @keyframes scroll-badges {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+} */
+
+/* Pause animation on hover for better UX */
+.trust-badges-track:hover {
+  animation-play-state: paused !important;
+}
+
+/* Individual badge styling - REFINEMENT #1: 240×92px dimensions */
+.trust-badge-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  min-width: var(--item-width);
+  width: var(--item-width);
+  height: 92px;
+  padding: 0 16px;
+  flex-shrink: 0; /* Prevents badges from compressing */
+}
+
+/* Badge icon with gold circular border - Figma exact specs */
+.badge-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Perfect circle */
+  border: 2px solid #d4af37; /* Gold border */
+  background: rgba(0, 0, 0, 0.4); /* Darker background for contrast */
+  padding: 10px;
+  transition: all 300ms ease-in-out;
+  flex-shrink: 0;
+
+  /* Subtle shadow */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.trust-badge-item:hover .badge-icon {
+  transform: translateY(-4px) scale(1.05);
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.25);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(212, 175, 55, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.badge-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Premium styling for the badge images with gold tint */
+  filter: brightness(1.2) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 300ms ease-in-out;
+}
+
+.trust-badge-item:hover .badge-icon img {
+  filter: brightness(1.4) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Badge text styling - Figma specs */
+.badge-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: left;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.3;
+  transition: all 300ms ease-in-out;
+  flex: 1;
+  min-width: 0;
+}
+
+.trust-badge-item:hover .badge-text {
+  color: #d4af37;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .trust-badges-wrapper {
+    /* Keep center positioning on tablet */
+    padding: 0 20px;
+    bottom: 12vh;
+  }
+
+  .trust-badges-track {
+    gap: var(--gap);
+    animation-duration: 25s; /* Slightly faster on mobile */
+  }
+
+  .trust-badge-item {
+    min-width: var(--item-width);
+  }
+
+  .badge-icon {
+    width: 52px;
+    height: 52px;
+    padding: 10px;
+  }
+
+  .trust-badges-container {
+    --gap: 20px;
+    --item-width: 200px;
+  }
+
+  .badge-text {
+    font-size: 11px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .trust-badges-wrapper {
+    /* Keep center positioning on mobile */
+    padding: 0 16px;
+    bottom: 10vh;
+  }
+
+  .trust-badges-container {
+    height: 80px;
+  }
+
+  .trust-badges-track {
+    gap: var(--gap);
+    animation-duration: 20s; /* Even faster on small screens */
+  }
+
+  .trust-badge-item {
+    min-width: var(--item-width);
+    height: 80px;
+  }
+
+  .badge-icon {
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+  }
+
+  .trust-badges-container {
+    --gap: 16px;
+    --item-width: 180px;
+  }
+
+  .badge-text {
+    font-size: 10px;
+  }
+}
+
+/* Keyframes moved to the top of the file */

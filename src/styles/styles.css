@@ -1,0 +1,26 @@
+/* styles.css */
+
+/* Small utility classes used by tests and examples */
+.test-item {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.brand-gold-text {
+  color: var(--brand-gold);
+}
+
+.text-light {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.test-container {
+  background: rgba(212, 175, 55, 0.15);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.object-contain {
+  object-fit: contain;
+}

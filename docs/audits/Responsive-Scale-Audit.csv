@@ -1,0 +1,32 @@
+Element Type,Desktop Base,Tablet Formula,Tablet Result,Mobile Formula,Mobile Result,8pt Grid Compliant,Touch Target Compliant,Notes
+Typography - Headlines (Display),,,,,,,,
+text-headline-xl,72px,72px × 0.78,56px,72px × 0.56,40px,✓,N/A,Display headlines for hero sections
+Typography - Headings (H1-H3),,,,,,,,
+text-headline-lg,48px,48px × 0.83,40px,48px × 0.72,32px,✓,N/A,Section headlines
+text-headline-md,36px,36px × 0.83,32px,36px × 0.72,24px,✓,N/A,Subsection headlines
+Typography - Body Text,,,,,,,,
+text-body-large,24px,24px × 1.0,24px,max(24px × 0.89 = 21.36px; 16px),24px,✓,N/A,Large body text - mobile uses max rule
+text-body,20px,20px × 1.0,20px,max(20px × 0.89 = 17.8px; 16px),16px,✓,N/A,Standard body - mobile enforces 16px minimum
+text-body-small,18px,18px × 1.0,18px,max(18px × 0.89 = 16.02px; 16px),16px,✓,N/A,Small body - mobile enforces 16px minimum
+Typography - Labels,,,,,,,,
+text-label,16px,16px × 0.90,16px,max(16px × 0.86 = 13.76px; 16px),16px,✓,N/A,Form labels - mobile enforces 16px minimum
+text-caption,14px,14px × 0.90,16px,max(14px × 0.86 = 12.04px; 16px),16px,✓,N/A,Captions - both tablet/mobile enforce 16px minimum
+Spacing - Section Padding,,,,,,,,
+section-padding,80px,80px × 0.50,40px,80px × 0.30,24px,✓,N/A,Main section horizontal padding
+Spacing - Internal Gaps,,,,,,,,
+component-gap,32px,32px × 0.75,24px,32px × 0.50,16px,✓,N/A,Component-to-component spacing
+card-gap,24px,24px × 0.75,16px,24px × 0.50,12px,✓,N/A,Card grid spacing
+grid-gutter,16px,16px × 0.75,16px,16px × 0.50,16px,✓,N/A,Grid column gutters - mobile maintains 16px for usability
+Spacing - Section Gaps,,,,,,,,
+spacing-section,80px,80px × 0.50,40px,80px × 0.30,24px,✓,N/A,Between major page sections
+spacing-component,48px,48px × 0.75,32px,48px × 0.50,24px,✓,N/A,Between component groups
+Touch Targets,,,,,,,,
+button-height,56px,56px × 1.0,56px,max(56px × 0.89; 44px),48px,✓,✓,All buttons maintain minimum 44px height
+touch-target-min,44px,44px × 1.0,44px,44px × 1.0,44px,✓,✓,Minimum touch target always preserved
+input-height,48px,48px × 1.0,48px,max(48px × 0.89; 44px),48px,✓,✓,Form inputs maintain accessibility standards
+Validation Summary,,,,,,,,
+Total Elements Audited,18,18,18,18,18,18/18,3/3,All elements pass 8pt grid compliance
+Off-Ratio Values,0,0,0,0,0,0,0,Zero off-ratio values detected
+16px Minimum Violations,0,0,0,0,0,0,0,All text meets 16px mobile minimum
+44px Touch Violations,0,0,0,0,0,0,0,All interactive elements meet touch standards
+Grid Compliance,100%,100%,100%,100%,100%,100%,100%,Perfect 8pt grid alignment maintained

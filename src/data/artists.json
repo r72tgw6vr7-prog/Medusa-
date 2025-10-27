@@ -1,0 +1,46 @@
+[
+  {
+    "id": "alexandra-schwarz",
+    "name": "Alexandra Schwarz",
+    "specialty": "Tattoo",
+    "image": "/images/artists/alexandra.jpg",
+    "bio": "Specialized in fine line and minimalist tattoos with 8+ years of experience.",
+    "portfolio": [
+      "/images/portfolio/alexandra-1.jpg",
+      "/images/portfolio/alexandra-2.jpg",
+      "/images/portfolio/alexandra-3.jpg"
+    ]
+  },
+  {
+    "id": "marcus-weber",
+    "name": "Marcus Weber",
+    "specialty": "Tattoo",
+    "image": "/images/artists/marcus.jpg",
+    "bio": "Black and grey realism expert with a focus on portrait tattoos.",
+    "portfolio": ["/images/portfolio/marcus-1.jpg", "/images/portfolio/marcus-2.jpg"]
+  },
+  {
+    "id": "elena-mueller",
+    "name": "Elena Müller",
+    "specialty": "Piercing",
+    "image": "/images/artists/elena.jpg",
+    "bio": "Professional piercer with certification in advanced body modifications.",
+    "portfolio": ["/images/portfolio/elena-1.jpg", "/images/portfolio/elena-2.jpg"]
+  },
+  {
+    "id": "david-schmidt",
+    "name": "David Schmidt",
+    "specialty": "Tattoo",
+    "image": "/images/artists/david.jpg",
+    "bio": "Specializes in traditional and neo-traditional tattoo styles.",
+    "portfolio": ["/images/portfolio/david-1.jpg", "/images/portfolio/david-2.jpg"]
+  },
+  {
+    "id": "angie-rodriguez",
+    "name": "Angie Rodriguez",
+    "specialty": "Tattoo",
+    "image": "/images/artists/angie.jpg",
+    "bio": "Watercolor and abstract tattoo artist with a unique artistic vision.",
+    "portfolio": ["/images/portfolio/angie-1.jpg", "/images/portfolio/angie-2.jpg"]
+  }
+]

@@ -1,0 +1,67 @@
+/* Artist card refinements for consistent spacing with 8pt grid */
+
+/* Image Container */
+.artist-card__image-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+/* Image Styling */
+.artist-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transition: transform 0.3s ease;
+}
+
+/* Name Badge */
+.artist-card__name-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* Dark Overlay */
+.artist-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+  z-index: 5;
+}
+
+/* Meta Info */
+.artist-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.artist-card__meta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.artist-card__meta-text {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+/* Specialties */
+.artist-card__specialties {
+  margin-bottom: 8px;
+}

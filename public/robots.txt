@@ -1,0 +1,45 @@
+# Medusa Tattoo München - robots.txt
+# Updated: October 24, 2025
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /_next
+Disallow: /private
+Disallow: /diagnostics
+
+# Sitemap location
+Sitemap: https://www.muenchen-tattoo-studio.de/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Block AI scrapers and bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: baiduspider
+Disallow: /

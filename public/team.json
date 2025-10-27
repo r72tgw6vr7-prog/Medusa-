@@ -1,0 +1,108 @@
+{
+  "team": [
+    {
+      "id": "angie",
+      "name": "Angie",
+      "role": "Resident Piercer",
+      "category": "piercing",
+      "photo": "/team/ImageWithFallback_4.png",
+      "specialties": ["Consultation", "Social Media", "Septum"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Piercing-Spezialistin mit Fokus auf Beratung und Kundenerlebnis.",
+      "experience": "8+ Jahre",
+      "instagram": "@angie_medusa"
+    },
+    {
+      "id": "aaron",
+      "name": "Aaron",
+      "role": "Ear Magician & Piercer",
+      "category": "piercing",
+      "photo": "/team/ImageWithFallback_5.png",
+      "specialties": ["Kids Specialist", "Dermalanker", "Zurface"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Spezialist für Kinder-Piercings und Ohr-Konfigurationen.",
+      "experience": "7+ Jahre",
+      "instagram": "@aaron_medusa"
+    },
+    {
+      "id": "oliver",
+      "name": "Mr. Oliver",
+      "role": "Studio Owner & Master Piercer",
+      "category": "leadership",
+      "photo": "/team/ImageWithFallback_6.png",
+      "specialties": ["Zauberer", "Implantat", "Intimpiercing"],
+      "bookable": false,
+      "featured": true,
+      "bio": "Gründer und Inhaber von Medusa Tattoo München.",
+      "experience": "25+ Jahre",
+      "instagram": "@oliver_medusa"
+    },
+    {
+      "id": "sasha",
+      "name": "Sasha",
+      "role": "Customer Experience Specialist",
+      "category": "service",
+      "photo": "/team/ImageWithFallback_7.png",
+      "specialties": ["Beratung & Verkauf", "Schmuckaustausch", "Nachsorge Berater"],
+      "bookable": false,
+      "featured": false,
+      "bio": "Ansprechpartnerin für alle Kundenanliegen und Nachsorge.",
+      "experience": "5+ Jahre",
+      "instagram": "@sasha_medusa"
+    },
+    {
+      "id": "vive",
+      "name": "Vive",
+      "role": "Resident Piercer",
+      "category": "piercing",
+      "photo": "/team/ImageWithFallback_3.png",
+      "specialties": ["Beratung", "Piercing Collection Curator", "Snake Eye"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Erfahrene Piercing-Spezialistin mit höchsten Hygienestandards.",
+      "experience": "8+ Jahre",
+      "instagram": "@vive_medusa"
+    },
+    {
+      "id": "loui",
+      "name": "Loui",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/team/ImageWithFallback_2.png",
+      "specialties": ["Black & Gray", "Realism", "Watercolor", "Portrait"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Meister der realistischen Portraits und Aquarell-Technik.",
+      "experience": "12+ Jahre",
+      "instagram": "@loui_medusa"
+    },
+    {
+      "id": "debi",
+      "name": "Debi",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/team/ImageWithFallback.png",
+      "specialties": ["Old School", "Geometry", "Blackwork", "Maori"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Expertin für traditionelle und geometrische Designs.",
+      "experience": "9+ Jahre",
+      "instagram": "@debi_medusa"
+    },
+    {
+      "id": "eli-luquez",
+      "name": "Eli Luquez",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/team/picture.png",
+      "specialties": ["Realism", "Black & Gray", "Fineline", "Blackwork"],
+      "bookable": true,
+      "featured": true,
+      "bio": "Spezialisiert auf realistische Portraits und Black & Grey Arbeiten.",
+      "experience": "10+ Jahre",
+      "instagram": "@eli_medusa"
+    }
+  ]
+}

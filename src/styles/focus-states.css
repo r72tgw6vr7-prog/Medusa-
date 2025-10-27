@@ -1,0 +1,128 @@
+/* WCAG AA Focus States */
+
+/* Default Focus State */
+:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Dark Background Focus State */
+.dark-bg :focus-visible {
+  outline-color: var(--brand-white);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Gold Button Focus State */
+.btn-gold:focus-visible {
+  outline-color: var(--brand-background);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.4);
+}
+
+/* Navigation Focus State */
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+  border-radius: 4px;
+}
+
+/* Form Input Focus State */
+.form-input:focus-visible {
+  outline: none;
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+/* Card Focus State */
+.card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Skip Link Focus State */
+.skip-link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-background),
+    0 0 0 4px var(--brand-gold);
+  border-radius: 4px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Carousel Controls Focus State */
+.carousel-control:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+  border-radius: 50%;
+}
+
+/* Language Switcher Focus State */
+.lang-switch:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+  border-radius: 4px;
+}
+
+/* Social Media Links Focus State */
+.social-link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--brand-gold),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
+/* Touch Target Size Enforcement - WCAG 2.5.8 */
+button,
+[role='button'],
+a,
+input,
+select,
+textarea {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 16px;
+  line-height: 1;
+}
+
+/* Exceptions for Inline Links */
+p a,
+li a {
+  min-width: unset;
+  min-height: unset;
+  padding: 0;
+}
+
+/* High Contrast Mode Support */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 3px;
+  }
+
+  .btn-gold:focus-visible,
+  .nav-link:focus-visible,
+  .form-input:focus-visible,
+  .card:focus-visible,
+  .carousel-control:focus-visible,
+  .lang-switch:focus-visible,
+  .social-link:focus-visible {
+    outline: 3px solid CanvasText;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+}

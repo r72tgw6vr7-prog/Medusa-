@@ -1,0 +1,99 @@
+/* Partners & Testimonials Section - REFINEMENT #4: Bigger logos + animated loop */
+
+@keyframes scrollPartners {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--loop-distance)));
+  }
+}
+
+.partners-carousel-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.partners-carousel-container {
+  --gap: 48px;
+  --item-width: 180px;
+  --loop-distance: calc(4 * var(--item-width) + 3 * var(--gap));
+  width: min(100%, var(--loop-distance));
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.partners-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  --loop-distance: calc(4 * var(--item-width) + 3 * var(--gap));
+  will-change: transform;
+  animation: scrollPartners 60s linear infinite;
+}
+
+.partners-logo {
+  min-width: var(--item-width);
+  width: var(--item-width);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.partners-logo img {
+  max-height: 80px;
+  max-width: 160px;
+  object-fit: contain;
+  /* Gold/yellow tint to match Figma design */
+  filter: brightness(1.2) saturate(1.3) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+}
+
+.partners-logo:hover {
+  opacity: 1;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+  outline: 1px solid #d4af37;
+  outline-offset: 2px;
+}
+
+/* Pause animation on hover for better UX */
+.partners-carousel-container:hover .partners-carousel-track {
+  animation-play-state: paused;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .partners-carousel-container {
+    --gap: 20px;
+    --item-width: clamp(120px, 45vw, 160px);
+    height: 92px;
+  }
+  .partners-logo {
+    height: 72px;
+  }
+  .partners-logo img {
+    max-height: calc(0.7 * var(--item-width));
+    max-width: calc(var(--item-width) - 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-carousel-container {
+    --gap: 16px;
+    --item-width: clamp(140px, 60vw, 180px);
+    height: 88px;
+  }
+  .partners-logo {
+    height: 68px;
+  }
+  .partners-logo img {
+    max-height: calc(0.7 * var(--item-width));
+    max-width: calc(var(--item-width) - 24px);
+  }
+}

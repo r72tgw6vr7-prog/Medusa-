@@ -1,0 +1,65 @@
+/* Import design system variables */
+@import './styles/variables.css';
+@import './styles/utility-classes.css';
+@import './styles/micro-transitions.css';
+@import './styles/background-texture.css';
+@import './lib/animations/keyframes.css';
+
+/* Font imports - expanded weights */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Tailwind v4 directives */
+@import 'tailwindcss';
+@import './styles/typography.css';
+
+/* Global fallback font */
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+/* Trust Badges Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(-33.33%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-mobile {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-tablet {
+  animation: marquee 50s linear infinite;
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+
+/* Hide scrollbar but maintain functionality */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-mobile,
+  .animate-marquee-tablet {
+    animation: none;
+    justify-content: space-around;
+  }
+}
