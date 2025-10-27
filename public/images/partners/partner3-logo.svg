@@ -1,0 +1,7 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Partner 3 logo placeholder -->
+  <rect x="10" y="15" width="180" height="30" fill="none" stroke="#D4AF37" stroke-width="2" rx="5"/>
+  <text x="100" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">PARTNER 3</text>
+  <circle cx="25" cy="30" r="5" fill="#D4AF37"/>
+  <circle cx="175" cy="30" r="5" fill="#D4AF37"/>
+</svg>

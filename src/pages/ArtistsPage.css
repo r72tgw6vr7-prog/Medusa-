@@ -1,0 +1,77 @@
+/* ============================================
+   ARTISTS PAGE STYLING
+   ============================================ */
+
+/* Section container */
+.artists-section {
+  padding-top: 96px; /* Space after navigation */
+  padding-bottom: 80px;
+  background: var(--brand-background, #222222);
+}
+
+/* Container */
+.artists-section .container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Section header */
+.section-header {
+  text-align: center;
+  margin-bottom: 64px; /* Space before cards - PHASE 3 requirement */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Title */
+.section-title {
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--brand-gold, #d4af37);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Description */
+.section-description {
+  font-size: 18px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  line-height: 1.6;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .artists-section {
+    padding-top: 64px;
+    padding-bottom: 48px;
+  }
+
+  .artists-section .container {
+    padding: 0 24px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-title {
+    font-size: 40px;
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "Medusa Tattoo München - Luxury Tattoo Salon",
+  "short_name": "Medusa Tattoo",
+  "description": "Premium tattoo salon in Munich offering exceptional artistry and luxury experience. Book your appointment with award-winning artists.",
+  "icons": [
+    {
+      "src": "/icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#222222",
+  "background_color": "#222222",
+  "lang": "de-DE",
+  "scope": "/",
+  "categories": ["lifestyle", "business", "entertainment"],
+  "shortcuts": [
+    {
+      "name": "Book Appointment",
+      "short_name": "Book Now",
+      "description": "Book your tattoo appointment",
+      "url": "/?action=book"
+    },
+    {
+      "name": "View Gallery",
+      "short_name": "Gallery",
+      "description": "Browse our tattoo gallery",
+      "url": "/gallery"
+    },
+    {
+      "name": "Our Artists",
+      "short_name": "Artists",
+      "description": "Meet our talented artists",
+      "url": "/artists"
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with us",
+      "url": "/contact"
+    }
+  ]
+}

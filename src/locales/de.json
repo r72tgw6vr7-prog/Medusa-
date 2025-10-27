@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "artists": "Künstler",
+    "gallery": "Galerie",
+    "pricing": "Preise",
+    "booking": "Termin buchen",
+    "bookingShort": "Termin",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "openMenu": "Navigationsmenü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "hero": {
+    "title": "Luxury Tattoo Art in München",
+    "subtitle": "Meisterhafte Tätowierungen seit 2010",
+    "cta": "Termin vereinbaren"
+  },
+  "footer": {
+    "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
+    "legal": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "subtitle": "Eine Sammlung meisterhafter Kunstwerke unserer talentierten Künstler. Entdecken Sie die Vielfalt unseres Studios.",
+    "noResults": "Keine Kunstwerke gefunden",
+    "filters": {
+      "allWorks": "Alle Arbeiten",
+      "allArtists": "Alle Künstler",
+      "allStyles": "Alle Stile",
+      "allYears": "Alle Jahre",
+      "reset": "Filter zurücksetzen",
+      "more": "Mehr anzeigen"
+    }
+  },
+  "slider": {
+    "heading": "Vorher & Nachher",
+    "before": "Vorher",
+    "after": "Nachher"
+  }
+}

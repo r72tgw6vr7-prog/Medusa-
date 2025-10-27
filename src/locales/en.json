@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "artists": "Artists",
+    "gallery": "Gallery",
+    "pricing": "Pricing",
+    "booking": "Book Appointment",
+    "bookingShort": "Book",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "title": "Luxury Tattoo Art in Munich",
+    "subtitle": "Masterful Tattoos since 2010",
+    "cta": "Book Appointment"
+  },
+  "footer": {
+    "copyright": " 2025 Medusa Tattoo Munich. All rights reserved.",
+    "legal": "Imprint",
+    "privacy": "Privacy Policy"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "A collection of masterful artworks by our talented artists. Discover our studio's diversity.",
+    "filters": {
+      "allWorks": "All Works",
+      "allArtists": "All Artists",
+      "allStyles": "All Styles",
+      "allYears": "All Years",
+      "reset": "Reset filters",
+      "more": "Show more"
+    }
+  },
+  "slider": {
+    "heading": "Before & After",
+    "before": "Before",
+    "after": "After"
+  }
+}

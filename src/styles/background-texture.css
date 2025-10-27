@@ -1,0 +1,54 @@
+/* ============================================
+   BACKGROUND TEXTURE UTILITY
+   ============================================
+   Apply to sections without photo backgrounds
+   for consistent texture throughout site
+   ============================================ */
+
+.bg-texture {
+  position: relative;
+  background-color: #222222; /* Charcoal black base */
+}
+
+.bg-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* BROKEN IMAGE REMOVED: background-image: url('/images/artists/web-background-and-assets/background-texture.png'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.15; /* Subtle texture overlay */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content stays above texture */
+.bg-texture > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Alternative - tiled texture (if you prefer repeating pattern) */
+.bg-texture-tiled {
+  position: relative;
+  background-color: #222222;
+}
+
+.bg-texture-tiled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* BROKEN IMAGE REMOVED: background-image: url('/images/artists/web-background-and-assets/background-texture.png'); */
+  background-size: 400px 400px; /* Adjust size for tiling */
+  background-position: center;
+  background-repeat: repeat;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-texture-tiled > * {
+  position: relative;
+  z-index: 1;
+}

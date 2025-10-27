@@ -1,0 +1,48 @@
+Type,Location,Current,Expected,Severity
+Color,TabletLuxuryShowcase.tsx:1129,#C0C0C0,var(--brand-chrome),High
+Color,TabletLuxuryShowcase.tsx:1588,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:1781,#C19B26,var(--brand-gold-hover),High
+Color,TabletLuxuryShowcase.tsx:1821,#FFFFFF,var(--brand-white),High
+Color,TabletLuxuryShowcase.tsx:1831,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:1873,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:1874,#222222,var(--brand-background),High
+Color,TabletLuxuryShowcase.tsx:2115,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2153,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2154,#222222,var(--brand-background),High
+Color,TabletLuxuryShowcase.tsx:2162,#C0C0C0,var(--brand-chrome),High
+Color,TabletLuxuryShowcase.tsx:2182,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2212,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2229,#FFFFFF,var(--brand-white),High
+Color,TabletLuxuryShowcase.tsx:2238,#C0C0C0,var(--brand-chrome),High
+Color,TabletLuxuryShowcase.tsx:2246,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2265,#D4AF37,var(--brand-gold),High
+Color,TabletLuxuryShowcase.tsx:2290,#C0C0C0,var(--brand-chrome),High
+Color,ui/chart.tsx:58,#ccc,var(--brand-chrome),Medium
+Color,ui/chart.tsx:58,#fff,var(--brand-white),Medium
+Spacing,ServicesPage.tsx:82,max-w-[360px],Should use design tokens,Medium
+Spacing,ServicesPage.tsx:82,h-[300px],Should use design tokens,Medium
+Spacing,App.tsx:156,10px 20px,Should use var(--spacing-tokens),Low
+Spacing,App.tsx:281,10px 20px,Should use var(--spacing-tokens),Low
+Spacing,App.tsx:294,10px 20px,Should use var(--spacing-tokens),Low
+Spacing,App.tsx:360,10px 20px,Should use var(--spacing-tokens),Low
+Spacing,App.tsx:381,10px 20px,Should use var(--spacing-tokens),Low
+Spacing,App.tsx:612,12px 24px,Should use var(--spacing-tokens),Low
+State,GlassmorphicNavigation.tsx,Missing :focus-visible,Should have focus states,High
+State,BookingFlow.tsx,Missing :disabled,Should have disabled states,High
+State,ServicesPage.tsx,Missing :loading,Should have loading states,Medium
+State,ArtistsPage.tsx,Missing :disabled,Should have disabled states,High
+State,ContactPage.tsx,Missing form validation states,Should have error/success states,High
+State,CookieConsentBanner.tsx,Missing :disabled,Should have disabled states,Medium
+Variant,GlassmorphicNavigation.tsx,Mobile menu incomplete,Should have full mobile variant,High
+Variant,BookingFlow.tsx,Missing tablet-specific layout,Should have tablet variant,Medium
+Variant,ServicesPage.tsx,Missing mobile card layout,Should have mobile variant,High
+Variant,ArtistsPage.tsx,Missing loading state variant,Should have loading variant,Medium
+Variant,ContactPage.tsx,Missing form states,Should have validation variants,High
+Accessibility,TabletLuxuryShowcase.tsx,Missing ARIA labels,Should have aria-label attributes,High
+Accessibility,BookingFlow.tsx,Missing focus management,Should have focus trapping,High
+Accessibility,ServicesPage.tsx,Missing keyboard navigation,Should have keydown handlers,High
+Accessibility,GlassmorphicNavigation.tsx,Missing screen reader text,Should have sr-only labels,Medium
+Typography,TabletLuxuryShowcase.tsx,Inconsistent line-height,Should use line-height: 1.0,Medium
+Component,TabletLuxuryShowcase.tsx,Monolithic component,Should be broken into smaller components,Critical
+Performance,BookingFlow.tsx,No lazy loading,Should implement code splitting,Medium
+Performance,ServicesPage.tsx,Heavy component,Should optimize re-renders,Low

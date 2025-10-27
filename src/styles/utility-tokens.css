@@ -1,0 +1,91 @@
+/**
+ * MEDUSA UTILITY TOKENS
+ * Version: v1.0-foundation
+ * 
+ * SPECIFICATIONS:
+ * - Border radius follows 8pt grid
+ * - Shadows meet WCAG contrast requirements
+ * - Gold shadows use brand color with 0.3 opacity
+ */
+
+:root {
+  /* Border Radius (8pt grid) */
+  --radius-sm: 4px; /* Subtle rounding */
+  --radius-md: 8px; /* Default buttons, cards */
+  --radius-lg: 16px; /* Large cards, modals */
+  --radius-xl: 24px; /* Hero sections */
+  --radius-full: 9999px; /* Pills, badges */
+
+  /* Shadows (WCAG-compliant) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle depth */
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08); /* Cards, buttons */
+  --shadow-lg:
+    0 10px 15px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.08); /* Modals, dropdowns */
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.12), 0 10px 10px rgba(0, 0, 0, 0.08); /* Hero elements */
+
+  /* Brand-specific shadows */
+  --shadow-gold: 0 4px 12px rgba(212, 175, 55, 0.3); /* Accent elements */
+  --shadow-gold-hover: 0 6px 16px rgba(212, 175, 55, 0.4); /* Hover states */
+  --shadow-gold-active: 0 2px 8px rgba(212, 175, 55, 0.5); /* Active/pressed */
+
+  /* Focus rings (WCAG AA) */
+  --focus-ring: 0 0 0 3px rgba(212, 175, 55, 0.4); /* Default focus */
+  --focus-ring-offset: 2px; /* Space between element and focus ring */
+}
+
+/* Utility classes for common use cases */
+.radius-sm {
+  border-radius: var(--radius-sm);
+}
+.radius-md {
+  border-radius: var(--radius-md);
+}
+.radius-lg {
+  border-radius: var(--radius-lg);
+}
+.radius-xl {
+  border-radius: var(--radius-xl);
+}
+.radius-full {
+  border-radius: var(--radius-full);
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+.shadow-gold {
+  box-shadow: var(--shadow-gold);
+}
+
+/* Interactive states */
+.shadow-hover {
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.shadow-hover:hover {
+  box-shadow: var(--shadow-gold-hover);
+  transform: translateY(-1px);
+}
+
+.shadow-hover:active {
+  box-shadow: var(--shadow-gold-active);
+  transform: translateY(0);
+}
+
+/* Focus styles */
+.focus-visible:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}

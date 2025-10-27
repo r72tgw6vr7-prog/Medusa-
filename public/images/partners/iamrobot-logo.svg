@@ -1,0 +1,7 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- I AM ROBOT logo inspired design -->
+  <text x="10" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">I AM ROBOT</text>
+  <text x="10" y="45" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#D4AF37">NFC Chip Implants</text>
+  <rect x="170" y="10" width="25" height="40" fill="#D4AF37" rx="3"/>
+  <path d="M175 20 L185 25 L175 30" stroke="#000" stroke-width="2" fill="none"/>
+</svg>

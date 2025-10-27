@@ -1,0 +1,14 @@
+/* Trust badges animation pause on hover */
+.hover\:animation-pause:hover {
+  animation-play-state: paused !important;
+}
+
+/* Ensure scrollBadges animation is available */
+@keyframes scrollBadges {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}

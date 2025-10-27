@@ -1,0 +1,216 @@
+/**
+ * FIGMA DESIGN TOKENS - Medusa Tattoo München
+ * Auto-generated from Figma design system
+ * DO NOT EDIT MANUALLY - Update tokens in Figma
+ */
+
+:root {
+  /* ========================================
+     BRAND COLORS - Core Identity
+     ======================================== */
+  --brand-background: #222222;
+  --brand-white: #FFFFFF;
+  --brand-gold: #D4AF37;
+  --brand-gold-hover: #C19B26;
+  --brand-chrome: #CCCCCC;
+  --brand-chrome-dark: #666666;
+
+  /* ========================================
+     TYPOGRAPHY - Font Families
+     ======================================== */
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* ========================================
+     TYPOGRAPHY - Font Sizes
+     ======================================== */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  --text-6xl: 60px;
+
+  --headline-sm: 28px;
+  --headline-md: 36px;
+  --headline-lg: 48px;
+  --headline-xl: 64px;
+
+  /* ========================================
+     SPACING - 8px Grid System
+     ======================================== */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
+
+  /* ========================================
+     BORDER RADIUS - 4px Grid
+     ======================================== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ========================================
+     SHADOWS - Luxury Elevation System
+     ======================================== */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
+  --shadow-gold-intense: 0 0 40px rgba(212, 175, 55, 0.5);
+
+  /* ========================================
+     GLASSMORPHISM
+     ======================================== */
+  --glass-background: rgba(34, 34, 34, 0.7);
+  --glass-border: rgba(212, 175, 55, 0.1);
+  --glass-blur: blur(12px);
+
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+
+  /* ========================================
+     Z-INDEX LAYERS
+     ======================================== */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-toast: 70;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.brand-bg {
+  background-color: var(--brand-background);
+}
+
+.brand-text-white {
+  color: var(--brand-white);
+}
+
+.brand-text-gold {
+  color: var(--brand-gold);
+}
+
+.brand-text-chrome {
+  color: var(--brand-chrome);
+}
+
+/* ========================================
+   BUTTON SYSTEM
+   ======================================== */
+.btn-primary {
+  background-color: var(--brand-gold);
+  color: var(--brand-background);
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: all var(--transition-base);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-gold-hover);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--brand-gold);
+  padding: 16px 32px;
+  border: 2px solid var(--brand-gold);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: all var(--transition-base);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: var(--brand-gold);
+  color: var(--brand-background);
+  box-shadow: var(--shadow-gold);
+}
+
+/* ========================================
+   GLASSMORPHIC NAVIGATION
+   ======================================== */
+.nav-glass {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================
+   FOCUS STATES - WCAG AA Compliant
+   ======================================== */
+.focus-gold-glow:focus {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

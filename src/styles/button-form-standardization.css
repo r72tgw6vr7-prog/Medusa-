@@ -1,0 +1,454 @@
+/* ============================================
+   BUTTON & FORM STANDARDIZATION
+   ============================================ */
+
+/* FIX 1: STANDARDIZE BUTTON SYSTEM */
+
+/* Base Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px; /* Standardized from 44-48px */
+  padding: 0 28px;
+  border-radius: 23px; /* Half of height for perfect pill shape */
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+/* Primary Button - Gold filled */
+.btn--primary {
+  background: #d4af37;
+  color: #1a1a1a;
+  border-color: #d4af37;
+}
+
+.btn--primary:hover {
+  background: #b8941f;
+  border-color: #b8941f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.2);
+}
+
+/* Secondary Button - Gold outline */
+.btn--secondary {
+  background: transparent;
+  color: #d4af37;
+  border-color: #d4af37;
+}
+
+.btn--secondary:hover {
+  background: #d4af37;
+  color: #1a1a1a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.btn--secondary:active {
+  transform: translateY(0);
+}
+
+/* Tertiary Button - Chrome outline */
+.btn--tertiary {
+  background: transparent;
+  color: #c0c0c0;
+  border-color: #c0c0c0;
+}
+
+.btn--tertiary:hover {
+  background: rgba(192, 192, 192, 0.1);
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+/* Button Sizes */
+.btn--small {
+  height: 38px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 19px;
+}
+
+.btn--large {
+  height: 52px;
+  padding: 0 32px;
+  font-size: 16px;
+  border-radius: 26px;
+}
+
+/* Full Width */
+.btn--full {
+  width: 100%;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button with Icon */
+.btn--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn--icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================
+   FIX 2: STANDARDIZE FORM INPUTS
+   ============================================ */
+
+/* All Input Fields */
+.form-input,
+.form-select,
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='password'],
+input[type='number'],
+input[type='url'],
+input[type='search'],
+input[type='date'],
+select {
+  width: 100%;
+  height: 50px; /* Standardized from 48-52px */
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Focus State */
+.form-input:focus,
+.form-select:focus,
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+input[type='password']:focus,
+input[type='number']:focus,
+input[type='url']:focus,
+input[type='search']:focus,
+input[type='date']:focus,
+select:focus {
+  outline: none;
+  border-color: #d4af37;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+/* Hover State */
+.form-input:hover,
+.form-select:hover,
+input[type='text']:hover,
+input[type='email']:hover,
+input[type='tel']:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+}
+
+/* Error State */
+.form-input--error,
+.form-input.error,
+input.error {
+  border-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.form-input--error:focus,
+input.error:focus {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+/* Success State */
+.form-input--success,
+.form-input.success,
+input.success {
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.05);
+}
+
+/* Disabled State */
+.form-input:disabled,
+input:disabled,
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Textarea */
+.form-textarea,
+textarea {
+  height: auto;
+  min-height: 120px;
+  padding: 14px 16px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Newsletter Input Specific */
+.footer__newsletter-input,
+.newsletter-input {
+  height: 52px; /* Standardized from 50-54px */
+  padding: 14px 20px;
+  font-size: 15px;
+}
+
+/* Select Dropdown Arrow */
+.form-select,
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+/* Checkbox & Radio */
+input[type='checkbox'],
+input[type='radio'] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #d4af37;
+}
+
+/* ============================================
+   FIX 3: FORM SPACING
+   ============================================ */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label,
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Inter', sans-serif;
+}
+
+.form-label--required::after,
+label.required::after {
+  content: '*';
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+/* Placeholder Styling */
+.form-input::placeholder,
+.form-textarea::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+/* Helper Text */
+.form-help,
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Error Message */
+.form-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+/* Success Message */
+.form-success {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #2ecc71;
+}
+
+/* ============================================
+   FIX 4: ARTIST CARD BUTTONS
+   ============================================ */
+
+.artist-card__buttons {
+  display: flex;
+  gap: 12px;
+  padding: 0 20px 24px;
+}
+
+.artist-card__buttons .btn,
+.artist-card__button {
+  flex: 1;
+  height: 44px; /* Slightly smaller for card context */
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 22px;
+}
+
+/* ============================================
+   FORM LAYOUTS
+   ============================================ */
+
+/* Inline Form (e.g., Newsletter) */
+.form-inline {
+  display: flex;
+  gap: 12px;
+}
+
+.form-inline .form-input {
+  flex: 1;
+}
+
+.form-inline .btn {
+  flex-shrink: 0;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-grid--full {
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .btn {
+    height: 44px;
+    padding: 0 24px;
+    font-size: 14px;
+  }
+
+  .btn--large {
+    height: 48px;
+    padding: 0 28px;
+  }
+
+  .form-input,
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'] {
+    height: 48px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .btn {
+    height: 44px;
+    padding: 0 20px;
+    font-size: 14px;
+    border-radius: 22px;
+  }
+
+  .btn--small {
+    height: 38px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+
+  .btn--large {
+    height: 48px;
+    padding: 0 24px;
+    font-size: 15px;
+  }
+
+  .form-input,
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'] {
+    height: 48px;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .footer__newsletter-input,
+  .newsletter-input {
+    height: 48px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-inline {
+    flex-direction: column;
+  }
+
+  .artist-card__buttons {
+    gap: 10px;
+    padding: 0 16px 20px;
+  }
+
+  .artist-card__buttons .btn {
+    height: 42px;
+    font-size: 13px;
+  }
+}
+
+/* ============================================
+   BUTTON & INPUT HEIGHT REFERENCE
+   ============================================ */
+
+/*
+STANDARDIZED HEIGHTS:
+
+Desktop:
+- Standard Button: 46px
+- Large Button: 52px
+- Small Button: 38px
+- Artist Card Button: 44px
+- Standard Input: 50px
+- Newsletter Input: 52px
+- Textarea: min 120px
+
+Tablet:
+- Standard Button: 44px
+- Standard Input: 48px
+
+Mobile:
+- Standard Button: 44px
+- Large Button: 48px
+- Small Button: 38px
+- Artist Card Button: 42px
+- Standard Input: 48px
+- Newsletter Input: 48px
+*/

@@ -1,0 +1,503 @@
+{
+  "metadata": {
+    "projectName": "Medusa Tattoo München",
+    "description": "Asset export manifest for developer handoff",
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-09"
+  },
+  
+  "images": {
+    "teamPhotos": {
+      "location": "/public/images/team/",
+      "format": "JPG",
+      "recommendedFormat": "WebP (for web optimization)",
+      "files": [
+        {
+          "filename": "AAron.jpg",
+          "artist": "Aaron",
+          "dimensions": "TBD - Should be standardized",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required - convert to WebP, optimize quality"
+        },
+        {
+          "filename": "ANGIE.jpg",
+          "artist": "Angie",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Debi.jpg",
+          "artist": "Debi",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Eli-luquez.jpg",
+          "artist": "Eli Luquez",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Loui.jpg",
+          "artist": "Loui",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Oli.jpg",
+          "artist": "Oli",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Sasha.jpg",
+          "artist": "Sasha",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        },
+        {
+          "filename": "Vive.jpg",
+          "artist": "Vive",
+          "dimensions": "TBD",
+          "aspectRatio": "3:4 portrait",
+          "optimization": "Required"
+        }
+      ],
+      "specifications": {
+        "aspectRatio": "3:4 (portrait orientation)",
+        "lighting": "Professional studio lighting with consistent color grading",
+        "background": "Consistent across all photos",
+        "cropping": "Identical framing for all artists",
+        "dimensions": {
+          "desktop": "260×320px (or 2x for retina: 520×640px)",
+          "tablet": "200×250px (or 2x: 400×500px)",
+          "mobile": "163×217px (or 2x: 326×434px)"
+        },
+        "format": "WebP primary, PNG/JPG fallback",
+        "quality": "85-90% WebP compression",
+        "colorProfile": "sRGB"
+      }
+    },
+    
+    "heroImages": {
+      "location": "To be provided by client",
+      "format": "WebP",
+      "files": [
+        {
+          "name": "hero-main.webp",
+          "usage": "Homepage hero section",
+          "dimensions": "1920×1080px minimum (2x for retina)",
+          "aspectRatio": "16:9",
+          "description": "Cinematic hero image with dramatic lighting"
+        },
+        {
+          "name": "services-hero.webp",
+          "usage": "Services page hero",
+          "dimensions": "1920×1080px minimum",
+          "aspectRatio": "16:9"
+        },
+        {
+          "name": "artists-hero.webp",
+          "usage": "Artists page hero",
+          "dimensions": "1920×1080px minimum",
+          "aspectRatio": "16:9"
+        },
+        {
+          "name": "gallery-hero.webp",
+          "usage": "Gallery page hero",
+          "dimensions": "1920×1080px minimum",
+          "aspectRatio": "16:9"
+        }
+      ],
+      "specifications": {
+        "format": "WebP",
+        "quality": "90-95%",
+        "colorGrading": "Cinema-style color grading applied",
+        "lighting": "Professional lighting setup",
+        "retina": "Provide 2x resolution for retina displays"
+      }
+    },
+    
+    "portfolioImages": {
+      "location": "To be provided by client",
+      "format": "WebP",
+      "description": "Tattoo portfolio images for gallery",
+      "specifications": {
+        "format": "WebP primary, JPG fallback",
+        "quality": "85-90%",
+        "dimensions": {
+          "thumbnail": "400×400px",
+          "lightbox": "1200×1200px minimum"
+        },
+        "aspectRatio": "1:1 (square) or 3:4 (portrait)",
+        "naming": "artist-name_tattoo-style_001.webp",
+        "metadata": {
+          "required": [
+            "artist",
+            "style",
+            "category",
+            "altText"
+          ]
+        }
+      },
+      "categories": [
+        "blackwork",
+        "realism",
+        "traditional",
+        "neotraditional",
+        "fineline",
+        "geometric",
+        "watercolor",
+        "tribal",
+        "portrait"
+      ]
+    },
+    
+    "serviceImages": {
+      "location": "To be provided by client",
+      "format": "WebP",
+      "files": [
+        {
+          "name": "service-tattoo.webp",
+          "usage": "Custom Tattoo service card",
+          "dimensions": "600×600px"
+        },
+        {
+          "name": "service-coverup.webp",
+          "usage": "Cover-up service card",
+          "dimensions": "600×600px"
+        },
+        {
+          "name": "service-piercing.webp",
+          "usage": "Piercing service card",
+          "dimensions": "600×600px"
+        },
+        {
+          "name": "service-consultation.webp",
+          "usage": "Consultation service card",
+          "dimensions": "600×600px"
+        },
+        {
+          "name": "service-aftercare.webp",
+          "usage": "Aftercare service card",
+          "dimensions": "600×600px"
+        }
+      ],
+      "specifications": {
+        "aspectRatio": "1:1 (square)",
+        "format": "WebP",
+        "quality": "85%",
+        "style": "Consistent photography style across all service images"
+      }
+    },
+    
+    "trustBadges": {
+      "location": "/public/images/trust/",
+      "format": "SVG preferred, PNG fallback",
+      "files": [
+        {
+          "name": "award-25years.svg",
+          "usage": "25+ years experience badge",
+          "dimensions": "80×80px",
+          "colors": ["#D4AF37", "#FFFFFF"]
+        },
+        {
+          "name": "rating-5stars.svg",
+          "usage": "5-star rating badge",
+          "dimensions": "120×24px",
+          "colors": ["#D4AF37"]
+        },
+        {
+          "name": "certification-health.svg",
+          "usage": "Health certification badge",
+          "dimensions": "80×80px",
+          "colors": ["#C0C0C0", "#FFFFFF"]
+        },
+        {
+          "name": "certification-safety.svg",
+          "usage": "Safety certification badge",
+          "dimensions": "80×80px",
+          "colors": ["#C0C0C0", "#FFFFFF"]
+        }
+      ],
+      "specifications": {
+        "format": "SVG (scalable, brand colors only)",
+        "fallback": "PNG @2x for older browsers",
+        "colors": "Must use only brand colors (#D4AF37, #FFFFFF, #C0C0C0, #222222)"
+      }
+    },
+    
+    "salonPhotos": {
+      "location": "To be provided by client",
+      "format": "WebP",
+      "description": "Interior and exterior salon photos",
+      "files": [
+        {
+          "name": "salon-exterior.webp",
+          "usage": "Salon exterior shot",
+          "dimensions": "1200×800px"
+        },
+        {
+          "name": "salon-interior-reception.webp",
+          "usage": "Reception area",
+          "dimensions": "1200×800px"
+        },
+        {
+          "name": "salon-interior-studio.webp",
+          "usage": "Tattoo studio space",
+          "dimensions": "1200×800px"
+        },
+        {
+          "name": "salon-interior-private.webp",
+          "usage": "Private rooms",
+          "dimensions": "1200×800px"
+        }
+      ],
+      "specifications": {
+        "aspectRatio": "3:2 landscape",
+        "format": "WebP",
+        "quality": "90%",
+        "lighting": "Professional photography with consistent color grading",
+        "colorGrading": "Match brand aesthetic (dark, cinematic, luxury)"
+      }
+    }
+  },
+  
+  "svgIcons": {
+    "location": "/imports/",
+    "description": "SVG icons and vector graphics",
+    "existingFiles": [
+      {
+        "filename": "svg-y4v69scqsj.ts",
+        "description": "Vector paths for UI elements",
+        "usage": "Imported from Figma design"
+      },
+      {
+        "filename": "Frame2.tsx",
+        "description": "React component with SVG",
+        "usage": "UI component"
+      },
+      {
+        "filename": "Rectangle.tsx",
+        "description": "SVG rectangle component",
+        "usage": "UI element"
+      }
+    ],
+    "neededIcons": {
+      "format": "SVG React components or inline SVG",
+      "colorRule": "Must use ONLY brand colors via CSS variables",
+      "icons": [
+        {
+          "name": "whatsapp",
+          "usage": "WhatsApp contact button",
+          "size": "24×24px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "instagram",
+          "usage": "Social media link",
+          "size": "24×24px",
+          "color": "var(--brand-white)"
+        },
+        {
+          "name": "facebook",
+          "usage": "Social media link",
+          "size": "24×24px",
+          "color": "var(--brand-white)"
+        },
+        {
+          "name": "phone",
+          "usage": "Contact information",
+          "size": "20×20px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "email",
+          "usage": "Contact information",
+          "size": "20×20px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "location",
+          "usage": "Address/location",
+          "size": "20×20px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "calendar",
+          "usage": "Booking calendar",
+          "size": "24×24px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "clock",
+          "usage": "Opening hours",
+          "size": "20×20px",
+          "color": "var(--brand-chrome)"
+        },
+        {
+          "name": "check",
+          "usage": "Success states, checkboxes",
+          "size": "16×16px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "chevron-right",
+          "usage": "Navigation arrows",
+          "size": "16×16px",
+          "color": "var(--brand-white)"
+        },
+        {
+          "name": "chevron-left",
+          "usage": "Navigation arrows",
+          "size": "16×16px",
+          "color": "var(--brand-white)"
+        },
+        {
+          "name": "close",
+          "usage": "Modal close buttons",
+          "size": "20×20px",
+          "color": "var(--brand-chrome)"
+        },
+        {
+          "name": "menu",
+          "usage": "Mobile menu toggle",
+          "size": "24×24px",
+          "color": "var(--brand-white)"
+        },
+        {
+          "name": "user",
+          "usage": "User profile",
+          "size": "20×20px",
+          "color": "var(--brand-chrome)"
+        },
+        {
+          "name": "star",
+          "usage": "Ratings",
+          "size": "20×20px",
+          "color": "var(--brand-gold)"
+        },
+        {
+          "name": "download",
+          "usage": "Download aftercare PDF",
+          "size": "20×20px",
+          "color": "var(--brand-gold)"
+        }
+      ],
+      "source": "Use lucide-react library or custom SVGs with brand colors"
+    }
+  },
+  
+  "logos": {
+    "location": "/public/images/brand/",
+    "files": [
+      {
+        "name": "medusa-logo-full.svg",
+        "usage": "Full logo with wordmark",
+        "description": "MEDUSA in Playfair Display, gold color",
+        "format": "SVG",
+        "colors": ["#D4AF37"],
+        "variants": [
+          "medusa-logo-full-white.svg",
+          "medusa-logo-full-gold.svg"
+        ]
+      },
+      {
+        "name": "medusa-icon.svg",
+        "usage": "Icon/symbol only (no text)",
+        "description": "Medusa head icon or simplified mark",
+        "format": "SVG",
+        "dimensions": "512×512px (square)",
+        "usage": "Favicon, app icon, compact spaces"
+      },
+      {
+        "name": "medusa-wordmark.svg",
+        "usage": "Text-only logo",
+        "description": "MEDUSA TATTOO MÜNCHEN in Playfair Display",
+        "format": "SVG",
+        "colors": ["#D4AF37", "#FFFFFF"]
+      }
+    ],
+    "favicon": {
+      "files": [
+        "favicon.ico (16×16, 32×32, 48×48)",
+        "favicon-16×16.png",
+        "favicon-32×32.png",
+        "apple-touch-icon.png (180×180)",
+        "android-chrome-192×192.png",
+        "android-chrome-512×512.png"
+      ],
+      "colors": "Use brand gold (#D4AF37) on dark background (#222222)"
+    }
+  },
+  
+  "optimizationGuidelines": {
+    "imageFormats": {
+      "primary": "WebP (85-95% quality)",
+      "fallback": "JPG or PNG",
+      "vector": "SVG for icons and logos"
+    },
+    "compression": {
+      "photos": "WebP 85-90% quality",
+      "heroImages": "WebP 90-95% quality (high quality for visual impact)",
+      "thumbnails": "WebP 80-85% quality",
+      "svg": "Minified, optimized paths"
+    },
+    "retina": {
+      "requirement": "Provide 2x resolution images for retina displays",
+      "naming": "filename@2x.webp or use srcset"
+    },
+    "lazyLoading": {
+      "requirement": "Implement lazy loading for all images below the fold",
+      "method": "Use loading='lazy' attribute or Intersection Observer"
+    },
+    "responsive": {
+      "requirement": "Provide multiple sizes via srcset",
+      "breakpoints": "320px, 768px, 1200px, 1920px"
+    },
+    "accessibility": {
+      "altText": "Required for all images",
+      "decorative": "Use empty alt='' for decorative images",
+      "descriptive": "Meaningful alt text for content images"
+    }
+  },
+  
+  "exportChecklist": [
+    "✓ All team photos converted to WebP with 2x retina versions",
+    "✓ Hero images optimized and color-graded",
+    "✓ Portfolio images categorized and tagged",
+    "✓ Service images standardized to 1:1 aspect ratio",
+    "✓ Trust badges created in SVG with brand colors only",
+    "✓ Salon photos professionally shot with consistent lighting",
+    "✓ All icons using brand colors via CSS variables",
+    "✓ Logo variants created (full, icon, wordmark)",
+    "✓ Favicon set generated (all sizes)",
+    "✓ All images have proper alt text",
+    "✓ Compression applied to all raster images",
+    "✓ SVG files minified and optimized"
+  ],
+  
+  "deliveryFormat": {
+    "structure": "/assets/",
+    "folders": [
+      "/assets/images/team/",
+      "/assets/images/hero/",
+      "/assets/images/portfolio/",
+      "/assets/images/services/",
+      "/assets/images/salon/",
+      "/assets/images/trust/",
+      "/assets/images/brand/",
+      "/assets/icons/",
+      "/assets/favicons/"
+    ],
+    "naming": "kebab-case (lowercase-with-dashes.webp)",
+    "organization": "Group by usage/context",
+    "documentation": "Include asset-manifest.json with metadata"
+  }
+}

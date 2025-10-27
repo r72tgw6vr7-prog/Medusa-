@@ -1,0 +1,258 @@
+/**
+ * Micro-transitions CSS
+ * 
+ * This file provides CSS classes for standardized micro-transitions
+ * that can be used directly in HTML/JSX without JavaScript.
+ * 
+ * Usage:
+ * <button class="hover-scale active-scale focus-ring-gold">Button</button>
+ */
+
+/* Duration Variables */
+:root {
+  --transition-duration-instant: 100ms;
+  --transition-duration-fast: 200ms;
+  --transition-duration-normal: 300ms;
+  --transition-duration-slow: 500ms;
+
+  /* Easing functions */
+  --transition-easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-easing-linear: linear;
+  --transition-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Base transitions */
+.transition-base {
+  transition-property: all;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+/* Hover Transitions */
+.hover-scale {
+  transition-property: transform;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-scale-subtle {
+  transition-property: transform;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.hover-scale-subtle:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow-gold {
+  transition-property: box-shadow;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.hover-glow-gold:hover {
+  box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.3);
+}
+
+.hover-glow-gold-medium:hover {
+  box-shadow: 0 0 12px 4px rgba(212, 175, 55, 0.4);
+}
+
+.hover-glow-gold-strong:hover {
+  box-shadow: 0 0 16px 6px rgba(212, 175, 55, 0.5);
+}
+
+.hover-glow-chrome {
+  transition-property: box-shadow;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.hover-glow-chrome:hover {
+  box-shadow: 0 0 8px 2px rgba(192, 192, 192, 0.3);
+}
+
+.hover-brightness {
+  transition-property: filter;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+/* Focus Transitions */
+.focus-ring-gold {
+  transition-property: box-shadow;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.focus-ring-gold:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px #d4af37;
+}
+
+.focus-ring-chrome {
+  transition-property: box-shadow;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.focus-ring-chrome:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px #c0c0c0;
+}
+
+/* Active/Tap Transitions */
+.active-scale {
+  transition-property: transform;
+  transition-duration: var(--transition-duration-instant);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.active-scale:active {
+  transform: scale(0.95);
+}
+
+.active-scale-subtle:active {
+  transform: scale(0.98);
+}
+
+.active-opacity {
+  transition-property: opacity;
+  transition-duration: var(--transition-duration-instant);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.active-opacity:active {
+  opacity: 0.8;
+}
+
+/* Color Transitions */
+.color-gold-to-chrome {
+  color: #d4af37;
+  transition-property: color;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.color-gold-to-chrome:hover {
+  color: #c0c0c0;
+}
+
+.color-chrome-to-gold {
+  color: #c0c0c0;
+  transition-property: color;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.color-chrome-to-gold:hover {
+  color: #d4af37;
+}
+
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+
+/* Preset combinations */
+.preset-button {
+  transition-property: transform, box-shadow;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.preset-button:hover {
+  transform: scale(1.02);
+}
+
+.preset-button:active {
+  transform: scale(0.95);
+}
+
+.preset-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px #d4af37;
+}
+
+.preset-button-gold {
+  transition-property: transform, box-shadow;
+  transition-duration: var(--transition-duration-fast);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.preset-button-gold:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.3);
+}
+
+.preset-button-gold:active {
+  transform: scale(0.95);
+}
+
+.preset-button-gold:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px #d4af37;
+}
+
+.preset-card {
+  transition-property: transform, box-shadow;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.preset-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.3);
+}
+
+.preset-link {
+  transition-property: color, filter;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+  color: #c0c0c0;
+}
+
+.preset-link:hover {
+  color: #d4af37;
+  filter: brightness(1.1);
+}
+
+.preset-image {
+  transition-property: transform, filter;
+  transition-duration: var(--transition-duration-normal);
+  transition-timing-function: var(--transition-easing-smooth);
+}
+
+.preset-image:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}

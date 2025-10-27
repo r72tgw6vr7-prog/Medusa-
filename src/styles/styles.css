@@ -1,0 +1,57 @@
+/* styles.css *//* styles.css */
+
+
+
+.test-item {.test-item {
+
+  background: rgba(212, 175, 55, 0.1);  background: rgba(212, 175, 55, 0.1);
+
+  padding: 2rem;  padding: 2rem;
+
+  border-radius: 8px;  border-radius: 8px;
+
+}}
+
+
+
+.brand-gold-text {.brand-gold-text {
+
+  color: var(--brand-gold);  color: var(--brand-gold);
+
+}}
+
+
+
+.text-light {.text-light {
+
+  color: rgba(255, 255, 255, 0.8);  color: rgba(255, 255, 255, 0.8);
+
+}}
+
+
+
+.test-container {.test-container {
+
+  background: rgba(212, 175, 55, 0.15);  background: rgba(212, 175, 55, 0.15);
+
+  padding: 2rem;  padding: 2rem;
+
+  border-radius: 8px;  border-radius: 8px;
+
+}}
+
+
+
+.object-contain {.object-contain {
+
+  object-fit: contain;  object-fit: contain;
+
+}}
+```
+
+Next, we'll update the `PHASE_2_PRIMITIVES_TEST.tsx` file to use these new CSS classes:
+
+```tool
+TOOL_NAME: edit_existing_file
+BEGIN_ARG: filepath
+"PHASE_2_PRIMITIVES_TEST.tsx"
