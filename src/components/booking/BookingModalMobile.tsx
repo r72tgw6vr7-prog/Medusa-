@@ -11,6 +11,9 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
+import Button from '../Button';
+import ArtistCard from '../ArtistCard';
+import FormInput from '../FormInput';
 
 // Interface for team.json data
 interface TeamArtist {
@@ -235,34 +238,45 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                 </button>
               ))}
             </div>
-            <button
-              className='next-button'
+            <Button
+              variant='primary'
               disabled={!canProceedStep1}
               onClick={() => setStep('artist')}
+              className='w-full'
+              icon={<ChevronRight size={20} />}
             >
               Weiter
-              <ChevronRight size={20} />
-            </button>
+            </Button>
           </div>
         )}
 
         {step === 'artist' && (
           <div className='step-container'>
             <div className='step-header'>
-              <button
-                className='back-button'
+              <Button
+                variant='secondary'
                 onClick={() => setStep('service')}
+                className='p-2'
                 aria-label='Zurück zu Service auswählen'
               >
                 <ChevronLeft size={24} />
-              </button>
+              </Button>
               <h3>Künstler:in auswählen</h3>
             </div>
             <div className='artist-grid'>
               {artists.map((artist) => (
-                <button
+                <ArtistCard
                   key={artist.id}
-                  className={`artist-card ${selectedArtist === artist.id ? 'selected' : ''}`}
+                  artist={{
+                    id: artist.id,
+                    name: artist.name,
+                    role: artist.role,
+                    photo: artist.photo,
+                    specialties: [],
+                    specialty: artist.specialty,
+                  }}
+                  variant="booking"
+                  isSelected={selectedArtist === artist.id}
                   onClick={() => setSelectedArtist(artist.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -270,95 +284,75 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                       setSelectedArtist(artist.id);
                     }
                   }}
-                  type='button'
-                >
-                  <div className='artist-photo'>
-                    <img
-                      src={artist.photo}
-                      alt={`${artist.name} - ${artist.role}`}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='artist-info'>
-                    <h4>{artist.name}</h4>
-                    <p>{artist.role}</p>
-                    <p className='specialty'>{artist.specialty}</p>
-                  </div>
-                </button>
+                />
               ))}
             </div>
-            <button
-              className='next-button'
+            <Button
+              variant='primary'
               disabled={!canProceedStep2}
               onClick={() => setStep('contact')}
+              className='w-full'
+              icon={<ChevronRight size={20} />}
             >
               Weiter
-              <ChevronRight size={20} />
-            </button>
+            </Button>
           </div>
         )}
 
         {step === 'contact' && (
           <form className='step-container' onSubmit={handleSubmit}>
             <div className='step-header'>
-              <button
+              <Button
                 type='button'
-                className='back-button'
+                variant='secondary'
                 onClick={() => setStep('artist')}
+                className='p-2'
                 aria-label='Zurück zu Künstler:in auswählen'
               >
                 <ChevronLeft size={24} />
-              </button>
+              </Button>
               <h3>Kontaktdaten</h3>
             </div>
 
-            <div className='form-group'>
-              <label htmlFor='name'>Name*</label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+            <FormInput
+              id="name"
+              label="Name*"
+              type="text"
+              value={formData.name}
+              onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
+              required
+              fieldContainerClass="form-group"
+            />
 
-            <div className='form-group'>
-              <label htmlFor='email'>E-Mail*</label>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+            <FormInput
+              id="email"
+              label="E-Mail*"
+              type="email"
+              value={formData.email}
+              onChange={(value) => setFormData((prev) => ({ ...prev, email: value }))}
+              required
+              fieldContainerClass="form-group"
+            />
 
-            <div className='form-group'>
-              <label htmlFor='phone'>Telefon*</label>
-              <input
-                type='tel'
-                id='phone'
-                name='phone'
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+            <FormInput
+              id="phone"
+              label="Telefon*"
+              type="tel"
+              value={formData.phone}
+              onChange={(value) => setFormData((prev) => ({ ...prev, phone: value }))}
+              required
+              fieldContainerClass="form-group"
+            />
 
-            <div className='form-group'>
-              <label htmlFor='date'>Gewünschter Termin*</label>
-              <input
-                type='date'
-                id='date'
-                name='date'
-                value={formData.date}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+            <FormInput
+              id="date"
+              label="Gewünschter Termin*"
+              type="date"
+              value={formData.date}
+              onChange={(value) => setFormData((prev) => ({ ...prev, date: value }))}
+              required
+              fieldContainerClass="form-group"
+            />
 
             <div className='form-group'>
               <label htmlFor='message'>Nachricht (optional)</label>
@@ -385,9 +379,14 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               </label>
             </div>
 
-            <button type='submit' className='submit-button' disabled={!canProceedStep3}>
+            <Button 
+              type='submit' 
+              variant='primary'
+              disabled={!canProceedStep3}
+              className='w-full'
+            >
               Termin anfragen
-            </button>
+            </Button>
           </form>
         )}
       </div>
@@ -408,21 +407,15 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
           <AlertCircle size={48} className='error-icon' />
           <h3>Etwas ist schiefgelaufen</h3>
           <p>{submissionError}</p>
-          <button
-            className='retry-button'
+          <Button
+            variant='primary'
             onClick={() => setStep('contact')}
             disabled={isSubmitting}
+            isLoading={isSubmitting}
             aria-label={isSubmitting ? 'Versuche erneut zu senden...' : 'Erneut versuchen'}
           >
-            {isSubmitting ? (
-              <>
-                <Loader2 className='animate-spin' size={20} />
-                <span>Versuche erneut...</span>
-              </>
-            ) : (
-              'Erneut versuchen'
-            )}
-          </button>
+            Erneut versuchen
+          </Button>
         </div>
       )}
 
@@ -464,13 +457,14 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
             Postfach und den Spam-Ordner.
           </p>
 
-          <button
-            className='close-confirmation-button'
+          <Button
+            variant='primary'
             onClick={onClose}
+            className='w-full'
             aria-label='Modal schließen'
           >
             Schließen
-          </button>
+          </Button>
         </div>
       )}
     </div>

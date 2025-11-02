@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import Footer from '../components/Footer';
+import Button from '../components/Button';
 import { BookingForm } from '../components/organisms/BookingForm';
 import { CheckCircle, Calendar, Users, Sparkles } from 'lucide-react';
 import { PageBackground } from '../components/atoms/PageBackground';
@@ -193,17 +194,15 @@ export const BookingPage: React.FC = () => {
                   </div>
 
                   <div className='flex flex-col sm:flex-row gap-8 justify-center'>
-                    <a
-                      href='/'
-                      className='inline-block bg-brand-gold hover:bg-brand-gold-hover text-black px-8 py-8 rounded-lg font-bold transition-all duration-300 shadow-gold-glow'
-                    >
-                      Zur Startseite
+                    <a href='/' className="no-underline">
+                      <Button variant='primary' className='min-w-[180px] text-center justify-center'>
+                        Zur Startseite
+                      </Button>
                     </a>
-                    <a
-                      href='/gallery'
-                      className='inline-block bg-white/5 hover:bg-white/10 text-white px-8 py-8 rounded-lg font-medium border border-white/10 transition-all duration-300'
-                    >
-                      Galerie ansehen
+                    <a href='/gallery' className="no-underline">
+                      <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
+                        Galerie ansehen
+                      </Button>
                     </a>
                   </div>
                 </div>
@@ -284,15 +283,16 @@ export const BookingPage: React.FC = () => {
                   href='https://wa.me/4989269313'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-flex items-center justify-center gap-0 bg-[#25D366] hover:bg-[#20BA5A] text-white px-8 py-8 rounded-lg font-bold transition-all duration-300 shadow-lg'
+                  className="no-underline"
                 >
-                  <span>WhatsApp</span>
+                  <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A]'>
+                    WhatsApp
+                  </Button>
                 </a>
-                <a
-                  href='/contact'
-                  className='inline-block bg-white/5 hover:bg-white/10 text-white px-8 py-8 rounded-lg font-medium border border-white/10 transition-all duration-300'
-                >
-                  Kontaktseite
+                <a href='/contact' className="no-underline">
+                  <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
+                    Kontaktseite
+                  </Button>
                 </a>
               </div>
             </div>

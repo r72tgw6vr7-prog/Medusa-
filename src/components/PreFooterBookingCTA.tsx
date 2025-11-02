@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { User, Mail, Palette, Calendar, Clock, Lightbulb } from 'lucide-react';
+import Button from './Button';
 import './PreFooterBookingCTA.css';
 
 interface BookingFormData {
@@ -258,10 +259,13 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
               type='submit'
-              className='w-full h-14 bg-[#D4AF37] text-[#1A1A1A] font-inter font-semibold text-lg rounded-xl hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-[rgba(212,175,55,0.25)] transition-all duration-300'
+              variant='primary'
+              className='w-full h-14 text-lg rounded-xl'
               style={{
+                backgroundColor: '#D4AF37',
+                color: '#1A1A1A',
                 boxShadow: '0 0 24px rgba(212,175,55,0.4)',
               }}
               onMouseEnter={(e) => {
@@ -272,7 +276,7 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
               }}
             >
               Jetzt Termin sichern →
-            </button>
+            </Button>
           </form>
         </div>
       </div>

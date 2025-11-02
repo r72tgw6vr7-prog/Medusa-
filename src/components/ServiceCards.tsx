@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/ServiceCards.css';
 import Section from './ui/Section';
+import Button from './Button';
 
 interface ServiceCard {
   id: string;
@@ -205,9 +206,14 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
 
                     <a
                       href={service.ctaHref}
-                      className='team-card-button team-card-button-primary service-card-cta text-sm md:text-base mx-auto'
+                      className="no-underline"
                     >
-                      {service.ctaText}
+                      <Button 
+                        variant={service.ctaVariant}
+                        className="w-full text-center justify-center"
+                      >
+                        {service.ctaText}
+                      </Button>
                     </a>
                   </div>
                 </div>

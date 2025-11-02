@@ -50,6 +50,7 @@ export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = 
     { icon: '⭐', value: '10,000+', label: 'Reviews' },
     { icon: '🚇', value: '5 min', label: 'U/S-Bahn' },
   ],
+  children, // children is now properly destructured
 }) => {
   // CRITICAL FIX #3: Parallax effect for hero background
   const heroRef = useRef<HTMLDivElement>(null);

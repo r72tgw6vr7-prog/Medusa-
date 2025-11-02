@@ -130,8 +130,122 @@ const galleryItems: GalleryItem[] = [
     style: 'Linework',
     date: '2024-07',
     featured: true,
-  }
+  },
+  {
+    id: 13,
+    image: '/images/gallery/tattoos/Legacy/26832a0e-491d-4542-af40-bcbbaae3b2a1.webp',
+    title: 'Portrait Realism',
+    artist: 'Loui',
+    style: 'Realism',
+    date: '2024-06',
+    featured: false,
+  },
+  {
+    id: 14,
+    image: '/images/gallery/tattoos/Legacy/39823510-93e5-47d9-aa5b-5b2538c1f9b4.webp',
+    title: 'Detailed Realistic Work',
+    artist: 'Loui',
+    style: 'Realism',
+    date: '2024-05',
+    featured: true,
+  },
+  {
+    id: 15,
+    image: '/images/gallery/tattoos/Legacy/b841b7f0-6014-49d8-9fe3-c594485ef1fd.webp',
+    title: 'Black & Grey Portrait',
+    artist: 'Loui',
+    style: 'Black & Gray',
+    date: '2024-04',
+    featured: false,
+  },
+
+  // Luz (Eli Luquez) - Modern Realism
+  {
+    id: 16,
+    image: '/images/gallery/tattoos/Luz/26832a0e-491d-4542-af40-bcbbaae3b2a1.webp',
+    title: 'Modern Realism',
+    artist: 'Eli Luquez',
+    style: 'Realism',
+    date: '2024-09',
+    featured: true,
+  },
+  {
+    id: 17,
+    image: '/images/gallery/tattoos/Luz/39823510-93e5-47d9-aa5b-5b2538c1f9b4.webp',
+    title: 'Realistic Detail',
+    artist: 'Eli Luquez',
+    style: 'Realism',
+    date: '2024-08',
+    featured: false,
+  },
+  {
+    id: 18,
+    image: '/images/gallery/tattoos/Luz/b841b7f0-6014-49d8-9fe3-c594485ef1fd.webp',
+    title: 'Intricate Detail Work',
+    artist: 'Eli Luquez',
+    style: 'Fineline',
+    date: '2024-07',
+    featured: true,
+  },
+  {
+    id: 19,
+    image: '/images/gallery/tattoos/Luz/c5f62ece-7bdd-49c6-a38f-719eecd906a8.webp',
+    title: 'Fine Detail Tattoo',
+    artist: 'Eli Luquez',
+    style: 'Fineline',
+    date: '2024-06',
+    featured: false,
+  },
+
+  // Mix with numbered placeholders for variety
+  {
+    id: 20,
+    image: '/images/gallery/tattoos/Legacy/aa6c12f5-2767-47fb-8d2a-82d80725be1c.webp',
+    title: 'Studio Work',
+    artist: 'Debi',
+    style: 'Mixed',
+    date: '2024-03',
+    featured: false,
+  },
+  {
+    id: 21,
+    image: '/images/gallery/tattoos/Legacy/26832a0e-491d-4542-af40-bcbbaae3b2a1.webp',
+    title: 'Custom Design',
+    artist: 'Loui',
+    style: 'Custom',
+    date: '2024-02',
+    featured: true,
+  },
+  {
+    id: 22,
+    image: '/images/gallery/tattoos/Legacy/39823510-93e5-47d9-aa5b-5b2538c1f9b4.webp',
+    title: 'Unique Piece',
+    artist: 'Eli Luquez',
+    style: 'Custom',
+    date: '2024-01',
+    featured: false,
+  },
+  {
+    id: 23,
+    image: '/images/gallery/tattoos/Legacy/b841b7f0-6014-49d8-9fe3-c594485ef1fd.webp',
+    title: 'Artistic Expression',
+    artist: 'Loui',
+    style: 'Mixed',
+    date: '2023-12',
+    featured: true,
+  },
+  {
+    id: 24,
+    image: '/images/gallery/tattoos/Legacy/c5f62ece-7bdd-49c6-a38f-719eecd906a8.webp',
+    title: 'Creative Work',
+    artist: 'Debi',
+    style: 'Mixed',
+    date: '2023-11',
+    featured: false,
+  },
 ];
+
+// i18n-aware lists will be created inside the component using current language
 
 export const EnhancedGalleryPage: React.FC = () => {
   const { t, language } = useLanguage();
@@ -304,6 +418,58 @@ export const EnhancedGalleryPage: React.FC = () => {
     };
   }, [selectedImage]);
 
+  // Focus management: Set focus to close button when lightbox opens
+  useEffect(() => {
+    if (selectedImage && closeButtonRef.current) {
+      // Store the currently focused element to restore later
+      triggerRef.current = document.activeElement as HTMLElement;
+
+      // Set focus to close button after a brief delay to ensure render
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 100);
+    } else if (!selectedImage && triggerRef.current) {
+      // Restore focus when lightbox closes
+      triggerRef.current.focus();
+      triggerRef.current = null;
+    }
+  }, [selectedImage]);
+
+  // Focus trap: Keep focus within the dialog
+  useEffect(() => {
+    if (!selectedImage || !dialogRef.current) return;
+
+    const handleFocusTrap = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusableElements = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey) {
+        // Shift + Tab: Move focus backwards
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable?.focus();
+        }
+      } else {
+        // Tab: Move focus forwards
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleFocusTrap);
+    return () => document.removeEventListener('keydown', handleFocusTrap);
+  }, [selectedImage]);
+
   const hasActiveFilters =
     filterArtist !== allArtistsLabel ||
     filterStyle !== allStylesLabel ||
@@ -365,15 +531,13 @@ export const EnhancedGalleryPage: React.FC = () => {
           aspect='16/9'
         />
 
-        {/* Gallery Content */}
-        <section className='section-padding'>
+        <section className='section-padding border-b border-[#D4AF37]/10'>
           <div className='responsive-container safe-area-padding'>
-            {/* Filter Controls */}
-            <div className='flex flex-wrap gap-4 items-center justify-between mb-8'>
-              <div className='flex flex-wrap gap-2'>
+            <div className='flex flex-wrap gap-8 items-center justify-between mb-8'>
+              <div className='flex flex-wrap gap-0'>
                 <button
                   onClick={resetFilters}
-                  className='px-6 py-3 bg-[#D4AF37]/10 border-2 border-[#D4AF37] text-[#D4AF37] font-medium transition-all duration-300 rounded-lg hover:bg-[#D4AF37]/20'
+                  className='touch-target bg-[#D4AF37]/10 border-2 border-[#D4AF37] text-[#D4AF37] font-medium transition-all duration-300 rounded-lg'
                 >
                   {t('gallery.filters.allWorks')}
                 </button>
@@ -385,8 +549,8 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowStyleDropdown(false);
                       setShowYearDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
-                      filterArtist !== allArtistsLabel
+                    className={`touch-target font-medium transition-all duration-300 rounded-lg ${
+                      filterArtist !== 'Alle Künstler'
                         ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
                         : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
                     }`}
@@ -394,7 +558,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     {filterArtist}
                   </button>
                   {showArtistDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px]'>
                       {i18nUniqueArtists.map((artist) => (
                         <button
                           key={artist}
@@ -402,7 +566,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterArtist(artist);
                             setShowArtistDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className='touch-target-inline block w-full text-left px-8 py-0 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {artist}
                         </button>
@@ -418,8 +582,8 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowArtistDropdown(false);
                       setShowYearDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
-                      filterStyle !== allStylesLabel
+                    className={`touch-target font-medium transition-all duration-300 rounded-lg ${
+                      filterStyle !== 'Alle Stile'
                         ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
                         : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
                     }`}
@@ -427,7 +591,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     {filterStyle}
                   </button>
                   {showStyleDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto'>
+                    <div className='absolute top-full mt-0 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto'>
                       {i18nUniqueStyles.map((style) => (
                         <button
                           key={style}
@@ -435,7 +599,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterStyle(style);
                             setShowStyleDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {style}
                         </button>
@@ -451,8 +615,8 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowArtistDropdown(false);
                       setShowStyleDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
-                      filterYear !== allYearsLabel
+                    className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                      filterYear !== 'Alle Jahre'
                         ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
                         : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
                     }`}
@@ -460,7 +624,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     {filterYear}
                   </button>
                   {showYearDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[150px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[150px]'>
                       {i18nUniqueYears.map((year) => (
                         <button
                           key={year}
@@ -468,7 +632,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterYear(year);
                             setShowYearDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {year}
                         </button>
@@ -481,188 +645,88 @@ export const EnhancedGalleryPage: React.FC = () => {
               {hasActiveFilters && (
                 <button
                   onClick={resetFilters}
-                  className='px-4 py-2 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300'
+                  className='px-8 py-0 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300'
                 >
                   Filter zurücksetzen
                 </button>
               )}
             </div>
 
-            <div className='text-white/60 text-sm mb-8'>
+            <div className='text-white/60 text-sm'>
               {filteredItems.length} von {galleryItems.length} Kunstwerken
             </div>
+          </div>
+        </section>
 
+        <section className='section-padding'>
+          <div className='responsive-container safe-area-padding'>
             {filteredItems.length === 0 ? (
               <div className='text-center py-24'>
                 <p className='text-xl text-[#C0C0C0] mb-8'>{t('gallery.noResults')}</p>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-4 bg-[#D4AF37] text-[#1A1A1A] font-medium hover:bg-[#C19B26] transition-colors rounded-lg'
+                  className='touch-target bg-[#D4AF37] text-[#1A1A1A] font-medium hover:bg-brand-gold-hover transition-colors rounded-lg transition duration-200 ease-out'
                 >
-                  {t('gallery.filters.reset')}
-                </button>
-              </div>
-            ) : (
-              <>
-                {/* Gallery Grid */}
-                <div className='gallery-grid'>
-                  {displayedItems.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      {...animationConfig}
-                      className={`gallery-item ${
-                        !showAllPhotos && index >= 8 && index < 12 ? 'opacity-50' : ''
-                      }`}
-                      onClick={() => setSelectedImage(item)}
-                    >
-                      <ImageWithFallback
-                        src={item.image}
-                        alt={`${item.title} by ${item.artist}`}
-                        className="gallery-image"
-                        fallback="/images/placeholder-tattoo.jpg"
-                        loading={index > 4 ? 'lazy' : 'eager'}
-                      />
-                      <div className="gallery-overlay">
-                        <h3 className="text-white font-bold text-lg">{item.title}</h3>
-                        <p className="text-[#D4AF37] font-medium">{item.artist}</p>
-                        <p className="text-white/70 text-sm">{item.style}</p>
-                        {item.featured && (
-                          <span className="inline-block mt-2 px-2 py-1 rounded-full bg-[#D4AF37] text-[#222222] text-xs font-bold">
-                            Featured
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
 
-                {/* Load More Button */}
-                {hasMorePhotos && !showAllPhotos && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isLoadMoreVisible ? 1 : 0, y: isLoadMoreVisible ? 0 : 20 }}
-                    className="text-center mt-16"
-                  >
-                    <button
-                      ref={loadMoreRef}
-                      onClick={() => setShowAllPhotos(true)}
-                      className="group inline-flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-[#222222] font-medium hover:bg-[#C19B26] transition-colors rounded-lg"
-                    >
-                      <span>{t('gallery.filters.more')}</span>
-                      <ChevronRight
-                        size={20}
-                        className='transition-transform group-hover:translate-x-1'
-                      />
-                    </button>
-                  </motion.div>
-                )}
-              </>
-            )}
-          </div>
-        </section>
-
-        {/* Lightbox Modal */}
-        <AnimatePresence>
-          {selectedImage && (
-            <motion.div
-              ref={dialogRef}
-              {...animationConfig}
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedImage(null)}
+          {hasActiveFilters && (
+            <button
+              onClick={resetFilters}
+              className='px-8 py-0 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300'
             >
-              <motion.div
-                {...dialogAnimationConfig}
-                className="relative bg-[#222222] rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Close Button */}
-                <button
-                  ref={closeButtonRef}
-                  onClick={() => setSelectedImage(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
-                  aria-label="Close lightbox"
-                >
-                  <X size={24} />
-                </button>
-
-                {/* Navigation Buttons */}
-                {currentIndex > 0 && (
-                  <button
-                    onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={24} />
-                  </button>
-                )}
-
-                {currentIndex < filteredItems.length - 1 && (
-                  <button
-                    onClick={goToNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={24} />
-                  </button>
-                )}
-
-                {/* Image and Details */}
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="aspect-square overflow-hidden rounded-lg">
-                    <ImageWithFallback
-                      src={selectedImage.image}
-                      alt={`${selectedImage.title} by ${selectedImage.artist}`}
-                      className="w-full h-full object-cover"
-                      fallback="/images/placeholder-tattoo.jpg"
-                    />
+              <span>{t('gallery.filters.more')}</span>
+              <ChevronRight
+                size={20}
+                className='transition-transform group-hover:translate-x-1 transition duration-200 ease-out'
+              />
+            </button>
+          </motion.div>
+        )}
+      </>
+    )}
+  </div>
+</MotionConfig>
+);
                   </div>
 
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl font-bold text-white mb-2">{selectedImage.title}</h2>
-                      <p className="text-[#D4AF37] text-lg font-medium">{selectedImage.artist}</p>
+                  <div className='space-y-0'>
+                    <div className='flex items-center gap-0'>
+                      <span className='text-white/60 text-sm'>Stil:</span>
+                      <span className='px-0 py-0 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-sm'>
+                        {selectedImage.style}
+                      </span>
                     </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-white/60 text-sm">Stil:</span>
-                        <span className="px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-sm">
-                          {selectedImage.style}
+                    <div className='flex items-center gap-0'>
+                      <span className='text-white/60 text-sm'>Datum:</span>
+                      <span className='text-white text-sm'>
+                        {new Date(selectedImage.date).toLocaleDateString('de-DE', {
+                          year: 'numeric',
+                          month: 'long',
+                        })}
+                      </span>
+                    </div>
+                    {selectedImage.featured && (
+                      <div className='flex items-center gap-0'>
+                        <span className='px-0 py-0 rounded-full bg-[#D4AF37] text-[#222222] text-xs font-bold'>
+                          Featured Work
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white/60 text-sm">Datum:</span>
-                        <span className="text-white text-sm">
-                          {new Date(selectedImage.date).toLocaleDateString('de-DE', {
-                            year: 'numeric',
-                            month: 'long',
-                          })}
-                        </span>
-                      </div>
-                      {selectedImage.featured && (
-                        <div className="flex items-center gap-2">
-                          <span className="px-3 py-1 rounded-full bg-[#D4AF37] text-[#222222] text-xs font-bold">
-                            Featured Work
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="pt-6 border-t border-white/10">
-                      <button
-                        onClick={() => (window.location.href = '/booking')}
-                        className="w-full py-4 px-8 rounded-lg bg-[#D4AF37] text-[#222222] hover:bg-[#D4AF37]/90 transition-colors font-bold text-lg shadow-lg shadow-[#D4AF37]/20"
-                      >
-                        Termin buchen
-                      </button>
-                    </div>
-
-                    <div className="text-white/40 text-xs text-center">
-                      {currentIndex + 1} von {filteredItems.length}
-                    </div>
+                    )}
                   </div>
-                </div>
-              </motion.div>
+
+                  <div className='pt-8 border-t border-white/10'>
+                    <button
+                      onClick={() => (window.location.href = '/booking')}
+                      className='w-full py-8 px-8 rounded-lg bg-[#D4AF37] text-[#222222] hover:bg-[#D4AF37]/90 transition-colors font-bold text-lg shadow-lg shadow-[#D4AF37]/20 transition duration-200 ease-out'
+                    >
+                      Termin buchen
+                    </button>
+                  </div>
+
+                  <div className='text-white/40 text-xs text-center'>
+                    {currentIndex + 1} von {filteredItems.length}
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

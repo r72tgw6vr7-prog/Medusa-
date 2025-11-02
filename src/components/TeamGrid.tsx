@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { PenTool, Target, UserIcon, Palette, Clock, Instagram } from 'lucide-react';
 import './TeamGrid.css';
 import Section from './ui/Section';
+import ArtistCard from './ArtistCard';
 
 interface TeamMember {
   id: string;
@@ -119,69 +119,20 @@ const TeamGrid = () => {
           </div>
         ) : (
           artists.map((artist, index) => (
-            <div key={index} className='team-card-wrap'>
-              <article className='team-card' data-artist-name={artist.name}>
-                <img
-                  src={artist.photo}
-                  alt={artist.name}
-                  className='team-card-image'
-                  loading='lazy'
-                  decoding='async'
-                  sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 360px) 50vw, 100vw'
-                  onError={(e) => (e.currentTarget.src = '/images/placeholder.jpg')}
-                />
-                <div className='team-card-overlay'></div>
-
-                <div className='team-card-name-top'>{artist.name}</div>
-
-                <div className='team-role-badge'>
-                  {artist.roleIcon === 'Pen' && <PenTool size={16} className='icon' />}
-                  {artist.roleIcon === 'Target' && <Target size={16} className='icon' />}
-                  {artist.roleIcon === 'User' && <UserIcon size={16} className='icon' />}
-                  {artist.roleIcon === 'Palette' && <Palette size={16} className='icon' />}
-                  {artist.role}
-                </div>
-
-                <div className='team-card-content'>
-                  <p className='team-card-specialties'>{artist.specialties.join(', ')}</p>
-
-                  <div className='team-card-bottom-info'>
-                    <div className='team-card-experience'>
-                      <Clock size={16} className='icon' />
-                      <span>{artist.experience}</span>
-                    </div>
-
-                    <div className='team-card-social'>
-                      <Instagram size={16} className='icon' />
-                      <a
-                        href={`https://instagram.com/${artist.instagram.replace('@', '')}`}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
-                        {artist.instagram}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              {/* Actions moved outside the card to match previous design */}
-              {artist.bookable && (
-                <div className='team-card-actions'>
-                  <a
-                    href={`/booking?artist=${encodeURIComponent(artist.name)}`}
-                    className='team-card-button team-card-button-primary'
-                  >
-                    Jetzt Buchen
-                  </a>
-                  <a
-                    href={`/gallery#${artist.name.toLowerCase()}`}
-                    className='team-card-button team-card-button-secondary'
-                  >
-                    Galerie
-                  </a>
-                </div>
-              )}
-            </div>
+            <ArtistCard
+              key={index}
+              artist={{
+                name: artist.name,
+                role: artist.role,
+                photo: artist.photo,
+                specialties: artist.specialties,
+                experience: artist.experience,
+                instagram: artist.instagram,
+                bookable: artist.bookable,
+                roleIcon: artist.roleIcon,
+              }}
+              variant="full"
+            />
           ))
         )}
       </div>

@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { SkipLink } from '../accessibility/SkipLink';
+import { useKeyboardNav } from '../../hooks/useKeyboardNav';
 import './NavigationStyles.css';
 
 type NavItem = {
@@ -172,12 +174,29 @@ export function MainNavigation() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  // Use keyboard navigation hook for better keyboard control
+  const { handleKeyDown: handleNavKeyDown } = useKeyboardNav({
+    onEscape: closeMenu,
+  });
+
+  // Handle overlay click to close menu
+  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      closeMenu();
+    }
+  }, []);
+
   return (
-    <nav
-      className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
-        scrolled ? 'scrolled' : ''
-      } ${menuOpen ? 'menu-open' : ''}`}
-    >
+    <>
+      <SkipLink />
+      <nav
+        id="main-navigation"
+        aria-label="Main navigation"
+        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
+          scrolled ? 'scrolled' : ''
+        } ${menuOpen ? 'menu-open' : ''}`}
+        onKeyDown={handleNavKeyDown}
+      >
       <div className='mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-16'>
         <Link
           to='/'
@@ -187,24 +206,27 @@ export function MainNavigation() {
         </Link>
 
         <div className='hidden flex-1 xl:flex'>
-          <div className='flex w-full items-center justify-center gap-16'>
+          <ul className='flex w-full items-center justify-center gap-16' role='menubar' aria-orientation='horizontal'>
             {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
               const active = isActive(location.pathname);
 
               return (
-                <Link
-                  key={to}
-                  to={to}
-                  className={`nav-link text-[18px] font-['Playfair_Display'] font-medium transition-all duration-300 ${
-                    active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
-                  }`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {t(i18nKey)}
-                </Link>
+                <li key={to} role='none'>
+                  <Link
+                    to={to}
+                    role='menuitem'
+                    className={`nav-link text-[18px] font-['Playfair_Display'] font-medium transition-all duration-300 ${
+                      active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
+                    }`}
+                    aria-current={active ? 'page' : undefined}
+                    tabIndex={0}
+                  >
+                    {t(i18nKey)}
+                  </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
 
         <div className='hidden items-center gap-8 xl:flex'>
@@ -238,6 +260,8 @@ export function MainNavigation() {
             ref={openButtonRef}
             type='button'
             aria-controls='mobile-menu-overlay'
+            aria-expanded={menuOpen}
+            aria-haspopup='true'
             aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
             onClick={() => setMenuOpen((value) => !value)}
             className={`mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 ${
@@ -249,6 +273,7 @@ export function MainNavigation() {
               <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
               <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
             </span>
+            <span className='sr-only'>{menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}</span>
           </button>
         </div>
       </div>
@@ -260,10 +285,14 @@ export function MainNavigation() {
             ref={overlayRef}
             role='dialog'
             aria-modal='true'
+            aria-labelledby='mobile-menu-title'
             className='mobile-menu-overlay'
+            onClick={handleOverlayClick}
+            onKeyDown={handleNavKeyDown}
           >
             <div className='mobile-menu-overlay__panel'>
-              <nav className='mobile-menu-overlay__links'>
+              <h2 id='mobile-menu-title' className='sr-only'>Main Menu</h2>
+              <nav className='mobile-menu-overlay__links' aria-label='Mobile navigation'>
                 {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
                   const active = isActive(location.pathname);
 
@@ -274,6 +303,7 @@ export function MainNavigation() {
                       onClick={closeMenu}
                       className={`mobile-nav-link ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
                       aria-current={active ? 'page' : undefined}
+                      tabIndex={menuOpen ? 0 : -1}
                     >
                       {t(i18nKey)}
                     </Link>
@@ -294,6 +324,7 @@ export function MainNavigation() {
                         : 'language-toggle__button--inactive'
                     }`}
                     onClick={() => switchLanguage('de')}
+                    tabIndex={menuOpen ? 0 : -1}
                   >
                     DE
                   </button>
@@ -305,6 +336,7 @@ export function MainNavigation() {
                         : 'language-toggle__button--active'
                     }`}
                     onClick={() => switchLanguage('en')}
+                    tabIndex={menuOpen ? 0 : -1}
                   >
                     EN
                   </button>
@@ -317,6 +349,7 @@ export function MainNavigation() {
                   onClick={closeMenu}
                   className='hero-appointment-cta nav-cta inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold text-[#C0C0C0] transition-all duration-300 hover:border-[#D4D4D4] hover:text-white'
                   aria-label={t('nav.booking')}
+                  tabIndex={menuOpen ? 0 : -1}
                 >
                   {t('nav.bookingShort')}
                 </Link>
@@ -325,6 +358,7 @@ export function MainNavigation() {
           </div>,
           document.body,
         )}
-    </nav>
+      </nav>
+    </>
   );
 }

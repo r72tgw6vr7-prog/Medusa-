@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import type { Service, Artist, BookingFormData, ValidationErrors } from '../../types/booking';
 import { ArtistCard } from '../molecules/ArtistCard';
+import Button from '../Button';
+import FormInput from '../FormInput';
 import './BookingForm.css';
 
 interface BookingFormProps {
@@ -191,35 +193,33 @@ export const BookingForm: React.FC<BookingFormProps> = ({
       </div>
 
       <div className='grid grid-cols-1 gap-16 md:grid-cols-2'>
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='date'>
-            Datum
-          </label>
-          <input
-            type='date'
-            id='date'
-            className={`${inputClass} scheme-dark`}
-            value={formData.date || ''}
-            onChange={(e) => setFormData((prev) => ({ ...prev, date: e.target.value }))}
-            min={new Date().toISOString().split('T')[0]}
-          />
-          {errors.date && <p className='text-red-500 text-sm mt-0'>{errors.date}</p>}
-        </div>
+        <FormInput
+          id="date"
+          label="Datum"
+          type="date"
+          value={formData.date || ''}
+          onChange={(value) => setFormData((prev) => ({ ...prev, date: value }))}
+          error={errors.date}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+          scheme="dark"
+          min={new Date().toISOString().split('T')[0]}
+        />
 
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='time'>
-            Uhrzeit
-          </label>
-          <input
-            type='time'
-            id='time'
-            className={`${inputClass} scheme-dark`}
-            value={formData.time || ''}
-            onChange={(e) => setFormData((prev) => ({ ...prev, time: e.target.value }))}
-            step='1800' // 30-minute intervals
-          />
-          {errors.time && <p className='text-red-500 text-sm mt-0'>{errors.time}</p>}
-        </div>
+        <FormInput
+          id="time"
+          label="Uhrzeit"
+          type="time"
+          value={formData.time || ''}
+          onChange={(value) => setFormData((prev) => ({ ...prev, time: value }))}
+          error={errors.time}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+          scheme="dark"
+          step="1800"
+        />
       </div>
     </div>
   );
@@ -235,101 +235,85 @@ export const BookingForm: React.FC<BookingFormProps> = ({
         </p>
       </div>
       <div className='grid grid-cols-1 gap-16 md:grid-cols-2'>
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='firstName'>
-            Vorname
-          </label>
-          <input
-            type='text'
-            id='firstName'
-            className={inputClass}
-            value={formData.personalInfo?.firstName || ''}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                personalInfo: {
-                  ...prev.personalInfo,
-                  firstName: e.target.value,
-                },
-              }))
-            }
-          />
-          {errors['personalInfo.firstName'] && (
-            <p className='text-red-500 text-sm mt-0'>{errors['personalInfo.firstName']}</p>
-          )}
-        </div>
+        <FormInput
+          id="firstName"
+          label="Vorname"
+          type="text"
+          value={formData.personalInfo?.firstName || ''}
+          onChange={(value) =>
+            setFormData((prev) => ({
+              ...prev,
+              personalInfo: {
+                ...prev.personalInfo,
+                firstName: value,
+              },
+            }))
+          }
+          error={errors['personalInfo.firstName']}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+        />
 
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='lastName'>
-            Nachname
-          </label>
-          <input
-            type='text'
-            id='lastName'
-            className={inputClass}
-            value={formData.personalInfo?.lastName || ''}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                personalInfo: {
-                  ...prev.personalInfo,
-                  lastName: e.target.value,
-                },
-              }))
-            }
-          />
-          {errors['personalInfo.lastName'] && (
-            <p className='text-red-500 text-sm mt-0'>{errors['personalInfo.lastName']}</p>
-          )}
-        </div>
+        <FormInput
+          id="lastName"
+          label="Nachname"
+          type="text"
+          value={formData.personalInfo?.lastName || ''}
+          onChange={(value) =>
+            setFormData((prev) => ({
+              ...prev,
+              personalInfo: {
+                ...prev.personalInfo,
+                lastName: value,
+              },
+            }))
+          }
+          error={errors['personalInfo.lastName']}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+        />
 
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='email'>
-            E-Mail
-          </label>
-          <input
-            type='email'
-            id='email'
-            className={inputClass}
-            value={formData.personalInfo?.email || ''}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                personalInfo: {
-                  ...prev.personalInfo,
-                  email: e.target.value,
-                },
-              }))
-            }
-          />
-          {errors['personalInfo.email'] && (
-            <p className='text-red-500 text-sm mt-0'>{errors['personalInfo.email']}</p>
-          )}
-        </div>
+        <FormInput
+          id="email"
+          label="E-Mail"
+          type="email"
+          value={formData.personalInfo?.email || ''}
+          onChange={(value) =>
+            setFormData((prev) => ({
+              ...prev,
+              personalInfo: {
+                ...prev.personalInfo,
+                email: value,
+              },
+            }))
+          }
+          error={errors['personalInfo.email']}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+        />
 
-        <div className={fieldContainerClass}>
-          <label className={labelClass} htmlFor='phone'>
-            Telefon
-          </label>
-          <input
-            type='tel'
-            id='phone'
-            className={inputClass}
-            value={formData.personalInfo?.phone || ''}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                personalInfo: {
-                  ...prev.personalInfo,
-                  phone: e.target.value,
-                },
-              }))
-            }
-          />
-          {errors['personalInfo.phone'] && (
-            <p className='text-red-500 text-sm mt-0'>{errors['personalInfo.phone']}</p>
-          )}
-        </div>
+        <FormInput
+          id="phone"
+          label="Telefon"
+          type="tel"
+          value={formData.personalInfo?.phone || ''}
+          onChange={(value) =>
+            setFormData((prev) => ({
+              ...prev,
+              personalInfo: {
+                ...prev.personalInfo,
+                phone: value,
+              },
+            }))
+          }
+          error={errors['personalInfo.phone']}
+          fieldContainerClass={fieldContainerClass}
+          labelClass={labelClass}
+          inputClass={inputClass}
+        />
       </div>
 
       <div className={fieldContainerClass}>
@@ -371,24 +355,27 @@ export const BookingForm: React.FC<BookingFormProps> = ({
       {errors.submit && <p className='text-red-500 text-sm mb-8'>{errors.submit}</p>}
 
       <div className='flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between'>
-        <button
+        <Button
           type='button'
           onClick={handleBack}
-          className={`inline-flex h-12 w-full items-center justify-center rounded-lg border border-white/10 px-8 py-0 text-sm font-medium text-white transition-colors hover:border-brand-gold/60 hover:text-brand-gold ${
+          variant='secondary'
+          className={`w-full sm:w-auto ${
             currentStep === 1 ? 'invisible sm:visible sm:opacity-0' : ''
           }`}
         >
           Zurück
-        </button>
+        </Button>
 
-        <button
+        <Button
           type={currentStep === 3 ? 'submit' : 'button'}
           onClick={currentStep === 3 ? undefined : handleNext}
           disabled={isSubmitting}
-          className='inline-flex h-12 w-full items-center justify-center rounded-lg bg-linear-to-r from-slate-200 to-slate-300 px-8 py-0 text-sm font-semibold text-black transition-all duration-200 ease-out hover:from-white hover:to-slate-200 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto shadow-[0_0_10px_rgba(255,255,255,0.3)]'
+          variant='primary'
+          className='w-full sm:w-auto'
+          isLoading={isSubmitting}
         >
-          {currentStep === 3 ? (isSubmitting ? 'Wird gesendet...' : 'Termin buchen') : 'Weiter'}
-        </button>
+          {currentStep === 3 ? 'Termin buchen' : 'Weiter'}
+        </Button>
       </div>
     </form>
   );
