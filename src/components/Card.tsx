@@ -134,7 +134,7 @@ export const CardHeader: React.FC<{
   <div className={`card-header flex justify-between items-start mb-4 ${className}`}>
     <div>
       {title && (
-        <h3 style={{ color: designTokens.colors.gold.primary, fontSize: '18px', fontWeight: 600, margin: 0 }}>
+        <h3 style={{ color: designTokens.colors.gold.primary, fontSize: '18px', fontWeight: designTokens.typography.fontWeight.semibold, margin: 0 }}>
           {title}
         </h3>
       )}

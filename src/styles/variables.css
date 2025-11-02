@@ -82,6 +82,15 @@
   /* Legacy font aliases */
   --font-headline: var(--font-display);
 
+  /* ===== FONT WEIGHTS ===== */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
   /* ===== BORDER RADIUS ===== */
   --radius-sm: 4px;
   --radius-md: 8px;

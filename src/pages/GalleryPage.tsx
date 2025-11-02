@@ -444,7 +444,7 @@ export const GalleryPage: React.FC = () => {
         transition: { duration: 0.3 },
       };
 
-  const dialogAnimationConfig = prefersReducedMotion.current
+  const dialogAnimationConfig = _prefersReducedMotion.current
     ? {
         initial: { scale: 1 },
         animate: { scale: 1 },
@@ -459,7 +459,7 @@ export const GalleryPage: React.FC = () => {
       };
 
   return (
-    <MotionConfig reducedMotion={prefersReducedMotion.current ? 'always' : 'never'}>
+    <MotionConfig reducedMotion={_prefersReducedMotion.current ? 'always' : 'never'}>
       <PageBackground>
         <div className='text-white' style={{ paddingTop: 'var(--header-height)' }}>
           <MainNavigation />
@@ -499,11 +499,11 @@ export const GalleryPage: React.FC = () => {
                     <motion.div
                       key={item.id}
                       initial={
-                        prefersReducedMotion.current ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                        _prefersReducedMotion.current ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
                       }
                       animate={{ opacity: 1, y: 0 }}
                       transition={
-                        prefersReducedMotion.current ? { duration: 0 } : { duration: 0.3 }
+                        _prefersReducedMotion.current ? { duration: 0 } : { duration: 0.3 }
                       }
                       className='group relative cursor-pointer overflow-hidden rounded-xl bg-black/20 hover:shadow-lg hover:shadow-gold-glow transition-all duration-300 flex flex-col h-full'
                       onClick={() => setSelectedImage(item)}
@@ -620,10 +620,10 @@ export const GalleryPage: React.FC = () => {
 
                   <motion.div
                     initial={
-                      prefersReducedMotion.current ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }
+                      _prefersReducedMotion.current ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }
                     }
                     animate={{ x: 0, opacity: 1 }}
-                    transition={prefersReducedMotion.current ? { duration: 0 } : { delay: 0.1 }}
+                    transition={_prefersReducedMotion.current ? { duration: 0 } : { delay: 0.1 }}
                     className='lg:w-80 bg-[#2A2A2A]/90 backdrop-blur-md border border-[#D4AF37]/20 rounded-xl p-8 space-y-8'
                   >
                     <div>

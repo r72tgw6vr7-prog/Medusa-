@@ -194,9 +194,12 @@ npm run preview          # Preview production build
 npm run lint             # Run ESLint
 npm run type-check       # Run TypeScript checks
 
-# Testing (if implemented)
-npm run test             # Run tests
-npm run test:e2e         # Run end-to-end tests
+# Testing
+npm run test             # Run unit tests (Vitest)
+npm run test:e2e         # Run end-to-end tests (Playwright)
+npm run test:p0          # Run P0 critical behavior tests
+npm run test:p0:headed   # Run P0 tests with visible browser
+npm run test:p0:report   # Run P0 tests and open HTML report
 ```
 
 ---
@@ -241,6 +244,45 @@ npm install -D @axe-core/cli
 # Run accessibility audit
 npx axe https://localhost:5173
 ```
+
+---
+
+## 🔬 P0 Critical Testing
+
+**P0 tests** verify critical user experience behaviors at runtime using Playwright.
+
+### Quick Start
+```bash
+# Setup (one-time)
+npx playwright install
+
+# Run all P0 tests
+npm run test:p0
+
+# Run with visual browser
+npm run test:p0:headed
+
+# Generate HTML report
+npm run test:p0:report
+```
+
+### Test Coverage
+
+| Test ID | Behavior | Status |
+|---------|----------|--------|
+| **R2** | Scroll to top on navigation | ✅ Implemented |
+| **C6** | Google Maps fallback behavior | ✅ Implemented |
+| **T4** | Font weight token compliance | ✅ Implemented |
+| **SEO5** | GA4 analytics event tracking | ✅ Implemented |
+
+### Environment Setup
+Create `.env.local`:
+```bash
+VITE_GOOGLE_MAPS_API_KEY=your_key_here
+VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+📖 **Full Documentation**: See [docs/P0_TESTING.md](docs/P0_TESTING.md) for complete testing guide.
 
 ---
 

@@ -81,7 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     padding: variantConfig.padding,
     height: variantConfig.height,
     borderRadius: variantConfig.borderRadius,
-    fontWeight: 600,
+    fontWeight: designTokens.typography.fontWeight.semibold,
     fontSize: '16px',
     cursor: disabled ? 'not-allowed' : 'pointer',
     transition: 'all 300ms ease-out',

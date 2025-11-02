@@ -1,5 +1,5 @@
 // Add custom matchers for testing-library
-import { expect } from 'vitest';
+import { expect, vi } from 'vitest';
 import matchers from '@testing-library/jest-dom/matchers';
 
 // Extend Vitest's expect with jest-dom matchers

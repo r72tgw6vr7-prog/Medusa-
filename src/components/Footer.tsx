@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook, Star } from 'lucide-react';
+import GoogleMap from './GoogleMap';
 
 // TypeScript interfaces
 interface StudioInfo {
@@ -81,9 +82,6 @@ const socialLinks: { [key: string]: SocialLink } = {
     href: 'https://facebook.com/medusa.tattoo.munich',
   },
 };
-
-const mapEmbedUrl =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.5!2d11.5678!3d48.1351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDA4JzA2LjQiTiAxMcKwMzQnMDQuMSJF!5e0!3m2!1sen!2sde!4v1234567890';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -340,17 +338,13 @@ const Footer: React.FC = () => {
             </h3>
           </div>
 
-          <div className='relative rounded-lg overflow-hidden border-2 border-[#D4AF37]/20'>
-            <iframe
-              src={mapEmbedUrl}
-              width='100%'
-              height='400'
-              allowFullScreen
-              loading='lazy'
-              referrerPolicy='no-referrer-when-downgrade'
-              title='Medusa Studio Location Map'
-              className='h-[300px] md:h-[350px] lg:h-[400px] border-0'
-            ></iframe>
+          <div className='relative'>
+            <GoogleMap 
+              width="100%"
+              height="400"
+              className=""
+              title="Medusa Studio Location Map"
+            />
           </div>
         </div>
 

@@ -19,6 +19,9 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
 import Meta from './components/Meta';
 import { SimpleMedusaProvider } from './foundation/index';
+import ScrollToTop from './components/ScrollToTop';
+import AnalyticsProvider from './components/AnalyticsProvider';
+import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from './hooks/useAnalytics';
 
 function App() {
   return (
@@ -26,7 +29,9 @@ function App() {
       <AppProvider initialLanguage='DE'>
         <LanguageProvider>
           <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <ScrollToTop />
+            <AnalyticsProvider>
+              <Suspense fallback={<div>Loading...</div>}>
               <Routes>
                 {/* Main Routes */}
                 <Route path='/' element={<HomePage />} />
@@ -143,6 +148,7 @@ function App() {
                 <Route path='*' element={<NotFoundPage />} />
               </Routes>
             </Suspense>
+            </AnalyticsProvider>
           </BrowserRouter>
         </LanguageProvider>
       </AppProvider>
