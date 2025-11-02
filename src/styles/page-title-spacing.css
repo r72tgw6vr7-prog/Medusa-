@@ -3,7 +3,7 @@
    ============================================ */
 .medusa-page-title {
   font-family: 'Playfair Display', serif;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: #d4af37;
   text-align: center;
   margin: 0 auto;

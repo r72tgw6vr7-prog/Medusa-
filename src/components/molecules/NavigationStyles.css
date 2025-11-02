@@ -46,7 +46,7 @@
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     border: none;
     background: transparent;
     cursor: pointer;
@@ -108,7 +108,7 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -357,7 +357,7 @@
   display: block;
   font-family: 'Playfair Display', serif;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 0.02em;
   transition:
     color 0.3s ease,

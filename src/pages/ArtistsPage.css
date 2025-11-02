@@ -28,7 +28,7 @@
 /* Title */
 .section-title {
   font-size: 48px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--brand-gold, #d4af37);
   margin-bottom: 16px;
   line-height: 1.2;

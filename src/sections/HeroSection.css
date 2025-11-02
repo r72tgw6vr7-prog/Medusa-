@@ -142,7 +142,7 @@
 .badge-text {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: #ffffff;
   text-align: left;
   letter-spacing: 0.01em;

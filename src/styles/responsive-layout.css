@@ -387,7 +387,7 @@ label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 input:not([type='checkbox']):not([type='radio']),
@@ -417,7 +417,7 @@ input[type='submit'] {
   width: 100%;
   min-height: 56px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 @media (min-width: 768px) {

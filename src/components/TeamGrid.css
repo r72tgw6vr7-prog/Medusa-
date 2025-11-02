@@ -15,7 +15,7 @@
 
 .team-heading h2 {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   font-size: 36px;
   color: var(--brand-gold);
   margin: 0;
@@ -93,7 +93,7 @@
   backdrop-filter: blur(8px);
   border-radius: 8px;
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   font-size: 16px;
   color: var(--brand-gold);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
@@ -199,7 +199,7 @@
   min-height: 44px; /* 44×44 tap target */
   border-radius: 8px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;

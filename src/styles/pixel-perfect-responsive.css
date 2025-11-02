@@ -164,7 +164,7 @@
 @media (min-width: 1024px) {
   .artist-card__role {
     font-size: 14px; /* FIX 9: Exact */
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     line-height: 1.3;
   }
 

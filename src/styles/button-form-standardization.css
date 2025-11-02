@@ -13,7 +13,7 @@
   padding: 0 28px;
   border-radius: 23px; /* Half of height for perfect pill shape */
   font-size: 15px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 0.5px;
   line-height: 1;
   border: 2px solid transparent;
@@ -251,7 +251,7 @@ label {
   display: block;
   margin-bottom: 8px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   color: rgba(255, 255, 255, 0.85);
   font-family: 'Inter', sans-serif;
 }
