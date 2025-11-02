@@ -1,24 +1,8 @@
-/* Responsive adjustments for ServiceCards layout on narrow viewports */
+/* ServiceCards specific styles */
 
 .service-card-grid {
   display: grid;
-  gap: 16px;
-}
-
-@media (min-width: 768px) {
-  .service-card-grid {
-    gap: 32px;
-  }
-}
-
-.service-card-padding {
-  padding: 16px;
-}
-
-@media (min-width: 768px) {
-  .service-card-padding {
-    padding: 32px;
-  }
+  gap: 32px;
 }
 
 .service-card-content {

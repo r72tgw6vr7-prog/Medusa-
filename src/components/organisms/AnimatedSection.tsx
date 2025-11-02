@@ -1,50 +1,96 @@
 /**
  * AnimatedSection Component
- *
+ * 
  * A reusable wrapper component that animates its children when they enter the viewport.
  * Uses Framer Motion and the animation utilities for consistent animation experience.
  */
 
 import { motion } from 'framer-motion';
-import React from 'react';
+import type { Variant, Variants, HTMLMotionProps, PanInfo } from 'framer-motion';
+import React, { forwardRef } from 'react';
 import { useScrollAnimation } from '../../lib/animations/hooks';
 
-interface AnimatedSectionProps {
+// Extend motion.section props but override the drag handler types
+type MotionSectionProps = Omit<HTMLMotionProps<'section'>, 'onDrag' | 'onDragStart' | 'onDragEnd'> & {
+  onDrag?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
+  onDragStart?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
+  onDragEnd?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
+};
+
+interface AnimatedSectionProps extends React.HTMLAttributes<HTMLElement> {
   /** Content to be animated */
   children: React.ReactNode;
-
+  
   /** Optional CSS class name */
   className?: string;
-
-  /** Additional HTML attributes */
-  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  
+  /** Animation variants for the section */
+  variants?: {
+    hidden: Variant;
+    visible: Variant;
+  };
+  
+  /** Animation transition properties */
+  transition?: {
+    duration?: number;
+    delay?: number;
+    ease?: string | number[];
+  };
+  
+  /** Custom ref for the section element */
+  ref?: React.Ref<HTMLElement>;
 }
 
 /**
  * AnimatedSection component that animates content when scrolled into view
  */
-const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children, className = '', ...rest }) => {
-  // Use the custom hook from hooks.ts
-  const { ref, isInView } = useScrollAnimation();
+const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'>>(
+  ({ children, className = '', variants, transition, ...rest }, ref) => {
+    const scrollRef = React.useRef<HTMLElement>(null);
+    const { isInView } = useScrollAnimation();
+    const sectionRef = ref || scrollRef;
 
-  return (
-    <motion.section
-      className={className}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{
-        opacity: isInView ? 1 : 0,
-        y: isInView ? 0 : 20,
-      }}
-      transition={{
-        duration: 0.5,
-        ease: [0.4, 0, 0.2, 1],
-      }}
-      ref={ref}
-      {...rest}
-    >
-      {children}
-    </motion.section>
-  );
-};
+    // Default variants if none provided
+    const defaultVariants: Variants = {
+      hidden: { opacity: 0, y: 20 },
+      visible: { 
+        opacity: 1, 
+        y: 0,
+        transition: {
+          duration: 0.6,
+          ease: 'easeOut',
+          ...transition,
+        },
+      },
+    };
+
+    // Filter out any non-standard props that might cause type issues
+    const {
+      // Remove any props that we handle explicitly
+      onDrag,
+      onDragStart,
+      onDragEnd,
+      ...filteredRest
+    } = rest as MotionSectionProps;
+
+    return (
+      <motion.section
+        ref={sectionRef as React.Ref<HTMLElement>}
+        className={className}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        variants={variants || defaultVariants}
+        onDrag={onDrag}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        {...filteredRest}
+      >
+        {children}
+      </motion.section>
+    );
+  }
+);
+
+AnimatedSection.displayName = 'AnimatedSection';
 
 export default AnimatedSection;

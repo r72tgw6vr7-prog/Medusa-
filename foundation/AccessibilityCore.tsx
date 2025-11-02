@@ -76,8 +76,8 @@ interface AccessibilityContextValue {
   disableSkipLinks: () => void;
   
   // Content Structure
-  generateAriaLabel: (context: string, details?: Record<string, any>) => string;
-  generateAriaDescription: (type: string, properties: Record<string, any>) => string;
+  generateAriaLabel: (context: string, details?: Record<string, string | number | boolean>) => string;
+  generateAriaDescription: (type: string, properties: Record<string, string | number | boolean | string[]>) => string;
   validateHeadingStructure: () => HeadingNode[];
   
   // Accessibility Audit
@@ -166,7 +166,7 @@ interface AccessibilityProviderProps {
 
 export function AccessibilityProvider({ 
   children, 
-  level = 'AA',
+  level: _level = 'AA',
   enableAudit = process.env.NODE_ENV === 'development'
 }: AccessibilityProviderProps) {
   const { announceToScreenReader } = useMedusaDesignSystem();

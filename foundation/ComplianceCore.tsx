@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { X, Shield, Eye, Cookie, ExternalLink, Info } from 'lucide-react';
+import { X, Eye, Cookie, ExternalLink } from 'lucide-react';
 import { useDesignSystem } from './DesignSystem';
 
 // ==========================================
@@ -211,7 +211,7 @@ interface ComplianceProviderProps {
 }
 
 export function ComplianceProvider({ children }: ComplianceProviderProps) {
-  const { language } = useDesignSystem();
+  const { language: _language } = useDesignSystem();
   
   // GDPR State
   const [gdprConsent, setGDPRConsent] = useState<GDPRConsent | null>(null);

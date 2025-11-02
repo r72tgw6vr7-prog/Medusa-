@@ -629,11 +629,16 @@ export function Show({ children, on, above, below }: ShowProps) {
 interface MotionWrapperProps {
   children: React.ReactNode;
   className?: string;
-  initial?: any;
-  animate?: any;
-  transition?: any;
-  whileHover?: any;
-  whileTap?: any;
+  initial?: React.CSSProperties | string | string[];
+  animate?: React.CSSProperties | string | string[];
+  transition?: {
+    duration?: number;
+    delay?: number;
+    ease?: string | number[];
+    [key: string]: string | number | number[] | undefined;
+  };
+  whileHover?: React.CSSProperties | string | string[];
+  whileTap?: React.CSSProperties | string | string[];
 }
 
 export function MotionWrapper({

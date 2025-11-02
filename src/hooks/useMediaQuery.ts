@@ -1,4 +1,11 @@
-import { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
+
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
 
 // Use useLayoutEffect on client, useEffect on server
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -107,9 +114,11 @@ export const useResponsive = <T>(mobile: T, tablet: T, desktop: T): T => {
   if (!isHydrated) return mobile;
 
   // Log for debugging
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[useResponsive] Current breakpoint:', breakpoint);
-    console.log('[useResponsive] Values:', { mobile, tablet, desktop });
+  if (import.meta.env.DEV) {
+    console.groupCollapsed('[useResponsive] Debug Info');
+    console.log('Current breakpoint:', breakpoint);
+    console.log('Values:', { mobile, tablet, desktop });
+    console.groupEnd();
   }
 
   switch (breakpoint) {

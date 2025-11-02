@@ -3,6 +3,13 @@
  * Monitors network connection to help identify timeout causes
  */
 
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
+
 
 
 class ConnectionMonitor {
@@ -20,13 +27,17 @@ class ConnectionMonitor {
       window.addEventListener('online', () => {
         this.isOnline = true;
         this.notifyListeners(true);
-        console.log('Connection restored');
+        if (import.meta.env.DEV) {
+          console.log('Connection restored');
+        }
       });
 
       window.addEventListener('offline', () => {
         this.isOnline = false;
         this.notifyListeners(false);
-        console.warn('Connection lost');
+        if (import.meta.env.DEV) {
+          console.warn('Connection lost');
+        }
       });
 
       // Initial status check

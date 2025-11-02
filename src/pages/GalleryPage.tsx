@@ -255,27 +255,26 @@ const galleryItems: GalleryItem[] = [
   },
 ];
 
-const uniqueArtists = [
+const _uniqueArtists = [
   'All Artists',
   ...Array.from(new Set(galleryItems.map((item) => item.artist))),
 ];
-const uniqueStyles = ['All Styles', ...Array.from(new Set(galleryItems.map((item) => item.style)))];
-const uniqueYears = [
+const _uniqueStyles = ['All Styles', ...Array.from(new Set(galleryItems.map((item) => item.style)))];
+const _uniqueYears = [
   'All Years',
   ...Array.from(new Set(galleryItems.map((item) => item.date.substring(0, 4))))
-    .sort()
-    .reverse(),
+    .sort((a, b) => b.localeCompare(a)),
 ];
 
 export const GalleryPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
-  const [filterArtist, setFilterArtist] = useState<string>('All Artists');
-  const [filterStyle, setFilterStyle] = useState<string>('All Styles');
-  const [filterYear, setFilterYear] = useState<string>('All Years');
-  const [showArtistDropdown, setShowArtistDropdown] = useState(false);
-  const [showStyleDropdown, setShowStyleDropdown] = useState(false);
-  const [showYearDropdown, setShowYearDropdown] = useState(false);
+  const [_filterArtist, setFilterArtist] = useState<string>('All Artists');
+  const [_filterStyle, setFilterStyle] = useState<string>('All Styles');
+  const [_filterYear, setFilterYear] = useState<string>('All Years');
+  const [_showArtistDropdown, setShowArtistDropdown] = useState(false);
+  const [_showStyleDropdown, setShowStyleDropdown] = useState(false);
+  const [_showYearDropdown, setShowYearDropdown] = useState(false);
 
   const closeAllDropdowns = () => {
     setShowArtistDropdown(false);
@@ -284,12 +283,12 @@ export const GalleryPage: React.FC = () => {
   };
 
   // Focus management refs
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const triggerRef = useRef<HTMLElement | null>(null);
+  const _dialogRef = useRef<HTMLDivElement>(null);
+  const _closeButtonRef = useRef<HTMLButtonElement>(null);
+  const _triggerRef = useRef<HTMLElement | null>(null);
 
   // Check for reduced motion preference
-  const prefersReducedMotion = useRef(
+  const _prefersReducedMotion = useRef(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
 
@@ -305,14 +304,18 @@ export const GalleryPage: React.FC = () => {
 
   useEffect(() => {
     const params: Record<string, string> = {};
-    if (filterArtist !== 'All Artists') params.artist = filterArtist;
-    if (filterStyle !== 'All Styles') params.style = filterStyle;
-    if (filterYear !== 'All Years') params.year = filterYear;
+    if (_filterArtist !== 'All Artists') params.artist = _filterArtist;
+    if (_filterStyle !== 'All Styles') params.style = _filterStyle;
+    if (_filterYear !== 'All Years') params.year = _filterYear;
     setSearchParams(params);
-  }, [filterArtist, filterStyle, filterYear, setSearchParams]);
+  }, [_filterArtist, _filterStyle, _filterYear, setSearchParams]);
 
-  // Show all items - no filtering
-  const filteredItems = galleryItems;
+  const filteredItems = galleryItems.filter((item) => {
+    const matchesArtist = _filterArtist === 'All Artists' || item.artist === _filterArtist;
+    const matchesStyle = _filterStyle === 'All Styles' || item.style === _filterStyle;
+    const matchesYear = _filterYear === 'All Years' || item.date.startsWith(_filterYear);
+    return matchesArtist && matchesStyle && matchesYear;
+  });
 
   const resetFilters = () => {
     closeAllDropdowns();
@@ -372,29 +375,29 @@ export const GalleryPage: React.FC = () => {
 
   // Focus management: Set focus to close button when lightbox opens
   useEffect(() => {
-    if (selectedImage && closeButtonRef.current) {
+    if (selectedImage && _closeButtonRef.current) {
       // Store the currently focused element to restore later
-      triggerRef.current = document.activeElement as HTMLElement;
+      _triggerRef.current = document.activeElement as HTMLElement;
 
       // Set focus to close button after a brief delay to ensure render
       setTimeout(() => {
-        closeButtonRef.current?.focus();
+        _closeButtonRef.current?.focus();
       }, 100);
-    } else if (!selectedImage && triggerRef.current) {
+    } else if (!selectedImage && _triggerRef.current) {
       // Restore focus when lightbox closes
-      triggerRef.current.focus();
-      triggerRef.current = null;
+      _triggerRef.current.focus();
+      _triggerRef.current = null;
     }
   }, [selectedImage]);
 
   // Focus trap: Keep focus within the dialog
   useEffect(() => {
-    if (!selectedImage || !dialogRef.current) return;
+    if (!selectedImage || !_dialogRef.current) return;
 
     const handleFocusTrap = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
 
-      const dialog = dialogRef.current;
+      const dialog = _dialogRef.current;
       if (!dialog) return;
 
       const focusableElements = dialog.querySelectorAll<HTMLElement>(
@@ -422,12 +425,12 @@ export const GalleryPage: React.FC = () => {
     return () => document.removeEventListener('keydown', handleFocusTrap);
   }, [selectedImage]);
 
-  const hasActiveFilters =
-    filterArtist !== 'All Artists' || filterStyle !== 'All Styles' || filterYear !== 'All Years';
-  const isAllFiltersActive = !hasActiveFilters;
+  // Filter state tracking
+  const _hasActiveFilters = _filterArtist !== 'All Artists' || _filterStyle !== 'All Styles' || _filterYear !== 'All Years';
+  const _isAllFiltersActive = _filterArtist === 'All Artists' && _filterStyle === 'All Styles' && _filterYear === 'All Years';
 
   // Animation config based on motion preference
-  const animationConfig = prefersReducedMotion.current
+  const animationConfig = _prefersReducedMotion.current
     ? {
         initial: { opacity: 1 },
         animate: { opacity: 1 },
@@ -552,7 +555,7 @@ export const GalleryPage: React.FC = () => {
                 onClick={() => setSelectedImage(null)}
               >
                 <button
-                  ref={closeButtonRef}
+                  ref={_closeButtonRef}
                   onClick={() => setSelectedImage(null)}
                   className='touch-target absolute top-6 right-6 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white z-10 transition-colors duration-200 ease-out'
                   aria-label='Close lightbox'
@@ -587,7 +590,7 @@ export const GalleryPage: React.FC = () => {
                 )}
 
                 <div
-                  ref={dialogRef}
+                  ref={_dialogRef}
                   className='responsive-container w-full max-h-[90vh] flex flex-col lg:flex-row gap-8'
                   onClick={(e) => e.stopPropagation()}
                   onKeyDown={(e) => {

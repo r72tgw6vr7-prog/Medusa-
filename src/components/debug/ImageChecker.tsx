@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
+
 interface ImageCheckResult {
   url: string;
   exists: boolean;
@@ -58,7 +65,11 @@ export const ImageChecker: React.FC = () => {
       setLoading(false);
 
       // Log results to console for debugging
-      console.log('Image check results:', checks);
+      if (import.meta.env.DEV) {
+        console.groupCollapsed('Image Check Results');
+        console.table(checks);
+        console.groupEnd();
+      }
 
       // Also create a visibility marker in the DOM
       const marker = document.createElement('div');

@@ -279,22 +279,28 @@ export const initializeFoundation = (config?: Partial<typeof foundationConfig>) 
 export const FoundationDevTools = isDevelopment ? {
   // Component tree inspector
   inspectComponentTree: () => {
-    console.log('Foundation Component Tree:', {
-      providers: ['DesignSystem', 'Navigation', 'Compliance'],
-      hooks: ['useDesignSystem', 'useResponsive', 'useNavigation', 'useCompliance', 'useLayout'],
-      components: ['Grid', 'Section', 'Flex', 'NavigationBar', 'GDPRBanner'],
-    });
+    if (import.meta.env.DEV) {
+      console.log('Foundation Component Tree:', {
+        providers: ['DesignSystem', 'Navigation', 'Compliance'],
+        hooks: ['useDesignSystem', 'useResponsive', 'useNavigation', 'useCompliance', 'useLayout'],
+        components: ['Grid', 'Section', 'Flex', 'NavigationBar', 'GDPRBanner'],
+      });
+    }
   },
   
   // Current state snapshot
   takeSnapshot: () => {
     // This would be implemented to capture current foundation state
-    console.log('Foundation State Snapshot taken');
+    if (import.meta.env.DEV) {
+      console.log('Foundation State Snapshot taken');
+    }
   },
   
   // Performance metrics
   getMetrics: () => {
     // This would be implemented to show performance data
-    console.log('Foundation Performance Metrics');
+    if (import.meta.env.DEV) {
+      console.log('Foundation Performance Metrics');
+    }
   },
 } : undefined;

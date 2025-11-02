@@ -164,14 +164,38 @@ export interface BrandTokens {
 }
 
 // Complete Design System Tokens
+export interface GlassmorphismToken {
+  blur: string;
+  opacity: string;
+  background: string;
+}
+
+export interface AccessibilityTokens {
+  text: {
+    contrast: {
+      min: number;
+      enhanced: number;
+    };
+    sizes: {
+      min: string;
+      body: string;
+      large: string;
+    };
+  };
+  focus: {
+    outline: string;
+    outlineOffset: string;
+  };
+}
+
 export interface DesignSystemTokens {
   brand: BrandTokens;
   colors: ColorTokens;
   spacing: SpacingTokens;
   fonts: FontTokens;
-  glassmorphism: any; // Define this more precisely if needed
-  zIndex: any; // Define this more precisely if needed
-  accessibility: any; // Define this more precisely if needed
+  glassmorphism: GlassmorphismToken;
+  zIndex: ZIndexTokens;
+  accessibility: AccessibilityTokens;
 }
 
 // Simplified Design Tokens for direct usage

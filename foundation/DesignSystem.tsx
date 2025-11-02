@@ -385,7 +385,7 @@ export function DesignSystemProvider({
   const breakpoint = useBreakpoint();
   
   // Responsive utilities
-  const getSpacing = (size: keyof DesignTokens['spacing']['mobile']): string => {
+  const _getSpacing = (size: keyof DesignTokens['spacing']['mobile']): string => {
     return designTokens.spacing[breakpoint.device][size];
   };
   
@@ -415,7 +415,7 @@ export function DesignSystemProvider({
     theme: 'dark',
     language,
     setLanguage,
-    getSpacing,
+    getSpacing: _getSpacing,
     getTypography,
     generateComponentId,
     registerComponent,

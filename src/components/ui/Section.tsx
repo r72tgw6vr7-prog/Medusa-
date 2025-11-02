@@ -1,13 +1,16 @@
-import React from "react";
+import React, { HTMLAttributes, memo } from "react";
 import Container, { ContainerSize } from "./Container";
 
 export type SectionBg = "none" | "dark" | "darker" | "darkest";
 
-export interface SectionProps {
+type SectionElement = "section" | "article" | "div" | "main" | "aside";
+
+interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
   /**
    * Section content
    */
   children: React.ReactNode;
+  
   /**
    * Background variant:
    * - dark:    bg-[#1A1A1A]
@@ -16,22 +19,21 @@ export interface SectionProps {
    * - none:    transparent
    */
   bg?: SectionBg;
+  
   /**
    * Controls inner Container size
    */
   containerSize?: ContainerSize;
+  
   /**
    * Element to render (section/article/div...)
    */
-  as?: "section" | "article" | "div" | "main" | "aside";
+  as?: SectionElement;
+  
   /**
    * Additional CSS classes
    */
   className?: string;
-  /**
-   * Additional HTML attributes
-   */
-  [key: string]: any;
 }
 
 /**
@@ -40,19 +42,20 @@ export interface SectionProps {
  * - Wraps a Container automatically
  * - Handles background variants (Tailwind utility classes used)
  * - Handles vertical padding:
- *   - mobile: py-16
- *   - desktop: lg:py-24
+ *   - mobile: py-16 (128px)
+ *   - tablet: md:py-20 (160px)
+ *   - desktop: lg:py-24 (192px)
  * - Accepts containerSize to control the inner Container
  * - Supports className overrides and additional HTML attributes
  */
-export default function Section({
+const Section: React.FC<SectionProps> = ({
   children,
   bg = "none",
   containerSize = "default",
   as: Component = "section",
   className = "",
   ...props
-}: SectionProps) {
+}) => {
   const bgClassMap: Record<SectionBg, string> = {
     none: "bg-transparent",
     dark: "bg-[#1A1A1A]",
@@ -63,25 +66,29 @@ export default function Section({
   const classes = [
     "w-full",
     bgClassMap[bg],
-    "py-16",
-    "lg:py-24",
+    "py-16",        // 128px on mobile
+    "md:py-20",     // 160px on tablet
+    "lg:py-24",     // 192px on desktop
     className,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <Component className={classes} {...props}>
-      <Container size={containerSize}>{children}</Container>
+      <Container size={containerSize}>
+        {children}
+      </Container>
     </Component>
   );
-}
+};
+
+export default memo(Section);
 
 /**
  * Example usages:
  *
- * // dark background, default (1440px) container
+ * // dark background, default (1280px) container
  * <Section bg="dark">
  *   <h2>Section title</h2>
  * </Section>

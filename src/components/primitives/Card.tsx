@@ -34,6 +34,11 @@ interface CardProps {
   hover?: boolean;
   className?: string;
   onClick?: () => void;
+  role?: string;
+  tabIndex?: number;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }
 
 interface CardSlotProps {
@@ -67,33 +72,59 @@ const HOVER_STYLES =
 // ============================================
 
 export const Card: React.FC<CardProps> & {
-  Header: React.FC<CardSlotProps>;
-  Body: React.FC<CardSlotProps>;
-  Footer: React.FC<CardSlotProps>;
-} = ({ children, variant = 'default', padding = 'md', hover = true, className = '', onClick }) => {
-  const variantClass = VARIANT_STYLES[variant];
-  const paddingClass = PADDING_STYLES[padding];
-  const hoverClass = hover ? HOVER_STYLES : '';
-  const clickableClass = onClick ? 'cursor-pointer' : '';
+  Header: typeof CardHeader;
+  Body: typeof CardBody;
+  Footer: typeof CardFooter;
+} = ({
+  children,
+  variant = 'default',
+  padding = 'md',
+  hover = true,
+  className = '',
+  onClick,
+  role = 'region',
+  tabIndex,
+  'aria-label': ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  ...props
+}) => {
+  const baseClasses = 'flex flex-col h-full rounded-lg transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500';
+  const variantClasses = VARIANT_STYLES[variant];
+  const paddingClasses = PADDING_STYLES[padding];
+  const hoverClasses = hover ? 'hover:transform hover:-translate-y-1 hover:shadow-xl' : '';
+  const isClickable = !!onClick;
+  const cardRole = isClickable ? 'button' : role;
+  const cardTabIndex = tabIndex !== undefined ? tabIndex : (isClickable ? 0 : undefined);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      onClick?.();
+    }
+  };
+
+  const classes = [
+    baseClasses,
+    variantClasses,
+    paddingClasses,
+    hoverClasses,
+    isClickable ? 'cursor-pointer' : '',
+    className
+  ].filter(Boolean).join(' ');
 
   return (
     <div
-      className={`
-        flex flex-col h-full
-        rounded-2xl
-        overflow-hidden
-        ${variantClass}
-        ${paddingClass}
-        ${hoverClass}
-        ${clickableClass}
-        ${className}
-      `
-        .trim()
-        .replace(/\s+/g, ' ')}
+      className={classes}
       onClick={onClick}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => (e.key === 'Enter' || e.key === ' ') && onClick() : undefined}
+      role={cardRole}
+      tabIndex={cardTabIndex}
+      onKeyDown={isClickable ? handleKeyDown : undefined}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
+      {...(isClickable ? { 'data-clickable': 'true' } : {})}
+      {...props}
     >
       {children}
     </div>

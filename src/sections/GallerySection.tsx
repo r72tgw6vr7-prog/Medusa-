@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Section from '../components/ui/Section';
 
 interface GalleryImage {
   id: string;
@@ -44,8 +45,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       : false;
 
   return (
-    <section className={`bg-[#1A1A1A] py-20 ${className}`}>
-      <div className='max-w-7xl mx-auto px-8'>
+    <Section 
+      bg="dark" 
+      className={`py-16 lg:py-24 ${className}`}
+      containerSize="default"
+    >
         {/* Header */}
         <div className='text-center mb-16'>
           <h2 className='font-serif text-4xl md:text-5xl font-bold text-[#D4A841]'>{title}</h2>
@@ -114,8 +118,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             </button>
           </motion.div>
         )}
-      </div>
-    </section>
+    </Section>
   );
 };
 

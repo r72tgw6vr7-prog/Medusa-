@@ -1,5 +1,12 @@
 import { SalonCarousel } from '../organisms/SalonCarousel';
 
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
+
 // Example custom images (optional)
 const customImages = [
   {
@@ -32,7 +39,11 @@ export function SalonCarouselExample() {
           showArrows={true}
           showIndicators={true}
           heading='OUR SALON'
-          onSlideChange={(index) => console.log(`Slide changed to ${index}`)}
+          onSlideChange={(index) => {
+            if (import.meta.env.DEV) {
+              console.log(`Slide changed to ${index}`);
+            }
+          }}
         />
       </div>
 

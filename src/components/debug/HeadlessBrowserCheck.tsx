@@ -68,14 +68,16 @@ const HeadlessBrowserCheck: React.FC = () => {
 
         setSnapshot(domSnapshot);
 
-        // Log to console for verification
-        console.group('HeadlessBrowserCheck Snapshot');
-        console.log('TeamGrid present:', domSnapshot.teamGridPresent);
-        console.log('Team cards found:', domSnapshot.teamCardsCount);
-        console.log('Images loaded:', `${domSnapshot.imagesLoaded}/${domSnapshot.imagesTotal}`);
-        console.log('CSS Variables loaded:', domSnapshot.cssVariables);
-        console.log('First card styles:', cardStyles[0] || 'No card found');
-        console.groupEnd();
+        // Log to console for verification in development
+        if (import.meta.env.DEV) {
+          console.group('HeadlessBrowserCheck Snapshot');
+          console.log('TeamGrid present:', domSnapshot.teamGridPresent);
+          console.log('Team cards found:', domSnapshot.teamCardsCount);
+          console.log('Images loaded:', `${domSnapshot.imagesLoaded}/${domSnapshot.imagesTotal}`);
+          console.log('CSS Variables loaded:', domSnapshot.cssVariables);
+          console.log('First card styles:', cardStyles[0] || 'No card found');
+          console.groupEnd();
+        }
 
         // Create DOM marker
         const marker = document.createElement('div');
@@ -92,7 +94,9 @@ const HeadlessBrowserCheck: React.FC = () => {
         marker.textContent = `HeadlessCheck: TeamGrid ${domSnapshot.teamGridPresent ? '✓' : '✗'}, Cards: ${domSnapshot.teamCardsCount}, Images: ${domSnapshot.imagesLoaded}/${domSnapshot.imagesTotal}`;
         document.body.appendChild(marker);
       } catch (error) {
-        console.error('HeadlessBrowserCheck error:', error);
+        if (import.meta.env.DEV) {
+          console.error('HeadlessBrowserCheck error:', error);
+        }
       }
 
       setLoading(false);
@@ -108,7 +112,9 @@ const HeadlessBrowserCheck: React.FC = () => {
       const newUrl = `${urlWithoutQuery}${cacheBuster}`;
 
       // We don't actually navigate, but we log what would happen in a headless browser
-      console.log(`Simulating cache-disabled reload: ${newUrl}`);
+      if (import.meta.env.DEV) {
+        console.log(`Simulating cache-disabled reload: ${newUrl}`);
+      }
 
       // Now take the snapshot
       setTimeout(takeSnapshot, 100);

@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
 import {
   Calendar,
   Clock,
@@ -159,7 +166,9 @@ export function BookingCallToAction({ onBookNow }: BookingCallToActionProps) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // In a real app, you would submit to your backend here
-    console.log('Form submitted:', formData);
+    if (import.meta.env.DEV) {
+      console.log('Form submitted:', formData);
+    }
 
     setIsSubmitting(false);
 

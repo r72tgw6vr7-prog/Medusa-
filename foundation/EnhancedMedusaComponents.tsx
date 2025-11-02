@@ -46,7 +46,7 @@ export const EnhancedContainer = forwardRef<HTMLDivElement, EnhancedContainerPro
   } = props;
 
   const { getContainerMaxWidth, getContainerPadding, tokens } = useMedusaDesignSystem();
-  const { device, isMobile, isTablet, isDesktop } = useMedusaResponsive();
+  const { device: _device, isMobile: _isMobile, isTablet: _isTablet, isDesktop: _isDesktop } = useMedusaResponsive();
   const componentId = useMedusaComponent('EnhancedContainer', { maxWidth, padding, containerQuery });
   
   const maxWidthMap = {
@@ -338,7 +338,7 @@ export const EnhancedButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, 
   );
 
   const commonProps = {
-    ref: ref as any,
+    ref: ref as React.Ref<HTMLButtonElement | HTMLAnchorElement>,
     className,
     style: buttonStyle,
     disabled: disabled || loading,
@@ -405,15 +405,25 @@ EnhancedButton.displayName = 'EnhancedButton';
 interface EnhancedMotionWrapperProps {
   children: React.ReactNode;
   className?: string;
-  initial?: any;
-  animate?: any;
-  exit?: any;
-  transition?: any;
-  whileHover?: any;
-  whileTap?: any;
-  whileFocus?: any;
-  whileInView?: any;
-  viewport?: any;
+  initial?: React.CSSProperties | string | string[];
+  animate?: React.CSSProperties | string | string[];
+  exit?: React.CSSProperties | string | string[];
+  transition?: {
+    duration?: number;
+    delay?: number;
+    ease?: string | number[];
+    [key: string]: string | number | number[] | undefined;
+  };
+  whileHover?: React.CSSProperties | string | string[];
+  whileTap?: React.CSSProperties | string | string[];
+  whileFocus?: React.CSSProperties | string | string[];
+  whileInView?: React.CSSProperties | string | string[];
+  viewport?: {
+    once?: boolean;
+    amount?: 'some' | 'all' | number;
+    margin?: string;
+    [key: string]: string | number | boolean | undefined;
+  };
   motionPreference?: MotionPreference;
   reduceMotionFallback?: 'static' | 'simplified' | 'fade';
   'aria-live'?: 'polite' | 'assertive' | 'off';

@@ -2,19 +2,20 @@ import React from "react";
 
 export type ContainerSize = "default" | "narrow" | "wide" | "full";
 
-export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivElement>> {
   /**
    * Inner content
    */
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
+  
   /**
    * Size variant for container max-width
-   * - default: 1440px
+   * - default: 1280px
    * - narrow: 960px
    * - wide: 1600px
    * - full: no max-width (fluid)
    */
-  size?: ContainerSize;
+  readonly size?: ContainerSize;
 }
 
 /**
@@ -29,12 +30,12 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * Note: preserves any additional className passed in.
  */
-export default function Container({
+const Container: React.FC<ContainerProps> = ({
   children,
   size = "default",
   className = "",
   ...props
-}: ContainerProps) {
+}) => {
   const sizeClassMap: Record<ContainerSize, string> = {
     default: "max-w-[1280px]",
     narrow: "max-w-[960px]",
@@ -59,7 +60,9 @@ export default function Container({
       {children}
     </div>
   );
-}
+};
+
+export default React.memo(Container);
 
 /**
  * Example usage:

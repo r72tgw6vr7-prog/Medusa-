@@ -3,6 +3,13 @@
  * Lightweight monitoring to help prevent timeout issues
  */
 
+// Add type declaration for Vite's import.meta.env
+interface ImportMetaEnv {
+  DEV: boolean;
+  PROD: boolean;
+  MODE: string;
+}
+
 
 
 interface PerformanceMetrics {
@@ -83,11 +90,14 @@ class PerformanceMonitor {
 
   // Suggest recovery actions
   private suggestRecovery() {
-    console.log('Recovery suggestions:');
-    console.log('1. Reload the page');
-    console.log('2. Check your internet connection');
-    console.log('3. Clear browser cache');
-    console.log('4. Try a different browser');
+    if (import.meta.env.DEV) {
+      console.group('Recovery suggestions:');
+      console.log('1. Reload the page');
+      console.log('2. Check your internet connection');
+      console.log('3. Clear browser cache');
+      console.log('4. Try a different browser');
+      console.groupEnd();
+    }
   }
 
   // Get current metrics

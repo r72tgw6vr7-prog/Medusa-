@@ -90,7 +90,12 @@ const TeamGrid = () => {
   }, []);
 
   return (
-    <Section bg="none" aria-label='Artist Team'>
+    <Section 
+      bg="dark" 
+      className="py-16 lg:py-24"
+      containerSize="default"
+      aria-label='Artist Team'
+    >
       <div className='team-heading'>
         <h2>Unser Meisterteam</h2>
         {/* Add data attributes for verification */}

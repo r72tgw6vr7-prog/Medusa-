@@ -1,9 +1,16 @@
 import { ReactNode } from 'react';
 
+export interface RouteComponentProps {
+  // Add common props that will be passed to all route components
+  className?: string;
+  children?: ReactNode;
+  [key: string]: unknown;
+}
+
 export interface RouteProps {
   path: string;
   name: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<RouteComponentProps>;
   exact?: boolean;
   isProtected?: boolean;
   layout?: React.ComponentType<{ children: ReactNode }>;
@@ -11,7 +18,7 @@ export interface RouteProps {
 }
 
 export interface RouteConfig extends Omit<RouteProps, 'component'> {
-  component: React.LazyExoticComponent<React.ComponentType<any>>;
+  component: React.LazyExoticComponent<React.ComponentType<RouteComponentProps>>;
 }
 
 export interface BreadcrumbItem {
@@ -44,9 +51,15 @@ export type RouteMatch = {
   isExact: boolean;
 };
 
-export type RouterHistory = {
-  push: (path: string, state?: any) => void;
-  replace: (path: string, state?: any) => void;
+export interface LocationState {
+  from?: string;
+  background?: Location;
+  [key: string]: unknown;
+}
+
+export interface RouterHistory {
+  push: (path: string, state?: LocationState) => void;
+  replace: (path: string, state?: LocationState) => void;
   go: (n: number) => void;
   goBack: () => void;
   goForward: () => void;
@@ -54,7 +67,9 @@ export type RouterHistory = {
     pathname: string;
     search: string;
     hash: string;
-    state: any;
+    state: LocationState | null;
     key: string;
   };
-};
+  listen: (listener: (location: Location, action: string) => void) => () => void;
+  block: (blocker: (location: Location, action: string) => string | void) => () => void;
+}

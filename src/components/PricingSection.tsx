@@ -58,8 +58,9 @@ const pricingData: PricingCard[] = [
 export const PricingSection: React.FC = () => {
   return (
     <Section
-      bg="none"
-      className="bg-texture"
+      bg="dark"
+      className="py-16 lg:py-24 bg-texture"
+      containerSize="default"
       aria-labelledby='pricing-section-title'
       id='pricing-section'
     >

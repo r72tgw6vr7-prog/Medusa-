@@ -31,14 +31,28 @@ declare module '*.webp' {
 declare module 'motion/react' {
   import { ComponentType, PropsWithChildren } from 'react';
 
+  export type MotionStyle = {
+    opacity?: number;
+    x?: number | string;
+    y?: number | string;
+    scale?: number;
+    rotate?: number | string;
+    [key: string]: string | number | undefined;
+  };
+
   export interface MotionProps {
-    initial?: Record<string, any>;
-    animate?: Record<string, any>;
-    exit?: Record<string, any>;
-    transition?: Record<string, any>;
-    variants?: Record<string, any>;
-    whileHover?: Record<string, any>;
-    whileTap?: Record<string, any>;
+    initial?: MotionStyle | string | string[];
+    animate?: MotionStyle | string | string[];
+    exit?: MotionStyle | string | string[];
+    transition?: {
+      duration?: number;
+      delay?: number;
+      ease?: string | number[];
+      [key: string]: string | number | number[] | undefined;
+    };
+    variants?: Record<string, MotionStyle>;
+    whileHover?: MotionStyle | string | string[];
+    whileTap?: MotionStyle | string | string[];
   }
 
   export type Motion = {

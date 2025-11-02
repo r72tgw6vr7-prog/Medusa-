@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Section from '../components/ui/Section';
 import './HeroSection.css';
 import { TRUST_BADGES, TrustBadgeItem } from './TrustBadges';
 
@@ -11,23 +12,24 @@ interface StatItem {
 
 interface HeroSectionProps {
   backgroundImage?: string;
-  overlayMedusaImage?: string;
-  title?: string;
-  subtitle?: string;
-  ctaButtons?: Array<{
+  _overlayMedusaImage?: string;
+  _title?: string;
+  _subtitle?: string;
+  _ctaButtons?: Array<{
     text: string;
     href: string;
     variant: 'primary' | 'secondary';
   }>;
-  trustBadges?: TrustBadgeItem[];
-  stats?: StatItem[];
+  _trustBadges?: TrustBadgeItem[];
+  _stats?: StatItem[];
+  children?: React.ReactNode;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
+export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = ({
   backgroundImage = '/hero/Medusa_tattoo_artwork.png',
-  title = 'Münchens Tattoo-Künstler am Marienplatz',
-  subtitle = '27 Jahre Erfahrung • 10.000+ Google Bewertungen • EU-Zertifiziert',
-  ctaButtons = [
+  _title = 'Münchens Tattoo-Künstler am Marienplatz',
+  _subtitle = '27 Jahre Erfahrung • 10.000+ Google Bewertungen • EU-Zertifiziert',
+  _ctaButtons = [
     {
       text: 'Termin',
       href: '/booking',
@@ -40,9 +42,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
   ],
   // We're now using hardcoded badges directly in the JSX
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  trustBadges = TRUST_BADGES,
-  stats = [
+  _trustBadges = TRUST_BADGES,
+  _stats = [
     { icon: '🎖️', value: '25+', label: 'Jahre' },
     { icon: '✓', value: '100%', label: 'Hygiene' },
     { icon: '🎨', value: 'EU-REACH', label: 'Farben' },
@@ -61,38 +62,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
 
   return (
-    <div ref={heroRef} className='hero-section relative min-h-screen flex flex-col overflow-hidden'>
-      {/* Background layer with parallax - FIXED: cover instead of contain */}
-      <motion.div
-        className='absolute inset-0 z-0 bg-[#222222]'
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          y: backgroundY,
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-        }}
-      />
+    <div ref={heroRef} className='relative min-h-screen flex flex-col overflow-hidden'>
+      <div className='absolute inset-0'>
+        {/* Background layer with parallax */}
+        <motion.div
+          className='absolute inset-0 z-0 bg-[#222222]'
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            y: backgroundY,
+            willChange: 'transform',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+          }}
+        />
 
-      {/* Glass overlay layer - FIXED: 45% opacity matching reference */}
-      <div
-        className='absolute inset-0 z-0'
-        style={{
-          background: 'rgba(0, 0, 0, 0.45)',
-        }}
-      />
+        {/* Glass overlay layer */}
+        <div className='absolute inset-0 z-0 bg-black/45' />
 
-      {/* Content area */}
-      <div className='relative z-10 flex-1 flex flex-col'>{/* Main content would go here */}</div>
+        {/* Content area */}
+        <div className='relative z-10 flex-1 flex flex-col'>
+          <Section 
+            bg="none" 
+            className="flex-1 flex flex-col justify-center py-16 lg:py-24"
+            containerSize="default"
+          >
+            {children}
+          </Section>
+        </div>
 
       {/* Trust Badges Carousel - Positioned in bottom area as shown in white box */}
       <section
         className='trust-badges-wrapper'
         aria-label='Qualitätsmerkmale und Auszeichnungen'
-        role='region'
       >
         <div className='trust-badges-container'>
           <div className='trust-badges-track animate-[scrollBadges_30s_linear_infinite]'>
@@ -118,6 +122,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
