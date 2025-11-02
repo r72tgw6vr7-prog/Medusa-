@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Award, Shield, Link2, Star, Clock } from 'lucide-react';
+import Section from './ui/Section';
 
 interface Badge {
   id: string;
@@ -49,10 +50,10 @@ const badges: Badge[] = [
 
 export const CarouselBadges: React.FC = () => {
   return (
-    <section className='carousel-badges-section py-0 bg-[#222222]'>
+    <Section bg="dark" className="py-0">
       {/* Dark Stripe Bar - Contrasts with background */}
       <div className='w-full bg-[#0F0F0F] border-y border-white/5'>
-        <div className='max-w-[1104px] mx-auto px-8 md:px-8 py-8 md:py-16'>
+        <div className='py-8 md:py-16'>
           {/* Horizontal Trust Strip - White badges on dark stripe */}
           <div className='flex flex-wrap justify-center items-center gap-16 md:gap-16 lg:gap-24'>
             {badges.map((badge) => {
@@ -80,7 +81,7 @@ export const CarouselBadges: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
