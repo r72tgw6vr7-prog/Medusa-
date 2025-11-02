@@ -50,11 +50,9 @@ const badges: Badge[] = [
 
 export const CarouselBadges: React.FC = () => {
   return (
-    <Section bg="dark" className="py-0">
-      {/* Dark Stripe Bar - Contrasts with background */}
-      <div className='w-full bg-[#0F0F0F] border-y border-white/5'>
-        <div className='py-8 md:py-16'>
-          {/* Horizontal Trust Strip - White badges on dark stripe */}
+    <section className='carousel-badges-section py-0 bg-[#222222]'>
+      <div className='w-full bg-[#0F0F0F] border-y border-white/5 py-8 md:py-16'>
+        <Section bg="none" containerSize="default">
           <div className='flex flex-wrap justify-center items-center gap-16 md:gap-16 lg:gap-24'>
             {badges.map((badge) => {
               const IconComponent = badge.icon;
@@ -63,10 +61,7 @@ export const CarouselBadges: React.FC = () => {
                   key={badge.id}
                   className='flex items-center gap-8 text-white/90 hover:text-white transition-colors duration-300'
                 >
-                  {/* Icon - Bigger */}
                   <IconComponent className='w-8 h-8 md:w-9 md:h-9 text-white shrink-0' />
-
-                  {/* Text - Bigger */}
                   <div className='flex flex-col leading-tight'>
                     <span className='font-inter text-base md:text-lg font-semibold whitespace-nowrap'>
                       {badge.title}
@@ -79,9 +74,9 @@ export const CarouselBadges: React.FC = () => {
               );
             })}
           </div>
-        </div>
+        </Section>
       </div>
-    </Section>
+    </section>
   );
 };
 

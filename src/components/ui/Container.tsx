@@ -36,7 +36,7 @@ export default function Container({
   ...props
 }: ContainerProps) {
   const sizeClassMap: Record<ContainerSize, string> = {
-    default: "max-w-[1440px]",
+    default: "max-w-[1280px]",
     narrow: "max-w-[960px]",
     wide: "max-w-[1600px]",
     full: "max-w-full",
