@@ -1,4 +1,4 @@
-import type { ReactNode, MouseEvent } from 'react';
+import type { ReactNode, KeyboardEvent, MouseEvent } from 'react';
 
 interface DialogProps {
   open: boolean;
@@ -13,20 +13,36 @@ export function Dialog({ open, children, onOpenChange }: DialogProps) {
     onOpenChange?.(false);
   };
 
+  const handleOverlayKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      onOpenChange?.(false);
+    }
+  };
+
   const handleContentClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
 
+  const handleContentKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     <div
-      className='fixed inset-0 bg-black/60 flex items-center justify-center z-50'
-      role='dialog'
-      aria-modal='true'
+      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+      role="dialog"
+      aria-modal="true"
+      tabIndex={-1}
       onClick={handleOverlayClick}
+      onKeyDown={handleOverlayKeyDown}
     >
       <div
-        className='bg-white rounded-lg p-8 max-w-md w-full shadow-xl'
+        className="bg-white rounded-lg p-8 max-w-md w-full shadow-xl"
+        role="document"
+        tabIndex={-1}
         onClick={handleContentClick}
+        onKeyDown={handleContentKeyDown}
       >
         {children}
       </div>
