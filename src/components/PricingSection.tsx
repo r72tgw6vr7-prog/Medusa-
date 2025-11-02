@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Check, Pen, Zap, MessageCircle } from 'lucide-react';
 import '../styles/PricingSection.css';
+import Section from './ui/Section';
 
 // Define the data structure for price items
 interface PriceItem {
@@ -56,24 +57,24 @@ const pricingData: PricingCard[] = [
 
 export const PricingSection: React.FC = () => {
   return (
-    <section
-      className='bg-texture px-8 py-16 md:px-16 md:py-24 lg:px-24 lg:py-32'
+    <Section
+      bg="none"
+      className="bg-texture"
       aria-labelledby='pricing-section-title'
       id='pricing-section'
     >
-      <div className='max-w-[1104px] mx-auto'>
-        {/* Section heading */}
-        <h2
-          className='text-[#D4AF37] text-center font-playfair text-4xl md:text-5xl font-bold mb-8'
-          id='pricing-section-title'
-        >
-          Services mit transparenten Preisen
-        </h2>
+      {/* Section heading */}
+      <h2
+        className='text-[#D4AF37] text-center font-playfair text-4xl md:text-5xl font-bold mb-8'
+        id='pricing-section-title'
+      >
+        Services mit transparenten Preisen
+      </h2>
 
-        {/* Section subheading */}
-        <p className='mb-16 text-center text-lg text-white/60'>
-          Keine versteckten Kosten – Ehrliche Beratung seit 1998
-        </p>
+      {/* Section subheading */}
+      <p className='mb-16 text-center text-lg text-white/60'>
+        Keine versteckten Kosten – Ehrliche Beratung seit 1998
+      </p>
 
         {/* Cards container */}
         <div className='pricing-cards-container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
@@ -139,8 +140,7 @@ export const PricingSection: React.FC = () => {
             </article>
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 };
 
