@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PenTool, Target, UserIcon, Palette, Clock, Instagram } from 'lucide-react';
 import './TeamGrid.css';
+import Section from './ui/Section';
 
 interface TeamMember {
   id: string;
@@ -89,7 +90,7 @@ const TeamGrid = () => {
   }, []);
 
   return (
-    <section aria-label='Artist Team' className='team-section'>
+    <Section bg="none" aria-label='Artist Team'>
       <div className='team-heading'>
         <h2>Unser Meisterteam</h2>
         {/* Add data attributes for verification */}
@@ -179,7 +180,7 @@ const TeamGrid = () => {
           ))
         )}
       </div>
-    </section>
+    </Section>
   );
 };
 
