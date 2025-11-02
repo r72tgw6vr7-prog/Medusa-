@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/ServiceCards.css';
+import Section from './ui/Section';
 
 interface ServiceCard {
   id: string;
@@ -96,27 +97,26 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
   };
 
   return (
-    <section className='w-full py-16 lg:py-16 xl:py-24 px-8 sm:px-8 lg:px-16 relative bg-texture'>
-      <div className='max-w-[1104px] mx-auto'>
-        {/* Header */}
-        <div className='text-center mb-16'>
-          <h2
-            className="font-['Playfair_Display'] text-xl md:text-2xl mb-8"
-            style={{ color: 'var(--brand-gold)' }}
-          >
-            Alle Services Entdecken
-          </h2>
-          <p
-            className='text-base md:text-lg max-w-2xl mx-auto'
-            style={{ color: 'rgba(255,255,255,0.8)' }}
-          >
-            Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit
-          </p>
-        </div>
+    <Section bg="none" className="bg-texture">
+      {/* Header */}
+      <div className='text-center mb-16'>
+        <h2
+          className="font-['Playfair_Display'] text-xl md:text-2xl mb-8"
+          style={{ color: 'var(--brand-gold)' }}
+        >
+          Alle Services Entdecken
+        </h2>
+        <p
+          className='text-base md:text-lg max-w-2xl mx-auto'
+          style={{ color: 'rgba(255,255,255,0.8)' }}
+        >
+          Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit
+        </p>
+      </div>
 
-        {/* Cards Grid */}
-        <div className='service-card-grid grid grid-cols-1 min-[360px]:grid-cols-2'>
-          {services.map((service) => (
+      {/* Cards Grid */}
+      <div className='service-card-grid grid grid-cols-1 min-[360px]:grid-cols-2'>
+        {services.map((service) => (
             <article
               key={service.id}
               className='group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform duration-300 hover:scale-[1.02] shadow-(--shadow-lg) hover:shadow-(--shadow-gold-intense) flex flex-col h-full'
@@ -215,8 +215,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
             </article>
           ))}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 };
 
