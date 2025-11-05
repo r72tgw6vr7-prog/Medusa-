@@ -1,5 +1,5 @@
-import { test, expect, Page } from '@playwright/test';
-import { promises as fs } from 'fs';
+import { test as _test, expect as _expect, Page } from '@playwright/test';
+import { promises as _fs } from 'fs';
 import path from 'path';
 
 /**
