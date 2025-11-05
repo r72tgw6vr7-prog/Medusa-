@@ -84,13 +84,13 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   };
 
   return (
-    <section className='py-16 px-8 sm:px-8 lg:px-8 bg-[#222222]'>
+    <section className='py-16 px-8 sm:px-8 lg:px-8 relative z-10'>
       <div className='max-w-[1104px] mx-auto'>
         {/* Section Title */}
         <div className='text-center mb-16'>
           <h2
             id='vorher-nachher-heading'
-            className='font-playfair text-3xl md:text-4xl lg:text-5xl font-semibold text-[#D4AF37] mb-8'
+            className='font-playfair text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--brand-gold)] mb-8'
           >
             {heading}
           </h2>
@@ -154,13 +154,13 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
           {/* Slider Handle - Gold circle with vertical line */}
           <div
-            className='absolute top-0 bottom-0 w-1 bg-[#D4AF37] pointer-events-none'
+            className='absolute top-0 bottom-0 w-1 bg-[var(--brand-gold)] pointer-events-none'
             style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
           >
             {/* Draggable Handle - 44px diameter for touch target */}
             <button
               type='button'
-              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 bg-[#D4AF37] rounded-full shadow-lg shadow-[#D4AF37]/50 flex items-center justify-center cursor-ew-resize pointer-events-auto'
+              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 bg-[var(--brand-gold)] rounded-full shadow-lg shadow-[var(--brand-gold)]/50 flex items-center justify-center cursor-ew-resize pointer-events-auto'
               onMouseDown={handleMouseDown}
               onTouchStart={handleMouseDown}
               onKeyDown={handleKeyDown}

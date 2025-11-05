@@ -1,7 +1,26 @@
 /* Enhanced Logo Styling */
 .nav-logo {
   position: relative;
-  .language-toggle {
+}
+
+/* Force full width navigation - no white spots */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+.navigation {
+  /* Force full viewport coverage */
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: translateX(0) !important;
+}
+
+.language-toggle {
     position: relative;
     width: 140px;
     height: 48px;
@@ -53,7 +72,6 @@
     transition: all 250ms ease;
     letter-spacing: 0.03em;
   }
-}
 
 .nav-cta:hover {
   box-shadow:
@@ -141,9 +159,10 @@
   left: 0 !important;
   right: 0 !important;
   z-index: 9998 !important;
-  /* Transparent background over hero */
-  background: transparent !important;
-  width: 100% !important;
+  /* Dark background over hero - no transparency issues */
+  background: rgba(34, 34, 34, 0.7) !important;
+  width: 100vw !important;
+  min-width: 100% !important;
   /* Backdrop blur for readability */
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -154,6 +173,11 @@
   /* No border or shadow in transparent state */
   border-bottom: none !important;
   box-shadow: none !important;
+  /* Ensure no white gaps */
+  margin: 0 !important;
+  padding: 0 !important;
+  /* Force full coverage */
+  transform: translateX(0) !important;
 }
 
 /* Logo/text colors for transparent state */
@@ -175,9 +199,16 @@
 
 /* Scrolled state - Solid background */
 .navigation.scrolled {
-  background: #1a1a1a !important;
+  background: rgba(26, 26, 26, 0.95) !important;
+  width: 100vw !important;
+  min-width: 100% !important;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
   border-bottom: 1px solid rgba(212, 175, 55, 0.1) !important;
+  /* Ensure full coverage */
+  margin: 0 !important;
+  padding: 0 !important;
+  /* Force full coverage */
+  transform: translateX(0) !important;
 }
 
 /* Logo/text colors for scrolled state (remain white) */
@@ -307,10 +338,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: calc(var(--header-height, 80px) + 24px) 24px 32px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.01); /* Minimal background to capture clicks */
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   z-index: 9999;
+  cursor: pointer; /* Show it's clickable */
 }
 
 .mobile-menu-overlay__panel {
@@ -329,6 +361,7 @@
   flex-direction: column;
   gap: 24px;
   overflow: hidden;
+  cursor: default; /* Reset cursor for panel content */
 }
 
 .mobile-menu-overlay__panel::before {
@@ -384,16 +417,18 @@
 
 @media (max-width: 767px) {
   .navigation {
-    padding: 12px 16px;
+    padding: 0 !important;
+    width: 100vw !important;
+    min-width: 100% !important;
   }
 
   /* Always show solid background on mobile when scrolled */
   .navigation.scrolled {
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 1.0) !important;
   }
 
   /* Mobile menu open state */
   .navigation.menu-open {
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 1.0) !important;
   }
 }

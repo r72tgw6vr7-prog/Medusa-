@@ -2,7 +2,129 @@ import React from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import Footer from '../components/Footer';
 
-export const ImpressumPage: React.FC = () => {
+interface ImpressumPageProps {
+  language?: 'DE' | 'EN';
+}
+
+export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' }) => {
+  const content = {
+    DE: {
+      title: 'Impressum',
+      subtitle: 'Medusa Tattoo & Piercing Studio - Rechtliche Angaben',
+      sections: {
+        tmg: {
+          title: 'Angaben gemäß § 5 TMG',
+          content: [
+            'Stargate GmbH',
+            'Handelsname: Medusa Tattoo & Piercing Studio',
+            'Studio-Adresse: Altheimer Eck 11',
+            '80331 München',
+            'Deutschland',
+            '',
+            'Eingetragener Firmensitz:',
+            'Proviantstraße 5a',
+            '85049 Ingolstadt',
+            'Deutschland'
+          ]
+        },
+        contact: {
+          title: 'Kontakt',
+          content: [
+            'Telefon München: 089 910994',
+            'Telefon Ingolstadt: 0841 910994',
+            'E-Mail: Medusa@in-tattoo.de',
+            'Website: www.medusa-tattoo.de',
+            '',
+            'Ansprechpartner: Oliver Loichinger',
+            'E-Mail: oliver@in-tattoo.de'
+          ]
+        },
+        registration: {
+          title: 'Handelsregister und Umsatzsteuer-ID',
+          content: [
+            'Handelsregisternummer: 12052245',
+            'Umsatzsteuer-Identifikationsnummer: DE 206 350 700',
+            'Verantwortliche Person: Oliver Loichinger',
+            'Amtsgericht Ingolstadt'
+          ]
+        },
+        responsible: {
+          title: 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV',
+          content: [
+            'Oliver Loichinger',
+            'Stargate GmbH',
+            'Altheimer Eck 11',
+            '80331 München'
+          ]
+        },
+        copyright: {
+          title: 'Urheberrecht',
+          content: [
+            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. Alle Rechte vorbehalten.'
+          ]
+        }
+      }
+    },
+    EN: {
+      title: 'Legal Notice',
+      subtitle: 'Medusa Tattoo & Piercing Studio - Legal Information',
+      sections: {
+        tmg: {
+          title: 'Information according to § 5 TMG',
+          content: [
+            'Stargate GmbH',
+            'Trading name: Medusa Tattoo & Piercing Studio',
+            'Studio address: Altheimer Eck 11',
+            '80331 Munich',
+            'Germany',
+            '',
+            'Registered office:',
+            'Proviantstraße 5a',
+            '85049 Ingolstadt',
+            'Germany'
+          ]
+        },
+        contact: {
+          title: 'Contact',
+          content: [
+            'Phone Munich: +49 89 910994',
+            'Phone Ingolstadt: +49 841 910994',
+            'Email: Medusa@in-tattoo.de',
+            'Website: www.medusa-tattoo.de',
+            '',
+            'Contact person: Oliver Loichinger',
+            'Email: oliver@in-tattoo.de'
+          ]
+        },
+        registration: {
+          title: 'Commercial Register and VAT ID',
+          content: [
+            'Commercial register number: 12052245',
+            'VAT identification number: DE 206 350 700',
+            'Responsible person: Oliver Loichinger',
+            'Local court Ingolstadt'
+          ]
+        },
+        responsible: {
+          title: 'Responsible for content according to § 55 para. 2 RStV',
+          content: [
+            'Oliver Loichinger',
+            'Stargate GmbH',
+            'Altheimer Eck 11',
+            '80331 Munich'
+          ]
+        },
+        copyright: {
+          title: 'Copyright',
+          content: [
+            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved.'
+          ]
+        }
+      }
+    }
+  };
+
+  const t = content[language];
   return (
     <div className='min-h-screen bg-brand-background text-brand-white flex flex-col'>
       <MainNavigation />
@@ -14,49 +136,50 @@ export const ImpressumPage: React.FC = () => {
             <div className='mx-auto w-full max-w-4xl'>
               {/* Unified heading section applied: matches ServicesPageInteractive styling */}
               <div className='text-center mb-16'>
-                <h1 className='typo-h1 text-[#D4AF37]'>Impressum</h1>
-                <p className='typo-subtitle text-[#C0C0C0]'>Medusa Tattoo München</p>
+                <h1 className='typo-h1 text-[var(--brand-gold)]'>{t.title}</h1>
+                <p className='typo-subtitle text-[#C0C0C0]'>{t.subtitle}</p>
               </div>
 
               <div className='space-y-16'>
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Angaben gemäß § 5 TMG</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.tmg.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
-                    <p className='font-semibold'>MEDUSA TATTOO MÜNCHEN</p>
-                    <p>Inhaberin: [Inhabername einfügen]</p>
-                    <p>Altheimer Eck 11</p>
-                    <p>80331 München</p>
-                    <p>Deutschland</p>
+                    {t.sections.tmg.content.map((line, index) => (
+                      <p key={index} className={line === '' ? 'pb-2' : line.includes('Stargate GmbH') ? 'font-semibold' : ''}>
+                        {line || '\u00A0'}
+                      </p>
+                    ))}
                   </div>
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Kontakt</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.contact.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
-                    <p>Telefon: +49 (0) 89 269 313</p>
-                    <p>E-Mail: info@medusa-tattoo.de</p>
-                    <p>Website: www.medusa-tattoo.de</p>
+                    {t.sections.contact.content.map((line, index) => (
+                      <p key={index} className={line === '' ? 'pb-2' : ''}>
+                        {line || '\u00A0'}
+                      </p>
+                    ))}
                   </div>
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Umsatzsteuer-ID</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.registration.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
-                    <p>Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:</p>
-                    <p>[USt-IdNr einfügen oder: Kleinunternehmer gemäß § 19 UStG]</p>
-                    <p>Steuernummer: [Steuernummer einfügen]</p>
-                    <p className='text-sm text-white/60'>Finanzamt München</p>
+                    {t.sections.registration.content.map((line, index) => (
+                      <p key={index} className={line.includes('Amtsgericht') || line.includes('Local court') ? 'text-sm text-white/60' : ''}>
+                        {line}
+                      </p>
+                    ))}
                   </div>
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
-                    Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
-                  </h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.responsible.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
-                    <p>[Vollständiger Name der verantwortlichen Person]</p>
-                    <p>Altheimer Eck 11</p>
-                    <p>80331 München</p>
+                    {t.sections.responsible.content.map((line, index) => (
+                      <p key={index}>{line}</p>
+                    ))}
                   </div>
                 </section>
 
@@ -113,21 +236,21 @@ export const ImpressumPage: React.FC = () => {
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Urheberrecht</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.copyright.title}</h2>
                   <p className='font-semibold text-brand-white/90'>
-                    © 2025 MEDUSA TATTOO MÜNCHEN. Alle Rechte vorbehalten.
+                    {t.sections.copyright.content[0]}
                   </p>
                   <p className='text-sm text-white/80 leading-relaxed'>
-                    Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen
-                    sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung
-                    und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen
-                    der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+                    {language === 'DE' 
+                      ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
+                      : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'
+                    }
                   </p>
                   <p className='text-sm text-white/80 leading-relaxed'>
-                    Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden
-                    die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine
-                    Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden
-                    Hinweis.
+                    {language === 'DE'
+                      ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
+                      : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'
+                    }
                   </p>
                 </section>
               </div>

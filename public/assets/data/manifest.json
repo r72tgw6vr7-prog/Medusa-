@@ -1,0 +1,12 @@
+{
+  "images": [
+    {
+      "id": "test-1",
+      "title": "Sample Tattoo",
+      "src": "/assets/images/photos/gallery/tattoos/debi/test.jpg",
+      "alt": "Sample Tattoo by Debi",
+      "artist": "Debi",
+      "category": "tattoo"
+    }
+  ]
+}

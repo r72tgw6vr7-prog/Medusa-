@@ -50,9 +50,9 @@ export default function TestimonialsCarousel({
   title = 'Was Kunden sagen',
 }: TestimonialsCarouselProps) {
   return (
-    <section className={`py-20 bg-[#1A1A1A] ${className}`} aria-label='Customer testimonials'>
+    <section className={`py-20 relative z-10 ${className}`} aria-label='Customer testimonials'>
       <div className='responsive-container safe-area-padding'>
-        <h2 className='font-playfair text-4xl md:text-5xl font-bold text-[#D4A841] text-center mb-16'>
+        <h2 className='font-playfair text-4xl md:text-5xl font-bold text-[var(--brand-gold)] text-center mb-16'>
           {title}
         </h2>
 
@@ -89,7 +89,7 @@ export default function TestimonialsCarousel({
         >
           {testimonialsList.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <div className='bg-white/5 border border-[#D4A841]/30 rounded-2xl p-8 h-full'>
+              <div className='bg-white/5 border border-[var(--brand-gold)]/30 rounded-2xl p-8 h-full'>
                 <div className='flex gap-0 mb-8'>
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} />

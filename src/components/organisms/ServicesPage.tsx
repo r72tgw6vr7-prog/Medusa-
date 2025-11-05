@@ -9,7 +9,7 @@ interface ServicesPageProps {
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookService: _onBookService }) => {
   return (
-    <div className='min-h-screen bg-[#1A1A1A]'>
+    <div className='min-h-screen relative z-10'>
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
       <ServicesPageInteractive />

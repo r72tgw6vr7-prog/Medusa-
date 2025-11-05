@@ -176,7 +176,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                 transition={{ duration: 0.8 }}
               >
                 <div className='text-center'>
-                  <h1 className='typo-h1 text-[#D4AF37]'>{t.title}</h1>
+                  <h1 className='typo-h1 text-[var(--brand-gold)]'>{t.title}</h1>
                   <p className='typo-subtitle text-[#C0C0C0]'>{t.subtitle}</p>
                   <p className='text-body-small font-body text-brand-chrome'>{t.lastUpdated}</p>
                 </div>

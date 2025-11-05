@@ -46,13 +46,12 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
   return (
     <Section 
-      bg="dark" 
-      className={`py-16 lg:py-24 ${className}`}
+      className={`py-16 lg:py-24 ${className} relative z-10`}
       containerSize="default"
     >
         {/* Header */}
         <div className='text-center mb-16'>
-          <h2 className='font-serif text-4xl md:text-5xl font-bold text-[#D4A841]'>{title}</h2>
+          <h2 className='font-serif text-4xl md:text-5xl font-bold text-[var(--brand-gold)]'>{title}</h2>
           <p className='text-gray-300 text-lg mt-0'>{subtitle}</p>
         </div>
 
@@ -78,7 +77,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 className='w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500'
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = '/images/placeholder-tattoo.jpg';
+                  target.src = '/assets/images/photos/gallery/placeholder-tattoo.webp';
                 }}
               />
 
@@ -86,7 +85,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               <div className='absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex flex-col h-full' />
 
               {/* Gold border on hover */}
-              <div className='absolute inset-0 border-2 border-transparent group-hover:border-[#D4A841] rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
+              <div className='absolute inset-0 border-2 border-transparent group-hover:border-[var(--brand-gold)] rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
 
               {/* Optional: Image info overlay on hover */}
               <div className='absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-linear-to-t from-black/80 to-transparent flex flex-col h-full'>
@@ -111,7 +110,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           >
             <button
               onClick={() => navigate('/gallery')}
-              className='bg-[#D4A841] text-black font-semibold text-lg px-8 py-8 rounded-xl hover:bg-[#C59A30] hover:scale-105 transition-all duration-300 flex items-center gap-0 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#D4A841] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]'
+              className='bg-[var(--brand-gold)] text-black font-semibold text-lg px-8 py-8 rounded-xl hover:bg-[var(--brand-gold-hover)] hover:scale-105 transition-all duration-300 flex items-center gap-0 shadow-lg hover:shadow-gold-glow focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
             >
               Zur Galerie
               <ArrowRight className='w-5 h-5' />

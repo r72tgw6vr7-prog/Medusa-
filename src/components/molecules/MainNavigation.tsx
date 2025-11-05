@@ -175,7 +175,7 @@ export function MainNavigation() {
   const closeMenu = () => setMenuOpen(false);
 
   // Use keyboard navigation hook for better keyboard control
-  const { handleKeyDown: handleNavKeyDown } = useKeyboardNav({
+  const { onKeyDown: handleNavKeyDown } = useKeyboardNav({
     onEscape: closeMenu,
   });
 
@@ -192,12 +192,12 @@ export function MainNavigation() {
       <nav
         id="main-navigation"
         aria-label="Main navigation"
-        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
+        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full transition-all duration-300 ease-out ${
           scrolled ? 'scrolled' : ''
         } ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
-      <div className='mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-16'>
+      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-8 md:px-16">
         <Link
           to='/'
           className="nav-logo text-[28px] leading-none tracking-tight text-brand-gold sm:text-[36px] md:text-[48px] font-['Playfair_Display'] font-bold"

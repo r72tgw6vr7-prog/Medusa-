@@ -6,7 +6,7 @@
 .artists-section {
   padding-top: 96px; /* Space after navigation */
   padding-bottom: 80px;
-  background: var(--brand-background, #222222);
+  /* Removed background to allow texture to show through */
 }
 
 /* Container */

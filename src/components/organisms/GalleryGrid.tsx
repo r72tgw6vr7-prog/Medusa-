@@ -100,7 +100,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({
             <div className='absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center flex-col h-full'>
               <div className='text-center'>
                 <h3 className='text-white text-lg font-bold'>{image.title}</h3>
-                <p className='text-[#D4AF37]'>{image.artist}</p>
+                <p className='text-[var(--brand-gold)]'>{image.artist}</p>
               </div>
             </div>
 

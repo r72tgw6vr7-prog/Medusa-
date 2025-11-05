@@ -256,7 +256,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               <Button
                 variant='secondary'
                 onClick={() => setStep('service')}
-                className='p-2'
+                className="p-0"
                 aria-label='Zurück zu Service auswählen'
               >
                 <ChevronLeft size={24} />
@@ -306,7 +306,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                 type='button'
                 variant='secondary'
                 onClick={() => setStep('artist')}
-                className='p-2'
+                className="p-0"
                 aria-label='Zurück zu Künstler:in auswählen'
               >
                 <ChevronLeft size={24} />

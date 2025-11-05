@@ -37,7 +37,7 @@ export const LegalPage: React.FC = () => {
             <div className='mx-auto w-full max-w-4xl space-y-16'>
               {/* Unified heading section applied: matches ServicesPageInteractive styling */}
               <div className='text-center md:text-left mb-8'>
-                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[#D4AF37]'>
+                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
                   Allgemeine Geschäftsbedingungen
                 </h1>
                 <p className='text-lg text-[#C0C0C0] max-w-2xl'>MEDUSA TATTOO MÜNCHEN</p>

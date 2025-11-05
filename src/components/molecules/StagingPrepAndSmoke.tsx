@@ -372,7 +372,7 @@ mkdir -p tests/e2e
       case 'success':
         return 'text-green-400';
       case 'warning':
-        return 'text-[#D4AF37]';
+        return 'text-[var(--brand-gold)]';
       case 'error':
         return 'text-red-400';
       default:
@@ -398,7 +398,7 @@ mkdir -p tests/e2e
         <button
           onClick={runWorkflow}
           disabled={isRunning}
-          className='w-full px-8 py-0 bg-[#D4AF37] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200 flex items-center justify-center gap-0'
+          className='w-full px-8 py-0 bg-[var(--brand-gold)] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200 flex items-center justify-center gap-0'
         >
           {isRunning ? (
             <>
@@ -425,7 +425,7 @@ mkdir -p tests/e2e
               </>
             ) : (
               <>
-                <AlertTriangle size={18} className='text-[#D4AF37]' />
+                <AlertTriangle size={18} className='text-[var(--brand-gold)]' />
                 <span className='text-sm'>Playwright not installed - E2E tests skipped</span>
               </>
             )}
@@ -529,7 +529,7 @@ mkdir -p tests/e2e
       {playwrightInstalled === false && (
         <section className='p-8 bg-yellow-900/20 border border-yellow-700 rounded'>
           <h3 className='font-semibold mb-0 flex items-center gap-0'>
-            <AlertTriangle size={18} className='text-[#D4AF37]' />
+            <AlertTriangle size={18} className='text-[var(--brand-gold)]' />
             Enable E2E Tests
           </h3>
           <p className='text-sm text-[#C0C0C0] mb-0'>

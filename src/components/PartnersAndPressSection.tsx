@@ -27,13 +27,13 @@ const loopedPartnerLogos: PartnerLogo[] = [...partnerLogos, ...partnerLogos];
 const PartnersAndPressSection: React.FC = () => {
   return (
     <section
-      className='w-full bg-[#222222] py-16 md:py-16 lg:py-24'
+      className='w-full bg-[var(--deep-black)] py-16 md:py-16 lg:py-24'
       aria-label='Partner and press logos'
     >
       <div className='max-w-[1104px] mx-auto px-8 md:px-8'>
         {/* Heading */}
         <div className='text-center mb-8'>
-          <h2 className="font-['Inter'] text-sm font-normal leading-snug tracking-widest uppercase text-[#D4AF37] mb-0">
+          <h2 className="font-['Inter'] text-sm font-normal leading-snug tracking-widest uppercase text-[var(--brand-gold)] mb-0">
             Unsere Partner & Presse
           </h2>
           <p className="font-['Inter'] text-xs font-light leading-relaxed text-white/70">

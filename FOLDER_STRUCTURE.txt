@@ -1,0 +1,54 @@
+# Medusa Tattoo München Image Structure
+# Last updated: November 4, 2025
+
+/public/images/
+├── gallery/
+│   ├── tattoos/
+│   │   ├── debi/                # Debi's tattoo work
+│   │   │   └── *.webp          # Optimized images
+│   │   ├── loui/               # Loui's tattoo work
+│   │   │   └── *.webp          # Optimized images
+│   │   ├── luz/                # Luz's tattoo work
+│   │   │   └── *.webp          # Optimized images
+│   │   └── legacy/             # Legacy artist images
+│   │       └── *.webp          # Historical work
+│   ├── piercings/             # All piercing work
+│   │   └── *.webp             # Optimized images
+│   └── other/                 # Miscellaneous gallery images
+│       └── *.webp             # Other artwork
+├── artists/
+│   └── headshots/            # Artist profile photos
+│       ├── aaron.webp
+│       ├── debi.webp
+│       ├── loui.webp
+│       ├── oliver.webp
+│       └── *.webp
+├── backgrounds/              # Page background images
+│   ├── tattoo-card-bg.webp
+│   ├── piercing-card-bg.webp
+│   └── process-timeline-bg.webp
+├── placeholders/            # Placeholder and fallback images
+│   ├── placeholder.svg
+│   └── placeholder-tattoo.webp
+└── icons/                  # Icons and logos
+    ├── *.svg              # Vector icons
+    └── *.png              # Raster icons
+
+Notes:
+1. All images should use lowercase filenames
+2. Web images should be in WebP format
+3. Each image should have responsive variants:
+   - @400w  (mobile)
+   - @800w  (tablet)
+   - @1200w (desktop)
+4. Original high-res files should be kept in /originals/
+5. SVG icons should be optimized
+6. All images should have appropriate alt text in code
+
+Naming Convention:
+- artist-name_piece-description_location_duration_price.webp
+- category-name_description_variant.webp
+- icon-name_purpose.svg
+
+Example:
+loui_butterfly-realistic_forearm_2-5h_400eur.webp

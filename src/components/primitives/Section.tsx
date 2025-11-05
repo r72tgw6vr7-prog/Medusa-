@@ -72,7 +72,7 @@ const BACKGROUND_STYLES: Record<SectionBackground, string> = {
   transparent: 'bg-transparent',
   dark: 'bg-[#1A1A1A]',
   darker: 'bg-black',
-  'gold-subtle': 'bg-gradient-to-b from-[#D4AF37]/5 to-transparent',
+  'gold-subtle': 'bg-gradient-to-b from-[var(--brand-gold)]/5 to-transparent',
 };
 
 // ============================================

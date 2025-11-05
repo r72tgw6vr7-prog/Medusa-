@@ -16,7 +16,7 @@ export const Badge: React.FC<BadgeProps> = ({
   const gradientStyle =
     variant === 'gradient'
       ? {
-          background: 'linear-gradient(180deg, #D4AF3700, #D4AF371A, #D4AF3700)',
+          background: 'linear-gradient(180deg, var(--brand-gold)00, var(--brand-gold)1A, var(--brand-gold)00)',
         }
       : {};
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texture Direct Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    
+    .texture-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/texture.webp');
+      background-size: 800px 800px;
+      background-repeat: repeat;
+      z-index: 0;
+    }
+    
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+    
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      max-width: 800px;
+      margin: 50px auto;
+    }
+    
+    h1 {
+      color: gold;
+    }
+    
+    .test-section {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Texture Background -->
+  <div class="texture-container"></div>
+  
+  <!-- Overlay -->
+  <div class="overlay"></div>
+  
+  <!-- Content -->
+  <div class="content">
+    <h1>Texture Background Test</h1>
+    
+    <div class="test-section">
+      <h2>Test Section 1</h2>
+      <p>This is a test section to verify that the texture background is visible behind the overlay.</p>
+    </div>
+    
+    <div class="test-section">
+      <h2>Test Section 2</h2>
+      <p>This section should be visible above the texture and overlay.</p>
+    </div>
+    
+    <div class="test-section">
+      <h2>Image Direct Test</h2>
+      <p>Here's the texture image displayed directly:</p>
+      <img src="/texture.webp" alt="Texture" style="width: 200px; height: 200px; object-fit: cover;">
+    </div>
+  </div>
+</body>
+</html>

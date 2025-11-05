@@ -62,7 +62,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     'max-w-[360px] lg:max-w-[380px]',
     'flex-col justify-between rounded-2xl',
     'border',
-    highlighted ? 'border-brand-gold' : 'border-[#C19B26]/30',
+    highlighted ? 'border-brand-gold' : 'border-[var(--brand-gold-hover)]/30',
     'bg-black/60 backdrop-blur',
     'p-4 md:p-5',
     'mx-auto',
@@ -164,7 +164,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                       >
                         <path
                           d='M10 3L4.5 8.5L2 6'
-                          stroke={accentColor === 'gold' ? '#D4AF37' : '#C0C0C0'}
+                          stroke={accentColor === 'gold' ? 'var(--brand-gold)' : '#C0C0C0'}
                           strokeWidth='2'
                           strokeLinecap='round'
                           strokeLinejoin='round'

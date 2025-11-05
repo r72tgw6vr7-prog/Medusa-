@@ -6,9 +6,10 @@ import Button from './Button';
 interface ServiceCard {
   id: string;
   backgroundImage: string;
-  icon: 'crown' | 'diamond';
+  icon: 'crown' | 'diamond' | 'diamond-piercing' | 'diamond-consultation';
   struckTitle: string;
   mainTitle: string;
+  description: string;
   bullets: string[];
   price: string;
   ctaText: string;
@@ -23,10 +24,11 @@ interface ServiceCardsProps {
 const DEFAULT_SERVICES: ServiceCard[] = [
   {
     id: 'tattoo',
-    backgroundImage: '/images/tattoo-card-bg.webp',
+    backgroundImage: '/assets/images/photos/backgrounds/tattoo-card-bg.webp',
     icon: 'crown',
     struckTitle: 'Tattoo Artistry',
     mainTitle: 'Permanent Kunst',
+    description: 'Hochwertige Tattoos von erfahrenen Künstlern mit individuellen Designs und steriler Arbeitsweise.',
     bullets: [
       'Individuelle Designs',
       'Erfahrene Künstler',
@@ -40,76 +42,88 @@ const DEFAULT_SERVICES: ServiceCard[] = [
   },
   {
     id: 'piercing',
-    backgroundImage: '/images/piercing-card-bg.jpg',
-    icon: 'diamond',
+    backgroundImage: '/assets/images/photos/backgrounds/piercing-card-bg.webp',
+    icon: 'diamond-piercing',
     struckTitle: 'Premium Piercing',
     mainTitle: 'Luxury Schmuck',
+    description: 'Erstklassiger Schmuck und sterile Verfahren für sichere und stilvolle Piercings.',
     bullets: ['Premium Schmuck', 'Professionelle Beratung', 'Hygienische Standards', 'Nachpflege'],
     price: 'ab €60',
     ctaText: 'Jetzt Entdecken',
     ctaHref: '/services#piercing',
     ctaVariant: 'primary',
   },
-  {
-    id: 'consultation',
-    backgroundImage: '/images/consultation-card-bg.jpg',
-    icon: 'diamond',
-    struckTitle: 'Kostenlose Beratung',
-    mainTitle: 'WhatsApp Chat',
-    bullets: ['Direkte Kommunikation', 'Schnelle Antworten', 'Unverbindlich', 'Professionell'],
-    price: 'Kostenlos',
-    ctaText: 'Jetzt Chatten',
-    ctaHref: 'https://wa.me/+4989123456789',
-    ctaVariant: 'primary',
-  },
 ];
 
 export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_SERVICES }) => {
-  const getIcon = (iconType: 'crown' | 'diamond') => {
+  const getIcon = (iconType: 'crown' | 'diamond' | 'diamond-piercing' | 'diamond-consultation') => {
     if (iconType === 'crown') {
-      return <img src='/icons/crown.svg' alt='Crown icon' width={40} height={40} />;
+      return (
+        <img 
+          src="/Crown.svg" 
+          alt="Crown icon" 
+          width={48} 
+          height={48}
+          style={{ width: '48px', height: '48px' }}
+        />
+      );
     }
+    
+    // The main piercing diamond icon - high visibility light gray diamond
+    if (iconType === 'diamond-piercing') {
+      return (
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 30 30" 
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M15 3L4 11L15 27L26 11L15 3Z"
+            stroke="#CCCCCC"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path 
+            d="M15 3L4 11L15 27L26 11L15 3Z"
+            fill="none"
+          />
+        </svg>
+      );
+    }
+    
+    // For consultation or any other diamond variant, use a regular diamond
     return (
       <svg
-        width={40}
-        height={40}
-        viewBox='0 0 40 40'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d='M20 4L24 16L20 28L16 16L20 4Z'
-          stroke='#C0C0C0'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
-        />
-        <path
-          d='M12 16L20 4L28 16L20 28L12 16Z'
-          stroke='#C0C0C0'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
+        <path 
+          d="M12 2L2 9L12 22L22 9L12 2Z" 
+          stroke="white" 
+          strokeWidth="1.5" 
+          fill="none"
         />
       </svg>
     );
   };
 
   return (
-    <Section bg="none" className="bg-texture">
+    <Section className="relative z-10">
       {/* Header */}
       <div className='text-center mb-16'>
         <h2
-          className="font-['Playfair_Display'] text-xl md:text-2xl mb-8"
-          style={{ color: 'var(--brand-gold)' }}
+          className="font-['Playfair_Display'] text-xl md:text-2xl mb-8 text-[var(--brand-gold)]"
         >
           Alle Services Entdecken
         </h2>
         <p
-          className='text-base md:text-lg max-w-2xl mx-auto'
-          style={{ color: 'rgba(255,255,255,0.8)' }}
+          className='text-base md:text-lg max-w-2xl mx-auto text-white/80'
         >
           Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit
         </p>
@@ -120,7 +134,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
         {services.map((service) => (
             <article
               key={service.id}
-              className='group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform duration-300 hover:scale-[1.02] shadow-(--shadow-lg) hover:shadow-(--shadow-gold-intense) flex flex-col h-full'
+              className='group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow border border-[var(--brand-gold)]/20 hover:border-[var(--brand-gold)]/60 flex flex-col h-full'
               aria-label={`${service.mainTitle} service card`}
             >
               {/* Background Image with Gradient Overlay */}
@@ -138,8 +152,8 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                   style={{
                     backgroundColor:
                       service.id === 'tattoo'
-                        ? 'rgba(212, 175, 55, 0.15)'
-                        : 'rgba(192, 192, 192, 0.15)',
+                        ? 'rgba(var(--brand-gold-rgb), 0.15)'
+                        : 'rgba(var(--chrome-silver-rgb), 0.15)',
                   }}
                 />
                 {/* Dark Gradient Overlay */}
@@ -153,7 +167,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
               </div>
 
               {/* Positioned icon (gold circle removed) */}
-              <div className='absolute top-6 left-6 sm:top-8 sm:left-8 md:top-12 md:left-12 z-10'>
+              <div className='absolute top-8 left-8 md:top-12 md:left-12 z-10'>
                 {getIcon(service.icon)}
               </div>
 
@@ -161,14 +175,15 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
               <div className='service-card-padding relative h-full flex flex-col justify-end items-center'>
                 {/* Text Content */}
                 <div className='service-card-content text-center'>
-                  {/* Struck-through Title */}
-                  <div className='flex items-center gap-0 justify-center'>
+                  {/* Small Label Title */}
+                  <div className='flex items-center gap-0 justify-center mt-16'>
                     <span
-                      className="font-['Playfair_Display'] text-lg line-through"
+                      className="font-['Playfair_Display'] text-sm tracking-wider"
                       style={{
                         color: 'var(--brand-gold)',
-                        textDecorationColor: 'var(--brand-gold)',
-                        opacity: 0.9,
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        letterSpacing: '1px'
                       }}
                     >
                       {service.struckTitle}
@@ -177,14 +192,19 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
 
                   {/* Main Title */}
                   <h3
-                    className="font-['Poppins'] text-2xl md:text-4xl font-bold leading-tight"
-                    style={{ color: 'var(--brand-white)' }}
+                    className="font-['Poppins'] text-3xl md:text-5xl font-bold leading-tight mt-0"
+                    style={{ color: '#FFFFFF' }}
                   >
                     {service.mainTitle}
                   </h3>
 
+                  {/* Description */}
+                  <p className="text-base mt-16" style={{ color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, maxWidth: '80%', margin: '16px auto 0' }}>
+                    {service.description}
+                  </p>
+                  
                   {/* Bullet Points */}
-                  <ul className='service-card-list space-y-0'>
+                  <ul className='service-card-list space-y-0 mt-16'>
                     {service.bullets.map((bullet, index) => (
                       <li
                         key={index}
@@ -198,8 +218,8 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                   {/* Price and CTA */}
                   <div className='service-card-footer'>
                     <span
-                      className="font-['Poppins'] text-2xl font-bold text-center block"
-                      style={{ color: 'var(--brand-white)' }}
+                      className="font-['Poppins'] text-2xl font-bold text-center block mt-24"
+                      style={{ color: '#FFFFFF' }}
                     >
                       {service.price}
                     </span>
@@ -221,6 +241,30 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
             </article>
           ))}
         </div>
+
+      {/* WhatsApp Consultation Button */}
+      <div className='mt-24 flex justify-center'>
+        <a
+          href='https://wa.me/+4989123456789'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='group relative inline-flex items-center justify-center gap-16 px-32 py-16 rounded-2xl border-2 border-brand-gold/60 bg-transparent hover:bg-brand-gold/10 transition-all duration-300 hover:shadow-gold-glow hover:border-brand-gold hover:scale-105'
+          aria-label='Kostenlose WhatsApp Beratung'
+        >
+          {/* WhatsApp Icon */}
+          <img 
+            src='/icons/whatsapp.svg'
+            alt='WhatsApp'
+            className='w-24 h-24 text-brand-gold group-hover:scale-110 transition-transform duration-300'
+            style={{ filter: 'invert(68%) sepia(47%) saturate(476%) hue-rotate(359deg) brightness(95%) contrast(87%)' }}
+          />
+          
+          {/* Button Text */}
+          <span className="font-['Poppins'] text-lg md:text-xl font-semibold text-brand-gold transition-colors duration-300">
+            Kostenlose WhatsApp Beratung
+          </span>
+        </a>
+      </div>
     </Section>
   );
 };

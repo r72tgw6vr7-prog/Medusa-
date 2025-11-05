@@ -26,7 +26,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = ({
-  backgroundImage = '/hero/Medusa_tattoo_artwork.png',
+  backgroundImage = '/assets/images/photos/hero/medusatattooartwork.webp',
   _title = 'Münchens Tattoo-Künstler am Marienplatz',
   _subtitle = '27 Jahre Erfahrung • 10.000+ Google Bewertungen • EU-Zertifiziert',
   _ctaButtons = [
@@ -67,7 +67,7 @@ export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = 
       <div className='absolute inset-0'>
         {/* Background layer with parallax */}
         <motion.div
-          className='absolute inset-0 z-0 bg-[#222222]'
+          className='absolute inset-0 z-20 '
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
@@ -81,10 +81,10 @@ export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = 
         />
 
         {/* Glass overlay layer */}
-        <div className='absolute inset-0 z-0 bg-black/45' />
+        <div className='absolute inset-0 z-20 bg-black/45' />
 
         {/* Content area */}
-        <div className='relative z-10 flex-1 flex flex-col'>
+        <div className='relative z-20 flex-1 flex flex-col'>
           <Section 
             bg="none" 
             className="flex-1 flex flex-col justify-center py-16 lg:py-24"

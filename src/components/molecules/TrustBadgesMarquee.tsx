@@ -1,9 +1,9 @@
 const uniqueBadges = [
-  { icon: '/images/hero/icons/icon-2.svg', label: 'Preisgekrönt 2024' },
-  { icon: '/images/hero/icons/icon-3.svg', label: 'Sterile Ausrüstung' },
-  { icon: '/images/hero/icons/icon-5.svg', label: '27 Jahre Erfahrung' },
-  { icon: '/images/hero/icons/icon-6.svg', label: 'EU Zertifiziert' },
-  { icon: '/images/hero/icons/icon-8.svg', label: '10,000+ Bewertungen' },
+  { icon: '/assets/images/icons/icon-2.svg', label: 'Preisgekrönt 2024' },
+  { icon: '/assets/images/icons/icon-3.svg', label: 'Sterile Ausrüstung' },
+  { icon: '/assets/images/icons/icon-5.svg', label: '27 Jahre Erfahrung' },
+  { icon: '/assets/images/icons/icon-6.svg', label: 'EU Zertifiziert' },
+  { icon: '/assets/images/icons/icon-8.svg', label: '10,000+ Bewertungen' },
 ];
 
 // Duplicate twice for seamless loop segment

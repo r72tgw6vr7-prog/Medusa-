@@ -20,7 +20,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
     const stars = [];
     for (let i = 0; i < rating; i++) {
       stars.push(
-        <Star key={i} className='w-6 h-6 fill-[#D4AF37] text-[#D4AF37]' aria-label='star' />,
+        <Star key={i} className='w-6 h-6 fill-[var(--brand-gold)] text-[var(--brand-gold)]' aria-label='star' />,
       );
     }
     return stars;
@@ -28,7 +28,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
   return (
     <div
-      className={`flex flex-col items-start bg-[#222222CC] w-[340px] py-[25px] rounded-2xl border border-solid border-[#D4AF37] shadow-[0px_4px_12px_#0000004D] ${className}`}
+      className={`flex flex-col items-start bg-[var(--deep-black)CC] w-[340px] py-[25px] rounded-2xl border border-solid border-[var(--brand-gold)] shadow-[0px_4px_12px_#0000004D] ${className}`}
     >
       <div className='flex mb-0.5 mx-8'>{renderStars()}</div>
       <div className='flex flex-col items-center self-stretch mb-8 mx-8'>

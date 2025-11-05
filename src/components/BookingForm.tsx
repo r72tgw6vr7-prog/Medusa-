@@ -67,12 +67,12 @@ export function BookingForm() {
   return (
     <form 
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 w-full max-w-4xl mx-auto"
+      className="space-y-8 w-full max-w-4xl mx-auto"
       noValidate
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Name */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="name" className="block text-sm font-medium">
             Full Name *
           </label>
@@ -88,7 +88,7 @@ export function BookingForm() {
         </div>
 
         {/* Email */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="email" className="block text-sm font-medium">
             Email *
           </label>
@@ -105,7 +105,7 @@ export function BookingForm() {
         </div>
 
         {/* Phone */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="phone" className="block text-sm font-medium">
             Phone Number *
           </label>
@@ -122,7 +122,7 @@ export function BookingForm() {
         </div>
 
         {/* Date */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="date" className="block text-sm font-medium">
             Date *
           </label>
@@ -139,7 +139,7 @@ export function BookingForm() {
         </div>
 
         {/* Time */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="time" className="block text-sm font-medium">
             Time *
           </label>
@@ -163,7 +163,7 @@ export function BookingForm() {
         </div>
 
         {/* Guests */}
-        <div className="space-y-2">
+        <div className="space-y-0">
           <label htmlFor="guests" className="block text-sm font-medium">
             Number of Guests *
           </label>
@@ -187,7 +187,7 @@ export function BookingForm() {
       </div>
 
       {/* Special Requests */}
-      <div className="space-y-2">
+      <div className="space-y-0">
         <label htmlFor="specialRequests" className="block text-sm font-medium">
           Special Requests (Optional)
         </label>
@@ -207,7 +207,7 @@ export function BookingForm() {
         </p>
       </div>
 
-      <div className="pt-2">
+      <div className="pt-0">
         <Button
           type="submit"
           className={cn(

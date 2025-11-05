@@ -76,7 +76,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
           loading='lazy'
           decoding='async'
           sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 360px) 50vw, 100vw'
-          onError={(e) => (e.currentTarget.src = '/images/placeholder.jpg')}
+          onError={(e) => (e.currentTarget.src = '/assets/images/photos/artists/picture.webp')}
         />
         <div className='team-card-overlay'></div>
 

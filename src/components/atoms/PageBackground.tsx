@@ -10,10 +10,10 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({ children, classN
     <div className={`min-h-screen relative ${className}`}>
       {/* Fixed background image */}
       <div
-        className='fixed inset-0 z-0'
+        className='fixed inset-0 z-20'
         style={{
           backgroundImage:
-            'url("/images/artists/web-background-and-assets/background-texture.png")',
+            'url("/assets/images/photos/backgrounds/process-timeline-bg.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -31,7 +31,7 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({ children, classN
       </div>
 
       {/* Content with proper z-index to appear above background */}
-      <div className='relative z-10'>{children}</div>
+      <div className='relative z-20'>{children}</div>
     </div>
   );
 };

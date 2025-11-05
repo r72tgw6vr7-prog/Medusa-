@@ -10,9 +10,7 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {
-      "actualWorkers": 2
-    },
+    "metadata": {},
     "preserveOutput": "always",
     "reporter": [
       [
@@ -42,9 +40,7 @@
         "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "chromium",
         "name": "chromium",
         "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
@@ -58,9 +54,7 @@
         "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "firefox",
         "name": "firefox",
         "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
@@ -74,9 +68,7 @@
         "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "webkit",
         "name": "webkit",
         "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
@@ -90,9 +82,7 @@
         "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
         "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
@@ -106,9 +96,7 @@
         "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {
-          "actualWorkers": 2
-        },
+        "metadata": {},
         "id": "Mobile Safari",
         "name": "Mobile Safari",
         "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
@@ -131,106 +119,17 @@
       "timeout": 120000
     }
   },
-  "suites": [
+  "suites": [],
+  "errors": [
     {
-      "title": "p0/demo.spec.ts",
-      "file": "p0/demo.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "P0 Framework Demo",
-          "file": "p0/demo.spec.ts",
-          "line": 10,
-          "column": 6,
-          "specs": [
-            {
-              "title": "should validate test framework setup",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 163,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "✅ P0 Test Framework validation complete\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-11-02T15:42:12.821Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b33c230b8add89b9711c-bbc891469a5925640d33",
-              "file": "p0/demo.spec.ts",
-              "line": 11,
-              "column": 3
-            },
-            {
-              "title": "should validate helper functions",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "passed",
-                      "duration": 147,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "✅ Helper functions validation complete\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-11-02T15:42:12.819Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b33c230b8add89b9711c-d7251100a0acba96bde8",
-              "file": "p0/demo.spec.ts",
-              "line": 40,
-              "column": 3
-            }
-          ]
-        }
-      ]
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
     }
   ],
-  "errors": [],
   "stats": {
-    "startTime": "2025-11-02T15:42:11.585Z",
-    "duration": 1526.338,
-    "expected": 2,
+    "startTime": "2025-11-05T21:37:29.243Z",
+    "duration": 62.488999999999976,
+    "expected": 0,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

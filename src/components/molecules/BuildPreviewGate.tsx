@@ -234,7 +234,7 @@ ${
 
           {currentCommand && (
             <div
-              className='mt-0 text-sm text-[#D4AF37] flex items-center gap-0'
+              className='mt-0 text-sm text-[var(--brand-gold)] flex items-center gap-0'
               role='status'
               aria-live='polite'
             >
@@ -377,7 +377,7 @@ ${
           <button
             onClick={generateReport}
             disabled={outputs.length === 0}
-            className='w-full px-8 py-0 bg-[#D4AF37] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200'
+            className='w-full px-8 py-0 bg-[var(--brand-gold)] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200'
           >
             Generate BUILD_PREVIEW_REPORT.md
           </button>

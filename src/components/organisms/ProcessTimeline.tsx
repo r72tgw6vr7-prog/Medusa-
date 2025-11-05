@@ -3,7 +3,7 @@ import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { LucideProps } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Palette, Zap, Heart, CheckCircle, Sparkles } from 'lucide-react';
-const backgroundImage = '/images/process-timeline-bg.png';
+const backgroundImage = '/assets/images/photos/backgrounds/process-timeline-bg.webp';
 import { useMedusaDesignSystem } from '../../../src/foundation/SimpleMedusaProvider';
 import { ProcessStepCard } from '../molecules/ProcessStepCard';
 

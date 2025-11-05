@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   resolve: {
@@ -16,7 +17,45 @@ export default defineConfig({
     dedupe: ['react', 'react-dom']
   },
   plugins: [
-    react()
+    react(),
+    // Gzip compression for production
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240, // Only compress files larger than 10KB
+      deleteOriginFile: false,
+    }),
+    // Brotli compression for production
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+      deleteOriginFile: false,
+    }),
+    {
+      name: 'image-optimization-handler',
+      configureServer(server) {
+        server.middlewares.use('/api/optimize-image', async (req, res) => {
+          try {
+            const handler = (await import('./src/api/optimize-image')).handler;
+            const response = await handler(req as unknown as Request);
+            
+            // Forward the response headers
+            for (const [key, value] of response.headers.entries()) {
+              res.setHeader(key, value);
+            }
+            
+            // Send the response
+            res.statusCode = response.status;
+            res.end(Buffer.from(await response.arrayBuffer()));
+          } catch (error) {
+            console.error('Image optimization error:', error);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Image optimization failed' }));
+          }
+        });
+      }
+    }
   ],
   base: '/',
   server: {
@@ -39,17 +78,31 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundles
     cssCodeSplit: true,
+    minify: 'terser', // Use terser for better compression
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (/node_modules\/(react|react-dom)(\/|\\)/.test(id)) {
+            if (/node_modules[\\/](react|react-dom)[\\/]/.test(id)) {
               return 'vendor-react';
             }
             if (id.includes('@radix-ui')) {
               return 'vendor-radix';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
             }
             return 'vendor';
           }
@@ -62,5 +115,7 @@ export default defineConfig({
         },
       },
     },
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
   },
 });

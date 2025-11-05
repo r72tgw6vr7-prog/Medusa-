@@ -100,7 +100,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className='fixed inset-0 z-50 bg-[#222222] overflow-y-auto'
+      className='fixed inset-0 z-50 bg-[var(--deep-black)] overflow-y-auto'
       ref={containerRef}
       role='dialog'
       aria-modal='true'
@@ -117,7 +117,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
         aria-label='Close'
         ref={closeBtnRef}
       >
-        <X className='w-6 h-6 text-white group-hover:text-[#222222] transition-colors transition duration-200 ease-out' />
+        <X className='w-6 h-6 text-white group-hover:text-[var(--deep-black)] transition-colors transition duration-200 ease-out' />
       </motion.button>
 
       {/* Hero Section with Parallax */}
@@ -148,8 +148,8 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
             />
           </div>
           {/* Gradient Overlays */}
-          <div className='absolute inset-0 bg-gradient-to-b from-[#222222]/60 via-transparent to-[#222222]' />
-          <div className='absolute inset-0 bg-gradient-to-r from-[#222222]/80 via-transparent to-transparent' />
+          <div className='absolute inset-0 bg-gradient-to-b from-[var(--deep-black)]/60 via-transparent to-[var(--deep-black)]' />
+          <div className='absolute inset-0 bg-gradient-to-r from-[var(--deep-black)]/80 via-transparent to-transparent' />
         </motion.div>
 
         {/* Hero Content - Parallax Foreground */}
@@ -164,9 +164,9 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
               transition={{ delay: 0.3, duration: 0.6 }}
             >
               {/* Role Badge */}
-              <div className='inline-flex items-center gap-0 px-8 py-0 bg-[rgba(26,26,26,0.8)] backdrop-blur-sm border border-[#D4AF37]/30 rounded-full mb-8'>
-                <span className='w-2 h-2 rounded-full bg-[#D4AF37]' />
-                <span className='font-inter text-sm font-medium text-[#D4AF37] uppercase tracking-wider'>
+              <div className='inline-flex items-center gap-0 px-8 py-0 bg-[rgba(26,26,26,0.8)] backdrop-blur-sm border border-[var(--brand-gold)]/30 rounded-full mb-8'>
+                <span className='w-2 h-2 rounded-full bg-[var(--brand-gold)]' />
+                <span className='font-inter text-sm font-medium text-[var(--brand-gold)] uppercase tracking-wider'>
                   {artist.role}
                 </span>
               </div>
@@ -181,7 +181,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
 
               {/* Experience */}
               <div className='flex items-center gap-0 mb-8'>
-                <Calendar className='w-5 h-5 text-[#D4AF37]' />
+                <Calendar className='w-5 h-5 text-[var(--brand-gold)]' />
                 <span className='font-inter text-lg text-[#C0C0C0]'>
                   {artist.experience} Erfahrung
                 </span>
@@ -205,7 +205,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
                   href={`https://instagram.com/${artist.instagramHandle.replace('@', '')}`}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='flex items-center gap-0 px-8 py-0 bg-[#D4AF37] text-[#222222] rounded-lg font-inter font-semibold hover:bg-[#C19B26] transition-all duration-300 hover:scale-105'
+                  className='flex items-center gap-0 px-8 py-0 bg-[var(--brand-gold)] text-[var(--deep-black)] rounded-lg font-inter font-semibold hover:bg-[var(--brand-gold-hover)] transition-all duration-300 hover:scale-105'
                 >
                   <Instagram className='w-5 h-5' />
                   <span>{artist.instagramHandle}</span>
@@ -238,14 +238,14 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
               transition={{ repeat: Infinity, duration: 1.5 }}
               className='w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-0'
             >
-              <motion.div className='w-1.5 h-1.5 bg-[#D4AF37] rounded-full' />
+              <motion.div className='w-1.5 h-1.5 bg-[var(--brand-gold)] rounded-full' />
             </motion.div>
           </div>
         </motion.div>
       </div>
 
       {/* Biography & Portfolio Section */}
-      <div className='relative bg-[#222222] py-24 md:py-32'>
+      <div className='relative bg-[var(--deep-black)] py-24 md:py-32'>
         <div className='max-w-[1104px] mx-auto px-8 md:px-8'>
           {/* Biography */}
           <motion.div
@@ -255,7 +255,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
             transition={{ duration: 0.6 }}
             className='mb-24'
           >
-            <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[#D4AF37] mb-8'>
+            <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[var(--brand-gold)] mb-8'>
               Über {artist.name.split(' ')[0]}
             </h2>
             <div className='prose prose-lg prose-invert max-w-none'>
@@ -286,7 +286,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[#D4AF37] mb-16'>
+            <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[var(--brand-gold)] mb-16'>
               Portfolio
             </h2>
 
@@ -323,7 +323,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
                     }}
                   />
                   <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col h-full' />
-                  <div className='absolute inset-0 ring-2 ring-transparent group-hover:ring-[#C19B26] transition-all duration-300 rounded-xl flex flex-col h-full' />
+                  <div className='absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--brand-gold-hover)] transition-all duration-300 rounded-xl flex flex-col h-full' />
                 </motion.div>
               ))}
             </div>
@@ -338,7 +338,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
             >
               <a
                 href={`/gallery?artist=${artist.name}`}
-                className='inline-flex items-center gap-0 px-8 py-8 bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-inter font-semibold hover:bg-brand-gold-hover hover:text-[#222222] transition-all duration-300'
+                className='inline-flex items-center gap-0 px-8 py-8 bg-transparent border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] rounded-lg font-inter font-semibold hover:bg-brand-gold-hover hover:text-[var(--deep-black)] transition-all duration-300'
               >
                 <span>Alle Arbeiten ansehen</span>
                 <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -356,7 +356,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
       </div>
 
       {/* Bottom CTA */}
-      <div className='relative bg-[#0F0F0F] py-16 border-t border-[#D4AF37]/20'>
+      <div className='relative bg-[#0F0F0F] py-16 border-t border-[var(--brand-gold)]/20'>
         <div className='max-w-[1104px] mx-auto px-8 md:px-8 text-center'>
           <h3 className='font-playfair text-3xl md:text-4xl font-semibold text-white mb-8'>
             Bereit für Ihr Kunstwerk?
@@ -367,7 +367,7 @@ export const ArtistDetailModal: React.FC<ArtistDetailModalProps> = ({ artist, on
           </p>
           <a
             href='/booking'
-            className='inline-flex items-center gap-0 px-16 py-8 bg-[#D4AF37] text-[#222222] rounded-lg font-inter font-bold text-lg hover:bg-[#C19B26] transition-all duration-300 hover:scale-105'
+            className='inline-flex items-center gap-0 px-16 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] rounded-lg font-inter font-bold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-300 hover:scale-105'
             style={{ boxShadow: '0 0 30px rgba(212,175,55,0.4)' }}
           >
             <Calendar className='w-6 h-6' />

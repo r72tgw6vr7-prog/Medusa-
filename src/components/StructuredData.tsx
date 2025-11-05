@@ -2,89 +2,71 @@ import React from 'react';
 import { env } from '../lib/env';
 
 interface StructuredDataProps {
-  type: 'organization' | 'local-business' | 'article' | 'service';
+  type: 'organization' | 'local-business' | 'article' | 'service' | 'person';
   data?: Record<string, any>;
 }
 
-// Base organization data
+// Base organization data from environment
 const baseOrganization = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness", "TattooShop"],
-  "name": "Medusa Tattoo München",
+  "name": env.VITE_BUSINESS_NAME,
   "alternateName": "Medusa Tattoo Studio",
   "description": "Premium Tattoo Studio in München - Professionelle Tätowierungen, Custom Designs und erstklassige Kunstwerke von erfahrenen Künstlern.",
   "url": env.VITE_SITE_URL,
   "logo": `${env.VITE_SITE_URL}/images/medusa-logo.png`,
   "image": `${env.VITE_SITE_URL}/images/og-medusa-tattoo-munich.jpg`,
-  "telephone": env.VITE_PHONE_NUMBER || "+49-89-12345678",
-  "email": env.VITE_CONTACT_EMAIL || "info@medusa-tattoo.com",
+  "telephone": env.VITE_BUSINESS_PHONE,
+  "email": env.VITE_BUSINESS_EMAIL,
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": env.VITE_ADDRESS || "Musterstraße 123",
-    "addressLocality": "München",
+    "streetAddress": env.VITE_BUSINESS_STREET,
+    "addressLocality": env.VITE_BUSINESS_CITY,
     "addressRegion": "Bayern",
-    "postalCode": "80331",
-    "addressCountry": "DE"
+    "postalCode": env.VITE_BUSINESS_POSTAL,
+    "addressCountry": env.VITE_BUSINESS_COUNTRY
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "48.1374",
-    "longitude": "11.5755"
+    "latitude": env.VITE_GEO_LAT,
+    "longitude": env.VITE_GEO_LNG
   },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-      "opens": "10:00",
-      "closes": "19:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification", 
-      "dayOfWeek": ["Friday", "Saturday"],
-      "opens": "10:00",
-      "closes": "20:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Sunday",
-      "opens": "12:00", 
-      "closes": "18:00"
-    }
-  ],
-  "priceRange": "€€€",
-  "currenciesAccepted": "EUR",
-  "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+  "openingHours": env.VITE_OPENING_HOURS,
+  "priceRange": env.VITE_PRICE_RANGE || "€€€",
+  "currenciesAccepted": env.VITE_CURRENCIES_ACCEPTED || "EUR",
+  "paymentAccepted": env.VITE_PAYMENT_METHODS?.split(',') || ["Cash", "Credit Card", "Bank Transfer"],
   "areaServed": {
     "@type": "City",
-    "name": "München"
+    "name": env.VITE_BUSINESS_CITY
   },
   "serviceArea": {
     "@type": "GeoCircle",
     "geoMidpoint": {
       "@type": "GeoCoordinates",
-      "latitude": "48.1374",
-      "longitude": "11.5755"
+      "latitude": env.VITE_GEO_LAT,
+      "longitude": env.VITE_GEO_LNG
     },
     "geoRadius": "50000"
   },
   "knowsAbout": [
     "Tattoo Art",
     "Custom Tattoo Design", 
+    "Realism Tattoos",
     "Traditional Tattoos",
-    "Realistic Tattoos",
     "Black & Grey Tattoos",
     "Color Tattoos",
-    "Piercing"
+    "Piercing",
+    "Cover-up Tattoos"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Tattoo Services",
+    "name": "Tattoo & Piercing Services",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Custom Tattoo Design",
+          "name": "Custom Tattoo Design München",
           "description": "Individuelle Tattoo-Designs nach Kundenwunsch"
         }
       },
@@ -92,25 +74,25 @@ const baseOrganization = {
         "@type": "Offer", 
         "itemOffered": {
           "@type": "Service",
-          "name": "Traditional Tattoos",
-          "description": "Klassische Tattoo-Stile und Motive"
+          "name": "Realism Tattoo München",
+          "description": "Fotorealistische Tattoo-Kunstwerke"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service", 
-          "name": "Realistic Tattoos",
-          "description": "Fotorealistische Tattoo-Kunstwerke"
+          "name": "Professional Piercing München",
+          "description": "Professionelles Piercing mit höchsten Hygienestandards"
         }
       }
     ]
   },
   "sameAs": [
-    "https://www.instagram.com/medusa_tattoo_munich",
-    "https://www.facebook.com/medusatattoomunch", 
-    "https://www.google.com/maps/place/medusa+tattoo+munich"
-  ]
+    env.VITE_INSTAGRAM_URL,
+    env.VITE_FACEBOOK_URL,
+    `https://wa.me/${env.VITE_WHATSAPP?.replace(/[^+\d]/g, '')}`
+  ].filter(Boolean)
 };
 
 const structuredDataTemplates = {
@@ -161,13 +143,28 @@ const structuredDataTemplates = {
     "provider": baseOrganization,
     "areaServed": {
       "@type": "City", 
-      "name": "München"
+      "name": env.VITE_BUSINESS_CITY
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": data.name,
       "itemListElement": data.offers || []
     }
+  }),
+
+  person: (data: any) => ({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": data.name,
+    "jobTitle": data.jobTitle || "Tattoo Artist",
+    "description": data.description,
+    "image": data.image,
+    "worksFor": {
+      "@type": "Organization",
+      "name": env.VITE_BUSINESS_NAME
+    },
+    "knowsAbout": data.specialties || ["Tattoo Art", "Custom Design"],
+    "url": data.portfolioUrl
   })
 };
 
@@ -221,4 +218,15 @@ export function ServiceSchema(props: {
   offers?: any[];
 }) {
   return <StructuredData type="service" data={props} />;
+}
+
+export function PersonSchema(props: {
+  name: string;
+  jobTitle?: string;
+  description: string;
+  image?: string;
+  specialties?: string[];
+  portfolioUrl?: string;
+}) {
+  return <StructuredData type="person" data={props} />;
 }

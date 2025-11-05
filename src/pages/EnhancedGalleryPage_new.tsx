@@ -340,7 +340,7 @@ export const EnhancedGalleryPage: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={prefersReducedMotion.current ? 'always' : 'never'}>
-      <div className='min-h-screen bg-texture'>
+      <div className='min-h-screen'>
         <MainNavigation />
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
@@ -348,7 +348,7 @@ export const EnhancedGalleryPage: React.FC = () => {
         <section className='relative section-padding-lg'>
           <div className='responsive-container safe-area-padding'>
             <div className='text-center'>
-              <h1 className='typo-h1 text-[#D4AF37]'>{t('gallery.title')}</h1>
+              <h1 className='typo-h1 text-[var(--brand-gold)]'>{t('gallery.title')}</h1>
               <p className='typo-subtitle text-[#C0C0C0]'>{t('gallery.subtitle')}</p>
             </div>
           </div>
@@ -369,11 +369,11 @@ export const EnhancedGalleryPage: React.FC = () => {
         <section className='section-padding'>
           <div className='responsive-container safe-area-padding'>
             {/* Filter Controls */}
-            <div className='flex flex-wrap gap-4 items-center justify-between mb-8'>
-              <div className='flex flex-wrap gap-2'>
+            <div className="flex flex-wrap gap-8 items-center justify-between mb-8">
+              <div className="flex flex-wrap gap-0">
                 <button
                   onClick={resetFilters}
-                  className='px-6 py-3 bg-[#D4AF37]/10 border-2 border-[#D4AF37] text-[#D4AF37] font-medium transition-all duration-300 rounded-lg hover:bg-[#D4AF37]/20'
+                  className="px-8 py-0 bg-[var(--brand-gold)]/10 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] font-medium transition-all duration-300 rounded-lg hover:bg-[var(--brand-gold)]/20"
                 >
                   {t('gallery.filters.allWorks')}
                 </button>
@@ -387,14 +387,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterArtist !== allArtistsLabel
-                        ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
+                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
                     }`}
                   >
                     {filterArtist}
                   </button>
                   {showArtistDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px]'>
+                    <div className="absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[200px]">
                       {i18nUniqueArtists.map((artist) => (
                         <button
                           key={artist}
@@ -402,7 +402,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterArtist(artist);
                             setShowArtistDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className="block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out"
                         >
                           {artist}
                         </button>
@@ -420,14 +420,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterStyle !== allStylesLabel
-                        ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
+                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
                     }`}
                   >
                     {filterStyle}
                   </button>
                   {showStyleDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto'>
+                    <div className="absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto">
                       {i18nUniqueStyles.map((style) => (
                         <button
                           key={style}
@@ -435,7 +435,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterStyle(style);
                             setShowStyleDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className="block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out"
                         >
                           {style}
                         </button>
@@ -453,14 +453,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterYear !== allYearsLabel
-                        ? 'bg-[#D4AF37] text-[#222222] border-2 border-[#D4AF37]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[#C19B26]/30'
+                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
                     }`}
                   >
                     {filterYear}
                   </button>
                   {showYearDropdown && (
-                    <div className='absolute top-full mt-2 left-0 bg-[#2A2A2A] border border-[#D4AF37]/20 rounded-lg shadow-lg z-[100] min-w-[150px]'>
+                    <div className="absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[150px]">
                       {i18nUniqueYears.map((year) => (
                         <button
                           key={year}
@@ -468,7 +468,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterYear(year);
                             setShowYearDropdown(false);
                           }}
-                          className='block w-full text-left px-4 py-2 text-white hover:bg-[#C19B26]/10 transition-colors first:rounded-t-lg last:rounded-b-lg'
+                          className="block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out"
                         >
                           {year}
                         </button>
@@ -481,7 +481,7 @@ export const EnhancedGalleryPage: React.FC = () => {
               {hasActiveFilters && (
                 <button
                   onClick={resetFilters}
-                  className='px-4 py-2 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300'
+                  className="px-8 py-0 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300"
                 >
                   Filter zurücksetzen
                 </button>
@@ -497,7 +497,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 <p className='text-xl text-[#C0C0C0] mb-8'>{t('gallery.noResults')}</p>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-4 bg-[#D4AF37] text-[#1A1A1A] font-medium hover:bg-[#C19B26] transition-colors rounded-lg'
+                  className="px-8 py-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out"
                 >
                   {t('gallery.filters.reset')}
                 </button>
@@ -524,10 +524,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       />
                       <div className="gallery-overlay">
                         <h3 className="text-white font-bold text-lg">{item.title}</h3>
-                        <p className="text-[#D4AF37] font-medium">{item.artist}</p>
+                        <p className="text-[var(--brand-gold)] font-medium">{item.artist}</p>
                         <p className="text-white/70 text-sm">{item.style}</p>
                         {item.featured && (
-                          <span className="inline-block mt-2 px-2 py-1 rounded-full bg-[#D4AF37] text-[#222222] text-xs font-bold">
+                          <span className="inline-block mt-0 px-0 py-0 rounded-full bg-[var(--brand-gold)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full">
                             Featured
                           </span>
                         )}
@@ -546,12 +546,12 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <button
                       ref={loadMoreRef}
                       onClick={() => setShowAllPhotos(true)}
-                      className="group inline-flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-[#222222] font-medium hover:bg-[#C19B26] transition-colors rounded-lg"
+                      className="group inline-flex items-center gap-0 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out"
                     >
                       <span>{t('gallery.filters.more')}</span>
                       <ChevronRight
                         size={20}
-                        className='transition-transform group-hover:translate-x-1'
+                        className="transition-transform group-hover:translate-x-1 transition duration-200 ease-out"
                       />
                     </button>
                   </motion.div>
@@ -567,19 +567,19 @@ export const EnhancedGalleryPage: React.FC = () => {
             <motion.div
               ref={dialogRef}
               {...animationConfig}
-              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-8"
               onClick={() => setSelectedImage(null)}
             >
               <motion.div
                 {...dialogAnimationConfig}
-                className="relative bg-[#222222] rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                className="relative bg-[var(--deep-black)] rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Button */}
                 <button
                   ref={closeButtonRef}
                   onClick={() => setSelectedImage(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
+                  className="absolute top-4 right-4 p-0 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10 transition duration-200 ease-out"
                   aria-label="Close lightbox"
                 >
                   <X size={24} />
@@ -589,7 +589,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 {currentIndex > 0 && (
                   <button
                     onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-0 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10 transition duration-200 ease-out"
                     aria-label="Previous image"
                   >
                     <ChevronLeft size={24} />
@@ -599,7 +599,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 {currentIndex < filteredItems.length - 1 && (
                   <button
                     onClick={goToNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-0 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors z-10 transition duration-200 ease-out"
                     aria-label="Next image"
                   >
                     <ChevronRight size={24} />
@@ -608,7 +608,7 @@ export const EnhancedGalleryPage: React.FC = () => {
 
                 {/* Image and Details */}
                 <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="aspect-square overflow-hidden rounded-lg">
+                  <div className="aspect-square overflow-hidden rounded-lg flex flex-col h-full">
                     <ImageWithFallback
                       src={selectedImage.image}
                       alt={`${selectedImage.title} by ${selectedImage.artist}`}
@@ -617,20 +617,20 @@ export const EnhancedGalleryPage: React.FC = () => {
                     />
                   </div>
 
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     <div>
-                      <h2 className="text-2xl font-bold text-white mb-2">{selectedImage.title}</h2>
-                      <p className="text-[#D4AF37] text-lg font-medium">{selectedImage.artist}</p>
+                      <h2 className="text-2xl font-bold text-white mb-0">{selectedImage.title}</h2>
+                      <p className="text-[var(--brand-gold)] text-lg font-medium">{selectedImage.artist}</p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2">
+                    <div className="space-y-8">
+                      <div className="flex items-center gap-0">
                         <span className="text-white/60 text-sm">Stil:</span>
-                        <span className="px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-sm">
+                        <span className="px-0 py-0 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 text-[var(--brand-gold)] text-sm flex flex-col h-full">
                           {selectedImage.style}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-0">
                         <span className="text-white/60 text-sm">Datum:</span>
                         <span className="text-white text-sm">
                           {new Date(selectedImage.date).toLocaleDateString('de-DE', {
@@ -640,18 +640,18 @@ export const EnhancedGalleryPage: React.FC = () => {
                         </span>
                       </div>
                       {selectedImage.featured && (
-                        <div className="flex items-center gap-2">
-                          <span className="px-3 py-1 rounded-full bg-[#D4AF37] text-[#222222] text-xs font-bold">
+                        <div className="flex items-center gap-0">
+                          <span className="px-0 py-0 rounded-full bg-[var(--brand-gold)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full">
                             Featured Work
                           </span>
                         </div>
                       )}
                     </div>
 
-                    <div className="pt-6 border-t border-white/10">
+                    <div className="pt-8 border-t border-white/10 flex flex-col h-full">
                       <button
                         onClick={() => (window.location.href = '/booking')}
-                        className="w-full py-4 px-8 rounded-lg bg-[#D4AF37] text-[#222222] hover:bg-[#D4AF37]/90 transition-colors font-bold text-lg shadow-lg shadow-[#D4AF37]/20"
+                        className="w-full py-8 px-8 rounded-lg bg-[var(--brand-gold)] text-[var(--deep-black)] hover:bg-[var(--brand-gold)]/90 transition-colors font-bold text-lg shadow-lg shadow-[var(--brand-gold)]/20 flex flex-col h-full transition duration-200 ease-out"
                       >
                         Termin buchen
                       </button>

@@ -99,17 +99,29 @@ export const getImageProps = (src?: string, alt?: string, config: ResponsiveImag
     quality = 85,
   } = config;
 
-  // Get base path and extension
+  // For studio images, use a simpler approach without srcset
+  // to avoid 404s for missing responsive variants
+  if (src?.includes('/studio/') || src?.includes('-studio-carrousel/')) {
+    return {
+      src: safeImageSrc(src),
+      alt: alt || 'Image',
+      onError: handleImageError,
+      'data-original-src': src,
+      loading: priority ? ('eager' as const) : ('lazy' as const),
+      decoding: priority ? ('sync' as const) : ('async' as const),
+      fetchpriority: priority ? ('high' as const) : ('auto' as const),
+    };
+  }
+
+  // Get base path and extension for other images
   const basePath = src ? src.replace(/\.(jpg|jpeg|png|webp)$/i, '') : '';
   const ext = src?.match(/\.(jpg|jpeg|png|webp)$/i)?.[0] || '.webp';
 
-  // Generate srcset for WebP and original format
+  // Generate srcset for WebP and original format (conservative approach)
   const srcSet = src
     ? [
         `${basePath}@400w${ext} 400w`,
         `${basePath}@800w${ext} 800w`,
-        `${basePath}@1200w${ext} 1200w`,
-        `${basePath}@2400w${ext} 2400w`,
       ].join(', ')
     : undefined;
 

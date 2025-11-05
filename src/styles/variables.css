@@ -8,9 +8,12 @@
   --color-primary-light: #E8D4B8;
   
   /* Legacy brand aliases (for backward compatibility) */
-  --brand-gold: var(--color-primary);
-  --accent-primary: var(--color-primary);
-  --accent-hover: var(--color-primary-dark);
+  --brand-gold: #D4AF37;
+  --brand-gold-rgb: 212, 175, 55;
+  --brand-gold-hover: #C19B26;
+  --brand-gold-hover-rgb: 193, 155, 38;
+  --accent-primary: var(--brand-gold);
+  --accent-hover: var(--brand-gold-hover);
   --accent-active: #a8821a;
 
   /* ===== BACKGROUND & SURFACE COLORS ===== */
@@ -19,9 +22,15 @@
   --color-border: #3A3A3A;
   
   /* Legacy aliases */
-  --brand-background: #222222;
-  --brand-white: #ffffff;
-  --brand-chrome: #c0c0c0;
+  --deep-black: #222222;
+  --deep-black-rgb: 34, 34, 34;
+  --brand-background: var(--deep-black);
+  --base-white: #ffffff;
+  --base-white-rgb: 255, 255, 255;
+  --brand-white: var(--base-white);
+  --chrome-silver: #c0c0c0;
+  --chrome-silver-rgb: 192, 192, 192;
+  --brand-chrome: var(--chrome-silver);
 
   /* ===== TEXT COLORS ===== */
   --color-text-primary: #FFFFFF;

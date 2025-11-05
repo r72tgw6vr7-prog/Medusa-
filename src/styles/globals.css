@@ -102,7 +102,7 @@ textarea:focus-visible {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--deep-black);
+  background-color: transparent;
   color: var(--base-white);
   line-height: 1.6;
 }

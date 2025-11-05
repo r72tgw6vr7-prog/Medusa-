@@ -99,34 +99,35 @@ const Footer: React.FC = () => {
   };
 
   const IconComponent = ({ iconName }: { iconName: string }) => {
+    // Consistent 20px size for contact icons
     switch (iconName) {
       case 'MapPin':
-        return <MapPin size={16} className='text-[#D4AF37]' />;
+        return <MapPin size={20} className='text-[var(--brand-gold)] flex-shrink-0' />;
       case 'Clock':
-        return <Clock size={16} className='text-[#D4AF37]' />;
+        return <Clock size={20} className='text-[var(--brand-gold)] flex-shrink-0' />;
       case 'Phone':
-        return <Phone size={16} className='text-[#D4AF37]' />;
+        return <Phone size={20} className='text-[var(--brand-gold)] flex-shrink-0' />;
       case 'Mail':
-        return <Mail size={16} className='text-[#D4AF37]' />;
+        return <Mail size={20} className='text-[var(--brand-gold)] flex-shrink-0' />;
       case 'Instagram':
         return (
           <Instagram
-            size={16}
-            className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+            size={28} // Larger size for social icons
+            className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300 flex-shrink-0'
           />
         );
       case 'Facebook':
         return (
           <Facebook
-            size={16}
-            className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+            size={28} // Larger size for social icons
+            className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300 flex-shrink-0'
           />
         );
       case 'Star':
         return (
           <Star
-            size={16}
-            className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+            size={28} // Larger size for social icons
+            className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300 flex-shrink-0'
           />
         );
       default:
@@ -135,52 +136,52 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className='bg-[#1A1A1A] w-full py-16 lg:py-16 xl:py-24'>
-      <div className='max-w-[1104px] mx-auto px-8 sm:px-8 lg:px-16'>
+    <footer className='relative z-10 border-t border-white/10 w-full py-16 md:py-16 lg:py-24'>
+      <div className='max-w-7xl mx-auto px-8 md:px-16 lg:px-16'>
         {/* Logo and Tagline */}
-        <div className='text-center mb-16'>
-          <h2 className="font-['Playfair_Display'] text-4xl md:text-5xl font-bold tracking-wider text-[#D4AF37] mb-8">
+        <div className='mb-16'>
+          <h2 className="font-['Playfair_Display'] text-4xl font-bold text-[var(--brand-gold)] mb-8">
             MEDUSA
           </h2>
-          <p className="font-['Inter'] text-base max-w-2xl mx-auto text-white/60">
+          <p className="font-['Inter'] text-base text-white/80">
             Münchens exklusivestes Tattoo-Studio für Kunst, die ein Leben lang hält.
           </p>
         </div>
 
         {/* Four-column grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16'>
           {/* Unser Studio */}
-          <div>
-            <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#D4AF37] mb-8">
-              Unser Studio
+          <div className='space-y-8'>
+            <h3 className="font-['Playfair_Display'] text-sm font-semibold tracking-wider uppercase text-[var(--brand-gold)] mb-8">
+              UNSER STUDIO
             </h3>
-            <div className='space-y-0'>
-              <div className='flex items-start gap-0'>
+            <div className='space-y-8'>
+              <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.address.icon} />
-                <span className="font-['Inter'] text-sm text-white/70 leading-relaxed">
+                <span className="font-['Inter'] text-sm text-white/80 leading-relaxed">
                   {studioInfo.address.text}
                 </span>
               </div>
-              <div className='flex items-start gap-0'>
+              <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.hours.icon} />
-                <span className="font-['Inter'] text-sm text-white/70 leading-relaxed">
+                <span className="font-['Inter'] text-sm text-white/80 leading-relaxed">
                   {studioInfo.hours.text}
                 </span>
               </div>
-              <div className='flex items-start gap-0'>
+              <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.phone.icon} />
                 <a
                   href={studioInfo.phone.href}
-                  className="font-['Inter'] text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300"
+                  className="font-['Inter'] text-sm text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-300"
                 >
                   {studioInfo.phone.text}
                 </a>
               </div>
-              <div className='flex items-start gap-0'>
+              <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.email.icon} />
                 <a
                   href={studioInfo.email.href}
-                  className="font-['Inter'] text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300"
+                  className="font-['Inter'] text-sm text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-300"
                 >
                   {studioInfo.email.text}
                 </a>
@@ -189,81 +190,115 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Rechtliches */}
-          <div>
-            <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#D4AF37] mb-8">
-              Rechtliches
+          <div className='space-y-8'>
+            <h3 className="font-['Playfair_Display'] text-sm font-semibold tracking-wider uppercase text-[var(--brand-gold)] mb-8">
+              RECHTLICHES
             </h3>
-            <nav aria-label='Legal Links' className='space-y-0'>
+            <ul className='space-y-8'>
               {legalLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="block font-['Inter'] text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300"
-                >
-                  {link.text}
-                </a>
+                <li key={`legal-${link.text}`}>
+                  <a
+                    href={link.href}
+                    className="block font-['Inter'] text-sm text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-300"
+                  >
+                    {link.text}
+                  </a>
+                </li>
               ))}
-            </nav>
+            </ul>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#D4AF37] mb-8">
-              Quick Links
+          <div className='space-y-8'>
+            <h3 className="font-['Playfair_Display'] text-sm font-semibold tracking-wider uppercase text-[var(--brand-gold)] mb-8">
+              QUICK LINKS
             </h3>
-            <nav aria-label='Site Navigation' className='space-y-0'>
+            <ul className='space-y-8'>
               {quickLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="block font-['Inter'] text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300"
-                >
-                  {link.text}
-                </a>
+                <li key={`quick-${link.text}`}>
+                  <a
+                    href={link.href}
+                    className="block font-['Inter'] text-sm text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-300"
+                  >
+                    {link.text}
+                  </a>
+                </li>
               ))}
-            </nav>
+            </ul>
           </div>
 
           {/* Folgen Sie uns */}
-          <div>
-            <h3 className="font-['Playfair_Display'] text-lg font-bold text-[#D4AF37] mb-8">
-              Folgen Sie uns
+          <div className='space-y-8'>
+            <h3 className="font-['Playfair_Display'] text-sm font-semibold tracking-wider uppercase text-[var(--brand-gold)] mb-8">
+              FOLGEN SIE UNS
             </h3>
-            <div className='space-y-0'>
+            {/* Social Icons */}
+            <div className='flex gap-8 mb-16'>
+              <a
+                href={socialLinks.instagram.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Instagram'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
+              >
+                <Instagram size={28} />
+              </a>
+              <a
+                href={socialLinks.facebook.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Facebook'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
+              >
+                <Facebook size={28} />
+              </a>
+              <a
+                href={socialLinks.rating.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Google Reviews'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
+              >
+                <Star size={28} />
+              </a>
+            </div>
+            
+            <div className='space-y-8'>
               {Object.entries(socialLinks).map(([key, social]) => (
-                <a
-                  key={key}
-                  href={social.href}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className="flex items-center gap-0 font-['Inter'] text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300"
-                  aria-label={social.text}
-                >
+                <div key={key} className='flex items-center gap-8'>
                   <IconComponent iconName={social.icon} />
-                  {social.text}
-                </a>
+                  <a
+                    href={social.href}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="font-['Inter'] text-sm text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-300"
+                    aria-label={social.text}
+                  >
+                    {social.text}
+                  </a>
+                </div>
               ))}
             </div>
 
             {/* Language Toggle */}
-            <div className='mt-8'>
-              <div className='flex gap-0'>
+            <div className='mt-16'>
+              <div className='flex gap-8'>
                 <button
                   onClick={() => setLanguage('DE')}
-                  className={`px-3 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  className={`px-8 py-8 text-sm font-medium rounded transition-all duration-300 ${
                     language === 'DE'
-                      ? 'bg-[#D4AF37] text-black'
-                      : 'bg-transparent text-white border border-gray-600 hover:opacity-80'
+                      ? 'bg-[var(--brand-gold)] text-black'
+                      : 'bg-transparent text-white border border-[var(--brand-gold)]/40 hover:border-[var(--brand-gold)]'
                   }`}
                 >
                   DE
                 </button>
                 <button
                   onClick={() => setLanguage('EN')}
-                  className={`px-3 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  className={`px-8 py-8 text-sm font-medium rounded transition-all duration-300 ${
                     language === 'EN'
-                      ? 'bg-[#D4AF37] text-black'
-                      : 'bg-transparent text-white border border-gray-600 hover:opacity-80'
+                      ? 'bg-[var(--brand-gold)] text-black'
+                      : 'bg-transparent text-white border border-[var(--brand-gold)]/40 hover:border-[var(--brand-gold)]'
                   }`}
                 >
                   EN
@@ -274,74 +309,73 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className='max-w-[1104px] mx-auto w-full mb-16'>
+        <div className='border-t border-white/20 pt-16 mb-16'>
           <div className='text-center mb-8'>
-            <h3 className="font-['Playfair_Display'] text-2xl font-bold text-[#D4AF37] mb-0">
+            <h3 className="font-['Playfair_Display'] text-2xl font-bold text-[var(--brand-gold)] mb-8">
               Newsletter
             </h3>
-            <p className="font-['Inter'] text-sm text-white/70">
+            <p className="font-['Inter'] text-base text-white/80 mb-8">
               Erhalten Sie exklusive Updates zu neuen Künstlern, Events und Aktionen.
             </p>
           </div>
 
-          <form onSubmit={handleNewsletterSubmit} className='space-y-8'>
-            <div>
-              <label htmlFor='newsletter-email' className='sr-only'>
-                E-Mail-Adresse
-              </label>
-              <input
-                id='newsletter-email'
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder='your.email@example.com'
-                className='w-full px-8 py-0 bg-[#3A3A3A] border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] focus:outline-none transition-colors duration-300'
-                required
-              />
+          <form onSubmit={handleNewsletterSubmit} className='max-w-md mx-auto mb-8'>
+            <div className='flex gap-8 mb-8'>
+              <div className='flex-1'>
+                <label htmlFor='newsletter-email' className='sr-only'>
+                  E-Mail-Adresse
+                </label>
+                <input
+                  id='newsletter-email'
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder='your.email@example.com'
+                  className='w-full px-8 py-8 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:border-[var(--brand-gold)] focus:outline-none transition-colors duration-300'
+                  required
+                />
+              </div>
+              <button
+                type='submit'
+                disabled={!email || !agreeMarketing}
+                className="bg-[var(--brand-gold)] text-black font-['Inter'] font-medium py-8 px-8 rounded hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
+              >
+                Abonnieren
+              </button>
             </div>
 
-            <div className='flex items-start gap-0'>
+            <div className='flex items-center justify-center gap-8'>
               <input
                 id='marketing-consent'
                 type='checkbox'
                 checked={agreeMarketing}
                 onChange={(e) => setAgreeMarketing(e.target.checked)}
-                className='mt-0 w-4 h-4 text-[#D4AF37] bg-[#3A3A3A] border-gray-600 rounded focus:ring-[#D4AF37] focus:ring-1'
+                className='w-4 h-4 text-[var(--brand-gold)] bg-white/10 border-white/30 rounded focus:ring-[var(--brand-gold)] focus:ring-0'
                 required
               />
               <label
                 htmlFor='marketing-consent'
-                className="font-['Inter'] text-xs text-white/60"
+                className="font-['Inter'] text-sm text-white/80"
                 aria-describedby='marketing-consent-description'
               >
                 I agree to receive marketing communications from Medusa Tattoo München. You can
                 unsubscribe at any time.
               </label>
             </div>
-
-            <button
-              type='submit'
-              disabled={!email || !agreeMarketing}
-              className="w-full bg-[#D4AF37] text-black font-['Inter'] font-medium py-0 px-8 rounded-lg hover:bg-[#D4AF37] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
-            >
-              Abonnieren
-            </button>
           </form>
         </div>
 
         {/* Map Section */}
-        <div className='w-full mb-16'>
-          <div className='flex items-center justify-center gap-0 mb-8'>
-            <MapPin size={20} className='text-[#D4AF37]' />
-            <h3 className="font-['Playfair_Display'] text-xl font-bold text-[#D4AF37]">
-              Wegbeschreibung
-            </h3>
-          </div>
+        <div className='border-t border-white/20 pt-16 mb-16 text-center'>
+          <h3 className="font-['Playfair_Display'] text-xl font-bold text-[var(--brand-gold)] mb-8 flex items-center justify-center gap-8">
+            <MapPin size={20} className='text-[var(--brand-gold)]' />
+            Wegbeschreibung
+          </h3>
 
-          <div className='relative'>
+          <div className='bg-white/10 rounded h-64 overflow-hidden'>
             <GoogleMap 
               width="100%"
-              height="400"
+              height="100%"
               className=""
               title="Medusa Studio Location Map"
             />
@@ -349,39 +383,39 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className='border-t border-[#C0C0C0]/20 pt-8'>
-          <div className='flex flex-col md:flex-row justify-between items-center gap-8'>
-            <p className="font-['Inter'] text-xs text-white/50 text-center md:text-left">
+        <div className='border-t border-white/20 pt-16'>
+          <div className='flex flex-col md:flex-row justify-between items-center gap-16'>
+            <p className="font-['Inter'] text-sm text-white/50">
               © 2025 Medusa Tattoo München. Alle Rechte vorbehalten.
             </p>
 
-            <div className='flex items-center gap-8'>
+            <div className='flex items-center gap-16'>
               <a
                 href={socialLinks.instagram.href}
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label='Instagram'
-                className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
               >
-                <Instagram size={20} />
+                <Instagram size={28} />
               </a>
               <a
                 href={socialLinks.facebook.href}
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label='Facebook'
-                className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
               >
-                <Facebook size={20} />
+                <Facebook size={28} />
               </a>
               <a
                 href={socialLinks.rating.href}
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label='Google Reviews'
-                className='text-[#D4AF37] hover:scale-110 transition-transform duration-300'
+                className='text-white hover:text-[var(--brand-gold)] transition-colors duration-300'
               >
-                <Star size={20} />
+                <Star size={28} />
               </a>
             </div>
           </div>

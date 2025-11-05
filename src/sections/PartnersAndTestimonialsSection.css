@@ -52,7 +52,9 @@
   max-width: 160px;
   object-fit: contain;
   /* Gold/yellow tint to match Figma design */
-  filter: brightness(1.2) saturate(1.3) drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+  filter: brightness(1.2) saturate(1.3) drop-shadow(0 2px 8px rgba(var(--brand-gold-rgb), 0.4));
+  /* Fix for partner images */
+  opacity: 1 !important;
 }
 
 .partners-logo:hover {

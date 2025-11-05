@@ -69,6 +69,7 @@ const Section: React.FC<SectionProps> = ({
     "py-16",        // 128px on mobile
     "md:py-20",     // 160px on tablet
     "lg:py-24",     // 192px on desktop
+    "relative z-10", // Ensure section content is above texture background
     className,
   ]
     .filter(Boolean)

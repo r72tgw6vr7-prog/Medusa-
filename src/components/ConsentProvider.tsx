@@ -170,30 +170,30 @@ function CookieBanner() {
   const { acceptAll, acceptNecessary, openSettings } = useConsent();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-neutral-700 p-4 z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-neutral-700 p-8 z-50">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
           <div className="flex-1">
             <p className="text-white text-sm">
               Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und anonyme Nutzungsstatistiken zu sammeln. 
               <button 
                 onClick={openSettings}
-                className="text-accent-gold hover:text-accent-gold-light underline ml-1"
+                className="text-accent-gold hover:text-accent-gold-light underline ml-0 transition duration-200 ease-out"
               >
                 Einstellungen anpassen
               </button>
             </p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-0">
             <button
               onClick={acceptNecessary}
-              className="px-4 py-2 text-sm border border-neutral-600 text-white hover:bg-neutral-800 rounded"
+              className="px-8 py-0 text-sm border border-neutral-600 text-white hover:bg-neutral-800 rounded transition duration-200 ease-out"
             >
               Nur Notwendige
             </button>
             <button
               onClick={acceptAll}
-              className="px-4 py-2 text-sm bg-accent-gold text-black hover:bg-accent-gold-light rounded font-medium"
+              className="px-8 py-0 text-sm bg-accent-gold text-black hover:bg-accent-gold-light rounded font-medium transition duration-200 ease-out"
             >
               Alle Akzeptieren
             </button>
@@ -215,11 +215,11 @@ function CookieSettings() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-      <div className="bg-neutral-900 rounded-lg max-w-md w-full p-6">
-        <h2 className="text-xl font-semibold text-white mb-4">Cookie-Einstellungen</h2>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-8 z-50">
+      <div className="bg-neutral-900 rounded-lg max-w-md w-full p-8">
+        <h2 className="text-xl font-semibold text-white mb-8">Cookie-Einstellungen</h2>
         
-        <div className="space-y-4">
+        <div className="space-y-8">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-white font-medium">Notwendige Cookies</h3>
@@ -260,16 +260,16 @@ function CookieSettings() {
           </div>
         </div>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-0 mt-8">
           <button
             onClick={closeSettings}
-            className="flex-1 px-4 py-2 border border-neutral-600 text-white hover:bg-neutral-800 rounded"
+            className="flex-1 px-8 py-0 border border-neutral-600 text-white hover:bg-neutral-800 rounded transition duration-200 ease-out"
           >
             Abbrechen
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-4 py-2 bg-accent-gold text-black hover:bg-accent-gold-light rounded font-medium"
+            className="flex-1 px-8 py-0 bg-accent-gold text-black hover:bg-accent-gold-light rounded font-medium transition duration-200 ease-out"
           >
             Speichern
           </button>

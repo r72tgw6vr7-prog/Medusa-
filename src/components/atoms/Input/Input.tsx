@@ -28,10 +28,10 @@ export const InputField: React.FC<InputFieldProps> = ({
 
   const inputContainerStyles = `
     relative flex items-center 
-    bg-[#222222] 
+    bg-[var(--deep-black)] 
     border border-solid 
     rounded-lg 
-    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[#D4AF37]'}
+    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[var(--brand-gold)]'}
   `;
 
   const inputStyles = `

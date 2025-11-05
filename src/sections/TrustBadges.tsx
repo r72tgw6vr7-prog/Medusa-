@@ -11,7 +11,7 @@ export const TRUST_BADGES: TrustBadgeItem[] = [
   {
     svg: (
       <img
-        src='/hero/Container_2.svg'
+        src='/assets/images/svg/Container_2.svg'
         alt='Auszeichnung Symbol'
         className='w-full h-full object-contain'
       />
@@ -23,7 +23,7 @@ export const TRUST_BADGES: TrustBadgeItem[] = [
   {
     svg: (
       <img
-        src='/hero/Container_3.svg'
+        src='/assets/images/svg/Container_3.svg'
         alt='Sterile Ausrüstung Symbol'
         className='w-full h-full object-contain'
       />
@@ -35,7 +35,7 @@ export const TRUST_BADGES: TrustBadgeItem[] = [
   {
     svg: (
       <img
-        src='/hero/Container_4.svg'
+        src='/assets/images/svg/Container_4.svg'
         alt='Erfahrung Symbol'
         className='w-full h-full object-contain'
       />
@@ -47,7 +47,7 @@ export const TRUST_BADGES: TrustBadgeItem[] = [
   {
     svg: (
       <img
-        src='/hero/Container.svg'
+        src='/assets/images/svg/Container.svg'
         alt='EU Zertifizierung Symbol'
         className='w-full h-full object-contain'
       />

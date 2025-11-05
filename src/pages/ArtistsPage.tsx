@@ -17,17 +17,17 @@ import './ArtistsPage.css';
 
 export function ArtistsPage() {
   return (
-    <main className='artists-page w-full bg-texture min-h-screen'>
+    <main className='artists-page w-full min-h-screen relative z-10'>
       {/* Navigation */}
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       {/* Artists Section with TeamGrid (matches homepage cards) */}
-      <section className='artists-section pt-24 md:pt-24 pb-16 md:pb-24'>
+      <section className='artists-section pt-24 md:pt-24 pb-16 md:pb-24 relative z-10'>
         <div className='container max-w-[1320px] mx-auto px-8 md:px-8'>
           {/* Unified heading section applied: matches ServicesPageInteractive styling */}
           <div className='text-center mb-16'>
-            <h1 className='typo-h1 text-[#D4AF37]'>Künstler</h1>
+            <h1 className='typo-h1 text-[var(--brand-gold)]'>Künstler</h1>
             <p className='typo-subtitle text-[#C0C0C0]'>
               Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.
             </p>

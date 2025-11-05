@@ -24,7 +24,7 @@ interface PricingCard {
 // Array of pricing data
 const pricingData: PricingCard[] = [
   {
-    icon: <Pen className='h-12 w-12 text-[#D4AF37]' />,
+    icon: <Pen className='h-12 w-12 text-[var(--brand-gold)]' />,
     title: 'Custom\nTattoo Designs',
     description:
       'Individuelle Kunstwerke ab 150€/Stunde. Kostenlose Erstberatung und Design-Entwicklung.',
@@ -37,7 +37,7 @@ const pricingData: PricingCard[] = [
     ctaVariant: 'link',
   },
   {
-    icon: <Zap className='h-12 w-12 text-[#D4AF37]' />,
+    icon: <Zap className='h-12 w-12 text-[var(--brand-gold)]' />,
     title: 'Professionelle\nPiercings',
     description:
       'Sterile Behandlung ab 45€ inkl. Premium-Grundschmuck. Titan-Erstschmuck und Nachkontrolle inklusive.',
@@ -46,7 +46,7 @@ const pricingData: PricingCard[] = [
     ctaVariant: 'link',
   },
   {
-    icon: <MessageCircle className='h-12 w-12 text-[#D4AF37]' />,
+    icon: <MessageCircle className='h-12 w-12 text-[var(--brand-gold)]' />,
     title: 'Kostenlose\nBeratung',
     description: 'Design-Beratung kostenfrei. KI-Vorschau inklusive. Vor-Ort oder WhatsApp.',
     ctaText: 'Jetzt beraten lassen',
@@ -58,15 +58,14 @@ const pricingData: PricingCard[] = [
 export const PricingSection: React.FC = () => {
   return (
     <Section
-      bg="dark"
-      className="py-16 lg:py-24 bg-texture"
+      className="py-16 lg:py-24 relative z-10"
       containerSize="default"
       aria-labelledby='pricing-section-title'
       id='pricing-section'
     >
       {/* Section heading */}
       <h2
-        className='text-[#D4AF37] text-center font-playfair text-4xl md:text-5xl font-bold mb-8'
+        className='text-[var(--brand-gold)] text-center font-playfair text-4xl md:text-5xl font-bold mb-8'
         id='pricing-section-title'
       >
         Services mit transparenten Preisen
@@ -83,7 +82,7 @@ export const PricingSection: React.FC = () => {
           {pricingData.map((card, index) => (
             <article
               key={index}
-              className='pricing-card group relative flex h-full flex-col rounded-3xl border border-[#D4AF37]/40 bg-[#101010] p-8 shadow-[0_0_24px_rgba(0,0,0,0.3)] transition-shadow duration-300 hover:border-[#D4AF37] hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]'
+              className='pricing-card group relative flex h-full flex-col rounded-3xl border border-[var(--brand-gold)]/40 bg-[#101010] p-8 shadow-[0_0_24px_rgba(0,0,0,0.3)] transition-shadow duration-300 hover:border-[var(--brand-gold)] hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]'
               data-card-type={card.title.toLowerCase().replace(/\s+/g, '-')}
             >
               {/* Free badge for the last card */}
@@ -95,7 +94,7 @@ export const PricingSection: React.FC = () => {
 
               {/* Icon in circular container */}
               <div className='mb-8 flex justify-center'>
-                <div className='flex h-20 w-20 items-center justify-center rounded-full border border-[#D4AF37]/70 bg-[#151515] flex-col h-full'>
+                <div className='flex h-20 w-20 items-center justify-center rounded-full border border-[var(--brand-gold)]/70 bg-[#151515] flex-col h-full'>
                   <div className='pricing-card-icon transition-transform duration-500 group-hover:rotate-360'>
                     {card.icon}
                   </div>
@@ -104,7 +103,7 @@ export const PricingSection: React.FC = () => {
 
               {/* Title section */}
               <div className='mb-8 text-center'>
-                <h3 className='whitespace-pre-line font-playfair text-2xl font-semibold text-[#D4AF37] md:text-3xl'>
+                <h3 className='whitespace-pre-line font-playfair text-2xl font-semibold text-[var(--brand-gold)] md:text-3xl'>
                   {card.title}
                 </h3>
               </div>

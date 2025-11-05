@@ -10,56 +10,56 @@ interface StudioImage {
 
 const STUDIO_IMAGES: StudioImage[] = [
   {
-    src: '/images/-studio-carrousel/img3876.webp',
+    src: '/assets/images/photos/studio/img3876.webp',
     alt: 'Medusa Tattoo Studio München - Empfangsbereich',
     priority: true,
   },
   {
-    src: '/images/-studio-carrousel/img3914.webp',
+    src: '/assets/images/photos/studio/img3914.webp',
     alt: 'Medusa Tattoo Studio München - Tattoo Arbeitsplatz',
   },
   {
-    src: '/images/-studio-carrousel/img3947.webp',
+    src: '/assets/images/photos/studio/img3947.webp',
     alt: 'Medusa Tattoo Studio München - Wartebereich',
   },
   {
-    src: '/images/-studio-carrousel/img3969.webp',
+    src: '/assets/images/photos/studio/img3969.webp',
     alt: 'Medusa Tattoo Studio München - Piercing Bereich',
   },
   {
-    src: '/images/-studio-carrousel/img3994.webp',
+    src: '/assets/images/photos/studio/img3994.webp',
     alt: 'Medusa Tattoo Studio München - Tattoo Station',
   },
   {
-    src: '/images/-studio-carrousel/img4031.webp',
+    src: '/assets/images/photos/studio/img4031.webp',
     alt: 'Medusa Tattoo Studio München - Sterilisationsraum',
   },
   {
-    src: '/images/-studio-carrousel/img4070.webp',
+    src: '/assets/images/photos/studio/img4070.webp',
     alt: 'Medusa Tattoo Studio München - Schmuck Vitrine',
   },
   {
-    src: '/images/-studio-carrousel/img4096.webp',
+    src: '/assets/images/photos/studio/img4096.webp',
     alt: 'Medusa Tattoo Studio München - Beratungsecke',
   },
   {
-    src: '/images/-studio-carrousel/img4120.webp',
+    src: '/assets/images/photos/studio/img4120.webp',
     alt: 'Medusa Tattoo Studio München - Wartebereich Detail',
   },
   {
-    src: '/images/-studio-carrousel/img4158.webp',
+    src: '/assets/images/photos/studio/img4158.webp',
     alt: 'Medusa Tattoo Studio München - Tattoo Arbeitsplatz Detail',
   },
   {
-    src: '/images/-studio-carrousel/img4197.webp',
+    src: '/assets/images/photos/studio/img4197.webp',
     alt: 'Medusa Tattoo Studio München - Piercing Bereich Detail',
   },
   {
-    src: '/images/-studio-carrousel/img4248.webp',
+    src: '/assets/images/photos/studio/img4248.webp',
     alt: 'Medusa Tattoo Studio München - Schmuck Auswahl',
   },
   {
-    src: '/images/-studio-carrousel/img4288.webp',
+    src: '/assets/images/photos/studio/img4288.webp',
     alt: 'Medusa Tattoo Studio München - Studio Übersicht',
   },
 ];
@@ -92,10 +92,10 @@ const StudioCarousel: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className='w-full bg-[#222222] py-16 md:py-16 overflow-hidden'>
+    <section ref={containerRef} className='w-full py-16 md:py-16 overflow-hidden relative z-10'>
       {/* Section Header - Contained - EMERGENCY FIX: 40px spacing */}
       <div className='max-w-[1104px] mx-auto px-8 md:px-8 mb-8'>
-        <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[#D4AF37] text-center'>
+        <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[var(--brand-gold)] text-center'>
           Unser Studio
         </h2>
         <p className='font-inter text-lg text-[#C0C0C0] text-center mt-8'>
@@ -103,10 +103,10 @@ const StudioCarousel: React.FC = () => {
         </p>
       </div>
 
-      {/* FULL-WIDTH CAROUSEL - FIXED: 2/3 viewport height desktop only */}
+      {/* FULL-WIDTH CAROUSEL - FIXED: 16:9 aspect ratio with max height limit */}
       <div className='relative w-full'>
-        {/* Main Image Container - 2/3 vh for desktop, fixed heights for mobile/tablet */}
-        <div className='relative w-full h-[400px] md:h-[500px] lg:h-[66.67vh] overflow-hidden bg-[#1a1a1a]'>
+        {/* Main Image Container - Fixed aspect ratio 16:9 */}
+        <div className='relative w-full aspect-[16/9] max-h-[80vh] overflow-hidden bg-[#1a1a1a]'>
           {/* Images */}
           {STUDIO_IMAGES.map((image, index) => (
             <div
@@ -121,7 +121,7 @@ const StudioCarousel: React.FC = () => {
                   priority: image.priority || false,
                 })}
                 className='w-full h-full object-cover'
-                style={{ objectPosition: 'center 40%' }}
+                style={{ objectPosition: 'center center' }}
               />
               {/* Subtle Gradient Overlay - Bottom only */}
               <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none' />

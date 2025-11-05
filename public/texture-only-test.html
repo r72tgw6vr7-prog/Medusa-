@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texture Only Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background-color: black;
+    }
+    
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: 50px auto;
+    }
+    
+    h1 {
+      color: gold;
+    }
+    
+    .test-section {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .texture-display {
+      width: 300px;
+      height: 300px;
+      border: 2px solid white;
+      margin: 20px auto;
+    }
+    
+    .texture-1 {
+      background-image: url('/texture.webp');
+      background-size: 400px 400px;
+      background-repeat: repeat;
+    }
+    
+    .texture-2 {
+      background-image: url('/assets/images/textures/background-texture.webp');
+      background-size: 400px 400px;
+      background-repeat: repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Texture Image Test</h1>
+    
+    <div class="test-section">
+      <h2>Direct Image Tag Test</h2>
+      <img src="/texture.webp" alt="Texture from root" style="width: 300px; height: 300px; object-fit: cover;">
+    </div>
+    
+    <div class="test-section">
+      <h2>Background Image Test 1 (from root)</h2>
+      <div class="texture-display texture-1"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>Background Image Test 2 (from assets)</h2>
+      <div class="texture-display texture-2"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>Direct Image Tag Test (from assets)</h2>
+      <img src="/assets/images/textures/background-texture.webp" alt="Texture from assets" style="width: 300px; height: 300px; object-fit: cover;">
+    </div>
+  </div>
+</body>
+</html>

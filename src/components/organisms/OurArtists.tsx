@@ -34,10 +34,10 @@ const artists: Artist[] = [
     role: 'Tattoo Artist',
     specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
     experience: '10+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/loui.jpg',
+    imageSrc: '/assets/images/photos/artists/Loui/Loui.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@loui_medusa',
-    imagePosition: 'object-[center_25%]', // FIX 1: Already well-positioned
+    imagePosition: 'center', // Unified positioning via CSS
   },
   {
     id: 'debi',
@@ -45,10 +45,10 @@ const artists: Artist[] = [
     role: 'Tattoo Artist',
     specialties: ['Old School', 'Geometry', 'Blackwork', 'Maori'],
     experience: '12+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/debi.jpg',
+    imageSrc: '/assets/images/photos/artists/Debi/Debi.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@debi_medusa',
-    imagePosition: 'object-[center_22%]', // FIX 1: Move face up significantly (seated close-up)
+    imagePosition: 'center', // Unified positioning via CSS
   },
   {
     id: 'aaron',
@@ -56,10 +56,10 @@ const artists: Artist[] = [
     role: 'Ear Magician & Piercer',
     specialties: ['Kids Specialist', 'Dermalanker', 'Surface'],
     experience: '11+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/aaron.jpg',
+    imageSrc: '/assets/images/photos/artists/Aaron/Aaron.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@aaron_medusa',
-    imagePosition: 'object-[center_20%]', // FIX 1: Move face up significantly
+    imagePosition: 'center', // Unified positioning via CSS
   },
   {
     id: 'vivi',
@@ -67,10 +67,10 @@ const artists: Artist[] = [
     role: 'Resident Piercer',
     specialties: ['Consultation', 'Snake Eye', 'Collection Curator'],
     experience: '9+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/vivi.jpg',
+    imageSrc: '/assets/images/photos/artists/Vivi/IMG_3149.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@vivi_medusa',
-    imagePosition: 'object-[center_25%]', // FIX 1: Move face up
+    imagePosition: 'center', // Unified positioning via CSS
   },
   {
     id: 'angie',
@@ -78,10 +78,10 @@ const artists: Artist[] = [
     role: 'Resident Piercer',
     specialties: ['Consultation', 'Social Media', 'Septum'],
     experience: '7+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/angie.jpg',
+    imageSrc: '/assets/images/photos/artists/Angie/Angie.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@angie_medusa',
-    imagePosition: 'object-[center_23%]', // FIX 1: Move face up
+    imagePosition: 'center', // Unified positioning via CSS
   },
   {
     id: 'eli-luquez',
@@ -89,10 +89,10 @@ const artists: Artist[] = [
     role: 'Tattoo Artist',
     specialties: ['Realism', 'Black & Gray', 'Fineline', 'Blackwork'],
     experience: '8+ Jahre',
-    imageSrc: '/images/artists/team-bio/headshots/oli.jpg',
+    imageSrc: '/assets/images/photos/artists/Luz/Luz.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@eli_luquez',
-    imagePosition: 'object-[center_40%]', // FIX 1: Standing pose, less adjustment needed
+    imagePosition: 'center', // Unified positioning via CSS
   },
 ];
 
@@ -117,7 +117,7 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
         <div className='responsive-container safe-area-padding'>
           {/* Section Header - STANDARDIZED TYPOGRAPHY */}
           <div className='section-header text-center mb-8 md:mb-16 max-w-[800px] mx-auto'>
-            <h2 className='section-title font-playfair text-[36px] font-semibold text-[#D4AF37] mb-8 leading-[1.2] tracking-tight'>
+            <h2 className='section-title font-playfair text-[36px] font-semibold text-[var(--brand-gold)] mb-8 leading-[1.2] tracking-tight'>
               Unser Meisterteam
             </h2>
             <p className='section-description font-inter text-[18px] text-[#C0C0C0] leading-[1.5]'>
@@ -140,7 +140,7 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
                 }}
                 role='button'
                 tabIndex={0}
-                className='cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded-2xl flex flex-col h-full'
+                className='cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] rounded-2xl flex flex-col h-full'
                 aria-label={`${artist.name} Details anzeigen`}
               >
                 <ArtistCard

@@ -93,7 +93,7 @@ export function FAQPageNew() {
   const [openSection, setOpenSection] = useState<number | null>(null);
 
   return (
-    <div className='min-h-screen bg-[#222222] text-white flex flex-col'>
+    <div className='min-h-screen text-white flex flex-col relative z-10'>
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
@@ -103,7 +103,7 @@ export function FAQPageNew() {
             <div className='mx-auto w-full max-w-[1104px] space-y-16'>
               {/* Unified heading section applied: matches ServicesPageInteractive styling */}
               <div className='text-center'>
-                <h1 className='typo-h1 text-[#D4AF37]'>Häufige Fragen (FAQ)</h1>
+                <h1 className='typo-h1 text-[var(--brand-gold)]'>Häufige Fragen (FAQ)</h1>
                 <p className='typo-subtitle text-[#C0C0C0]'>
                   Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen.
                 </p>
@@ -118,15 +118,15 @@ export function FAQPageNew() {
                       className='rounded-3xl border border-[#C0C0C0]/25 bg-[rgba(34,34,34,0.85)] backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-300'
                     >
                       <button
-                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-[#222222]'
+                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
                         onClick={() => setOpenSection(isOpen ? null : idx)}
                         aria-expanded={isOpen}
                       >
-                        <span className='font-headline text-2xl md:text-3xl text-[#D4AF37]'>
+                        <span className='font-headline text-2xl md:text-3xl text-[var(--brand-gold)]'>
                           {section.title}
                         </span>
                         <span
-                          className={`ml-4 text-[#D4AF37] transition-transform duration-300 ${
+                          className={`ml-4 text-[var(--brand-gold)] transition-transform duration-300 ${
                             isOpen ? 'rotate-90' : ''
                           }`}
                         >
@@ -142,7 +142,7 @@ export function FAQPageNew() {
                         <div className='px-8 pb-8 space-y-8 border-t border-[#C0C0C0]/20'>
                           {section.questions.map((q) => (
                             <div key={q.q} className='space-y-8'>
-                              <h3 className='font-headline text-xl md:text-2xl text-[#D4AF37]'>
+                              <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-gold)]'>
                                 {q.q}
                               </h3>
                               <p className='font-body text-base md:text-lg text-white/85 leading-relaxed'>

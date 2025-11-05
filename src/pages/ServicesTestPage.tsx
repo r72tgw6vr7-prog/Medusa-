@@ -5,11 +5,7 @@ import { AppProvider } from '../../core/state/AppContext';
 export const ServicesTestPage: React.FC = () => {
   return (
     <AppProvider initialLanguage='DE'>
-      <div className='min-h-screen'>
-        <div className='p-8 bg-[#D4AF37] text-center'>
-          <h1 className='text-2xl font-bold text-black'>🎯 ServicesPageInteractive Test</h1>
-          <p className='text-black'>Testing the new interactive service component</p>
-        </div>
+      <div className='min-h-screen relative z-10'>
         <ServicesPageInteractive />
       </div>
     </AppProvider>

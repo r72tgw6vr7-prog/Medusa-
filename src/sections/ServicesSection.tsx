@@ -42,7 +42,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`w-full bg-[#222222] ${className}`}>
+    <div className={`w-full  ${className}`}>
       {/* Quick Links */}
       {quickLinks && quickLinks.length > 0 && (
         <div className='flex items-start justify-center py-16'>
@@ -51,7 +51,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <button
                 key={index}
                 onClick={link.onClick}
-                className='flex flex-col items-center bg-[#222222] w-[279px] py-8 rounded-[14px] border border-solid border-[#C0BFBF33]'
+                className='flex flex-col items-center  w-[279px] py-8 rounded-[14px] border border-solid border-[#C0BFBF33]'
               >
                 <img
                   src={link.iconUrl}

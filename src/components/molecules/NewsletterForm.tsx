@@ -57,7 +57,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
             placeholder='Ihre E-Mail-Adresse'
             className={`w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border
               ${error ? 'border-red-500' : 'border-gray-600'}
-              text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]`}
+              text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]`}
             required
             disabled={isSubmitting}
             aria-invalid={!!error}
@@ -82,8 +82,8 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
         className={`w-full px-6 py-3 text-base font-medium rounded-lg
           ${
             isSuccess
-              ? 'bg-[#D4AF37] text-[#222222] cursor-default'
-              : 'bg-[#D4AF37] text-white hover:bg-[#B69121]'
+              ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] cursor-default'
+              : 'bg-[var(--brand-gold)] text-white hover:bg-[#B69121]'
           } transition-colors disabled:opacity-50`}
       >
         {isSubmitting

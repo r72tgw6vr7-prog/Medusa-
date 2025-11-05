@@ -100,7 +100,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
   };
 
   const renderStepIndicator = () => (
-    <div className='flex items-center justify-center gap-8 mb-16'>
+    <div className='flex items-center justify-center gap-8 mb-24'>
       {[1, 2, 3].map((step) => (
         <React.Fragment key={step}>
           <div
@@ -128,9 +128,9 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
   const renderServiceSelection = () => (
     <div className='space-y-8'>
-      <div className='text-center md:text-left'>
+      <div className='text-center md:text-left mb-16'>
         <p className='text-brand-gold/90 text-sm tracking-[0.2em] uppercase mb-8'>Schritt 1</p>
-        <h3 className='text-3xl font-headline text-white mb-16'>Wählen Sie einen Service</h3>
+        <h3 className='text-3xl font-headline text-white mb-8'>Wählen Sie einen Service</h3>
         <p className='text-sm text-white/70 max-w-2xl mx-auto md:mx-0'>
           Geben Sie uns einen Hinweis darauf, welches Projekt Sie planen. Die Auswahl hilft uns bei
           der optimalen Vorbereitung.
@@ -158,9 +158,9 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
   const renderArtistAndTimeSelection = () => (
     <div className='space-y-16'>
-      <div className='text-center md:text-left'>
+      <div className='text-center md:text-left mb-16'>
         <p className='text-brand-gold/90 text-sm tracking-[0.2em] uppercase mb-8'>Schritt 2</p>
-        <h3 className='text-3xl font-headline text-white mb-16'>Künstler & Termin wählen</h3>
+        <h3 className='text-3xl font-headline text-white mb-8'>Künstler & Termin wählen</h3>
         <p className='text-sm text-white/70 max-w-2xl mx-auto md:mx-0'>
           Sichern Sie sich Ihren Wunschkünstler und Zeitfenster. Wir bestätigen Ihren Termin zeitnah
           per E-Mail.
@@ -226,9 +226,9 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
   const renderPersonalInfo = () => (
     <div className='space-y-16'>
-      <div className='text-center md:text-left'>
+      <div className='text-center md:text-left mb-16'>
         <p className='text-brand-gold/90 text-sm tracking-[0.2em] uppercase mb-8'>Schritt 3</p>
-        <h3 className='text-3xl font-headline text-white mb-16'>Persönliche Informationen</h3>
+        <h3 className='text-3xl font-headline text-white mb-8'>Persönliche Informationen</h3>
         <p className='text-sm text-white/70 max-w-2xl mx-auto md:mx-0'>
           Teilen Sie uns mit, wie wir Sie erreichen können. Wir nutzen diese Daten ausschließlich
           für Ihre Buchung.

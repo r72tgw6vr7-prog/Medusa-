@@ -21,8 +21,8 @@ import {
 import { useLuxuryInteractions, LuxuryButton, LuxuryInput } from '../atoms/MicroInteractions';
 import { useMedusaDesignSystem } from '../../../src/foundation/SimpleMedusaProvider';
 
-// CRITICAL FIX: Use actual background image instead of Figma asset
-const newBackgroundImage = '/images/tattoo-card-bg.jpg';
+// Updated to use consolidated asset structure
+const newBackgroundImage = '/assets/images/photos/backgrounds/tattoo-card-bg.webp';
 
 interface BookingCallToActionProps {
   onBookNow: () => void;

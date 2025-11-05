@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
 import { BookingForm } from '../components/organisms/BookingForm';
 import { CheckCircle, Calendar, Users, Sparkles } from 'lucide-react';
-import { PageBackground } from '../components/atoms/PageBackground';
+// Using universal texture background instead of PageBackground
 
 import type { Service, Artist, BookingFormData } from '../types/booking';
-import teamData from '../../public/team.json';
 
 // Sample services data based on design system
 const SERVICES: Service[] = [
@@ -69,19 +68,31 @@ const SERVICES: Service[] = [
   },
 ];
 
-// Transform artist data to match BookingForm requirements
-const ARTISTS: Artist[] = teamData.team
-  .filter((artist) => artist.bookable)
-  .map((artist) => ({
-    id: artist.id,
-    name: artist.name,
-    imageUrl: artist.photo,
-    specialties: artist.specialties,
-    availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  }));
-
 export const BookingPage: React.FC = () => {
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
+  const [artists, setArtists] = useState<Artist[]>([]);
+
+  // Load team data from public directory
+  useEffect(() => {
+    fetch('/team.json')
+      .then((res) => res.json())
+      .then((teamData: { team: any[] }) => {
+        const artistsList = teamData.team
+          .filter((artist) => artist.bookable)
+          .map((artist) => ({
+            id: artist.id,
+            name: artist.name,
+            imageUrl: artist.photo,
+            specialties: artist.specialties,
+            availability: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          }));
+        setArtists(artistsList);
+      })
+      .catch((error) => {
+        console.error('Error loading team data:', error);
+        setArtists([]);
+      });
+  }, []);
 
   const handleBookingSubmit = async (_data: BookingFormData) => {
     // In production, this would send to backend API
@@ -91,11 +102,11 @@ export const BookingPage: React.FC = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     setBookingSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    globalThis.window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <PageBackground>
+    <div className='relative z-10'>
       <div className='text-white'>
         <MainNavigation />
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
@@ -103,8 +114,8 @@ export const BookingPage: React.FC = () => {
         {/* Unified heading section applied: matches ServicesPageInteractive styling */}
         <section className='relative section-padding-lg'>
           <div className='responsive-container safe-area-padding'>
-            <div className='text-center'>
-              <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[#D4AF37]'>
+            <div className='text-center mb-16 md:mb-24'>
+              <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
                 Termin Buchen
               </h1>
               <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto'>
@@ -116,7 +127,7 @@ export const BookingPage: React.FC = () => {
         </section>
 
         {/* Benefits Section - Container → Section → Grid → Components */}
-        <section className='section-padding bg-black/20'>
+        <section className='section-padding mb-16 md:mb-24'>
           <div className='responsive-container safe-area-padding'>
             <div className='responsive-grid cols-3-desktop gap-8'>
               <div className='flex flex-col h-full text-center'>
@@ -153,8 +164,26 @@ export const BookingPage: React.FC = () => {
         </section>
 
         {/* Booking Form Section - Container → Section → Form */}
-        <section className='section-padding'>
-          <div className='responsive-container safe-area-padding'>
+        <section className='section-padding pt-16 md:pt-24 relative'>
+          {/* Jewelry Image Background - positioned above the texture layer */}
+          <div 
+            className='absolute inset-0 z-5 opacity-70'
+            style={{
+              backgroundImage: "url('/Bauchnabel echt gold vitrine_(3).jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed',
+              filter: 'brightness(0.7)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Dark overlay to ensure form content is readable */}
+          <div 
+            className='absolute inset-0 z-6 bg-black/60'
+            aria-hidden="true"
+          />
+          <div className='responsive-container safe-area-padding relative z-7'>
             {bookingSubmitted ? (
               // Success Message
               <div className='max-w-2xl mx-auto'>
@@ -210,7 +239,7 @@ export const BookingPage: React.FC = () => {
             ) : (
               // Booking Form
               <div className='mx-auto max-w-6xl'>
-                <BookingForm services={SERVICES} artists={ARTISTS} onSubmit={handleBookingSubmit} />
+                <BookingForm services={SERVICES} artists={artists} onSubmit={handleBookingSubmit} />
               </div>
             )}
           </div>
@@ -285,7 +314,7 @@ export const BookingPage: React.FC = () => {
                   rel='noopener noreferrer'
                   className="no-underline"
                 >
-                  <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A]'>
+                  <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A] transition-colors duration-300'>
                     WhatsApp
                   </Button>
                 </a>
@@ -301,7 +330,7 @@ export const BookingPage: React.FC = () => {
 
         <Footer />
       </div>
-    </PageBackground>
+    </div>
   );
 };
 

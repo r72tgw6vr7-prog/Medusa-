@@ -25,7 +25,7 @@ export const ImageWithLoader: React.FC<ImageWithLoaderProps> = ({
   return (
     <div className='relative'>
       {/* Skeleton loader */}
-      {!isLoaded && <div className='absolute inset-0 bg-[#2A2A2A] animate-pulse rounded-lg' />}
+      {!isLoaded && <div className='absolute inset-0 bg-[var(--deep-black)] animate-pulse rounded-lg' />}
 
       {/* Actual image */}
       <SafeImage

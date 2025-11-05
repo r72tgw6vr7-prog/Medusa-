@@ -53,7 +53,7 @@ interface CardSlotProps {
 const VARIANT_STYLES: Record<CardVariant, string> = {
   default: 'bg-[#1A1A1A] border border-white/10',
   elevated: 'bg-[#1A1A1A] shadow-lg shadow-black/50',
-  outlined: 'bg-transparent border-2 border-[#D4AF37]',
+  outlined: 'bg-transparent border-2 border-[var(--brand-gold)]',
   glass: 'bg-white/5 backdrop-blur-md border border-white/10',
 };
 

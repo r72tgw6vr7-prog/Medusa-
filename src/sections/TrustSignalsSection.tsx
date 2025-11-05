@@ -37,12 +37,12 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
 }) => {
   return (
     <div className={`w-full ${className}`}>
-      <div className='flex flex-col items-center self-stretch bg-[#222222] py-24'>
+      <div className='flex flex-col items-center self-stretch  py-24'>
         <div className='flex flex-col items-center w-[1334px] pb-16'>
           {/* Partners Section */}
           <div className='flex flex-col items-center w-[1064px] px-72 mb-16 gap-0.5'>
             <div className='flex flex-col items-start'>
-              <span className='text-[#D4AF37] text-[35px] font-bold'>{title}</span>
+              <span className='text-brand-gold text-[35px] font-bold'>{title}</span>
             </div>
             <div className='flex flex-col items-start'>
               <span className='text-white text-[15px]'>{subtitle}</span>
@@ -55,7 +55,7 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
               <div key={index} className='flex flex-col items-center'>
                 <img src={partner.logo} alt={partner.name} className='h-36 object-contain' />
                 {partner.description && (
-                  <span className='text-[#D4AF37] text-[25px] mt-0'>{partner.description}</span>
+                  <span className='text-brand-gold text-[25px] mt-0'>{partner.description}</span>
                 )}
               </div>
             ))}
@@ -64,7 +64,7 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
           {/* Reviews Section */}
           <div className='flex flex-col items-center self-stretch px-80 mx-8 gap-8'>
             <div className='flex flex-col items-start'>
-              <span className='text-[#D4AF37] text-[35px] font-bold'>Was Kunden sagen</span>
+              <span className='text-brand-gold text-[35px] font-bold'>Was Kunden sagen</span>
             </div>
 
             {/* Reviews Grid */}
@@ -86,7 +86,7 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
                 <div
                   key={index}
                   className={`w-2 h-2 rounded ${
-                    isActive ? 'bg-[#D4AF37]' : 'bg-[#666666]'
+                    isActive ? 'bg-brand-gold' : 'bg-gray-600'
                   } ${index !== 2 ? 'mr-2' : ''}`}
                 />
               ))}

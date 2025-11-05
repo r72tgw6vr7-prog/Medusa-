@@ -4,6 +4,7 @@ import { ServicesPage } from './components/organisms/ServicesPage';
 import { ArtistsPage } from './pages/ArtistsPage';
 import { AftercarePage } from './pages/AftercarePage';
 import React, { Suspense, lazy } from 'react';
+// UniversalTextureBackground moved to main.tsx
 const EnhancedGalleryPage = lazy(() => import('./pages/EnhancedGalleryPage'));
 const BookingPage = lazy(() => import('./pages/BookingPage'));
 import { LegalPage } from './pages/LegalPage';
@@ -13,7 +14,6 @@ import AGBPage from './pages/AGBPage';
 import { FAQPageNew as FAQPage } from './pages/FAQPageNew';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import DeveloperDiagnostics from './pages/DeveloperDiagnostics';
 import { ServicesTestPage } from './pages/ServicesTestPage';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
@@ -24,6 +24,8 @@ import AnalyticsProvider from './components/AnalyticsProvider';
 import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from './hooks/useAnalytics';
 
 function App() {
+  // Texture background is now handled in main.tsx
+  
   return (
     <SimpleMedusaProvider>
       <AppProvider initialLanguage='DE'>
@@ -31,8 +33,10 @@ function App() {
           <BrowserRouter>
             <ScrollToTop />
             <AnalyticsProvider>
-              <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
+              {/* All page content (texture moved to main.tsx) */}
+              <div className="relative z-10"> {/* Content above texture */}
+                <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
                 {/* Main Routes */}
                 <Route path='/' element={<HomePage />} />
                 <Route
@@ -141,13 +145,13 @@ function App() {
                   }
                 />
 
-                {/* Diagnostics */}
-                <Route path='/diagnostics' element={<DeveloperDiagnostics />} />
+                
 
                 {/* 404 Route */}
                 <Route path='*' element={<NotFoundPage />} />
               </Routes>
-            </Suspense>
+              </Suspense>
+              </div> {/* End content wrapper */}
             </AnalyticsProvider>
           </BrowserRouter>
         </LanguageProvider>

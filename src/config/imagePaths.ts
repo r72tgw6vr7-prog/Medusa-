@@ -14,56 +14,56 @@
 export const IMAGE_PATHS = {
   // Artist team photos
   artists: {
-    eli: '/images/artists/team-bio/headshots/luz.webp',
-    aaron: '/images/artists/team-bio/headshots/aaron.webp',
-    oliver: '/images/artists/team-bio/headshots/oli.webp',
-    vive: '/images/artists/team-bio/headshots/vivi.webp',
-    angie: '/images/artists/team-bio/headshots/angie.webp',
-    debi: '/images/artists/team-bio/headshots/debi.webp',
-    loui: '/images/artists/team-bio/headshots/loui.webp',
-    sasha: '/images/artists/team-bio/headshots/sascha.webp',
+    eli: '/assets/images/photos/artists/picture.webp',
+    aaron: '/assets/images/photos/artists/aaron.webp',
+    oliver: '/assets/images/photos/artists/oliver.webp',
+    vive: '/assets/images/photos/artists/vivi.webp',
+    angie: '/assets/images/photos/artists/picture.webp',
+    debi: '/assets/images/photos/artists/debi.webp',
+    loui: '/assets/images/photos/artists/loui@1200w.webp',
+    sasha: '/assets/images/photos/artists/picture.webp',
   },
 
   // Studio interior photos
   studio: {
-    interior1: '/images/studio/studio-interior-1.webp',
-    interior2: '/images/studio/studio-interior-2.webp',
-    interior3: '/images/studio/studio-interior-3.webp',
+    interior1: '/assets/images/photos/studio/img3876.webp',
+    interior2: '/assets/images/photos/studio/img3914.webp',
+    interior3: '/assets/images/photos/studio/img3947.webp',
   },
 
   // Service card backgrounds
   services: {
-    tattoo: '/images/tattoo-card-bg.jpg',
-    piercing: '/images/piercing-card-bg.jpg',
+    tattoo: '/assets/images/photos/backgrounds/tattoo-card-bg.webp',
+    piercing: '/assets/images/photos/backgrounds/piercing-card-bg.webp',
   },
 
   // Icons and logos
   icons: {
-    crown: '/icons/crown.svg',
-    diamond: '/icons/diamond.png',
+    crown: '/assets/images/icons/crown.svg',
+    diamond: '/assets/images/icons/Diamond.png',
   },
 
   // Hero section
   hero: {
-    background: '/hero/Medusa_tattoo_artwork.png',
-    trustBadge1: '/hero/Container_2.svg',
-    trustBadge2: '/hero/Container_3.svg',
-    trustBadge3: '/hero/Container_4.svg',
-    trustBadge4: '/hero/Container.svg',
+    background: '/assets/images/photos/hero/medusatattooartwork.webp',
+    trustBadge1: '/assets/images/svg/Container_2.svg',
+    trustBadge2: '/assets/images/svg/Container_3.svg',
+    trustBadge3: '/assets/images/svg/Container_4.svg',
+    trustBadge4: '/assets/images/svg/Container.svg',
   },
 
   // Partners logos
   partners: {
-    nannybag: '/images/partners/nannybag-logo.svg',
-    iamrobot: '/images/partners/iamrobot-logo.svg',
-    partner3: '/images/partners/partner3-logo.svg',
-    bqla: '/images/partners/bqla-logo.svg',
+    nannybag: '/assets/images/photos/partners/nannybag-logo.svg',
+    iamrobot: '/assets/images/photos/partners/iamrobot-logo.svg',
+    partner3: '/assets/images/photos/partners/partner3-logo.svg',
+    bqla: '/assets/images/photos/partners/bqla-logo.svg',
   },
 
   // Fallback images
   fallback: {
-    placeholder: '/images/placeholder.svg',
-    artist: '/images/artists/team-bio/picture.webp',
+    placeholder: '/assets/images/icons/placeholder.svg',
+    artist: '/assets/images/photos/artists/picture.webp',
   },
 } as const;
 

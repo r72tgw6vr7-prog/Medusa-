@@ -41,11 +41,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`bg-[#222222] ${className}`}>
+    <div className={` ${className}`}>
       <div className='container mx-auto px-8 py-24'>
         {/* Header */}
         <div className='text-center mb-16'>
-          <h2 className='text-[#D4AF37] text-[42px] font-bold mb-8'>{title}</h2>
+          <h2 className='text-brand-gold text-[42px] font-bold mb-8'>{title}</h2>
           <p className='text-white text-lg max-w-2xl mx-auto'>{subtitle}</p>
         </div>
 
@@ -76,7 +76,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   console.error('Failed to submit form:', error);
                 }
               }}
-              className='bg-[#1E1E1E] p-8 rounded-lg flex flex-col h-full'
+              className=' p-8 rounded-lg flex flex-col h-full'
             >
               <h3 className='text-white text-2xl mb-8'>Kontaktiere uns</h3>
               <div className='mb-8'>
@@ -162,7 +162,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
               <button
                 type='submit'
-                className='bg-[#D4AF37] text-black px-8 py-0 rounded hover:opacity-80 transition-opacity duration-200 flex flex-col h-full'
+                className='bg-brand-gold text-black px-8 py-0 rounded hover:opacity-80 transition-opacity duration-200 flex flex-col h-full'
                 aria-label='Nachricht absenden'
               >
                 Senden
@@ -177,7 +177,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               {contactInfo.map((info) => (
                 <div
                   key={`contact-${info.title}-${info.value}`}
-                  className='bg-[#1E1E1E] p-8 rounded-lg flex items-center flex-col h-full'
+                  className=' p-8 rounded-lg flex items-center flex-col h-full'
                 >
                   {info.icon && <img src={info.icon} alt={info.title} className='w-8 h-8 mr-8' />}
                   <div>
@@ -185,7 +185,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     {info.href ? (
                       <a
                         href={info.href}
-                        className='text-[#D4AF37] hover:underline transition duration-200 ease-out'
+                        className='text-brand-gold hover:underline transition duration-200 ease-out'
                       >
                         {info.value}
                       </a>
@@ -207,7 +207,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     href={social.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='p-0 bg-[#1E1E1E] rounded-full hover:bg-[#D4AF37] transition-colors duration-200 flex flex-col h-full'
+                    className='p-0  rounded-full hover:bg-brand-gold transition-colors duration-200 flex flex-col h-full'
                     aria-label={social.label}
                   >
                     <img src={social.icon} alt={social.label} className='w-6 h-6' />
@@ -217,7 +217,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
 
             {/* Map or Additional Content */}
-            <div className='rounded-lg overflow-hidden h-[300px] bg-[#1E1E1E] flex flex-col h-full'>
+            <div className='rounded-lg overflow-hidden h-[300px]  flex flex-col h-full'>
               <iframe
                 title='Location Map'
                 src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...'

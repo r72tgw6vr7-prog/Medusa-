@@ -10,9 +10,9 @@ import { Image, CheckCircle2, AlertTriangle, Archive, FileCheck, XCircle } from 
 // DESIGN SPECIFICATIONS:
 // ----------------------
 // Layout: w-full max-w-3xl mx-auto p-6 bg-[#1A1A1A] text-white rounded-lg
-// Colors: bg #1A1A1A, text #EAEAEA, borders #2A2A2A, brand #D4AF37
+// Colors: bg #1A1A1A, text #EAEAEA, borders var(--deep-black), brand var(--brand-gold)
 // Typography: Inter 16 body, 22 line-height; headings bold
-// Interactive States: hover:bg-[#2A2A2A], focus:ring-[#D4AF37]
+// Interactive States: hover:bg-[var(--deep-black)], focus:ring-[var(--brand-gold)]
 // Responsive: stack content on mobile, two-column checks on desktop
 // [file:ASSET_SPECIFICATIONS.md]
 
@@ -250,8 +250,8 @@ Repeat Network tab checks above.
   return (
     <div className='w-full max-w-3xl mx-auto p-8 bg-[#1A1A1A] text-[#EAEAEA] rounded-lg min-h-[50vh]'>
       {/* Header */}
-      <div className='flex items-center gap-0 mb-8 pb-8 border-b border-[#2A2A2A]'>
-        <Image className='w-6 h-6 text-[#D4AF37]' />
+      <div className='flex items-center gap-0 mb-8 pb-8 border-b border-[var(--deep-black)]'>
+        <Image className='w-6 h-6 text-[var(--brand-gold)]' />
         <h2 className='text-xl font-bold'>Asset Normalization Panel</h2>
       </div>
 
@@ -272,7 +272,7 @@ Repeat Network tab checks above.
       {stage === 'checking' && (
         <div className='flex flex-col items-center justify-center gap-8 py-16'>
           <div className='animate-spin'>
-            <Image className='w-12 h-12 text-[#D4AF37]' />
+            <Image className='w-12 h-12 text-[var(--brand-gold)]' />
           </div>
           <p className='text-sm text-[#EAEAEA]/60 uppercase tracking-wide'>
             Verifying team.json paths...
@@ -285,7 +285,7 @@ Repeat Network tab checks above.
         <div className='flex flex-col gap-8'>
           {/* Summary Cards */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <div className='flex items-center gap-0 mb-0'>
                 <CheckCircle2 className='w-5 h-5 text-green-500' />
                 <span className='text-sm text-[#EAEAEA]/60 uppercase tracking-wide'>Found</span>
@@ -294,7 +294,7 @@ Repeat Network tab checks above.
               <p className='text-xs text-[#EAEAEA]/60 mt-0'>of {report.totalMembers} images</p>
             </div>
 
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <div className='flex items-center gap-0 mb-0'>
                 <AlertTriangle className='w-5 h-5 text-red-500' />
                 <span className='text-sm text-[#EAEAEA]/60 uppercase tracking-wide'>Missing</span>
@@ -317,7 +317,7 @@ Repeat Network tab checks above.
                 {report.foundImages.map((img, i) => (
                   <li key={i} className='flex items-center gap-0 text-sm'>
                     <CheckCircle2 className='w-4 h-4 text-green-500 shrink-0' />
-                    <code className='text-[#D4AF37] bg-[#1A1A1A] px-0 py-0.5 rounded'>
+                    <code className='text-[var(--brand-gold)] bg-[#1A1A1A] px-0 py-0.5 rounded'>
                       {img.path.split('/').pop()}
                     </code>
                     <span className='text-[#EAEAEA]/60'>— {img.memberName}</span>
@@ -356,19 +356,19 @@ Repeat Network tab checks above.
 
           {/* Duplicates Warning */}
           {report.duplicatesFolderExists && (
-            <div className='p-8 bg-[#D4AF37]/10 border border-[#D4AF37] rounded-lg'>
+            <div className='p-8 bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)] rounded-lg'>
               <div className='flex items-center gap-0 mb-0'>
-                <AlertTriangle className='w-5 h-5 text-[#D4AF37]' />
-                <h3 className='font-semibold text-[#D4AF37]'>Duplicate Folder Detected</h3>
+                <AlertTriangle className='w-5 h-5 text-[var(--brand-gold)]' />
+                <h3 className='font-semibold text-[var(--brand-gold)]'>Duplicate Folder Detected</h3>
               </div>
               <p className='text-sm text-[#EAEAEA]/80 mb-8'>
-                Found <code className='text-[#D4AF37]'>{DATA_CONFIG.duplicatesDir}/</code> folder.
+                Found <code className='text-[var(--brand-gold)]'>{DATA_CONFIG.duplicatesDir}/</code> folder.
                 This contains duplicate/placeholder images that are not used by{' '}
-                <code className='text-[#D4AF37]'>team.json</code>.
+                <code className='text-[var(--brand-gold)]'>team.json</code>.
               </p>
               <button
                 onClick={archiveDuplicates}
-                className='w-full py-0 px-8 bg-[#D4AF37] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[#D4AF37] focus:outline-none active:opacity-90 transition-all duration-200 flex items-center justify-center gap-0'
+                className='w-full py-0 px-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none active:opacity-90 transition-all duration-200 flex items-center justify-center gap-0'
                 aria-label='Archive duplicate team folder'
               >
                 <Archive className='w-5 h-5' />
@@ -378,21 +378,21 @@ Repeat Network tab checks above.
           )}
 
           {/* Source of Truth Info */}
-          <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg'>
+          <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg'>
             <div className='flex items-center gap-0 mb-0'>
-              <FileCheck className='w-5 h-5 text-[#D4AF37]' />
+              <FileCheck className='w-5 h-5 text-[var(--brand-gold)]' />
               <h3 className='font-semibold'>Source of Truth</h3>
             </div>
             <div className='space-y-0 text-sm'>
               <div className='flex justify-between items-center'>
                 <span className='text-[#EAEAEA]/60'>Images Directory:</span>
-                <code className='text-[#D4AF37] bg-[#1A1A1A] px-0 py-0.5 rounded'>
+                <code className='text-[var(--brand-gold)] bg-[#1A1A1A] px-0 py-0.5 rounded'>
                   {DATA_CONFIG.sourceOfTruthDir}/
                 </code>
               </div>
               <div className='flex justify-between items-center'>
                 <span className='text-[#EAEAEA]/60'>Data File:</span>
-                <code className='text-[#D4AF37] bg-[#1A1A1A] px-0 py-0.5 rounded'>
+                <code className='text-[var(--brand-gold)] bg-[#1A1A1A] px-0 py-0.5 rounded'>
                   {DATA_CONFIG.json}
                 </code>
               </div>
@@ -401,10 +401,10 @@ Repeat Network tab checks above.
 
           {/* Execution Logs */}
           <details className='group'>
-            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg hover:border-[#D4AF37]/30 transition-colors duration-200'>
+            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg hover:border-[var(--brand-gold)]/30 transition-colors duration-200'>
               <span className='font-semibold'>View Verification Logs ({logs.length} entries)</span>
             </summary>
-            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg max-h-[200px] overflow-y-auto font-mono text-xs'>
+            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg max-h-[200px] overflow-y-auto font-mono text-xs'>
               {logs.map((log, i) => (
                 <div key={i} className='text-[#EAEAEA]/70 mb-0'>
                   {log}
@@ -418,17 +418,17 @@ Repeat Network tab checks above.
       {/* Archiving Stage */}
       {stage === 'archiving' && (
         <div className='flex flex-col gap-8'>
-          <div className='flex items-center gap-0 p-8 bg-[#D4AF37]/10 border border-[#D4AF37] rounded-lg'>
+          <div className='flex items-center gap-0 p-8 bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)] rounded-lg'>
             <div className='animate-spin'>
-              <Archive className='w-5 h-5 text-[#D4AF37]' />
+              <Archive className='w-5 h-5 text-[var(--brand-gold)]' />
             </div>
-            <span className='text-sm font-semibold text-[#D4AF37] uppercase tracking-wide'>
+            <span className='text-sm font-semibold text-[var(--brand-gold)] uppercase tracking-wide'>
               Archiving duplicate folder...
             </span>
           </div>
 
           <div
-            className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg h-[200px] overflow-y-auto font-mono text-xs'
+            className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg h-[200px] overflow-y-auto font-mono text-xs'
             role='log'
             aria-live='polite'
           >
@@ -459,40 +459,40 @@ Repeat Network tab checks above.
 
           {/* Summary Stats */}
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>
                 Total Members
               </p>
-              <p className='text-2xl font-bold text-[#D4AF37]'>{report.totalMembers}</p>
+              <p className='text-2xl font-bold text-[var(--brand-gold)]'>{report.totalMembers}</p>
             </div>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Found Images</p>
               <p className='text-2xl font-bold text-green-500'>{report.foundImages.length}</p>
             </div>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Missing</p>
               <p className='text-2xl font-bold text-red-500'>{report.missingImages.length}</p>
             </div>
           </div>
 
           {/* Browser Verification Checklist */}
-          <div className='p-8 bg-[#2A2A2A] border border-[#D4AF37]/30 rounded-lg'>
-            <h3 className='text-lg font-bold text-[#D4AF37] mb-8'>Verify in Browser:</h3>
+          <div className='p-8 bg-[var(--deep-black)] border border-[var(--brand-gold)]/30 rounded-lg'>
+            <h3 className='text-lg font-bold text-[var(--brand-gold)] mb-8'>Verify in Browser:</h3>
 
             <div className='space-y-8'>
               {/* Dev Server */}
               <div>
                 <p className='font-semibold mb-0 flex items-center gap-0'>
-                  <span className='text-[#D4AF37]'>1.</span> Start Dev Server
+                  <span className='text-[var(--brand-gold)]'>1.</span> Start Dev Server
                 </p>
-                <code className='block p-0 bg-[#0A0A0A] rounded border border-[#2A2A2A] text-green-500 mb-0'>
+                <code className='block p-0 bg-[#0A0A0A] rounded border border-[var(--deep-black)] text-green-500 mb-0'>
                   npm run dev
                 </code>
                 <a
                   href='http://localhost:5173/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm text-[#D4AF37] hover:underline transition duration-200 ease-out'
+                  className='text-sm text-[var(--brand-gold)] hover:underline transition duration-200 ease-out'
                 >
                   → Open: http://localhost:5173/
                 </a>
@@ -501,7 +501,7 @@ Repeat Network tab checks above.
               {/* Network Tab Check */}
               <div>
                 <p className='font-semibold mb-0 flex items-center gap-0'>
-                  <span className='text-[#D4AF37]'>2.</span> Check Network Tab
+                  <span className='text-[var(--brand-gold)]'>2.</span> Check Network Tab
                 </p>
                 <ul className='list-disc list-inside text-sm text-[#EAEAEA]/80 space-y-0 ml-8'>
                   <li>Open DevTools (F12) → Network tab</li>
@@ -524,7 +524,7 @@ Repeat Network tab checks above.
               {/* Visual Check */}
               <div>
                 <p className='font-semibold mb-0 flex items-center gap-0'>
-                  <span className='text-[#D4AF37]'>3.</span> Visual Verification
+                  <span className='text-[var(--brand-gold)]'>3.</span> Visual Verification
                 </p>
                 <ul className='list-disc list-inside text-sm text-[#EAEAEA]/80 space-y-0 ml-8'>
                   <li>Navigate to team section on homepage</li>
@@ -536,16 +536,16 @@ Repeat Network tab checks above.
               {/* Production Build */}
               <div>
                 <p className='font-semibold mb-0 flex items-center gap-0'>
-                  <span className='text-[#D4AF37]'>4.</span> Production Build Check
+                  <span className='text-[var(--brand-gold)]'>4.</span> Production Build Check
                 </p>
-                <code className='block p-0 bg-[#0A0A0A] rounded border border-[#2A2A2A] text-green-500 mb-0'>
+                <code className='block p-0 bg-[#0A0A0A] rounded border border-[var(--deep-black)] text-green-500 mb-0'>
                   npm run build && npm run preview
                 </code>
                 <a
                   href='http://localhost:4173/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm text-[#D4AF37] hover:underline transition duration-200 ease-out'
+                  className='text-sm text-[var(--brand-gold)] hover:underline transition duration-200 ease-out'
                 >
                   → Open: http://localhost:4173/
                 </a>
@@ -563,10 +563,10 @@ Repeat Network tab checks above.
 
           {/* Execution Logs */}
           <details className='group' open>
-            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg hover:border-[#D4AF37]/30 transition-colors duration-200'>
+            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg hover:border-[var(--brand-gold)]/30 transition-colors duration-200'>
               <span className='font-semibold'>Execution Logs ({logs.length} entries)</span>
             </summary>
-            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg max-h-[300px] overflow-y-auto font-mono text-xs'>
+            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg max-h-[300px] overflow-y-auto font-mono text-xs'>
               {logs.map((log, i) => (
                 <div key={i} className='text-[#EAEAEA]/70 mb-0'>
                   {log}
@@ -584,7 +584,7 @@ Repeat Network tab checks above.
               setError(null);
               verifyAssets();
             }}
-            className='w-full py-0 px-8 bg-[#0A0A0A] border border-[#2A2A2A] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[#2A2A2A] focus:ring-2 focus:ring-[#D4AF37] focus:outline-none transition-all duration-200'
+            className='w-full py-0 px-8 bg-[#0A0A0A] border border-[var(--deep-black)] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[var(--deep-black)] focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none transition-all duration-200'
           >
             Re-run Verification
           </button>

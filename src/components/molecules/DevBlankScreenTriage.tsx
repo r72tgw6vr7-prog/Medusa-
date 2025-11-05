@@ -405,7 +405,7 @@ ${
       case 'error':
         return <XCircle size={16} className='text-red-500' />;
       case 'warning':
-        return <AlertTriangle size={16} className='text-[#D4AF37]' />;
+        return <AlertTriangle size={16} className='text-[var(--brand-gold)]' />;
       case 'running':
         return (
           <div className='animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent' />
@@ -471,7 +471,7 @@ ${
           <button
             onClick={runFullTriage}
             disabled={isRunning}
-            className='px-8 py-0 bg-[#D4AF37] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200 flex flex-col h-full'
+            className='px-8 py-0 bg-[var(--brand-gold)] hover:bg-[#C49D2B] disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold rounded transition-colors duration-200 flex flex-col h-full'
           >
             {isRunning ? 'Running...' : 'Run Full Triage'}
           </button>
@@ -589,7 +589,7 @@ ${
                     log.type === 'success'
                       ? 'text-green-400'
                       : log.type === 'warning'
-                        ? 'text-[#D4AF37]'
+                        ? 'text-[var(--brand-gold)]'
                         : log.type === 'error'
                           ? 'text-red-400'
                           : 'text-[#C0C0C0]'

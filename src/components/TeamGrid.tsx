@@ -91,8 +91,7 @@ const TeamGrid = () => {
 
   return (
     <Section 
-      bg="dark" 
-      className="py-16 lg:py-24"
+      className="py-16 lg:py-24 relative z-10"
       containerSize="default"
       aria-label='Artist Team'
     >

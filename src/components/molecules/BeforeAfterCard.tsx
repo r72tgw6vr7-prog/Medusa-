@@ -108,7 +108,7 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
         >
           <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <div className='w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center'>
-              <span className='text-[#222222] text-xs'>↔</span>
+              <span className='text-[var(--deep-black)] text-xs'>↔</span>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
       {(title || artist) && (
         <div className='absolute bottom-0 inset-x-0 bg-linear-to-t from-black to-transparent p-8'>
           {title && <h3 className='text-white text-lg font-bold'>{title}</h3>}
-          {artist && <p className='text-[#D4AF37] text-sm'>{artist}</p>}
+          {artist && <p className='text-[var(--brand-gold)] text-sm'>{artist}</p>}
         </div>
       )}
     </button>

@@ -189,7 +189,7 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
           <section className='section-padding bg-deep-black'>
             <div className='responsive-container safe-area-padding'>
               <div className='text-center'>
-                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[#D4AF37]'>
+                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
                   {t.title}
                 </h1>
                 <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto'>{t.subtitle}</p>

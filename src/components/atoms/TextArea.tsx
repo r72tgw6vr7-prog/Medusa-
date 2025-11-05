@@ -23,10 +23,10 @@ export const TextArea: React.FC<TextAreaProps> = ({
   `;
 
   const textareaContainerStyles = `
-    bg-[#222222] 
+    bg-[var(--deep-black)] 
     border border-solid 
     rounded-lg 
-    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[#D4AF37]'}
+    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[var(--brand-gold)]'}
   `;
 
   const textareaStyles = `

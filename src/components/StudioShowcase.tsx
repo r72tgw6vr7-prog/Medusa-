@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/StudioShowcase.css';
 
-// Use existing optimized assets from public/images/-studio-carrousel
-// Prefer 800w variants for a balance of quality and size
+// Use optimized assets from the new consolidated structure
+// These are the 3 most important studio images
 const studioImages = [
-  '/images/-studio-carrousel/img3914@800w.webp',
-  '/images/-studio-carrousel/img3947@800w.webp',
-  '/images/-studio-carrousel/img4031@800w.webp',
+  '/assets/images/photos/studio/img3914.webp',
+  '/assets/images/photos/studio/img3947.webp',
+  '/assets/images/photos/studio/img4031.webp',
 ];
 
 export const StudioShowcase: React.FC = () => {
@@ -47,7 +47,7 @@ export const StudioShowcase: React.FC = () => {
       {/* MEDUSA overlay with readability background */}
       <div className='absolute inset-0 flex items-center justify-center bg-black/30 z-10 pointer-events-none'>
         <h1
-          className='font-playfair text-5xl md:text-6xl lg:text-8xl font-bold text-[#D4AF37] tracking-widest medusa-logo'
+          className='font-playfair text-5xl md:text-6xl lg:text-8xl font-bold text-[var(--brand-gold)] tracking-widest medusa-logo'
           aria-label='Medusa Tattoo Studio'
         >
           MEDUSA
@@ -64,7 +64,7 @@ export const StudioShowcase: React.FC = () => {
               onClick={() => setCurrentImageIndex(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentImageIndex
-                  ? 'bg-[#D4AF37]'
+                  ? 'bg-[var(--brand-gold)]'
                   : 'bg-white bg-opacity-50 hover:bg-opacity-75'
               }`}
               aria-label={`View studio image ${index + 1}`}

@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 export const AGBPage: React.FC = () => {
   return (
-    <div className='min-h-screen bg-texture flex flex-col'>
+    <div className='min-h-screen flex flex-col'>
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
@@ -14,7 +14,7 @@ export const AGBPage: React.FC = () => {
             <div className='mx-auto w-full max-w-[1104px]'>
               {/* Unified heading section applied: matches ServicesPageInteractive styling */}
               <div className='text-center mb-16'>
-                <h1 className='typo-h1 text-[#D4AF37]'>Allgemeine Geschäftsbedingungen</h1>
+                <h1 className='typo-h1 text-[var(--brand-gold)]'>Allgemeine Geschäftsbedingungen</h1>
                 <p className='typo-subtitle text-[#C0C0C0]'>
                   Gültig bis zur Veröffentlichung der finalen Fassung
                 </p>
@@ -27,19 +27,19 @@ export const AGBPage: React.FC = () => {
                   veröffentlicht.
                 </p>
 
-                <h2 className='font-playfair text-2xl text-[#D4AF37]'>§ 1 Geltungsbereich</h2>
+                <h2 className='font-playfair text-2xl text-[var(--brand-gold)]'>§ 1 Geltungsbereich</h2>
                 <p>
                   Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für sämtliche Dienstleistungen
                   von Medusa Tattoo München.
                 </p>
 
-                <h2 className='font-playfair text-2xl text-[#D4AF37]'>§ 2 Termine & Zahlungen</h2>
+                <h2 className='font-playfair text-2xl text-[var(--brand-gold)]'>§ 2 Termine & Zahlungen</h2>
                 <p>
                   Termine sind verbindlich. Anzahlungen werden auf den Endpreis angerechnet. Preise
                   verstehen sich inkl. MwSt.
                 </p>
 
-                <h2 className='font-playfair text-2xl text-[#D4AF37]'>§ 3 Haftung & Nachsorge</h2>
+                <h2 className='font-playfair text-2xl text-[var(--brand-gold)]'>§ 3 Haftung & Nachsorge</h2>
                 <p>
                   Es gelten die in der Nachsorge beschriebenen Hinweise. Eine Haftung für
                   Missachtung der Pflegehinweise ist ausgeschlossen.

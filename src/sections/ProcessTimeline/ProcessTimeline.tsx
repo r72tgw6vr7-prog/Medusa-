@@ -157,10 +157,10 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
     >
       <div className='relative mx-auto max-w-[1104px] px-8'>
         <div className='text-center'>
-          <span className='inline-flex items-center justify-center rounded-full border border-[#d4af37]/40 bg-[#d4af37]/10 px-8 py-0 text-xs font-semibold uppercase tracking-[0.28em] text-[#d4af37]'>
+          <span className='inline-flex items-center justify-center rounded-full border border-brand-gold/40 bg-brand-gold/10 px-8 py-0 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold'>
             {copy.eyebrow}
           </span>
-          <h2 className="mt-8 font-['Playfair_Display'] text-4xl font-semibold text-[#d4af37] md:text-[44px]">
+          <h2 className="mt-8 font-['Playfair_Display'] text-4xl font-semibold text-brand-gold md:text-[44px]">
             {copy.headline}
           </h2>
           <p className='mx-auto mt-8 max-w-2xl text-base leading-7 text-white/80 md:text-lg'>
@@ -179,7 +179,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
               style={{ left }}
               aria-hidden='true'
             >
-              <div className='flex h-10 w-10 items-center justify-center rounded-full border border-[#d4af37] bg-[#111111] text-sm font-semibold text-[#d4af37] shadow-[0_0_18px_rgba(212,175,55,0.35)]'>
+              <div className='flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold bg-deep-black text-sm font-semibold text-brand-gold shadow-gold-glow'>
                 {index + 1}
               </div>
             </div>
@@ -191,11 +191,11 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
             const Icon = step.icon;
             return (
               <article key={step.id} className='flex flex-col h-full p-8 md:p-8'>
-                <div className='mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-[#d4af37]/60 bg-[#d4af37]/10 text-[#d4af37] md:mb-8 md:h-14 md:w-14 flex-col h-full'>
+                <div className='mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold/60 bg-brand-gold/10 text-brand-gold md:mb-8 md:h-14 md:w-14 flex-col h-full'>
                   <Icon size={20} className='md:hidden' />
                   <Icon size={24} className='hidden md:block' />
                 </div>
-                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-[#d4af37] md:text-2xl">
+                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-brand-gold md:text-2xl">
                   {step.title[language] ?? step.title.EN}
                 </h3>
                 <p className='mt-0 text-xs leading-5 text-white/80 md:mt-8 md:text-sm md:leading-6'>

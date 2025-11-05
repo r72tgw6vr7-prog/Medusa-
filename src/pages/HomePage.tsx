@@ -10,12 +10,13 @@ import { PartnersAndTestimonialsSection } from '../sections/PartnersAndTestimoni
 import StudioCarousel from '../components/organisms/StudioCarousel';
 import { CarouselBadges } from '../components/CarouselBadges';
 import { PreFooterBookingCTA } from '../components/PreFooterBookingCTA';
+import ErrorBoundary from '../components/layout/ErrorBoundary';
 
 // Sample gallery data - 4 HIGH-QUALITY headshots
 const sampleGalleryImages = [
   {
     id: '1',
-    imageUrl: '/images/artists/team-bio/headshots/aaron.webp',
+    imageUrl: '/assets/images/photos/artists/aaron.webp',
     title: 'Künstler Portrait',
     artist: 'Aaron',
     year: '2024',
@@ -23,7 +24,7 @@ const sampleGalleryImages = [
   },
   {
     id: '2',
-    imageUrl: '/images/artists/team-bio/headshots/angie.webp',
+    imageUrl: '/assets/images/photos/artists/picture.webp',
     title: 'Künstler Portrait',
     artist: 'Angie',
     year: '2024',
@@ -31,7 +32,7 @@ const sampleGalleryImages = [
   },
   {
     id: '3',
-    imageUrl: '/images/artists/team-bio/headshots/loui.webp',
+    imageUrl: '/assets/images/photos/artists/loui@1200w.webp',
     title: 'Künstler Portrait',
     artist: 'Loui',
     year: '2024',
@@ -39,7 +40,7 @@ const sampleGalleryImages = [
   },
   {
     id: '4',
-    imageUrl: '/images/artists/team-bio/headshots/oli.webp',
+    imageUrl: '/assets/images/photos/artists/oliver.webp',
     title: 'Künstler Portrait',
     artist: 'Oliver',
     year: '2024',
@@ -49,46 +50,73 @@ const sampleGalleryImages = [
 
 export function HomePage() {
   return (
-    <div className='min-h-screen bg-texture'>
-      <MainNavigation />
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col">
+        {/* Navigation */}
+        <ErrorBoundary>
+          <MainNavigation />
+        </ErrorBoundary>
 
-      {/* 1. Hero Section */}
-      <HeroSection backgroundImage='/hero/Medusa_tattoo_artwork.png' />
+        {/* 1. Hero Section */}
+        <ErrorBoundary>
+          <HeroSection backgroundImage='/assets/images/photos/hero/medusatattooartwork.webp' />
+        </ErrorBoundary>
 
-      {/* 2. Team Grid / Artist Gallery */}
-      <TeamGrid />
+        {/* 2. Team Grid / Artist Gallery */}
+        <ErrorBoundary>
+          <TeamGrid />
+        </ErrorBoundary>
 
-      {/* 3. Service Cards */}
-      <ServiceCards />
+        {/* 3. Service Cards */}
+        <ErrorBoundary>
+          <ServiceCards />
+        </ErrorBoundary>
 
-      {/* 4. Studio Carousel */}
-      <StudioCarousel />
+        {/* 4. Studio Carousel */}
+        <ErrorBoundary>
+          <StudioCarousel />
+        </ErrorBoundary>
 
-      {/* 4.5. Carousel Badges */}
-      <CarouselBadges />
+        {/* 4.5. Carousel Badges */}
+        <ErrorBoundary>
+          <CarouselBadges />
+        </ErrorBoundary>
 
-      {/* 5. Pricing Section */}
-      <PricingSection />
+        {/* 5. Pricing Section */}
+        <ErrorBoundary>
+          <PricingSection />
+        </ErrorBoundary>
 
-      {/* 6. Process Timeline */}
-      <ProcessTimeline />
+        {/* 6. Process Timeline */}
+        <ErrorBoundary>
+          <ProcessTimeline />
+        </ErrorBoundary>
 
-      {/* 7. Gallery Section */}
-      <GallerySection
-        title='Unsere Kunstwerke'
-        subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
-        images={sampleGalleryImages}
-      />
+        {/* 7. Gallery Section */}
+        <ErrorBoundary>
+          <GallerySection
+            title='Unsere Kunstwerke'
+            subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
+            images={sampleGalleryImages}
+          />
+        </ErrorBoundary>
 
-      {/* 8. Partners & Testimonials */}
-      <PartnersAndTestimonialsSection />
+        {/* 8. Partners & Testimonials */}
+        <ErrorBoundary>
+          <PartnersAndTestimonialsSection />
+        </ErrorBoundary>
 
-      {/* 9. Pre-Footer Booking CTA */}
-      <PreFooterBookingCTA />
+        {/* 9. Pre-Footer Booking CTA */}
+        <ErrorBoundary>
+          <PreFooterBookingCTA />
+        </ErrorBoundary>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary>
+      </div>
+    </ErrorBoundary>
   );
 }
 

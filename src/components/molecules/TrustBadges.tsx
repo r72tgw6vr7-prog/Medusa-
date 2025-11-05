@@ -28,7 +28,7 @@ export const TrustBadges: React.FC<TrustBadgesProps> = ({ className = '' }) => {
                 className='flex flex-row items-center gap-0 md:gap-8 min-w-48 md:min-w-60 h-16 md:h-[92px] px-0 md:px-8 shrink-0'
               >
                 {/* Gold Badge Icon */}
-                <div className='w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full border-2 border-[#D4AF37] bg-[#D4AF37]/15 p-0 md:p-0 transition-all duration-300 hover:scale-105 hover:bg-[#D4AF37]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3),0_0_25px_rgba(212,175,55,0.5)] shrink-0'>
+                <div className='w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/15 p-0 md:p-0 transition-all duration-300 hover:scale-105 hover:bg-[var(--brand-gold)]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3),0_0_25px_rgba(212,175,55,0.5)] shrink-0'>
                   {badge.svg}
                 </div>
                 {/* Badge Text */}
@@ -45,7 +45,7 @@ export const TrustBadges: React.FC<TrustBadgesProps> = ({ className = '' }) => {
                 className='flex flex-row items-center gap-0 md:gap-8 min-w-48 md:min-w-60 h-16 md:h-[92px] px-0 md:px-8 shrink-0'
               >
                 {/* Gold Badge Icon */}
-                <div className='w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full border-2 border-[#D4AF37] bg-[#D4AF37]/15 p-0 md:p-0 transition-all duration-300 hover:scale-105 hover:bg-[#D4AF37]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3),0_0_25px_rgba(212,175,55,0.5)] shrink-0'>
+                <div className='w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/15 p-0 md:p-0 transition-all duration-300 hover:scale-105 hover:bg-[var(--brand-gold)]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3),0_0_25px_rgba(212,175,55,0.5)] shrink-0'>
                   {badge.svg}
                 </div>
                 {/* Badge Text */}

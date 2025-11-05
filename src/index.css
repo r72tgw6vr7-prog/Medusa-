@@ -2,7 +2,9 @@
 @import './styles/variables.css';
 @import './styles/utility-classes.css';
 @import './styles/micro-transitions.css';
-@import './styles/background-texture.css';
+/* @import './styles/background-texture.css'; */
+/* @import './styles/texture-test.css'; */
+/* universal-texture.css removed - using React component instead */
 @import './lib/animations/keyframes.css';
 
 /* Font imports - expanded weights */

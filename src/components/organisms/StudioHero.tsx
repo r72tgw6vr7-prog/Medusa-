@@ -77,7 +77,7 @@ export const StudioHero: React.FC = () => {
     <section className='w-full bg-[#1A1A1A]'>
       {/* Main Content Block */}
       <div className='max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 pt-16 pb-16 text-center'>
-        <h2 className='font-playfair font-bold text-4xl md:text-5xl text-[#D4AF37] mb-8'>
+        <h2 className='font-playfair font-bold text-4xl md:text-5xl text-[var(--brand-gold)] mb-8'>
           Unser Studio
         </h2>
         <p className='font-inter text-lg text-white max-w-3xl mx-auto leading-relaxed'>
@@ -113,7 +113,7 @@ export const StudioHero: React.FC = () => {
         {/* Navigation Arrows - Visible on hover */}
         <button
           onClick={goToPrevious}
-          className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[#D4AF37] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-transparent z-10'
+          className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[var(--brand-gold)] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-transparent z-10'
           aria-label='Previous image'
         >
           <ChevronLeft className='w-6 h-6 text-white' />
@@ -121,7 +121,7 @@ export const StudioHero: React.FC = () => {
 
         <button
           onClick={goToNext}
-          className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[#D4AF37] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-transparent z-10'
+          className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[var(--brand-gold)] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-transparent z-10'
           aria-label='Next image'
         >
           <ChevronRight className='w-6 h-6 text-white' />
@@ -137,7 +137,7 @@ export const StudioHero: React.FC = () => {
                 setCurrentSlide(index);
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-[#D4AF37] w-8' : 'bg-white/40 hover:bg-white/60'
+                index === currentSlide ? 'bg-[var(--brand-gold)] w-8' : 'bg-white/40 hover:bg-white/60'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -157,7 +157,7 @@ export const StudioHero: React.FC = () => {
                   className='flex flex-col items-center gap-0 group cursor-default transition-all duration-300'
                 >
                   <IconComponent
-                    className='w-8 h-8 text-[#D4AF37] group-hover:text-white transition-colors duration-300'
+                    className='w-8 h-8 text-[var(--brand-gold)] group-hover:text-white transition-colors duration-300'
                     strokeWidth={1.5}
                   />
                   <span className='font-inter text-sm font-medium text-[#A1A1AA] group-hover:text-white transition-colors duration-300'>
@@ -172,7 +172,7 @@ export const StudioHero: React.FC = () => {
 
       {/* CTA Block */}
       <div className='max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 py-16 text-center'>
-        <h3 className='font-playfair font-semibold text-3xl md:text-4xl text-[#D4AF37] mb-8'>
+        <h3 className='font-playfair font-semibold text-3xl md:text-4xl text-[var(--brand-gold)] mb-8'>
           Alle Services Entdecken
         </h3>
         <p className='font-inter text-lg text-[#A1A1AA] max-w-3xl mx-auto leading-relaxed'>

@@ -26,7 +26,7 @@ const RadioGroupItem = React.forwardRef<
   const id = React.useId();
   
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-0">
       <RadioGroupPrimitive.Item
         ref={ref}
         className={cn(
@@ -70,7 +70,7 @@ const Radio = React.forwardRef<
   const radioId = propId || `radio-${id}`;
   
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-0">
       <RadioGroupPrimitive.Item
         ref={ref}
         className={cn(

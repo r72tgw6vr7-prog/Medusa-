@@ -1,0 +1,308 @@
+/**
+ * MEDUSA GALLERY - CSS DESIGN TOKENS REFERENCE
+ * =============================================
+ * 
+ * This file documents all Tailwind design tokens used in Gallery components
+ * for brand consistency and maintainability.
+ */
+
+/* ============================================
+   SPACING (8px Grid System)
+   ============================================ */
+
+.gallery-spacing-reference {
+  /* Grid Gaps */
+  gap: 32px;              /* gap-8 = 8px × 4 */
+  
+  /* Section Padding */
+  padding: 64px 32px;     /* py-16 px-8 = (8px × 8) (8px × 4) */
+  
+  /* Card Padding */
+  padding: 32px;          /* p-8 = 8px × 4 */
+  
+  /* Small Spacing */
+  margin-bottom: 16px;    /* mb-4 = 8px × 2 */
+  margin-bottom: 32px;    /* mb-8 = 8px × 4 */
+}
+
+/* ============================================
+   COLORS (Brand Palette)
+   ============================================ */
+
+.gallery-colors-reference {
+  /* Primary Gold */
+  --brand-gold: #D4AF37;
+  background-color: var(--brand-gold);           /* bg-brand-gold */
+  color: var(--brand-gold);                      /* text-brand-gold */
+  border-color: rgba(212, 175, 55, 0.2);        /* border-brand-gold/20 */
+  
+  /* Chrome (Secondary) */
+  --brand-chrome: #C0C0C0;
+  color: var(--brand-chrome);                    /* text-brand-chrome */
+  
+  /* Background */
+  --brand-background: #222222;
+  background-color: var(--brand-background);     /* bg-brand-background */
+  
+  /* White */
+  color: #FFFFFF;                                /* text-white */
+  color: rgba(255, 255, 255, 0.8);              /* text-white/80 */
+  color: rgba(255, 255, 255, 0.6);              /* text-white/60 */
+}
+
+/* ============================================
+   SHADOWS (Brand Glows)
+   ============================================ */
+
+.gallery-shadows-reference {
+  /* Gold Glow (Hover State) */
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);  /* shadow-gold-glow */
+  
+  /* Gold Glow Medium */
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3); /* shadow-gold-glow-medium */
+  
+  /* Gold Glow Strong */
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);  /* shadow-gold-glow-strong */
+  
+  /* Chrome Glow */
+  box-shadow: 0 0 15px rgba(192, 192, 192, 0.3); /* shadow-chrome-glow */
+}
+
+/* ============================================
+   BORDER RADIUS (Luxury Aesthetic)
+   ============================================ */
+
+.gallery-radius-reference {
+  border-radius: 8px;     /* rounded-md */
+  border-radius: 16px;    /* rounded-lg */
+  border-radius: 24px;    /* rounded-xl (primary for cards) */
+  border-radius: 9999px;  /* rounded-full (buttons, badges) */
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+.gallery-typography-reference {
+  /* Headings */
+  font-family: 'Playfair Display', serif;  /* font-playfair */
+  font-size: 3rem;                        /* text-5xl (48px) */
+  font-weight: 600;                       /* font-semibold */
+  line-height: 1.2;
+  
+  /* Body Text */
+  font-family: 'Inter', sans-serif;       /* font-inter */
+  font-size: 1rem;                        /* text-base (16px) */
+  line-height: 1.5;
+}
+
+/* ============================================
+   GRID LAYOUTS (Responsive)
+   ============================================ */
+
+.gallery-grid-reference {
+  /* Desktop (>= 1024px) - 3 columns */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* lg:grid-cols-3 */
+  gap: 32px;                              /* gap-8 */
+  
+  /* Tablet (640px - 1024px) - 2 columns */
+  @media (max-width: 1023px) and (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr); /* sm:grid-cols-2 */
+  }
+  
+  /* Mobile (< 640px) - 1 column */
+  @media (max-width: 639px) {
+    grid-template-columns: 1fr;            /* grid-cols-1 */
+  }
+}
+
+/* ============================================
+   HOVER STATES
+   ============================================ */
+
+.gallery-card {
+  /* Base State */
+  background-color: rgba(0, 0, 0, 0.2);    /* bg-black/20 */
+  border-radius: 24px;                     /* rounded-xl */
+  overflow: hidden;
+  transition: all 0.3s ease;               /* transition-all duration-300 */
+  
+  /* Hover State */
+  &:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); /* hover:shadow-gold-glow */
+    transform: translateY(-2px);
+  }
+  
+  /* Focus State (Keyboard Navigation) */
+  &:focus-visible {
+    outline: 2px solid #D4AF37;            /* focus:outline-brand-gold */
+    outline-offset: 4px;
+  }
+}
+
+/* ============================================
+   IMAGE TRANSITIONS
+   ============================================ */
+
+.gallery-image {
+  /* Loading State */
+  opacity: 0;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  
+  /* Loaded State */
+  &.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Hover Zoom */
+  &:hover {
+    transform: scale(1.1);               /* group-hover:scale-110 */
+    transition: transform 0.5s ease;     /* duration-500 */
+  }
+}
+
+/* ============================================
+   OVERLAY GRADIENTS
+   ============================================ */
+
+.gallery-overlay {
+  /* Base Gradient */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    transparent 100%
+  );  /* bg-gradient-to-t from-black/90 via-black/50 to-transparent */
+  
+  /* Opacity Animation */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   ASPECT RATIOS
+   ============================================ */
+
+.gallery-aspect-ratios {
+  /* 4:3 (Standard Gallery Card) */
+  aspect-ratio: 4/3;                     /* aspect-4/3 */
+  
+  /* 16:9 (Before/After Slider) */
+  aspect-ratio: 16/9;                    /* aspect-16/9 */
+  
+  /* 1:1 (Square Profile) */
+  aspect-ratio: 1/1;                     /* aspect-square */
+}
+
+/* ============================================
+   ACCESSIBILITY (WCAG AA)
+   ============================================ */
+
+.gallery-accessibility {
+  /* Focus States */
+  &:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 4px;
+  }
+  
+  /* Touch Targets (Minimum 44px) */
+  min-width: 44px;
+  min-height: 44px;
+  
+  /* Color Contrast (Text on Background) */
+  /* White on #222222 = 15.3:1 (WCAG AAA) ✅ */
+  /* Gold #D4AF37 on #222222 = 6.1:1 (WCAG AA) ✅ */
+  /* Chrome #C0C0C0 on #222222 = 8.9:1 (WCAG AAA) ✅ */
+}
+
+/* ============================================
+   ANIMATION TOKENS
+   ============================================ */
+
+.gallery-animations {
+  /* Duration */
+  transition-duration: 200ms;            /* duration-200 */
+  transition-duration: 300ms;            /* duration-300 */
+  transition-duration: 500ms;            /* duration-500 */
+  
+  /* Easing */
+  transition-timing-function: ease-out;  /* ease-out */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
+  
+  /* Properties */
+  transition-property: all;              /* transition-all */
+  transition-property: opacity;          /* transition-opacity */
+  transition-property: transform;        /* transition-transform */
+}
+
+/* ============================================
+   Z-INDEX LAYERS
+   ============================================ */
+
+.gallery-z-index {
+  z-index: 1;      /* z-base (image) */
+  z-index: 10;     /* z-above (overlay) */
+  z-index: 20;     /* z-elevated (badges) */
+  z-index: 1000;   /* z-modal (lightbox) */
+}
+
+/* ============================================
+   USAGE EXAMPLES (Copy-Paste Ready)
+   ============================================ */
+
+/* Example: Gallery Card */
+.gallery-card-example {
+  @apply relative overflow-hidden rounded-xl bg-black/20;
+  @apply hover:shadow-gold-glow transition-all duration-300;
+  @apply cursor-pointer group;
+}
+
+/* Example: Card Image */
+.gallery-card-image-example {
+  @apply w-full h-full object-cover;
+  @apply group-hover:scale-110 transition-transform duration-500;
+}
+
+/* Example: Card Overlay */
+.gallery-card-overlay-example {
+  @apply absolute inset-0;
+  @apply bg-gradient-to-t from-black/90 via-black/50 to-transparent;
+  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  @apply flex flex-col justify-end p-8;
+}
+
+/* Example: Heading */
+.gallery-heading-example {
+  @apply font-playfair text-4xl md:text-5xl lg:text-6xl;
+  @apply font-semibold text-brand-gold mb-8;
+}
+
+/* Example: Grid Container */
+.gallery-grid-example {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  @apply gap-8 auto-rows-fr;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tailwind Default Breakpoints (used in Gallery) */
+@media (min-width: 640px)  { /* sm: */ }
+@media (min-width: 768px)  { /* md: */ }
+@media (min-width: 1024px) { /* lg: */ }
+@media (min-width: 1280px) { /* xl: */ }
+@media (min-width: 1536px) { /* 2xl: */ }
+
+/* Gallery-Specific Usage:
+   - Mobile:  < 640px   → 1 column  (grid-cols-1)
+   - Tablet:  640-1024px → 2 columns (sm:grid-cols-2)
+   - Desktop: > 1024px  → 3 columns (lg:grid-cols-3)
+*/

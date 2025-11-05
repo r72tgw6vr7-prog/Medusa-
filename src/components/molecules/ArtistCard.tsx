@@ -17,7 +17,7 @@ interface ArtistProps {
   onClick?: () => void;
   onBookClick?: () => void;
   onGalleryClick?: () => void;
-  imagePosition?: string;
+  imagePosition?: string; // Kept for backward compatibility but ignored now
   isSelected?: boolean;
 }
 
@@ -32,7 +32,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
   onClick,
   onBookClick,
   onGalleryClick,
-  imagePosition = 'center',
+  imagePosition: _imagePosition = 'center', // Kept but unused as we use CSS class instead
   isSelected = false,
 }) => {
   const hasBookCta = Boolean(onBookClick);
@@ -69,27 +69,27 @@ export const ArtistCard: React.FC<ArtistProps> = ({
       className={`flex h-full w-full flex-col overflow-hidden rounded-[21px] border border-solid ${
         isSelected
           ? 'border-brand-gold shadow-gold-glow ring-2 ring-brand-gold/50'
-          : 'border-[#C0BFBF33]'
-      } bg-black/40 ${className} ${onClick ? 'cursor-pointer hover:border-brand-gold/60' : ''}`}
+          : 'border-brand-gold/20'
+      } ${className} ${onClick ? 'cursor-pointer hover:border-brand-gold/60' : ''}`}
       aria-label={cardAriaLabel}
       {...interactiveProps}
     >
       <div className='flex flex-col h-full'>
-        <div className='relative flex flex-col items-center justify-center self-stretch h-80 overflow-hidden'>
+        <div className='relative flex flex-col items-center justify-center self-stretch flex-1 overflow-hidden'>
           <img
             src={imageUrl}
             alt={name}
-            className='absolute inset-0 w-full h-full object-cover'
+            className='absolute inset-0 w-full h-full object-cover artist-card__image'
             style={{
-              objectPosition: imagePosition,
+              // objectPosition applied from CSS for consistency
             }}
           />
           {/* Dark overlay */}
           <div className='absolute inset-0 bg-black/20 z-1' />
 
-          {/* Artist name badge at top center - smaller and subtle */}
-          <div className='absolute top-8 left-1/2 transform -translate-x-1/2 z-3'>
-            <span className='inline-block px-8 py-0 bg-black/40 backdrop-blur-sm rounded-md text-white text-sm font-medium border border-brand-gold/20'>
+          {/* Artist name badge at bottom - positioned above buttons */}
+          <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 z-3'>
+            <span className='inline-block px-16 py-8 bg-black/80 backdrop-blur-sm rounded-md text-white text-base font-semibold border border-brand-gold/40'>
               {name}
             </span>
           </div>
@@ -120,7 +120,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
           {onBookClick && (
             <button
               onClick={onBookClick}
-              className='w-full h-12 bg-[#D4AF37] text-[#1A1A1A] font-inter font-semibold rounded-lg hover:bg-[#C19B26] transition-all duration-300 hover:shadow-gold-glow'
+              className='w-full h-12 bg-[var(--brand-gold)] text-[#1A1A1A] font-inter font-semibold rounded-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-300 hover:shadow-gold-glow'
             >
               Jetzt Buchen
             </button>
@@ -128,7 +128,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
           {onGalleryClick && (
             <button
               onClick={onGalleryClick}
-              className='w-full h-12 bg-transparent border border-[#D4AF37] text-[#D4AF37] font-inter font-semibold rounded-lg hover:bg-[#D4AF37]/10 transition-all duration-300'
+              className='w-full h-12 bg-transparent border border-[var(--brand-gold)] text-[var(--brand-gold)] font-inter font-semibold rounded-lg hover:bg-[var(--brand-gold)]/10 transition-all duration-300'
             >
               Galerie Ansehen
             </button>

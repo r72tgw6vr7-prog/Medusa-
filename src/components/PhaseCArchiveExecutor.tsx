@@ -10,9 +10,9 @@ import { Archive, Trash2, Check, AlertTriangle, FileCheck } from 'lucide-react';
 // DESIGN SPECIFICATIONS:
 // ----------------------
 // Layout: Container w-full max-w-4xl mx-auto p-6 bg-[#1A1A1A] text-white rounded-lg
-// Colors: Background #1A1A1A, Text #EAEAEA, Borders #2A2A2A, Brand #D4AF37
+// Colors: Background #1A1A1A, Text #EAEAEA, Borders var(--deep-black), Brand var(--brand-gold)
 // Typography: Inter, 14/22/500 body, 20/24/700 headings
-// Interactive States: Hover scale-105, Focus ring-2 ring-[#D4AF37], 200ms transitions
+// Interactive States: Hover scale-105, Focus ring-2 ring-[var(--brand-gold)], 200ms transitions
 // Responsive: Mobile stack, Tablet two-column, Desktop full-width grid
 // [file:23d20ef0]
 
@@ -224,8 +224,8 @@ npm run preview
   return (
     <div className='w-full max-w-4xl mx-auto p-8 bg-[#1A1A1A] text-[#EAEAEA] rounded-lg min-h-[60vh]'>
       {/* Header */}
-      <div className='flex items-center gap-0 mb-8 pb-8 border-b border-[#2A2A2A]'>
-        <Archive className='w-6 h-6 text-[#D4AF37]' />
+      <div className='flex items-center gap-0 mb-8 pb-8 border-b border-[var(--deep-black)]'>
+        <Archive className='w-6 h-6 text-[var(--brand-gold)]' />
         <h2 className='text-2xl font-bold'>Phase C: Archive Executor</h2>
       </div>
 
@@ -233,16 +233,16 @@ npm run preview
       {stage === 'checklist' && (
         <div className='flex flex-col gap-8'>
           {/* Warning Banner */}
-          <div className='flex items-start gap-0 p-8 bg-[#2A2A2A] border border-[#D4AF37]/30 rounded-lg'>
-            <AlertTriangle className='w-5 h-5 text-[#D4AF37] mt-0.5 shrink-0' />
+          <div className='flex items-start gap-0 p-8 bg-[var(--deep-black)] border border-[var(--brand-gold)]/30 rounded-lg'>
+            <AlertTriangle className='w-5 h-5 text-[var(--brand-gold)] mt-0.5 shrink-0' />
             <div className='flex-1'>
-              <p className='text-sm font-semibold text-[#D4AF37] uppercase tracking-wide mb-0'>
+              <p className='text-sm font-semibold text-[var(--brand-gold)] uppercase tracking-wide mb-0'>
                 Junior Developer Protocol
               </p>
               <p className='text-sm text-[#EAEAEA]/80'>
                 This operation will <strong>move</strong> (not delete) ~{totalItems}+ files to
                 archive-{getArchiveDate()}/. The working entry path will be preserved:{' '}
-                <code className='text-[#D4AF37]'>index.html → main.tsx → HomePage</code>
+                <code className='text-[var(--brand-gold)]'>index.html → main.tsx → HomePage</code>
               </p>
             </div>
           </div>
@@ -253,11 +253,11 @@ npm run preview
             {ARCHIVE_DATA.map((group, idx) => (
               <div
                 key={idx}
-                className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg hover:border-[#D4AF37]/30 transition-colors duration-200'
+                className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg hover:border-[var(--brand-gold)]/30 transition-colors duration-200'
               >
                 <div className='flex items-center justify-between mb-0'>
-                  <span className='font-semibold text-[#D4AF37]'>{group.group}</span>
-                  <span className='text-xs text-[#EAEAEA]/60 bg-[#2A2A2A] px-0 py-0 rounded'>
+                  <span className='font-semibold text-[var(--brand-gold)]'>{group.group}</span>
+                  <span className='text-xs text-[#EAEAEA]/60 bg-[var(--deep-black)] px-0 py-0 rounded'>
                     ~{estimateItemCount(group)} items
                   </span>
                 </div>
@@ -296,7 +296,7 @@ npm run preview
           {/* Action Button */}
           <button
             onClick={handleConfirm}
-            className='w-full py-0 px-8 bg-[#D4AF37] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[#D4AF37] focus:outline-none active:opacity-90 transition-all duration-200'
+            className='w-full py-0 px-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none active:opacity-90 transition-all duration-200'
           >
             Review Confirmation
           </button>
@@ -306,14 +306,14 @@ npm run preview
       {/* Confirmation Stage */}
       {stage === 'confirmation' && (
         <div className='flex flex-col gap-8'>
-          <div className='p-8 bg-[#2A2A2A] border border-[#D4AF37] rounded-lg'>
-            <h3 className='text-xl font-bold text-[#D4AF37] mb-8 uppercase tracking-wide'>
+          <div className='p-8 bg-[var(--deep-black)] border border-[var(--brand-gold)] rounded-lg'>
+            <h3 className='text-xl font-bold text-[var(--brand-gold)] mb-8 uppercase tracking-wide'>
               ⚠️ Final Confirmation Required
             </h3>
             <div className='space-y-0 text-sm text-[#EAEAEA]/90 mb-8'>
               <p>
                 • Archive directory:{' '}
-                <code className='text-[#D4AF37]'>archive-{getArchiveDate()}/</code>
+                <code className='text-[var(--brand-gold)]'>archive-{getArchiveDate()}/</code>
               </p>
               <p>
                 • Total items to move: <strong>~{totalItems}+</strong>
@@ -331,14 +331,14 @@ npm run preview
             <div className='flex gap-8'>
               <button
                 onClick={executeArchive}
-                className='flex-1 py-0 px-8 bg-[#D4AF37] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[#D4AF37] focus:outline-none active:opacity-90 transition-all duration-200 flex items-center justify-center gap-0'
+                className='flex-1 py-0 px-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold rounded-lg hover:scale-105 focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none active:opacity-90 transition-all duration-200 flex items-center justify-center gap-0'
               >
                 <Archive className='w-5 h-5' />
                 CONFIRM ARCHIVE
               </button>
               <button
                 onClick={() => setStage('checklist')}
-                className='px-8 py-0 bg-[#0A0A0A] border border-[#2A2A2A] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[#2A2A2A] focus:ring-2 focus:ring-[#D4AF37] focus:outline-none transition-all duration-200'
+                className='px-8 py-0 bg-[#0A0A0A] border border-[var(--deep-black)] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[var(--deep-black)] focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none transition-all duration-200'
               >
                 Cancel
               </button>
@@ -350,18 +350,18 @@ npm run preview
       {/* Executing Stage */}
       {stage === 'executing' && (
         <div className='flex flex-col gap-8'>
-          <div className='flex items-center gap-0 p-8 bg-[#D4AF37]/10 border border-[#D4AF37] rounded-lg'>
+          <div className='flex items-center gap-0 p-8 bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)] rounded-lg'>
             <div className='animate-spin'>
-              <Archive className='w-5 h-5 text-[#D4AF37]' />
+              <Archive className='w-5 h-5 text-[var(--brand-gold)]' />
             </div>
-            <span className='text-sm font-semibold text-[#D4AF37] uppercase tracking-wide'>
+            <span className='text-sm font-semibold text-[var(--brand-gold)] uppercase tracking-wide'>
               Executing Archive Operations...
             </span>
           </div>
 
           {/* Live Logs */}
           <div
-            className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg h-[400px] overflow-y-auto font-mono text-xs'
+            className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg h-[400px] overflow-y-auto font-mono text-xs'
             role='log'
             aria-live='polite'
           >
@@ -414,15 +414,15 @@ npm run preview
 
           {/* Summary Stats */}
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Moved Items</p>
-              <p className='text-2xl font-bold text-[#D4AF37]'>{results.movedItems.length}</p>
+              <p className='text-2xl font-bold text-[var(--brand-gold)]'>{results.movedItems.length}</p>
             </div>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Errors</p>
               <p className='text-2xl font-bold text-red-500'>{results.errors.length}</p>
             </div>
-            <div className='p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg flex flex-col h-full'>
+            <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Timestamp</p>
               <p className='text-sm font-mono text-[#EAEAEA]/80'>
                 {new Date(results.timestamp).toLocaleTimeString()}
@@ -432,10 +432,10 @@ npm run preview
 
           {/* Execution Logs */}
           <details className='group'>
-            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg hover:border-[#D4AF37]/30 transition-colors duration-200'>
+            <summary className='cursor-pointer p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg hover:border-[var(--brand-gold)]/30 transition-colors duration-200'>
               <span className='font-semibold'>View Execution Logs ({logs.length} entries)</span>
             </summary>
-            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg max-h-[300px] overflow-y-auto font-mono text-xs'>
+            <div className='mt-0 p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg max-h-[300px] overflow-y-auto font-mono text-xs'>
               {logs.map((log, i) => (
                 <div key={i} className='text-[#EAEAEA]/70 mb-0'>
                   {log}
@@ -445,12 +445,12 @@ npm run preview
           </details>
 
           {/* Next Steps */}
-          <div className='p-8 bg-[#2A2A2A] border border-[#D4AF37]/30 rounded-lg'>
-            <h3 className='text-lg font-bold text-[#D4AF37] mb-8'>Next Steps:</h3>
+          <div className='p-8 bg-[var(--deep-black)] border border-[var(--brand-gold)]/30 rounded-lg'>
+            <h3 className='text-lg font-bold text-[var(--brand-gold)] mb-8'>Next Steps:</h3>
             <div className='space-y-8 text-sm'>
               <div>
                 <p className='font-semibold mb-0'>1. Start Development Server</p>
-                <code className='block p-0 bg-[#0A0A0A] rounded border border-[#2A2A2A] text-green-500'>
+                <code className='block p-0 bg-[#0A0A0A] rounded border border-[var(--deep-black)] text-green-500'>
                   npm run dev
                 </code>
                 <p className='text-xs text-[#EAEAEA]/60 mt-0'>Dev server: http://localhost:5173/</p>
@@ -458,7 +458,7 @@ npm run preview
 
               <div>
                 <p className='font-semibold mb-0'>2. Build for Production</p>
-                <code className='block p-0 bg-[#0A0A0A] rounded border border-[#2A2A2A] text-green-500'>
+                <code className='block p-0 bg-[#0A0A0A] rounded border border-[var(--deep-black)] text-green-500'>
                   npm run build && npm run preview
                 </code>
                 <p className='text-xs text-[#EAEAEA]/60 mt-0'>
@@ -491,7 +491,7 @@ npm run preview
               setLogs([]);
               setResults(null);
             }}
-            className='w-full py-0 px-8 bg-[#0A0A0A] border border-[#2A2A2A] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[#2A2A2A] focus:ring-2 focus:ring-[#D4AF37] focus:outline-none transition-all duration-200'
+            className='w-full py-0 px-8 bg-[#0A0A0A] border border-[var(--deep-black)] text-[#EAEAEA] font-semibold rounded-lg hover:bg-[var(--deep-black)] focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none transition-all duration-200'
           >
             Reset Executor
           </button>
