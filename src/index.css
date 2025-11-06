@@ -1,6 +1,14 @@
 /* Tailwind v4 directives - MUST be first */
 @import 'tailwindcss';
 
+/* Font imports - expanded weights */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Essential style imports - keeping the most important for brand colors */
+@import './styles/variables.css';
+@import './styles/typography.css';
+
 /* Critical viewport height fixes - MUST be in @layer base for Tailwind compatibility */
 @layer base {
   html, body {
