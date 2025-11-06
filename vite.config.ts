@@ -92,12 +92,14 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        manualChunks: (id) => {
+          // Explicitly group React, ReactDOM, and Scheduler
+          if (/node_modules[\/](react|react-dom|scheduler)[\/]/.test(id)) {
+            return 'vendor-react';
+          }
+          
+          // Other vendor packages
           if (id.includes('node_modules')) {
-            // Make sure React, ReactDOM, and Scheduler are bundled together
-            if (/node_modules[/\\](react|react-dom|scheduler)[/\\]/.test(id)) {
-              return 'vendor-react';
-            }
             if (id.includes('@radix-ui')) {
               return 'vendor-radix';
             }
