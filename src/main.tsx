@@ -1,3 +1,5 @@
+// Import scheduler first to ensure it's initialized before React tries to use it
+import 'scheduler';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

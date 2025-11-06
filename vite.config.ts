@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import path from 'node:path';
 import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
@@ -12,9 +12,10 @@ export default defineConfig({
       '@/hooks': path.resolve(__dirname, './src/hooks'),
       '@/types': path.resolve(__dirname, './src/types'),
       '@/foundation': path.resolve(__dirname, './src/foundation'),
+      'scheduler': path.resolve(__dirname, './node_modules/scheduler/index.js')
     },
     extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
-    dedupe: ['react', 'react-dom']
+    dedupe: ['react', 'react-dom', 'scheduler']
   },
   plugins: [
     react(),
@@ -93,7 +94,8 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (/node_modules[\\/](react|react-dom)[\\/]/.test(id)) {
+            // Make sure React, ReactDOM, and Scheduler are bundled together
+            if (/node_modules[/\\](react|react-dom|scheduler)[/\\]/.test(id)) {
               return 'vendor-react';
             }
             if (id.includes('@radix-ui')) {
