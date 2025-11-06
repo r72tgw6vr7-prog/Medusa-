@@ -13,8 +13,8 @@ const path = require('path');
 
 // Configuration
 const CONFIG = {
-  inputDir: './public/images',
-  outputDir: './public/images',
+  inputDir: './public/assets/images',
+  outputDir: './public/assets/images',
   formats: ['webp', 'jpg'], // WebP primary, JPG fallback
   sizes: [400, 800, 1200, 2400], // Responsive sizes
   quality: {

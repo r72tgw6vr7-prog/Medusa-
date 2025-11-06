@@ -40,7 +40,9 @@ export const bookingSchema = z.object({
   guests: z.number()
     .min(1, { message: 'At least 1 guest is required' })
     .max(20, { message: 'Maximum 20 guests allowed' })
-    .default(2),
+    .default(2)
+    .optional()
+    .transform(val => val ?? 2), // Transform undefined to 2
     
   specialRequests: z.string()
     .max(500, { message: 'Special requests must be less than 500 characters' })

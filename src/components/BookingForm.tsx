@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input/Input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea/Textarea';
 import { Select } from '@/components/ui/select/Select';
+import { ChangeEvent } from 'react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -34,7 +35,7 @@ export function BookingForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormData>({
-    resolver: zodResolver(bookingSchema),
+    resolver: zodResolver(bookingSchema) as any,
     defaultValues: {
       guests: 2,
       specialRequests: '',
@@ -42,6 +43,7 @@ export function BookingForm() {
     mode: 'onBlur',
   });
 
+  // Define onSubmit with the correct type
   const onSubmit = async (data: BookingFormData) => {
     try {
       // Simulate API call
@@ -66,7 +68,10 @@ export function BookingForm() {
 
   return (
     <form 
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => {
+        // Cast data to BookingFormData
+        onSubmit(data as unknown as BookingFormData);
+      })}
       className="space-y-8 w-full max-w-4xl mx-auto"
       noValidate
     >
@@ -149,12 +154,17 @@ export function BookingForm() {
             render={({ field }) => (
               <Select
                 id="time"
-                options={timeSlots}
+                error={!!errors.time}
                 value={field.value}
                 onChange={field.onChange}
-                error={!!errors.time}
                 placeholder="Select a time"
-              />
+              >
+                {timeSlots.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
             )}
           />
           {errors.time && (
@@ -173,11 +183,16 @@ export function BookingForm() {
             render={({ field }) => (
               <Select
                 id="guests"
-                options={guestOptions}
-                value={field.value?.toString()}
-                onChange={(value) => field.onChange(parseInt(value, 10))}
                 error={!!errors.guests}
-              />
+                value={field.value?.toString()}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => field.onChange(parseInt(e.target.value, 10))}
+              >
+                {guestOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
             )}
           />
           {errors.guests && (

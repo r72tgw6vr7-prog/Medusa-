@@ -23,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const rootElement = document.getElementById('root');
   debugDiv.innerHTML += `<p>Root element exists: ${rootElement ? 'Yes' : 'No'}</p>`;
   
+  // Check for React loading
+  debugDiv.innerHTML += `<p>React loaded: ${window.React ? 'Yes' : 'No'}</p>`;
+  debugDiv.innerHTML += `<p>ReactDOM loaded: ${window.ReactDOM ? 'Yes' : 'No'}</p>`;
+  
+  // Network status
+  debugDiv.innerHTML += `<p>Online status: ${navigator.onLine ? 'Online' : 'Offline'}</p>`;
+  
+  // Environment info
+  debugDiv.innerHTML += `<p>Environment: ${process?.env?.NODE_ENV || 'Not available'}</p>`;
+  debugDiv.innerHTML += `<p>Build time: ${new Date().toISOString()}</p>`;
+  
   // Check CSP headers
   debugDiv.innerHTML += `<p>CSP: ${document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content || 'Not found in meta'}</p>`;
   

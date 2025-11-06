@@ -2,8 +2,9 @@ import React from 'react';
 import { ServicesPageInteractive } from '../pages/ServicesPageInteractive';
 import { MainNavigation } from '../molecules/MainNavigation';
 import Footer from '../Footer';
+import { RouteComponentProps } from '../../types/routes';
 
-interface ServicesPageProps {
+export interface ServicesPageProps extends RouteComponentProps {
   onBookService?: (serviceId: string) => void;
 }
 

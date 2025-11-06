@@ -1,6 +1,8 @@
 // Re-export all UI components and utilities
-export * from './types';
 export * from './utils';
+
+// Re-export types but exclude ButtonProps to avoid ambiguity
+export type { Size, Variant, State, CommonProps } from './types';
 
 // Form Components
 export * from './button/Button';

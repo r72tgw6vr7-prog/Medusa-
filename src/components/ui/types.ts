@@ -39,5 +39,4 @@ export interface ButtonProps extends CommonProps {
   fullWidth?: boolean;
 }
 
-// Export all types for easy importing
-export * from './types';
+// No recursive export here

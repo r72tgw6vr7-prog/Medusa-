@@ -12,7 +12,7 @@
     "dev": "vite",
     "build": "npm run verify-backgrounds && vite build",
     "build:local": "npm run optimize:gallery && vite build",
-    "build:force": "SKIP_VERIFY=true vite build",
+    "build:force": "SKIP_VERIFY=true SKIP_IMAGE_OPTIMIZATION=true vite build",
     "preview": "vite preview",
     "analyze": "vite build && open dist/stats.html",
     "start": "vite dev",

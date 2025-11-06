@@ -87,9 +87,9 @@ export const ArtistCard: React.FC<ArtistProps> = ({
           {/* Dark overlay */}
           <div className='absolute inset-0 bg-black/20 z-1' />
 
-          {/* Artist name badge at bottom - positioned above buttons */}
-          <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 z-3'>
-            <span className='inline-block px-16 py-8 bg-black/80 backdrop-blur-sm rounded-md text-white text-base font-semibold border border-brand-gold/40'>
+          {/* Artist name badge positioned above description */}
+          <div className='absolute bottom-[72px] left-1/2 transform -translate-x-1/2 z-3'>
+            <span className='inline-block px-16 py-8 bg-black/90 backdrop-blur-md rounded-md text-white text-lg font-semibold border border-brand-gold/40 shadow-lg'>
               {name}
             </span>
           </div>
@@ -120,7 +120,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
           {onBookClick && (
             <button
               onClick={onBookClick}
-              className='w-full h-12 bg-[var(--brand-gold)] text-[#1A1A1A] font-inter font-semibold rounded-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-300 hover:shadow-gold-glow'
+              className='w-full h-12 bg-(--brand-gold) text-[#1A1A1A] font-inter font-semibold rounded-lg hover:bg-(--brand-gold-hover) transition-all duration-300 hover:shadow-gold-glow'
             >
               Jetzt Buchen
             </button>
@@ -128,7 +128,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
           {onGalleryClick && (
             <button
               onClick={onGalleryClick}
-              className='w-full h-12 bg-transparent border border-[var(--brand-gold)] text-[var(--brand-gold)] font-inter font-semibold rounded-lg hover:bg-[var(--brand-gold)]/10 transition-all duration-300'
+              className='w-full h-12 bg-transparent border border-(--brand-gold) text-(--brand-gold) font-inter font-semibold rounded-lg hover:bg-(--brand-gold)/10 transition-all duration-300'
             >
               Galerie Ansehen
             </button>

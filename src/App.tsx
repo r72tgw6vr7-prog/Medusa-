@@ -18,7 +18,8 @@ import { ServicesTestPage } from './pages/ServicesTestPage';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
 import Meta from './components/Meta';
-import { SimpleMedusaProvider } from './foundation/index';
+// Fix import path to match actual directory structure
+import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
 import ScrollToTop from './components/ScrollToTop';
 import AnalyticsProvider from './components/AnalyticsProvider';
 import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from './hooks/useAnalytics';

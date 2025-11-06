@@ -21,3 +21,35 @@ export const generateSrcSet = (srcset: { [key: string]: string }): string => {
     .map(([size, url]) => `${url} ${size}`)
     .join(', ');
 };
+
+// Stats for gallery overview
+interface GalleryStats {
+  totalImages: number;
+  featured: number;
+  byArtist: Record<string, number>;
+  byCategory: Record<string, number>;
+  totalSize: number;
+}
+
+// Generate statistics from gallery data
+export const getStats = (): GalleryStats => {
+  // This is a stub implementation until the real data is available
+  return {
+    totalImages: 147,
+    featured: 24,
+    byArtist: {
+      'Sophia': 42,
+      'Marcus': 38,
+      'Elena': 32,
+      'David': 21,
+      'Guest': 14
+    },
+    byCategory: {
+      'tattoo': 98,
+      'piercing': 27,
+      'portraits': 12,
+      'other': 10
+    },
+    totalSize: 187654321 // Approx 188MB
+  };
+};

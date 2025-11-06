@@ -28,6 +28,8 @@ export interface SelectProps extends SelectHTMLAttributes {
   size?: 'sm' | 'md' | 'lg';
   /** Whether the select has an error */
   error?: boolean;
+  /** Placeholder text */
+  placeholder?: string;
   /** Additional class name */
   className?: string;
   /** Select container class name */
@@ -85,7 +87,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className
           )}
           disabled={disabled}
-          aria-invalid={error ? 'true' : 'false'}
+          aria-invalid={error}
           {...props}
         >
           {children}

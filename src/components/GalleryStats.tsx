@@ -37,7 +37,7 @@ export const GalleryStats: React.FC = () => {
               key={artist}
               className="px-0 py-0 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 text-[var(--brand-gold)] text-xs"
             >
-              {artist}: {count}
+              {artist}: {count.toString()}
             </span>
           ))}
         </div>
