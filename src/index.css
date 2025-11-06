@@ -8,6 +8,9 @@
 /* Essential style imports - keeping the most important for brand colors */
 @import './styles/variables.css';
 @import './styles/typography.css';
+@import './styles/utility-classes.css';
+@import './styles/responsive-layout.css';
+@import './styles/micro-transitions.css';
 
 /* Critical viewport height fixes - MUST be in @layer base for Tailwind compatibility */
 @layer base {
