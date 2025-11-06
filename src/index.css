@@ -12,6 +12,11 @@
 @import './styles/responsive-layout.css';
 @import './styles/micro-transitions.css';
 
+/* Mobile UX Fixes - Added Nov 6, 2025 */
+@import './styles/phone-frame-fix.css';
+@import './styles/artist-cards-fix.css';
+@import './styles/pricing-cards-compact.css';
+
 /* Critical viewport height fixes - MUST be in @layer base for Tailwind compatibility */
 @layer base {
   html, body {

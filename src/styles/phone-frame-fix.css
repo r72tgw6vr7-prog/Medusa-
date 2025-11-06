@@ -1,0 +1,23 @@
+/* Fix for phone frame white space issues */
+.phone-frame-container,
+[class*="phone-frame"],
+[class*="mobile-mockup"],
+[class*="device-mockup"] {
+  margin-left: calc(-50vw + 50%);
+  width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile responsive wrapper for device mockups */
+.device-wrapper {
+  width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}

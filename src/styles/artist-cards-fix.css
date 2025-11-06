@@ -1,0 +1,18 @@
+/* Force artist names to be white */
+.team-card-name-top,
+.artist-card h4,
+.artist-card__name-badge span,
+.artist-info h4,
+[class*="artist"] [class*="name"],
+.team-card-content h3,
+span.inline-block {
+  color: #FFFFFF !important; /* Force white text */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Add shadow for legibility */
+}
+
+/* Ensure text in artist cards is visible against dark backgrounds */
+.artist-card p,
+.team-card p,
+.artist-info p {
+  color: rgba(255, 255, 255, 0.8) !important;
+}

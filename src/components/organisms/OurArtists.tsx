@@ -126,8 +126,8 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
             </p>
           </div>
 
-          {/* Artist Grid - FIX 12: 4 columns desktop, reduced gaps to 32px */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-8'>
+          {/* Artist Grid - Updated: 2 columns mobile, 3-4 columns larger screens */}
+          <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8'>
             {artists.map((artist) => (
               <div
                 key={artist.id}
