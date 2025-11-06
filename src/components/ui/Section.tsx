@@ -75,8 +75,15 @@ const Section: React.FC<SectionProps> = ({
     .filter(Boolean)
     .join(" ");
 
+  // Add data-texture-bg attribute when section has a background color
+  const needsTextureStretch = bg !== 'none';
+  
   return (
-    <Component className={classes} {...props}>
+    <Component 
+      className={classes} 
+      {...props}
+      {...(needsTextureStretch ? { 'data-texture-bg': true } : {})}
+    >
       <Container size={containerSize}>
         {children}
       </Container>

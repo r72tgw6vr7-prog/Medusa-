@@ -78,3 +78,12 @@
     justify-content: space-around;
   }
 }
+
+/* Full-width texture sections */
+[data-texture-bg] {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  padding-left: var(--safe-left, 0);
+  padding-right: var(--safe-right, 0);
+}

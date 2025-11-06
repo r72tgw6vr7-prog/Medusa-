@@ -23,6 +23,9 @@ interface AnimatedSectionProps extends React.HTMLAttributes<HTMLElement> {
   
   /** Optional CSS class name */
   className?: string;
+
+  /** Add texture-bg attribute for full-width background */
+  hasBackground?: boolean;
   
   /** Animation variants for the section */
   variants?: {
@@ -45,7 +48,7 @@ interface AnimatedSectionProps extends React.HTMLAttributes<HTMLElement> {
  * AnimatedSection component that animates content when scrolled into view
  */
 const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'>>(
-  ({ children, className = '', variants, transition, ...rest }, ref) => {
+  ({ children, className = '', hasBackground = false, variants, transition, ...rest }, ref) => {
     const scrollRef = React.useRef<HTMLElement>(null);
     const { isInView } = useScrollAnimation();
     const sectionRef = ref || scrollRef;
@@ -83,6 +86,7 @@ const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'
         onDrag={onDrag}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
+        {...(hasBackground ? { 'data-texture-bg': true } : {})}
         {...filteredRest}
       >
         {children}

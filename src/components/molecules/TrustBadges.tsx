@@ -8,7 +8,7 @@ interface TrustBadgesProps {
 
 export const TrustBadges: React.FC<TrustBadgesProps> = ({ className = '' }) => {
   return (
-    <section className={`w-full py-12 md:py-16 bg-[#1A1A1A] ${className}`}>
+    <section className={`w-full py-12 md:py-16 bg-[#1A1A1A] ${className}`} data-texture-bg>
       <div className='max-w-[1104px] mx-auto px-8 md:px-8'>
         {/* Trust Badges Section - Animated from right to left */}
         <div className='relative overflow-hidden'>

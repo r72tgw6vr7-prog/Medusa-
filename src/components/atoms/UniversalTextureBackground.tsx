@@ -6,6 +6,7 @@ export function UniversalTextureBackground() {
       {/* Layer 0: Texture */}
       <div
         className="fixed pointer-events-none inset-0 min-h-screen w-screen overflow-hidden"
+        data-texture-bg
         style={{
           backgroundImage: "url('/texture.webp')",
           backgroundSize: 'cover',
@@ -23,6 +24,7 @@ export function UniversalTextureBackground() {
       {/* Layer 1: 20% black overlay */}
       <div
         className="fixed pointer-events-none inset-0 min-h-screen w-screen overflow-hidden"
+        data-texture-bg
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.2)',
           zIndex: 1,

@@ -28,6 +28,7 @@ export const StudioShowcase: React.FC = () => {
     <section
       className='relative w-full studio-showcase h-[350px] md:h-[450px] lg:h-[600px] mb-0 overflow-hidden'
       aria-label='Studio Interior Showcase'
+      data-texture-bg
     >
       {/* Background image carousel */}
       <div className='absolute inset-0'>
