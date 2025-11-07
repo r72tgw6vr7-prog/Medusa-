@@ -1,0 +1,153 @@
+/* 
+ * ArtistCard.css 
+ * Component-specific styling for artist cards
+ * Preserved from original design while using new token system
+ */
+
+/* Artist card - booking variant */
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-medium);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  padding: var(--space-2);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.artist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.artist-card.selected {
+  border: 2px solid var(--color-brand-gold);
+  box-shadow: 0 0 0 2px var(--color-brand-gold);
+}
+
+.artist-card .artist-photo {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.artist-card .artist-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.2);
+}
+
+.artist-card .artist-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.artist-card .artist-info h4 {
+  font-family: var(--font-family-heading);
+  color: var(--color-brand-gold);
+  font-size: 18px;
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.artist-card .artist-info p {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.artist-card .artist-info .specialty {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Styling for team card variant - complementing TeamGrid.css */
+.team-card-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: var(--space-20);
+}
+
+.team-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-surface-dark);
+  aspect-ratio: 0.6;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.02);
+}
+
+.team-role-badge {
+  position: absolute;
+  top: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(34, 34, 34, 0.8);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Explicitly add image styling here for better specificity */
+.team-card img,
+.team-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.2);
+}
+
+/* Essential overlay for text contrast */
+.team-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 34, 34, 0) 0%,
+    rgba(34, 34, 34, 0.6) 60%,
+    rgba(34, 34, 34, 0.9) 100%
+  );
+  z-index: 2;
+}
+
+/* Artist Card bottom/top name styling clarification */
+.team-card-name-top {
+  position: absolute;
+  top: var(--space-2);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-gold);
+  font-size: 18px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  background-color: rgba(34, 34, 34, 0.6);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
