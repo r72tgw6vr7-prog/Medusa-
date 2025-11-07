@@ -5,7 +5,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ONE system file to rule them all */
-@import './styles/system.css';
+/* Design system - contains all tokens, base styles and components */
+@import './styles/design-system.css';
 
-/* All CSS has been moved to system.css */
+/* Critical: Full viewport height for React SPA */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-y: auto;
+}

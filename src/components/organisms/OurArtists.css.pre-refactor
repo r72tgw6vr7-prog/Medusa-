@@ -1,0 +1,26 @@
+/* Trust badges animation pause on hover - uses :where() for specificity control */
+:where(.hover\:animation-pause):hover {
+  animation-play-state: paused;
+}
+
+/* Ensure scrollBadges animation is available */
+@keyframes scrollBadges {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+/* Artist name badges positioning - high specificity without !important */
+.artist-card .artist-card__name-badge,
+div[class*="absolute"][class*="left"] span.inline-block,
+.cursor-pointer .absolute {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  top: auto;
+  transform: translateX(-50%);
+  z-index: 10;
+}

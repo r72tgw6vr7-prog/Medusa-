@@ -1,0 +1,79 @@
+/* StudioShowcase specific styles - PIXEL-PERFECT IMPLEMENTATION */
+
+.studio-showcase {
+  height: 350px; /* Default for mobile */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  max-height: 600px; /* Maximum height cap */
+}
+
+/* Common styling for all carousel images */
+.studio-carousel-image {
+  background-size: cover;
+  background-position: center;
+  transform: translateZ(0);
+  will-change: opacity;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Background image is applied inline via style={{ backgroundImage: `url(...)` }} */
+
+/* Fallback color while images load */
+.studio-carousel-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(34, 34, 34, 0.8);
+  z-index: -1;
+}
+
+/* Hover effect for the logo */
+.medusa-logo {
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  transition: text-shadow 0.3s ease;
+}
+
+.studio-showcase:hover .medusa-logo {
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+}
+
+/* Carousel navigation dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background-color: #d4af37;
+  transform: scale(1.2);
+}
+
+/* Responsive height adjustments - PIXEL-PERFECT */
+@media (min-width: 768px) {
+  .studio-showcase {
+    height: 450px; /* Tablet height */
+    max-height: 550px; /* FIX 2: Cap for tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .studio-showcase {
+    height: 600px; /* Desktop height - FIX 2: Exact target */
+    max-height: 600px; /* FIX 2: Strict cap */
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import Section from '../../ui/Section';
 import Button from '../../atoms/Button/Button';
+import styles from './ServiceCards.module.css';
+import './ServiceCards.css';
 
 interface ServiceCard {
   id: string;

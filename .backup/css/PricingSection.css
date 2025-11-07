@@ -1,0 +1,133 @@
+/* PricingSection specific styles */
+
+/* Rotate animation for icons on hover */
+.pricing-card-icon {
+  transition: transform 0.5s ease;
+}
+
+.pricing-card:hover .pricing-card-icon {
+  transform: rotate(360deg);
+}
+
+/* Gradient hover effects for buttons */
+.pricing-cta-btn {
+  transition: all 0.3s ease;
+}
+
+/* Gold badge animation */
+.free-badge {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ensure cards are equal height */
+.pricing-cards-container {
+  display: grid;
+  grid-auto-rows: 1fr;
+}
+
+/* Premium card effect - subtle glow on hover */
+.pricing-card {
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.pricing-card:hover {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.pricing-card-badge {
+  border-radius: 9999px;
+  padding: 8px 16px;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.35);
+}
+
+.pricing-card-features {
+  display: grid;
+  row-gap: 16px;
+}
+
+.pricing-card-feature {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.pricing-card-feature-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #d4af37;
+  transition: transform 0.3s ease;
+}
+
+.pricing-card-feature-text {
+  color: #ffffff;
+}
+
+.pricing-card:hover .pricing-card-feature-icon {
+  transform: scale(1.15);
+}
+
+.pricing-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: var(--font-weight-semibold);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.pricing-cta-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pricing-cta-btn--link {
+  background: transparent;
+  border: none;
+  color: #d4af37;
+}
+
+.pricing-cta-btn--link:hover {
+  color: #f5d36c;
+}
+
+.pricing-cta-btn--solid {
+  background: #d4af37;
+  border: none;
+  color: #111111;
+}
+
+.pricing-cta-btn--solid:hover {
+  background: #f5d36c;
+}
+
+/* Media queries for responsive adjustments */
+@media (max-width: 768px) {
+  .pricing-cards-container {
+    grid-auto-rows: auto;
+  }
+}

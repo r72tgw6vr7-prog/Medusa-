@@ -1,0 +1,61 @@
+/* Section spacing */
+.section { 
+  padding-top: 48px; 
+  padding-bottom: 48px; 
+}
+
+@media (min-width: 768px) { 
+  .section { 
+    padding-top: 64px; 
+    padding-bottom: 64px; 
+  } 
+}
+
+@media (min-width: 1024px) { 
+  .section { 
+    padding-top: 96px; 
+    padding-bottom: 96px; 
+  } 
+}
+
+/* Card styles */
+.card { 
+  padding: 32px; 
+  margin-bottom: 32px; 
+  border-radius: 8px; 
+}
+
+/* Form styles */
+.form-group { 
+  margin-bottom: 24px; 
+}
+
+.form-label { 
+  display: block; 
+  margin-bottom: 16px; 
+}
+
+.form-input { 
+  margin-bottom: 16px; 
+}
+
+/* Padding utilities */
+.p-xs { padding: 8px; } 
+.p-sm { padding: 16px; } 
+.p-md { padding: 24px; } 
+.p-lg { padding: 32px; } 
+.p-xl { padding: 48px; }
+
+/* Margin utilities */
+.m-xs { margin: 8px; } 
+.m-sm { margin: 16px; } 
+.m-md { margin: 24px; } 
+.m-lg { margin: 32px; } 
+.m-xl { margin: 48px; }
+
+/* Gap utilities */
+.gap-xs { gap: 8px; } 
+.gap-sm { gap: 16px; } 
+.gap-md { gap: 24px; } 
+.gap-lg { gap: 32px; } 
+.gap-xl { gap: 48px; }

@@ -1,0 +1,244 @@
+/* ============================================
+   PIXEL-PERFECT RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* PHASE 4: Responsive breakpoints matching Figma exactly */
+
+/* ============================================
+   CONTAINER MAX-WIDTHS (FIX 11)
+   ============================================ */
+
+.artists-section,
+.studio-hero {
+  max-width: 1320px; /* Down from ~1400-1600px */
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ============================================
+   ARTIST GRID RESPONSIVE (FIX 12)
+   ============================================ */
+
+.artists-grid {
+  display: grid;
+  gap: 32px; /* Down from ~40-48px */
+}
+
+/* Desktop XL (1320px+) - 4 columns */
+@media (min-width: 1320px) {
+  .artists-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .artists-section,
+  .studio-hero {
+    max-width: 1320px;
+  }
+}
+
+/* Desktop Large (1200px - 1319px) - 3 columns */
+@media (min-width: 1200px) and (max-width: 1319px) {
+  .artists-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .artists-section,
+  .studio-hero {
+    max-width: 1200px;
+  }
+}
+
+/* Tablet Large (900px - 1199px) - 3 columns */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .artists-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .artist-card {
+    height: 480px; /* Slightly shorter on tablet */
+  }
+
+  .artist-card__photo-container {
+    height: 280px;
+  }
+}
+
+/* Tablet Small (600px - 899px) - 2 columns */
+@media (min-width: 600px) and (max-width: 899px) {
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .artist-card {
+    height: 480px;
+  }
+
+  .artist-card__photo-container {
+    height: 280px;
+  }
+}
+
+/* Mobile (< 600px) - 1 column */
+@media (max-width: 599px) {
+  .artists-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .studio-hero__subtitle {
+    margin-bottom: 40px; /* Reduced from 60px on mobile */
+  }
+
+  .artist-card {
+    height: 520px; /* Maintain full height on mobile */
+    max-width: 100%;
+  }
+
+  .artist-card__photo-container {
+    height: 320px;
+  }
+}
+
+/* ============================================
+   STUDIO SECTION RESPONSIVE
+   ============================================ */
+
+/* Desktop (1400px+) */
+@media (min-width: 1400px) {
+  .studio-hero {
+    max-width: 1320px;
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .studio-hero__subtitle {
+    margin-bottom: 60px; /* FIX 1: Exact target */
+  }
+}
+
+/* Desktop Standard (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .studio-hero {
+    max-width: 1200px;
+  }
+
+  .studio-hero__subtitle {
+    margin-bottom: 60px;
+  }
+}
+
+/* Tablet (768px - 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .studio-hero {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .studio-hero__subtitle {
+    margin-bottom: 50px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .studio-hero {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .studio-hero__subtitle {
+    margin-bottom: 40px;
+  }
+}
+
+/* ============================================
+   ARTIST CARD TYPOGRAPHY RESPONSIVE
+   ============================================ */
+
+/* Desktop - maintain exact sizes */
+@media (min-width: 1024px) {
+  .artist-card__role {
+    font-size: 14px; /* FIX 9: Exact */
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+  }
+
+  .artist-card__specialties {
+    font-size: 13px; /* FIX 9: Exact */
+    line-height: 1.4;
+  }
+
+  .artist-card__experience,
+  .artist-card__social {
+    font-size: 13px; /* FIX 9: Exact */
+  }
+}
+
+/* Tablet - slightly adjust */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .artist-card__role {
+    font-size: 13px;
+  }
+
+  .artist-card__specialties {
+    font-size: 12px;
+  }
+
+  .artist-card__experience,
+  .artist-card__social {
+    font-size: 12px;
+  }
+}
+
+/* Mobile - maintain readability */
+@media (max-width: 599px) {
+  .artist-card__role {
+    font-size: 14px;
+  }
+
+  .artist-card__specialties {
+    font-size: 13px;
+  }
+
+  .artist-card__experience,
+  .artist-card__social {
+    font-size: 13px;
+  }
+}
+
+/* ============================================
+   BUTTON SPACING RESPONSIVE (FIX 10)
+   ============================================ */
+
+.artist-card__buttons {
+  display: flex;
+  gap: 12px;
+  padding: 0 20px 24px; /* FIX 10: Exact target */
+}
+
+@media (max-width: 599px) {
+  .artist-card__buttons {
+    padding: 0 16px 20px;
+    gap: 10px;
+  }
+}
+
+/* ============================================
+   MEASUREMENT SUMMARY (REFERENCE)
+   ============================================ */
+
+/*
+| Element                    | Old (Wrong)  | New (Correct) | Change    |
+|----------------------------|--------------|---------------|-----------|
+| Studio subtitle margin-bottom | ~150-200px | 60px         | -90px+    |
+| Artist card height         | ~600-700px   | 520px        | -80px+    |
+| Photo container height     | ~400-450px   | 320px        | -80px+    |
+| Grid gap                   | ~40-48px     | 32px         | -8px+     |
+| Role text size             | ~16-18px     | 14px         | -2px+     |
+| Container max-width        | ~1400-1600px | 1320px       | -80px+    |
+*/

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import './BookingModalMobile.css';
 import {
   X,
   ChevronLeft,

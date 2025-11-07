@@ -1,0 +1,750 @@
+/* ==============================================
+   MEDUSA-WEB: NORMALIZED DESIGN SYSTEM
+   November 7, 2025
+   
+   Structure:
+   1) TOKENS - CSS custom properties
+   2) THEME - Tailwind v4 theme mappings
+   3) BASE - Low specificity (@layer base + :where())
+   4) COMPONENTS - Component patterns (@layer components)
+   ============================================== */
+
+/* 1) TOKENS */
+:root {
+  /* colors */
+  --color-brand-gold: #D4AF37;
+  --color-brand-gold-hover: #C9A961;
+  --color-brand-gold-rgb: 212, 175, 55;
+  --color-surface-dark: #222;
+  --color-surface-medium: #2A2A2A;
+  --color-surface-light: #3A3A3A;
+  --color-text-primary: #fff;
+  --color-text-secondary: rgba(255, 255, 255, 0.8);
+  --color-accent-silver: #C0C0C0;
+
+  /* spacing (8px grid) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+
+  /* type */
+  --font-family-primary: 'Inter', -apple-system, sans-serif;
+  --font-family-heading: 'Playfair Display', serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --text-h1: clamp(28px, 6vw, 48px);
+  --text-h2: clamp(24px, 4.8vw, 40px);
+  --text-h3: clamp(20px, 4vw, 32px);
+  --text-body: 16px;
+  --line-height-normal: 1.6;
+
+  /* effects */
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  
+  /* layout */
+  --touch-target-min: 48px;
+  --header-height: 80px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-height: 80px;
+  }
+}
+
+/* 2) THEME - Tailwind v4 theme mappings */
+/* stylelint-disable */
+/* @theme is Tailwind v4 syntax - required for theme customization */
+@theme {
+  /* Brand colors - primary gold palette */
+  --color-brand-500: var(--color-brand-gold);
+  --color-brand-600: var(--color-brand-gold-hover);
+  --color-brand-700: var(--color-brand-gold-dark);
+  
+  /* Surface colors - backgrounds */
+  --color-surface-900: var(--color-surface-dark);
+  --color-surface-800: var(--color-surface-medium);
+  --color-surface-700: var(--color-surface-light);
+  
+  /* Text colors */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  
+  /* Accent colors */
+  --color-accent-500: var(--color-accent-silver);
+  
+  /* Spacing scale (8px grid) */
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-12: var(--space-12);
+  
+  /* Border radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  
+  /* Shadows */
+  --shadow-lg: var(--shadow-lg);
+}
+
+/* 3) BASE (low specificity) */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(html) {
+    color-scheme: light dark;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  :where(body) {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-body);
+    font-weight: 400; /* Base text weight for T4 tests */
+    line-height: var(--line-height-normal);
+    background-color: var(--color-surface-dark);
+    color: var(--color-text-primary);
+  }
+
+  :where(h1, h2, h3) {
+    font-family: var(--font-family-heading);
+  }
+
+  :where(h1) {
+    font-size: var(--text-h1);
+    font-weight: 700; /* Bold for h1 (T4 compliance) */
+    line-height: 1.1;
+  }
+
+  :where(h2) {
+    font-size: var(--text-h2);
+    font-weight: 600; /* Semibold for h2 (T4 compliance) */
+    line-height: 1.2;
+  }
+
+  :where(h3) {
+    font-weight: 600; /* Semibold for h3 */
+  }
+
+  /* Navigation links: 500 or 600, NOT 700 (T4 compliance) */
+  :where(nav a, nav button) {
+    font-weight: 500;
+  }
+
+  :where(p, li) {
+    font-size: var(--text-body);
+  }
+
+  :where(a) {
+    color: var(--color-brand-gold);
+    text-decoration: none;
+  }
+
+  :where(button, input, select, textarea) {
+    font-family: inherit;
+    font-size: 16px;
+  }
+
+  :where(button) {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+
+  /* Z-index layering (R2/Mobile Safari fix) */
+  :where(header[role="banner"]), :where(.navigation) {
+    position: sticky;
+    top: 0;
+    z-index: 50; /* Above content, below modals */
+  }
+
+  :where(.modal), :where([role="dialog"]) {
+    z-index: 100; /* Modals above everything */
+  }
+
+  /* Disable pointer events on background when overlay is open */
+  :where(.overlay-open) .page-underlay,
+  :where(.modal-open) main {
+    pointer-events: none;
+  }
+
+  /* Maps fallback minimum size (C6 Mobile Safari fix) */
+  :where(.map-embed), :where(.map-fallback) {
+    min-height: 280px;
+    min-width: 240px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :where(*) {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ——— Optional page wrapper for Artists ——— */
+:where(.artists-page){
+  min-height: 100vh;
+  background: var(--color-background, #000);
+}
+
+/* 4) COMPONENTS/UTILITIES */
+@layer components {
+  /* Container - Single source of truth */
+  :where(.container) {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: var(--space-6);
+  }
+
+  /* Section spacing */
+  :where(.section) {
+    padding-block: clamp(var(--space-6), 6vw, var(--space-12));
+  }
+
+  /* Container queries wrapper */
+  :where(.grid-container) {
+    container-type: inline-size;
+    container-name: grid-wrapper;
+  }
+
+  /* Typography utilities (from globals.css) */
+  :where(.headline-xl) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.headline-lg) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.headline-md) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h3);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.body-text) {
+    font-family: var(--font-family-primary);
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+  }
+
+  /* Button styles */
+  :where(.btn) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--touch-target-min);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  :where(.btn-primary) {
+    background-color: var(--color-brand-gold);
+    color: var(--color-surface-dark);
+    border: none;
+    padding: 16px 24px;
+  }
+
+  :where(.btn-primary):hover {
+    background-color: var(--color-brand-gold-hover);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+  }
+
+  :where(.btn-secondary) {
+    background-color: transparent;
+    color: var(--color-brand-gold);
+    border: 2px solid var(--color-brand-gold);
+    padding: 16px 24px;
+  }
+
+  :where(.btn-secondary):hover {
+    background-color: var(--color-brand-gold);
+    color: var(--color-surface-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Card styles */
+  :where(.card) {
+    background-color: var(--color-surface-medium);
+    border: 1px solid var(--color-surface-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+
+  /* Grid patterns with container queries */
+  :where(.team-grid) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  @container grid-wrapper (min-width: 640px) {
+    :where(.team-grid) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container grid-wrapper (min-width: 900px) {
+    :where(.team-grid) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @container grid-wrapper (min-width: 1200px) {
+    :where(.team-grid) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  :where(.artist-grid) {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  @container grid-wrapper (min-width: 600px) {
+    :where(.artist-grid) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container grid-wrapper (min-width: 900px) {
+    :where(.artist-grid) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @container grid-wrapper (min-width: 1200px) {
+    :where(.artist-grid) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+  }
+
+  /* Skip link (accessibility) */
+  :where(.skip-link) {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--color-brand-gold);
+    color: var(--color-surface-dark);
+    padding: 8px;
+    text-decoration: none;
+    z-index: 1000;
+  }
+
+  :where(.skip-link):focus {
+    top: 6px;
+  }
+
+  /* Screen reader only */
+  :where(.sr-only) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  /* Image aspect ratios */
+  :where(.artist-card) img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  :where(.service-card) img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  :where(.gallery-img) {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  /* Image error states */
+  :where(img[src='']),
+  :where(img:not([src])),
+  :where(img[src*='undefined']),
+  :where(img[src*='null']) {
+    display: none;
+  }
+
+  :where(img[src*='placeholder']) {
+    opacity: 0.3;
+    filter: grayscale(100%);
+  }
+
+  :where(.image-error) {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    border: 2px dashed var(--color-accent-silver);
+  }
+
+  /* Background utilities */
+  :where(.bg-cover-center) {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: var(--bg-image, none);
+  }
+
+  /* Maps responsive wrapper */
+  :where(.map-embed) {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  @container grid-wrapper (min-width: 900px) {
+    :where(.map-embed) {
+      min-height: 420px;
+    }
+  }
+
+  /* Mobile-safe background attachment */
+  @media (pointer: coarse) {
+    :where(.bg-fixed) {
+      background-attachment: scroll;
+    }
+  }
+
+  /* ---- RESTORE TYPOGRAPHY UTILITIES ---- */
+  :where(.text-headline-xl) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.text-headline-lg) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.text-headline-md) {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-h3);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+    color: var(--color-brand-gold);
+  }
+
+  /* ---- RESTORE GALLERY GRID ---- */
+  :where(.gallery-grid) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 640px) {
+    :where(.gallery-grid) { 
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+
+  @media (min-width: 900px) {
+    :where(.gallery-grid) { 
+      grid-template-columns: repeat(3, 1fr); 
+    }
+  }
+
+  @media (min-width: 1200px) {
+    :where(.gallery-grid) { 
+      grid-template-columns: repeat(4, 1fr); 
+    }
+  }
+
+  /* ---- GALLERY VISUAL ENHANCEMENTS ---- */
+  :where(.gallery-item) {
+    /* zero-specificity utility */
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg, 12px);
+    cursor: pointer;
+    /* "group" behavior is applied in JSX if you want hover chains */
+  }
+
+  :where(.gallery-image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s ease;
+  }
+
+  :where(.gallery-overlay) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: var(--space-4, 16px);
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent 55%);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+
+  /* Optional: when parent adds "group" in JSX */
+  :where(.group:hover) :where(.gallery-image) { transform: scale(1.05); }
+  :where(.group:hover) :where(.gallery-overlay) { opacity: 1; }
+
+  /* ---- TYPOGRAPHY UTILITIES ---- */
+  :where(.typo-h1) {
+    font-family: var(--font-family-heading, ui-sans-serif);
+    font-size: var(--text-h1);    /* your fluid token */
+    font-weight: var(--font-weight-bold, 700);
+    line-height: 1.1;
+  }
+
+  :where(.typo-subtitle) {
+    font-family: var(--font-family-primary, ui-sans-serif);
+    font-size: var(--text-body, 1rem);
+    line-height: var(--line-height-relaxed, 1.6);
+    color: var(--color-text-secondary, rgba(255,255,255,.75));
+  }
+
+  /* ---- DATENSCHUTZPAGE TYPOGRAPHY UTILITIES ---- */
+  :where(.font-body) {
+    font-family: var(--font-family-primary, ui-sans-serif);
+  }
+
+  :where(.text-body-small) {
+    font-size: var(--text-sm, 0.875rem);
+    line-height: var(--line-height-normal, 1.5);
+  }
+
+  /* ---- DATENSCHUTZPAGE BRAND COLOR UTILITIES ---- */
+  :where(.text-brand-gold) {
+    color: var(--color-brand-gold);
+  }
+
+  :where(.text-brand-chrome) {
+    color: var(--color-brand-chrome, #C0C0C0);
+  }
+
+  :where(.text-brand-white) {
+    color: var(--color-brand-white, #FFFFFF);
+  }
+
+  /* ---- DATENSCHUTZPAGE SURFACE/BORDER UTILITIES ---- */
+  :where(.bg-brand-background) {
+    background: var(--color-brand-background, rgba(0, 0, 0, 0.8));
+  }
+
+  :where(.border-brand-gold) {
+    border-color: var(--color-brand-gold);
+  }
+
+  :where(.border-brand-chrome) {
+    border-color: var(--color-brand-chrome, #C0C0C0);
+  }
+
+  /* ---- DATENSCHUTZPAGE INTERACTIVE UTILITIES ---- */
+  :where(.bg-brand-gold) {
+    background: var(--color-brand-gold);
+  }
+
+  :where(.hover\:bg-brand-gold:hover) {
+    background: var(--color-brand-gold-hover, rgba(212, 175, 55, 0.9));
+  }
+
+  :where(.hover\:shadow-gold-glow:hover) {
+    box-shadow: var(--shadow-gold-glow, 0 0 20px rgba(212, 175, 55, 0.3));
+  }
+
+  /* ---- LAYOUT UTILITIES ---- */
+  :where(.section-padding-lg) {
+    padding-block: var(--space-20, 160px);
+  }
+
+  :where(.section-padding) {
+    padding-block: var(--space-16, 64px);
+  }
+
+  /* ——— ArtistsPage polish: carousel badges section wrapper ——— */
+  :where(.carousel-badges-section){
+    padding-block: var(--space-12, 48px);
+    background: var(--color-surface-dark, rgba(0,0,0,0.3));
+  }
+
+  :where(.responsive-container) {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--space-4, 16px);
+  }
+
+  :where(.safe-area-padding) {
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+  }
+
+  :where(.nav-offset-spacer) {
+    height: var(--header-height, 72px);
+  }
+
+  /* ---- SHARED UTILITIES FOR HOMEPAGE ---- */
+  :where(.trust-badges-container) { 
+    position: relative; 
+    overflow: hidden; 
+  }
+
+  :where(.trust-badge-item) {
+    display: flex; 
+    align-items: center; 
+    column-gap: var(--space-2, 8px);
+    padding: var(--space-2, 8px) var(--space-4, 16px);
+    background: rgba(255, 255, 255, 0.06); 
+    border-radius: var(--radius-md, 10px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  :where(.badge-icon) { 
+    inline-size: 20px; 
+    block-size: 20px; 
+    flex-shrink: 0; 
+  }
+
+  /* stylelint-disable color-contrast */
+  :where(.free-badge) {
+    display: inline-flex; 
+    align-items: center;
+    padding: 2px 10px; 
+    border-radius: 999px;
+    font-size: 0.875rem; 
+    font-weight: 600;
+    background: rgba(34, 197, 94, 0.15); 
+    color: rgb(34, 197, 94);
+  }
+  /* stylelint-enable color-contrast */
+
+  /* ---- RESPONSIVE GRID UTILITIES ---- */
+  :where(.responsive-grid) {
+    display: grid;
+    gap: var(--space-6, 24px);
+  }
+
+  :where(.cols-3-desktop) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    :where(.cols-3-desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :where(.cols-3-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---- CRITICAL MISSING UTILITIES ---- */
+  /* Typography Utilities - Fluid Responsive */
+  :where(.text-headline-xl) {
+    font-size: var(--text-h1); /* clamp(28px, 6vw, 48px) */
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.text-headline-lg) {
+    font-size: var(--text-h2); /* clamp(24px, 5vw, 40px) */
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.25;
+    color: var(--color-brand-gold);
+  }
+
+  :where(.text-headline-md) {
+    font-size: var(--text-h3); /* clamp(20px, 4vw, 32px) */
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+    color: var(--color-brand-gold);
+  }
+
+  /* Grid Utilities - Responsive Layouts */
+  :where(.gallery-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  :where(.service-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-3);
+  }
+
+  /* Background Utilities - Mobile Safe */
+  :where(.bg-cover-center) {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  @media (pointer: coarse) {
+    :where(.bg-fixed) {
+      background-attachment: scroll;
+    }
+  }
+
+  /* Map Utilities - Responsive Container */
+  :where(.map-embed) {
+    width: 100%;
+    min-height: 300px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  @container grid-wrapper (min-width: 900px) {
+    :where(.map-embed) {
+      min-height: 420px;
+    }
+  }
+}
