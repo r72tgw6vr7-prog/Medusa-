@@ -1,34 +1,65 @@
 import React from 'react';
+import type { LucideProps } from 'lucide-react';
 
 interface IconProps {
-  name: string; // Icon identifier
-  size?: 'sm' | 'md' | 'lg';
-  color?: string;
+  icon?: React.ComponentType<LucideProps>;
+  size?: number;
   className?: string;
+  children?: React.ReactNode; // For inline SVG content
+  color?: string;
+  strokeWidth?: number;
+  fill?: string;
+  viewBox?: string;
+  onClick?: () => void;
+  'aria-label'?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({
-  name,
-  size = 'md',
-  color = 'currentColor',
+  icon: IconComponent,
+  size = 24,
   className = '',
+  children,
+  color,
+  strokeWidth,
+  fill,
+  viewBox = '0 0 24 24',
+  onClick,
+  'aria-label': ariaLabel,
 }) => {
-  const sizeStyles = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-8 h-8',
-  };
-
-  return (
-    <span className={`inline-flex items-center justify-center ${sizeStyles[size]} ${className}`}>
-      <img
-        src={`/assets/icons/${name}.svg`}
-        alt={name}
-        className='w-full h-full'
-        style={{ color }}
+  // If an icon component is provided, render it
+  if (IconComponent) {
+    return (
+      <IconComponent
+        size={size}
+        className={className}
+        color={color}
+        strokeWidth={strokeWidth}
+        fill={fill}
+        onClick={onClick}
+        aria-label={ariaLabel}
       />
-    </span>
-  );
+    );
+  }
+
+  // If children are provided, render as inline SVG
+  if (children) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox={viewBox}
+        className={className}
+        fill={fill}
+        onClick={onClick}
+        aria-label={ariaLabel}
+      >
+        {children}
+      </svg>
+    );
+  }
+
+  // Fallback - empty span
+  return <span className={className} />;
 };
 
 export default Icon;

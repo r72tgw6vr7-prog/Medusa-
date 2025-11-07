@@ -1,6 +1,6 @@
 import React from 'react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
 
 interface ImpressumPageProps {
   language?: 'DE' | 'EN';

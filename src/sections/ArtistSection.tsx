@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArtistCard } from '../components/molecules/ArtistCard';
+import { ArtistCard } from '@/components/molecules/Card/ArtistCard';
 
 interface Artist {
   name: string;
@@ -18,7 +18,7 @@ interface ArtistSectionProps {
   subtitle: string;
   artists: Artist[];
   onBookClick?: (artistName: string) => void;
-  onGalleryClick?: (artistName: string) => void;
+  _onGalleryClick?: (artistName: string) => void;
   className?: string;
 }
 
@@ -27,7 +27,7 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
   subtitle,
   artists,
   onBookClick,
-  onGalleryClick,
+  _onGalleryClick,
   className = '',
 }) => {
   return (
@@ -58,14 +58,15 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
           {artists.map((artist, index) => (
             <ArtistCard
               key={index}
-              name={artist.name}
-              role={artist.role}
-              specialties={artist.specialties}
-              experience={artist.experience}
-              instagramHandle={artist.instagramHandle}
-              imageUrl={artist.imageUrl}
-              onBookClick={() => onBookClick?.(artist.name)}
-              onGalleryClick={() => onGalleryClick?.(artist.name)}
+              artist={{
+                name: artist.name,
+                role: artist.role.name,
+                photo: artist.imageUrl,
+                specialties: artist.specialties,
+                experience: artist.experience,
+                instagram: artist.instagramHandle,
+              }}
+              onClick={() => onBookClick?.(artist.name)}
             />
           ))}
         </div>

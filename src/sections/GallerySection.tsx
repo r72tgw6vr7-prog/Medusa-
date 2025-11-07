@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Section from '../components/ui/Section';
+import Section from '@/components/ui/Section';
 
 interface GalleryImage {
   id: string;

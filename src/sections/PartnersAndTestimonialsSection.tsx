@@ -1,5 +1,5 @@
 import React from 'react';
-import TestimonialsCarousel from '../components/organisms/TestimonialsCarousel';
+import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
 import './PartnersAndTestimonialsSection.css';
 
 // PARTNER LOGOS - REFINEMENT #4: Only 4 real partners - FIXED WITH CORRECT PATHS

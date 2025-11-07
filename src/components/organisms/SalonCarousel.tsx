@@ -2,11 +2,18 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useDrag } from '@use-gesture/react';
-import salonMainLevel from 'figma:asset/4ba4b5ee79fffa380a84277c61b38f32ff42ec37.png';
-import salonUpperLevel from 'figma:asset/45cd1fc2ed6614d86b0670b0fd926d0269967146.png';
-import salonTreatmentRoom from 'figma:asset/5a6857c9f59f892552b7bcbe4ad205d96df76db8.png';
-import salonEnvironment1 from 'figma:asset/895ac0a94078e8a7cdf5f7e2f4e31a66ea5c6fae.png';
-import salonEnvironment2 from 'figma:asset/18d7dc765a127cfdd40662c47bde9b6355824894.png';
+// import salonMainLevel from 'figma:asset/4ba4b5ee79fffa380a84277c61b38f32ff42ec37.png';
+// import salonUpperLevel from 'figma:asset/45cd1fc2ed6614d86b0670b0fd926d0269967146.png';
+// import salonTreatmentRoom from 'figma:asset/5a6857c9f59f892552b7bcbe4ad205d96df76db8.png';
+// import salonEnvironment1 from 'figma:asset/895ac0a94078e8a7cdf5f7e2f4e31a66ea5c6fae.png';
+// import salonEnvironment2 from 'figma:asset/18d7dc765a127cfdd40662c47bde9b6355824894.png';
+
+// Temporary placeholder images
+import salonMainLevel from '/assets/images/photos/studio/img3876.webp';
+import salonUpperLevel from '/assets/images/photos/studio/img3914.webp';
+import salonTreatmentRoom from '/assets/images/photos/studio/img3947.webp';
+import salonEnvironment1 from '/assets/images/photos/studio/img3969.webp';
+import salonEnvironment2 from '/assets/images/photos/studio/img3994.webp';
 import { useMedusaDesignSystem } from '../../foundation';
 
 interface SalonImage {

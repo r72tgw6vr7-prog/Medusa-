@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { User, Mail, Palette, Calendar, Clock, Lightbulb } from 'lucide-react';
-import Button from './Button';
+import Button from './atoms/Button/Button';
 import './PreFooterBookingCTA.css';
 
 interface BookingFormData {
@@ -20,8 +20,8 @@ interface BookingFormData {
 }
 
 interface PreFooterBookingCTAProps {
-  selectedArtist?: string;
-  selectedService?: string;
+  readonly selectedArtist?: string;
+  readonly selectedService?: string;
 }
 
 export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFooterBookingCTAProps) {
@@ -82,7 +82,7 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
       <div className='absolute inset-0 bg-[rgba(26,26,26,0.85)] z-auto' />
 
       {/* Animated background accent */}
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(212,175,55,0.05)] to-transparent z-auto opacity-50' />
+      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[rgba(212,175,55,0.05)] to-transparent z-auto opacity-50' />
 
       {/* Content */}
       <div className='relative z-10 max-w-[920px] mx-auto px-8 md:px-8'>
@@ -119,7 +119,7 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
                   type='text'
                   placeholder='Wie sollen wir Sie nennen?'
                   required
-                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] placeholder:text-[#666666] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300 flex flex-col h-full'
+                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] placeholder:text-[#666666] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-500 flex flex-col h-full'
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />

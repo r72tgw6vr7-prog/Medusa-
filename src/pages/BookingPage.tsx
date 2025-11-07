@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
-import Button from '../components/Button';
-import { BookingForm } from '../components/organisms/BookingForm';
+import { Footer } from '../components/pages';
+import Button from '../components/atoms/Button/Button';
+import { BookingForm } from '../components/organisms';
 import { CheckCircle, Calendar, Users, Sparkles } from 'lucide-react';
 // Using universal texture background instead of PageBackground
 
@@ -239,7 +239,7 @@ export const BookingPage: React.FC = () => {
             ) : (
               // Booking Form
               <div className='mx-auto max-w-6xl'>
-                <BookingForm services={SERVICES} artists={artists} onSubmit={handleBookingSubmit} />
+                <BookingForm />
               </div>
             )}
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '../atoms/Button/Button';
+import Button from '../atoms/Button/Button';
 
 interface GalleryImage {
   id: string;

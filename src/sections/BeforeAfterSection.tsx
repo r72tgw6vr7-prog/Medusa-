@@ -1,5 +1,5 @@
 import React from 'react';
-import { BeforeAfterCard } from '../components/molecules/BeforeAfterCard';
+import { BeforeAfterCard } from '@/components/molecules/BeforeAfterCard';
 
 interface BeforeAfterImage {
   id: string;

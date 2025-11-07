@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { ArtistCard } from '../molecules/ArtistCard';
+import { ArtistCard } from '../molecules/Card/ArtistCard';
 import { ArtistDetailModal } from './ArtistDetailModal';
 import './OurArtists.css';
 
@@ -127,7 +127,7 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
           </div>
 
           {/* Artist Grid - Updated: 2 columns mobile, 3-4 columns larger screens */}
-          <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8'>
+          <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-8 lg:gap-8'>
             {artists.map((artist) => (
               <div
                 key={artist.id}
@@ -144,15 +144,17 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
                 aria-label={`${artist.name} Details anzeigen`}
               >
                 <ArtistCard
-                  name={artist.name}
-                  role={{ name: artist.role, icon: '★' }}
-                  specialties={artist.specialties}
-                  experience={artist.experience}
-                  instagramHandle={artist.instagramHandle}
-                  imageUrl={artist.imageSrc}
-                  imagePosition={artist.imagePosition} // Pass custom positioning
-                  onBookClick={() => onBookArtist(artist.id)}
-                  onGalleryClick={() => handleGalleryView(artist.id)}
+                  artist={{
+                    id: artist.id,
+                    name: artist.name,
+                    role: artist.role,
+                    photo: artist.imageSrc,
+                    specialties: artist.specialties,
+                    experience: artist.experience,
+                    instagram: artist.instagramHandle,
+                    bookable: true,
+                  }}
+                  onClick={() => onBookArtist(artist.id)}
                 />
               </div>
             ))}

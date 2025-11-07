@@ -1,171 +1,138 @@
-import React, { ButtonHTMLAttributes, forwardRef } from 'react';
-import { TRANSITION_PRESETS, respectMotionPreferences } from '../../../lib/animations';
-import { VisuallyHidden } from '../../accessibility/VisuallyHidden';
+import React from 'react';
+import { designTokens } from '../../../design-tokens';
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'aria-disabled'> {
-  /** The visual style of the button */
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  /** The size of the button */
-  size?: ButtonSize;
-  /** Optional icon to display with the button */
-  icon?: React.ReactNode;
-  /** Position of the icon relative to the text */
-  iconPosition?: 'left' | 'right';
-  /** Whether the button is in a loading state */
-  loading?: boolean;
-  /** Whether the button should take up the full width of its container */
+  isLoading?: boolean;
   fullWidth?: boolean;
-  /** Additional class names to apply to the button */
-  className?: string;
-  /** 
-   * Accessible label for the button (required if no visible text is provided)
-   * This will be announced by screen readers instead of the button's content
-   */
-  'aria-label'?: string;
-  /** 
-   * Accessible description for the button
-   * Use this to provide additional context that will be read after the label
-   */
-  'aria-describedby'?: string;
-  /** 
-   * Indicates the current "pressed" state of a toggle button
-   * Only use for buttons that toggle between two states
-   */
-  'aria-pressed'?: boolean | 'true' | 'false' | 'mixed';
-  /** 
-   * Indicates the current state of a collapsible element
-   * Only use for buttons that control expandable content
-   */
-  'aria-expanded'?: boolean | 'true' | 'false';
-  /** 
-   * Indicates that the button controls another element
-   * Use with aria-expanded for collapsible content
-   */
-  'aria-controls'?: string;
-  /** 
-   * Indicates that the button has a popup menu
-   * Use with aria-haspopup for menus, dialogs, etc.
-   */
-  'aria-haspopup'?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+  icon?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-/**
- * A customizable, accessible button component with support for icons, loading states, and more.
- * 
- * @example
- * // Basic usage
- * <Button>Click me</Button>
- * 
- * @example
- * // With icon
- * <Button icon={<Icon />} iconPosition="left">Save</Button>
- * 
- * @example
- * // Icon-only button
- * <Button icon={<CloseIcon />} aria-label="Close dialog" />
- * 
- * @example
- * // Loading state
- * <Button loading>Processing...</Button>
- */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   variant = 'primary',
-  size = 'md',
-  icon,
-  iconPosition = 'right',
-  loading = false,
+  isLoading = false,
   fullWidth = false,
-  className = '',
+  icon,
   children,
-  disabled = false,
-  type = 'button',
+  disabled,
   ...props
 }, ref) => {
-  const baseStyles = 'flex items-center justify-center font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-gold';
-  
-  // Determine if this is an icon-only button (no visible text)
-  const isIconOnly = !children || (Array.isArray(children) && children.length === 0);
-
-  const variantStyles = {
-    primary: `bg-brand-gold text-black border-2 border-solid border-brand-gold hover:border-brand-gold-hover shadow-gold-subtle ${TRANSITION_PRESETS.buttonGold}`,
-    secondary: `bg-transparent border-2 border-solid border-brand-gold text-white hover:bg-brand-gold/10 ${TRANSITION_PRESETS.button}`,
-    ghost: `bg-transparent border-2 border-solid border-brand-chrome/50 text-white hover:border-brand-gold ${TRANSITION_PRESETS.button}`,
-    link: `bg-transparent text-white hover:text-brand-gold px-0 ${TRANSITION_PRESETS.link}`,
+  const getVariantConfig = (variant: ButtonVariant) => {
+    switch (variant) {
+      case 'primary':
+        return {
+          bg: designTokens.colors.gold.primary,
+          bgHover: designTokens.colors.gold[600],
+          text: designTokens.colors.background,
+          border: 'none',
+          padding: '12px 24px',
+          height: '48px',
+          borderRadius: designTokens.borderRadius.md,
+        };
+      case 'secondary':
+        return {
+          bg: 'transparent',
+          bgHover: designTokens.colors.goldAlpha[10],
+          text: designTokens.colors.gold.primary,
+          border: `2px solid ${designTokens.colors.gold.primary}`,
+          padding: '12px 24px',
+          height: '48px',
+          borderRadius: designTokens.borderRadius.md,
+        };
+      case 'tertiary':
+        return {
+          bg: 'transparent',
+          bgHover: designTokens.colors.goldAlpha[10],
+          text: designTokens.colors.white,
+          border: `1px solid ${designTokens.colors.goldAlpha[20]}`,
+          padding: '12px 24px',
+          height: '48px',
+          borderRadius: designTokens.borderRadius.md,
+        };
+      default:
+        return {
+          bg: designTokens.colors.gold.primary,
+          bgHover: designTokens.colors.gold[600],
+          text: designTokens.colors.background,
+          border: 'none',
+          padding: '12px 24px',
+          height: '48px',
+          borderRadius: designTokens.borderRadius.md,
+        };
+    }
   };
 
-  const sizeStyles = {
-    sm: 'px-4 py-2 text-sm rounded-lg',
-    md: 'px-6 py-4 text-base rounded-lg',
-    lg: 'px-8 py-5 text-lg rounded-lg',
+  const variantConfig = getVariantConfig(variant);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const getBackgroundColor = () => {
+    if (disabled) return variantConfig.bg;
+    if (isHovered && variant === 'primary') return variantConfig.bgHover;
+    return variantConfig.bg;
   };
 
-  const disabledStyles = disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
-  const widthStyles = fullWidth ? 'w-full' : '';
-  const motionStyles = respectMotionPreferences();
-
-  // Accessibility attributes
-  const accessibilityProps = {
-    'aria-busy': loading ? true : undefined,
-    'aria-disabled': disabled || loading || undefined, // Use undefined instead of false for better a11y
-    'aria-label': props['aria-label'] || (isIconOnly ? 'Button' : undefined),
-    'aria-describedby': props['aria-describedby'],
-    'aria-pressed': props['aria-pressed'],
-    'aria-expanded': props['aria-expanded'],
-    'aria-controls': props['aria-controls'],
-    'aria-haspopup': props['aria-haspopup'],
-    disabled: disabled || loading,
-    type,
+  const style: React.CSSProperties = {
+    backgroundColor: getBackgroundColor(),
+    border: variantConfig.border || 'none',
+    color: variantConfig.text,
+    padding: variantConfig.padding,
+    height: variantConfig.height,
+    borderRadius: variantConfig.borderRadius,
+    fontWeight: designTokens.typography.fontWeight.semibold,
+    fontSize: '16px',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    transition: 'all 300ms ease-out',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    opacity: disabled ? 0.6 : 1,
+    width: fullWidth ? '100%' : 'auto',
+    transform: isHovered && !disabled ? 'translateY(-2px)' : 'translateY(0)',
+    boxShadow: isHovered && !disabled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
   };
-
-  // Warn in development if an icon-only button is missing an aria-label
-  if (process.env.NODE_ENV !== 'production' && isIconOnly && !props['aria-label']) {
-    console.warn('Icon-only buttons should have an aria-label for accessibility');
-  }
 
   return (
-    <button
-      ref={ref}
-      className={`
-        ${baseStyles}
-        ${variantStyles[variant]}
-        ${sizeStyles[size]}
-        ${disabledStyles}
-        ${widthStyles}
-        ${motionStyles}
-        ${className}
-      `}
-      {...accessibilityProps}
+    <button 
+      ref={ref} 
+      style={style} 
+      onMouseEnter={() => setIsHovered(true)} 
+      onMouseLeave={() => setIsHovered(false)} 
+      disabled={disabled || isLoading} 
       {...props}
     >
-      {loading && (
-        <span 
-          className={`${iconPosition === 'right' ? 'order-1' : 'order-0'} mr-2`}
-          aria-hidden='true'
-        >
-          <span className='animate-spin'>⟳</span>
-        </span>
-      )}
-      {!loading && icon && iconPosition === 'left' && (
-        <span className='mr-0' aria-hidden='true'>{icon}</span>
-      )}
-      {children && (
-        <span className={`${loading ? 'opacity-0' : 'opacity-100'}`}>
+      {isLoading ? (
+        <>
+          <span style={{
+            display: 'inline-block', 
+            width: '16px', 
+            height: '16px', 
+            border: '2px solid currentColor', 
+            borderTopColor: 'transparent', 
+            borderRadius: '50%', 
+            animation: 'spin 0.8s linear infinite'
+          }} />
+          Loading...
+        </>
+      ) : (
+        <>
+          {icon && <span>{icon}</span>}
           {children}
-        </span>
+        </>
       )}
-      {!loading && icon && iconPosition === 'right' && (
-        <span className={children ? 'ml-2' : ''} aria-hidden='true'>{icon}</span>
-      )}
-      {isIconOnly && !loading && !icon && (
-        <VisuallyHidden>Button</VisuallyHidden>
-      )}
+      <style>{
+        `@keyframes spin { to { transform: rotate(360deg); } } 
+        button:focus { 
+          outline: 2px solid ${designTokens.colors.gold.primary}; 
+          outline-offset: 2px; 
+        }`
+      }</style>
     </button>
   );
 });
 
 Button.displayName = 'Button';
-
 export default Button;

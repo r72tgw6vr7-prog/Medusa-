@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookingForm } from '../components/organisms/BookingForm';
+import { BookingForm } from '@/components/organisms/BookingForm';
 import type { Service, Artist, BookingFormData } from '../types/booking';
 
 interface BookingSectionProps {

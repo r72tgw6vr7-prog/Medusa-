@@ -1,5 +1,5 @@
 import React from 'react';
-import { FAQAccordion } from '../components/organisms/FAQAccordion';
+import { FAQAccordion } from '@/components/organisms/FAQAccordion';
 
 interface FAQ {
   id: string;

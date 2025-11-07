@@ -3,11 +3,8 @@ import 'scheduler';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
-import './styles/parallax-fix.css';
-import './styles/motion-fix.css';
-import './styles/motion-containers.css';
-import { UniversalTextureBackground } from './components/atoms/UniversalTextureBackground';
+import './index.css'; // Imports system.css now
+import { UniversalTextureBackground } from '@/components/atoms/UniversalTextureBackground';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

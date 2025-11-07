@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './components/organisms/ServicesPage';
+import { ServicesPage } from '@/components/organisms/ServicesPage';
 import { ArtistsPage } from './pages/ArtistsPage';
 import { AftercarePage } from './pages/AftercarePage';
 import React, { Suspense, lazy } from 'react';
@@ -17,12 +17,11 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ServicesTestPage } from './pages/ServicesTestPage';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
-import Meta from './components/Meta';
+import Meta from '@/components/Meta';
 // Fix import path to match actual directory structure
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
-import ScrollToTop from './components/ScrollToTop';
-import AnalyticsProvider from './components/AnalyticsProvider';
-import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from './hooks/useAnalytics';
+import ScrollToTop from '@/components/ScrollToTop';
+import AnalyticsProvider from '@/components/AnalyticsProvider';
 
 function App() {
   // Texture background is now handled in main.tsx

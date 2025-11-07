@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 
 export const AGBPage: React.FC = () => {
   return (

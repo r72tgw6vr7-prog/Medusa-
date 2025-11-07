@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TeamGrid.css';
-import Section from './ui/Section';
-import ArtistCard from './ArtistCard';
+import Section from '../ui/Section';
+import { ArtistCard } from '../molecules';
 
 interface TeamMember {
   id: string;

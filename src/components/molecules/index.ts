@@ -1,4 +1,6 @@
-export * from './ArtistCard';
+export * from './Card/ArtistCard';
+export * from './Card/ServiceCards';
+export * from './Card/Card';
 export * from './BeforeAfterCard';
 export * from './ContactInfoCard';
 export * from './FAQItem';
@@ -10,7 +12,6 @@ export * from './BookingCallToAction';
 export * from './CookieConsentBanner';
 export * from './FocusTrap';
 export * from './GDPRCompliance';
-// export * from './NavigationBar'; // File does not exist
 export * from './ProcessStepCard';
 export * from './TrustBadgesBar';
 export * from './TrustBadgesMarquee';
@@ -18,3 +19,4 @@ export * from './TrustSignals';
 export * from './MainNavigation';
 export * from './TrustBadgeCarousel';
 export * from './StatsBar';
+export * from './LanguageToggle';

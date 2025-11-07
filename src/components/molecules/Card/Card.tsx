@@ -1,5 +1,5 @@
 import React from 'react';
-import { designTokens } from '../design-tokens';
+import { designTokens } from '../../../design-tokens';
 
 type CardVariant = 'default' | 'elevated' | 'bordered' | 'glass';
 type CardPadding = 'none' | 'sm' | 'md' | 'lg' | 'xl';

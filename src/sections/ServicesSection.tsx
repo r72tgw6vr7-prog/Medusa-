@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServiceCard } from '../components/molecules/ServiceCard';
+import { ServiceCard } from '@/components/molecules/ServiceCard';
 
 interface ServiceFeature {
   text: string;

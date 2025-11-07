@@ -9,10 +9,9 @@
 // - Footer: <Footer />
 
 import React from 'react';
-import TeamGrid from '../components/TeamGrid';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { CarouselBadges } from '../components/CarouselBadges';
-import Footer from '../components/Footer';
+import { TeamGrid, Footer } from '@/components/pages';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { CarouselBadges } from '@/components/CarouselBadges';
 import './ArtistsPage.css';
 
 export function ArtistsPage() {
@@ -27,7 +26,7 @@ export function ArtistsPage() {
         <div className='container max-w-[1320px] mx-auto px-8 md:px-8'>
           {/* Unified heading section applied: matches ServicesPageInteractive styling */}
           <div className='text-center mb-16'>
-            <h1 className='typo-h1 text-[var(--brand-gold)]'>Künstler</h1>
+            <h2 className='font-headline text-3xl text-[var(--brand-gold)] text-center mb-8'>Künstler</h2>
             <p className='typo-subtitle text-[#C0C0C0]'>
               Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.
             </p>

@@ -16,10 +16,10 @@
 /* Force artist name badges to bottom of cards - override all other positioning */
 .artist-card__name-badge,
 div[class*="absolute"][class*="left-1/2"] span.inline-block,
-.absolute.bottom-8.left-1\/2,
+.absolute.bottom-8.left-1/2,
 .absolute.bottom-8 {
   position: absolute !important;
-  bottom: 32px !important;
+  bottom: var(--space-4) !important;
   top: auto !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
@@ -28,6 +28,6 @@ div[class*="absolute"][class*="left-1/2"] span.inline-block,
 
 /* Specifically target the name badge container */
 .cursor-pointer .absolute.bottom-8 {
-  bottom: 32px !important;
+  bottom: var(--space-4) !important;
   top: auto !important;
 }

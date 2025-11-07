@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Section from '../components/ui/Section';
+import Section from '@/components/ui/Section';
 import './HeroSection.css';
 import { TRUST_BADGES, TrustBadgeItem } from './TrustBadges';
 

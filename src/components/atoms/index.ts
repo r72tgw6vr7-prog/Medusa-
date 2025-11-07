@@ -1,7 +1,9 @@
-export * from './Badge';
-export * from './Button';
-export * from './Icon';
-export * from './InputField';
+export * from './Badge/Badge';
+export * from './Button/Button';
+export * from './Icon/Icon';
+export * from './Input/Input';
+export * from './Input/InputField';
+export * from './Input/FormInput';
 export * from './TextArea';
 export * from './Container';
 export * from './AccessibleButton';
@@ -12,5 +14,10 @@ export * from './MicroInteractions';
 export * from './PlaceholderImage';
 export * from './Section';
 export * from './TrustBadge';
-
-// Note: New components are now exported from main components index
+export * from './PageBackground';
+export * from './PageTitle';
+export * from './GalleryImage';
+export * from './ImageWithLoader';
+export * from './ResponsiveImage';
+export * from './SafeImage';
+export * from './UniversalTextureBackground';

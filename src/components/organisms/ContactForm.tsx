@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { InputField } from '../atoms/InputField';
+import { InputField } from '../atoms/Input/InputField';
 import { TextArea } from '../atoms/TextArea';
-import { Button } from '../atoms/Button/Button';
+import Button from '../atoms/Button/Button';
 import { Icon } from '../atoms/Icon/Icon';
 
 interface FormData {

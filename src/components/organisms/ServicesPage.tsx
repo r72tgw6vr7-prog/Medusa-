@@ -1,7 +1,7 @@
 import React from 'react';
 import { ServicesPageInteractive } from '../pages/ServicesPageInteractive';
 import { MainNavigation } from '../molecules/MainNavigation';
-import Footer from '../Footer';
+import Footer from '../pages/Footer';
 import { RouteComponentProps } from '../../types/routes';
 
 export interface ServicesPageProps extends RouteComponentProps {

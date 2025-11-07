@@ -1,13 +1,5 @@
 /* ServiceCards - Additional Styles */
-
-/* Ensure Playfair Display for struck titles */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-/* Ensure Poppins for headings and CTAs */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-/* Ensure Inter for body text */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* All font imports moved to system.css */
 
 /* Custom line-through decoration for struck titles */
 .line-through {
@@ -22,7 +14,7 @@
 
 /* Focus visible states for accessibility */
 a:focus-visible {
-  outline: 2px solid #d4af37;
+  outline: 2px solid var(--color-brand-gold);
   outline-offset: 2px;
 }
 

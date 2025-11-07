@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, MessageCircle, Globe } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 import { PageTitle } from '../components/atoms/PageTitle';
 import { PageBackground } from '../components/atoms/PageBackground';
 

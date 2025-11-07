@@ -1,11 +1,6 @@
-import { Metadata } from 'next';
-import { BookingForm } from '@/components/BookingForm';
+import React from 'react';
+import { BookingForm } from '@/components/organisms/BookingForm/BookingForm';
 import { Card } from '@/components/ui/card/Card';
-
-export const metadata: Metadata = {
-  title: 'Book an Appointment | Medusa Tattoo Studio',
-  description: 'Book your tattoo appointment with our talented artists at Medusa Tattoo Studio.',
-};
 
 export default function BookingPage() {
   return (

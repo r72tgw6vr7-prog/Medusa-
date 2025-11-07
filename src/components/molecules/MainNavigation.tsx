@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { SkipLink } from '../accessibility/SkipLink';
 import { useKeyboardNav } from '../../hooks/useKeyboardNav';
-import './NavigationStyles.css';
+import './MainNavigation.css';
 
 type NavItem = {
   to: string;
@@ -25,7 +25,7 @@ const NAV_ITEMS: NavItem[] = [
 export function MainNavigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const overlayRef = useRef<HTMLDialogElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
@@ -104,7 +104,7 @@ export function MainNavigation() {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
 
-      window.setTimeout(() => {
+      globalThis.setTimeout(() => {
         const first = overlayRef.current?.querySelector<HTMLElement>(
           'button, a, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         );
@@ -123,19 +123,19 @@ export function MainNavigation() {
 
   useEffect(() => {
     const updateHeaderHeight = () => {
-      const nav = document.querySelector('.navigation') as HTMLElement | null;
+      const nav = document.querySelector('.navigation');
 
       if (nav) {
-        document.documentElement.style.setProperty('--header-height', `${nav.offsetHeight}px`);
+        document.documentElement.style.setProperty('--header-height', `${(nav as HTMLElement).offsetHeight}px`);
       }
     };
 
     updateHeaderHeight();
 
-    const nav = document.querySelector('.navigation') as HTMLElement | null;
+    const nav = document.querySelector('.navigation') as HTMLElement;
     let resizeObserver: ResizeObserver | undefined;
 
-    if (nav && 'ResizeObserver' in window) {
+    if (nav && 'ResizeObserver' in globalThis) {
       resizeObserver = new ResizeObserver(updateHeaderHeight);
       resizeObserver.observe(nav);
     }
@@ -160,12 +160,6 @@ export function MainNavigation() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    if (openButtonRef.current) {
-      openButtonRef.current.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
-    }
-  }, [menuOpen]);
-
   const switchLanguage = (nextLanguage: 'de' | 'en') => {
     if (nextLanguage !== language) {
       setLanguage(nextLanguage);
@@ -189,6 +183,7 @@ export function MainNavigation() {
   return (
     <>
       <SkipLink />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <nav
         id="main-navigation"
         aria-label="Main navigation"
@@ -206,15 +201,14 @@ export function MainNavigation() {
         </Link>
 
         <div className='hidden flex-1 xl:flex'>
-          <ul className='flex w-full items-center justify-center gap-16' role='menubar' aria-orientation='horizontal'>
+          <ul className='flex w-full items-center justify-center gap-16'>
             {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
               const active = isActive(location.pathname);
 
               return (
-                <li key={to} role='none'>
+                <li key={to}>
                   <Link
                     to={to}
-                    role='menuitem'
                     className={`nav-link text-[18px] font-['Playfair_Display'] font-medium transition-all duration-300 ${
                       active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
                     }`}
@@ -230,7 +224,7 @@ export function MainNavigation() {
         </div>
 
         <div className='hidden items-center gap-8 xl:flex'>
-          <div className='language-toggle' role='group' aria-label='Language selection'>
+          <fieldset className='language-toggle' aria-label='Language selection'>
             <div
               className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
             />
@@ -252,7 +246,7 @@ export function MainNavigation() {
             >
               EN
             </button>
-          </div>
+          </fieldset>
         </div>
 
         <div className='flex items-center xl:hidden'>
@@ -260,7 +254,7 @@ export function MainNavigation() {
             ref={openButtonRef}
             type='button'
             aria-controls='mobile-menu-overlay'
-            aria-expanded={menuOpen}
+            aria-expanded={menuOpen ? 'true' : 'false'}
             aria-haspopup='true'
             aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
             onClick={() => setMenuOpen((value) => !value)}
@@ -280,10 +274,9 @@ export function MainNavigation() {
 
       {menuOpen &&
         createPortal(
-          <div
+          <dialog
             id='mobile-menu-overlay'
             ref={overlayRef}
-            role='dialog'
             aria-modal='true'
             aria-labelledby='mobile-menu-title'
             className='mobile-menu-overlay'
@@ -312,7 +305,7 @@ export function MainNavigation() {
               </nav>
 
               <div className='mobile-menu-overlay__language'>
-                <div className='language-toggle' role='group' aria-label='Language selection'>
+                <fieldset className='language-toggle' aria-label='Language selection'>
                   <div
                     className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
                   />
@@ -340,7 +333,7 @@ export function MainNavigation() {
                   >
                     EN
                   </button>
-                </div>
+                </fieldset>
               </div>
 
               <div className='mobile-menu-overlay__cta'>
@@ -355,7 +348,7 @@ export function MainNavigation() {
                 </Link>
               </div>
             </div>
-          </div>,
+          </dialog>,
           document.body,
         )}
       </nav>

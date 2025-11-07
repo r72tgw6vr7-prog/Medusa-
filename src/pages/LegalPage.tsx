@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 import { PageBackground } from '../components/atoms/PageBackground';
 
 export const LegalPage: React.FC = () => {

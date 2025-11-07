@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook, Star } from 'lucide-react';
-import GoogleMap from './GoogleMap';
+import GoogleMap from '../GoogleMap';
 
 // TypeScript interfaces
 interface StudioInfo {

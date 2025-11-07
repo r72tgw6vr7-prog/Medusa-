@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 import { ImageWithFallback } from '../components/atoms/ImageWithFallback';
 import { BeforeAfterSlider } from '../components/BeforeAfterSlider';
 import { useLanguage } from '../contexts/LanguageContext';

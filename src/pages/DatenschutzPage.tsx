@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, FileText, Mail } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 
 interface DatenschutzPageProps {
   language?: 'DE' | 'EN';

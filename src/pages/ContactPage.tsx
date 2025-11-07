@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MainNavigation } from '../components/molecules/MainNavigation';
-import Footer from '../components/Footer';
+import { Footer } from '../components/pages';
 import { MapPin, Phone, Mail, Clock, Instagram, Star } from 'lucide-react';
 
 interface ContactFormData {
