@@ -75,9 +75,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.6) 60%,
-    rgba(0, 0, 0, 0.9) 100%
+    rgba(var(--color-surface-darker-rgb), 0) 0%,
+    rgba(var(--color-surface-darker-rgb), 0.6) 60%,
+    rgba(var(--color-surface-darker-rgb), 0.9) 100%
   );
 }
 
@@ -93,7 +93,7 @@
 .team-card-name-badge {
   display: inline-block;
   padding: var(--space-1) var(--space-2);
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(var(--color-surface-darker-rgb), 0.7);
   -webkit-backdrop-filter: blur(var(--space-1));
   backdrop-filter: blur(var(--space-1));
   border-radius: var(--space-1);
@@ -101,7 +101,7 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-body);
   color: var(--color-brand-gold);
-  text-shadow: 0 var(--space-1) var(--space-2) rgba(0, 0, 0, 0.5);
+  text-shadow: 0 var(--space-1) var(--space-2) rgba(var(--color-surface-darker-rgb), 0.5);
   border: 1px solid rgba(var(--color-brand-gold-rgb), 0.3);
   white-space: nowrap;
 }
@@ -139,7 +139,7 @@
 
 .team-card-experience span {
   font-size: var(--text-label);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(var(--color-text-primary-rgb), 0.7);
 }
 
 .team-card-social {
@@ -152,7 +152,7 @@
 
 .team-card-social a {
   font-size: var(--text-body-small);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(var(--color-text-primary-rgb), 0.5);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -217,18 +217,18 @@
 }
 
 .team-card-button-primary:hover {
-  background-color: rgba(212, 175, 55, 0.1);
+  background-color: rgba(var(--color-brand-gold-rgb), 0.1);
   border-color: var(--color-brand-gold-dark);
 }
 
 .team-card-button-secondary {
   background-color: transparent;
   color: var(--brand-white);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(var(--color-text-primary-rgb), 0.4);
 }
 
 .team-card-button-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--color-text-primary-rgb), 0.1);
   border-color: var(--color-brand-gold);
 }
 
@@ -258,7 +258,7 @@
 
 .team-status__text {
   font-size: var(--text-body);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(var(--color-text-primary-rgb), 0.7);
   text-align: center;
 }
 
@@ -274,7 +274,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(var(--color-surface-darker-rgb), 0.7);
   display: flex;
   flex-direction: column;
   align-items: center;

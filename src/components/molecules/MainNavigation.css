@@ -176,7 +176,7 @@ html, body {
   height: var(--touch-target-min);
   border-radius: var(--radius-md);
   border: 1px solid rgba(var(--color-brand-gold-rgb), 0.45);
-  background: rgba(10, 10, 10, 0.75);
+  background: rgba(var(--color-surface-darker-rgb), 0.75);
   box-shadow:
     0 var(--space-2) var(--space-5) rgba(0, 0, 0, 0.45),
     0 0 20px rgba(var(--color-brand-gold-rgb), 0.18);
@@ -276,8 +276,8 @@ html, body {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: calc(var(--header-height) + 24px) 24px 32px;
-  background: rgba(0, 0, 0, 0.01); /* Minimal background to capture clicks */
+  padding: calc(var(--header-height) + var(--space-3)) var(--space-3) var(--space-4);
+  background: rgba(var(--color-surface-darker-rgb), 0.01); /* Minimal background to capture clicks */
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   z-index: 9999;

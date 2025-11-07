@@ -261,7 +261,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(18, 18, 18, 0.95);
+  background-color: rgba(var(--color-surface-darker-rgb), 0.95);
   z-index: -1;
 }
 
@@ -273,7 +273,7 @@
   border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
   position: sticky;
   top: 0;
-  background: rgba(18, 18, 18, 0.8);
+  background: rgba(var(--color-surface-darker-rgb), 0.8);
   -webkit-backdrop-filter: blur(var(--space-1));
   backdrop-filter: blur(var(--space-1));
   z-index: 3;
@@ -301,7 +301,7 @@
 }
 
 .close-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--color-text-primary-rgb), 0.1);
 }
 
 .modal-body {
@@ -310,7 +310,7 @@
   overflow-y: auto;
   position: relative;
   z-index: 1;
-  background: rgba(18, 18, 18, 0.4);
+  background: rgba(var(--color-surface-darker-rgb), 0.4);
 }
 
 /* Step Container */

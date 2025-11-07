@@ -26,6 +26,10 @@
   --color-accent-silver: #C0C0C0;
   --color-accent-grey: #A8A8A8;
   
+  /* Status Colors */
+  --color-error-red: #DC2626;
+  --color-success-green: #16A34A;
+  
   /* RGB values for opacity control */
   --color-brand-gold-rgb: 212, 175, 55;
   --color-surface-dark-rgb: 34, 34, 34;
@@ -38,13 +42,29 @@
   --space-4: 32px;   /* 4 units */
   --space-5: 40px;   /* 5 units */
   --space-6: 48px;   /* 6 units */
+  --space-7: 56px;   /* 7 units */
   --space-8: 64px;   /* 8 units */
   --space-10: 80px;  /* 10 units */
+  --space-11: 88px;  /* 11 units */
   --space-12: 96px;  /* 12 units */
+  --space-15: 120px; /* 15 units */
+  --space-20: 160px; /* 20 units */
+  --space-23: 184px; /* 23 units */
+  --space-25: 200px; /* 25 units */
+  --space-36: 288px; /* 36 units */
+  --space-45: 360px; /* 45 units */
+  --space-50: 400px; /* 50 units */
+  --space-65: 520px; /* 65 units */
   
   /* TYPOGRAPHY - One scale only */
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-heading: 'Playfair Display', serif;
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
   
   --text-h1-desktop: 48px;
   --text-h1-tablet: 36px;
@@ -67,6 +87,7 @@
   --line-height-loose: 1.8;
   
   /* RESPONSIVE BREAKPOINTS - Mobile-first only */
+  --breakpoint-mobile: 480px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
   --breakpoint-wide: 1440px;
@@ -83,6 +104,15 @@
   --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
   --shadow-gold: 0 0 15px rgba(212, 175, 55, 0.3);
   
+  /* BORDER RADIUS */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* BRAND WHITE */
+  --brand-white: #FFFFFF;
+  
   /* TOUCH TARGETS (Accessibility) */
   --touch-target-min: 48px;
   
@@ -91,6 +121,10 @@
   --z-sticky: 200;
   --z-modal: 1000;
   --z-toast: 2000;
+  --z-index-header: 50;
+  
+  /* HEADER HEIGHT */
+  --header-height: 80px;
   
   /* LEGACY SUPPORT (for backward compatibility) */
   --brand-gold: var(--color-brand-gold);
