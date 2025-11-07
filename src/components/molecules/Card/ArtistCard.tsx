@@ -1,5 +1,6 @@
 import React from 'react';
 import { PenTool, Target, UserIcon, Palette, Clock, Instagram } from 'lucide-react';
+import './ArtistCard.css';
 
 interface ArtistCardProps {
   artist: {
