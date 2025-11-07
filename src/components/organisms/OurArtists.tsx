@@ -113,7 +113,7 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
 
   return (
     <>
-      <section className='w-full section-padding'>
+      <section className='w-full section-padding' data-texture-bg>
         <div className='responsive-container safe-area-padding'>
           {/* Section Header - STANDARDIZED TYPOGRAPHY */}
           <div className='section-header text-center mb-8 md:mb-16 max-w-[800px] mx-auto'>

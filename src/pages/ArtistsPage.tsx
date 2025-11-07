@@ -23,7 +23,7 @@ export function ArtistsPage() {
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       {/* Artists Section with TeamGrid (matches homepage cards) */}
-      <section className='artists-section pt-24 md:pt-24 pb-16 md:pb-24 relative z-10'>
+      <section className='artists-section pt-24 md:pt-24 pb-16 md:pb-24 relative z-10' data-texture-bg>
         <div className='container max-w-[1320px] mx-auto px-8 md:px-8'>
           {/* Unified heading section applied: matches ServicesPageInteractive styling */}
           <div className='text-center mb-16'>

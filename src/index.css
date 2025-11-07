@@ -16,6 +16,7 @@
 @import './styles/phone-frame-fix.css';
 @import './styles/artist-cards-fix.css';
 @import './styles/pricing-cards-compact.css';
+@import './styles/artist-section-fix.css';
 
 /* Critical viewport height fixes - MUST be in @layer base for Tailwind compatibility */
 @layer base {
