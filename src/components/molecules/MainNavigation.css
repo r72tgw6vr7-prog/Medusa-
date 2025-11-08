@@ -3,41 +3,33 @@
   position: relative;
 }
 
-/* Force full width navigation - no white spots */
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden !important;
-}
+/* Full width navigation - handled by design-system.css base layer */
 
 /* Navigation - Transparent by default (over hero) */
 .navigation {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: var(--z-index-header) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navigation);
   /* Dark background over hero - no transparency issues */
-  background: rgba(var(--color-surface-dark-rgb), 0.7) !important;
-  width: 100vw !important;
-  min-width: 100% !important;
+  background: rgba(var(--color-surface-dark-rgb), 0.7);
+  width: 100vw;
+  min-width: 100%;
   /* Backdrop blur for readability */
   -webkit-backdrop-filter: blur(var(--space-1));
   backdrop-filter: blur(var(--space-1));
   /* Smooth transitions */
   transition:
     background-color 0.3s ease,
-    box-shadow 0.3s ease !important;
+    box-shadow 0.3s ease;
   /* No border or shadow in transparent state */
-  border-bottom: none !important;
-  box-shadow: none !important;
+  border-bottom: none;
+  box-shadow: none;
   /* Ensure no white gaps */
-  margin: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding: 0 !important;
-  /* Force full coverage */
-  transform: translateX(0) !important;
+  margin: 0;
+  /* Full coverage */
+  transform: translateX(0);
 }
 
 /* Language Toggle Animation */
@@ -79,7 +71,7 @@ html, body {
 
   .language-toggle__button {
     position: relative;
-    z-index: 10;
+    z-index: var(--z-dropdown);
     width: var(--space-7);
     height: var(--space-5);
     display: flex;
@@ -138,17 +130,16 @@ html, body {
 
 /* Scrolled state - Solid background */
 .navigation.scrolled {
-  width: 100vw !important;
-  min-width: 100% !important;
-  box-shadow: var(--shadow-lg) !important;
-  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1) !important;
+  width: 100vw;
+  min-width: 100%;
+  box-shadow: var(--shadow-lg);
+  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
   /* Ensure full coverage */
-  margin: 0 !important;
-  padding: 0 !important;
-  /* Force full coverage */
-  transform: translateX(0) !important;
+  margin: 0;
+  padding: 0;
+  transform: translateX(0);
   /* Always show solid background on mobile when scrolled */
-  background: rgba(var(--color-surface-darker-rgb), 1.0) !important;
+  background: rgba(var(--color-surface-darker-rgb), 1.0);
 }
 
 /* Logo/text colors for scrolled state (remain white) */
@@ -185,8 +176,8 @@ html, body {
     box-shadow 0.3s ease,
     border-color 0.3s ease,
     background 0.3s ease;
-  overflow: visible !important;
-  z-index: var(--z-dropdown) !important;
+  overflow: visible;
+  z-index: var(--z-dropdown);
 }
 
 .mobile-menu-button:hover {
@@ -208,62 +199,62 @@ html, body {
   position: relative;
   width: var(--space-3);
   height: var(--space-3);
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: visible !important;
-  z-index: 10001 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  z-index: calc(var(--z-navigation) + 1);
 }
 
 .mobile-menu-button__line {
-  position: absolute !important;
-  left: 50% !important;
+  position: absolute;
+  left: 50%;
   width: var(--space-6);
   height: var(--space-1);
   border-radius: var(--space-1);
-  background-color: var(--color-brand-gold) !important;
-  box-shadow: 0 0 10px rgba(var(--color-brand-gold-rgb), 0.7) !important;
-  display: block !important;
-  content: '' !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 10002 !important;
-  pointer-events: none !important;
-  will-change: transform, opacity !important;
-  transform-origin: center !important;
-  transform: translateX(-50%) !important;
+  background-color: var(--color-brand-gold);
+  box-shadow: 0 0 10px rgba(var(--color-brand-gold-rgb), 0.7);
+  display: block;
+  content: '';
+  visibility: visible;
+  opacity: 1;
+  z-index: calc(var(--z-navigation) + 2);
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform-origin: center;
+  transform: translateX(-50%);
   transition:
     transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55),
     opacity 0.3s ease,
-    top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .mobile-menu-button__line--top {
-  top: 0 !important;
+  top: 0;
 }
 
 .mobile-menu-button__line--middle {
-  top: calc(var(--space-2) + 0.5px) !important;
+  top: calc(var(--space-2) + 0.5px);
 }
 
 .mobile-menu-button__line--bottom {
-  top: var(--space-4) !important;
+  top: var(--space-4);
 }
 
 /* X animation when menu is open */
 .mobile-menu-button.is-open .mobile-menu-button__line--top {
-  top: calc(var(--space-2) + 0.5px) !important;
-  transform: translateX(-50%) rotate(45deg) !important;
+  top: calc(var(--space-2) + 0.5px);
+  transform: translateX(-50%) rotate(45deg);
 }
 
 .mobile-menu-button.is-open .mobile-menu-button__line--middle {
-  opacity: 0 !important;
-  transform: translateX(-50%) scale(0) !important;
+  opacity: 0;
+  transform: translateX(-50%) scale(0);
 }
 
 .mobile-menu-button.is-open .mobile-menu-button__line--bottom {
-  top: calc(var(--space-2) + 0.5px) !important;
-  transform: translateX(-50%) rotate(-45deg) !important;
+  top: calc(var(--space-2) + 0.5px);
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 /* ============================================
@@ -280,7 +271,7 @@ html, body {
   background: rgba(var(--color-surface-darker-rgb), 0.01); /* Minimal background to capture clicks */
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  z-index: 9999;
+  z-index: var(--z-overlay);
   cursor: pointer; /* Show it's clickable */
 }
 
@@ -315,7 +306,7 @@ html, body {
 
 .mobile-menu-overlay__panel > * {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
 }
 
 .mobile-menu-overlay__links {
@@ -356,5 +347,5 @@ html, body {
 
 /* Mobile menu open state */
 .navigation.menu-open {
-  background: rgba(var(--color-surface-darker-rgb), 1.0) !important;
+  background: rgba(var(--color-surface-darker-rgb), 1.0);
 }

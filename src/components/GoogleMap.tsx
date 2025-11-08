@@ -1,6 +1,5 @@
 import React from 'react';
 import { MapPin, ExternalLink } from 'lucide-react';
-import '../styles/google-map.css';
 
 interface Props {
   width?: string;

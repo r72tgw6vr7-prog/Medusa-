@@ -1,6 +1,6 @@
 /* Trust badges animation pause on hover */
 .hover\:animation-pause:hover {
-  animation-play-state: paused !important;
+  animation-play-state: paused;
 }
 
 /* Ensure scrollBadges animation is available */
@@ -13,21 +13,22 @@
   }
 }
 
-/* Force artist name badges to bottom of cards - override all other positioning */
+/* Artist name badges positioning - using higher specificity instead of !important */
 .artist-card__name-badge,
-div[class*="absolute"][class*="left-1/2"] span.inline-block,
-.absolute.bottom-8.left-1/2,
-.absolute.bottom-8 {
-  position: absolute !important;
-  bottom: var(--space-4) !important;
-  top: auto !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  z-index: 10 !important;
+.artist-card .absolute span.inline-block,
+.artist-card .absolute.left-1\/2,
+.artist-card .absolute {
+  position: absolute;
+  bottom: var(--space-4);
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-dropdown);
 }
 
-/* Specifically target the name badge container */
-.cursor-pointer .absolute.bottom-8 {
-  bottom: var(--space-4) !important;
-  top: auto !important;
+/* Name badge container - higher specificity for cursor-pointer context */
+.cursor-pointer.artist-card .absolute.bottom-8,
+.artist-card.cursor-pointer .absolute.bottom-8 {
+  bottom: var(--space-4);
+  top: auto;
 }
