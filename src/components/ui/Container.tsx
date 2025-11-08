@@ -37,7 +37,7 @@ const Container: React.FC<ContainerProps> = ({
   ...props
 }) => {
   const sizeClassMap: Record<ContainerSize, string> = {
-    default: "max-w-[1280px]",
+    default: "max-w-[1440px]",
     narrow: "max-w-[960px]",
     wide: "max-w-[1600px]",
     full: "max-w-full",
