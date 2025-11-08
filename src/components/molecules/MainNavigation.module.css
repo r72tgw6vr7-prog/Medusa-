@@ -5,27 +5,28 @@
 
 /* Full width navigation - handled by design-system.css base layer */
 
-/* Navigation - Transparent by default (over hero) */
+/* Navigation - Glassmorphism effect for modern aesthetic */
 .navigation {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: var(--z-navigation);
-  /* Dark background over hero - no transparency issues */
-  background: rgba(var(--color-surface-dark-rgb), 0.7);
+  /* Semi-transparent dark background with glassmorphism */
+  background: rgba(var(--color-surface-darker-rgb), 0.7);
   width: 100vw;
   min-width: 100%;
-  /* Backdrop blur for readability */
-  -webkit-backdrop-filter: blur(var(--space-1));
-  backdrop-filter: blur(var(--space-1));
+  /* Enhanced backdrop blur for premium glassmorphism effect */
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
   /* Smooth transitions */
   transition:
-    background-color 0.3s ease,
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.3s ease;
-  /* No border or shadow in transparent state */
-  border-bottom: none;
-  box-shadow: none;
+  /* Subtle border for definition */
+  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   /* Ensure no white gaps */
   margin: 0;
   /* Full coverage */
@@ -128,18 +129,22 @@
    PHASE 2: SOLID NAVIGATION (WHEN SCROLLED)
    ============================================ */
 
-/* Scrolled state - Solid background */
+/* Scrolled state - Enhanced glassmorphism */
 .navigation.scrolled {
   width: 100vw;
   min-width: 100%;
-  box-shadow: var(--shadow-lg);
-  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
-  /* Ensure full coverage */
+  /* More opaque when scrolled for better readability */
+  background: rgba(var(--color-surface-darker-rgb), 0.85);
+  /* Increased blur and saturation when scrolled */
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  /* Enhanced shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  /* More visible border */
+  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.2);
   margin: 0;
   padding: 0;
   transform: translateX(0);
-  /* Always show solid background on mobile when scrolled */
-  background: rgba(var(--color-surface-darker-rgb), 1.0);
 }
 
 /* Logo/text colors for scrolled state (remain white) */

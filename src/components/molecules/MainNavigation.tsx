@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { SkipLink } from '../accessibility/SkipLink';
 import { useKeyboardNav } from '../../hooks/useKeyboardNav';
-import './MainNavigation.css';
+import styles from './MainNavigation.module.css';
 
 type NavItem = {
   to: string;
@@ -187,9 +187,7 @@ export function MainNavigation() {
       <nav
         id="main-navigation"
         aria-label="Main navigation"
-        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full transition-all duration-300 ease-out ${
-          scrolled ? 'scrolled' : ''
-        } ${menuOpen ? 'menu-open' : ''}`}
+        className={`${styles['navigation']} ${scrolled ? styles['scrolled'] : ''} ${menuOpen ? 'menu-open' : ''} fixed top-0 left-0 right-0 z-1000 w-full transition-all duration-300 ease-out`}
         onKeyDown={handleNavKeyDown}
       >
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-8 md:px-16">

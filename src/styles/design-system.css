@@ -79,12 +79,30 @@
   --line-height-tight: 1.2;
   --line-height-normal: 1.6;
 
-  /* effects */
+  /* effects - shadows */
+  /* Neutral shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-gold: 0 4px 12px rgba(212, 175, 55, 0.3);
-  --shadow-gold-hover: 0 6px 16px rgba(212, 175, 55, 0.4);
-  --shadow-gold-active: 0 2px 8px rgba(212, 175, 55, 0.5);
-  --shadow-focus-ring: 0 0 0 3px rgba(212, 175, 55, 0.4);
+  --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.2);
+  
+  /* Gold glow shadows */
+  --shadow-gold-sm: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
+  --shadow-gold-md: 0 0 12px 4px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-gold-lg: 0 0 16px 6px rgba(var(--color-brand-gold-rgb), 0.5);
+  --shadow-gold: 0 4px 12px rgba(var(--color-brand-gold-rgb), 0.3);
+  --shadow-gold-hover: 0 6px 16px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-gold-active: 0 2px 8px rgba(var(--color-brand-gold-rgb), 0.5);
+  
+  /* Silver/Chrome shadows */
+  --shadow-silver-sm: 0 0 8px 2px rgba(var(--color-accent-silver-rgb), 0.3);
+  
+  /* Focus rings */
+  --shadow-focus-ring: 0 0 0 3px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-focus-ring-white: 0 0 0 2px var(--color-text-primary);
+  
+  /* Combined shadows */
+  --shadow-card-premium: 0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--color-brand-gold-rgb), 0.15);
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;

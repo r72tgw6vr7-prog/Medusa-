@@ -58,15 +58,15 @@
 }
 
 .hover-glow-gold:hover {
-  box-shadow: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
+  box-shadow: var(--shadow-gold-sm);
 }
 
 .hover-glow-gold-medium:hover {
-  box-shadow: 0 0 12px 4px rgba(var(--color-brand-gold-rgb), 0.4);
+  box-shadow: var(--shadow-gold-md);
 }
 
 .hover-glow-gold-strong:hover {
-  box-shadow: 0 0 16px 6px rgba(var(--color-brand-gold-rgb), 0.5);
+  box-shadow: var(--shadow-gold-lg);
 }
 
 .hover-glow-chrome {
@@ -76,7 +76,7 @@
 }
 
 .hover-glow-chrome:hover {
-  box-shadow: 0 0 8px 2px rgba(var(--color-accent-silver-rgb), 0.3);
+  box-shadow: var(--shadow-silver-sm);
 }
 
 .hover-brightness {
@@ -209,7 +209,7 @@
 
 .preset-button-gold:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
+  box-shadow: var(--shadow-gold-sm);
 }
 
 .preset-button-gold:active {
@@ -231,7 +231,7 @@
 
 .preset-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
+  box-shadow: var(--shadow-gold-sm);
 }
 
 .preset-link {
