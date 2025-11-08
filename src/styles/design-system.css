@@ -34,21 +34,27 @@
   --color-success-green: #16A34A;
 
   /* spacing (8px grid) */
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 32px;
-  --space-6: 48px;
-  --space-8: 64px;
-  --space-12: 96px;
-  --space-16: 128px;
-  --space-20: 160px;
-  --space-24: 192px;
-  --space-32: 256px;
-  --space-40: 320px;
-  --space-48: 384px;
-  --space-56: 448px;
-  --space-65: 520px;
+  --space-0-5: 4px;   /* 0.5 unit */
+  --space-1: 8px;     /* 1 unit */
+  --space-1-5: 12px;  /* 1.5 units */
+  --space-2: 16px;    /* 2 units */
+  --space-2-5: 20px;  /* 2.5 units */
+  --space-3: 24px;    /* 3 units */
+  --space-4: 32px;    /* 4 units */
+  --space-5: 40px;    /* 5 units */
+  --space-6: 48px;    /* 6 units */
+  --space-7: 56px;    /* 7 units */
+  --space-8: 64px;    /* 8 units */
+  --space-10: 80px;   /* 10 units */
+  --space-12: 96px;   /* 12 units */
+  --space-16: 128px;  /* 16 units */
+  --space-20: 160px;  /* 20 units */
+  --space-24: 192px;  /* 24 units */
+  --space-32: 256px;  /* 32 units */
+  --space-40: 320px;  /* 40 units */
+  --space-48: 384px;  /* 48 units */
+  --space-56: 448px;  /* 56 units */
+  --space-65: 520px;  /* 65 units */
 
   /* type */
   --font-family-primary: 'Inter', -apple-system, sans-serif;

@@ -19,7 +19,7 @@
   right: 0;
   width: 100%;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 var(--space-4);
   z-index: calc(var(--z-base) + 29);
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@
 
 .trust-badges-container {
   /* REFINEMENT #1: 1020×92px container with 96px fade gradients */
-  --gap: 24px;
+  --gap: var(--space-3);
   --item-width: 240px;
   width: min(100%, 1020px);
   max-width: 1020px;
@@ -87,25 +87,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-2);
   min-width: var(--item-width);
   width: var(--item-width);
   height: 92px;
-  padding: 0 16px;
+  padding: 0 var(--space-2);
   flex-shrink: 0; /* Prevents badges from compressing */
 }
 
 /* Badge icon with gold circular border - Figma exact specs */
 .badge-icon {
-  width: 56px;
-  height: 56px;
+  width: var(--space-7);
+  height: var(--space-7);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%; /* Perfect circle */
-  border: 2px solid #d4af37; /* Gold border */
+  border: 2px solid var(--color-brand-gold); /* Gold border */
   background: rgba(0, 0, 0, 0.4); /* Darker background for contrast */
-  padding: 10px;
+  padding: var(--space-1-5);
   transition: all 300ms ease-in-out;
   flex-shrink: 0;
 
@@ -216,13 +216,13 @@
   }
 
   .badge-icon {
-    width: 48px;
-    height: 48px;
-    padding: 8px;
+    width: var(--space-6);
+    height: var(--space-6);
+    padding: var(--space-1);
   }
 
   .trust-badges-container {
-    --gap: 16px;
+    --gap: var(--space-2);
     --item-width: 180px;
   }
 
