@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { PageBackground } from '../components/atoms/PageBackground';
+import { PageHeader } from '../components/ui/PageHeader';
 
 export const LegalPage: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -35,18 +36,13 @@ export const LegalPage: React.FC = () => {
         <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px]'>
-              {/* Page Header - Matches Services page exactly */}
-              <div className='text-center space-y-8 mb-16'>
-                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                  Medusa München
-                </p>
-                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
-                  Allgemeine Geschäftsbedingungen
-                </h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
-                  MEDUSA TATTOO MÜNCHEN
-                </p>
-              </div>
+              {/* Page Header - Standardized */}
+              <PageHeader
+                eyebrow="Medusa München"
+                title="Allgemeine Geschäftsbedingungen"
+                subtitle="MEDUSA TATTOO MÜNCHEN"
+                alignment="center"
+              />
 
               {/* Table of Contents */}
               <nav className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-16'>

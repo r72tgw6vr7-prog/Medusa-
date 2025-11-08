@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, FileText, Mail } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
+import { PageHeader } from '../components/ui/PageHeader';
 
 interface DatenschutzPageProps {
   language?: 'DE' | 'EN';
@@ -168,19 +169,19 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
         >
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px]'>
-              {/* Page Header - Matches Services page exactly */}
+              {/* Page Header - Standardized */}
               <motion.div
-                className='text-center space-y-8 mb-16'
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 40 }}
                 transition={{ duration: 0.8 }}
               >
-                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                  Medusa München
-                </p>
-                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>{t.title}</h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>{t.subtitle}</p>
-                <p className='text-sm text-white/60'>{t.lastUpdated}</p>
+                <PageHeader
+                  eyebrow="Medusa München"
+                  title={t.title}
+                  subtitle={t.subtitle}
+                  alignment="center"
+                />
+                <p className='text-sm text-white/60 text-center'>{t.lastUpdated}</p>
               </motion.div>
 
               {/* Introduction */}

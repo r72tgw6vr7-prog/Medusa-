@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
+import { PageHeader } from '../components/ui/PageHeader';
 import {
   CheckCircle,
   AlertTriangle,
@@ -53,17 +54,14 @@ export const AftercarePage: React.FC = () => {
       <section className='section-padding relative z-10'>
         <div className='responsive-container safe-area-padding'>
           <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
-            <div className='text-center space-y-8'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Medusa München
-              </p>
-              <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
-                Tattoo Nachsorge
-              </h1>
-              <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
-                Ihr Leitfaden für perfekte Heilung und langanhaltende Schönheit
-              </p>
-              <div className='flex items-center justify-center gap-8 text-white/70'>
+            <div className='text-center'>
+              <PageHeader
+                eyebrow="Medusa München"
+                title="Tattoo Nachsorge"
+                subtitle="Ihr Leitfaden für perfekte Heilung und langanhaltende Schönheit"
+                alignment="center"
+              />
+              <div className='flex items-center justify-center gap-8 text-white/70 -mt-8'>
                 <Clock size={20} />
                 <span className='text-base'>
                   Heilungsdauer: 2-4 Wochen oberflächlich, 3-6 Monate vollständig

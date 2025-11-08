@@ -1,6 +1,7 @@
 import React from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
+import { PageHeader } from '../components/ui/PageHeader';
 
 export const AGBPage: React.FC = () => {
   return (
@@ -12,18 +13,13 @@ export const AGBPage: React.FC = () => {
         <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px]'>
-              {/* Page Header - Matches Services page exactly */}
-              <div className='text-center space-y-8 mb-16'>
-                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                  Medusa München
-                </p>
-                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
-                  Allgemeine Geschäftsbedingungen
-                </h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
-                  Gültig bis zur Veröffentlichung der finalen Fassung
-                </p>
-              </div>
+              {/* Page Header - Standardized */}
+              <PageHeader
+                eyebrow="Medusa München"
+                title="Allgemeine Geschäftsbedingungen"
+                subtitle="Gültig bis zur Veröffentlichung der finalen Fassung"
+                alignment="center"
+              />
 
               <section className='space-y-8 text-white/70'>
                 <p>
