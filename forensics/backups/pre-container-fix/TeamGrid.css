@@ -1,0 +1,337 @@
+/* TeamGrid.css - Matches exactly the reference Figma design */
+
+.team-section {
+  padding: 96px 0;
+  background-color: var(--brand-background);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+}
+
+.team-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: 36px;
+  color: var(--brand-gold);
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.team-heading h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--brand-gold);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.team-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #000000;
+  /* Taller cards */
+  aspect-ratio: 0.6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: scale(1.02);
+}
+
+.team-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: none;
+  position: relative;
+  display: block;
+}
+
+.team-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+/* Artist Name Badge at Top Center */
+.team-card-name-top {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.team-card-name-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-semibold);
+  font-size: 16px;
+  color: var(--brand-gold);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  white-space: nowrap;
+}
+
+.team-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-card-specialties {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--brand-white);
+  margin-bottom: 20px;
+  text-align: center;
+  opacity: 0.9;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-card-experience {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+.team-card-experience span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.team-card-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.team-card-social a {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.team-card-social a:hover {
+  color: var(--brand-gold);
+}
+
+.team-card-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.team-card-bottom-info .team-card-experience {
+  margin-bottom: 0;
+}
+
+.team-card-bottom-info .team-card-social {
+  margin-bottom: 0;
+}
+
+.team-card-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 0 16px;
+}
+
+/* Wrapper to keep card and buttons together */
+.team-card-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+/* Ensure adequate height on desktop */
+@media (min-width: 1024px) {
+  .team-card {
+    min-height: 520px;
+  }
+}
+
+.team-card-button {
+  flex: 1;
+  padding: 12px 0;
+  min-height: 44px; /* 44×44 tap target */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.team-card-button-primary {
+  background-color: transparent;
+  color: var(--brand-white);
+  border: 2px solid #d4af37;
+}
+
+.team-card-button-primary:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  border-color: #c19b26;
+}
+
+.team-card-button-secondary {
+  background-color: transparent;
+  color: var(--brand-white);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.team-card-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #d4af37;
+}
+
+.icon {
+  color: #c19b26;
+  opacity: 0.7;
+}
+
+.team-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 16px;
+  color: var(--brand-white);
+}
+
+.team-status__spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid rgba(212, 175, 55, 0.35);
+  border-top-color: var(--brand-gold);
+  animation: team-spinner 1s linear infinite;
+}
+
+.team-status__text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+@keyframes team-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.image-error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  color: white;
+  gap: 8px;
+}
+
+/* Responsive adjustments - Match requested breakpoints */
+@media (min-width: 360px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 20px; /* ~20px gutters */
+    padding: 0 20px;
+  }
+  .team-heading {
+    margin-bottom: 32px;
+  }
+  .team-heading h2 {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+  }
+}
+
+/* Render timestamp styling */
+.team-render-timestamp {
+  font-size: 12px;
+  opacity: 0.6;
+  display: block;
+  margin-top: 8px;
+}
+
+@media (max-width: 576px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .team-card {
+    width: 100%;
+    aspect-ratio: 0.6;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .team-section {
+    padding: 60px 0;
+  }
+}

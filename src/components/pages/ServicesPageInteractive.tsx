@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useMemo, useState, useCallback, useRef } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Sparkles, Zap, Shield, Heart, Euro, ChevronRight } from 'lucide-react';
 import { useApp } from '../../../core/state/AppContext';
+import { Button } from '../ui/button';
 
 const categories = [
   {
@@ -168,6 +169,20 @@ const serviceDetails = {
 
 type CategoryId = keyof typeof serviceDetails;
 
+// Standard animation variants (consistent across pages)
+const fadeInUpVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+  transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+} as const;
+
+const containerVariants = {
+  animate: {
+    transition: { staggerChildren: 0.1 },
+  },
+} as const;
+
 interface ServicesPageInteractiveProps {
   className?: string;
 }
@@ -186,22 +201,31 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
   const [isAnimating, setIsAnimating] = useState(false);
   const { openBooking } = useApp();
 
+  // Intersection Observer to trigger animations when in view
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(containerRef, { amount: 0.1, once: true });
+
   const currentServices = useMemo(() => serviceDetails[activeCategory], [activeCategory]);
   const activeCategoryMeta = useMemo(
     () => categories.find((category) => category.id === activeCategory),
     [activeCategory],
   );
 
-  const handleCategoryChange = (categoryId: CategoryId) => {
+  const handleCategoryChange = useCallback((categoryId: CategoryId) => {
     if (categoryId === activeCategory || isAnimating) return;
     setIsAnimating(true);
     setActiveCategory(categoryId);
     window.setTimeout(() => setIsAnimating(false), 400);
-  };
+  }, [activeCategory, isAnimating]);
 
-  const handleServiceBooking = (serviceId: string) => {
-    openBooking({ service: serviceId });
-  };
+  // Debounced booking handler to prevent accidental double-invocation
+  const handleServiceBooking = useMemo(() => {
+    let t: number | undefined;
+    return (serviceId: string) => {
+      if (t) window.clearTimeout(t);
+      t = window.setTimeout(() => openBooking({ service: serviceId }), 300) as unknown as number;
+    };
+  }, [openBooking]);
 
   return (
     <section className={`section-padding relative z-10 ${className}`}>
@@ -220,7 +244,11 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
             </p>
           </div>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
+          <div
+            className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'
+            role='tablist'
+            aria-label='Service-Kategorien'
+          >
             {categories.map((category) => {
               const IconComponent = category.icon;
               const isActive = activeCategory === category.id;
@@ -231,24 +259,28 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
               return (
                 <button
                   key={category.id}
+                  id={`tab-${category.id}`}
+                  role='tab'
+                  aria-selected={isActive}
+                  aria-controls={`panel-${category.id}`}
+                  tabIndex={isActive ? 0 : -1}
                   className={buttonClass}
                   onClick={() => handleCategoryChange(category.id as CategoryId)}
-                  aria-pressed={isActive}
                   aria-label={`Select ${category.title} category`}
                 >
                   <div className='flex items-center justify-between mb-8'>
                     <div
-                      className='h-12 w-12 flex items-center justify-center'
+                      className='h-14 w-14 flex items-center justify-center'
                       style={{ borderRadius: '9999px', backgroundColor: 'var(--brand-gold)' }}
                     >
-                      <IconComponent size={24} className='text-black' />
+                      <IconComponent size={20} className='text-black' />
                     </div>
                     <span className='text-xs font-semibold uppercase tracking-[0.25em] text-white/60'>
                       ab {category.priceFrom}
                     </span>
                   </div>
                   <div className='space-y-8 flex-1'>
-                    <h3 className='font-headline text-2xl text-[var(--brand-gold)]'>{category.title}</h3>
+                    <h3 className='font-headline text-2xl text-(--brand-gold)'>{category.title}</h3>
                     <p className='text-sm md:text-base text-white/75 leading-relaxed font-body'>
                       {category.subtitle}
                     </p>
@@ -261,13 +293,17 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              ref={containerRef}
               className='space-y-16'
+              role='tabpanel'
+              id={`panel-${activeCategory}`}
+              aria-labelledby={`tab-${activeCategory}`}
               aria-live='polite'
               aria-label={`Showing ${activeCategoryMeta?.title} services`}
+              variants={containerVariants}
+              initial='initial'
+              animate={inView ? 'animate' : 'initial'}
+              exit='exit'
             >
               <div className='text-center space-y-8'>
                 <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
@@ -291,14 +327,8 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                   return (
                     <div key={service.id} className='flex flex-col h-full'>
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: index * 0.1,
-                          duration: 0.4,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                        }}
-                        className={`flex flex-col h-full rounded-3xl border-2 transition-all duration-300 ${stateClass}`}
+                        variants={fadeInUpVariants}
+                        className={`flex flex-col h-full rounded-3xl border-2 bg-[#222222] transition-all duration-300 ${stateClass}`}
                       >
                         <div className='flex flex-col gap-8 p-8 h-full'>
                           <div className='flex items-center justify-between'>
@@ -325,24 +355,21 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
 
                           <ul className='space-y-8 text-sm text-white/80 font-body'>
                             {service.features.map((feature, featureIndex) => (
-                              <li key={featureIndex} className='flex items-center gap-8'>
+                              <motion.li key={featureIndex} className='flex items-center gap-8' variants={fadeInUpVariants}>
                                 <ChevronRight size={16} className='text-[var(--brand-gold)] shrink-0' />
                                 <span>{feature}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </ul>
 
-                          <button
+                          <Button
                             onClick={() => handleServiceBooking(service.id)}
-                            className={`w-full inline-flex items-center justify-center rounded-xl px-8 py-4 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] ${
-                              index === 1
-                                ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] hover:bg-[var(--brand-gold-hover)]'
-                                : 'border border-[var(--brand-gold)] text-[var(--brand-gold)] hover:bg-[var(--brand-gold)]/10'
-                            }`}
+                            variant={index === 1 ? 'gold' : 'outlineGold'}
+                            className={`w-full inline-flex items-center justify-center rounded-xl px-8 py-4 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]`}
                             aria-label={`${service.cta} für ${service.title}`}
                           >
                             {service.cta}
-                          </button>
+                          </Button>
                         </div>
                       </motion.div>
                     </div>

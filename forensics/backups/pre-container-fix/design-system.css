@@ -1,0 +1,323 @@
+/* ==============================================
+   MEDUSA-WEB: NORMALIZED DESIGN SYSTEM
+   November 7, 2025
+   
+   Structure:
+   1) TOKENS - CSS custom properties
+   2) THEME - Tailwind v4 theme mappings
+   3) BASE - Low specificity (@layer base + :where())
+   4) COMPONENTS - Component patterns (@layer components)
+   ============================================== */
+
+/* 1) TOKENS */
+:root {
+  /* colors */
+  --color-brand-gold: #D4AF37;
+  --brand-gold: #D4AF37;
+  --brand-white: #FFFFFF;
+  --shadow-gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+  --color-brand-gold-hover: #C9A961;
+  --color-brand-gold-dark: #A68646;
+  --color-brand-gold-light: #E8D4B8;
+  --color-brand-gold-rgb: 212, 175, 55;
+  --brand-gold-hover: #E5C158; /* hover gold as per spec */
+  --deep-black: #1A1A1A; /* surface darker */
+  --base-white: #FFFFFF;
+  --chrome-silver: #C0C0C0;
+  --shadow-gold-intense: 0 4px 20px rgba(var(--color-brand-gold-rgb), 0.3);
+  --color-surface-dark: #222222;
+  --color-surface-darker: #1A1A1A;
+  --color-surface-darker-rgb: 26, 26, 26;
+  --color-surface-medium: #2A2A2A;
+  --color-surface-light: #3A3A3A;
+  --color-text-primary: #FFFFFF;
+  --color-text-primary-rgb: 255, 255, 255;
+  --color-text-secondary: rgba(255, 255, 255, 0.8);
+  --color-text-tertiary: rgba(255, 255, 255, 0.6);
+  --color-accent-silver: #C0C0C0;
+  --color-accent-silver-rgb: 192, 192, 192;
+  --color-accent-grey: #A8A8A8;
+  
+  /* Status Colors */
+  --color-error-red: #DC2626;
+  --color-success-green: #16A34A;
+
+  /* spacing (8px grid) */
+  --space-0-5: 4px;   /* 0.5 unit */
+  --space-1: 8px;     /* 1 unit */
+  --space-1-5: 12px;  /* 1.5 units */
+  --space-2: 16px;    /* 2 units */
+  --space-2-5: 20px;  /* 2.5 units */
+  --space-3: 24px;    /* 3 units */
+  --space-4: 32px;    /* 4 units */
+  --space-5: 40px;    /* 5 units */
+  --space-6: 48px;    /* 6 units */
+  --space-7: 56px;    /* 7 units */
+  --space-8: 64px;    /* 8 units */
+  --space-10: 80px;   /* 10 units */
+  --space-12: 96px;   /* 12 units */
+  --space-16: 128px;  /* 16 units */
+  --space-20: 160px;  /* 20 units */
+  --space-24: 192px;  /* 24 units */
+  --space-32: 256px;  /* 32 units */
+  --space-40: 320px;  /* 40 units */
+  --space-48: 384px;  /* 48 units */
+  --space-56: 448px;  /* 56 units */
+  --space-65: 520px;  /* 65 units */
+
+  /* type */
+  --font-family-primary: 'Inter', -apple-system, sans-serif;
+  --font-family-heading: 'Playfair Display', serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --text-h1: clamp(28px, 6vw, 48px);
+  --text-h2: clamp(24px, 4.8vw, 40px);
+  --text-h2-desktop: 40px;
+  --text-h3: clamp(20px, 4vw, 32px);
+  --text-lg: 18px;
+  --text-body: 16px;
+  --text-body-small: 14px;
+  --text-label: 12px;
+  --text-xs: 11px;
+  
+  /* line heights */
+  --line-height-tighter: 1.1;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+
+  /* effects - shadows */
+  /* Neutral shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.2);
+  
+  /* Gold glow shadows */
+  --shadow-gold-sm: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
+  --shadow-gold-md: 0 0 12px 4px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-gold-lg: 0 0 16px 6px rgba(var(--color-brand-gold-rgb), 0.5);
+  --shadow-gold: 0 4px 12px rgba(var(--color-brand-gold-rgb), 0.3);
+  --shadow-gold-hover: 0 6px 16px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-gold-active: 0 2px 8px rgba(var(--color-brand-gold-rgb), 0.5);
+  
+  /* Silver/Chrome shadows */
+  --shadow-silver-sm: 0 0 8px 2px rgba(var(--color-accent-silver-rgb), 0.3);
+  
+  /* Focus rings */
+  --shadow-focus-ring: 0 0 0 3px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-focus-ring-white: 0 0 0 2px var(--color-text-primary);
+  
+  /* Combined shadows */
+  --shadow-card-premium: 0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--color-brand-gold-rgb), 0.15);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* layout */
+  --touch-target-min: 48px;
+  --header-height: 80px;
+  --first-section-offset: calc(var(--header-height) + 40px);
+  --container-default: 1280px;
+  --container-wide: 1440px;
+  --container-narrow: 1024px;
+  --container-padding: var(--space-6);
+  
+  /* breakpoints */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
+  
+  /* z-index system (systematic layering) */
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-sticky: 100;
+  --z-overlay: 500;
+  --z-modal: 1000;
+  --z-navigation: 2000;
+  --z-tooltip: 3000;
+  
+  /* Legacy z-index aliases (for backward compatibility) */
+  --z-index-header: var(--z-navigation);
+}
+
+/* Container Definitions */
+.container {
+  width: 100%;
+  max-width: var(--container-default);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+}
+
+/* 2) THEME - Tailwind v4 theme mappings */
+/* stylelint-disable */
+/* @theme is Tailwind v4 syntax - required for theme customization */
+@theme {
+  /* Brand colors - primary gold palette */
+  --color-brand-500: var(--color-brand-gold);
+  --color-brand-600: var(--color-brand-gold-hover);
+  --color-brand-700: var(--color-brand-gold-dark);
+  
+  /* Surface colors - backgrounds */
+  --color-surface-900: var(--color-surface-dark);
+  --color-surface-950: var(--color-surface-darker);
+  --color-surface-800: var(--color-surface-medium);
+  --color-surface-700: var(--color-surface-light);
+  
+  /* Text colors - for content */
+  --color-text-100: var(--color-text-primary);
+  --color-text-200: var(--color-text-secondary);
+  --color-text-300: var(--color-text-tertiary);
+}
+/* stylelint-enable */
+
+/* 3) BASE (low specificity) */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :where(html) {
+    color-scheme: light dark;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  :where(body) {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: var(--text-body);
+    font-weight: 400; /* Base text weight for T4 tests */
+    line-height: var(--line-height-normal);
+    background-color: var(--color-surface-dark);
+    color: var(--color-text-primary);
+  }
+
+  :where(h1, h2, h3) {
+    font-family: var(--font-family-heading);
+  }
+
+  :where(h1) {
+    font-size: var(--text-h1);
+    font-weight: 700; /* Bold for h1 (T4 compliance) */
+    line-height: 1.1;
+  }
+
+  :where(h2) {
+    font-size: var(--text-h2);
+    font-weight: 600; /* Semibold for h2 (T4 compliance) */
+    line-height: 1.2;
+  }
+  
+  /* Grid wrapper for container queries */
+  .grid-wrapper {
+    container-type: inline-size;
+    width: 100%;
+  }
+  
+  /* Team grid system - uses container queries */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+  
+  @container grid-wrapper (min-width: 640px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+  }
+  
+  @container grid-wrapper (min-width: 900px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+  }
+  
+  @container grid-wrapper (min-width: 1200px) {
+    .team-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+  }
+  
+  /* Artist grid system - uses container queries */
+  .artist-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+  
+  @container grid-wrapper (min-width: 600px) {
+    .artist-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+  }
+  
+  @container grid-wrapper (min-width: 900px) {
+    .artist-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+  }
+  
+  @container grid-wrapper (min-width: 1200px) {
+    .artist-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  :where(h3) {
+    font-weight: 600; /* Semibold for h3 */
+  }
+
+  /* Navigation links: 500 or 600, NOT 700 (T4 compliance) */
+  :where(nav a, nav button) {
+    font-weight: 500;
+  }
+
+  :where(p, li) {
+    font-size: var(--text-body);
+  }
+
+  :where(a) {
+    color: var(--color-brand-gold);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  :where(a:hover) {
+    color: var(--color-brand-gold-hover);
+  }
+
+  :where(button, .button) {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  :where(a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible) {
+    outline: 2px solid var(--color-brand-gold);
+    outline-offset: 2px;
+  }
+}
