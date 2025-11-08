@@ -14,7 +14,7 @@
 
 .trust-badges-wrapper {
   position: absolute;
-  bottom: 15vh;
+  bottom: max(120px, 15vh);
   left: 0;
   right: 0;
   width: 100%;
@@ -165,7 +165,7 @@
   .trust-badges-wrapper {
     /* Keep center positioning on tablet */
     padding: 0 20px;
-    bottom: 12vh;
+    bottom: max(100px, 12vh);
   }
 
   .trust-badges-track {
@@ -198,7 +198,7 @@
   .trust-badges-wrapper {
     /* Keep center positioning on mobile */
     padding: 0 16px;
-    bottom: 10vh;
+    bottom: max(80px, 10vh);
   }
 
   .trust-badges-container {

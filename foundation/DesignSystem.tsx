@@ -468,7 +468,7 @@ export function ResponsiveContainer({
   const maxWidthClasses = {
     mobile: 'max-w-sm',
     tablet: 'max-w-4xl',
-    desktop: 'max-w-[1440px]',
+    desktop: 'style={{ maxWidth: "1433px" }}',
     wide: 'max-w-screen-2xl',
     full: 'max-w-none',
   };

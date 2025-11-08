@@ -13,18 +13,10 @@
 :root {
   /* colors */
   --color-brand-gold: #D4AF37;
-  --brand-gold: #D4AF37;
-  --brand-white: #FFFFFF;
-  --shadow-gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
   --color-brand-gold-hover: #C9A961;
   --color-brand-gold-dark: #A68646;
   --color-brand-gold-light: #E8D4B8;
   --color-brand-gold-rgb: 212, 175, 55;
-  --brand-gold-hover: #E5C158; /* hover gold as per spec */
-  --deep-black: #1A1A1A; /* surface darker */
-  --base-white: #FFFFFF;
-  --chrome-silver: #C0C0C0;
-  --shadow-gold-intense: 0 4px 20px rgba(var(--color-brand-gold-rgb), 0.3);
   --color-surface-dark: #222222;
   --color-surface-darker: #1A1A1A;
   --color-surface-darker-rgb: 26, 26, 26;
@@ -120,13 +112,13 @@
   --touch-target-min: 48px;
   --header-height: 80px;
   --first-section-offset: calc(var(--header-height) + 40px);
-  --container-default: 1440px;
+  --container-default: 1280px;
   --container-wide: 1440px;
   --container-narrow: 1024px;
   --container-padding: var(--space-6);
   
   /* breakpoints */
-  --breakpoint-mobile: 640px;
+  --breakpoint-mobile: 480px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
   --breakpoint-wide: 1280px;
@@ -245,14 +237,14 @@
     }
   }
   
-  @container grid-wrapper (min-width: 1024px) {
+  @container grid-wrapper (min-width: 900px) {
     .team-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-3);
     }
   }
   
-  @container grid-wrapper (min-width: 1280px) {
+  @container grid-wrapper (min-width: 1200px) {
     .team-grid {
       grid-template-columns: repeat(4, 1fr);
       gap: var(--space-4);
@@ -273,14 +265,14 @@
     }
   }
   
-  @container grid-wrapper (min-width: 1024px) {
+  @container grid-wrapper (min-width: 900px) {
     .artist-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-3);
     }
   }
   
-  @container grid-wrapper (min-width: 1280px) {
+  @container grid-wrapper (min-width: 1200px) {
     .artist-grid {
       grid-template-columns: repeat(4, 1fr);
       gap: var(--space-4);
