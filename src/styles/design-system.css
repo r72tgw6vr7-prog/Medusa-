@@ -27,6 +27,7 @@
   --color-text-secondary: rgba(255, 255, 255, 0.8);
   --color-text-tertiary: rgba(255, 255, 255, 0.6);
   --color-accent-silver: #C0C0C0;
+  --color-accent-silver-rgb: 192, 192, 192;
   --color-accent-grey: #A8A8A8;
   
   /* Status Colors */
@@ -67,9 +68,15 @@
   --text-h2: clamp(24px, 4.8vw, 40px);
   --text-h2-desktop: 40px;
   --text-h3: clamp(20px, 4vw, 32px);
+  --text-lg: 18px;
   --text-body: 16px;
   --text-body-small: 14px;
   --text-label: 12px;
+  --text-xs: 11px;
+  
+  /* line heights */
+  --line-height-tighter: 1.1;
+  --line-height-tight: 1.2;
   --line-height-normal: 1.6;
 
   /* effects */

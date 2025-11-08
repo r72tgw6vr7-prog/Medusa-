@@ -15,12 +15,12 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 .artist-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .artist-card.selected {
@@ -53,7 +53,7 @@
 .artist-card .artist-info h4 {
   font-family: var(--font-family-heading);
   color: var(--color-brand-gold);
-  font-size: 18px;
+  font-size: var(--text-lg);
   margin: 0;
   font-weight: var(--font-weight-semibold);
 }
@@ -65,8 +65,8 @@
 }
 
 .artist-card .artist-info .specialty {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-body-small);
+  color: rgba(var(--color-text-primary-rgb), 0.6);
 }
 
 /* Styling for team card variant - complementing TeamGrid.css */
@@ -95,18 +95,18 @@
   top: var(--space-6);
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(34, 34, 34, 0.8);
+  background-color: rgba(var(--color-surface-darker-rgb), 0.8);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
-  font-size: 14px;
+  font-size: var(--text-lg);
   color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   gap: var(--space-1);
   z-index: calc(var(--z-base) + 2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(var(--color-text-primary-rgb), 0.1);
 }
 
 /* Explicitly add image styling here for better specificity */
@@ -117,6 +117,8 @@
   object-fit: cover;
   object-position: center 25%;
   transform: scale(1.2);
+  opacity: 1;
+  filter: none;
 }
 
 /* Essential overlay for text contrast */
@@ -125,9 +127,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(34, 34, 34, 0) 0%,
-    rgba(34, 34, 34, 0.6) 60%,
-    rgba(34, 34, 34, 0.9) 100%
+    rgba(var(--color-surface-darker-rgb), 0) 0%,
+    rgba(var(--color-surface-darker-rgb), 0.6) 60%,
+    rgba(var(--color-surface-darker-rgb), 0.9) 100%
   );
   z-index: calc(var(--z-base) + 1);
 }
@@ -142,12 +144,12 @@
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-semibold);
   color: var(--color-brand-gold);
-  font-size: 18px;
+  font-size: var(--text-lg);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-  background-color: rgba(34, 34, 34, 0.6);
+  background-color: rgba(var(--color-surface-darker-rgb), 0.8);
   padding: var(--space-0-5) var(--space-1-5);
   border-radius: var(--radius-sm);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(var(--color-brand-gold-rgb), 0.3);
 }

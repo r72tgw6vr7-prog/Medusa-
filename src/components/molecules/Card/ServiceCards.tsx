@@ -1,8 +1,8 @@
 import React from 'react';
 import Section from '../../ui/Section';
 import Button from '../../atoms/Button/Button';
-import styles from './ServiceCards.module.css';
-import './ServiceCards.css';
+// Note: ServiceCards uses Tailwind classes - CSS module not currently needed
+// import styles from './ServiceCards.module.css';
 
 interface ServiceCard {
   id: string;

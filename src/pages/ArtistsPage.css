@@ -27,20 +27,20 @@
 
 /* Title */
 .section-title {
-  font-size: 48px;
+  font-size: var(--text-h1);
   font-weight: var(--font-weight-semibold);
   color: var(--brand-gold, #d4af37);
   margin-bottom: 16px;
-  line-height: 1.2;
+  line-height: var(--line-height-heading);
   letter-spacing: -0.02em;
   font-family: 'Playfair Display', serif;
 }
 
 /* Description */
 .section-description {
-  font-size: 18px;
+  font-size: var(--text-body);
   color: var(--text-secondary, rgba(255, 255, 255, 0.8));
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   margin: 0;
   font-family: 'Inter', sans-serif;
 }
@@ -61,17 +61,17 @@
   }
 
   .section-title {
-    font-size: 32px;
+    font-size: var(--text-h2-mobile);
   }
 
   .section-description {
-    font-size: 16px;
+    font-size: var(--text-body-mobile);
   }
 }
 
 /* Tablet adjustments */
 @media (min-width: 768px) and (max-width: 1023px) {
   .section-title {
-    font-size: 40px;
+    font-size: var(--text-h2-desktop);
   }
 }

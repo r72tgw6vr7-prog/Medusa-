@@ -1,6 +1,6 @@
 import React from 'react';
 import { TRUST_BADGES } from '../../sections/TrustBadges';
-import '../organisms/OurArtists.css';
+import styles from '../organisms/OurArtists.module.css';
 
 interface TrustBadgesProps {
   className?: string;

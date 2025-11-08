@@ -2,7 +2,7 @@
   position: relative;
   height: 4px;
   border-radius: 9999px;
-  background: rgba(193, 155, 38, 0.25);
+  background: rgba(166, 134, 70, 0.25);
   overflow: hidden;
 }
 .timeline-fill {
@@ -10,7 +10,7 @@
   inset: 0;
   transform: scaleX(0);
   transform-origin: left;
-  background: #c19b26;
+  background: var(--color-brand-gold-dark);
 }
 .timeline-fill.is-visible {
   transform: scaleX(1);

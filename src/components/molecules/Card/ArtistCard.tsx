@@ -1,6 +1,6 @@
 import React from 'react';
 import { PenTool, Target, UserIcon, Palette, Clock, Instagram } from 'lucide-react';
-import './ArtistCard.css';
+import styles from './ArtistCard.module.css';
 
 interface ArtistCardProps {
   artist: {
@@ -33,13 +33,13 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   const getRoleIcon = (roleIcon?: string) => {
     switch (roleIcon) {
       case 'Pen':
-        return <PenTool size={16} className='icon' />;
+        return <PenTool size={16} className={styles.icon} />;
       case 'Target':
-        return <Target size={16} className='icon' />;
+        return <Target size={16} className={styles.icon} />;
       case 'Palette':
-        return <Palette size={16} className='icon' />;
+        return <Palette size={16} className={styles.icon} />;
       default:
-        return <UserIcon size={16} className='icon' />;
+        return <UserIcon size={16} className={styles.icon} />;
     }
   };
 
@@ -47,61 +47,61 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
     return (
       <button
         type='button'
-        className={`artist-card ${isSelected ? 'selected' : ''} ${className}`}
+        className={`${styles['artist-card']} ${isSelected ? styles.selected : ''} ${className}`}
         onClick={onClick}
         onKeyDown={onKeyDown}
       >
-        <div className='artist-photo'>
+        <div className={styles['artist-photo']}>
           <img
             src={artist.photo}
             alt={`${artist.name} - ${artist.role}`}
             loading='lazy'
           />
         </div>
-        <div className='artist-info'>
+        <div className={styles['artist-info']}>
           <h4>{artist.name}</h4>
           <p>{artist.role}</p>
-          <p className='specialty'>{artist.specialty || artist.specialties.join(', ')}</p>
+          <p className={styles.specialty}>{artist.specialty || artist.specialties.join(', ')}</p>
         </div>
       </button>
     );
   }
 
   return (
-    <div className={`team-card-wrap ${className}`}>
-      <article className='team-card' data-artist-name={artist.name}>
+    <div className={`${styles['team-card-wrap']} ${className}`}>
+      <article className={styles['team-card']} data-artist-name={artist.name}>
         <img
           src={artist.photo}
           alt={artist.name}
-          className='team-card-image'
+          className={styles['team-card-image']}
           loading='lazy'
           decoding='async'
           sizes='(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 360px) 50vw, 100vw'
           onError={(e) => (e.currentTarget.src = '/assets/images/photos/artists/picture.webp')}
         />
-        <div className='team-card-overlay'></div>
+        <div className={styles['team-card-overlay']}></div>
 
-        <div className='team-card-name-top'>{artist.name}</div>
+        <div className={styles['team-card-name-top']}>{artist.name}</div>
 
-        <div className='team-role-badge'>
+        <div className={styles['team-role-badge']}>
           {getRoleIcon(artist.roleIcon)}
           {artist.role}
         </div>
 
-        <div className='team-card-content'>
-          <p className='team-card-specialties'>{artist.specialties.join(', ')}</p>
+        <div className={styles['team-card-content']}>
+          <p className={styles['team-card-specialties']}>{artist.specialties.join(', ')}</p>
 
-          <div className='team-card-bottom-info'>
+          <div className={styles['team-card-bottom-info']}>
             {artist.experience && (
-              <div className='team-card-experience'>
-                <Clock size={16} className='icon' />
+              <div className={styles['team-card-experience']}>
+                <Clock size={16} className={styles.icon} />
                 <span>{artist.experience}</span>
               </div>
             )}
 
             {artist.instagram && (
-              <div className='team-card-social'>
-                <Instagram size={16} className='icon' />
+              <div className={styles['team-card-social']}>
+                <Instagram size={16} className={styles.icon} />
                 <a
                   href={`https://instagram.com/${artist.instagram.replace('@', '')}`}
                   target='_blank'
@@ -116,16 +116,16 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
       </article>
       {/* Actions moved outside the card to match previous design */}
       {artist.bookable && (
-        <div className='team-card-actions'>
+        <div className={styles['team-card-actions']}>
           <a
             href={`/booking?artist=${encodeURIComponent(artist.name)}`}
-            className='team-card-button team-card-button-primary'
+            className={`${styles['team-card-button']} ${styles['team-card-button-primary']}`}
           >
             Jetzt Buchen
           </a>
           <a
             href={`/gallery#${artist.name.toLowerCase()}`}
-            className='team-card-button team-card-button-secondary'
+            className={`${styles['team-card-button']} ${styles['team-card-button-secondary']}`}
           >
             Galerie
           </a>

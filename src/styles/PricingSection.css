@@ -48,36 +48,36 @@
 }
 
 .pricing-card:hover {
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 15px rgba(var(--color-brand-gold-rgb), 0.2);
 }
 
 .pricing-card-badge {
   border-radius: 9999px;
-  padding: 8px 16px;
-  box-shadow: 0 0 24px rgba(212, 175, 55, 0.35);
+  padding: var(--space-1) var(--space-2);
+  box-shadow: 0 0 24px rgba(var(--color-brand-gold-rgb), 0.35);
 }
 
 .pricing-card-features {
   display: grid;
-  row-gap: 16px;
+  row-gap: var(--space-2);
 }
 
 .pricing-card-feature {
   display: flex;
   align-items: center;
-  column-gap: 16px;
+  column-gap: var(--space-2);
 }
 
 .pricing-card-feature-icon {
-  width: 20px;
-  height: 20px;
+  width: var(--space-2-5);
+  height: var(--space-2-5);
   flex-shrink: 0;
-  color: #d4af37;
+  color: var(--color-brand-gold);
   transition: transform 0.3s ease;
 }
 
 .pricing-card-feature-text {
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .pricing-card:hover .pricing-card-feature-icon {
@@ -88,11 +88,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  column-gap: 16px;
+  column-gap: var(--space-2);
   width: 100%;
-  min-height: 48px;
-  padding: 16px 32px;
-  border-radius: 12px;
+  min-height: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--space-1-5);
   font-weight: var(--font-weight-semibold);
   transition:
     background-color 0.3s ease,
@@ -101,28 +101,28 @@
 }
 
 .pricing-cta-btn svg {
-  width: 20px;
-  height: 20px;
+  width: var(--space-2-5);
+  height: var(--space-2-5);
 }
 
 .pricing-cta-btn--link {
   background: transparent;
   border: none;
-  color: #d4af37;
+  color: var(--color-brand-gold);
 }
 
 .pricing-cta-btn--link:hover {
-  color: #f5d36c;
+  color: var(--color-brand-gold-hover);
 }
 
 .pricing-cta-btn--solid {
-  background: #d4af37;
+  background: var(--color-brand-gold);
   border: none;
-  color: #111111;
+  color: var(--color-surface-darker);
 }
 
 .pricing-cta-btn--solid:hover {
-  background: #f5d36c;
+  background: var(--color-brand-gold-hover);
 }
 
 /* Media queries for responsive adjustments */

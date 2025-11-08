@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import { User, Mail, Palette, Calendar, Clock, Lightbulb } from 'lucide-react';
 import Button from './atoms/Button/Button';
-import './PreFooterBookingCTA.css';
+import styles from './PreFooterBookingCTA.module.css';
 
 interface BookingFormData {
   name: string;
@@ -97,7 +97,7 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
         </div>
 
         {/* Booking Form Card with BREATHING CHROME GLOW */}
-        <div className='breathing-glow relative bg-[rgba(15,15,15,0.75)] backdrop-blur-xl rounded-2xl p-8 md:p-8 lg:p-16 ring-1 ring-[rgba(192,192,192,0.25)]'>
+        <div className={`${styles['breathing-glow']} relative bg-[rgba(15,15,15,0.75)] backdrop-blur-xl rounded-2xl p-8 md:p-8 lg:p-16 ring-1 ring-[rgba(192,192,192,0.25)]`}>
           <h3 className='font-playfair text-2xl md:text-3xl font-semibold text-[var(--brand-gold)] text-center mb-8'>
             Buchen Sie Ihren Termin
           </h3>

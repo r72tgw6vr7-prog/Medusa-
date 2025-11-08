@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ArtistCard } from '../molecules/Card/ArtistCard';
 import { ArtistDetailModal } from './ArtistDetailModal';
-import './OurArtists.css';
+import styles from './OurArtists.module.css';
 
 interface Artist {
   id: string;

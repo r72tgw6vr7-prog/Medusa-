@@ -10,13 +10,13 @@
 .testimonials-swiper .swiper-pagination-bullet {
   width: 12px !important;
   height: 12px !important;
-  background: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(var(--color-text-primary-rgb), 0.3) !important;
   opacity: 1 !important;
   transition: all 0.3s ease !important;
 }
 
 .testimonials-swiper .swiper-pagination-bullet-active {
-  background: #d4a841 !important;
+  background: var(--color-brand-gold) !important;
   width: 32px !important;
   border-radius: 6px !important;
 }

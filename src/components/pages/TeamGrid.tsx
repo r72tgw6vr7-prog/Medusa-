@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './TeamGrid.css';
+import styles from './TeamGrid.module.css';
 import Section from '../ui/Section';
 import { ArtistCard } from '../molecules';
 
@@ -96,18 +96,18 @@ const TeamGrid = () => {
       aria-label='Artist Team'
       data-texture-bg
     >
-      <div className='team-heading'>
+      <div className={styles['team-heading']}>
         <h2>Unser Meisterteam</h2>
         {/* Add data attributes for verification */}
         <small
-          className='render-info team-render-timestamp'
+          className={`${styles['render-info']} ${styles['team-render-timestamp']}`}
           data-timestamp={RENDER_TIMESTAMP}
           data-render-count={renderCount}
         >
           Updated: {new Date().toLocaleTimeString()}
         </small>
       </div>
-      <div className='team-grid'>
+      <div className={styles['team-grid']}>
         {loading ? (
           <div className='text-center py-8'>
             <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-brand-gold flex flex-col h-full'></div>
