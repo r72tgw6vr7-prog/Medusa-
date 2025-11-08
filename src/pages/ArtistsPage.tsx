@@ -21,19 +21,28 @@ export function ArtistsPage() {
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
-      {/* Artists Section with TeamGrid (matches homepage cards) */}
-      <section className='artists-section pt-24 md:pt-24 pb-16 md:pb-24 relative z-10' data-texture-bg>
-        <div className='container max-w-[1320px] mx-auto px-8 md:px-8'>
-          {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-          <div className='text-center mb-16'>
-            <h2 className='font-headline text-3xl text-[var(--brand-gold)] text-center mb-8'>Künstler</h2>
-            <p className='typo-subtitle text-[#C0C0C0]'>
-              Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.
-            </p>
+      {/* Page Header - Matches Services page exactly */}
+      <section className='section-padding relative z-10'>
+        <div className='responsive-container safe-area-padding'>
+          <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+            <div className='text-center space-y-8'>
+              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                Medusa München
+              </p>
+              <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
+                Künstler
+              </h1>
+              <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+                Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.
+              </p>
+            </div>
           </div>
-          {/* FIX 11: Reduced from 1440px to 1320px */}
-          <TeamGrid />
         </div>
+      </section>
+
+      {/* Artists Grid Section */}
+      <section className='section-padding relative z-10'>
+        <TeamGrid containerSize="wide" />
       </section>
 
       {/* Trust Statistics Strip */}

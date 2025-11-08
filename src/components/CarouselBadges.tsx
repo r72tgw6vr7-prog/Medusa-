@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Award, Shield, Link2, Star, Clock } from 'lucide-react';
-import Section from './ui/Section';
+// Section removed to prevent default vertical padding
 
 interface Badge {
   id: string;
@@ -50,9 +50,9 @@ const badges: Badge[] = [
 
 export const CarouselBadges: React.FC = () => {
   return (
-    <section className='carousel-badges-section py-0 bg-[var(--deep-black)]'>
-      <div className='w-full bg-[#0F0F0F] border-y border-white/5 py-8 md:py-16'>
-        <Section bg="none" containerSize="default">
+    <section className='carousel-badges-section py-0 bg-transparent'>
+      <div className='w-full bg-black/30 border-y border-white/5 py-0'>
+        <div className='max-w-[1104px] mx-auto px-8'>
           <div className='flex flex-wrap justify-center items-center gap-16 md:gap-16 lg:gap-24'>
             {badges.map((badge) => {
               const IconComponent = badge.icon;
@@ -74,7 +74,7 @@ export const CarouselBadges: React.FC = () => {
               );
             })}
           </div>
-        </Section>
+        </div>
       </div>
     </section>
   );

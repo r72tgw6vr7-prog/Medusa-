@@ -1,155 +1,172 @@
-/* 
- * ArtistCard.css 
- * Component-specific styling for artist cards
- * Preserved from original design while using new token system
- */
+/* ArtistCard Component Styles - Using Design System Variables */
 
-/* Artist card - booking variant */
 .artist-card {
   display: flex;
-  flex-direction: column;
-  background-color: var(--color-surface-medium);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  padding: var(--space-2);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-  box-shadow: var(--shadow-sm);
-}
-
-.artist-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.artist-card.selected {
-  border: 2px solid var(--color-brand-gold);
-  box-shadow: 0 0 0 2px var(--color-brand-gold);
-}
-
-.artist-card .artist-photo {
+  height: 100%;
   width: 100%;
-  height: 120px;
+  flex-direction: column;
   overflow: hidden;
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-2);
+  border-radius: 21px;
+  border: 1px solid rgba(192, 191, 191, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
-.artist-card .artist-photo img {
+.artist-card--selected {
+  border-color: var(--color-brand-gold);
+  box-shadow: var(--shadow-gold-md), 0 0 0 2px rgba(var(--color-brand-gold-rgb), 0.5);
+}
+
+.artist-card--interactive {
+  cursor: pointer;
+}
+
+.artist-card--interactive:hover {
+  border-color: rgba(var(--color-brand-gold-rgb), 0.6);
+}
+
+.artist-card__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.artist-card__image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  height: 320px;
+  overflow: hidden;
+}
+
+.artist-card__image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
   transform: scale(1.2);
-}
-
-.artist-card .artist-info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.artist-card .artist-info h4 {
-  font-family: var(--font-family-heading);
-  color: var(--color-brand-gold);
-  font-size: var(--text-lg);
-  margin: 0;
-  font-weight: var(--font-weight-semibold);
-}
-
-.artist-card .artist-info p {
-  font-size: var(--text-body);
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-.artist-card .artist-info .specialty {
-  font-size: var(--text-body-small);
-  color: rgba(var(--color-text-primary-rgb), 0.6);
-}
-
-/* Styling for team card variant - complementing TeamGrid.css */
-.team-card-wrap {
-  display: flex;
-  flex-direction: column;
-  min-width: var(--space-20);
-}
-
-.team-card {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background-color: var(--color-surface-dark);
-  aspect-ratio: 0.6;
-  box-shadow: var(--shadow-lg);
   transition: transform 0.3s ease;
 }
 
-.team-card:hover {
-  transform: scale(1.02);
+.artist-card--interactive:hover .artist-card__image {
+  transform: scale(1.25);
 }
 
-.team-role-badge {
-  position: absolute;
-  top: var(--space-6);
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(var(--color-surface-darker-rgb), 0.8);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-lg);
-  color: var(--color-text-secondary);
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-  z-index: calc(var(--z-base) + 2);
-  border: 1px solid rgba(var(--color-text-primary-rgb), 0.1);
-}
-
-/* Explicitly add image styling here for better specificity */
-.team-card img,
-.team-card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-  transform: scale(1.2);
-  opacity: 1;
-  filter: none;
-}
-
-/* Essential overlay for text contrast */
-.team-card-overlay {
+.artist-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--color-surface-darker-rgb), 0) 0%,
-    rgba(var(--color-surface-darker-rgb), 0.6) 60%,
-    rgba(var(--color-surface-darker-rgb), 0.9) 100%
-  );
-  z-index: calc(var(--z-base) + 1);
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
-/* Artist Card bottom/top name styling clarification */
-.team-card-name-top {
+.artist-card__name-badge {
   position: absolute;
-  top: var(--space-2);
+  top: var(--space-4);
   left: 50%;
   transform: translateX(-50%);
-  z-index: calc(var(--z-base) + 2);
-  font-family: var(--font-family-heading);
+  z-index: 3;
+}
+
+.artist-card__name-text {
+  display: inline-block;
+  padding: 0 var(--space-4);
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: var(--text-body-small);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid rgba(var(--color-brand-gold-rgb), 0.2);
+}
+
+.artist-card__checkmark {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 4;
+  width: 24px;
+  height: 24px;
+  background: var(--color-brand-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-gold-md);
+}
+
+.artist-card__checkmark-icon {
+  color: var(--color-surface-darker);
+}
+
+.artist-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  margin-top: auto;
+}
+
+.artist-card__button {
+  width: 100%;
+  height: 48px;
+  font-family: var(--font-family-primary);
   font-weight: var(--font-weight-semibold);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.artist-card__button--primary {
+  background: var(--color-brand-gold);
+  color: var(--color-surface-darker);
+}
+
+.artist-card__button--primary:hover {
+  background: var(--color-brand-gold-hover);
+  box-shadow: var(--shadow-gold-md);
+}
+
+.artist-card__button--secondary {
+  background: transparent;
+  border: 1px solid var(--color-brand-gold);
   color: var(--color-brand-gold);
-  font-size: var(--text-lg);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-  background-color: rgba(var(--color-surface-darker-rgb), 0.8);
-  padding: var(--space-0-5) var(--space-1-5);
-  border-radius: var(--radius-sm);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(var(--color-brand-gold-rgb), 0.3);
+}
+
+.artist-card__button--secondary:hover {
+  background: rgba(var(--color-brand-gold-rgb), 0.1);
+}
+
+/* Focus states for accessibility */
+.artist-card--interactive:focus {
+  outline: none;
+  border-color: var(--color-brand-gold);
+  box-shadow: var(--shadow-gold-md);
+}
+
+.artist-card__button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--color-brand-gold-rgb), 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .artist-card__image-container {
+    height: 280px;
+  }
+  
+  .artist-card__actions {
+    padding: var(--space-3);
+    gap: var(--space-1-5);
+  }
+  
+  .artist-card__button {
+    height: 44px;
+  }
 }

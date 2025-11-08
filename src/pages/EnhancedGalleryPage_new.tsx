@@ -348,8 +348,8 @@ export const EnhancedGalleryPage: React.FC = () => {
         <section className='relative section-padding-lg'>
           <div className='responsive-container safe-area-padding'>
             <div className='text-center'>
-              <h1 className='typo-h1 text-[var(--brand-gold)]'>{t('gallery.title')}</h1>
-              <p className='typo-subtitle text-[#C0C0C0]'>{t('gallery.subtitle')}</p>
+              <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-brand-gold'>{t('gallery.title')}</h1>
+              <p className='font-body text-lg text-brand-chrome'>{t('gallery.subtitle')}</p>
             </div>
           </div>
         </section>

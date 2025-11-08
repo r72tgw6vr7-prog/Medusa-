@@ -111,53 +111,66 @@ export const BookingPage: React.FC = () => {
         <MainNavigation />
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
-        {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-        <section className='relative section-padding-lg'>
+        {/* Page Header - Matches Services page exactly */}
+        <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='text-center mb-16 md:mb-24'>
-              <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
-                Termin Buchen
-              </h1>
-              <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto'>
-                Ihr Weg zum perfekten Kunstwerk beginnt hier. Buchen Sie jetzt Ihren Termin mit
-                unseren erfahrenen Künstlern.
-              </p>
+            <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+              <div className='text-center space-y-8'>
+                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                  Medusa München
+                </p>
+                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
+                  Termin Buchen
+                </h1>
+                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+                  Ihr Weg zum perfekten Kunstwerk beginnt hier. Buchen Sie jetzt Ihren Termin mit
+                  unseren erfahrenen Künstlern.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Benefits Section - Container → Section → Grid → Components */}
-        <section className='section-padding mb-16 md:mb-24'>
+        {/* Benefits Section */}
+        <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='responsive-grid cols-3-desktop gap-8'>
-              <div className='flex flex-col h-full text-center'>
-                <div className='inline-flex items-center justify-center w-16 h-16 bg-brand-gold/10 rounded-full mb-8 mx-auto shrink-0 flex-col h-full'>
-                  <Calendar className='text-brand-gold' size={32} />
+            <div className='mx-auto w-full max-w-[1104px]'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+                <div className='text-center space-y-8'>
+                  <div className='flex justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                      <Calendar className='text-black' size={24} />
+                    </div>
+                  </div>
+                  <h3 className='font-headline text-xl text-white'>Flexible Termine</h3>
+                  <p className='text-base text-white/70 leading-relaxed'>
+                    Buchen Sie zu Ihrer Wunschzeit - 7 Tage die Woche verfügbar
+                  </p>
                 </div>
-                <h3 className='font-headline text-xl text-white mb-0'>Flexible Termine</h3>
-                <p className='text-white/70 text-sm'>
-                  Buchen Sie zu Ihrer Wunschzeit - 7 Tage die Woche verfügbar
-                </p>
-              </div>
 
-              <div className='flex flex-col h-full text-center'>
-                <div className='inline-flex items-center justify-center w-16 h-16 bg-brand-gold/10 rounded-full mb-8 mx-auto shrink-0 flex-col h-full'>
-                  <Users className='text-brand-gold' size={32} />
+                <div className='text-center space-y-8'>
+                  <div className='flex justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                      <Users className='text-black' size={24} />
+                    </div>
+                  </div>
+                  <h3 className='font-headline text-xl text-white'>Erfahrene Künstler</h3>
+                  <p className='text-base text-white/70 leading-relaxed'>
+                    Wählen Sie aus unserem Team von 8 professionellen Künstlern
+                  </p>
                 </div>
-                <h3 className='font-headline text-xl text-white mb-0'>Erfahrene Künstler</h3>
-                <p className='text-white/70 text-sm'>
-                  Wählen Sie aus unserem Team von 8 professionellen Künstlern
-                </p>
-              </div>
 
-              <div className='flex flex-col h-full text-center'>
-                <div className='inline-flex items-center justify-center w-16 h-16 bg-brand-gold/10 rounded-full mb-8 mx-auto shrink-0 flex-col h-full'>
-                  <Sparkles className='text-brand-gold' size={32} />
+                <div className='text-center space-y-8'>
+                  <div className='flex justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                      <Sparkles className='text-black' size={24} />
+                    </div>
+                  </div>
+                  <h3 className='font-headline text-xl text-white'>Premium Qualität</h3>
+                  <p className='text-base text-white/70 leading-relaxed'>
+                    EU-zertifiziertes Studio mit höchsten Hygiene-Standards
+                  </p>
                 </div>
-                <h3 className='font-headline text-xl text-white mb-0'>Premium Qualität</h3>
-                <p className='text-white/70 text-sm'>
-                  EU-zertifiziertes Studio mit höchsten Hygiene-Standards
-                </p>
               </div>
             </div>
           </div>
@@ -187,36 +200,36 @@ export const BookingPage: React.FC = () => {
             {bookingSubmitted ? (
               // Success Message
               <div className='max-w-2xl mx-auto'>
-                <div className='bg-linear-to-br from-brand-gold/10 to-brand-gold/5 border border-brand-gold/30 rounded-xl p-8 md:p-16 text-center'>
-                  <div className='inline-flex items-center justify-center w-20 h-20 bg-brand-gold rounded-full mb-8'>
+                <div className='rounded-3xl border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/10 p-8 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(212,175,55,0.35)]'>
+                  <div className='inline-flex items-center justify-center w-20 h-20 bg-[var(--brand-gold)] rounded-full mb-8'>
                     <CheckCircle className='text-black' size={48} />
                   </div>
 
-                  <h2 className='font-headline text-3xl md:text-4xl text-brand-gold mb-8'>
+                  <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)] mb-8'>
                     Buchung Erfolgreich!
                   </h2>
 
-                  <p className='text-xl text-white mb-8'>
+                  <p className='text-lg text-white/80 mb-8 leading-relaxed'>
                     Vielen Dank für Ihre Buchung bei Medusa Tattoo München.
                   </p>
 
-                  <div className='bg-black/30 rounded-lg p-8 mb-8 text-left'>
-                    <h3 className='font-bold text-white mb-8'>Was passiert als Nächstes?</h3>
-                    <ul className='space-y-0 text-white/80'>
-                      <li className='flex items-start gap-0'>
-                        <CheckCircle className='text-brand-gold shrink-0 mt-0.5' size={20} />
+                  <div className='rounded-xl border-2 border-white/10 bg-black/30 p-8 mb-8 text-left'>
+                    <h3 className='font-semibold text-white mb-8'>Was passiert als Nächstes?</h3>
+                    <ul className='space-y-8 text-white/70'>
+                      <li className='flex items-start gap-8'>
+                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
                         <span>Sie erhalten eine Bestätigungs-E-Mail mit allen Details</span>
                       </li>
-                      <li className='flex items-start gap-0'>
-                        <CheckCircle className='text-brand-gold shrink-0 mt-0.5' size={20} />
+                      <li className='flex items-start gap-8'>
+                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
                         <span>Unser Team wird Sie innerhalb von 24 Stunden kontaktieren</span>
                       </li>
-                      <li className='flex items-start gap-0'>
-                        <CheckCircle className='text-brand-gold shrink-0 mt-0.5' size={20} />
+                      <li className='flex items-start gap-8'>
+                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
                         <span>Wir bestätigen Ihren Termin und besprechen Details</span>
                       </li>
-                      <li className='flex items-start gap-0'>
-                        <CheckCircle className='text-brand-gold shrink-0 mt-0.5' size={20} />
+                      <li className='flex items-start gap-8'>
+                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
                         <span>Bei Fragen erreichen Sie uns jederzeit per WhatsApp</span>
                       </li>
                     </ul>
@@ -247,49 +260,56 @@ export const BookingPage: React.FC = () => {
 
         {/* Info Section */}
         {!bookingSubmitted && (
-          <section className='py-16 px-8 sm:px-8 lg:px-8 bg-black/30'>
-            <div className='max-w-4xl mx-auto'>
-              <h2 className='font-headline text-3xl text-brand-gold text-center mb-8'>
-                Wichtige Informationen
-              </h2>
-
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                <div className='bg-white/5 border border-white/10 rounded-lg p-8 flex flex-col h-full'>
-                  <h3 className='font-bold text-white mb-0'>Vor dem Termin</h3>
-                  <ul className='space-y-0 text-white/70 text-sm'>
-                    <li>• Ausreichend Schlaf in der Nacht zuvor</li>
-                    <li>• Gut gegessen und hydriert</li>
-                    <li>• Keine Einnahme von Blutverdünnern</li>
-                    <li>• Saubere, zugängliche Körperstelle</li>
-                  </ul>
+          <section className='section-padding relative z-10'>
+            <div className='responsive-container safe-area-padding'>
+              <div className='mx-auto w-full max-w-[1104px]'>
+                <div className='text-center space-y-8 mb-16'>
+                  <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                    Informationen
+                  </p>
+                  <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+                    Wichtige Informationen
+                  </h2>
                 </div>
 
-                <div className='bg-white/5 border border-white/10 rounded-lg p-8 flex flex-col h-full'>
-                  <h3 className='font-bold text-white mb-0'>Mitzubringen</h3>
-                  <ul className='space-y-0 text-white/70 text-sm'>
-                    <li>• Gültiger Lichtbildausweis</li>
-                    <li>• Referenzbilder (falls vorhanden)</li>
-                    <li>• Bequeme Kleidung</li>
-                    <li>• Snacks und Getränke für längere Sessions</li>
-                  </ul>
-                </div>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+                  <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 flex flex-col h-full'>
+                    <h3 className='font-headline text-xl text-white mb-8'>Vor dem Termin</h3>
+                    <ul className='space-y-8 text-base text-white/70'>
+                      <li>• Ausreichend Schlaf in der Nacht zuvor</li>
+                      <li>• Gut gegessen und hydriert</li>
+                      <li>• Keine Einnahme von Blutverdünnern</li>
+                      <li>• Saubere, zugängliche Körperstelle</li>
+                    </ul>
+                  </div>
 
-                <div className='bg-white/5 border border-white/10 rounded-lg p-8 flex flex-col h-full'>
-                  <h3 className='font-bold text-white mb-0'>Stornierung</h3>
-                  <ul className='space-y-0 text-white/70 text-sm'>
-                    <li>• Kostenlose Stornierung bis 48h vorher</li>
-                    <li>• Terminverschiebung nach Absprache möglich</li>
-                    <li>• Bei Krankheit bitte frühzeitig melden</li>
-                  </ul>
-                </div>
+                  <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 flex flex-col h-full'>
+                    <h3 className='font-headline text-xl text-white mb-8'>Mitzubringen</h3>
+                    <ul className='space-y-8 text-base text-white/70'>
+                      <li>• Gültiger Lichtbildausweis</li>
+                      <li>• Referenzbilder (falls vorhanden)</li>
+                      <li>• Bequeme Kleidung</li>
+                      <li>• Snacks und Getränke für längere Sessions</li>
+                    </ul>
+                  </div>
 
-                <div className='bg-white/5 border border-white/10 rounded-lg p-8 flex flex-col h-full'>
-                  <h3 className='font-bold text-white mb-0'>Zahlung</h3>
-                  <ul className='space-y-0 text-white/70 text-sm'>
-                    <li>• Bar, EC-Karte oder Kreditkarte</li>
-                    <li>• Anzahlung bei größeren Projekten</li>
-                    <li>• Rechnung mit MwSt. inklusive</li>
-                  </ul>
+                  <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 flex flex-col h-full'>
+                    <h3 className='font-headline text-xl text-white mb-8'>Stornierung</h3>
+                    <ul className='space-y-8 text-base text-white/70'>
+                      <li>• Kostenlose Stornierung bis 48h vorher</li>
+                      <li>• Terminverschiebung nach Absprache möglich</li>
+                      <li>• Bei Krankheit bitte frühzeitig melden</li>
+                    </ul>
+                  </div>
+
+                  <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 flex flex-col h-full'>
+                    <h3 className='font-headline text-xl text-white mb-8'>Zahlung</h3>
+                    <ul className='space-y-8 text-base text-white/70'>
+                      <li>• Bar, EC-Karte oder Kreditkarte</li>
+                      <li>• Anzahlung bei größeren Projekten</li>
+                      <li>• Rechnung mit MwSt. inklusive</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -298,31 +318,38 @@ export const BookingPage: React.FC = () => {
 
         {/* Contact CTA */}
         {!bookingSubmitted && (
-          <section className='py-16 px-8 sm:px-8 lg:px-8'>
-            <div className='max-w-4xl mx-auto text-center'>
-              <h2 className='font-headline text-3xl md:text-4xl text-brand-gold mb-8'>
-                Fragen zur Buchung?
-              </h2>
-              <p className='text-lg text-white/80 mb-8'>
-                Unser Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns über WhatsApp,
-                Telefon oder besuchen Sie uns direkt im Studio.
-              </p>
-              <div className='flex flex-col sm:flex-row gap-8 justify-center'>
-                <a
-                  href='https://wa.me/4989269313'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className="no-underline"
-                >
-                  <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A] transition-colors duration-300'>
-                    WhatsApp
-                  </Button>
-                </a>
-                <a href='/contact' className="no-underline">
-                  <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
-                    Kontaktseite
-                  </Button>
-                </a>
+          <section className='section-padding relative z-10'>
+            <div className='responsive-container safe-area-padding'>
+              <div className='mx-auto w-full max-w-[1104px]'>
+                <div className='text-center space-y-8'>
+                  <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                    Unterstützung
+                  </p>
+                  <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+                    Fragen zur Buchung?
+                  </h2>
+                  <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed mb-16'>
+                    Unser Team steht Ihnen gerne zur Verfügung. Kontaktieren Sie uns über WhatsApp,
+                    Telefon oder besuchen Sie uns direkt im Studio.
+                  </p>
+                  <div className='flex flex-col sm:flex-row gap-8 justify-center'>
+                    <a
+                      href='https://wa.me/4989269313'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className="no-underline"
+                    >
+                      <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A] transition-all duration-200'>
+                        WhatsApp
+                      </Button>
+                    </a>
+                    <a href='/contact' className="no-underline">
+                      <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
+                        Kontaktseite
+                      </Button>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </section>

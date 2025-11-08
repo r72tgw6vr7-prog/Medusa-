@@ -74,13 +74,13 @@ export const StudioHero: React.FC = () => {
   };
 
   return (
-    <section className='w-full bg-[#1A1A1A]'>
+    <section className='w-full bg-deep-black'>
       {/* Main Content Block */}
       <div className='max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 pt-16 pb-16 text-center'>
-        <h2 className='font-playfair font-bold text-4xl md:text-5xl text-[var(--brand-gold)] mb-8'>
+        <h2 className='font-headline text-5xl md:text-6xl lg:text-7xl text-brand-gold mb-8'>
           Unser Studio
         </h2>
-        <p className='font-inter text-lg text-white max-w-3xl mx-auto leading-relaxed'>
+        <p className='font-body text-lg text-brand-chrome max-w-3xl mx-auto leading-relaxed'>
           Willkommen im Medusa Tattoo Studio – Ihrem professionellen Tattoo- und Piercing-Studio im
           Herzen Münchens. Mit über 25 Jahren Erfahrung, höchsten Hygienestandards und
           EU-zertifizierten Farben bieten wir Ihnen erstklassige Kunstwerke in einer sauberen,
@@ -113,7 +113,7 @@ export const StudioHero: React.FC = () => {
         {/* Navigation Arrows - Visible on hover */}
         <button
           onClick={goToPrevious}
-          className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[var(--brand-gold)] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-transparent z-10'
+          className='absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-brand-gold transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-transparent z-10'
           aria-label='Previous image'
         >
           <ChevronLeft className='w-6 h-6 text-white' />
@@ -121,7 +121,7 @@ export const StudioHero: React.FC = () => {
 
         <button
           onClick={goToNext}
-          className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-[var(--brand-gold)] transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-transparent z-10'
+          className='absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:border hover:border-brand-gold transition-all duration-300 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 focus:ring-offset-transparent z-10'
           aria-label='Next image'
         >
           <ChevronRight className='w-6 h-6 text-white' />
@@ -137,7 +137,7 @@ export const StudioHero: React.FC = () => {
                 setCurrentSlide(index);
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-[var(--brand-gold)] w-8' : 'bg-white/40 hover:bg-white/60'
+                index === currentSlide ? 'bg-brand-gold w-8' : 'bg-white/40 hover:bg-white/60'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -148,7 +148,7 @@ export const StudioHero: React.FC = () => {
       {/* Stats Bar */}
       <div className='w-full bg-black py-8 md:py-16'>
         <div className='max-w-7xl mx-auto px-8'>
-          <div className='flex flex-wrap justify-center items-center gap-x-8 gap-y-8 md:gap-x-16'>
+          <div className='grid grid-cols-5 items-center justify-items-center gap-8 md:gap-16'>
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               return (
@@ -157,10 +157,10 @@ export const StudioHero: React.FC = () => {
                   className='flex flex-col items-center gap-0 group cursor-default transition-all duration-300'
                 >
                   <IconComponent
-                    className='w-8 h-8 text-[var(--brand-gold)] group-hover:text-white transition-colors duration-300'
+                    className='w-8 h-8 text-brand-gold group-hover:text-white transition-colors duration-300'
                     strokeWidth={1.5}
                   />
-                  <span className='font-inter text-sm font-medium text-[#A1A1AA] group-hover:text-white transition-colors duration-300'>
+                  <span className='font-body text-sm font-medium text-brand-chrome group-hover:text-white transition-colors duration-300'>
                     {stat.label}
                   </span>
                 </div>
@@ -172,10 +172,10 @@ export const StudioHero: React.FC = () => {
 
       {/* CTA Block */}
       <div className='max-w-7xl mx-auto px-8 sm:px-8 lg:px-8 py-16 text-center'>
-        <h3 className='font-playfair font-semibold text-3xl md:text-4xl text-[var(--brand-gold)] mb-8'>
+        <h3 className='font-headline text-3xl md:text-4xl text-brand-gold mb-8'>
           Alle Services Entdecken
         </h3>
-        <p className='font-inter text-lg text-[#A1A1AA] max-w-3xl mx-auto leading-relaxed'>
+        <p className='font-body text-lg text-brand-chrome max-w-3xl mx-auto leading-relaxed'>
           Von individuellen Tattoo-Designs bis hin zu professionellem Piercing – entdecken Sie unser
           vollständiges Angebot an Dienstleistungen und finden Sie den perfekten Stil für Ihre
           Körperkunst.

@@ -28,7 +28,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       {/* Step Number Circle */}
       <div
         className={`
-        shrink-0 w-10 h-10 rounded-full flex items-center justify-center
+        relative z-10 shrink-0 w-12 h-12 rounded-full flex items-center justify-center
         ${isActive || isComplete ? 'bg-[var(--brand-gold)]' : 'bg-[var(--deep-black)] border border-[var(--brand-gold)]'}
         ${isComplete ? 'text-white' : ''}
       `}
@@ -42,7 +42,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
             />
           </svg>
         ) : (
-          <span className='text-white font-bold'>{number}</span>
+          <span className='text-white font-bold text-lg md:text-xl'>{number}</span>
         )}
       </div>
 

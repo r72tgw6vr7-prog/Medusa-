@@ -164,37 +164,38 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
       <main className='flex-1'>
         <section
           ref={sectionRef}
-          className='section-padding bg-linear-to-b from-brand-background via-brand-background/95 to-brand-background/90'
+          className='section-padding relative z-10'
         >
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-4xl'>
-              {/* Unified heading section applied: matches ServicesPageInteractive styling */}
+            <div className='mx-auto w-full max-w-[1104px]'>
+              {/* Page Header - Matches Services page exactly */}
               <motion.div
-                className='text-center mb-16'
+                className='text-center space-y-8 mb-16'
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 40 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className='text-center'>
-                  <h1 className='typo-h1 text-[var(--brand-gold)]'>{t.title}</h1>
-                  <p className='typo-subtitle text-[#C0C0C0]'>{t.subtitle}</p>
-                  <p className='text-body-small font-body text-brand-chrome'>{t.lastUpdated}</p>
-                </div>
+                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                  Medusa München
+                </p>
+                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>{t.title}</h1>
+                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>{t.subtitle}</p>
+                <p className='text-sm text-white/60'>{t.lastUpdated}</p>
               </motion.div>
 
               {/* Introduction */}
               <motion.div
-                className='bg-brand-background/40 backdrop-blur-sm border border-brand-gold/20 rounded-2xl p-8 mb-8'
+                className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-8'
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                <p className='text-2xl leading-relaxed'>{t.introduction}</p>
+                <p className='text-base text-white/70 leading-relaxed'>{t.introduction}</p>
               </motion.div>
 
               {/* Definitions */}
               <motion.div
-                className='bg-brand-background/60 backdrop-blur-sm border border-brand-chrome/20 rounded-2xl p-8 mb-8'
+                className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-8'
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                 transition={{ duration: 0.8, delay: 0.15 }}

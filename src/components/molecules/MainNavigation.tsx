@@ -193,7 +193,7 @@ export function MainNavigation() {
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-8 md:px-16">
         <Link
           to='/'
-          className="nav-logo text-[28px] leading-none tracking-tight text-brand-gold sm:text-[36px] md:text-[48px] font-['Playfair_Display'] font-bold"
+          className="nav-logo font-headline text-3xl sm:text-4xl md:text-5xl leading-none tracking-tight text-brand-gold font-bold"
         >
           MEDUSA
         </Link>
@@ -207,7 +207,7 @@ export function MainNavigation() {
                 <li key={to}>
                   <Link
                     to={to}
-                    className={`nav-link text-[18px] font-['Playfair_Display'] font-medium transition-all duration-300 ${
+                    className={`nav-link font-body text-base md:text-lg font-medium transition-all duration-300 ${
                       active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
                     }`}
                     aria-current={active ? 'page' : undefined}
@@ -292,7 +292,7 @@ export function MainNavigation() {
                       key={`mobile-${to}`}
                       to={to}
                       onClick={closeMenu}
-                      className={`mobile-nav-link ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
+                      className={`mobile-nav-link font-body text-lg ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
                       aria-current={active ? 'page' : undefined}
                       tabIndex={menuOpen ? 0 : -1}
                     >

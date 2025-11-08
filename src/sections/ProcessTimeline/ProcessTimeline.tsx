@@ -156,14 +156,14 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
       }}
     >
       <div className='relative mx-auto max-w-[1104px] px-8'>
-        <div className='text-center'>
-          <span className='inline-flex items-center justify-center rounded-full border border-brand-gold/40 bg-brand-gold/10 px-8 py-0 text-xs font-semibold uppercase tracking-[0.28em] text-brand-gold'>
+        <div className='text-center space-y-8'>
+          <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
             {copy.eyebrow}
-          </span>
-          <h2 className="mt-8 font-['Playfair_Display'] text-4xl font-semibold text-brand-gold md:text-[44px]">
+          </p>
+          <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
             {copy.headline}
           </h2>
-          <p className='mx-auto mt-8 max-w-2xl text-base leading-7 text-white/80 md:text-lg'>
+          <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
             {copy.subtitle}
           </p>
         </div>

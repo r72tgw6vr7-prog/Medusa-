@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, Check, Pen, Zap, MessageCircle } from 'lucide-react';
-import '../styles/PricingSection.css';
 import Section from './ui/Section';
 
 // Define the data structure for price items
@@ -63,18 +62,21 @@ export const PricingSection: React.FC = () => {
       aria-labelledby='pricing-section-title'
       id='pricing-section'
     >
-      {/* Section heading */}
-      <h2
-        className='text-[var(--brand-gold)] text-center font-playfair text-4xl md:text-5xl font-bold mb-8'
-        id='pricing-section-title'
-      >
-        Services mit transparenten Preisen
-      </h2>
-
-      {/* Section subheading */}
-      <p className='mb-16 text-center text-lg text-white/60'>
-        Keine versteckten Kosten – Ehrliche Beratung seit 1998
-      </p>
+      {/* Section Header */}
+      <div className='text-center space-y-8 mb-16'>
+        <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+          Preise
+        </p>
+        <h2
+          className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'
+          id='pricing-section-title'
+        >
+          Services mit transparenten Preisen
+        </h2>
+        <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
+          Keine versteckten Kosten – Ehrliche Beratung seit 1998
+        </p>
+      </div>
 
         {/* Cards container */}
         <div className='pricing-cards-container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
@@ -87,7 +89,7 @@ export const PricingSection: React.FC = () => {
             >
               {/* Free badge for the last card */}
               {card.badgeLabel && (
-                <span className='pricing-card-badge free-badge absolute right-8 top-8 text-xs font-semibold uppercase tracking-wide text-[#111111]'>
+                <span className='pricing-card-badge free-badge absolute right-8 top-8 text-xs font-semibold uppercase tracking-wide'>
                   {card.badgeLabel}
                 </span>
               )}

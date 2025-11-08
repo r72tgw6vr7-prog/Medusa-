@@ -32,19 +32,24 @@ export const LegalPage: React.FC = () => {
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
-        <section className='section-padding'>
+        <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-4xl space-y-16'>
-              {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-              <div className='text-center md:text-left mb-8'>
-                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
+            <div className='mx-auto w-full max-w-[1104px]'>
+              {/* Page Header - Matches Services page exactly */}
+              <div className='text-center space-y-8 mb-16'>
+                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                  Medusa München
+                </p>
+                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
                   Allgemeine Geschäftsbedingungen
                 </h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl'>MEDUSA TATTOO MÜNCHEN</p>
+                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+                  MEDUSA TATTOO MÜNCHEN
+                </p>
               </div>
 
               {/* Table of Contents */}
-              <nav className='bg-brand-charcoal p-8 rounded-2xl border border-brand-gold/20'>
+              <nav className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-16'>
                 <h2 className='text-2xl font-semibold text-brand-gold mb-8'>Inhaltsverzeichnis</h2>
                 <ul className='space-y-0 text-brand-lightGray'>
                   <li>
@@ -440,7 +445,7 @@ export const LegalPage: React.FC = () => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className='fixed bottom-8 right-8 bg-brand-gold text-brand-charcoal p-8 rounded-full shadow-lg hover:bg-brand-gold-hover transition-all duration-300 z-50'
+          className='fixed bottom-8 right-8 bg-[var(--brand-gold)] text-black p-4 rounded-xl shadow-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 z-50'
           aria-label='Zurück nach oben'
         >
           <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>

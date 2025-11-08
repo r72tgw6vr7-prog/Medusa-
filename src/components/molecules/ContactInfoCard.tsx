@@ -20,7 +20,7 @@ export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({
     <div
       className={`flex items-start p-6 bg-[var(--deep-black)] rounded-lg border border-solid border-[#C0BFBF33] ${className}`}
     >
-      <Icon name={icon} size='lg' className='text-[var(--brand-gold)] mr-8' />
+      <Icon size={24} className='text-[var(--brand-gold)] mr-8' />
       <div className='flex flex-col'>
         <span className='text-[#C0BFBF] text-sm mb-0'>{title}</span>
         <span className='text-white text-base'>{value}</span>

@@ -46,7 +46,7 @@ export default function GalleryPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
-        <div className="text-[var(--brand-gold)]">Loading gallery...</div>
+        <div className="text-(--brand-gold)">Loading gallery...</div>
       </div>
     );
   }
@@ -54,7 +54,7 @@ export default function GalleryPage() {
   return (
     <div className="min-h-screen relative z-10 py-16 px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-[var(--brand-gold)] mb-8">Gallery</h1>
+        <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl text-(--brand-gold) mb-8">Gallery</h1>
 
         {/* Filter Buttons */}
         <div className="flex gap-0 mb-16 flex-wrap">
@@ -66,8 +66,8 @@ export default function GalleryPage() {
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-2 rounded-lg font-medium transition-all ${
                 filter === f.value
-                  ? 'bg-[var(--brand-gold)] text-[#1a1a1a]'
-                  : 'border border-[var(--brand-gold)] text-[var(--brand-gold)] hover:bg-[var(--brand-gold)]/10'
+                  ? 'bg-(--brand-gold) text-[#1a1a1a]'
+                  : 'border border-(--brand-gold) text-(--brand-gold) hover:bg-(--brand-gold)/10'
               }`}
             >
               {f.label}
@@ -99,7 +99,7 @@ export default function GalleryPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center text-[var(--brand-gold)]">
+          <div className="text-center text-(--brand-gold)">
             No images in this category
           </div>
         )}

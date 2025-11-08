@@ -69,6 +69,7 @@ export const artistsEN = {
     }
   ],
 
+
   // PIERCING SPECIALISTS SECTION (3 members)
   piercingSpecialists: [
     {
@@ -136,6 +137,7 @@ export const artistsEN = {
     }
   ],
 
+
   // LEADERSHIP/SERVICE SECTION (2 members)
   leadership: [
     {
@@ -147,7 +149,7 @@ export const artistsEN = {
       bio: "Oliver is the founder and owner of Medusa Tattoo Studio. As 'Mr. Magic' he combines extraordinary piercing techniques with the art of entertainment and specializes in implants.",
       image: "/images/artists/headshots/oli.jpg",
       featured: true,
-      rating: 5.0,
+      rating: 5,
       reviewCount: 284,
       priceRange: {
         min: 100,
@@ -181,6 +183,7 @@ export const artistsEN = {
       section: "service"
     }
   ],
+
 
   // Legacy artists array for backward compatibility
   artists: [
@@ -275,5 +278,6 @@ export const artistsEN = {
     }
   ]
 };
+
 
 export default artistsEN;

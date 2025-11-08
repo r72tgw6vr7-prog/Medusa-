@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import styles from './BookingModalMobile.module.css';
+import './BookingModalMobile.css';
 import {
   X,
   ChevronLeft,
@@ -12,9 +12,9 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
-import Button from '../Button';
-import ArtistCard from '../ArtistCard';
-import FormInput from '../FormInput';
+import Button from '../atoms/Button';
+import ArtistCard from '../molecules/Card/ArtistCard';
+import FormInput from '../atoms/Input/FormInput';
 
 // Interface for team.json data
 interface TeamArtist {
@@ -190,23 +190,23 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
   );
 
   return (
-    <div className={styles['booking-modal-mobile']}>
-      <div className={styles['modal-header']}>
+    <div className='booking-modal-mobile'>
+      <div className='modal-header'>
         <h2>Termin buchen</h2>
-        <button className={styles['close-button']} onClick={onClose} aria-label='Schließen'>
+        <button className='close-button' onClick={onClose} aria-label='Schließen'>
           <X size={24} />
         </button>
       </div>
 
-      <div className={styles['modal-body']}>
+      <div className='modal-body'>
         {step === 'service' && (
-          <div className={styles['step-container']}>
+          <div className='step-container'>
             <h3>Service auswählen</h3>
-            <div className={styles['service-grid']}>
+            <div className='service-grid'>
               {SERVICES.map((service) => (
                 <button
                   key={service.id}
-                  className={`${styles['service-card']} ${selectedService === service.id ? styles.selected : ''}`}
+                  className={`service-card ${selectedService === service.id ? 'selected' : ''}`}
                   onClick={() => setSelectedService(service.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -216,20 +216,29 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                   }}
                   type='button'
                 >
-                  <div className={styles['service-icon']}>
+                  <div className='service-icon'>
                     {service.id === 'tattoo' ? (
-                      <svg /* Tattoo icon */ />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"></path>
+                        <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"></path>
+                        <path d="m2.3 2.3 7.286 7.286"></path>
+                        <circle cx="11" cy="11" r="2"></circle>
+                      </svg>
                     ) : (
-                      <svg /* Piercing icon */ />
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="12" r="6"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                      </svg>
                     )}
                   </div>
                   <h4>{service.title}</h4>
-                  <p className={styles.price}>{service.price}</p>
-                  <ul className={styles.features}>
-                    {service.features.map((feature, idx) => {
+                  <p className='price'>{service.price}</p>
+                  <ul className='features'>
+                    {service.features.map((feature) => {
                       const Icon = feature.icon;
                       return (
-                        <li key={idx}>
+                        <li key={`${service.id}-${feature.text}`}>
                           <Icon size={20} />
                           <span>{feature.text}</span>
                         </li>
@@ -252,8 +261,8 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
         )}
 
         {step === 'artist' && (
-          <div className={styles['step-container']}>
-            <div className={styles['step-header']}>
+          <div className='step-container'>
+            <div className='step-header'>
               <Button
                 variant='secondary'
                 onClick={() => setStep('service')}
@@ -264,7 +273,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               </Button>
               <h3>Künstler:in auswählen</h3>
             </div>
-            <div className={styles['artist-grid']}>
+            <div className='artist-grid'>
               {artists.map((artist) => (
                 <ArtistCard
                   key={artist.id}
@@ -301,8 +310,8 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
         )}
 
         {step === 'contact' && (
-          <form className={styles['step-container']} onSubmit={handleSubmit}>
-            <div className={styles['step-header']}>
+          <form className='step-container' onSubmit={handleSubmit}>
+            <div className='step-header'>
               <Button
                 type='button'
                 variant='secondary'
@@ -355,7 +364,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               fieldContainerClass="form-group"
             />
 
-            <div className={styles['form-group']}>
+            <div className='form-group'>
               <label htmlFor='message'>Nachricht (optional)</label>
               <textarea
                 id='message'
@@ -394,8 +403,8 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
 
       {/* Loading Overlay */}
       {isSubmitting && (
-        <div className={styles['loading-overlay']}>
-          <div className={styles['loading-spinner']}>
+        <div className='loading-overlay'>
+          <div className='loading-spinner'>
             <Loader2 className='animate-spin' size={48} />
             <p>Ihre Buchung wird übermittelt...</p>
           </div>
@@ -404,8 +413,8 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
 
       {/* Error State */}
       {step === 'error' && submissionError && (
-        <div className={styles['error-state']}>
-          <AlertCircle size={48} className={styles['error-icon']} />
+        <div className='error-state'>
+          <AlertCircle size={48} className='error-icon' />
           <h3>Etwas ist schiefgelaufen</h3>
           <p>{submissionError}</p>
           <Button
@@ -422,12 +431,12 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
 
       {/* Confirmation Screen */}
       {step === 'confirmation' && bookingResult && (
-        <div className={styles['confirmation-screen']}>
-          <CheckCircle2 size={64} className={styles['success-icon']} />
+        <div className='confirmation-screen'>
+          <CheckCircle2 size={64} className='success-icon' />
           <h3>Termin bestätigt!</h3>
           <p>Ihre Terminbuchung wurde erfolgreich übermittelt.</p>
 
-          <div className={styles['booking-details']}>
+          <div className='booking-details'>
             <div className='detail-row'>
               <span className='detail-label'>Buchungsnummer:</span>
               <span className='detail-value'>{bookingResult.bookingNumber}</span>

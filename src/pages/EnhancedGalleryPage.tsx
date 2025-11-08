@@ -279,12 +279,21 @@ export const EnhancedGalleryPage: React.FC = () => {
         <MainNavigation />
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
-        {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-        <section className='relative z-10 section-padding-lg'>
+        {/* Page Header - Matches Services page exactly */}
+        <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='text-center'>
-              <h1 className='typo-h1 text-[var(--brand-gold)]'>{t('gallery.title')}</h1>
-              <p className='typo-subtitle text-[#C0C0C0]'>{t('gallery.subtitle')}</p>
+            <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+              <div className='text-center space-y-8'>
+                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                  Medusa München
+                </p>
+                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
+                  {t('gallery.title')}
+                </h1>
+                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+                  {t('gallery.subtitle')}
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -304,11 +313,11 @@ export const EnhancedGalleryPage: React.FC = () => {
         <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
             {/* Filter Controls */}
-            <div className="flex flex-wrap gap-8 items-center justify-between mb-8">
-              <div className="flex flex-wrap gap-0">
+            <div className="flex flex-wrap gap-8 items-center justify-between mb-16">
+              <div className="flex flex-wrap gap-8">
                 <button
                   onClick={resetFilters}
-                  className="px-8 py-0 bg-[var(--brand-gold)]/10 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] font-medium transition-all duration-300 rounded-lg hover:bg-[var(--brand-gold)]/20"
+                  className="px-8 py-4 bg-[var(--brand-gold)]/10 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] font-semibold text-base transition-all duration-200 rounded-xl hover:bg-[var(--brand-gold)]/20"
                 >
                   {t('gallery.filters.allWorks')}
                 </button>
@@ -320,10 +329,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowStyleDropdown(false);
                       setShowYearDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
+                    className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterArtist !== allArtistsLabel
                         ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
                     }`}
                   >
                     {filterArtist}
@@ -353,10 +362,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowArtistDropdown(false);
                       setShowYearDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
+                    className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterStyle !== allStylesLabel
                         ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
                     }`}
                   >
                     {filterStyle}
@@ -386,10 +395,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       setShowArtistDropdown(false);
                       setShowStyleDropdown(false);
                     }}
-                    className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
+                    className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterYear !== allYearsLabel
                         ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
                     }`}
                   >
                     {filterYear}
@@ -416,7 +425,7 @@ export const EnhancedGalleryPage: React.FC = () => {
               {hasActiveFilters && (
                 <button
                   onClick={resetFilters}
-                  className="px-8 py-0 rounded-lg bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-medium transition-all duration-300"
+                  className="px-8 py-4 rounded-xl bg-red-500/10 border-2 border-red-500/30 text-red-400 hover:bg-red-500/20 font-semibold text-base transition-all duration-200"
                 >
                   Filter zurücksetzen
                 </button>
@@ -481,12 +490,12 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <button
                       ref={loadMoreRef}
                       onClick={() => setShowAllPhotos(true)}
-                      className="group inline-flex items-center gap-0 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out"
+                      className="group inline-flex items-center justify-center gap-8 px-8 py-4 bg-[var(--brand-gold)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 rounded-xl"
                     >
                       <span>{t('gallery.filters.more')}</span>
                       <ChevronRight
                         size={20}
-                        className="transition-transform group-hover:translate-x-1 transition duration-200 ease-out"
+                        className="transition-transform duration-200 group-hover:translate-x-1"
                       />
                     </button>
                   </motion.div>

@@ -170,7 +170,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             {/* Timeline Line */}
-            <div className='absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-brand-gold to-transparent'>
+            <div className='absolute top-24 left-0 right-0 h-0.5 z-0 bg-gradient-to-r from-transparent via-brand-gold to-transparent'>
               <motion.div
                 className='h-full bg-brand-gold origin-left'
                 initial={{ scaleX: 0 }}
@@ -242,8 +242,8 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
                       <div className='bg-gradient-to-br from-brand-background via-brand-background/95 to-brand-background/90 rounded-2xl p-8 border border-brand-chrome/30 group-hover:border-brand-gold/40 transition-all duration-500 group-hover:shadow-gold-glow-subtle'>
                         {/* Icon and Title Row */}
                         <div className='flex items-center space-x-8 mb-8'>
-                          <div className='w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center'>
-                            <IconComponent size={24} className='text-brand-gold' />
+                          <div className='w-14 h-14 rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center'>
+                            <IconComponent size={20} className='text-brand-gold' />
                           </div>
                           <div className='flex-1'>
                             <h3 className='text-headline-md font-headline text-brand-gold mb-0'>

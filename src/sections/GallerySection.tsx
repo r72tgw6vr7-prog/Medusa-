@@ -50,9 +50,12 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       containerSize="default"
     >
         {/* Header */}
-        <div className='text-center mb-16'>
-          <h2 className='font-serif text-4xl md:text-5xl font-bold text-[var(--brand-gold)]'>{title}</h2>
-          <p className='text-gray-300 text-lg mt-0'>{subtitle}</p>
+        <div className='text-center space-y-8 mb-16'>
+          <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+            Galerie
+          </p>
+          <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>{title}</h2>
+          <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>{subtitle}</p>
         </div>
 
         {/* Gallery Grid - Sample Preview */}
@@ -110,7 +113,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           >
             <button
               onClick={() => navigate('/gallery')}
-              className='bg-[var(--brand-gold)] text-black font-semibold text-lg px-8 py-8 rounded-xl hover:bg-[var(--brand-gold-hover)] hover:scale-105 transition-all duration-300 flex items-center gap-0 shadow-lg hover:shadow-gold-glow focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+              className='inline-flex items-center justify-center gap-8 px-8 py-4 bg-[var(--brand-gold)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
             >
               Zur Galerie
               <ArrowRight className='w-5 h-5' />

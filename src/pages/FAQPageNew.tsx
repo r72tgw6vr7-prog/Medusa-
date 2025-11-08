@@ -5,7 +5,6 @@
 // Features: Glassmorphic cards, gold accents, Playfair/Inter fonts, responsive grid
 
 import React, { useState } from 'react';
-import { PageHeader } from '../components/ui/PageHeader';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 
@@ -99,16 +98,16 @@ export function FAQPageNew() {
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
-        <section className='section-padding relative z-10'>
+        <section className='section-padding'>
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-[1104px]'>
-              {/* Page Header - Using reusable component */}
-              <PageHeader
-                eyebrow="Medusa München"
-                title="Häufige Fragen (FAQ)"
-                subtitle="Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen."
-                alignment="center"
-              />
+            <div className='mx-auto w-full max-w-[1104px] space-y-16'>
+              {/* Unified heading section applied: matches ServicesPageInteractive styling */}
+              <div className='text-center'>
+                <h1 className='typo-h1 text-[var(--brand-gold)]'>Häufige Fragen (FAQ)</h1>
+                <p className='typo-subtitle text-[#C0C0C0]'>
+                  Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen.
+                </p>
+              </div>
 
               <div className='space-y-8'>
                 {FAQ_SECTIONS.map((section, idx) => {
@@ -116,10 +115,10 @@ export function FAQPageNew() {
                   return (
                     <div
                       key={section.title}
-                      className='rounded-3xl border-2 border-white/10 bg-[#222222] transition-all duration-200'
+                      className='rounded-3xl border border-[#C0C0C0]/25 bg-[rgba(34,34,34,0.85)] backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-300'
                     >
                       <button
-                        className='w-full px-8 py-4 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
                         onClick={() => setOpenSection(isOpen ? null : idx)}
                         aria-expanded={isOpen}
                       >
@@ -127,7 +126,7 @@ export function FAQPageNew() {
                           {section.title}
                         </span>
                         <span
-                          className={`ml-4 text-[var(--brand-gold)] transition-transform duration-200 ${
+                          className={`ml-4 text-[var(--brand-gold)] transition-transform duration-300 ${
                             isOpen ? 'rotate-90' : ''
                           }`}
                         >
@@ -135,18 +134,18 @@ export function FAQPageNew() {
                         </span>
                       </button>
                       <div
-                        className={`overflow-hidden transition-all duration-200 ${
-                          isOpen ? 'max-h-[1000px]' : 'max-h-0'
+                        className={`overflow-hidden transition-all duration-300 ${
+                          isOpen ? 'max-h-[800px]' : 'max-h-0'
                         }`}
                         aria-hidden={!isOpen}
                       >
-                        <div className='px-8 pb-8 space-y-8 border-t border-white/10 pt-8'>
+                        <div className='px-8 pb-8 space-y-8 border-t border-[#C0C0C0]/20'>
                           {section.questions.map((q) => (
                             <div key={q.q} className='space-y-8'>
-                              <h3 className='font-headline text-xl text-[var(--brand-gold)]'>
+                              <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-gold)]'>
                                 {q.q}
                               </h3>
-                              <p className='text-base text-white/70 font-body leading-relaxed'>
+                              <p className='font-body text-base md:text-lg text-white/85 leading-relaxed'>
                                 {q.a}
                               </p>
                             </div>

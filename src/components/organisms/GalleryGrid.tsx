@@ -43,8 +43,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({
           {categories.map((cat) => (
             <Button
               key={cat}
-              variant={filter === cat ? 'primary' : 'ghost'}
-              size='sm'
+              variant={filter === cat ? 'primary' : 'secondary'}
               onClick={() => setFilter(cat)}
             >
               {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -54,10 +53,8 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({
 
         <div className='ml-auto'>
           <Button
-            variant='ghost'
-            size='sm'
+            variant='secondary'
             onClick={() => setSortBy(sortBy === 'latest' ? 'oldest' : 'latest')}
-            icon={<span>↓</span>}
           >
             {sortBy === 'latest' ? 'Newest First' : 'Oldest First'}
           </Button>

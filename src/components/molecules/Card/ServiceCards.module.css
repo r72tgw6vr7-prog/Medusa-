@@ -1,26 +1,71 @@
-/* ServiceCards - Additional Styles */
-/* All font imports moved to system.css */
+/* ServiceCards - Button INSIDE at bottom with price */
 
-/* Custom line-through decoration for struck titles */
+/* Service card footer - price and button together at bottom */
+.service-card-footer {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* Service card CTA button - centered, not full width */
+.service-card-cta {
+  display: inline-block;
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--space-1);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  min-width: 180px;
+}
+
+/* Reuse team-card-button styles from ArtistCard */
+.team-card-button-primary {
+  background-color: transparent;
+  color: var(--brand-white);
+  border: 2px solid var(--color-brand-gold);
+}
+
+.team-card-button-primary:hover {
+  background-color: rgba(var(--color-brand-gold-rgb), 0.1);
+  border-color: var(--color-brand-gold-dark);
+}
+
+/* Service grid */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-card {
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 801px) {
+  .service-card {
+    min-height: 500px;
+  }
+}
+
+/* Legacy styles */
 .line-through {
   text-decoration-thickness: 1px;
   text-decoration-skip-ink: none;
 }
 
-/* Smooth hover transitions for cards */
-.group:hover {
-  transform: scale(1.02);
-}
-
-/* Focus visible states for accessibility */
 a:focus-visible {
   outline: 2px solid var(--color-brand-gold);
   outline-offset: 2px;
-}
-
-/* Ensure proper contrast for text on backgrounds */
-@supports (backdrop-filter: blur(10px)) {
-  .backdrop-blur-sm {
-    backdrop-filter: blur(10px);
-  }
 }

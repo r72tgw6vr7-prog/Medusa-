@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { InputField } from '../atoms/Input/InputField';
 import { TextArea } from '../atoms/TextArea';
 import Button from '../atoms/Button/Button';
-import { Icon } from '../atoms/Icon/Icon';
 
 interface FormData {
   name: string;
@@ -141,7 +140,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className = 
           error={errors.message}
         />
 
-        <Button type='submit' fullWidth loading={isSubmitting} icon={<Icon name='send' />}>
+        <Button type='submit' fullWidth isLoading={isSubmitting}>
           Nachricht senden
         </Button>
       </form>

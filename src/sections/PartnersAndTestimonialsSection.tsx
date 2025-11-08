@@ -17,12 +17,6 @@ const partnerLogos = [
     alt: 'nannybag Logo',
   },
   {
-    id: 'partner3',
-    name: 'Partner 3',
-    src: '/assets/images/photos/partners/partner3-logo.svg',
-    alt: 'Partner 3 Logo',
-  },
-  {
     id: 'bqla',
     name: 'BQLA',
     src: '/assets/images/photos/partners/bqla-logo.svg',

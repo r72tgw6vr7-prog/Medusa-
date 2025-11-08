@@ -131,13 +131,20 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
-        <section className='section-padding'>
+        <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-4xl'>
-              {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-              <div className='text-center mb-16'>
-                <h1 className='typo-h1 text-[var(--brand-gold)]'>{t.title}</h1>
-                <p className='typo-subtitle text-[#C0C0C0]'>{t.subtitle}</p>
+            <div className='mx-auto w-full max-w-[1104px]'>
+              {/* Page Header - Matches Services page exactly */}
+              <div className='text-center space-y-8 mb-16'>
+                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                  Medusa München
+                </p>
+                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
+                  {t.title}
+                </h1>
+                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+                  {t.subtitle}
+                </p>
               </div>
 
               <div className='space-y-16'>

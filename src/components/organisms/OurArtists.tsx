@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ArtistCard } from '../molecules/Card/ArtistCard';
 import { ArtistDetailModal } from './ArtistDetailModal';
-import styles from './OurArtists.module.css';
 
 interface Artist {
   id: string;
@@ -144,17 +143,15 @@ export function OurArtists({ onBookArtist }: OurArtistsProps) {
                 aria-label={`${artist.name} Details anzeigen`}
               >
                 <ArtistCard
-                  artist={{
-                    id: artist.id,
-                    name: artist.name,
-                    role: artist.role,
-                    photo: artist.imageSrc,
-                    specialties: artist.specialties,
-                    experience: artist.experience,
-                    instagram: artist.instagramHandle,
-                    bookable: true,
-                  }}
-                  onClick={() => onBookArtist(artist.id)}
+                  name={artist.name}
+                  role={{ name: artist.role, icon: 'pen-icon.svg' }}
+                  imageUrl={artist.imageSrc}
+                  specialties={artist.specialties}
+                  experience={artist.experience}
+                  instagramHandle={artist.instagramHandle}
+                  imagePosition={artist.imagePosition}
+                  onClick={() => handleCardClick(artist)}
+                  onBookClick={() => onBookArtist(artist.id)}
                 />
               </div>
             ))}

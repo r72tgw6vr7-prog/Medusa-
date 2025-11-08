@@ -58,14 +58,12 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
           {artists.map((artist, index) => (
             <ArtistCard
               key={index}
-              artist={{
-                name: artist.name,
-                role: artist.role.name,
-                photo: artist.imageUrl,
-                specialties: artist.specialties,
-                experience: artist.experience,
-                instagram: artist.instagramHandle,
-              }}
+              name={artist.name}
+              role={artist.role}
+              imageUrl={artist.imageUrl}
+              specialties={artist.specialties}
+              experience={artist.experience}
+              instagramHandle={artist.instagramHandle}
               onClick={() => onBookClick?.(artist.name)}
             />
           ))}
