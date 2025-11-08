@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { PageHeader } from '../components/ui/PageHeader';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { MapPin, Phone, Mail, Clock, Instagram, Star } from 'lucide-react';
@@ -67,51 +68,53 @@ export const ContactPage: React.FC = () => {
       <MainNavigation />
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
-      {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-      <section className='relative section-padding'>
-        <div className='responsive-container safe-area-padding flex flex-col items-center text-center gap-8'>
-          <p className='text-sm uppercase tracking-[0.3em] text-white/60'>Kontaktieren Sie uns</p>
-          <div className='text-center'>
-            <h1 className='typo-h1 text-[var(--brand-gold)]'>Kontakt</h1>
-            <p className='typo-subtitle text-[#C0C0C0]'>
-              Wir begleiten Sie von der ersten Idee bis zum finalen Meisterwerk. Schreiben Sie uns –
-              wir melden uns zeitnah zurück.
-            </p>
+      {/* Page Header - Matches Services page exactly */}
+      <section className='section-padding relative z-10'>
+        <div className='responsive-container safe-area-padding'>
+          <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+            <PageHeader
+              eyebrow="Kontaktieren Sie uns"
+              title="Kontakt"
+              subtitle="Wir begleiten Sie von der ersten Idee bis zum finalen Meisterwerk. Schreiben Sie uns – wir melden uns zeitnah zurück."
+              alignment="left"
+              maxWidth="lg"
+            />
           </div>
         </div>
       </section>
 
       {/* Content */}
-      <section className='section-padding'>
+      <section className='section-padding relative z-10'>
         <div className='responsive-container safe-area-padding'>
-          <div className='grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]'>
+          <div className='mx-auto w-full max-w-[1104px]'>
+            <div className='grid gap-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]'>
             {/* Contact Form */}
             <div className='flex flex-col gap-16'>
-              <div className='flex flex-col gap-8'>
+              <div className='text-center space-y-8'>
                 <p className='text-sm uppercase tracking-[0.25em] text-white/60'>Kontaktformular</p>
-                <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
+                <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
                   Schreiben Sie uns
                 </h2>
-                <p className='text-white/70 font-body'>
+                <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
                   Hinterlassen Sie uns eine Nachricht – unser Team meldet sich innerhalb von 24
                   Stunden.
                 </p>
               </div>
 
               {isSubmitted ? (
-                <div className='flex h-full flex-col items-center justify-center gap-8 rounded-2xl border border-[var(--brand-gold)]/60 bg-[var(--brand-gold)]/10 p-16 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)]'>
+                <div className='flex h-full flex-col items-center justify-center gap-8 rounded-3xl border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/10 p-8 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(212,175,55,0.35)]'>
                   <div className='text-5xl text-[var(--brand-gold)]'>✓</div>
-                  <h3 className="font-['Playfair_Display'] text-2xl text-[var(--brand-gold)]">
+                  <h3 className='font-headline text-2xl md:text-3xl text-[var(--brand-gold)]'>
                     Nachricht gesendet!
                   </h3>
-                  <p className='max-w-md text-white/80 font-body'>
+                  <p className='text-base leading-7 text-white/70 max-w-md font-body'>
                     Vielen Dank für Ihre Nachricht. Wir melden uns so schnell wie möglich bei Ihnen.
                   </p>
                 </div>
               ) : (
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className='flex h-full flex-col gap-8 rounded-2xl border border-white/10 bg-black/40 p-8 md:p-16 backdrop-blur-lg shadow-[0_20px_60px_rgba(0,0,0,0.45)]'
+                  className='flex h-full flex-col gap-8 rounded-3xl border-2 border-white/10 bg-[#222222] p-8'
                 >
                   <div className='flex flex-col gap-8'>
                     <label
@@ -226,7 +229,7 @@ export const ContactPage: React.FC = () => {
                   <button
                     type='submit'
                     disabled={isSubmitting}
-                    className='flex flex-col h-full h-12 w-full inline-flex items-center justify-center rounded-xl bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold text-lg tracking-wide transition-all duration-300 hover:bg-[var(--brand-gold-hover)] hover:shadow-[0_12px_40px_rgba(212,175,55,0.35)] disabled:opacity-60 disabled:cursor-not-allowed'
+                    className='w-full inline-flex items-center justify-center rounded-xl px-8 py-4 text-lg font-semibold transition-all duration-200 bg-[var(--brand-gold)] text-[var(--deep-black)] hover:bg-[var(--brand-gold-hover)] focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] disabled:opacity-60 disabled:cursor-not-allowed'
                   >
                     {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
                   </button>
@@ -240,7 +243,7 @@ export const ContactPage: React.FC = () => {
                 <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
                   Studio & Service
                 </p>
-                <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
+                <h2 className="font-headline text-3xl md:text-4xl text-(--brand-gold)">
                   Unser Studio
                 </h2>
                 <p className='text-white/70 font-body'>
@@ -364,6 +367,7 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>
