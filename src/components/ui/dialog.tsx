@@ -30,16 +30,16 @@ export function Dialog({ open, children, onOpenChange }: DialogProps) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
-      role="dialog"
-      aria-modal="true"
+      className='fixed inset-0 bg-black/60 flex items-center justify-center z-50'
+      role='dialog'
+      aria-modal='true'
       tabIndex={-1}
       onClick={handleOverlayClick}
       onKeyDown={handleOverlayKeyDown}
     >
       <div
-        className="bg-white rounded-lg p-8 max-w-md w-full shadow-xl"
-        role="document"
+        className='bg-white rounded-lg p-8 max-w-md w-full shadow-xl'
+        role='document'
         tabIndex={-1}
         onClick={handleContentClick}
         onKeyDown={handleContentKeyDown}

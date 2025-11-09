@@ -140,10 +140,8 @@ const Footer: React.FC = () => {
       <div className='max-w-7xl mx-auto px-8 md:px-16 lg:px-16'>
         {/* Logo and Tagline */}
         <div className='mb-16'>
-          <h2 className="font-headline text-4xl font-bold text-(--brand-gold) mb-8">
-            MEDUSA
-          </h2>
-          <p className="font-body text-base text-white/80">
+          <h2 className='font-headline text-4xl font-bold text-(--brand-gold) mb-8'>MEDUSA</h2>
+          <p className='font-body text-base text-white/80'>
             Münchens exklusivestes Tattoo-Studio für Kunst, die ein Leben lang hält.
           </p>
         </div>
@@ -152,19 +150,19 @@ const Footer: React.FC = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16'>
           {/* Unser Studio */}
           <div className='space-y-8'>
-            <h3 className="font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8">
+            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
               UNSER STUDIO
             </h3>
             <div className='space-y-8'>
               <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.address.icon} />
-                <span className="font-body text-sm text-white/80 leading-relaxed">
+                <span className='font-body text-sm text-white/80 leading-relaxed'>
                   {studioInfo.address.text}
                 </span>
               </div>
               <div className='flex items-start gap-8'>
                 <IconComponent iconName={studioInfo.hours.icon} />
-                <span className="font-body text-sm text-white/80 leading-relaxed">
+                <span className='font-body text-sm text-white/80 leading-relaxed'>
                   {studioInfo.hours.text}
                 </span>
               </div>
@@ -172,7 +170,7 @@ const Footer: React.FC = () => {
                 <IconComponent iconName={studioInfo.phone.icon} />
                 <a
                   href={studioInfo.phone.href}
-                  className="font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300"
+                  className='font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
                 >
                   {studioInfo.phone.text}
                 </a>
@@ -181,7 +179,7 @@ const Footer: React.FC = () => {
                 <IconComponent iconName={studioInfo.email.icon} />
                 <a
                   href={studioInfo.email.href}
-                  className="font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300"
+                  className='font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
                 >
                   {studioInfo.email.text}
                 </a>
@@ -191,15 +189,15 @@ const Footer: React.FC = () => {
 
           {/* Rechtliches */}
           <div className='space-y-8'>
-            <h3 className="font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8">
+            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
               RECHTLICHES
             </h3>
-            <ul className='space-y-8'>
+            <ul className='grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-0 md:space-y-8'>
               {legalLinks.map((link, index) => (
                 <li key={`legal-${link.text}`}>
                   <a
                     href={link.href}
-                    className="block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300"
+                    className='block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
                   >
                     {link.text}
                   </a>
@@ -210,15 +208,15 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div className='space-y-8'>
-            <h3 className="font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8">
+            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
               QUICK LINKS
             </h3>
-            <ul className='space-y-8'>
+            <ul className='grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-0 md:space-y-8'>
               {quickLinks.map((link, index) => (
                 <li key={`quick-${link.text}`}>
                   <a
                     href={link.href}
-                    className="block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300"
+                    className='block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
                   >
                     {link.text}
                   </a>
@@ -229,7 +227,7 @@ const Footer: React.FC = () => {
 
           {/* Folgen Sie uns */}
           <div className='space-y-8'>
-            <h3 className="font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8">
+            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
               FOLGEN SIE UNS
             </h3>
             {/* Social Icons */}
@@ -262,7 +260,7 @@ const Footer: React.FC = () => {
                 <Star size={28} />
               </a>
             </div>
-            
+
             <div className='space-y-8'>
               {Object.entries(socialLinks).map(([key, social]) => (
                 <div key={key} className='flex items-center gap-8'>
@@ -271,7 +269,7 @@ const Footer: React.FC = () => {
                     href={social.href}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className="font-body text-sm text-white/80 hover:text-brand-gold transition-colors duration-300"
+                    className='font-body text-sm text-white/80 hover:text-brand-gold transition-colors duration-300'
                     aria-label={social.text}
                   >
                     {social.text}
@@ -311,10 +309,10 @@ const Footer: React.FC = () => {
         {/* Newsletter Section */}
         <div className='border-t border-white/20 pt-16 mb-16'>
           <div className='text-center mb-8'>
-            <h3 className="font-headline text-2xl font-bold text-(--brand-gold) mb-8">
+            <h3 className='font-headline text-2xl font-bold text-(--brand-gold) mb-8'>
               Newsletter
             </h3>
-            <p className="font-body text-base text-white/80 mb-8">
+            <p className='font-body text-base text-white/80 mb-8'>
               Erhalten Sie exklusive Updates zu neuen Künstlern, Events und Aktionen.
             </p>
           </div>
@@ -338,7 +336,7 @@ const Footer: React.FC = () => {
               <button
                 type='submit'
                 disabled={!email || !agreeMarketing}
-                className="bg-(--brand-gold) text-black font-body font-medium py-8 px-8 rounded hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-(--brand-gold) focus:ring-offset-2 focus:ring-offset-[#1A1A1A]"
+                className='bg-(--brand-gold) text-black font-body font-medium py-8 px-8 rounded hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-(--brand-gold) focus:ring-offset-2 focus:ring-offset-[#1A1A1A]'
               >
                 Abonnieren
               </button>
@@ -355,7 +353,7 @@ const Footer: React.FC = () => {
               />
               <label
                 htmlFor='marketing-consent'
-                className="font-body text-sm text-white/80"
+                className='font-body text-sm text-white/80'
                 aria-describedby='marketing-consent-description'
               >
                 I agree to receive marketing communications from Medusa Tattoo München. You can
@@ -367,25 +365,20 @@ const Footer: React.FC = () => {
 
         {/* Map Section */}
         <div className='border-t border-white/20 pt-16 mb-16 text-center'>
-          <h3 className="font-headline text-xl font-bold text-(--brand-gold) mb-8 flex items-center justify-center gap-8">
+          <h3 className='font-headline text-xl font-bold text-(--brand-gold) mb-8 flex items-center justify-center gap-8'>
             <MapPin size={20} className='text-(--brand-gold)' />
             Wegbeschreibung
           </h3>
 
           <div className='bg-white/10 rounded h-64 overflow-hidden'>
-            <GoogleMap 
-              width="100%"
-              height="100%"
-              className=""
-              title="Medusa Studio Location Map"
-            />
+            <GoogleMap width='100%' height='100%' className='' title='Medusa Studio Location Map' />
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className='border-t border-white/20 pt-16'>
           <div className='flex flex-col md:flex-row justify-between items-center gap-16'>
-            <p className="font-body text-sm text-white/50">
+            <p className='font-body text-sm text-white/50'>
               © 2025 Medusa Tattoo München. Alle Rechte vorbehalten.
             </p>
 

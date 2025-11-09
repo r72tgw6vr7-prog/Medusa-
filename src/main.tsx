@@ -14,5 +14,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       {/* App rendered ON TOP */}
       <App />
     </>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

@@ -85,44 +85,41 @@ export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = 
 
         {/* Content area */}
         <div className='relative z-20 flex-1 flex flex-col'>
-          <Section 
-            bg="none" 
-            className="flex-1 flex flex-col justify-center py-16 lg:py-24"
-            containerSize="default"
+          <Section
+            bg='none'
+            className='flex-1 flex flex-col justify-center py-16 lg:py-24'
+            containerSize='default'
           >
             {children}
           </Section>
         </div>
 
-      {/* Trust Badges Carousel - Positioned in bottom area as shown in white box */}
-      <section
-        className='trust-badges-wrapper'
-        aria-label='Qualitätsmerkmale und Auszeichnungen'
-      >
-        <div className='trust-badges-container'>
-          <div className='trust-badges-track animate-[scrollBadges_30s_linear_infinite]'>
-            {/* First set of badges - Map through TRUST_BADGES */}
-            {TRUST_BADGES.map((badge) => (
-              <div key={badge.id} className='trust-badge-item'>
-                <div className='badge-icon' aria-hidden='true'>
-                  {badge.svg}
+        {/* Trust Badges Carousel - Positioned in bottom area as shown in white box */}
+        <section className='trust-badges-wrapper' aria-label='Qualitätsmerkmale und Auszeichnungen'>
+          <div className='trust-badges-container'>
+            <div className='trust-badges-track animate-[scrollBadges_30s_linear_infinite]'>
+              {/* First set of badges - Map through TRUST_BADGES */}
+              {TRUST_BADGES.map((badge) => (
+                <div key={badge.id} className='trust-badge-item'>
+                  <div className='badge-icon' aria-hidden='true'>
+                    {badge.svg}
+                  </div>
+                  <span className='badge-text'>{badge.text}</span>
                 </div>
-                <span className='badge-text'>{badge.text}</span>
-              </div>
-            ))}
+              ))}
 
-            {/* Duplicate set for infinite scrolling */}
-            {TRUST_BADGES.map((badge) => (
-              <div key={`${badge.id}-duplicate`} className='trust-badge-item'>
-                <div className='badge-icon' aria-hidden='true'>
-                  {badge.svg}
+              {/* Duplicate set for infinite scrolling */}
+              {TRUST_BADGES.map((badge) => (
+                <div key={`${badge.id}-duplicate`} className='trust-badge-item'>
+                  <div className='badge-icon' aria-hidden='true'>
+                    {badge.svg}
+                  </div>
+                  <span className='badge-text'>{badge.text}</span>
                 </div>
-                <span className='badge-text'>{badge.text}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </div>
     </div>
   );

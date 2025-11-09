@@ -218,17 +218,37 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                 >
                   <div className='service-icon'>
                     {service.id === 'tattoo' ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"></path>
-                        <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"></path>
-                        <path d="m2.3 2.3 7.286 7.286"></path>
-                        <circle cx="11" cy="11" r="2"></circle>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='24'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      >
+                        <path d='M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z'></path>
+                        <path d='m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18'></path>
+                        <path d='m2.3 2.3 7.286 7.286'></path>
+                        <circle cx='11' cy='11' r='2'></circle>
                       </svg>
                     ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <circle cx="12" cy="12" r="6"></circle>
-                        <circle cx="12" cy="12" r="2"></circle>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        width='24'
+                        height='24'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      >
+                        <circle cx='12' cy='12' r='10'></circle>
+                        <circle cx='12' cy='12' r='6'></circle>
+                        <circle cx='12' cy='12' r='2'></circle>
                       </svg>
                     )}
                   </div>
@@ -266,7 +286,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               <Button
                 variant='secondary'
                 onClick={() => setStep('service')}
-                className="p-0"
+                className='p-0'
                 aria-label='Zurück zu Service auswählen'
               >
                 <ChevronLeft size={24} />
@@ -277,23 +297,14 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               {artists.map((artist) => (
                 <ArtistCard
                   key={artist.id}
-                  artist={{
-                    id: artist.id,
-                    name: artist.name,
-                    role: artist.role,
-                    photo: artist.photo,
-                    specialties: [],
-                    specialty: artist.specialty,
-                  }}
-                  variant="booking"
+                  name={artist.name}
+                  role={{ name: artist.role, icon: '' }}
+                  specialties={artist.specialty ? [artist.specialty] : []}
+                  experience={''}
+                  instagramHandle={''}
+                  imageUrl={artist.photo}
                   isSelected={selectedArtist === artist.id}
                   onClick={() => setSelectedArtist(artist.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setSelectedArtist(artist.id);
-                    }
-                  }}
                 />
               ))}
             </div>
@@ -316,7 +327,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
                 type='button'
                 variant='secondary'
                 onClick={() => setStep('artist')}
-                className="p-0"
+                className='p-0'
                 aria-label='Zurück zu Künstler:in auswählen'
               >
                 <ChevronLeft size={24} />
@@ -325,43 +336,43 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
             </div>
 
             <FormInput
-              id="name"
-              label="Name*"
-              type="text"
+              id='name'
+              label='Name*'
+              type='text'
               value={formData.name}
               onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
               required
-              fieldContainerClass="form-group"
+              fieldContainerClass='form-group'
             />
 
             <FormInput
-              id="email"
-              label="E-Mail*"
-              type="email"
+              id='email'
+              label='E-Mail*'
+              type='email'
               value={formData.email}
               onChange={(value) => setFormData((prev) => ({ ...prev, email: value }))}
               required
-              fieldContainerClass="form-group"
+              fieldContainerClass='form-group'
             />
 
             <FormInput
-              id="phone"
-              label="Telefon*"
-              type="tel"
+              id='phone'
+              label='Telefon*'
+              type='tel'
               value={formData.phone}
               onChange={(value) => setFormData((prev) => ({ ...prev, phone: value }))}
               required
-              fieldContainerClass="form-group"
+              fieldContainerClass='form-group'
             />
 
             <FormInput
-              id="date"
-              label="Gewünschter Termin*"
-              type="date"
+              id='date'
+              label='Gewünschter Termin*'
+              type='date'
               value={formData.date}
               onChange={(value) => setFormData((prev) => ({ ...prev, date: value }))}
               required
-              fieldContainerClass="form-group"
+              fieldContainerClass='form-group'
             />
 
             <div className='form-group'>
@@ -389,12 +400,7 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
               </label>
             </div>
 
-            <Button 
-              type='submit' 
-              variant='primary'
-              disabled={!canProceedStep3}
-              className='w-full'
-            >
+            <Button type='submit' variant='primary' disabled={!canProceedStep3} className='w-full'>
               Termin anfragen
             </Button>
           </form>

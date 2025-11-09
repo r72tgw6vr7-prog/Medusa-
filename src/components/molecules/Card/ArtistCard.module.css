@@ -14,7 +14,9 @@
 
 .artist-card--selected {
   border-color: var(--color-brand-gold);
-  box-shadow: var(--shadow-gold-md), 0 0 0 2px rgba(var(--color-brand-gold-rgb), 0.5);
+  box-shadow:
+    var(--shadow-gold-md),
+    0 0 0 2px rgba(var(--color-brand-gold-rgb), 0.5);
 }
 
 .artist-card--interactive {
@@ -160,12 +162,12 @@
   .artist-card__image-container {
     height: 280px;
   }
-  
+
   .artist-card__actions {
     padding: var(--space-3);
     gap: var(--space-1-5);
   }
-  
+
   .artist-card__button {
     height: 44px;
   }

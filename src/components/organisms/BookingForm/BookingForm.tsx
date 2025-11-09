@@ -48,14 +48,14 @@ export function BookingForm() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       console.log('Booking submitted:', data);
-      
+
       // Show success message
       toast.success('Booking submitted successfully!', {
         description: 'We will contact you shortly to confirm your reservation.',
       });
-      
+
       // Reset form
       reset();
     } catch (error) {
@@ -67,97 +67,84 @@ export function BookingForm() {
   };
 
   return (
-    <form 
+    <form
       onSubmit={handleSubmit((data) => {
         // Cast data to BookingFormData
         onSubmit(data as unknown as BookingFormData);
       })}
-      className="space-y-8 w-full max-w-4xl mx-auto"
+      className='space-y-8 w-full max-w-4xl mx-auto'
       noValidate
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
         {/* Name */}
-        <div className="space-y-0">
-          <label htmlFor="name" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='name' className='block text-sm font-medium'>
             Full Name *
           </label>
-          <Input
-            id="name"
-            placeholder="John Doe"
-            error={!!errors.name}
-            {...register('name')}
-          />
-          {errors.name && (
-            <p className="text-sm text-red-600">{errors.name.message}</p>
-          )}
+          <Input id='name' placeholder='John Doe' error={!!errors.name} {...register('name')} />
+          {errors.name && <p className='text-sm text-red-600'>{errors.name.message}</p>}
         </div>
 
         {/* Email */}
-        <div className="space-y-0">
-          <label htmlFor="email" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='email' className='block text-sm font-medium'>
             Email *
           </label>
           <Input
-            id="email"
-            type="email"
-            placeholder="your@email.com"
+            id='email'
+            type='email'
+            placeholder='your@email.com'
             error={!!errors.email}
             {...register('email')}
           />
-          {errors.email && (
-            <p className="text-sm text-red-600">{errors.email.message}</p>
-          )}
+          {errors.email && <p className='text-sm text-red-600'>{errors.email.message}</p>}
         </div>
 
         {/* Phone */}
-        <div className="space-y-0">
-          <label htmlFor="phone" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='phone' className='block text-sm font-medium'>
             Phone Number *
           </label>
           <Input
-            id="phone"
-            type="tel"
-            placeholder="+1 (123) 456-7890"
+            id='phone'
+            type='tel'
+            placeholder='+1 (123) 456-7890'
             error={!!errors.phone}
             {...register('phone')}
           />
-          {errors.phone && (
-            <p className="text-sm text-red-600">{errors.phone.message}</p>
-          )}
+          {errors.phone && <p className='text-sm text-red-600'>{errors.phone.message}</p>}
         </div>
 
         {/* Date */}
-        <div className="space-y-0">
-          <label htmlFor="date" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='date' className='block text-sm font-medium'>
             Date *
           </label>
           <Input
-            id="date"
-            type="date"
+            id='date'
+            type='date'
             min={new Date().toISOString().split('T')[0]}
             error={!!errors.date}
             {...register('date')}
           />
-          {errors.date && (
-            <p className="text-sm text-red-600">{errors.date.message}</p>
-          )}
+          {errors.date && <p className='text-sm text-red-600'>{errors.date.message}</p>}
         </div>
 
         {/* Time */}
-        <div className="space-y-0">
-          <label htmlFor="time" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='time' className='block text-sm font-medium'>
             Time *
           </label>
           <Controller
-            name="time"
+            name='time'
             control={control}
             render={({ field }) => (
               <Select
-                id="time"
+                id='time'
                 error={!!errors.time}
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Select a time"
+                placeholder='Select a time'
               >
                 {timeSlots.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -167,25 +154,25 @@ export function BookingForm() {
               </Select>
             )}
           />
-          {errors.time && (
-            <p className="text-sm text-red-600">{errors.time.message}</p>
-          )}
+          {errors.time && <p className='text-sm text-red-600'>{errors.time.message}</p>}
         </div>
 
         {/* Guests */}
-        <div className="space-y-0">
-          <label htmlFor="guests" className="block text-sm font-medium">
+        <div className='space-y-0'>
+          <label htmlFor='guests' className='block text-sm font-medium'>
             Number of Guests *
           </label>
           <Controller
-            name="guests"
+            name='guests'
             control={control}
             render={({ field }) => (
               <Select
-                id="guests"
+                id='guests'
                 error={!!errors.guests}
                 value={field.value?.toString()}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => field.onChange(parseInt(e.target.value, 10))}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  field.onChange(parseInt(e.target.value, 10))
+                }
               >
                 {guestOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -195,39 +182,37 @@ export function BookingForm() {
               </Select>
             )}
           />
-          {errors.guests && (
-            <p className="text-sm text-red-600">{errors.guests.message}</p>
-          )}
+          {errors.guests && <p className='text-sm text-red-600'>{errors.guests.message}</p>}
         </div>
       </div>
 
       {/* Special Requests */}
-      <div className="space-y-0">
-        <label htmlFor="specialRequests" className="block text-sm font-medium">
+      <div className='space-y-0'>
+        <label htmlFor='specialRequests' className='block text-sm font-medium'>
           Special Requests (Optional)
         </label>
         <Textarea
-          id="specialRequests"
-          placeholder="Any special requirements or notes..."
+          id='specialRequests'
+          placeholder='Any special requirements or notes...'
           rows={4}
           error={!!errors.specialRequests}
           {...register('specialRequests')}
         />
-        <p className="text-xs text-gray-500">
+        <p className='text-xs text-gray-500'>
           {errors.specialRequests ? (
-            <span className="text-red-600">{errors.specialRequests.message}</span>
+            <span className='text-red-600'>{errors.specialRequests.message}</span>
           ) : (
             'Maximum 500 characters'
           )}
         </p>
       </div>
 
-      <div className="pt-0">
+      <div className='pt-0'>
         <Button
-          type="submit"
+          type='submit'
           className={cn(
             'w-full py-3 text-base',
-            isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+            isSubmitting ? 'opacity-70 cursor-not-allowed' : '',
           )}
           disabled={isSubmitting}
         >

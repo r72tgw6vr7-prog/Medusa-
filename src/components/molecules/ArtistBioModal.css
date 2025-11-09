@@ -1,0 +1,489 @@
+/* Modal Overlay */
+.artist-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 34, 34, 0.85);
+  /* No backdrop blur */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content Container - Horizontal Layout */
+.artist-modal-content {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(34, 34, 34, 0.92) 40%,
+    rgba(34, 34, 34, 0.95) 100%
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  border-radius: 16px;
+  max-width: 1000px;
+  width: 95%;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 0 40px rgba(212, 175, 55, 0.5),
+    0 0 80px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Close Button */
+.modal-close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent !important;
+  border: none;
+  color: #d4af37;
+  font-size: 32px;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  border-radius: 0;
+  z-index: 5; /* Ensure above photo */
+}
+
+.modal-close-button:hover {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  background: transparent; /* No rectangle on hover */
+}
+
+.modal-close-button:focus {
+  outline: 2px solid #d4af37;
+  outline-offset: 2px;
+}
+
+/* Left Photo Section - Background Image */
+.modal-photo-section {
+  flex: 0 0 40%;
+  position: relative;
+  z-index: 0; /* Keep photo behind close button */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  border-radius: 14px 0 0 14px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-photo-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(34, 34, 34, 0.85) 95%,
+    rgba(34, 34, 34, 0.98) 100%
+  );
+  pointer-events: none;
+}
+
+/* Right Content Section */
+.modal-content-section {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 34, 34, 0.5) 0%,
+    rgba(34, 34, 34, 0.7) 50%,
+    rgba(34, 34, 34, 0.85) 100%
+  );
+}
+
+/* Hidden - no longer needed */
+.modal-artist-photo {
+  display: none;
+}
+
+/* Artist Name */
+.modal-artist-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  line-height: 1.1;
+  color: #d4af37;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+/* Artist Role */
+.modal-artist-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Artist Meta (Experience + Instagram) */
+.modal-artist-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.modal-experience {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-experience::before {
+  content: '⏱';
+  font-size: 16px;
+}
+
+.modal-instagram {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #d4af37;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modal-instagram:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.modal-instagram::before {
+  content: '📷';
+  font-size: 16px;
+}
+
+/* Specialties */
+.modal-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.specialty-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #222222;
+  background: #d4af37;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Certifications */
+.modal-certifications {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(212, 175, 55, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.modal-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #d4af37;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.certification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.certification-list li {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.certification-list li::before {
+  content: '✓';
+  color: #d4af37;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Biography */
+.modal-bio {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.modal-bio p {
+  margin-bottom: 12px;
+}
+
+.modal-bio p:last-child {
+  margin-bottom: 0;
+}
+
+/* Portfolio Samples */
+.modal-portfolio-samples {
+  margin-bottom: 24px;
+}
+
+.modal-portfolio-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #d4af37;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.portfolio-thumbnails {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.portfolio-thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.portfolio-thumbnail:hover {
+  transform: scale(1.05);
+  border-color: #d4af37;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.portfolio-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: rgba(212, 175, 55, 0.5);
+}
+
+/* CTA Buttons */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.modal-cta-button {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  min-height: 48px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-cta-primary {
+  background: #d4af37;
+  color: #222222;
+}
+
+.modal-cta-primary:hover {
+  background: #c19b26;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.modal-cta-primary:focus {
+  outline: 2px solid #d4af37;
+  outline-offset: 2px;
+}
+
+.modal-cta-secondary {
+  background: transparent;
+  color: #d4af37;
+  border: 2px solid #d4af37;
+}
+
+.modal-cta-secondary:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.modal-cta-secondary:focus {
+  outline: 2px solid #d4af37;
+  outline-offset: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .artist-modal-content {
+    flex-direction: column;
+    max-height: 90vh;
+  }
+
+  .modal-photo-section {
+    flex: 0 0 200px;
+    min-height: 200px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .modal-content-section {
+    padding: 24px;
+  }
+
+  .modal-artist-name {
+    font-size: 28px;
+  }
+
+  .modal-artist-photo {
+    width: 150px;
+    height: 200px;
+  }
+
+  .modal-bio {
+    font-size: 14px;
+  }
+
+  .modal-artist-role {
+    font-size: 16px;
+  }
+
+  .modal-actions {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .artist-modal-overlay {
+    padding: 10px;
+  }
+
+  .artist-modal-content {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .modal-artist-name {
+    font-size: 24px;
+  }
+
+  .modal-artist-photo {
+    width: 120px;
+    height: 160px;
+  }
+
+  .specialty-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .artist-modal-overlay,
+  .artist-modal-content {
+    animation: none;
+  }
+
+  .modal-cta-button:hover {
+    transform: none;
+  }
+}
+
+/* Scrollbar Styling for Modal Content */
+.artist-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.artist-modal-content::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 4px;
+}
+
+.artist-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.5);
+  border-radius: 4px;
+}
+
+.artist-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.7);
+}

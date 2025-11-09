@@ -416,7 +416,9 @@ npm run preview
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Moved Items</p>
-              <p className='text-2xl font-bold text-[var(--brand-gold)]'>{results.movedItems.length}</p>
+              <p className='text-2xl font-bold text-[var(--brand-gold)]'>
+                {results.movedItems.length}
+              </p>
             </div>
             <div className='p-8 bg-[#0A0A0A] border border-[var(--deep-black)] rounded-lg flex flex-col h-full'>
               <p className='text-xs text-[#EAEAEA]/60 uppercase tracking-wide mb-0'>Errors</p>

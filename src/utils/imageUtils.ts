@@ -119,10 +119,7 @@ export const getImageProps = (src?: string, alt?: string, config: ResponsiveImag
 
   // Generate srcset for WebP and original format (conservative approach)
   const srcSet = src
-    ? [
-        `${basePath}@400w${ext} 400w`,
-        `${basePath}@800w${ext} 800w`,
-      ].join(', ')
+    ? [`${basePath}@400w${ext} 400w`, `${basePath}@800w${ext} 800w`].join(', ')
     : undefined;
 
   return {

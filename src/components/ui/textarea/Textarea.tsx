@@ -1,8 +1,7 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
 import { cn } from '../utils';
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Size of the textarea */
   size?: 'sm' | 'md' | 'lg';
   /** Whether the textarea has an error */
@@ -35,7 +34,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const currentRef = (ref as React.RefObject<HTMLTextAreaElement>) || textareaRef;
@@ -49,19 +48,17 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const baseClasses =
       'flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
-    const errorClasses = error
-      ? 'border-red-500 focus-visible:ring-red-200'
-      : 'border-input';
+    const errorClasses = error ? 'border-red-500 focus-visible:ring-red-200' : 'border-input';
 
     // Auto-resize functionality
     useEffect(() => {
       const textarea = currentRef.current;
       if (!autoResize || !textarea) return;
-      
+
       const adjustHeight = () => {
         textarea.style.height = 'auto';
         const maxHeight = maxRows * 24; // Approximate line height
-        
+
         if (textarea.scrollHeight <= maxHeight) {
           textarea.style.height = `${Math.max(textarea.scrollHeight, minRows * 24)}px`;
         } else {
@@ -97,7 +94,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             'resize-none': autoResize,
             'cursor-not-allowed opacity-50': disabled,
           },
-          className
+          className,
         )}
         disabled={disabled}
         aria-invalid={error ? 'true' : 'false'}
@@ -109,7 +106,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Textarea.displayName = 'Textarea';

@@ -47,7 +47,7 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 0.35, fixed: 0 },
     processingTime: '3-5 Werktage',
     popular: true,
-    icon: '/icons/sepa.svg'
+    icon: '/icons/sepa.svg',
   },
   {
     id: 'klarna',
@@ -57,7 +57,7 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 2.49, fixed: 30 },
     processingTime: 'Sofort',
     popular: true,
-    icon: '/icons/klarna.svg'
+    icon: '/icons/klarna.svg',
   },
   {
     id: 'paypal',
@@ -67,7 +67,7 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 2.49, fixed: 35 },
     processingTime: 'Sofort',
     popular: true,
-    icon: '/icons/paypal.svg'
+    icon: '/icons/paypal.svg',
   },
   {
     id: 'card',
@@ -77,7 +77,7 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 1.4, fixed: 25 },
     processingTime: 'Sofort',
     popular: false,
-    icon: '/icons/cards.svg'
+    icon: '/icons/cards.svg',
   },
   {
     id: 'sofort',
@@ -87,7 +87,7 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 0.9, fixed: 25 },
     processingTime: 'Sofort',
     popular: true,
-    icon: '/icons/sofort.svg'
+    icon: '/icons/sofort.svg',
   },
   {
     id: 'giropay',
@@ -97,8 +97,8 @@ export const GERMAN_PAYMENT_METHODS: PaymentMethod[] = [
     fees: { percentage: 1.2, fixed: 10 },
     processingTime: 'Sofort',
     popular: false,
-    icon: '/icons/giropay.svg'
-  }
+    icon: '/icons/giropay.svg',
+  },
 ];
 
 /**
@@ -126,7 +126,7 @@ export const processPayment = async (request: PaymentRequest): Promise<PaymentRe
       success: false,
       paymentId: '',
       status: 'failed',
-      error: error instanceof Error ? error.message : 'Payment processing failed'
+      error: error instanceof Error ? error.message : 'Payment processing failed',
     };
   }
 };
@@ -136,7 +136,7 @@ export const processPayment = async (request: PaymentRequest): Promise<PaymentRe
  */
 async function processStripePayment(request: PaymentRequest): Promise<PaymentResponse> {
   const stripeKey = process.env.VITE_STRIPE_PUBLISHABLE_KEY;
-  
+
   if (!stripeKey) {
     throw new Error('Stripe configuration missing');
   }
@@ -155,19 +155,19 @@ async function processStripePayment(request: PaymentRequest): Promise<PaymentRes
       metadata: {
         booking_id: request.bookingId,
         customer_name: request.customerName,
-        ...request.metadata
-      }
-    })
+        ...request.metadata,
+      },
+    }),
   });
 
   const data = await response.json();
-  
+
   return {
     success: response.ok,
     paymentId: data.payment_intent_id || '',
     status: data.status || 'failed',
     redirectUrl: data.redirect_url,
-    error: data.error
+    error: data.error,
   };
 }
 
@@ -185,18 +185,18 @@ async function processPayPalPayment(request: PaymentRequest): Promise<PaymentRes
       currency: request.currency,
       description: request.description,
       customer_email: request.customerEmail,
-      booking_id: request.bookingId
-    })
+      booking_id: request.bookingId,
+    }),
   });
 
   const data = await response.json();
-  
+
   return {
     success: response.ok,
     paymentId: data.order_id || '',
     status: 'pending',
     redirectUrl: data.approval_url,
-    error: data.error
+    error: data.error,
   };
 }
 
@@ -214,26 +214,28 @@ async function processKlarnaPayment(request: PaymentRequest): Promise<PaymentRes
       currency: request.currency,
       customer: {
         email: request.customerEmail,
-        name: request.customerName
+        name: request.customerName,
       },
-      order_lines: [{
-        name: request.description,
-        quantity: 1,
-        unit_price: request.amount,
-        total_amount: request.amount
-      }],
-      merchant_reference1: request.bookingId
-    })
+      order_lines: [
+        {
+          name: request.description,
+          quantity: 1,
+          unit_price: request.amount,
+          total_amount: request.amount,
+        },
+      ],
+      merchant_reference1: request.bookingId,
+    }),
   });
 
   const data = await response.json();
-  
+
   return {
     success: response.ok,
     paymentId: data.order_id || '',
     status: 'pending',
     redirectUrl: data.redirect_url,
-    error: data.error
+    error: data.error,
   };
 }
 
@@ -253,18 +255,18 @@ async function processSofortPayment(request: PaymentRequest): Promise<PaymentRes
       customer_email: request.customerEmail,
       booking_id: request.bookingId,
       success_url: `${window.location.origin}/booking/success`,
-      cancel_url: `${window.location.origin}/booking/cancel`
-    })
+      cancel_url: `${window.location.origin}/booking/cancel`,
+    }),
   });
 
   const data = await response.json();
-  
+
   return {
     success: response.ok,
     paymentId: data.transaction_id || '',
     status: 'pending',
     redirectUrl: data.payment_url,
-    error: data.error
+    error: data.error,
   };
 }
 
@@ -281,25 +283,28 @@ async function processGiropayPayment(request: PaymentRequest): Promise<PaymentRe
       amount: request.amount,
       currency: request.currency,
       customer_email: request.customerEmail,
-      booking_id: request.bookingId
-    })
+      booking_id: request.bookingId,
+    }),
   });
 
   const data = await response.json();
-  
+
   return {
     success: response.ok,
     paymentId: data.payment_id || '',
     status: 'pending',
     redirectUrl: data.redirect_url,
-    error: data.error
+    error: data.error,
   };
 }
 
 /**
  * Calculate total cost including fees
  */
-export const calculatePaymentCost = (amount: number, method: PaymentMethod): {
+export const calculatePaymentCost = (
+  amount: number,
+  method: PaymentMethod,
+): {
   subtotal: number;
   fee: number;
   total: number;
@@ -308,7 +313,7 @@ export const calculatePaymentCost = (amount: number, method: PaymentMethod): {
   return {
     subtotal: amount,
     fee,
-    total: amount + fee
+    total: amount + fee,
   };
 };
 
@@ -318,16 +323,16 @@ export const calculatePaymentCost = (amount: number, method: PaymentMethod): {
 export const getRecommendedPaymentMethod = (amount: number): PaymentMethod => {
   // For larger amounts (>200€), recommend SEPA (lowest fees)
   if (amount >= 20000) {
-    return GERMAN_PAYMENT_METHODS.find(m => m.id === 'sepa')!;
+    return GERMAN_PAYMENT_METHODS.find((m) => m.id === 'sepa')!;
   }
-  
+
   // For medium amounts, recommend Klarna (popular)
   if (amount >= 5000) {
-    return GERMAN_PAYMENT_METHODS.find(m => m.id === 'klarna')!;
+    return GERMAN_PAYMENT_METHODS.find((m) => m.id === 'klarna')!;
   }
-  
+
   // For smaller amounts, recommend PayPal
-  return GERMAN_PAYMENT_METHODS.find(m => m.id === 'paypal')!;
+  return GERMAN_PAYMENT_METHODS.find((m) => m.id === 'paypal')!;
 };
 
 /**
@@ -339,13 +344,13 @@ export const validatePaymentMethod = (method: PaymentMethod): boolean => {
     paypal: ['VITE_PAYPAL_CLIENT_ID'],
     klarna: ['VITE_KLARNA_CLIENT_ID'],
     sofort: ['VITE_SOFORT_CONFIG_KEY'],
-    giropay: ['VITE_GIROPAY_MERCHANT_ID']
+    giropay: ['VITE_GIROPAY_MERCHANT_ID'],
   };
 
   const required = requiredEnvVars[method.provider];
   if (!required) return false;
 
-  return required.every(envVar => {
+  return required.every((envVar) => {
     const value = import.meta.env[envVar];
     return value && value !== 'your_key_here';
   });

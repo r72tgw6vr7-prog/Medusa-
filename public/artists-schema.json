@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Medusa München Artist Data Schema",
+  "description": "Canonical artist data structure based on Guidelines.md requirements",
+  "type": "object",
+  "properties": {
+    "artists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "slug", "name", "role", "photo", "specialties", "experience", "booking"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (e.g., 'loul-001')",
+            "pattern": "^[a-z]+-[0-9]{3}$"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-safe identifier (e.g., 'loul')",
+            "pattern": "^[a-z-]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the artist"
+          },
+          "role": {
+            "type": "string",
+            "description": "Primary role (e.g., 'Tattoo Artist', 'Piercing Artist')"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["tattoo", "piercing", "management"],
+            "description": "Artist category for filtering"
+          },
+          "photo": {
+            "type": "string",
+            "description": "Path to artist headshot (e.g., '/images/artists/loul.jpg')"
+          },
+          "photoAlt": {
+            "type": "string",
+            "description": "Accessibility alt text for photo"
+          },
+          "specialties": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Array of specialization styles"
+          },
+          "experience": {
+            "type": "string",
+            "description": "Years of experience (e.g., '10+ Jahre')"
+          },
+          "badges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {"type": "string"},
+                "label": {"type": "string"}
+              }
+            },
+            "description": "Achievement badges"
+          },
+          "bio": {
+            "type": "object",
+            "properties": {
+              "de": {"type": "string", "description": "German biography (2-3 paragraphs)"},
+              "en": {"type": "string", "description": "English biography (2-3 paragraphs)"}
+            },
+            "description": "Bilingual biography for modal display"
+          },
+          "portfolio": {
+            "type": "object",
+            "properties": {
+              "featured": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Array of featured work image paths"
+              },
+              "total": {
+                "type": "number",
+                "description": "Total number of portfolio pieces"
+              }
+            }
+          },
+          "booking": {
+            "type": "object",
+            "required": ["available"],
+            "properties": {
+              "available": {"type": "boolean"},
+              "whatsapp": {"type": "string"},
+              "calendarLink": {"type": "string"}
+            }
+          },
+          "social": {
+            "type": "object",
+            "properties": {
+              "instagram": {"type": "string"},
+              "tiktok": {"type": "string"}
+            }
+          },
+          "certifications": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Professional certifications"
+          },
+          "featured": {
+            "type": "boolean",
+            "description": "Artist of the Month flag"
+          }
+        }
+      }
+    }
+  }
+}

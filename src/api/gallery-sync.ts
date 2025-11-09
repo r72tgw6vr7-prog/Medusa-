@@ -1,6 +1,6 @@
 /**
  * Gallery Sync API
- * 
+ *
  * This module provides functionality to sync gallery images from CMS to the local manifest.
  * It's designed to be called by a webhook from the CMS when images are added, updated, or removed.
  */
@@ -28,25 +28,25 @@ interface GalleryManifest {
 export async function syncGalleryManifest(): Promise<void> {
   try {
     console.log('Starting gallery manifest sync...');
-    
+
     // TODO: Implement CMS API call to fetch images
     // const response = await fetch('https://your-cms-api.com/gallery-images');
     // const cmsImages = await response.json();
-    
+
     // For now, we'll use a placeholder implementation
     const cmsImages: GalleryImage[] = [];
-    
+
     // Create the manifest
     const manifest: GalleryManifest = {
-      images: cmsImages
+      images: cmsImages,
     };
-    
+
     // Save the manifest to the file system
     // In a real implementation, this would write to the file system
     // For now, we'll just log the manifest
     console.log('Gallery manifest updated:', manifest);
     console.log('Gallery sync completed successfully');
-    
+
     // Return the manifest for testing purposes
     return;
   } catch (error) {

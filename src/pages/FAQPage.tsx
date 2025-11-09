@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, MessageCircle, Globe } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageTitle } from '../components/atoms/PageTitle';
+import { PageHeader } from '../components/ui/PageHeader';
 import { PageBackground } from '../components/atoms/PageBackground';
 
 interface FAQItem {
@@ -185,15 +185,15 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
         <main className='flex-1'>
-          {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-          <section className='section-padding bg-deep-black'>
+          {/* Page Header - Matches Services page exactly */}
+          <section className='section-padding relative z-10'>
             <div className='responsive-container safe-area-padding'>
-              <div className='text-center'>
-                <h1 className='font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 text-[var(--brand-gold)]'>
-                  {t.title}
-                </h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto'>{t.subtitle}</p>
-              </div>
+              <PageHeader
+                eyebrow='Medusa München'
+                title={t.title}
+                subtitle={t.subtitle}
+                alignment='center'
+              />
             </div>
           </section>
 
@@ -203,9 +203,12 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
               <div className='mx-auto w-full max-w-4xl space-y-16'>
                 {t.sections.map((section) => (
                   <div key={section.id} className='space-y-8'>
-                    <h2 className='text-antique-gold text-3xl md:text-4xl font-headline text-center'>
-                      {section.title}
-                    </h2>
+                    <div className='text-center space-y-8'>
+                      <p className='text-sm uppercase tracking-[0.25em] text-white/60'>FAQ</p>
+                      <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+                        {section.title}
+                      </h2>
+                    </div>
 
                     <div className='space-y-8'>
                       {section.items.map((item) => {

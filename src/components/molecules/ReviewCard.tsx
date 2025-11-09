@@ -20,7 +20,11 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
     const stars = [];
     for (let i = 0; i < rating; i++) {
       stars.push(
-        <Star key={i} className='w-6 h-6 fill-[var(--brand-gold)] text-[var(--brand-gold)]' aria-label='star' />,
+        <Star
+          key={i}
+          className='w-6 h-6 fill-[var(--brand-gold)] text-[var(--brand-gold)]'
+          aria-label='star'
+        />,
       );
     }
     return stars;

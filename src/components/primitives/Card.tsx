@@ -89,13 +89,14 @@ export const Card: React.FC<CardProps> & {
   'aria-describedby': ariaDescribedBy,
   ...props
 }) => {
-  const baseClasses = 'flex flex-col h-full rounded-lg transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500';
+  const baseClasses =
+    'flex flex-col h-full rounded-lg transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500';
   const variantClasses = VARIANT_STYLES[variant];
   const paddingClasses = PADDING_STYLES[padding];
   const hoverClasses = hover ? 'hover:transform hover:-translate-y-1 hover:shadow-xl' : '';
   const isClickable = !!onClick;
   const cardRole = isClickable ? 'button' : role;
-  const cardTabIndex = tabIndex !== undefined ? tabIndex : (isClickable ? 0 : undefined);
+  const cardTabIndex = tabIndex !== undefined ? tabIndex : isClickable ? 0 : undefined;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
@@ -110,8 +111,10 @@ export const Card: React.FC<CardProps> & {
     paddingClasses,
     hoverClasses,
     isClickable ? 'cursor-pointer' : '',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div

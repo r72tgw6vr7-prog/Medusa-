@@ -304,9 +304,9 @@
 
 @media (min-width: 1024px) {
   .team-grid {
-    grid-template-columns: repeat(4, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 24px;
+    padding: 0 24px;
   }
 }
 

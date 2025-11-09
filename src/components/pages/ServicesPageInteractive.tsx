@@ -211,12 +211,15 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
     [activeCategory],
   );
 
-  const handleCategoryChange = useCallback((categoryId: CategoryId) => {
-    if (categoryId === activeCategory || isAnimating) return;
-    setIsAnimating(true);
-    setActiveCategory(categoryId);
-    window.setTimeout(() => setIsAnimating(false), 400);
-  }, [activeCategory, isAnimating]);
+  const handleCategoryChange = useCallback(
+    (categoryId: CategoryId) => {
+      if (categoryId === activeCategory || isAnimating) return;
+      setIsAnimating(true);
+      setActiveCategory(categoryId);
+      window.setTimeout(() => setIsAnimating(false), 400);
+    },
+    [activeCategory, isAnimating],
+  );
 
   // Debounced booking handler to prevent accidental double-invocation
   const handleServiceBooking = useMemo(() => {
@@ -355,8 +358,15 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
 
                           <ul className='space-y-8 text-sm text-white/80 font-body'>
                             {service.features.map((feature, featureIndex) => (
-                              <motion.li key={featureIndex} className='flex items-center gap-8' variants={fadeInUpVariants}>
-                                <ChevronRight size={16} className='text-[var(--brand-gold)] shrink-0' />
+                              <motion.li
+                                key={featureIndex}
+                                className='flex items-center gap-8'
+                                variants={fadeInUpVariants}
+                              >
+                                <ChevronRight
+                                  size={16}
+                                  className='text-[var(--brand-gold)] shrink-0'
+                                />
                                 <span>{feature}</span>
                               </motion.li>
                             ))}
@@ -365,7 +375,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                           <Button
                             onClick={() => handleServiceBooking(service.id)}
                             variant={index === 1 ? 'gold' : 'outlineGold'}
-                            className={`w-full inline-flex items-center justify-center rounded-xl px-8 py-4 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]`}
+                            className={`w-full flex flex-col h-full items-center justify-center rounded-xl px-8 py-8 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]`}
                             aria-label={`${service.cta} für ${service.title}`}
                           >
                             {service.cta}

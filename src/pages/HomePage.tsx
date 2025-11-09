@@ -51,7 +51,7 @@ const sampleGalleryImages = [
 export function HomePage() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col">
+      <div className='min-h-screen flex flex-col'>
         {/* Navigation */}
         <ErrorBoundary>
           <MainNavigation />

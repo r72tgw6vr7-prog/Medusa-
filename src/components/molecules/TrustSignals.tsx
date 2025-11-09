@@ -70,7 +70,11 @@ export function TrustSignals() {
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
                 style={{ background: 'var(--brand-gold)' }}
               >
-                <Shield size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
+                <Shield
+                  size={16}
+                  className='lg:w-8 lg:h-8'
+                  style={{ color: 'var(--deep-black)' }}
+                />
               </div>
             </div>
 
@@ -134,7 +138,8 @@ export function TrustSignals() {
               <div
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
                 style={{
-                  background: 'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+                  background:
+                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
                 }}
               >
                 <Award size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
@@ -201,7 +206,8 @@ export function TrustSignals() {
               <div
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
                 style={{
-                  background: 'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+                  background:
+                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
                 }}
               >
                 <Heart size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />

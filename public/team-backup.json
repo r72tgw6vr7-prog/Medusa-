@@ -1,0 +1,159 @@
+{
+  "team": [
+    {
+      "id": "loui-001",
+      "slug": "loui",
+      "name": "Loui",
+      "fullName": "Gegő 'Loui' Lajos",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/loui.webp",
+      "photoAlt": "Loui, Senior Tattoo Artist at Medusa München",
+      "specialties": ["Black & Gray Realism", "Color Realism", "Portrait"],
+      "bookable": true,
+      "featured": true,
+      "bio": {
+        "de": "Jeder Künstler trägt seine Vergangenheit in seine Gegenwart, und für Gegő Lajos—liebevoll 'Loui' genannt—ist diese Vergangenheit gemalt in heiligen Fresken und Kirchendecken. Bevor er je eine Tätowiermaschine in der Hand hielt, war Loui ausgebildeter Kirchenmaler und arbeitete in der ehrwürdigen Tradition ungarischer Sakralkunst.\n\nSeit zwei Jahrzehnten verwandelt Loui diese klassische Ausbildung in etwas vollkommen Eigenes. Seine Spezialisierung, Realismus in Schwarz-Grau wie in Farbe, trägt die Handschrift eines Menschen, der gelernt hat, Licht und Schatten in den anspruchsvollsten Medien einzufangen. Jedes Portrait-Tattoo, jedes realistische Werk trägt in sich das Echo der Renaissance-Meister und das Gewicht sakraler Kunsttraditionen.\n\nWie sein Kollege Debi pflegt Loui tiefe Wurzeln in seiner ungarischen Heimat, während er im Zwei-Wochen-Rhythmus im Medusa Studio in München arbeitet. Er ist ein Mann der Kontraste: minutiös in seiner realistischen Arbeit, doch die delikate Präzision feiner Linienarbeiten meidend. Gründlich in seinem Handwerk, doch manchmal bedächtig in seinen Vorbereitungen. Er erschafft Schönheit auf der Haut anderer, obwohl er selbst bemerkenswerterweise kein einziges Tattoo trägt.\n\nLouis Instagram-Präsenz (@lajosgego) gewährt Einblicke in seine Welt, wo klassische Kunstfertigkeit auf moderne Tattoo-Kultur trifft. Seine Arbeit spricht von der Geduld, die er beim Bemalen heiliger Räume gelernt hat, nun angewandt auf die heilige Leinwand menschlicher Haut. In seinen Händen wird Realismus zu mehr—eine Brücke zwischen altehrwürdiger Handwerkskunst und zeitgenössischer Körperkunst.",
+        "en": "Every artist carries their past into their present, and for Gegő Lajos—known affectionately as 'Loui'—that past is painted in sacred frescoes and church ceilings. Before he ever held a tattoo machine, Loui was a trained church painter, working in the hallowed tradition of Hungarian ecclesiastical art.\n\nFor two decades, Loui has transformed this classical training into something entirely his own. His specialty, realism in both black-and-grey and color, bears the marks of someone who learned to capture light and shadow in the most demanding of mediums. Each portrait tattoo, each realistic piece, carries within it the echo of Renaissance masters and the weight of sacred art traditions.\n\nLike his colleague Debi, Loui maintains deep roots in his Hungarian homeland while spending alternating two-week periods at Medusa Studio in Munich. He is a man of contrasts: meticulous in his realistic work, yet avoiding the delicate precision of fine line tattoos. Thorough in his craft, yet sometimes unhurried in his preparations. He creates beauty on others' skin, though remarkably, he carries not a single tattoo himself.\n\nLoui's Instagram presence (@lajosgego) offers glimpses into his world, where classical artistry meets modern tattoo culture. His work speaks of patience learned in painting holy spaces, now applied to the sacred canvas of human skin. In his hands, realism becomes something more—a bridge between old-world craftsmanship and contemporary body art."
+      },
+      "experience": "20+ Jahre",
+      "instagram": "@lajosgego",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified", "Church Painter Training"]
+    },
+    {
+      "id": "angie-002",
+      "slug": "angie",
+      "name": "Angie",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/angie.webp",
+      "photoAlt": "Angie, Traditional Tattoo Artist at Medusa München",
+      "specialties": ["Traditional", "Neo-Traditional", "Japanese"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
+        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+      },
+      "experience": "6+ Jahre",
+      "instagram": "@angie_medusa",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"]
+    },
+    {
+      "id": "aaron-003",
+      "slug": "aaron",
+      "name": "Aaron",
+      "role": "Piercing Artist",
+      "category": "piercing",
+      "photo": "/images/artists/aaron.webp",
+      "photoAlt": "Aaron, Senior Piercing Artist at Medusa München",
+      "specialties": ["Dermal", "Industrial", "Complex Piercings"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
+        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+      },
+      "experience": "10+ Jahre",
+      "instagram": "@aaron_medusa",
+      "certifications": ["EU Hygiene Certificate", "APP Member"]
+    },
+    {
+      "id": "oliver-004",
+      "slug": "oliver",
+      "name": "Oliver",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/oliver.webp",
+      "photoAlt": "Oliver, Geometric Tattoo Artist at Medusa München",
+      "specialties": ["Geometric", "Blackwork", "Minimalist"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
+        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+      },
+      "experience": "5+ Jahre",
+      "instagram": "@oli_medusa",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"]
+    },
+    {
+      "id": "sascha-005",
+      "slug": "sascha",
+      "name": "Sascha",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/sascha.webp",
+      "photoAlt": "Sascha, Tattoo Artist at Medusa München",
+      "specialties": ["Custom Design", "Color Work", "Illustrative"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
+        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+      },
+      "experience": "7+ Jahre",
+      "instagram": "@sascha_medusa",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"]
+    },
+    {
+      "id": "luz-006",
+      "slug": "luz",
+      "name": "Luz",
+      "fullName": "Wilfrank Jose Garcia Luquez 'Ell Luquez'",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/luz.webp",
+      "photoAlt": "Luz (Ell Luquez), Realism Tattoo Artist at Medusa München",
+      "specialties": ["Black & Gray Realism", "Color Realism", "Digital Design", "Airbrush"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "Von den sonnendurchfluteten Tälern Venezuelas ins Herz Münchens—Wilfrank Jose Garcia Luquez hat einen Weg zurückgelegt, der von Kunstfertigkeit, Hingabe und einem unerschütterlichen Streben nach Exzellenz geprägt ist.\n\nAm 20. September 1983 in Valle de la Pascua, Venezuela geboren, formt Ell Luquez (wie er professionell bekannt ist) sein Handwerk seit zwanzig bemerkenswerten Jahren. Seine Reise führte ihn in die Münchner Cimbernstraße, und seit drei Jahren ist er ein unverzichtbarer Teil der Medusa-Familie—im Juli 2025 offiziell als festes Teammitglied aufgenommen.\n\nWas Ell auszeichnet, ist nicht nur seine Meisterschaft im Realismus, sowohl in Schwarz-Grau als auch in Farbe, sondern sein ganzheitlicher Ansatz zur Kunstform. Er ist ebenso versiert im Erstellen digitaler Designs auf dem iPad wie im Verwandeln dieser Visionen in Realität mit der Tätowiermaschine. Sein Hintergrund in Airbrush-Kunst und Grafikdesign verleiht seiner Arbeit eine technische Raffinesse, die ihm erste und zweite Plätze bei zahlreichen Tattoo-Conventions eingebracht hat.\n\nIm Studio ist Ell für seine Zuverlässigkeit und Geschwindigkeit bekannt—er arbeitet mit der Effizienz eines Menschen, der sowohl sein Handwerk als auch die Zeit seiner Kunden respektiert. Fließend in Spanisch und Englisch, überbrückt er Kulturen ebenso mühelos wie künstlerische Stile. Als Ehemann und Vater eines Kleinkindes mit einem weiteren Baby unterwegs, bringt er in seine Arbeit dieselbe Hingabe ein, die er seiner Familie widmet.\n\nVon Montag bis Samstag, oft auf eigenen Wunsch früh beginnend, repräsentiert Ell Luquez die neue Generation von Tattoo-Künstlern—digital versiert, traditionell geschult und endlos engagiert, die Grenzen des auf Haut Möglichen zu erweitern.",
+        "en": "From the sun-drenched valleys of Venezuela to the heart of Munich, Wilfrank Jose Garcia Luquez has traveled a path defined by artistry, dedication, and an unwavering commitment to excellence.\n\nBorn on September 20, 1983, in Valle de la Pascua, Venezuela, Ell Luquez (as he's known professionally) has been shaping his craft for twenty remarkable years. His journey brought him to Munich's Cimbernstraße, and for the past three years, he has been an essential part of the Medusa family—officially joining as a permanent team member in July 2025.\n\nWhat sets Ell apart is not just his mastery of realism in both black-and-grey and color, but his holistic approach to the art form. He is as comfortable with an iPad creating digital designs as he is with a tattoo machine transforming those visions into reality. His background in airbrush art and graphic design infuses his work with a technical sophistication that has earned him first and second place finishes at numerous tattoo conventions.\n\nIn the studio, Ell is known for his reliability and speed—he works with the efficiency of someone who respects both his craft and his clients' time. Fluent in Spanish and English, he bridges cultures as easily as he bridges artistic styles. As a husband and father to a young child with another on the way, he brings to his work the same dedication he brings to his family.\n\nMonday through Saturday, often arriving early by choice, Ell Luquez represents the new generation of tattoo artists—digitally savvy, traditionally skilled, and endlessly committed to pushing the boundaries of what's possible on skin."
+      },
+      "experience": "20+ Jahre",
+      "instagram": "@ellluquez",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified", "Convention Awards"]
+    },
+    {
+      "id": "vivi-007",
+      "slug": "vivi",
+      "name": "Vivi",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/vivi.webp",
+      "photoAlt": "Vivi, Tattoo Artist at Medusa München",
+      "specialties": ["Watercolor", "Abstract", "Artistic"],
+      "bookable": true,
+      "featured": false,
+      "bio": {
+        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
+        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+      },
+      "experience": "5+ Jahre",
+      "instagram": "@vivi_medusa",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"]
+    },
+    {
+      "id": "debi-008",
+      "slug": "debi",
+      "name": "Debi",
+      "fullName": "Gabor 'Debi' Debreczeni",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/debi.webp",
+      "photoAlt": "Debi, Master Tattoo Artist at Medusa München",
+      "specialties": ["Line Work", "All Styles", "Precision Tattooing"],
+      "bookable": true,
+      "featured": true,
+      "bio": {
+        "de": "Es gibt Künstler, die durch Worte sprechen, und dann gibt es jene, die ihre Nadeln Geschichten erzählen lassen, die ein Leben lang bleiben. Gabor Debreczeni, in der Tattoo-Welt schlicht als 'Debi' bekannt, gehört zu Letzteren.\n\n1975 in Ungarn geboren, entdeckte Debi seine Berufung 1999 mit der Tätowiermaschine. Was als Leidenschaft in seiner Heimat begann, entwickelte sich zu einer Meisterschaft, die über zwei Jahrzehnte und Grenzen hinweg reicht. Seit über fünfzehn Jahren ist er ein fester Bestandteil der Medusa Tattoo & Piercing Studio Familie und lebt dabei in einem einzigartigen Rhythmus zwischen zwei Welten—zwei Wochen in München, dann zwei Wochen in seiner ungarischen Heimat, wo sein Herz bei seiner Partnerin und der wachsenden Familie wohnt.\n\nDebis Herangehensweise ans Tätowieren ist geprägt von kompromissloser Präzision. Während er nahezu jeden Tattoo-Stil mit gleicher Sicherheit beherrscht, ist es seine legendäre Linienführung, die ihn auszeichnet. Jede Linie fließt mit der Gewissheit eines Kalligraphie-Meisters, jede Kurve wird mit mathematischer Präzision gesetzt. Er tätowiert nicht einfach—er erschafft Hautkunst mit der Geduld eines Menschen, der weiß, dass Perfektion nicht zu überstürzen ist.\n\nIm Studio arbeitet Debi mit ruhiger Intensität, sein Fokus unerschütterlich, bis jedes Detail seinen hohen Ansprüchen genügt. Diese Hingabe, diese Weigerung zu Kompromissen, hat ihm eine treue Klientel eingebracht, die versteht, dass wahre Kunstfertigkeit Zeit braucht. Für Debi ist ein Tattoo erst dann fertig, wenn es makellos ist—und erst dann legt er seine Maschine zur Seite.",
+        "en": "There are artists who speak through words, and then there are those who let their needles tell stories that last a lifetime. Gabor Debreczeni, known in the tattoo world simply as 'Debi,' belongs to the latter.\n\nBorn in Hungary in 1975, Debi discovered his calling with a tattoo machine in 1999. What began as a passion in his homeland soon evolved into a mastery that would span over two decades and cross borders. For more than fifteen years, he has been an integral part of the Medusa Tattoo & Piercing Studio family, creating a unique rhythm between two worlds—spending two weeks in Munich, then two weeks in his Hungarian homeland, where his heart also resides with his partner and their growing family.\n\nDebi's approach to tattooing is one of unwavering precision. While he commands nearly every tattoo style with equal confidence, it is his legendary line work that sets him apart. Each line flows with the certainty of a master calligrapher, each curve placed with mathematical precision. He doesn't simply tattoo—he architects skin art with the patience of someone who knows that perfection cannot be rushed.\n\nIn the studio, Debi works with a quiet intensity, his focus unbreakable until every detail meets his exacting standards. This dedication, this refusal to compromise, has earned him a loyal following of clients who understand that true artistry takes time. For Debi, a tattoo is never finished until it is flawless—and only then does he set down his machine."
+      },
+      "experience": "25+ Jahre",
+      "instagram": "@debi_medusa",
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"]
+    }
+  ]
+}

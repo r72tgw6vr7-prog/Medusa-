@@ -1,6 +1,6 @@
 /**
  * Gallery Manifest Loader
- * 
+ *
  * Loads gallery images from optimized manifest.json
  * Falls back to gallery-index.json if manifest doesn't exist
  */
@@ -67,8 +67,8 @@ export async function loadGalleryManifest(): Promise<GalleryManifest | null> {
  */
 export function getSrcSet(variants: GalleryImageVariant[]): string {
   return variants
-    .filter(v => v.format === 'webp')
-    .map(v => `${v.url} ${v.width}w`)
+    .filter((v) => v.format === 'webp')
+    .map((v) => `${v.url} ${v.width}w`)
     .join(', ');
 }
 
@@ -77,17 +77,19 @@ export function getSrcSet(variants: GalleryImageVariant[]): string {
  */
 export function getOptimalImageUrl(
   variants: GalleryImageVariant[],
-  viewportWidth: number = 800
+  viewportWidth: number = 800,
 ): string {
   // Find WebP variant closest to viewport width
-  const webpVariants = variants.filter(v => v.format === 'webp').sort((a, b) => a.width - b.width);
-  
+  const webpVariants = variants
+    .filter((v) => v.format === 'webp')
+    .sort((a, b) => a.width - b.width);
+
   for (const variant of webpVariants) {
     if (variant.width >= viewportWidth) {
       return variant.url;
     }
   }
-  
+
   // Return largest if none match
   return webpVariants[webpVariants.length - 1]?.url || variants[0]?.url;
 }

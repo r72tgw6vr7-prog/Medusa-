@@ -56,10 +56,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               onSubmit={async (e: FormEvent<HTMLFormElement>) => {
                 e.preventDefault();
                 if (!onSubmit) return;
-                
+
                 const form = e.currentTarget;
                 const formData = new FormData(form);
-                
+
                 const formValues: ContactFormData = {
                   name: formData.get('name') as string,
                   email: formData.get('email') as string,
@@ -68,7 +68,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   message: formData.get('message') as string,
                   privacyPolicy: formData.get('privacyPolicy') === 'on',
                 };
-                
+
                 try {
                   await onSubmit(formValues);
                   form.reset();

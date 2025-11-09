@@ -5,8 +5,25 @@ node_modules
 coverage/
 *.log
 
+# Environment files (CRITICAL: Never commit these!)
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env.*.local
+
 # Local Netlify folder
 .netlify
 
 # Snyk Security Extension - AI Rules (auto-generated)
 .windsurf/rules/snyk_rules.md
+
+# Test artifacts and reports
+chromewebdata_*.report.html
+*.report.html
+
+# Debug/test files
+public/test-*.html
+public/diagnose.js
+public/texture-*-test.html

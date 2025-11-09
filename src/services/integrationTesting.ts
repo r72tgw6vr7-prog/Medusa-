@@ -28,7 +28,7 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
     results,
     passed: 0,
     failed: 0,
-    warnings: 0
+    warnings: 0,
   };
 
   // Test basic configuration
@@ -36,7 +36,7 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
     'VITE_SITE_URL',
     'VITE_BUSINESS_NAME',
     'VITE_BUSINESS_EMAIL',
-    'VITE_BUSINESS_PHONE'
+    'VITE_BUSINESS_PHONE',
   ];
 
   for (const varName of basicVars) {
@@ -45,14 +45,14 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
       results.push({
         service: varName,
         status: 'success',
-        message: 'Configured correctly'
+        message: 'Configured correctly',
       });
       suite.passed++;
     } else {
       results.push({
         service: varName,
         status: 'error',
-        message: 'Missing or placeholder value'
+        message: 'Missing or placeholder value',
       });
       suite.failed++;
     }
@@ -63,10 +63,10 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
     { name: 'SendGrid', key: 'VITE_SENDGRID_API_KEY' },
     { name: 'Mailgun', key: 'VITE_MAILGUN_API_KEY' },
     { name: 'Amazon SES', key: 'VITE_AWS_SES_ACCESS_KEY' },
-    { name: 'SMTP', key: 'VITE_SMTP_HOST' }
+    { name: 'SMTP', key: 'VITE_SMTP_HOST' },
   ];
 
-  const configuredEmailServices = emailServices.filter(service => {
+  const configuredEmailServices = emailServices.filter((service) => {
     const value = import.meta.env[service.key];
     return value && value !== 'your_key_here';
   });
@@ -75,21 +75,21 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
     results.push({
       service: 'Email Service',
       status: 'error',
-      message: 'No email service configured'
+      message: 'No email service configured',
     });
     suite.failed++;
   } else if (configuredEmailServices.length > 1) {
     results.push({
       service: 'Email Service',
       status: 'warning',
-      message: `Multiple email services configured: ${configuredEmailServices.map(s => s.name).join(', ')}`
+      message: `Multiple email services configured: ${configuredEmailServices.map((s) => s.name).join(', ')}`,
     });
     suite.warnings++;
   } else {
     results.push({
       service: 'Email Service',
       status: 'success',
-      message: `${configuredEmailServices[0].name} configured`
+      message: `${configuredEmailServices[0].name} configured`,
     });
     suite.passed++;
   }
@@ -107,13 +107,13 @@ export async function testEmailService(): Promise<TestSuite> {
     results,
     passed: 0,
     failed: 0,
-    warnings: 0
+    warnings: 0,
   };
 
   try {
     // Test email service detection
     const { sendEmail } = await import('../services/emailService');
-    
+
     // Test booking confirmation email
     const testResult = await sendEmail({
       to: 'test@example.com',
@@ -126,9 +126,9 @@ export async function testEmailService(): Promise<TestSuite> {
         artistName: 'Test Artist',
         serviceName: 'Test Service',
         preferredDate: '2025-01-15',
-        preferredTime: '14:00'
+        preferredTime: '14:00',
       },
-      language: 'DE'
+      language: 'DE',
     });
 
     if (testResult.success) {
@@ -136,23 +136,22 @@ export async function testEmailService(): Promise<TestSuite> {
         service: 'Email Sending',
         status: 'success',
         message: 'Email sent successfully',
-        details: { messageId: testResult.messageId }
+        details: { messageId: testResult.messageId },
       });
       suite.passed++;
     } else {
       results.push({
         service: 'Email Sending',
         status: 'error',
-        message: testResult.error || 'Failed to send email'
+        message: testResult.error || 'Failed to send email',
       });
       suite.failed++;
     }
-
   } catch (error) {
     results.push({
       service: 'Email Service',
       status: 'error',
-      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`,
     });
     suite.failed++;
   }
@@ -170,28 +169,30 @@ export async function testPaymentService(): Promise<TestSuite> {
     results,
     passed: 0,
     failed: 0,
-    warnings: 0
+    warnings: 0,
   };
 
   try {
-    const { GERMAN_PAYMENT_METHODS, validatePaymentMethod } = await import('../services/paymentService');
+    const { GERMAN_PAYMENT_METHODS, validatePaymentMethod } = await import(
+      '../services/paymentService'
+    );
 
     // Test each payment method configuration
     for (const method of GERMAN_PAYMENT_METHODS) {
       const isValid = validatePaymentMethod(method);
-      
+
       if (isValid) {
         results.push({
           service: `${method.name} (${method.provider})`,
           status: 'success',
-          message: 'Configuration valid'
+          message: 'Configuration valid',
         });
         suite.passed++;
       } else {
         results.push({
           service: `${method.name} (${method.provider})`,
           status: 'warning',
-          message: 'Missing API keys - will be hidden from users'
+          message: 'Missing API keys - will be hidden from users',
         });
         suite.warnings++;
       }
@@ -203,23 +204,22 @@ export async function testPaymentService(): Promise<TestSuite> {
       results.push({
         service: 'Payment Methods',
         status: 'error',
-        message: 'No payment methods configured'
+        message: 'No payment methods configured',
       });
       suite.failed++;
     } else {
       results.push({
         service: 'Payment Methods',
         status: 'success',
-        message: `${validMethods.length} payment methods ready`
+        message: `${validMethods.length} payment methods ready`,
       });
       suite.passed++;
     }
-
   } catch (error) {
     results.push({
       service: 'Payment Service',
       status: 'error',
-      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`,
     });
     suite.failed++;
   }
@@ -237,7 +237,7 @@ export async function testZohoCRM(): Promise<TestSuite> {
     results,
     passed: 0,
     failed: 0,
-    warnings: 0
+    warnings: 0,
   };
 
   try {
@@ -248,7 +248,7 @@ export async function testZohoCRM(): Promise<TestSuite> {
       results.push({
         service: 'ZOHO Configuration',
         status: 'warning',
-        message: 'ZOHO CRM not configured - booking data will not sync'
+        message: 'ZOHO CRM not configured - booking data will not sync',
       });
       suite.warnings++;
       return suite;
@@ -256,20 +256,20 @@ export async function testZohoCRM(): Promise<TestSuite> {
 
     // Test connection
     const connectionTest = await zohoCRM.testConnection();
-    
+
     if (connectionTest.success) {
       results.push({
         service: 'ZOHO Connection',
         status: 'success',
         message: 'Connected successfully',
-        details: connectionTest.data
+        details: connectionTest.data,
       });
       suite.passed++;
     } else {
       results.push({
         service: 'ZOHO Connection',
         status: 'error',
-        message: connectionTest.error || 'Connection failed'
+        message: connectionTest.error || 'Connection failed',
       });
       suite.failed++;
     }
@@ -281,7 +281,7 @@ export async function testZohoCRM(): Promise<TestSuite> {
       email: 'test@example.com',
       phone: '+49 89 12345678',
       leadSource: 'Website' as const,
-      tags: ['Test']
+      tags: ['Test'],
     };
 
     // Note: This would actually create a contact in CRM
@@ -289,15 +289,14 @@ export async function testZohoCRM(): Promise<TestSuite> {
     results.push({
       service: 'ZOHO Contact Creation',
       status: 'warning',
-      message: 'Skipped in test mode (would create real contact)'
+      message: 'Skipped in test mode (would create real contact)',
     });
     suite.warnings++;
-
   } catch (error) {
     results.push({
       service: 'ZOHO CRM',
       status: 'error',
-      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`,
     });
     suite.failed++;
   }
@@ -315,7 +314,7 @@ export async function testAPIEndpoints(): Promise<TestSuite> {
     results,
     passed: 0,
     failed: 0,
-    warnings: 0
+    warnings: 0,
   };
 
   const endpoints = [
@@ -323,7 +322,7 @@ export async function testAPIEndpoints(): Promise<TestSuite> {
     { name: 'Payment Methods', path: '/api/payment-methods', method: 'GET' },
     // Note: Booking and Contact endpoints require POST data, so we test OPTIONS
     { name: 'Booking CORS', path: '/api/booking', method: 'OPTIONS' },
-    { name: 'Contact CORS', path: '/api/contact', method: 'OPTIONS' }
+    { name: 'Contact CORS', path: '/api/contact', method: 'OPTIONS' },
   ];
 
   for (const endpoint of endpoints) {
@@ -331,22 +330,22 @@ export async function testAPIEndpoints(): Promise<TestSuite> {
       const response = await fetch(endpoint.path, {
         method: endpoint.method,
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.ok) {
         results.push({
           service: endpoint.name,
           status: 'success',
-          message: `${endpoint.method} ${endpoint.path} - ${response.status}`
+          message: `${endpoint.method} ${endpoint.path} - ${response.status}`,
         });
         suite.passed++;
       } else {
         results.push({
           service: endpoint.name,
           status: 'warning',
-          message: `${endpoint.method} ${endpoint.path} - ${response.status}`
+          message: `${endpoint.method} ${endpoint.path} - ${response.status}`,
         });
         suite.warnings++;
       }
@@ -354,7 +353,7 @@ export async function testAPIEndpoints(): Promise<TestSuite> {
       results.push({
         service: endpoint.name,
         status: 'error',
-        message: `${endpoint.method} ${endpoint.path} - ${error instanceof Error ? error.message : 'Network error'}`
+        message: `${endpoint.method} ${endpoint.path} - ${error instanceof Error ? error.message : 'Network error'}`,
       });
       suite.failed++;
     }
@@ -383,7 +382,7 @@ export async function runAllTests(): Promise<{
     testEmailService(),
     testPaymentService(),
     testZohoCRM(),
-    testAPIEndpoints()
+    testAPIEndpoints(),
   ]);
 
   const summary = {
@@ -391,7 +390,7 @@ export async function runAllTests(): Promise<{
     passed: suites.reduce((sum, suite) => sum + suite.passed, 0),
     failed: suites.reduce((sum, suite) => sum + suite.failed, 0),
     warnings: suites.reduce((sum, suite) => sum + suite.warnings, 0),
-    readiness: 'ready' as 'ready' | 'needs_setup' | 'critical_issues'
+    readiness: 'ready' as 'ready' | 'needs_setup' | 'critical_issues',
   };
 
   // Determine readiness level
@@ -420,13 +419,13 @@ export async function testFormSubmission(testData: {
 }): Promise<TestResult> {
   try {
     const endpoint = testData.type === 'booking' ? '/api/booking' : '/api/contact';
-    
+
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(testData.data)
+      body: JSON.stringify(testData.data),
     });
 
     const result = await response.json();
@@ -436,21 +435,21 @@ export async function testFormSubmission(testData: {
         service: `${testData.type} submission`,
         status: 'success',
         message: 'Form submitted successfully',
-        details: result
+        details: result,
       };
     } else {
       return {
         service: `${testData.type} submission`,
         status: 'error',
         message: result.message || 'Submission failed',
-        details: result
+        details: result,
       };
     }
   } catch (error) {
     return {
       service: `${testData.type} submission`,
       status: 'error',
-      message: error instanceof Error ? error.message : 'Network error'
+      message: error instanceof Error ? error.message : 'Network error',
     };
   }
 }

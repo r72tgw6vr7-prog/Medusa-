@@ -359,11 +359,13 @@ Repeat Network tab checks above.
             <div className='p-8 bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)] rounded-lg'>
               <div className='flex items-center gap-0 mb-0'>
                 <AlertTriangle className='w-5 h-5 text-[var(--brand-gold)]' />
-                <h3 className='font-semibold text-[var(--brand-gold)]'>Duplicate Folder Detected</h3>
+                <h3 className='font-semibold text-[var(--brand-gold)]'>
+                  Duplicate Folder Detected
+                </h3>
               </div>
               <p className='text-sm text-[#EAEAEA]/80 mb-8'>
-                Found <code className='text-[var(--brand-gold)]'>{DATA_CONFIG.duplicatesDir}/</code> folder.
-                This contains duplicate/placeholder images that are not used by{' '}
+                Found <code className='text-[var(--brand-gold)]'>{DATA_CONFIG.duplicatesDir}/</code>{' '}
+                folder. This contains duplicate/placeholder images that are not used by{' '}
                 <code className='text-[var(--brand-gold)]'>team.json</code>.
               </p>
               <button

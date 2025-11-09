@@ -47,7 +47,7 @@
   .service-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .service-card {
     min-height: 400px;
   }

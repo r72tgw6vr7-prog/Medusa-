@@ -1,16 +1,16 @@
-import React, { HTMLAttributes, memo } from "react";
-import Container, { ContainerSize } from "./Container";
+import React, { HTMLAttributes, memo } from 'react';
+import Container, { ContainerSize } from './Container';
 
-export type SectionBg = "none" | "dark" | "darker" | "darkest";
+export type SectionBg = 'none' | 'dark' | 'darker' | 'darkest';
 
-type SectionElement = "section" | "article" | "div" | "main" | "aside";
+type SectionElement = 'section' | 'article' | 'div' | 'main' | 'aside';
 
 interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
   /**
    * Section content
    */
   children: React.ReactNode;
-  
+
   /**
    * Background variant:
    * - dark:    bg-[#1A1A1A]
@@ -19,17 +19,17 @@ interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
    * - none:    transparent
    */
   bg?: SectionBg;
-  
+
   /**
    * Controls inner Container size
    */
   containerSize?: ContainerSize;
-  
+
   /**
    * Element to render (section/article/div...)
    */
   as?: SectionElement;
-  
+
   /**
    * Additional CSS classes
    */
@@ -50,43 +50,41 @@ interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
  */
 const Section: React.FC<SectionProps> = ({
   children,
-  bg = "none",
-  containerSize = "default",
-  as: Component = "section",
-  className = "",
+  bg = 'none',
+  containerSize = 'default',
+  as: Component = 'section',
+  className = '',
   ...props
 }) => {
   const bgClassMap: Record<SectionBg, string> = {
-    none: "bg-transparent",
-    dark: "bg-[#1A1A1A]",
-    darker: "bg-[#0F0F0F]",
-    darkest: "bg-black",
+    none: 'bg-transparent',
+    dark: 'bg-[#1A1A1A]',
+    darker: 'bg-[#0F0F0F]',
+    darkest: 'bg-black',
   };
 
   const classes = [
-    "w-full",
+    'w-full',
     bgClassMap[bg],
-    "py-16",        // 128px on mobile
-    "md:py-20",     // 160px on tablet
-    "lg:py-24",     // 192px on desktop
-    "relative z-10", // Ensure section content is above texture background
+    'py-16', // 128px on mobile
+    'md:py-20', // 160px on tablet
+    'lg:py-24', // 192px on desktop
+    'relative z-10', // Ensure section content is above texture background
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   // Add data-texture-bg attribute when section has a background color
   const needsTextureStretch = bg !== 'none';
-  
+
   return (
-    <Component 
-      className={classes} 
+    <Component
+      className={classes}
       {...props}
       {...(needsTextureStretch ? { 'data-texture-bg': true } : {})}
     >
-      <Container size={containerSize}>
-        {children}
-      </Container>
+      <Container size={containerSize}>{children}</Container>
     </Component>
   );
 };

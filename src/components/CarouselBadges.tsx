@@ -50,30 +50,92 @@ const badges: Badge[] = [
 
 export const CarouselBadges: React.FC = () => {
   return (
-    <section className='carousel-badges-section py-0 bg-transparent'>
-      <div className='w-full bg-black/30 border-y border-white/5 py-0'>
-        <div className='max-w-[1104px] mx-auto px-8'>
-          <div className='flex flex-wrap justify-center items-center gap-16 md:gap-16 lg:gap-24'>
-            {badges.map((badge) => {
-              const IconComponent = badge.icon;
-              return (
-                <div
-                  key={badge.id}
-                  className='flex items-center gap-8 text-white/90 hover:text-white transition-colors duration-300'
-                >
-                  <IconComponent className='w-8 h-8 md:w-9 md:h-9 text-white shrink-0' />
-                  <div className='flex flex-col leading-tight'>
-                    <span className='font-inter text-base md:text-lg font-semibold whitespace-nowrap'>
-                      {badge.title}
-                    </span>
-                    <span className='font-inter text-sm md:text-base text-white/70 whitespace-nowrap'>
-                      {badge.subtitle}
-                    </span>
-                  </div>
+    <section
+      className='carousel-badges-section'
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 40,
+        backgroundColor: '#000000',
+        height: '64px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        padding: 0,
+        margin: 0,
+      }}
+    >
+      <div
+        className='w-full h-full'
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '24px',
+            flexWrap: 'nowrap',
+          }}
+        >
+          {badges.map((badge) => {
+            const IconComponent = badge.icon;
+            return (
+              <div
+                key={badge.id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  transition: 'color 0.3s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)')}
+              >
+                <div style={{ width: '20px', height: '20px', flexShrink: 0, color: '#ffffff' }}>
+                  <IconComponent className='w-full h-full' />
                 </div>
-              );
-            })}
-          </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    lineHeight: '1.2',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {badge.title}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '12px',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {badge.subtitle}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

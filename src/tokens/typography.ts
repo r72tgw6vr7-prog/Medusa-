@@ -1,6 +1,6 @@
 /**
  * TYPOGRAPHY TOKENS
- * 
+ *
  * Defines typography-related design tokens including:
  * - Font families
  * - Font sizes (responsive)
@@ -21,22 +21,10 @@ export const fontFamilies = {
     'Arial',
     'sans-serif',
   ].join(', '),
-  
-  serif: [
-    'Playfair Display',
-    'Georgia',
-    'Times New Roman',
-    'serif',
-  ].join(', '),
-  
-  mono: [
-    'Menlo',
-    'Monaco',
-    'Consolas',
-    'Liberation Mono',
-    'Courier New',
-    'monospace',
-  ].join(', '),
+
+  serif: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'].join(', '),
+
+  mono: ['Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'].join(', '),
 } as const;
 
 // Font weights
@@ -110,7 +98,7 @@ const fontSizesMap = {
     lineHeight: 'tight',
     fontWeight: 'bold',
   },
-  
+
   // Text sizes
   'text-xl': {
     fontSize: '1.25rem', // 20px
@@ -141,7 +129,7 @@ type FontSizes = {
     lineHeight: keyof typeof lineHeights;
     letterSpacing?: keyof typeof letterSpacing;
     fontWeight?: keyof typeof fontWeights;
-  }
+  };
 };
 
 const fontSizes = Object.entries(fontSizesMap).reduce<FontSizes>((acc, [key, value]) => {
@@ -149,7 +137,7 @@ const fontSizes = Object.entries(fontSizesMap).reduce<FontSizes>((acc, [key, val
     fontSize: value.fontSize,
     lineHeight: value.lineHeight,
   };
-  
+
   // Add optional properties if they exist
   if ('letterSpacing' in value) {
     (sizeDef as any).letterSpacing = value.letterSpacing;
@@ -157,7 +145,7 @@ const fontSizes = Object.entries(fontSizesMap).reduce<FontSizes>((acc, [key, val
   if ('fontWeight' in value) {
     (sizeDef as any).fontWeight = value.fontWeight;
   }
-  
+
   return {
     ...acc,
     [key]: sizeDef,
@@ -172,37 +160,50 @@ export const typographyVariables = {
   '--font-sans': fontFamilies.sans,
   '--font-serif': fontFamilies.serif,
   '--font-mono': fontFamilies.mono,
-  
+
   // Font weights
-  ...Object.entries(fontWeights).reduce((acc, [key, value]) => ({
-    ...acc,
-    [`--font-weight-${key}`]: value,
-  }), {}),
-  
+  ...Object.entries(fontWeights).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [`--font-weight-${key}`]: value,
+    }),
+    {},
+  ),
+
   // Line heights
-  ...Object.entries(lineHeights).reduce((acc, [key, value]) => ({
-    ...acc,
-    [`--line-height-${key}`]: value,
-  }), {}),
-  
+  ...Object.entries(lineHeights).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [`--line-height-${key}`]: value,
+    }),
+    {},
+  ),
+
   // Letter spacing
-  ...Object.entries(letterSpacing).reduce((acc, [key, value]) => ({
-    ...acc,
-    [`--letter-spacing-${key}`]: value,
-  }), {}),
-  
+  ...Object.entries(letterSpacing).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [`--letter-spacing-${key}`]: value,
+    }),
+    {},
+  ),
+
   // Font sizes
   ...Object.entries(fontSizes).reduce((acc, [key, value]) => {
     const prefix = `--font-${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}`;
-    
+
     return {
       ...acc,
       [`${prefix}-size`]: value.fontSize,
-      [`${prefix}-weight`]: value.fontWeight ? `var(--font-weight-${value.fontWeight})` : 'var(--font-weight-normal)',
+      [`${prefix}-weight`]: value.fontWeight
+        ? `var(--font-weight-${value.fontWeight})`
+        : 'var(--font-weight-normal)',
       [`${prefix}-line-height`]: `var(--line-height-${value.lineHeight})`,
-      ...('letterSpacing' in value && value.letterSpacing ? {
-        [`${prefix}-letter-spacing`]: `var(--letter-spacing-${value.letterSpacing})`,
-      } : {}),
+      ...('letterSpacing' in value && value.letterSpacing
+        ? {
+            [`${prefix}-letter-spacing`]: `var(--letter-spacing-${value.letterSpacing})`,
+          }
+        : {}),
     };
   }, {}),
 };

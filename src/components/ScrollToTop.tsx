@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 
 /**
  * ScrollToTop Component
- * 
+ *
  * Automatically scrolls to the top of the page when the route changes.
  * This component should be placed inside the Router but outside of Routes.
- * 
+ *
  * Features:
  * - Smooth scroll animation
  * - Preserves hash-based navigation (e.g., #section-id)
@@ -14,40 +14,52 @@ import { useLocation } from 'react-router-dom';
  * - Cross-browser compatible
  */
 const ScrollToTop: React.FC = () => {
-  const { pathname, hash, key } = useLocation();
+  const { pathname, hash } = useLocation();
+
+  // Ensure the browser doesn't try to restore scroll on POP while we manage it
+  useEffect(() => {
+    const prev = history.scrollRestoration;
+    try {
+      history.scrollRestoration = 'manual';
+    } catch {}
+    return () => {
+      try {
+        history.scrollRestoration = prev || 'auto';
+      } catch {}
+    };
+  }, []);
 
   useEffect(() => {
     // If there's a hash in the URL, scroll to that element instead
     if (hash) {
-      const element = document.getElementById(hash.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-        return;
-      }
+      const id = hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return;
     }
 
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Always scroll to top on route change (including back/forward for consistency)
+    // Immediate scroll to top
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Also scroll the content container if it exists
+    const scrollRoot = document.querySelector('[data-scroll-root]') as HTMLElement | null;
+    if (scrollRoot && 'scrollTo' in scrollRoot) {
+      scrollRoot.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
 
-    // Scroll to top on route change
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    // Force scroll after a brief delay to ensure DOM is ready
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      if (scrollRoot) {
+        scrollRoot.scrollTop = 0;
+      }
     });
-
-    // Fallback for older browsers
-    if (window.scrollY !== 0) {
-      try {
-        window.scrollTo(0, 0);
-      } catch (error) {
-        console.warn('Scroll to top fallback failed:', error);
-      }
-    }
-  }, [pathname, hash, key]); // key ensures it triggers on same-route navigations
+  }, [pathname, hash]); // Removed navType and key dependencies for simpler, more reliable behavior
 
   return null; // This component doesn't render anything
 };

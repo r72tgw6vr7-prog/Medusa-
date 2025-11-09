@@ -1,15 +1,21 @@
-import { handleUpload } from '@vercel/blob/client';
 import { put } from '@vercel/blob';
 
-export default async function handler(request) {
+export default async function handler(request: Request) {
   try {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
 
-    const blob = await handleUpload({
-      request,
+    const form = await request.formData();
+    const file = form.get('file');
+    if (!(file instanceof File)) {
+      return new Response('No file provided', { status: 400 });
+    }
+
+    const blob = await put(file.name, file, {
+      access: 'public',
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      contentType: file.type || 'application/octet-stream',
     });
 
     return Response.json(blob);

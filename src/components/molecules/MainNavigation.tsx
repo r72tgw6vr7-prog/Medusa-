@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { SkipLink } from '../accessibility/SkipLink';
 import { useKeyboardNav } from '../../hooks/useKeyboardNav';
-import styles from './MainNavigation.module.css';
+import './MainNavigation.css';
 
 type NavItem = {
   to: string;
@@ -25,7 +25,7 @@ const NAV_ITEMS: NavItem[] = [
 export function MainNavigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const overlayRef = useRef<HTMLDialogElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
@@ -103,6 +103,7 @@ export function MainNavigation() {
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
 
       globalThis.setTimeout(() => {
         const first = overlayRef.current?.querySelector<HTMLElement>(
@@ -113,11 +114,13 @@ export function MainNavigation() {
       }, 0);
     } else {
       document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
       openButtonRef.current?.focus();
     }
 
     return () => {
       document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
     };
   }, [menuOpen]);
 
@@ -126,7 +129,10 @@ export function MainNavigation() {
       const nav = document.querySelector('.navigation');
 
       if (nav) {
-        document.documentElement.style.setProperty('--header-height', `${(nav as HTMLElement).offsetHeight}px`);
+        document.documentElement.style.setProperty(
+          '--header-height',
+          `${(nav as HTMLElement).offsetHeight}px`,
+        );
       }
     };
 
@@ -156,10 +162,6 @@ export function MainNavigation() {
     document.documentElement.lang = language;
   }, [language]);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
   const switchLanguage = (nextLanguage: 'de' | 'en') => {
     if (nextLanguage !== language) {
       setLanguage(nextLanguage);
@@ -185,170 +187,180 @@ export function MainNavigation() {
       <SkipLink />
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <nav
-        id="main-navigation"
-        aria-label="Main navigation"
-        className={`${styles['navigation']} ${scrolled ? styles['scrolled'] : ''} ${menuOpen ? 'menu-open' : ''} fixed top-0 left-0 right-0 z-1000 w-full transition-all duration-300 ease-out`}
+        id='main-navigation'
+        aria-label='Main navigation'
+        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
+          scrolled ? 'scrolled' : ''
+        } ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-8 md:px-16">
-        <Link
-          to='/'
-          className="nav-logo font-headline text-3xl sm:text-4xl md:text-5xl leading-none tracking-tight text-brand-gold font-bold"
-        >
-          MEDUSA
-        </Link>
-
-        <div className='hidden flex-1 xl:flex'>
-          <ul className='flex w-full items-center justify-center gap-16'>
-            {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
-              const active = isActive(location.pathname);
-
-              return (
-                <li key={to}>
-                  <Link
-                    to={to}
-                    className={`nav-link font-body text-base md:text-lg font-medium transition-all duration-300 ${
-                      active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
-                    }`}
-                    aria-current={active ? 'page' : undefined}
-                    tabIndex={0}
-                  >
-                    {t(i18nKey)}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        <div className='hidden items-center gap-8 xl:flex'>
-          <fieldset className='language-toggle' aria-label='Language selection'>
-            <div
-              className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
-            />
-            <button
-              type='button'
-              className={`language-toggle__button ${
-                isGerman ? 'language-toggle__button--active' : 'language-toggle__button--inactive'
-              }`}
-              onClick={() => switchLanguage('de')}
-            >
-              DE
-            </button>
-            <button
-              type='button'
-              className={`language-toggle__button ${
-                isGerman ? 'language-toggle__button--inactive' : 'language-toggle__button--active'
-              }`}
-              onClick={() => switchLanguage('en')}
-            >
-              EN
-            </button>
-          </fieldset>
-        </div>
-
-        <div className='flex items-center xl:hidden'>
-          <button
-            ref={openButtonRef}
-            type='button'
-            aria-controls='mobile-menu-overlay'
-            aria-expanded={menuOpen ? 'true' : 'false'}
-            aria-haspopup='true'
-            aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
-            onClick={() => setMenuOpen((value) => !value)}
-            className={`mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 ${
-              menuOpen ? 'is-open' : ''
-            }`}
+        <div className='mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-16'>
+          <Link
+            to='/'
+            className="nav-logo text-[28px] leading-none tracking-tight text-brand-gold sm:text-[36px] md:text-[48px] font-['Playfair_Display'] font-bold"
           >
-            <span aria-hidden className='mobile-menu-button__box'>
-              <span className='mobile-menu-button__line mobile-menu-button__line--top' />
-              <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
-              <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
-            </span>
-            <span className='sr-only'>{menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}</span>
-          </button>
-        </div>
-      </div>
+            MEDUSA
+          </Link>
 
-      {menuOpen &&
-        createPortal(
-          <dialog
-            id='mobile-menu-overlay'
-            ref={overlayRef}
-            aria-modal='true'
-            aria-labelledby='mobile-menu-title'
-            className='mobile-menu-overlay'
-            onClick={handleOverlayClick}
-            onKeyDown={handleNavKeyDown}
-          >
-            <div className='mobile-menu-overlay__panel'>
-              <h2 id='mobile-menu-title' className='sr-only'>Main Menu</h2>
-              <nav className='mobile-menu-overlay__links' aria-label='Mobile navigation'>
-                {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
-                  const active = isActive(location.pathname);
+          <div className='hidden flex-1 xl:flex'>
+            <ul
+              className='flex w-full items-center justify-center gap-16'
+              role='menubar'
+              aria-orientation='horizontal'
+            >
+              {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
+                const active = isActive(location.pathname);
 
-                  return (
+                return (
+                  <li key={to} role='none'>
                     <Link
-                      key={`mobile-${to}`}
                       to={to}
-                      onClick={closeMenu}
-                      className={`mobile-nav-link font-body text-lg ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
+                      role='menuitem'
+                      className={`nav-link font-body text-base md:text-lg font-medium transition-all duration-300 ${
+                        active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
+                      }`}
                       aria-current={active ? 'page' : undefined}
-                      tabIndex={menuOpen ? 0 : -1}
+                      tabIndex={0}
                     >
                       {t(i18nKey)}
                     </Link>
-                  );
-                })}
-              </nav>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-              <div className='mobile-menu-overlay__language'>
-                <fieldset className='language-toggle' aria-label='Language selection'>
-                  <div
-                    className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
-                  />
-                  <button
-                    type='button'
-                    className={`language-toggle__button ${
-                      isGerman
-                        ? 'language-toggle__button--active'
-                        : 'language-toggle__button--inactive'
-                    }`}
-                    onClick={() => switchLanguage('de')}
-                    tabIndex={menuOpen ? 0 : -1}
-                  >
-                    DE
-                  </button>
-                  <button
-                    type='button'
-                    className={`language-toggle__button ${
-                      isGerman
-                        ? 'language-toggle__button--inactive'
-                        : 'language-toggle__button--active'
-                    }`}
-                    onClick={() => switchLanguage('en')}
-                    tabIndex={menuOpen ? 0 : -1}
-                  >
-                    EN
-                  </button>
-                </fieldset>
-              </div>
-
-              <div className='mobile-menu-overlay__cta'>
-                <Link
-                  to='/booking'
-                  onClick={closeMenu}
-                  className='hero-appointment-cta nav-cta inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold text-[#C0C0C0] transition-all duration-300 hover:border-[#D4D4D4] hover:text-white'
-                  aria-label={t('nav.booking')}
-                  tabIndex={menuOpen ? 0 : -1}
-                >
-                  {t('nav.bookingShort')}
-                </Link>
-              </div>
+          <div className='hidden items-center gap-8 xl:flex'>
+            <div className='language-toggle' role='group' aria-label='Language selection'>
+              <div
+                className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
+              />
+              <button
+                type='button'
+                className={`language-toggle__button ${
+                  isGerman ? 'language-toggle__button--active' : 'language-toggle__button--inactive'
+                }`}
+                onClick={() => switchLanguage('de')}
+              >
+                DE
+              </button>
+              <button
+                type='button'
+                className={`language-toggle__button ${
+                  isGerman ? 'language-toggle__button--inactive' : 'language-toggle__button--active'
+                }`}
+                onClick={() => switchLanguage('en')}
+              >
+                EN
+              </button>
             </div>
-          </dialog>,
-          document.body,
-        )}
+          </div>
+
+          <div className='flex items-center xl:hidden'>
+            <button
+              ref={openButtonRef}
+              type='button'
+              aria-controls='mobile-menu-overlay'
+              aria-expanded={menuOpen}
+              aria-haspopup='true'
+              aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
+              onClick={() => setMenuOpen((value) => !value)}
+              className={`mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 ${
+                menuOpen ? 'is-open' : ''
+              }`}
+            >
+              <span aria-hidden className='mobile-menu-button__box'>
+                <span className='mobile-menu-button__line mobile-menu-button__line--top' />
+                <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
+                <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
+              </span>
+              <span className='sr-only'>{menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}</span>
+            </button>
+          </div>
+        </div>
+
+        {menuOpen &&
+          createPortal(
+            <div
+              id='mobile-menu-overlay'
+              ref={overlayRef}
+              role='dialog'
+              aria-modal='true'
+              aria-labelledby='mobile-menu-title'
+              className='mobile-menu-overlay'
+              onClick={handleOverlayClick}
+              onKeyDown={handleNavKeyDown}
+            >
+              <div className='mobile-menu-overlay__panel'>
+                <h2 id='mobile-menu-title' className='sr-only'>
+                  Main Menu
+                </h2>
+                <nav className='mobile-menu-overlay__links' aria-label='Mobile navigation'>
+                  {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
+                    const active = isActive(location.pathname);
+
+                    return (
+                      <Link
+                        key={`mobile-${to}`}
+                        to={to}
+                        onClick={closeMenu}
+                        className={`mobile-nav-link ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
+                        aria-current={active ? 'page' : undefined}
+                        tabIndex={menuOpen ? 0 : -1}
+                      >
+                        {t(i18nKey)}
+                      </Link>
+                    );
+                  })}
+                </nav>
+
+                <div className='mobile-menu-overlay__language'>
+                  <div className='language-toggle' role='group' aria-label='Language selection'>
+                    <div
+                      className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
+                    />
+                    <button
+                      type='button'
+                      className={`language-toggle__button ${
+                        isGerman
+                          ? 'language-toggle__button--active'
+                          : 'language-toggle__button--inactive'
+                      }`}
+                      onClick={() => switchLanguage('de')}
+                      tabIndex={menuOpen ? 0 : -1}
+                    >
+                      DE
+                    </button>
+                    <button
+                      type='button'
+                      className={`language-toggle__button ${
+                        isGerman
+                          ? 'language-toggle__button--inactive'
+                          : 'language-toggle__button--active'
+                      }`}
+                      onClick={() => switchLanguage('en')}
+                      tabIndex={menuOpen ? 0 : -1}
+                    >
+                      EN
+                    </button>
+                  </div>
+                </div>
+
+                <div className='mobile-menu-overlay__cta'>
+                  <Link
+                    to='/booking'
+                    onClick={closeMenu}
+                    className='hero-appointment-cta nav-cta inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold transition-all duration-300'
+                    aria-label={t('nav.booking')}
+                    tabIndex={menuOpen ? 0 : -1}
+                  >
+                    {t('nav.bookingShort')}
+                  </Link>
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )}
       </nav>
     </>
   );

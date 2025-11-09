@@ -1,22 +1,15 @@
 import React from 'react';
-import { BookingForm } from '@/components/organisms/BookingForm';
-import type { Service, Artist, BookingFormData } from '../types/booking';
+import { BookingForm } from '@/components/organisms/BookingForm/BookingForm';
 
 interface BookingSectionProps {
   title: string;
   subtitle?: string;
-  services: Service[];
-  artists: Artist[];
-  onSubmit: (data: BookingFormData) => Promise<void>;
   className?: string;
 }
 
 export const BookingSection: React.FC<BookingSectionProps> = ({
   title,
   subtitle,
-  services,
-  artists,
-  onSubmit,
   className = '',
 }) => {
   return (
@@ -26,12 +19,7 @@ export const BookingSection: React.FC<BookingSectionProps> = ({
         {subtitle && <p className='text-lg text-gray-600 max-w-2xl mx-auto'>{subtitle}</p>}
       </div>
 
-      <BookingForm
-        services={services}
-        artists={artists}
-        onSubmit={onSubmit}
-        className='bg-white rounded-2xl shadow-lg p-8'
-      />
+      <BookingForm />
     </section>
   );
 };

@@ -163,10 +163,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
       <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
-        <section
-          ref={sectionRef}
-          className='section-padding relative z-10'
-        >
+        <section ref={sectionRef} className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px]'>
               {/* Page Header - Standardized */}
@@ -176,10 +173,10 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                 transition={{ duration: 0.8 }}
               >
                 <PageHeader
-                  eyebrow="Medusa München"
+                  eyebrow='Medusa München'
                   title={t.title}
                   subtitle={t.subtitle}
-                  alignment="center"
+                  alignment='center'
                 />
                 <p className='text-sm text-white/60 text-center'>{t.lastUpdated}</p>
               </motion.div>

@@ -11,11 +11,11 @@ interface VisuallyHiddenProps extends ComponentPropsWithoutRef<'span'> {
 
 /**
  * VisuallyHidden component that hides content visually but keeps it accessible to screen readers
- * 
+ *
  * @example
  * // Basic usage
  * <VisuallyHidden>This text is hidden but read by screen readers</VisuallyHidden>
- * 
+ *
  * @example
  * // With custom element
  * <VisuallyHidden as="div">Hidden div content</VisuallyHidden>
@@ -23,15 +23,11 @@ interface VisuallyHiddenProps extends ComponentPropsWithoutRef<'span'> {
 export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
   ({ as: Component = 'span', children, className = '', ...props }, ref) => {
     return (
-      <Component
-        ref={ref}
-        className={`sr-only ${className}`}
-        {...props}
-      >
+      <Component ref={ref} className={`sr-only ${className}`} {...props}>
         {children}
       </Component>
     );
-  }
+  },
 );
 
 VisuallyHidden.displayName = 'VisuallyHidden';

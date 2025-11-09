@@ -34,7 +34,9 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   return (
     <div className={`${baseClasses} ${highlightedClasses} ${shadowClasses} ${className}`}>
       <img src={iconUrl} alt={title} className='w-12 h-12 mb-8 rounded-2xl object-fill' />
-      <span className='text-[var(--brand-gold)] text-[31px] font-bold text-center mb-8'>{title}</span>
+      <span className='text-[var(--brand-gold)] text-[31px] font-bold text-center mb-8'>
+        {title}
+      </span>
       <span className='text-white text-base text-center mb-8'>{description}</span>
       <div className='flex flex-col items-start self-stretch mb-16 mx-8 gap-0'>
         {features.map((feature, index) => (

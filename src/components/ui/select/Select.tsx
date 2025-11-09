@@ -5,18 +5,18 @@ import { cn } from '../utils';
 // Custom dropdown arrow icon
 const ChevronDownIcon = () => (
   <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="text-gray-400"
-    aria-hidden="true"
+    width='16'
+    height='16'
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className='text-gray-400'
+    aria-hidden='true'
   >
-    <path d="m6 9 6 6 6-6" />
+    <path d='m6 9 6 6 6-6' />
   </svg>
 );
 
@@ -50,7 +50,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const sizeClasses = {
       sm: 'h-8 text-sm pl-3 pr-8',
@@ -67,9 +67,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const baseClasses =
       'appearance-none w-full rounded-md border bg-background py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
-    const errorClasses = error
-      ? 'border-red-500 focus:ring-red-200'
-      : 'border-input';
+    const errorClasses = error ? 'border-red-500 focus:ring-red-200' : 'border-input';
 
     return (
       <div className={cn('relative', containerClassName)}>
@@ -84,7 +82,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               'cursor-not-allowed opacity-50': disabled,
               'text-gray-400': !props.value, // Placeholder text color
             },
-            className
+            className,
           )}
           disabled={disabled}
           aria-invalid={error}
@@ -95,14 +93,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <div
           className={cn(
             'pointer-events-none absolute top-1/2 -translate-y-1/2',
-            iconSizeClasses[size]
+            iconSizeClasses[size],
           )}
         >
           <ChevronDownIcon />
         </div>
       </div>
     );
-  }
+  },
 );
 
 Select.displayName = 'Select';

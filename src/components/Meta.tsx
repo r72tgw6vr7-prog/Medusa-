@@ -37,10 +37,10 @@ function upsertLink(rel: string, href: string) {
   link.setAttribute('href', href);
 }
 
-export default function Meta({ 
-  title, 
-  description, 
-  canonicalPath, 
+export default function Meta({
+  title,
+  description,
+  canonicalPath,
   ogImage,
   ogType = 'website',
   twitterCard = 'summary_large_image',
@@ -48,7 +48,7 @@ export default function Meta({
   author,
   robots = 'index,follow',
   hreflang,
-  alternateLocale
+  alternateLocale,
 }: MetaProps) {
   useEffect(() => {
     const url = `${BASE_URL}${canonicalPath}`;
@@ -88,10 +88,10 @@ export default function Meta({
     upsertMetaTag('property', 'og:image:width', '1200');
     upsertMetaTag('property', 'og:image:height', '630');
     upsertMetaTag('property', 'og:locale', 'de_DE');
-    
+
     // Alternate locales
     if (alternateLocale) {
-      alternateLocale.forEach(locale => {
+      alternateLocale.forEach((locale) => {
         upsertMetaTag('property', 'og:locale:alternate', locale);
       });
     }
@@ -103,12 +103,23 @@ export default function Meta({
     upsertMetaTag('name', 'twitter:description', description);
     upsertMetaTag('name', 'twitter:image', fullImageUrl);
     upsertMetaTag('name', 'twitter:site', '@medusa_tattoo_munich');
-    
+
     // Additional structured markup
     upsertMetaTag('name', 'application-name', 'Medusa Tattoo München');
     upsertMetaTag('name', 'theme-color', '#d4af37'); // Gold theme
-    
-  }, [title, description, canonicalPath, ogImage, ogType, twitterCard, keywords, author, robots, hreflang, alternateLocale]);
+  }, [
+    title,
+    description,
+    canonicalPath,
+    ogImage,
+    ogType,
+    twitterCard,
+    keywords,
+    author,
+    robots,
+    hreflang,
+    alternateLocale,
+  ]);
 
   return null;
 }

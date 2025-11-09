@@ -112,7 +112,7 @@ export const BookingPage: React.FC = () => {
         <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
         {/* Page Header - Matches Services page exactly */}
-        <section className='section-padding relative z-10'>
+        <section className='section-padding-lg relative z-10 pb-8 md:pb-16'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
               <div className='text-center space-y-8'>
@@ -131,14 +131,14 @@ export const BookingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className='section-padding relative z-10'>
+        {/* Benefits Section - Trust Badges */}
+        <section className='section-padding-lg relative z-10 pt-16 md:pt-16'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px]'>
-              <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-16'>
                 <div className='text-center space-y-8'>
                   <div className='flex justify-center'>
-                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center flex-col h-full'>
                       <Calendar className='text-black' size={24} />
                     </div>
                   </div>
@@ -150,7 +150,7 @@ export const BookingPage: React.FC = () => {
 
                 <div className='text-center space-y-8'>
                   <div className='flex justify-center'>
-                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center flex-col h-full'>
                       <Users className='text-black' size={24} />
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export const BookingPage: React.FC = () => {
 
                 <div className='text-center space-y-8'>
                   <div className='flex justify-center'>
-                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center'>
+                    <div className='h-14 w-14 rounded-full bg-[var(--brand-gold)] flex items-center justify-center flex-col h-full'>
                       <Sparkles className='text-black' size={24} />
                     </div>
                   </div>
@@ -177,9 +177,9 @@ export const BookingPage: React.FC = () => {
         </section>
 
         {/* Booking Form Section - Container → Section → Form */}
-        <section className='section-padding pt-16 md:pt-24 relative'>
+        <section className='section-padding-lg pt-24 md:pt-32 relative'>
           {/* Jewelry Image Background - positioned above the texture layer */}
-          <div 
+          <div
             className='absolute inset-0 z-5 opacity-70'
             style={{
               backgroundImage: "url('/Bauchnabel echt gold vitrine_(3).jpg')",
@@ -189,13 +189,10 @@ export const BookingPage: React.FC = () => {
               backgroundAttachment: 'fixed',
               filter: 'brightness(0.7)',
             }}
-            aria-hidden="true"
+            aria-hidden='true'
           />
           {/* Dark overlay to ensure form content is readable */}
-          <div 
-            className='absolute inset-0 z-6 bg-black/60'
-            aria-hidden="true"
-          />
+          <div className='absolute inset-0 z-6 bg-black/60' aria-hidden='true' />
           <div className='responsive-container safe-area-padding relative z-7'>
             {bookingSubmitted ? (
               // Success Message
@@ -217,32 +214,50 @@ export const BookingPage: React.FC = () => {
                     <h3 className='font-semibold text-white mb-8'>Was passiert als Nächstes?</h3>
                     <ul className='space-y-8 text-white/70'>
                       <li className='flex items-start gap-8'>
-                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
+                        <CheckCircle
+                          className='text-[var(--brand-gold)] shrink-0 mt-0.5'
+                          size={20}
+                        />
                         <span>Sie erhalten eine Bestätigungs-E-Mail mit allen Details</span>
                       </li>
                       <li className='flex items-start gap-8'>
-                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
+                        <CheckCircle
+                          className='text-[var(--brand-gold)] shrink-0 mt-0.5'
+                          size={20}
+                        />
                         <span>Unser Team wird Sie innerhalb von 24 Stunden kontaktieren</span>
                       </li>
                       <li className='flex items-start gap-8'>
-                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
+                        <CheckCircle
+                          className='text-[var(--brand-gold)] shrink-0 mt-0.5'
+                          size={20}
+                        />
                         <span>Wir bestätigen Ihren Termin und besprechen Details</span>
                       </li>
                       <li className='flex items-start gap-8'>
-                        <CheckCircle className='text-[var(--brand-gold)] shrink-0 mt-0.5' size={20} />
+                        <CheckCircle
+                          className='text-[var(--brand-gold)] shrink-0 mt-0.5'
+                          size={20}
+                        />
                         <span>Bei Fragen erreichen Sie uns jederzeit per WhatsApp</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className='flex flex-col sm:flex-row gap-8 justify-center'>
-                    <a href='/' className="no-underline">
-                      <Button variant='primary' className='min-w-[180px] text-center justify-center'>
+                    <a href='/' className='no-underline'>
+                      <Button
+                        variant='primary'
+                        className='min-w-[180px] text-center justify-center'
+                      >
                         Zur Startseite
                       </Button>
                     </a>
-                    <a href='/gallery' className="no-underline">
-                      <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
+                    <a href='/gallery' className='no-underline'>
+                      <Button
+                        variant='secondary'
+                        className='min-w-[180px] text-center justify-center'
+                      >
                         Galerie ansehen
                       </Button>
                     </a>
@@ -260,10 +275,10 @@ export const BookingPage: React.FC = () => {
 
         {/* Info Section */}
         {!bookingSubmitted && (
-          <section className='section-padding relative z-10'>
+          <section className='section-padding-lg relative z-10'>
             <div className='responsive-container safe-area-padding'>
               <div className='mx-auto w-full max-w-[1104px]'>
-                <div className='text-center space-y-8 mb-16'>
+                <div className='text-center space-y-8 mb-24'>
                   <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
                     Informationen
                   </p>
@@ -272,7 +287,7 @@ export const BookingPage: React.FC = () => {
                   </h2>
                 </div>
 
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16'>
                   <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 flex flex-col h-full'>
                     <h3 className='font-headline text-xl text-white mb-8'>Vor dem Termin</h3>
                     <ul className='space-y-8 text-base text-white/70'>
@@ -318,7 +333,7 @@ export const BookingPage: React.FC = () => {
 
         {/* Contact CTA */}
         {!bookingSubmitted && (
-          <section className='section-padding relative z-10'>
+          <section className='section-padding-lg relative z-10'>
             <div className='responsive-container safe-area-padding'>
               <div className='mx-auto w-full max-w-[1104px]'>
                 <div className='text-center space-y-8'>
@@ -337,14 +352,20 @@ export const BookingPage: React.FC = () => {
                       href='https://wa.me/4989269313'
                       target='_blank'
                       rel='noopener noreferrer'
-                      className="no-underline"
+                      className='no-underline'
                     >
-                      <Button variant='primary' className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A] transition-all duration-200'>
+                      <Button
+                        variant='primary'
+                        className='min-w-[180px] text-center justify-center bg-[#25D366] hover:bg-[#20BA5A] transition-all duration-200'
+                      >
                         WhatsApp
                       </Button>
                     </a>
-                    <a href='/contact' className="no-underline">
-                      <Button variant='secondary' className='min-w-[180px] text-center justify-center'>
+                    <a href='/contact' className='no-underline'>
+                      <Button
+                        variant='secondary'
+                        className='min-w-[180px] text-center justify-center'
+                      >
                         Kontaktseite
                       </Button>
                     </a>

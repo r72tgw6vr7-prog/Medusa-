@@ -2,6 +2,7 @@
 'use client';
 
 import { Shield, Award, Check, Heart, Users, Star } from 'lucide-react';
+import styles from './TrustBadgesBar.module.css';
 
 export function TrustBadgesBar() {
   const badges = [
@@ -38,29 +39,24 @@ export function TrustBadgesBar() {
   ];
 
   return (
-    <div className='mt-24 mb-16'>
-      <div className='relative overflow-hidden max-w-[1104px] mx-auto'>
-        <div className='flex gap-16 animate-scroll-infinite w-fit'>
-          {/* Render badges twice for infinite scroll */}
-          {[...badges, ...badges].map((badge, idx) => {
-            const IconComponent = badge.icon;
-            return (
-              <div
-                key={idx}
-                className='flex flex-col items-center text-center shrink-0 min-w-[200px] group'
-              >
-                {/* Icon container */}
-                <div className='w-16 h-16 bg-chateau-green/20 rounded-full flex items-center justify-center mb-8 backdrop-blur-sm border border-chateau-green/20 transition-all duration-500 group-hover:bg-chateau-green/30 group-hover:scale-110'>
-                  <IconComponent size={28} className='text-chateau-green' />
-                </div>
-                {/* Label */}
-                <span className='text-athens-gray/90 text-[12px] font-inter group-hover:text-athens-gray transition-colors duration-300'>
-                  {badge.label}
+    <div className={styles.badgesContainer}>
+      <div className={styles.badgesRow}>
+        {badges.map((badge, idx) => {
+          const IconComponent = badge.icon;
+          return (
+            <div key={idx} className={styles.badge}>
+              <IconComponent className={styles.badgeIcon} />
+              <div className={styles.badgeContent}>
+                <span className={styles.badgeNumber}>
+                  {badge.label.includes('+') ? badge.label.split('+')[0] + '+' : ''}
+                </span>
+                <span className={styles.badgeLabel}>
+                  {badge.label.includes('+') ? badge.label.split('+')[1] : badge.label}
                 </span>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -25,8 +25,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Eingetragener Firmensitz:',
             'Proviantstraße 5a',
             '85049 Ingolstadt',
-            'Deutschland'
-          ]
+            'Deutschland',
+          ],
         },
         contact: {
           title: 'Kontakt',
@@ -37,8 +37,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Website: www.medusa-tattoo.de',
             '',
             'Ansprechpartner: Oliver Loichinger',
-            'E-Mail: oliver@in-tattoo.de'
-          ]
+            'E-Mail: oliver@in-tattoo.de',
+          ],
         },
         registration: {
           title: 'Handelsregister und Umsatzsteuer-ID',
@@ -46,25 +46,20 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Handelsregisternummer: 12052245',
             'Umsatzsteuer-Identifikationsnummer: DE 206 350 700',
             'Verantwortliche Person: Oliver Loichinger',
-            'Amtsgericht Ingolstadt'
-          ]
+            'Amtsgericht Ingolstadt',
+          ],
         },
         responsible: {
           title: 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV',
-          content: [
-            'Oliver Loichinger',
-            'Stargate GmbH',
-            'Altheimer Eck 11',
-            '80331 München'
-          ]
+          content: ['Oliver Loichinger', 'Stargate GmbH', 'Altheimer Eck 11', '80331 München'],
         },
         copyright: {
           title: 'Urheberrecht',
           content: [
-            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. Alle Rechte vorbehalten.'
-          ]
-        }
-      }
+            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. Alle Rechte vorbehalten.',
+          ],
+        },
+      },
     },
     EN: {
       title: 'Legal Notice',
@@ -82,8 +77,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Registered office:',
             'Proviantstraße 5a',
             '85049 Ingolstadt',
-            'Germany'
-          ]
+            'Germany',
+          ],
         },
         contact: {
           title: 'Contact',
@@ -94,8 +89,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Website: www.medusa-tattoo.de',
             '',
             'Contact person: Oliver Loichinger',
-            'Email: oliver@in-tattoo.de'
-          ]
+            'Email: oliver@in-tattoo.de',
+          ],
         },
         registration: {
           title: 'Commercial Register and VAT ID',
@@ -103,26 +98,21 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             'Commercial register number: 12052245',
             'VAT identification number: DE 206 350 700',
             'Responsible person: Oliver Loichinger',
-            'Local court Ingolstadt'
-          ]
+            'Local court Ingolstadt',
+          ],
         },
         responsible: {
           title: 'Responsible for content according to § 55 para. 2 RStV',
-          content: [
-            'Oliver Loichinger',
-            'Stargate GmbH',
-            'Altheimer Eck 11',
-            '80331 Munich'
-          ]
+          content: ['Oliver Loichinger', 'Stargate GmbH', 'Altheimer Eck 11', '80331 Munich'],
         },
         copyright: {
           title: 'Copyright',
           content: [
-            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved.'
-          ]
-        }
-      }
-    }
+            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved.',
+          ],
+        },
+      },
+    },
   };
 
   const t = content[language];
@@ -137,10 +127,10 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
             <div className='mx-auto w-full max-w-[1104px]'>
               {/* Page Header - Matches Services page exactly */}
               <PageHeader
-                eyebrow="Medusa München"
+                eyebrow='Medusa München'
                 title={t.title}
                 subtitle={t.subtitle}
-                alignment="center"
+                alignment='center'
               />
 
               <div className='space-y-16'>
@@ -148,7 +138,16 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                   <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.tmg.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
                     {t.sections.tmg.content.map((line, index) => (
-                      <p key={index} className={line === '' ? 'pb-2' : line.includes('Stargate GmbH') ? 'font-semibold' : ''}>
+                      <p
+                        key={index}
+                        className={
+                          line === ''
+                            ? 'pb-2'
+                            : line.includes('Stargate GmbH')
+                              ? 'font-semibold'
+                              : ''
+                        }
+                      >
                         {line || '\u00A0'}
                       </p>
                     ))}
@@ -156,7 +155,9 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.contact.title}</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                    {t.sections.contact.title}
+                  </h2>
                   <div className='space-y-0 text-brand-white/85'>
                     {t.sections.contact.content.map((line, index) => (
                       <p key={index} className={line === '' ? 'pb-2' : ''}>
@@ -167,10 +168,19 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.registration.title}</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                    {t.sections.registration.title}
+                  </h2>
                   <div className='space-y-0 text-brand-white/85'>
                     {t.sections.registration.content.map((line, index) => (
-                      <p key={index} className={line.includes('Amtsgericht') || line.includes('Local court') ? 'text-sm text-white/60' : ''}>
+                      <p
+                        key={index}
+                        className={
+                          line.includes('Amtsgericht') || line.includes('Local court')
+                            ? 'text-sm text-white/60'
+                            : ''
+                        }
+                      >
                         {line}
                       </p>
                     ))}
@@ -178,7 +188,9 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.responsible.title}</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                    {t.sections.responsible.title}
+                  </h2>
                   <div className='space-y-0 text-brand-white/85'>
                     {t.sections.responsible.content.map((line, index) => (
                       <p key={index}>{line}</p>
@@ -239,21 +251,21 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.copyright.title}</h2>
+                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                    {t.sections.copyright.title}
+                  </h2>
                   <p className='font-semibold text-brand-white/90'>
                     {t.sections.copyright.content[0]}
                   </p>
                   <p className='text-sm text-white/80 leading-relaxed'>
-                    {language === 'DE' 
+                    {language === 'DE'
                       ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
-                      : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'
-                    }
+                      : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'}
                   </p>
                   <p className='text-sm text-white/80 leading-relaxed'>
                     {language === 'DE'
                       ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
-                      : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'
-                    }
+                      : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'}
                   </p>
                 </section>
               </div>

@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-export type ContainerSize = "default" | "narrow" | "wide" | "full";
+export type ContainerSize = 'default' | 'narrow' | 'wide' | 'full';
 
 export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivElement>> {
   /**
    * Inner content
    */
   readonly children: React.ReactNode;
-  
+
   /**
    * Size variant for container max-width
    * - default: 1280px
@@ -32,28 +32,28 @@ export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivEle
  */
 const Container: React.FC<ContainerProps> = ({
   children,
-  size = "default",
-  className = "",
+  size = 'default',
+  className = '',
   ...props
 }) => {
   const sizeClassMap: Record<ContainerSize, string> = {
-    default: "max-w-[1440px]",
-    narrow: "max-w-[960px]",
-    wide: "max-w-[1600px]",
-    full: "max-w-full",
+    default: 'max-w-[1440px]',
+    narrow: 'max-w-[960px]',
+    wide: 'max-w-[1600px]',
+    full: 'max-w-full',
   };
 
   const classes = [
-    "w-full",
+    'w-full',
     sizeClassMap[size],
-    "mx-auto",
-    "px-4", // mobile: 16px
-    "sm:px-6", // tablet: 24px
-    "lg:px-8", // desktop: 32px
+    'mx-auto',
+    'px-4', // mobile: 16px
+    'sm:px-6', // tablet: 24px
+    'lg:px-8', // desktop: 32px
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
   return (
     <div className={classes} {...props}>

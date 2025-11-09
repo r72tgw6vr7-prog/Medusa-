@@ -53,3 +53,54 @@
 .smooth-scroll {
   scroll-behavior: smooth;
 }
+
+/* Section spacing utilities */
+.section-padding {
+  padding-top: 3rem; /* 48px - mobile */
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 4rem; /* 64px - tablet */
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 5rem; /* 80px - desktop */
+    padding-bottom: 5rem;
+  }
+}
+
+/* Larger section spacing for better visual separation */
+.section-padding-lg {
+  padding-top: 4rem; /* 64px - mobile */
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding-lg {
+    padding-top: 5rem; /* 80px - tablet */
+    padding-bottom: 5rem;
+  }
+}
+
+/* Custom z-index helpers used in a few sections */
+.z-5 {
+  z-index: 5;
+}
+.z-6 {
+  z-index: 6;
+}
+.z-7 {
+  z-index: 7;
+}
+
+@media (min-width: 1024px) {
+  .section-padding-lg {
+    padding-top: 6rem; /* 96px - desktop */
+    padding-bottom: 6rem;
+  }
+}

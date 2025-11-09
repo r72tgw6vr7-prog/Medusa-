@@ -38,18 +38,18 @@ export const getStats = (): GalleryStats => {
     totalImages: 147,
     featured: 24,
     byArtist: {
-      'Sophia': 42,
-      'Marcus': 38,
-      'Elena': 32,
-      'David': 21,
-      'Guest': 14
+      Sophia: 42,
+      Marcus: 38,
+      Elena: 32,
+      David: 21,
+      Guest: 14,
     },
     byCategory: {
-      'tattoo': 98,
-      'piercing': 27,
-      'portraits': 12,
-      'other': 10
+      tattoo: 98,
+      piercing: 27,
+      portraits: 12,
+      other: 10,
     },
-    totalSize: 187654321 // Approx 188MB
+    totalSize: 187654321, // Approx 188MB
   };
 };

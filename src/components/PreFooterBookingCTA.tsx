@@ -3,10 +3,11 @@
 // ============================================
 // PURPOSE: Final booking call-to-action section above footer with animated breathing chrome glow effect
 
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { User, Mail, Palette, Calendar, Clock, Lightbulb } from 'lucide-react';
 import Button from './atoms/Button/Button';
 import styles from './PreFooterBookingCTA.module.css';
+import { MedusaInput } from './ui/input/MedusaInput';
 
 interface BookingFormData {
   name: string;
@@ -97,7 +98,9 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
         </div>
 
         {/* Booking Form Card with BREATHING CHROME GLOW */}
-        <div className={`${styles['breathing-glow']} relative bg-[rgba(15,15,15,0.75)] backdrop-blur-xl rounded-2xl p-8 md:p-8 lg:p-16 ring-1 ring-[rgba(192,192,192,0.25)]`}>
+        <div
+          className={`${styles['breathing-glow']} relative bg-[rgba(15,15,15,0.75)] backdrop-blur-xl rounded-2xl p-8 md:p-8 lg:p-16 ring-1 ring-[rgba(192,192,192,0.25)]`}
+        >
           <h3 className='font-playfair text-2xl md:text-3xl font-semibold text-[var(--brand-gold)] text-center mb-8'>
             Buchen Sie Ihren Termin
           </h3>
@@ -107,19 +110,13 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
             <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
               {/* Name Input */}
               <div className='flex flex-col gap-8 h-full'>
-                <label
-                  htmlFor='name'
-                  className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-                >
-                  <User className='w-4 h-4' />
-                  Ihr Name
-                </label>
-                <input
+                <MedusaInput
                   id='name'
+                  label='Ihr Name'
                   type='text'
                   placeholder='Wie sollen wir Sie nennen?'
                   required
-                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] placeholder:text-[#666666] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-500 flex flex-col h-full'
+                  leftIcon={<User className='w-4 h-4' />}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
@@ -127,112 +124,103 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
 
               {/* Email Input */}
               <div className='flex flex-col gap-8 h-full'>
-                <label
-                  htmlFor='email'
-                  className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-                >
-                  <Mail className='w-4 h-4' />
-                  E-Mail Adresse
-                </label>
-                <input
+                <MedusaInput
                   id='email'
+                  label='E-Mail Adresse'
                   type='email'
                   placeholder='ihre.email@beispiel.de'
                   required
-                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] placeholder:text-[#666666] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300 flex flex-col h-full'
+                  leftIcon={<Mail className='w-4 h-4' />}
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                 />
               </div>
             </div>
 
             {/* Row 2: Service Dropdown (full width) */}
             <div className='flex flex-col gap-8 h-full'>
-              <label
-                htmlFor='service'
-                className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-              >
-                <Palette className='w-4 h-4' />
-                Gewünschter Service
-              </label>
-              <select
-                id='service'
-                required
-                className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300'
-                value={formData.service || selectedService || ''}
-                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-              >
-                <option value='' disabled>
-                  Service auswählen...
-                </option>
-                <option value='custom-tattoo'>Individuelles Tattoo</option>
-                <option value='cover-up'>Cover-Up</option>
-                <option value='piercing'>Piercing</option>
-                <option value='plasma-removal'>Tattoo-Entfernung</option>
-                <option value='consultation'>Kostenlose Beratung</option>
-              </select>
+              <div className='relative'>
+                <label
+                  htmlFor='service'
+                  className='flex items-center gap-0 text-[15px] font-medium text-white/90 mb-0.5'
+                >
+                  <Palette className='w-4 h-4 text-[var(--brand-gold)]' />
+                  Gewünschter Service
+                </label>
+                <select
+                  id='service'
+                  required
+                  className='w-full min-h-[40px] px-8 py-0 bg-[rgba(34,34,34,0.8)] border border-[rgba(192,192,192,0.3)] rounded-md text-white text-base placeholder:text-white/40 focus:outline-none focus:border-[var(--brand-gold)] focus:shadow-[0_0_10px_rgba(212,175,55,0.2)] hover:border-[var(--brand-gold)]/50 transition duration-200 ease-out'
+                  value={formData.service || selectedService || ''}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                >
+                  <option value='' disabled>
+                    Service auswählen...
+                  </option>
+                  <option value='custom-tattoo'>Individuelles Tattoo</option>
+                  <option value='cover-up'>Cover-Up</option>
+                  <option value='piercing'>Piercing</option>
+                  <option value='plasma-removal'>Tattoo-Entfernung</option>
+                  <option value='consultation'>Kostenlose Beratung</option>
+                </select>
+              </div>
             </div>
 
             {/* Row 3: Preferred Date + Time */}
             <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
               {/* Preferred Date */}
               <div className='flex flex-col gap-8 h-full'>
-                <label
-                  htmlFor='date'
-                  className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-                >
-                  <Calendar className='w-4 h-4' />
-                  Wunschtermin
-                </label>
-                <input
+                <MedusaInput
                   id='date'
+                  label='Wunschtermin'
                   type='date'
                   required
-                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300 flex flex-col h-full'
+                  leftIcon={<Calendar className='w-4 h-4' />}
                   value={formData.preferredDate}
-                  onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setFormData({ ...formData, preferredDate: e.target.value })
+                  }
                 />
               </div>
 
               {/* Preferred Time */}
               <div className='flex flex-col gap-8 h-full'>
-                <label
-                  htmlFor='time'
-                  className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-                >
-                  <Clock className='w-4 h-4' />
-                  Uhrzeit
-                </label>
-                <input
+                <MedusaInput
                   id='time'
+                  label='Uhrzeit'
                   type='time'
                   required
-                  className='w-full h-12 px-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300 flex flex-col h-full'
+                  leftIcon={<Clock className='w-4 h-4' />}
                   value={formData.preferredTime}
-                  onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setFormData({ ...formData, preferredTime: e.target.value })
+                  }
                 />
               </div>
             </div>
 
             {/* Row 4: Vision/Idea Textarea (optional) */}
             <div className='flex flex-col gap-8 h-full'>
-              <label
-                htmlFor='vision'
-                className='flex items-center gap-8 font-inter text-sm font-medium text-[var(--brand-gold)] mb-8'
-              >
-                <Lightbulb className='w-4 h-4' />
-                Ihre Vision (optional)
-              </label>
-              <textarea
-                id='vision'
-                placeholder='Beschreiben Sie Ihre Tattoo-Idee...'
-                rows={4}
-                className='w-full px-8 py-8 bg-[rgba(26,26,26,0.9)] border border-[rgba(192,192,192,0.3)] rounded-lg text-[#FFFFFF] placeholder:text-[#666666] font-inter text-base focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:border-[var(--brand-gold)] hover:border-[rgba(212,175,55,0.45)] transition-all duration-300 resize-none'
-                value={formData.vision}
-                onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
-              />
+              <div className='relative'>
+                <label
+                  htmlFor='vision'
+                  className='flex items-center gap-0 text-[15px] font-medium text-white/90 mb-0.5'
+                >
+                  <Lightbulb className='w-4 h-4 text-[var(--brand-gold)]' />
+                  Ihre Vision (optional)
+                </label>
+                <textarea
+                  id='vision'
+                  placeholder='Beschreiben Sie Ihre Tattoo-Idee...'
+                  rows={4}
+                  className='w-full px-8 py-0.5 bg-[rgba(34,34,34,0.8)] border border-[rgba(192,192,192,0.3)] rounded-md text-white text-base placeholder:text-white/40 focus:outline-none focus:border-[var(--brand-gold)] focus:shadow-[0_0_10px_rgba(212,175,55,0.2)] hover:border-[var(--brand-gold)]/50 resize-none transition duration-200 ease-out'
+                  value={formData.vision}
+                  onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
+                />
+              </div>
             </div>
-
             {/* Privacy Consent */}
             <div className='flex items-start gap-8'>
               <input

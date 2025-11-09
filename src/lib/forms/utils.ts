@@ -1,4 +1,4 @@
-import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
+import { FieldValues, Path, UseFormReturn, DefaultValues } from 'react-hook-form';
 import { z, ZodTypeAny } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -7,22 +7,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
  */
 export function getErrorMessage<T extends FieldValues>(
   form: UseFormReturn<T>,
-  name: Path<T>
+  name: Path<T>,
 ): string | undefined {
   const error = form.formState.errors[name];
-  
+
   if (!error) {
     return undefined;
   }
-  
+
   if (typeof error.message === 'string') {
     return error.message;
   }
-  
+
   if (Array.isArray(error)) {
     return error[0]?.message;
   }
-  
+
   return 'Invalid field';
 }
 
@@ -48,10 +48,7 @@ export function formatFieldName(name: string): string {
 /**
  * Check if a form field has an error
  */
-export function hasError<T extends FieldValues>(
-  form: UseFormReturn<T>,
-  name: Path<T>
-): boolean {
+export function hasError<T extends FieldValues>(form: UseFormReturn<T>, name: Path<T>): boolean {
   return Boolean(form.formState.errors[name]);
 }
 
@@ -67,9 +64,13 @@ export function isSubmitting<T extends FieldValues>(form: UseFormReturn<T>): boo
  */
 export function resetForm<T extends FieldValues>(
   form: UseFormReturn<T>,
-  values?: Partial<T>
+  values?: Partial<T>,
 ): void {
-  form.reset(values || form.formState.defaultValues || {});
+  const defaults =
+    (values as DefaultValues<T>) ??
+    (form.formState.defaultValues as DefaultValues<T>) ??
+    ({} as DefaultValues<T>);
+  form.reset(defaults);
 }
 
 /**
@@ -77,7 +78,7 @@ export function resetForm<T extends FieldValues>(
  */
 export function setFormErrors<T extends FieldValues>(
   form: UseFormReturn<T>,
-  errors: Record<string, string[]>
+  errors: Record<string, string[]>,
 ): void {
   Object.entries(errors).forEach(([field, messages]) => {
     form.setError(field as Path<T>, {

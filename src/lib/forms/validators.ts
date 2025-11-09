@@ -23,35 +23,34 @@ export const VALIDATION_MESSAGES = {
  * Common field validators
  */
 export const validators = {
-  required: (message = VALIDATION_MESSAGES.required) => 
-    z.string().min(1, { message }),
-  
-  email: (message = VALIDATION_MESSAGES.email) => 
-    z.string().email({ message }),
-  
-  minLength: (length: number, message?: string) => 
-    z.string().min(length, { 
-      message: message || VALIDATION_MESSAGES.minLength(length) 
+  required: (message = VALIDATION_MESSAGES.required) => z.string().min(1, { message }),
+
+  email: (message = VALIDATION_MESSAGES.email) => z.string().email({ message }),
+
+  minLength: (length: number, message?: string) =>
+    z.string().min(length, {
+      message: message || VALIDATION_MESSAGES.minLength(length),
     }),
-    
-  maxLength: (length: number, message?: string) => 
-    z.string().max(length, { 
-      message: message || VALIDATION_MESSAGES.maxLength(length) 
+
+  maxLength: (length: number, message?: string) =>
+    z.string().max(length, {
+      message: message || VALIDATION_MESSAGES.maxLength(length),
     }),
-    
-  url: (message = VALIDATION_MESSAGES.url) => 
-    z.string().url({ message }),
-    
+
+  url: (message = VALIDATION_MESSAGES.url) => z.string().url({ message }),
+
   phone: (message = VALIDATION_MESSAGES.phone) =>
     z.string().regex(/^\+?[\d\s-()]{10,}$/, { message }),
-    
-  password: (options: {
-    minLength?: number;
-    requireUppercase?: boolean;
-    requireLowercase?: boolean;
-    requireNumber?: boolean;
-    requireSpecialChar?: boolean;
-  } = {}) => {
+
+  password: (
+    options: {
+      minLength?: number;
+      requireUppercase?: boolean;
+      requireLowercase?: boolean;
+      requireNumber?: boolean;
+      requireSpecialChar?: boolean;
+    } = {},
+  ) => {
     const {
       minLength = 8,
       requireUppercase = true,
@@ -59,39 +58,39 @@ export const validators = {
       requireNumber = true,
       requireSpecialChar = true,
     } = options;
-    
+
     let schema = z.string();
-    
+
     if (minLength > 0) {
-      schema = schema.min(minLength, { 
-        message: VALIDATION_MESSAGES.password.minLength 
+      schema = schema.min(minLength, {
+        message: VALIDATION_MESSAGES.password.minLength,
       });
     }
-    
+
     if (requireUppercase) {
-      schema = schema.regex(/[A-Z]/, { 
-        message: VALIDATION_MESSAGES.password.uppercase 
+      schema = schema.regex(/[A-Z]/, {
+        message: VALIDATION_MESSAGES.password.uppercase,
       });
     }
-    
+
     if (requireLowercase) {
-      schema = schema.regex(/[a-z]/, { 
-        message: VALIDATION_MESSAGES.password.lowercase 
+      schema = schema.regex(/[a-z]/, {
+        message: VALIDATION_MESSAGES.password.lowercase,
       });
     }
-    
+
     if (requireNumber) {
-      schema = schema.regex(/[0-9]/, { 
-        message: VALIDATION_MESSAGES.password.number 
+      schema = schema.regex(/[0-9]/, {
+        message: VALIDATION_MESSAGES.password.number,
       });
     }
-    
+
     if (requireSpecialChar) {
-      schema = schema.regex(/[^A-Za-z0-9]/, { 
-        message: VALIDATION_MESSAGES.password.special 
+      schema = schema.regex(/[^A-Za-z0-9]/, {
+        message: VALIDATION_MESSAGES.password.special,
       });
     }
-    
+
     return schema;
   },
 } as const;
@@ -99,9 +98,7 @@ export const validators = {
 /**
  * Create a validation schema for a form
  */
-export function createFormSchema<T extends Record<string, any>>(
-  schema: T
-): z.ZodObject<T> {
+export function createFormSchema<T extends Record<string, any>>(schema: T): z.ZodObject<T> {
   return z.object(schema);
 }
 

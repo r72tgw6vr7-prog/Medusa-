@@ -20,14 +20,14 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
         className={cn(
           'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1',
           { 'after:content-["*"] after:ml-0.5 after:text-red-500': required },
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </label>
     );
-  }
+  },
 );
 
 Label.displayName = 'Label';

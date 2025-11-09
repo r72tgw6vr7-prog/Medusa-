@@ -76,7 +76,7 @@ export class ZohoCRMService {
       client_id: this.config.clientId,
       scope: scopes.join(','),
       redirect_uri: redirectUri,
-      access_type: 'offline'
+      access_type: 'offline',
     });
     return `${baseUrl}?${params.toString()}`;
   }
@@ -91,18 +91,18 @@ export class ZohoCRMService {
 
     const domain = this.config.domain;
     const tokenUrl = `https://accounts.zoho.${domain}/oauth/v2/token`;
-    
+
     const response = await fetch(tokenUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
         refresh_token: this.config.refreshToken,
         client_id: this.config.clientId,
         client_secret: this.config.clientSecret,
-        grant_type: 'refresh_token'
-      })
+        grant_type: 'refresh_token',
+      }),
     });
 
     if (!response.ok) {
@@ -111,7 +111,7 @@ export class ZohoCRMService {
 
     const data = await response.json();
     this.accessToken = data.access_token;
-    this.tokenExpiry = Date.now() + (data.expires_in * 1000) - 60000; // 1 minute buffer
+    this.tokenExpiry = Date.now() + data.expires_in * 1000 - 60000; // 1 minute buffer
 
     return this.accessToken!;
   }
@@ -120,9 +120,9 @@ export class ZohoCRMService {
    * Make authenticated API request
    */
   private async apiRequest<T>(
-    endpoint: string, 
+    endpoint: string,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET',
-    data?: any
+    data?: any,
   ): Promise<ZohoResponse<T>> {
     try {
       const token = await this.getAccessToken();
@@ -131,10 +131,10 @@ export class ZohoCRMService {
       const response = await fetch(url, {
         method,
         headers: {
-          'Authorization': `Zoho-oauthtoken ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Zoho-oauthtoken ${token}`,
+          'Content-Type': 'application/json',
         },
-        body: data ? JSON.stringify(data) : undefined
+        body: data ? JSON.stringify(data) : undefined,
       });
 
       const responseData = await response.json();
@@ -143,18 +143,18 @@ export class ZohoCRMService {
         return {
           success: false,
           error: responseData.message || 'ZOHO API error',
-          code: responseData.code
+          code: responseData.code,
         };
       }
 
       return {
         success: true,
-        data: responseData
+        data: responseData,
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Network error'
+        error: error instanceof Error ? error.message : 'Network error',
       };
     }
   }
@@ -170,27 +170,19 @@ export class ZohoCRMService {
       Phone: contact.phone,
       Lead_Source: contact.leadSource,
       Tag: contact.tags,
-      ...contact.customFields
+      ...contact.customFields,
     };
 
     // Check if contact exists by email
     const existingContact = await this.findContactByEmail(contact.email);
-    
+
     if (existingContact.success && existingContact.data?.data?.length > 0) {
       // Update existing contact
       const contactId = existingContact.data.data[0].id;
-      return await this.apiRequest(
-        `/Contacts/${contactId}`,
-        'PUT',
-        { data: [contactData] }
-      );
+      return await this.apiRequest(`/Contacts/${contactId}`, 'PUT', { data: [contactData] });
     } else {
       // Create new contact
-      return await this.apiRequest(
-        '/Contacts',
-        'POST',
-        { data: [contactData] }
-      );
+      return await this.apiRequest('/Contacts', 'POST', { data: [contactData] });
     }
   }
 
@@ -199,7 +191,7 @@ export class ZohoCRMService {
    */
   public async findContactByEmail(email: string): Promise<ZohoResponse<any>> {
     return await this.apiRequest(
-      `/Contacts/search?criteria=Email:equals:${encodeURIComponent(email)}`
+      `/Contacts/search?criteria=Email:equals:${encodeURIComponent(email)}`,
     );
   }
 
@@ -219,38 +211,30 @@ export class ZohoCRMService {
       Currency: booking.currency,
       Description: booking.notes,
       Booking_Status: booking.status,
-      ...booking.customFields
+      ...booking.customFields,
     };
 
-    return await this.apiRequest(
-      '/Deals',
-      'POST',
-      { data: [dealData] }
-    );
+    return await this.apiRequest('/Deals', 'POST', { data: [dealData] });
   }
 
   /**
    * Update booking status
    */
   public async updateBookingStatus(
-    bookingId: string, 
+    bookingId: string,
     status: ZohoBooking['status'],
-    notes?: string
+    notes?: string,
   ): Promise<ZohoResponse<any>> {
     const updateData: any = {
       Booking_Status: status,
-      Stage: this.mapStatusToStage(status)
+      Stage: this.mapStatusToStage(status),
     };
 
     if (notes) {
       updateData.Description = notes;
     }
 
-    return await this.apiRequest(
-      `/Deals/${bookingId}`,
-      'PUT',
-      { data: [updateData] }
-    );
+    return await this.apiRequest(`/Deals/${bookingId}`, 'PUT', { data: [updateData] });
   }
 
   /**
@@ -258,11 +242,11 @@ export class ZohoCRMService {
    */
   private mapStatusToStage(status: ZohoBooking['status']): string {
     const stageMap = {
-      'New': 'New Booking',
-      'Confirmed': 'Appointment Scheduled',
+      New: 'New Booking',
+      Confirmed: 'Appointment Scheduled',
       'In Progress': 'Service in Progress',
-      'Completed': 'Closed Won',
-      'Cancelled': 'Closed Lost'
+      Completed: 'Closed Won',
+      Cancelled: 'Closed Lost',
     };
     return stageMap[status] || 'New Booking';
   }
@@ -277,35 +261,33 @@ export class ZohoCRMService {
   /**
    * List bookings with filters
    */
-  public async listBookings(
-    filters?: {
-      status?: ZohoBooking['status'];
-      artist?: string;
-      dateFrom?: string;
-      dateTo?: string;
-    }
-  ): Promise<ZohoResponse<any>> {
+  public async listBookings(filters?: {
+    status?: ZohoBooking['status'];
+    artist?: string;
+    dateFrom?: string;
+    dateTo?: string;
+  }): Promise<ZohoResponse<any>> {
     let endpoint = '/Deals';
-    
+
     if (filters) {
       const criteria: string[] = [];
-      
+
       if (filters.status) {
         criteria.push(`Booking_Status:equals:${filters.status}`);
       }
-      
+
       if (filters.artist) {
         criteria.push(`Artist_Name:equals:${encodeURIComponent(filters.artist)}`);
       }
-      
+
       if (filters.dateFrom) {
         criteria.push(`Preferred_Date:greater_equal:${filters.dateFrom}`);
       }
-      
+
       if (filters.dateTo) {
         criteria.push(`Preferred_Date:less_equal:${filters.dateTo}`);
       }
-      
+
       if (criteria.length > 0) {
         endpoint += `?criteria=${criteria.join(' and ')}`;
       }
@@ -318,26 +300,22 @@ export class ZohoCRMService {
    * Add note to booking
    */
   public async addBookingNote(
-    bookingId: string, 
+    bookingId: string,
     note: string,
-    noteOwner?: string
+    noteOwner?: string,
   ): Promise<ZohoResponse<any>> {
     const noteData: any = {
       Note_Title: 'Booking Update',
       Note_Content: note,
       Parent_Id: bookingId,
-      se_module: 'Deals'
+      se_module: 'Deals',
     };
 
     if (noteOwner) {
       noteData.Note_Owner = noteOwner;
     }
 
-    return await this.apiRequest(
-      '/Notes',
-      'POST',
-      { data: [noteData] }
-    );
+    return await this.apiRequest('/Notes', 'POST', { data: [noteData] });
   }
 
   /**
@@ -347,7 +325,7 @@ export class ZohoCRMService {
     bookingId: string,
     subject: string,
     dueDate: string,
-    priority: 'High' | 'Normal' | 'Low' = 'Normal'
+    priority: 'High' | 'Normal' | 'Low' = 'Normal',
   ): Promise<ZohoResponse<any>> {
     const taskData = {
       Subject: subject,
@@ -355,14 +333,10 @@ export class ZohoCRMService {
       Priority: priority,
       Status: 'Not Started',
       What_Id: bookingId,
-      se_module: 'Deals'
+      se_module: 'Deals',
     };
 
-    return await this.apiRequest(
-      '/Tasks',
-      'POST',
-      { data: [taskData] }
-    );
+    return await this.apiRequest('/Tasks', 'POST', { data: [taskData] });
   }
 
   /**
@@ -378,13 +352,13 @@ export class ZohoCRMService {
  */
 export const initializeZohoCRM = (): ZohoCRMService | null => {
   const env = import.meta.env;
-  
+
   const config: ZohoConfig = {
     clientId: env.VITE_ZOHO_CLIENT_ID || '',
     clientSecret: env.VITE_ZOHO_CLIENT_SECRET || '',
     refreshToken: env.VITE_ZOHO_REFRESH_TOKEN || '',
     domain: (env.VITE_ZOHO_DOMAIN as ZohoConfig['domain']) || 'eu',
-    sandbox: env.VITE_ZOHO_SANDBOX === 'true'
+    sandbox: env.VITE_ZOHO_SANDBOX === 'true',
   };
 
   // Validate configuration
@@ -410,8 +384,8 @@ export const createContactFromBooking = (bookingData: any): ZohoContact => {
     customFields: {
       Preferred_Service: bookingData.serviceName,
       Preferred_Artist: bookingData.artistName,
-      Initial_Message: bookingData.message || bookingData.details
-    }
+      Initial_Message: bookingData.message || bookingData.details,
+    },
   };
 };
 
@@ -433,7 +407,7 @@ export const createBookingFromForm = (bookingData: any, contactId: string): Zoho
       Tattoo_Size: bookingData.tattooSize,
       Body_Area: bookingData.bodyArea,
       Design_Style: bookingData.designStyle,
-      Budget_Range: bookingData.budgetRange
-    }
+      Budget_Range: bookingData.budgetRange,
+    },
   };
 };

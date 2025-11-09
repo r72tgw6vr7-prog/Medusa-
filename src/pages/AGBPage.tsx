@@ -15,10 +15,10 @@ export const AGBPage: React.FC = () => {
             <div className='mx-auto w-full max-w-[1104px]'>
               {/* Page Header - Standardized */}
               <PageHeader
-                eyebrow="Medusa München"
-                title="Allgemeine Geschäftsbedingungen"
-                subtitle="Gültig bis zur Veröffentlichung der finalen Fassung"
-                alignment="center"
+                eyebrow='Medusa München'
+                title='Allgemeine Geschäftsbedingungen'
+                subtitle='Gültig bis zur Veröffentlichung der finalen Fassung'
+                alignment='center'
               />
 
               <section className='space-y-8 text-white/70'>
@@ -34,13 +34,17 @@ export const AGBPage: React.FC = () => {
                   von Medusa Tattoo München.
                 </p>
 
-                <h2 className='font-headline text-2xl text-(--brand-gold)'>§ 2 Termine & Zahlungen</h2>
+                <h2 className='font-headline text-2xl text-(--brand-gold)'>
+                  § 2 Termine & Zahlungen
+                </h2>
                 <p>
                   Termine sind verbindlich. Anzahlungen werden auf den Endpreis angerechnet. Preise
                   verstehen sich inkl. MwSt.
                 </p>
 
-                <h2 className='font-headline text-2xl text-(--brand-gold)'>§ 3 Haftung & Nachsorge</h2>
+                <h2 className='font-headline text-2xl text-(--brand-gold)'>
+                  § 3 Haftung & Nachsorge
+                </h2>
                 <p>
                   Es gelten die in der Nachsorge beschriebenen Hinweise. Eine Haftung für
                   Missachtung der Pflegehinweise ist ausgeschlossen.

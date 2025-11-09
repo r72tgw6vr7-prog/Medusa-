@@ -2,7 +2,6 @@ import React from 'react';
 import Section from '../../ui/Section';
 import { Button } from '../../ui/button';
 
-
 interface ServiceCard {
   id: string;
   backgroundImage: string;
@@ -16,16 +15,14 @@ interface ServiceCard {
   ctaVariant: 'default' | 'secondary';
 }
 
-
 interface ServiceCardsProps {
   services?: ServiceCard[];
 }
 
-
 const DEFAULT_SERVICES: ServiceCard[] = [
   {
     id: 'tattoo',
-    backgroundImage: '/images/tattoo-card-bg.webp',
+    backgroundImage: '/assets/images/photos/backgrounds/tattoo-card-bg.webp',
     icon: 'crown',
     struckTitle: 'Tattoo Artistry',
     mainTitle: 'Permanent Kunst',
@@ -42,7 +39,7 @@ const DEFAULT_SERVICES: ServiceCard[] = [
   },
   {
     id: 'piercing',
-    backgroundImage: '/images/piercing-card-bg.jpg',
+    backgroundImage: '/assets/images/photos/backgrounds/piercing-card-bg.webp',
     icon: 'diamond',
     struckTitle: 'Premium Piercing',
     mainTitle: 'Luxury Schmuck',
@@ -54,43 +51,16 @@ const DEFAULT_SERVICES: ServiceCard[] = [
   },
 ];
 
-
 export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_SERVICES }) => {
   const getIcon = (iconType: 'crown' | 'diamond') => {
     if (iconType === 'crown') {
       return <img src='/icons/crown.svg' alt='Crown icon' width={40} height={40} />;
     }
-    return (
-      <svg
-        width={40}
-        height={40}
-        viewBox='0 0 40 40'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <path
-          d='M20 4L24 16L20 28L16 16L20 4Z'
-          stroke='#C0C0C0'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
-        />
-        <path
-          d='M12 16L20 4L28 16L20 28L12 16Z'
-          stroke='#C0C0C0'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
-        />
-      </svg>
-    );
+    return <img src='/Diamond.svg' alt='Diamond icon' width={40} height={40} />;
   };
 
-
   return (
-    <Section bg="none" className="bg-texture">
+    <Section bg='none' className='bg-texture'>
       {/* Header */}
       <div className='text-center space-y-8 mb-16'>
         <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
@@ -104,11 +74,11 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
         </p>
       </div>
 
-
       {/* Cards Grid */}
-      <div className='service-card-grid grid grid-cols-1 md:grid-cols-2'>
+      <div className='service-card-grid grid grid-cols-1 md:grid-cols-2 gap-8'>
         {services.map((service) => {
-          const baseClasses = 'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow-strong border border-(--brand-gold)/20 hover:border-(--brand-gold)/60 flex flex-col h-full';
+          const baseClasses =
+            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow-strong border border-(--brand-gold)/20 hover:border-(--brand-gold)/60 flex flex-col h-full';
           return (
             <article
               key={service.id}
@@ -144,12 +114,10 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                 />
               </div>
 
-
               {/* Positioned icon (gold circle removed) */}
               <div className='absolute top-6 left-6 sm:top-8 sm:left-8 md:top-12 md:left-12 z-10'>
                 {getIcon(service.icon)}
               </div>
-
 
               {/* Content */}
               <div className='service-card-padding relative h-full flex flex-col justify-end items-center'>
@@ -168,7 +136,6 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     </span>
                   </div>
 
-
                   {/* Main Title */}
                   <h3
                     className="font-['Poppins'] text-2xl md:text-4xl font-bold leading-tight"
@@ -176,7 +143,6 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                   >
                     {service.mainTitle}
                   </h3>
-
 
                   {/* Bullet Points */}
                   <ul className='service-card-list space-y-0'>
@@ -190,7 +156,6 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     ))}
                   </ul>
 
-
                   {/* Price and CTA */}
                   <div className='service-card-footer'>
                     <span
@@ -200,14 +165,14 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                       {service.price}
                     </span>
 
-
-                    <a href={service.ctaHref} className="no-underline">
+                    <a href={service.ctaHref} className='no-underline'>
                       {(() => {
-                        const btnVariant: 'gold' | 'outlineGold' = service.ctaVariant === 'secondary' ? 'outlineGold' : 'gold';
+                        const btnVariant: 'gold' | 'outlineGold' =
+                          service.ctaVariant === 'secondary' ? 'outlineGold' : 'gold';
                         return (
                           <Button
                             variant={btnVariant}
-                            className="w-full inline-flex items-center justify-center text-center transition-colors duration-300"
+                            className='w-full inline-flex items-center justify-center text-center transition-colors duration-300'
                           >
                             {service.ctaText}
                           </Button>
@@ -220,10 +185,9 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
             </article>
           );
         })}
-        </div>
+      </div>
     </Section>
   );
 };
-
 
 export default ServiceCards;

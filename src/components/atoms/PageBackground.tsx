@@ -12,8 +12,7 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({ children, classN
       <div
         className='fixed inset-0 z-20'
         style={{
-          backgroundImage:
-            'url("/assets/images/photos/backgrounds/process-timeline-bg.webp")',
+          backgroundImage: 'url("/assets/images/photos/backgrounds/process-timeline-bg.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

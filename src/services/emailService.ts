@@ -20,7 +20,11 @@ export interface EmailRequest {
   to: string;
   from: string;
   subject: string;
-  template: 'booking-confirmation' | 'booking-notification' | 'contact-notification' | 'payment-confirmation';
+  template:
+    | 'booking-confirmation'
+    | 'booking-notification'
+    | 'contact-notification'
+    | 'payment-confirmation';
   data: Record<string, any>;
   language?: 'DE' | 'EN';
 }
@@ -39,50 +43,50 @@ const EMAIL_TEMPLATES: Record<string, Record<'DE' | 'EN', EmailTemplate>> = {
     DE: {
       subject: 'Buchungsbestätigung - Medusa Tattoo München',
       html: generateBookingConfirmationHTML('DE'),
-      text: generateBookingConfirmationText('DE')
+      text: generateBookingConfirmationText('DE'),
     },
     EN: {
       subject: 'Booking Confirmation - Medusa Tattoo Munich',
       html: generateBookingConfirmationHTML('EN'),
-      text: generateBookingConfirmationText('EN')
-    }
+      text: generateBookingConfirmationText('EN'),
+    },
   },
   'booking-notification': {
     DE: {
       subject: 'Neue Buchungsanfrage - {{customerName}}',
       html: generateBookingNotificationHTML('DE'),
-      text: generateBookingNotificationText('DE')
+      text: generateBookingNotificationText('DE'),
     },
     EN: {
       subject: 'New Booking Request - {{customerName}}',
       html: generateBookingNotificationHTML('EN'),
-      text: generateBookingNotificationText('EN')
-    }
+      text: generateBookingNotificationText('EN'),
+    },
   },
   'contact-notification': {
     DE: {
       subject: 'Neue Kontaktanfrage - {{subject}}',
       html: generateContactNotificationHTML('DE'),
-      text: generateContactNotificationText('DE')
+      text: generateContactNotificationText('DE'),
     },
     EN: {
       subject: 'New Contact Request - {{subject}}',
       html: generateContactNotificationHTML('EN'),
-      text: generateContactNotificationText('EN')
-    }
+      text: generateContactNotificationText('EN'),
+    },
   },
   'payment-confirmation': {
     DE: {
       subject: 'Zahlungsbestätigung - Medusa Tattoo München',
       html: generatePaymentConfirmationHTML('DE'),
-      text: generatePaymentConfirmationText('DE')
+      text: generatePaymentConfirmationText('DE'),
     },
     EN: {
       subject: 'Payment Confirmation - Medusa Tattoo Munich',
       html: generatePaymentConfirmationHTML('EN'),
-      text: generatePaymentConfirmationText('EN')
-    }
-  }
+      text: generatePaymentConfirmationText('EN'),
+    },
+  },
 };
 
 /**
@@ -92,13 +96,13 @@ export const sendEmail = async (request: EmailRequest): Promise<EmailResponse> =
   try {
     const provider = detectEmailProvider();
     const template = EMAIL_TEMPLATES[request.template]?.[request.language || 'DE'];
-    
+
     if (!template) {
       throw new Error(`Template ${request.template} not found for language ${request.language}`);
     }
 
     const processedTemplate = processTemplate(template, request.data);
-    
+
     switch (provider.name) {
       case 'sendgrid':
         return await sendViaSendGrid(request, processedTemplate, provider);
@@ -115,7 +119,7 @@ export const sendEmail = async (request: EmailRequest): Promise<EmailResponse> =
     console.error('Email sending error:', error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Email sending failed'
+      error: error instanceof Error ? error.message : 'Email sending failed',
     };
   }
 };
@@ -125,36 +129,36 @@ export const sendEmail = async (request: EmailRequest): Promise<EmailResponse> =
  */
 function detectEmailProvider(): EmailProvider {
   const env = import.meta.env;
-  
+
   if (env.VITE_SENDGRID_API_KEY) {
     return {
       name: 'sendgrid',
-      apiKey: env.VITE_SENDGRID_API_KEY
+      apiKey: env.VITE_SENDGRID_API_KEY,
     };
   }
-  
+
   if (env.VITE_MAILGUN_API_KEY && env.VITE_MAILGUN_DOMAIN) {
     return {
       name: 'mailgun',
       apiKey: env.VITE_MAILGUN_API_KEY,
-      domain: env.VITE_MAILGUN_DOMAIN
+      domain: env.VITE_MAILGUN_DOMAIN,
     };
   }
-  
+
   if (env.VITE_AWS_SES_ACCESS_KEY) {
     return {
       name: 'amazonses',
-      apiKey: env.VITE_AWS_SES_ACCESS_KEY
+      apiKey: env.VITE_AWS_SES_ACCESS_KEY,
     };
   }
-  
+
   if (env.VITE_SMTP_HOST) {
     return {
       name: 'smtp',
-      endpoint: env.VITE_SMTP_HOST
+      endpoint: env.VITE_SMTP_HOST,
     };
   }
-  
+
   throw new Error('No email provider configured');
 }
 
@@ -171,7 +175,7 @@ function processTemplate(template: EmailTemplate, data: Record<string, any>): Em
   return {
     subject: processString(template.subject),
     html: processString(template.html),
-    text: processString(template.text)
+    text: processString(template.text),
   };
 }
 
@@ -179,27 +183,29 @@ function processTemplate(template: EmailTemplate, data: Record<string, any>): Em
  * SendGrid implementation
  */
 async function sendViaSendGrid(
-  request: EmailRequest, 
-  template: EmailTemplate, 
-  provider: EmailProvider
+  request: EmailRequest,
+  template: EmailTemplate,
+  provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/sendgrid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${provider.apiKey}`
+      Authorization: `Bearer ${provider.apiKey}`,
     },
     body: JSON.stringify({
-      personalizations: [{
-        to: [{ email: request.to }],
-        subject: template.subject
-      }],
+      personalizations: [
+        {
+          to: [{ email: request.to }],
+          subject: template.subject,
+        },
+      ],
       from: { email: request.from },
       content: [
         { type: 'text/plain', value: template.text },
-        { type: 'text/html', value: template.html }
-      ]
-    })
+        { type: 'text/html', value: template.html },
+      ],
+    }),
   });
 
   if (!response.ok) {
@@ -209,7 +215,7 @@ async function sendViaSendGrid(
 
   return {
     success: true,
-    messageId: response.headers.get('x-message-id') || undefined
+    messageId: response.headers.get('x-message-id') || undefined,
   };
 }
 
@@ -217,9 +223,9 @@ async function sendViaSendGrid(
  * Mailgun implementation
  */
 async function sendViaMailgun(
-  request: EmailRequest, 
-  template: EmailTemplate, 
-  provider: EmailProvider
+  request: EmailRequest,
+  template: EmailTemplate,
+  provider: EmailProvider,
 ): Promise<EmailResponse> {
   const formData = new FormData();
   formData.append('from', request.from);
@@ -231,9 +237,9 @@ async function sendViaMailgun(
   const response = await fetch(`/api/email/mailgun`, {
     method: 'POST',
     headers: {
-      'Authorization': `Basic ${btoa(`api:${provider.apiKey}`)}`
+      Authorization: `Basic ${btoa(`api:${provider.apiKey}`)}`,
     },
-    body: formData
+    body: formData,
   });
 
   if (!response.ok) {
@@ -244,7 +250,7 @@ async function sendViaMailgun(
   const data = await response.json();
   return {
     success: true,
-    messageId: data.id
+    messageId: data.id,
   };
 }
 
@@ -252,37 +258,37 @@ async function sendViaMailgun(
  * Amazon SES implementation
  */
 async function sendViaAmazonSES(
-  request: EmailRequest, 
-  template: EmailTemplate, 
-  provider: EmailProvider
+  request: EmailRequest,
+  template: EmailTemplate,
+  provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/amazonses', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       Source: request.from,
       Destination: {
-        ToAddresses: [request.to]
+        ToAddresses: [request.to],
       },
       Message: {
         Subject: {
           Data: template.subject,
-          Charset: 'UTF-8'
+          Charset: 'UTF-8',
         },
         Body: {
           Text: {
             Data: template.text,
-            Charset: 'UTF-8'
+            Charset: 'UTF-8',
           },
           Html: {
             Data: template.html,
-            Charset: 'UTF-8'
-          }
-        }
-      }
-    })
+            Charset: 'UTF-8',
+          },
+        },
+      },
+    }),
   });
 
   if (!response.ok) {
@@ -293,7 +299,7 @@ async function sendViaAmazonSES(
   const data = await response.json();
   return {
     success: true,
-    messageId: data.MessageId
+    messageId: data.MessageId,
   };
 }
 
@@ -301,22 +307,22 @@ async function sendViaAmazonSES(
  * SMTP implementation
  */
 async function sendViaSMTP(
-  request: EmailRequest, 
-  template: EmailTemplate, 
-  provider: EmailProvider
+  request: EmailRequest,
+  template: EmailTemplate,
+  provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/smtp', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       from: request.from,
       to: request.to,
       subject: template.subject,
       text: template.text,
-      html: template.html
-    })
+      html: template.html,
+    }),
   });
 
   if (!response.ok) {
@@ -325,7 +331,7 @@ async function sendViaSMTP(
   }
 
   return {
-    success: true
+    success: true,
   };
 }
 
@@ -386,9 +392,9 @@ function generateBookingConfirmationHTML(language: 'DE' | 'EN'): string {
 }
 
 function generateBookingConfirmationText(language: 'DE' | 'EN'): string {
-  return language === 'DE' ? 
-    `Buchungsbestätigung - Medusa Tattoo München\n\nLiebe/r {{customerName}},\n\nVielen Dank für Ihre Buchungsanfrage!\n\nBuchungs-ID: {{bookingId}}\nKünstler: {{artistName}}\nService: {{serviceName}}\nGewünschter Termin: {{preferredDate}} um {{preferredTime}}\n\nWir werden uns innerhalb von 24 Stunden bei Ihnen melden.` :
-    `Booking Confirmation - Medusa Tattoo Munich\n\nDear {{customerName}},\n\nThank you for your booking request!\n\nBooking ID: {{bookingId}}\nArtist: {{artistName}}\nService: {{serviceName}}\nPreferred Date: {{preferredDate}} at {{preferredTime}}\n\nWe will contact you within 24 hours.`;
+  return language === 'DE'
+    ? `Buchungsbestätigung - Medusa Tattoo München\n\nLiebe/r {{customerName}},\n\nVielen Dank für Ihre Buchungsanfrage!\n\nBuchungs-ID: {{bookingId}}\nKünstler: {{artistName}}\nService: {{serviceName}}\nGewünschter Termin: {{preferredDate}} um {{preferredTime}}\n\nWir werden uns innerhalb von 24 Stunden bei Ihnen melden.`
+    : `Booking Confirmation - Medusa Tattoo Munich\n\nDear {{customerName}},\n\nThank you for your booking request!\n\nBooking ID: {{bookingId}}\nArtist: {{artistName}}\nService: {{serviceName}}\nPreferred Date: {{preferredDate}} at {{preferredTime}}\n\nWe will contact you within 24 hours.`;
 }
 
 function generateBookingNotificationHTML(language: 'DE' | 'EN'): string {

@@ -19,7 +19,7 @@ export function cn(...inputs: ClassValue[]) {
 export function getVariantClasses<T extends string>(
   variant: T,
   variantMap: Record<T, string>,
-  defaultVariant: T
+  defaultVariant: T,
 ) {
   return variantMap[variant] || variantMap[defaultVariant];
 }
@@ -33,7 +33,7 @@ export function getVariantClasses<T extends string>(
 export function getSizeClasses<T extends string>(
   size: T,
   sizeMap: Record<T, string>,
-  defaultSize: T
+  defaultSize: T,
 ) {
   return sizeMap[size] || sizeMap[defaultSize];
 }
@@ -46,11 +46,11 @@ export function getSizeClasses<T extends string>(
  */
 export function asChild<T, P extends React.HTMLAttributes<T>>(
   Component: React.ElementType,
-  props: P & { asChild?: boolean; as?: React.ElementType }
+  props: P & { asChild?: boolean; as?: React.ElementType },
 ) {
   const { asChild: _, as: As, ...rest } = props;
   const ComponentToUse = As || Component;
-  
+
   return {
     Component: ComponentToUse,
     props: rest,

@@ -7,7 +7,7 @@ interface AnalyticsProviderProps {
 
 /**
  * Analytics Provider Component
- * 
+ *
  * Wraps the app to provide analytics tracking functionality.
  * Automatically tracks page views, scroll depth, and time on page.
  */

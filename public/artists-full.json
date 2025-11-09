@@ -1,0 +1,287 @@
+{
+  "artists": [
+    {
+      "id": "loul-001",
+      "slug": "loul",
+      "name": "Loul",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/loul.jpg",
+      "photoAlt": "Loul, Senior Tattoo Artist at Medusa München",
+      "specialties": ["Black & Gray", "Realism", "Watercolor", "Portrait"],
+      "experience": "10+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"},
+        {"type": "senior", "label": "Senior Artist"}
+      ],
+      "bio": {
+        "de": "Loul ist ein preisgekrönter Tattoo-Künstler mit über 10 Jahren Erfahrung in Realismus und Black & Gray. Seine Arbeiten zeichnen sich durch außergewöhnliche Detailtreue und künstlerische Vision aus.\n\nSpezialisiert auf fotorealistische Portraits und komplexe Designs, hat Loul sich einen Namen in der Münchner Tattoo-Szene gemacht. Seine Leidenschaft für Kunst und Perfektion spiegelt sich in jedem seiner Werke wider.\n\nBei Medusa München leitet er unser Tattoo-Team und teilt sein Wissen mit aufstrebenden Künstlern.",
+        "en": "Loul is an award-winning tattoo artist with over 10 years of experience in realism and black & gray. His work is characterized by exceptional attention to detail and artistic vision.\n\nSpecializing in photorealistic portraits and complex designs, Loul has made a name for himself in Munich's tattoo scene. His passion for art and perfection is reflected in every piece he creates.\n\nAt Medusa München, he leads our tattoo team and shares his knowledge with emerging artists."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/loul/work-1.jpg",
+          "/images/portfolio/loul/work-2.jpg",
+          "/images/portfolio/loul/work-3.jpg"
+        ],
+        "total": 250
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=loul"
+      },
+      "social": {
+        "instagram": "@loui_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified", "First Aid Certified"],
+      "featured": true
+    },
+    {
+      "id": "ange-002",
+      "slug": "ange",
+      "name": "Ange",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/ange.jpg",
+      "photoAlt": "Ange, Traditional Tattoo Artist at Medusa München",
+      "specialties": ["Traditional", "Neo-Traditional", "Japanese", "Color Work"],
+      "experience": "8+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"}
+      ],
+      "bio": {
+        "de": "Ange ist eine Meisterin der traditionellen und japanischen Tattoo-Kunst. Mit über 8 Jahren Erfahrung hat sie ihren einzigartigen Stil entwickelt, der klassische Techniken mit modernen Elementen verbindet.\n\nIhre Arbeiten sind bekannt für kräftige Linien, lebendige Farben und perfekte Komposition. Ange hat in renommierten Studios in Europa und Asien gearbeitet und bringt internationale Expertise nach München.\n\nBei Medusa München ist sie spezialisiert auf großflächige Traditional- und Japanese-Projekte.",
+        "en": "Ange is a master of traditional and Japanese tattoo art. With over 8 years of experience, she has developed her unique style that combines classic techniques with modern elements.\n\nHer work is known for bold lines, vibrant colors, and perfect composition. Ange has worked in renowned studios across Europe and Asia, bringing international expertise to Munich.\n\nAt Medusa München, she specializes in large-scale traditional and Japanese projects."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/ange/work-1.jpg",
+          "/images/portfolio/ange/work-2.jpg"
+        ],
+        "total": 180
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=ange"
+      },
+      "social": {
+        "instagram": "@angie_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"],
+      "featured": false
+    },
+    {
+      "id": "aaron-003",
+      "slug": "aaron",
+      "name": "Aaron",
+      "role": "Piercing Artist",
+      "category": "piercing",
+      "photo": "/images/artists/aaron.jpg",
+      "photoAlt": "Aaron, Senior Piercing Artist at Medusa München",
+      "specialties": ["Dermal", "Industrial", "Complex Piercings", "Body Modifications"],
+      "experience": "12+ Jahre",
+      "badges": [
+        {"type": "piercing-artist", "label": "Piercing Artist"},
+        {"type": "senior", "label": "Senior Artist"}
+      ],
+      "bio": {
+        "de": "Aaron ist ein Experte für komplexe Piercings und Körpermodifikationen mit über 12 Jahren Erfahrung. Seine Präzision und sein Auge für Anatomie machen ihn zu einem der gefragtesten Piercing-Künstler Münchens.\n\nSpezialisiert auf Dermal Anchors, Industrial Piercings und individuelle Körpermodifikationen, legt Aaron höchsten Wert auf Hygiene und Sicherheit. Er arbeitet ausschließlich mit Titan-Schmuck höchster Qualität.\n\nBei Medusa München leitet er unser Piercing-Team und bietet Beratungen für komplexe Projekte an.",
+        "en": "Aaron is an expert in complex piercings and body modifications with over 12 years of experience. His precision and eye for anatomy make him one of Munich's most sought-after piercing artists.\n\nSpecializing in dermal anchors, industrial piercings, and custom body modifications, Aaron places the highest emphasis on hygiene and safety. He works exclusively with the highest quality titanium jewelry.\n\nAt Medusa München, he leads our piercing team and offers consultations for complex projects."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/aaron/work-1.jpg",
+          "/images/portfolio/aaron/work-2.jpg"
+        ],
+        "total": 320
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=aaron"
+      },
+      "social": {
+        "instagram": "@aaron_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "APP Member", "First Aid Certified"],
+      "featured": false
+    },
+    {
+      "id": "oliver-004",
+      "slug": "oliver",
+      "name": "Oliver",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/oliver.jpg",
+      "photoAlt": "Oliver, Geometric Tattoo Artist at Medusa München",
+      "specialties": ["Geometric", "Blackwork", "Minimalist", "Dotwork"],
+      "experience": "6+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"}
+      ],
+      "bio": {
+        "de": "Oliver ist spezialisiert auf geometrische und minimalistische Designs. Mit über 6 Jahren Erfahrung hat er einen unverwechselbaren Stil entwickelt, der Präzision und künstlerische Vision vereint.\n\nSeine Arbeiten zeichnen sich durch perfekte Symmetrie, saubere Linien und innovative Kompositionen aus. Oliver ist bekannt für seine Fähigkeit, komplexe geometrische Muster nahtlos an die Körperform anzupassen.\n\nBei Medusa München ist er die erste Wahl für Kunden, die moderne, minimalistische Tattoo-Kunst suchen.",
+        "en": "Oliver specializes in geometric and minimalist designs. With over 6 years of experience, he has developed a distinctive style that combines precision and artistic vision.\n\nHis work is characterized by perfect symmetry, clean lines, and innovative compositions. Oliver is known for his ability to seamlessly adapt complex geometric patterns to body contours.\n\nAt Medusa München, he is the go-to choice for clients seeking modern, minimalist tattoo art."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/oliver/work-1.jpg",
+          "/images/portfolio/oliver/work-2.jpg"
+        ],
+        "total": 140
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=oliver"
+      },
+      "social": {
+        "instagram": "@oli_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"],
+      "featured": false
+    },
+    {
+      "id": "emma-005",
+      "slug": "emma",
+      "name": "Emma",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/emma.jpg",
+      "photoAlt": "Emma, Color Tattoo Artist at Medusa München",
+      "specialties": ["Color", "New School", "Custom Design", "Illustrative"],
+      "experience": "7+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"}
+      ],
+      "bio": {
+        "de": "Emma ist eine Expertin für farbenfrohe und lebendige Tattoo-Designs. Mit über 7 Jahren Erfahrung hat sie sich auf New School und illustrative Stile spezialisiert, die ihre künstlerische Ausbildung widerspiegeln.\n\nIhre Arbeiten sind bekannt für brillante Farbkombinationen, dynamische Kompositionen und einzigartige Custom Designs. Emma arbeitet eng mit ihren Kunden zusammen, um deren Visionen zum Leben zu erwecken.\n\nBei Medusa München bringt sie frische, kreative Energie in jedes Projekt ein.",
+        "en": "Emma is an expert in colorful and vibrant tattoo designs. With over 7 years of experience, she specializes in new school and illustrative styles that reflect her artistic training.\n\nHer work is known for brilliant color combinations, dynamic compositions, and unique custom designs. Emma works closely with her clients to bring their visions to life.\n\nAt Medusa München, she brings fresh, creative energy to every project."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/emma/work-1.jpg",
+          "/images/portfolio/emma/work-2.jpg"
+        ],
+        "total": 160
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=emma"
+      },
+      "social": {
+        "instagram": "@emma_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"],
+      "featured": false
+    },
+    {
+      "id": "max-006",
+      "slug": "max",
+      "name": "Max",
+      "role": "Piercing Artist",
+      "category": "piercing",
+      "photo": "/images/artists/max.jpg",
+      "photoAlt": "Max, Piercing Artist at Medusa München",
+      "specialties": ["Surface", "Microdermal", "Body Modifications", "Curated Ear"],
+      "experience": "9+ Jahre",
+      "badges": [
+        {"type": "piercing-artist", "label": "Piercing Artist"}
+      ],
+      "bio": {
+        "de": "Max ist spezialisiert auf Surface Piercings und Mikrodermals mit über 9 Jahren Erfahrung. Seine Expertise in Anatomie und Platzierung macht ihn zum Experten für anspruchsvolle Piercing-Projekte.\n\nBekannt für seine Arbeit mit Curated Ear Designs und komplexen Body Modifications, legt Max größten Wert auf individuelle Beratung und perfekte Ausführung. Er arbeitet ausschließlich mit hochwertigem Titan-Schmuck.\n\nBei Medusa München ist er spezialisiert auf innovative Piercing-Konzepte und langfristige Projekte.",
+        "en": "Max specializes in surface piercings and microdermalsith over 9 years of experience. His expertise in anatomy and placement makes him an expert for demanding piercing projects.\n\nKnown for his work with curated ear designs and complex body modifications, Max places great emphasis on individual consultation and perfect execution. He works exclusively with high-quality titanium jewelry.\n\nAt Medusa München, he specializes in innovative piercing concepts and long-term projects."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/max/work-1.jpg",
+          "/images/portfolio/max/work-2.jpg"
+        ],
+        "total": 210
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=max"
+      },
+      "social": {
+        "instagram": "@max_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "APP Member"],
+      "featured": false
+    },
+    {
+      "id": "sophia-007",
+      "slug": "sophia",
+      "name": "Sophia",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/sophia.jpg",
+      "photoAlt": "Sophia, Fine Line Tattoo Artist at Medusa München",
+      "specialties": ["Fine Line", "Script", "Ornamental", "Delicate Work"],
+      "experience": "5+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"}
+      ],
+      "bio": {
+        "de": "Sophia ist eine Meisterin der Fine Line Tattoos und filigranen Designs. Mit über 5 Jahren Erfahrung hat sie sich auf zarte, detailreiche Arbeiten spezialisiert, die höchste Präzision erfordern.\n\nIhre Expertise liegt in Script-Tattoos, ornamentalen Designs und minimalistischen Kompositionen. Sophia ist bekannt für ihre ruhige Hand und ihr Auge für perfekte Proportionen.\n\nBei Medusa München ist sie die erste Wahl für Kunden, die elegante, zeitlose Tattoo-Kunst suchen.",
+        "en": "Sophia is a master of fine line tattoos and delicate designs. With over 5 years of experience, she specializes in subtle, detailed work that requires the highest precision.\n\nHer expertise lies in script tattoos, ornamental designs, and minimalist compositions. Sophia is known for her steady hand and eye for perfect proportions.\n\nAt Medusa München, she is the first choice for clients seeking elegant, timeless tattoo art."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/sophia/work-1.jpg",
+          "/images/portfolio/sophia/work-2.jpg"
+        ],
+        "total": 120
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=sophia"
+      },
+      "social": {
+        "instagram": "@sophia_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"],
+      "featured": false
+    },
+    {
+      "id": "leo-008",
+      "slug": "leo",
+      "name": "Leo",
+      "role": "Tattoo Artist",
+      "category": "tattoo",
+      "photo": "/images/artists/leo.jpg",
+      "photoAlt": "Leo, Dark Art Tattoo Artist at Medusa München",
+      "specialties": ["Dark Art", "Horror", "Biomechanical", "Surrealism"],
+      "experience": "7+ Jahre",
+      "badges": [
+        {"type": "tattoo-artist", "label": "Tattoo Artist"}
+      ],
+      "bio": {
+        "de": "Leo ist spezialisiert auf Dark Art und Horror-Tattoos mit über 7 Jahren Erfahrung. Seine düsteren, atmosphärischen Designs sind bekannt für ihre intensive Wirkung und technische Perfektion.\n\nMit Expertise in Biomechanical und surrealistischen Stilen schafft Leo einzigartige Kunstwerke, die Grenzen überschreiten. Seine Arbeiten sind geprägt von starken Kontrasten und dramatischer Bildsprache.\n\nBei Medusa München ist er die erste Wahl für Kunden, die außergewöhnliche, provokative Tattoo-Kunst suchen.",
+        "en": "Leo specializes in dark art and horror tattoos with over 7 years of experience. His dark, atmospheric designs are known for their intense impact and technical perfection.\n\nWith expertise in biomechanical and surrealist styles, Leo creates unique artworks that push boundaries. His work is characterized by strong contrasts and dramatic imagery.\n\nAt Medusa München, he is the first choice for clients seeking extraordinary, provocative tattoo art."
+      },
+      "portfolio": {
+        "featured": [
+          "/images/portfolio/leo/work-1.jpg",
+          "/images/portfolio/leo/work-2.jpg"
+        ],
+        "total": 150
+      },
+      "booking": {
+        "available": true,
+        "whatsapp": "+49-xxx-xxxx",
+        "calendarLink": "/booking?artist=leo"
+      },
+      "social": {
+        "instagram": "@leo_medusa"
+      },
+      "certifications": ["EU Hygiene Certificate", "REACH Certified"],
+      "featured": false
+    }
+  ]
+}

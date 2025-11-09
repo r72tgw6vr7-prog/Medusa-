@@ -1,6 +1,6 @@
 /**
  * AnimatedSection Component
- * 
+ *
  * A reusable wrapper component that animates its children when they enter the viewport.
  * Uses Framer Motion and the animation utilities for consistent animation experience.
  */
@@ -11,7 +11,10 @@ import React, { forwardRef } from 'react';
 import { useScrollAnimation } from '../../lib/animations/hooks';
 
 // Extend motion.section props but override the drag handler types
-type MotionSectionProps = Omit<HTMLMotionProps<'section'>, 'onDrag' | 'onDragStart' | 'onDragEnd'> & {
+type MotionSectionProps = Omit<
+  HTMLMotionProps<'section'>,
+  'onDrag' | 'onDragStart' | 'onDragEnd'
+> & {
   onDrag?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
   onDragStart?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
   onDragEnd?: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
@@ -20,26 +23,26 @@ type MotionSectionProps = Omit<HTMLMotionProps<'section'>, 'onDrag' | 'onDragSta
 interface AnimatedSectionProps extends React.HTMLAttributes<HTMLElement> {
   /** Content to be animated */
   children: React.ReactNode;
-  
+
   /** Optional CSS class name */
   className?: string;
 
   /** Add texture-bg attribute for full-width background */
   hasBackground?: boolean;
-  
+
   /** Animation variants for the section */
   variants?: {
     hidden: Variant;
     visible: Variant;
   };
-  
+
   /** Animation transition properties */
   transition?: {
     duration?: number;
     delay?: number;
     ease?: string | number[];
   };
-  
+
   /** Custom ref for the section element */
   ref?: React.Ref<HTMLElement>;
 }
@@ -56,8 +59,8 @@ const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'
     // Default variants if none provided
     const defaultVariants: Variants = {
       hidden: { opacity: 0, y: 20 },
-      visible: { 
-        opacity: 1, 
+      visible: {
+        opacity: 1,
         y: 0,
         transition: {
           duration: 0.6,
@@ -80,7 +83,7 @@ const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'
       <motion.section
         ref={sectionRef as React.Ref<HTMLElement>}
         className={className}
-        initial="hidden"
+        initial='hidden'
         animate={isInView ? 'visible' : 'hidden'}
         variants={variants || defaultVariants}
         onDrag={onDrag}
@@ -92,7 +95,7 @@ const AnimatedSection = forwardRef<HTMLElement, Omit<AnimatedSectionProps, 'ref'
         {children}
       </motion.section>
     );
-  }
+  },
 );
 
 AnimatedSection.displayName = 'AnimatedSection';

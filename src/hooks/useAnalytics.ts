@@ -4,7 +4,7 @@ import analytics from '../utils/analytics';
 
 /**
  * Custom hook for Google Analytics integration
- * 
+ *
  * Features:
  * - Automatic page view tracking on route changes
  * - Easy access to analytics functions
@@ -17,7 +17,7 @@ export const useAnalytics = () => {
   useEffect(() => {
     // Get page title from document or route
     const pageTitle = document.title;
-    
+
     // Track the page view
     analytics.pageView(location.pathname + location.search, pageTitle);
   }, [location]);
@@ -27,15 +27,15 @@ export const useAnalytics = () => {
     // Page tracking
     pageView: analytics.pageView.bind(analytics),
     event: analytics.event.bind(analytics),
-    
+
     // Specific tracking methods
     trackBooking: analytics.trackBooking,
     trackGallery: analytics.trackGallery,
     trackForm: analytics.trackForm,
     trackEngagement: analytics.trackEngagement,
-    
+
     // Debug info
-    getDebugInfo: analytics.getDebugInfo.bind(analytics)
+    getDebugInfo: analytics.getDebugInfo.bind(analytics),
   };
 };
 
@@ -45,12 +45,12 @@ export const useAnalytics = () => {
 export const useScrollDepthTracking = () => {
   useEffect(() => {
     let maxScrollPercentage = 0;
-    
+
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = Math.round((scrollTop / documentHeight) * 100);
-      
+
       if (scrollPercentage > maxScrollPercentage) {
         maxScrollPercentage = scrollPercentage;
         analytics.trackEngagement.scrollDepth(scrollPercentage);
@@ -65,7 +65,7 @@ export const useScrollDepthTracking = () => {
     };
 
     window.addEventListener('scroll', throttledHandleScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
       if (timeoutId) clearTimeout(timeoutId);
@@ -79,7 +79,7 @@ export const useScrollDepthTracking = () => {
 export const useTimeOnPageTracking = () => {
   useEffect(() => {
     const startTime = Date.now();
-    
+
     return () => {
       const timeSpent = Date.now() - startTime;
       // Track if user spent more than 30 seconds on page
@@ -87,7 +87,7 @@ export const useTimeOnPageTracking = () => {
         analytics.event('time_on_page', {
           content_group1: 'engagement',
           time_spent_seconds: Math.round(timeSpent / 1000),
-          page_path: window.location.pathname
+          page_path: window.location.pathname,
         });
       }
     };

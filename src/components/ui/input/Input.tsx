@@ -34,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       rightIcon,
       ...props
     },
-    ref
+    ref,
   ) => {
     const sizeClasses = {
       sm: 'h-8 text-sm pl-3',
@@ -51,9 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const baseClasses =
       'flex w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50';
 
-    const errorClasses = error
-      ? 'border-red-500 focus-visible:ring-red-200'
-      : 'border-input';
+    const errorClasses = error ? 'border-red-500 focus-visible:ring-red-200' : 'border-input';
 
     return (
       <div className={cn('relative w-full', containerClassName)}>
@@ -61,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cn(
               'absolute left-3 top-1/2 -translate-y-1/2 text-gray-400',
-              iconSizeClasses[size]
+              iconSizeClasses[size],
             )}
           >
             {leftIcon}
@@ -78,7 +76,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               'pr-10': rightIcon,
               'cursor-not-allowed opacity-50': disabled,
             },
-            className
+            className,
           )}
           disabled={disabled}
           aria-invalid={error ? 'true' : 'false'}
@@ -88,7 +86,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cn(
               'absolute right-3 top-1/2 -translate-y-1/2 text-gray-400',
-              iconSizeClasses[size]
+              iconSizeClasses[size],
             )}
           >
             {rightIcon}
@@ -96,7 +94,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';

@@ -1,4 +1,13 @@
-import { KeyboardEvent, useCallback, useEffect, useRef, useState, KeyboardEventHandler, RefObject, FocusEventHandler } from 'react';
+import {
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  KeyboardEventHandler,
+  RefObject,
+  FocusEventHandler,
+} from 'react';
 
 type KeyHandler = (event: KeyboardEvent) => void;
 type FocusHandler = (event: React.FocusEvent) => void;
@@ -143,20 +152,26 @@ export function useKeyboardNav({
       onHome,
       onEnd,
       onKeyDown,
-    ]
+    ],
   );
 
   // Handle focus events
-  const handleFocus = useCallback<FocusEventHandler>((event) => {
-    setIsFocused(true);
-    onFocus?.(event);
-  }, [onFocus]);
+  const handleFocus = useCallback<FocusEventHandler>(
+    (event) => {
+      setIsFocused(true);
+      onFocus?.(event);
+    },
+    [onFocus],
+  );
 
   // Handle blur events
-  const handleBlur = useCallback<FocusEventHandler>((event) => {
-    setIsFocused(false);
-    onBlur?.(event);
-  }, [onBlur]);
+  const handleBlur = useCallback<FocusEventHandler>(
+    (event) => {
+      setIsFocused(false);
+      onBlur?.(event);
+    },
+    [onBlur],
+  );
 
   // Set up event listeners for focus management
   useEffect(() => {
@@ -269,7 +284,7 @@ interface ListNavigationReturn {
 export const useListNavigation = (
   itemCount: number,
   onSelect: (index: number) => void,
-  options: ListNavigationOptions = {}
+  options: ListNavigationOptions = {},
 ): ListNavigationReturn => {
   const { initialIndex = 0, wrapAround = true, autoFocus = false } = options;
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
@@ -324,7 +339,7 @@ export const useListNavigation = (
 
       setSelectedIndex(newIndex);
     },
-    [itemCount, onSelect, selectedIndex, wrapAround]
+    [itemCount, onSelect, selectedIndex, wrapAround],
   );
 
   return {

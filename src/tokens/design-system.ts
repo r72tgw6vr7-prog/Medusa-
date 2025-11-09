@@ -70,40 +70,40 @@ export const designTokens = {
     fontWeight: { light: 300, regular: 400, medium: 500, semibold: 600, bold: 700 },
   },
   buttons: {
-    primary: { 
-      bg: '#C9A961', 
-      bgHover: '#A68646', 
-      text: '#FFFFFF', 
-      padding: '16px 32px', 
-      height: '48px', 
-      borderRadius: '8px' 
+    primary: {
+      bg: '#C9A961',
+      bgHover: '#A68646',
+      text: '#FFFFFF',
+      padding: '16px 32px',
+      height: '48px',
+      borderRadius: '8px',
     },
-    secondary: { 
-      bg: 'transparent', 
-      border: '2px solid #C9A961', 
-      text: '#C9A961', 
-      padding: '16px 32px', 
-      height: '48px', 
-      borderRadius: '8px' 
+    secondary: {
+      bg: 'transparent',
+      border: '2px solid #C9A961',
+      text: '#C9A961',
+      padding: '16px 32px',
+      height: '48px',
+      borderRadius: '8px',
     },
-    tertiary: { 
-      bg: '#1A1A1A', 
-      border: '1px solid #3A3A3A', 
-      text: '#FFFFFF', 
-      padding: '16px 32px', 
-      height: '48px', 
-      borderRadius: '8px' 
+    tertiary: {
+      bg: '#1A1A1A',
+      border: '1px solid #3A3A3A',
+      text: '#FFFFFF',
+      padding: '16px 32px',
+      height: '48px',
+      borderRadius: '8px',
     },
   },
-  breakpoints: { 
-    mobile: '640px', 
-    tablet: '768px', 
-    desktop: '1024px', 
-    wide: '1280px' 
+  breakpoints: {
+    mobile: '640px',
+    tablet: '768px',
+    desktop: '1024px',
+    wide: '1280px',
   },
-  shadows: { 
-    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', 
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', 
+  shadows: {
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
     lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
     // Gold glow shadows
     goldSubtle: '0 0 10px rgba(212, 175, 55, 0.2)',
@@ -111,17 +111,17 @@ export const designTokens = {
     goldStrong: '0 0 30px rgba(212, 175, 55, 0.4)',
     goldMedium: '0 4px 20px rgba(212, 175, 55, 0.3)',
   },
-  borderRadius: { 
-    sm: '4px', 
-    md: '8px', 
+  borderRadius: {
+    sm: '4px',
+    md: '8px',
     lg: '16px',
-    xl: '24px', 
-    full: '9999px' 
+    xl: '24px',
+    full: '9999px',
   },
-  transitions: { 
-    fast: '150ms ease-out', 
-    normal: '300ms ease-out', 
-    slow: '500ms ease-out' 
+  transitions: {
+    fast: '150ms ease-out',
+    normal: '300ms ease-out',
+    slow: '500ms ease-out',
   },
   zIndex: {
     base: 1,

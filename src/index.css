@@ -7,9 +7,14 @@
 
 /* Design system - contains all tokens, base styles and components */
 @import './styles/design-system.css';
+@import './styles/utility-classes.css';
+/* Restored responsive layout primitives (phone frame fix) */
+@import './styles/responsive-layout.css';
 
 /* Critical: Full viewport height for React SPA */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -19,4 +24,3 @@ html, body, #root {
 body {
   overflow-y: auto;
 }
-

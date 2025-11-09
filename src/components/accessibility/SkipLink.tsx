@@ -7,7 +7,7 @@ interface SkipLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   label?: string;
   /** Additional class names to apply */
   className?: string;
-};
+}
 
 /**
  * SkipLink component that provides keyboard users with a way to skip to the main content.
@@ -26,7 +26,7 @@ export const SkipLink = ({
       {...props}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
-      <span aria-hidden="true" className="block">
+      <span aria-hidden='true' className='block'>
         {label}
       </span>
     </a>

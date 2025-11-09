@@ -35,9 +35,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   step,
   scheme,
 }) => {
-  const finalInputClass = scheme === 'dark' 
-    ? `${inputClass} scheme-dark` 
-    : inputClass;
+  const finalInputClass = scheme === 'dark' ? `${inputClass} scheme-dark` : inputClass;
 
   return (
     <div className={`${fieldContainerClass} ${className}`}>

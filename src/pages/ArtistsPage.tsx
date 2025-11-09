@@ -42,7 +42,7 @@ export function ArtistsPage() {
 
       {/* Artists Grid Section */}
       <section className='section-padding relative z-10'>
-        <TeamGrid containerSize="wide" />
+        <TeamGrid containerSize='wide' />
       </section>
 
       {/* Trust Statistics Strip */}

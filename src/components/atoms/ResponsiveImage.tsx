@@ -29,10 +29,10 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   // Extract base path and extension
   const basePath = src.replace(/\.(jpg|jpeg|png|webp|avif)$/i, '');
   const originalExt = src.match(/\.(jpg|jpeg|png|webp|avif)$/i)?.[0] || '.webp';
-  
+
   // Check if image is in optimized directory
   const isOptimized = src.includes('/optimized/');
-  
+
   // Generate srcset for a specific format
   const generateSrcSet = (format: string) => {
     return widths
@@ -72,19 +72,11 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   return (
     <picture>
       {/* AVIF - Best compression, newest format */}
-      <source
-        type="image/avif"
-        srcSet={generateSrcSet('avif')}
-        sizes={sizes}
-      />
-      
+      <source type='image/avif' srcSet={generateSrcSet('avif')} sizes={sizes} />
+
       {/* WebP - Good compression, wide support */}
-      <source
-        type="image/webp"
-        srcSet={generateSrcSet('webp')}
-        sizes={sizes}
-      />
-      
+      <source type='image/webp' srcSet={generateSrcSet('webp')} sizes={sizes} />
+
       {/* Fallback for older browsers */}
       <img
         src={src}
@@ -92,7 +84,7 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         className={className}
         loading={loading}
         fetchPriority={fetchPriority}
-        decoding="async"
+        decoding='async'
       />
     </picture>
   );

@@ -27,7 +27,7 @@ const buttonVariants = cva(
       variant: 'primary',
       size: 'md',
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -51,54 +51,58 @@ export interface ButtonProps
 
 /**
  * A customizable, accessible button component with support for icons, loading states, and more.
- * 
+ *
  * @example
  * // Basic usage
  * <Button>Click me</Button>
- * 
+ *
  * @example
  * // With icon
  * <Button leftIcon={<Icon />}>Save</Button>
- * 
+ *
  * @example
  * // Icon-only button
  * <Button icon={<CloseIcon />} aria-label="Close dialog" />
- * 
+ *
  * @example
  * // Loading state
  * <Button loading>Processing...</Button>
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({
-    className,
-    variant,
-    size,
-    asChild = false,
-    loading = false,
-    leftIcon,
-    rightIcon,
-    fullWidth,
-    children,
-    disabled,
-    icon,
-    iconPosition = 'right',
-    type = 'button',
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false,
+      leftIcon,
+      rightIcon,
+      fullWidth,
+      children,
+      disabled,
+      icon,
+      iconPosition = 'right',
+      type = 'button',
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button';
-    const isIconOnly = React.Children.count(children) === 0 && (!!leftIcon || !!rightIcon || !!icon);
-  const { 'aria-label': ariaLabel } = props;
-    
-  // Handle deprecated icon prop
-  const resolvedLeftIcon = leftIcon || (icon && iconPosition === 'left' ? icon : null);
-  const resolvedRightIcon = rightIcon || (icon && iconPosition === 'right' ? icon : null);
+    const isIconOnly =
+      React.Children.count(children) === 0 && (!!leftIcon || !!rightIcon || !!icon);
+    const { 'aria-label': ariaLabel } = props;
 
-  // Warn in development if an icon-only button is missing an aria-label
-  React.useEffect(() => {
-    if (process.env.NODE_ENV !== 'production' && isIconOnly && !ariaLabel) {
-      console.warn('Icon-only buttons should have an aria-label for accessibility');
-    }
-  }, [isIconOnly, ariaLabel]);
+    // Handle deprecated icon prop
+    const resolvedLeftIcon = leftIcon || (icon && iconPosition === 'left' ? icon : null);
+    const resolvedRightIcon = rightIcon || (icon && iconPosition === 'right' ? icon : null);
+
+    // Warn in development if an icon-only button is missing an aria-label
+    React.useEffect(() => {
+      if (process.env.NODE_ENV !== 'production' && isIconOnly && !ariaLabel) {
+        console.warn('Icon-only buttons should have an aria-label for accessibility');
+      }
+    }, [isIconOnly, ariaLabel]);
 
     return (
       <Comp
@@ -106,7 +110,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ variant, size, className }),
           fullWidth && 'w-full',
           isIconOnly && 'p-0',
-          className
+          className,
         )}
         ref={ref}
         disabled={disabled || loading}
@@ -115,55 +119,51 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && (
-          <span className="inline-flex items-center" aria-hidden="true">
+          <span className='inline-flex items-center' aria-hidden='true'>
             <svg
-              className="animate-spin h-4 w-4 text-current"
-              fill="none"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+              className='animate-spin h-4 w-4 text-current'
+              fill='none'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'
             >
               <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
+                className='opacity-25'
+                cx='12'
+                cy='12'
+                r='10'
+                stroke='currentColor'
+                strokeWidth='4'
               />
               <path
-                className="opacity-75"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                fill="currentColor"
+                className='opacity-75'
+                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                fill='currentColor'
               />
             </svg>
-            <span className="sr-only">Loading...</span>
+            <span className='sr-only'>Loading...</span>
           </span>
         )}
-        
+
         {!loading && resolvedLeftIcon && (
-          <span className={cn('inline-flex', children && 'mr-2')} aria-hidden="true">
+          <span className={cn('inline-flex', children && 'mr-2')} aria-hidden='true'>
             {resolvedLeftIcon}
           </span>
         )}
-        
-        {children && (
-          <span className={loading ? 'opacity-0' : 'opacity-100'}>
-            {children}
-          </span>
-        )}
-        
+
+        {children && <span className={loading ? 'opacity-0' : 'opacity-100'}>{children}</span>}
+
         {!loading && resolvedRightIcon && (
-          <span className={cn('inline-flex', children && 'ml-2')} aria-hidden="true">
+          <span className={cn('inline-flex', children && 'ml-2')} aria-hidden='true'>
             {resolvedRightIcon}
           </span>
         )}
-        
+
         {isIconOnly && !loading && !resolvedLeftIcon && !resolvedRightIcon && (
           <VisuallyHidden>Button</VisuallyHidden>
         )}
       </Comp>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

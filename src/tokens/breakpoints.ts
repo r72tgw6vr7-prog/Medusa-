@@ -1,6 +1,6 @@
 /**
  * BREAKPOINT TOKENS
- * 
+ *
  * Defines responsive breakpoints for the design system.
  * Uses a mobile-first approach with min-width media queries.
  */
@@ -20,21 +20,23 @@ const breakpointValues = {
 } as const;
 
 // Convert pixel values to ems (1em = 16px)
-const breakpoints = Object.entries(breakpointValues).reduce((acc, [key, value]) => ({
-  ...acc,
-  [key]: `${value / 16}em`,
-}), {} as Record<keyof typeof breakpointValues, string>);
+const breakpoints = Object.entries(breakpointValues).reduce(
+  (acc, [key, value]) => ({
+    ...acc,
+    [key]: `${value / 16}em`,
+  }),
+  {} as Record<keyof typeof breakpointValues, string>,
+);
 
 // Media query utilities
 const mediaQueries = {
-  up: (breakpoint: keyof typeof breakpoints) => 
-    `@media (min-width: ${breakpoints[breakpoint]})`,
+  up: (breakpoint: keyof typeof breakpoints) => `@media (min-width: ${breakpoints[breakpoint]})`,
   down: (breakpoint: keyof typeof breakpoints) => {
     // For the down breakpoint, we subtract 0.02px to avoid overlap
     const breakpointValue = breakpointValues[breakpoint];
     return `@media (max-width: ${(breakpointValue - 0.02) / 16}em)`;
   },
-  between: (min: keyof typeof breakpoints, max: keyof typeof breakpoints) => 
+  between: (min: keyof typeof breakpoints, max: keyof typeof breakpoints) =>
     `@media (min-width: ${breakpoints[min]}) and (max-width: ${(breakpointValues[max] - 0.02) / 16}em)`,
 };
 

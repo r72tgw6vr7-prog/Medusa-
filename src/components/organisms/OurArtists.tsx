@@ -69,7 +69,7 @@ const artists: Artist[] = [
     imageSrc: '/assets/images/photos/artists/Vivi/IMG_3149.png',
     imageFallback: '/images/placeholder.jpg',
     instagramHandle: '@vivi_medusa',
-    imagePosition: 'center', // Unified positioning via CSS
+    imagePosition: 'center 60%', // Moved further down to align with neon frame
   },
   {
     id: 'angie',

@@ -1,6 +1,6 @@
 /**
  * DESIGN TOKENS - MAIN EXPORT
- * 
+ *
  * Central export for all design tokens.
  * This file also provides a function to generate CSS variables.
  */
@@ -14,17 +14,17 @@ import breakpoints, { breakpointVariables } from './breakpoints';
 // Export all tokens from their respective files
 export { default as colors, type ColorPalette, type ColorToken } from './colors';
 export { default as spacing, type SpacingScale, type SpacingValue } from './spacing';
-export { 
-  fontFamilies, 
-  fontWeights, 
-  lineHeights, 
-  letterSpacing, 
-  fontSizes, 
+export {
+  fontFamilies,
+  fontWeights,
+  lineHeights,
+  letterSpacing,
+  fontSizes,
   type FontFamily,
   type FontWeight,
   type LineHeight,
   type LetterSpacing,
-  type FontSize
+  type FontSize,
 } from './typography';
 
 export { default as breakpoints, mediaQueries } from './breakpoints';

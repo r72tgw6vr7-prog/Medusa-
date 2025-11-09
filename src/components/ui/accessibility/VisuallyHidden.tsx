@@ -13,11 +13,11 @@ interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 /**
  * VisuallyHidden component that hides content visually but keeps it accessible to screen readers.
- * 
+ *
  * @example
  * // Basic usage
  * <VisuallyHidden>This text is only visible to screen readers</VisuallyHidden>
- * 
+ *
  * @example
  * // As a child element
  * <button>
@@ -28,7 +28,7 @@ interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElement> {
 const VisuallyHidden = React.forwardRef<HTMLSpanElement, VisuallyHiddenProps>(
   ({ className, children, asChild = false, focusable = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'span';
-    
+
     return (
       <Comp
         ref={ref}
@@ -49,14 +49,14 @@ const VisuallyHidden = React.forwardRef<HTMLSpanElement, VisuallyHiddenProps>(
             'bg-white': focusable,
             'shadow-md': focusable,
           },
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </Comp>
     );
-  }
+  },
 );
 
 VisuallyHidden.displayName = 'VisuallyHidden';

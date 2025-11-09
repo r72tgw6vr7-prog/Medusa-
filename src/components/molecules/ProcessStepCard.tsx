@@ -55,7 +55,9 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <div className='ml-8'>
         <div className='flex items-center mb-0'>
           <IconComponent size={32} className='text-[var(--brand-gold)] mr-0' />
-          <h3 className={`text-xl font-bold ${isActive ? 'text-[var(--brand-gold)]' : 'text-white'}`}>
+          <h3
+            className={`text-xl font-bold ${isActive ? 'text-[var(--brand-gold)]' : 'text-white'}`}
+          >
             {title}
           </h3>
         </div>

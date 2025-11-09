@@ -1,0 +1,72 @@
+.stickyTrustSignalsBar {
+  /* Fixed height & core styles */
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+  padding: 8px 20px !important;
+  background-color: var(--deep-black);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+
+  /* Sticky positioning */
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+.trustSignalsContainer {
+  /* Single row layout */
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  flex-wrap: nowrap !important;
+
+  /* Container styles */
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.trustSignalBadge {
+  /* Badge layout */
+  flex-shrink: 1 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  /* Badge styling */
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.2s ease;
+}
+
+.trustSignalIcon {
+  /* Icon sizing */
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--brand-gold);
+}
+
+.trustSignalNumber {
+  /* Number text */
+  font-size: 18px !important;
+  font-weight: 600;
+  color: var(--brand-gold);
+  line-height: 1;
+}
+
+.trustSignalLabel {
+  /* Label text */
+  font-size: 11px !important;
+  color: #fff;
+  opacity: 0.9;
+  line-height: 1;
+  white-space: nowrap;
+}

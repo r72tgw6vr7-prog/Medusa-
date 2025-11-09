@@ -1,6 +1,6 @@
 /**
  * Google Analytics 4 (GA4) Integration
- * 
+ *
  * Features:
  * - Environment-based configuration
  * - Event tracking for user interactions
@@ -30,29 +30,29 @@ export const GA_EVENTS = {
   BOOKING_ABANDONED: 'booking_abandoned',
   SERVICE_SELECTED: 'service_selected',
   ARTIST_SELECTED: 'artist_selected',
-  
-  // Gallery Events  
+
+  // Gallery Events
   GALLERY_VIEW: 'gallery_view',
   IMAGE_CLICKED: 'image_clicked',
   FILTER_APPLIED: 'filter_applied',
   LIGHTBOX_OPENED: 'lightbox_opened',
-  
+
   // Form Events
   CONTACT_FORM_SUBMITTED: 'contact_form_submitted',
   NEWSLETTER_SIGNUP: 'newsletter_signup',
   FORM_ERROR: 'form_error',
-  
+
   // Navigation Events
   PAGE_VIEW: 'page_view',
   EXTERNAL_LINK_CLICKED: 'external_link_clicked',
   PHONE_CLICKED: 'phone_clicked',
   EMAIL_CLICKED: 'email_clicked',
   SOCIAL_CLICKED: 'social_clicked',
-  
+
   // User Engagement
   SCROLL_DEPTH: 'scroll_depth',
   TIME_ON_PAGE: 'time_on_page',
-  CTA_CLICKED: 'cta_clicked'
+  CTA_CLICKED: 'cta_clicked',
 };
 
 class GoogleAnalytics {
@@ -63,7 +63,7 @@ class GoogleAnalytics {
   constructor() {
     this.measurementId = import.meta.env.VITE_GA4_MEASUREMENT_ID || null;
     this.debugMode = import.meta.env.VITE_APP_ENV === 'development';
-    
+
     if (this.measurementId) {
       this.initialize();
     } else {
@@ -76,7 +76,7 @@ class GoogleAnalytics {
    */
   private initialize(): void {
     if (typeof window === 'undefined' || this.isInitialized) return;
-    
+
     try {
       // Load gtag script
       const script = document.createElement('script');
@@ -86,7 +86,7 @@ class GoogleAnalytics {
 
       // Initialize gtag
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function() {
+      window.gtag = function () {
         window.dataLayer.push(arguments);
       };
 
@@ -96,17 +96,17 @@ class GoogleAnalytics {
         anonymize_ip: true,
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
-        
+
         // Debug mode for development
         debug_mode: this.debugMode,
-        
+
         // Custom configuration
         send_page_view: false, // We'll send manually for better control
         cookie_flags: 'SameSite=Strict;Secure',
       });
 
       this.isInitialized = true;
-      
+
       if (this.debugMode) {
         console.log('GA4: Initialized with ID:', this.measurementId);
       }
@@ -125,7 +125,7 @@ class GoogleAnalytics {
       window.gtag('event', 'page_view', {
         page_title: title || document.title,
         page_location: window.location.origin + path,
-        page_path: path
+        page_path: path,
       });
 
       if (this.debugMode) {
@@ -145,7 +145,7 @@ class GoogleAnalytics {
     try {
       window.gtag('event', eventName, {
         ...parameters,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
 
       if (this.debugMode) {
@@ -163,39 +163,39 @@ class GoogleAnalytics {
     started: (service?: string) => {
       this.event(GA_EVENTS.BOOKING_STARTED, {
         content_group1: 'booking',
-        service_type: service
+        service_type: service,
       });
     },
-    
+
     completed: (service: string, artist: string, value?: number) => {
       this.event(GA_EVENTS.BOOKING_COMPLETED, {
         content_group1: 'booking',
         service_type: service,
         artist_name: artist,
-        value: value
+        value: value,
       });
     },
-    
+
     abandoned: (step: string) => {
       this.event(GA_EVENTS.BOOKING_ABANDONED, {
         content_group1: 'booking',
-        abandonment_step: step
+        abandonment_step: step,
       });
     },
-    
+
     serviceSelected: (service: string) => {
       this.event(GA_EVENTS.SERVICE_SELECTED, {
         content_group1: 'booking',
-        service_type: service
+        service_type: service,
       });
     },
-    
+
     artistSelected: (artist: string) => {
       this.event(GA_EVENTS.ARTIST_SELECTED, {
         content_group1: 'booking',
-        artist_name: artist
+        artist_name: artist,
       });
-    }
+    },
   };
 
   /**
@@ -205,33 +205,33 @@ class GoogleAnalytics {
     view: (filterType?: string) => {
       this.event(GA_EVENTS.GALLERY_VIEW, {
         content_group1: 'gallery',
-        filter_type: filterType
+        filter_type: filterType,
       });
     },
-    
+
     imageClicked: (imageId: string, artist: string, style: string) => {
       this.event(GA_EVENTS.IMAGE_CLICKED, {
         content_group1: 'gallery',
         image_id: imageId,
         artist_name: artist,
-        tattoo_style: style
+        tattoo_style: style,
       });
     },
-    
+
     filterApplied: (filterType: string, filterValue: string) => {
       this.event(GA_EVENTS.FILTER_APPLIED, {
         content_group1: 'gallery',
         filter_type: filterType,
-        filter_value: filterValue
+        filter_value: filterValue,
       });
     },
-    
+
     lightboxOpened: (imageId: string) => {
       this.event(GA_EVENTS.LIGHTBOX_OPENED, {
         content_group1: 'gallery',
-        image_id: imageId
+        image_id: imageId,
       });
-    }
+    },
   };
 
   /**
@@ -242,25 +242,25 @@ class GoogleAnalytics {
       this.event(success ? GA_EVENTS.CONTACT_FORM_SUBMITTED : GA_EVENTS.FORM_ERROR, {
         content_group1: 'forms',
         form_type: formType,
-        success: success
+        success: success,
       });
     },
-    
+
     newsletter: (email: string) => {
       this.event(GA_EVENTS.NEWSLETTER_SIGNUP, {
         content_group1: 'engagement',
         // Don't send actual email for privacy
-        has_email: !!email
+        has_email: !!email,
       });
     },
-    
+
     error: (formType: string, errorType: string) => {
       this.event(GA_EVENTS.FORM_ERROR, {
         content_group1: 'forms',
         form_type: formType,
-        error_type: errorType
+        error_type: errorType,
       });
-    }
+    },
   };
 
   /**
@@ -271,46 +271,46 @@ class GoogleAnalytics {
       this.event(GA_EVENTS.EXTERNAL_LINK_CLICKED, {
         content_group1: 'navigation',
         link_url: url,
-        link_text: linkText
+        link_text: linkText,
       });
     },
-    
+
     phone: () => {
       this.event(GA_EVENTS.PHONE_CLICKED, {
-        content_group1: 'contact'
+        content_group1: 'contact',
       });
     },
-    
+
     email: () => {
       this.event(GA_EVENTS.EMAIL_CLICKED, {
-        content_group1: 'contact'
+        content_group1: 'contact',
       });
     },
-    
+
     social: (platform: string) => {
       this.event(GA_EVENTS.SOCIAL_CLICKED, {
         content_group1: 'social',
-        social_platform: platform
+        social_platform: platform,
       });
     },
-    
+
     cta: (ctaText: string, location: string) => {
       this.event(GA_EVENTS.CTA_CLICKED, {
         content_group1: 'engagement',
         cta_text: ctaText,
-        cta_location: location
+        cta_location: location,
       });
     },
-    
+
     scrollDepth: (percentage: number) => {
       // Only track meaningful milestones
       if ([25, 50, 75, 100].includes(percentage)) {
         this.event(GA_EVENTS.SCROLL_DEPTH, {
           content_group1: 'engagement',
-          scroll_percentage: percentage
+          scroll_percentage: percentage,
         });
       }
-    }
+    },
   };
 
   /**
@@ -323,14 +323,14 @@ class GoogleAnalytics {
       }
       return false;
     }
-    
+
     if (typeof window === 'undefined' || !window.gtag) {
       if (this.debugMode) {
         console.warn('GA4: gtag not available');
       }
       return false;
     }
-    
+
     return true;
   }
 
@@ -342,7 +342,7 @@ class GoogleAnalytics {
       measurementId: this.measurementId,
       isInitialized: this.isInitialized,
       debugMode: this.debugMode,
-      gtagAvailable: typeof window !== 'undefined' && !!window.gtag
+      gtagAvailable: typeof window !== 'undefined' && !!window.gtag,
     };
   }
 }

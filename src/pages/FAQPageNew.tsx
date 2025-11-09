@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
+import { PageHeader } from '../components/ui/PageHeader';
 
 const FAQ_SECTIONS = [
   {
@@ -101,13 +102,13 @@ export function FAQPageNew() {
         <section className='section-padding'>
           <div className='responsive-container safe-area-padding'>
             <div className='mx-auto w-full max-w-[1104px] space-y-16'>
-              {/* Unified heading section applied: matches ServicesPageInteractive styling */}
-              <div className='text-center'>
-                <h1 className='typo-h1 text-[var(--brand-gold)]'>Häufige Fragen (FAQ)</h1>
-                <p className='typo-subtitle text-[#C0C0C0]'>
-                  Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen.
-                </p>
-              </div>
+              {/* Page Header - Matches Services page exactly */}
+              <PageHeader
+                eyebrow='Medusa München'
+                title='Häufige Fragen (FAQ)'
+                subtitle='Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen.'
+                alignment='center'
+              />
 
               <div className='space-y-8'>
                 {FAQ_SECTIONS.map((section, idx) => {

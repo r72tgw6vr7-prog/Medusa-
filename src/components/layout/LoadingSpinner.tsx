@@ -28,25 +28,21 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   };
 
   return (
-    <div className={`flex justify-center items-center ${className}`} aria-label="Loading">
+    <div className={`flex justify-center items-center ${className}`} aria-label='Loading'>
       <svg
         className={`animate-spin ${sizeMap[size]}`}
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns='http://www.w3.org/2000/svg'
         width={sizePx[size]}
         height={sizePx[size]}
-        viewBox="0 0 24 24"
-        fill="none"
+        viewBox='0 0 24 24'
+        fill='none'
         stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       >
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" />
-        <path 
-          d="M12 2a10 10 0 0 1 10 10" 
-          stroke="currentColor"
-          strokeOpacity="0.75"
-        />
+        <circle cx='12' cy='12' r='10' stroke='currentColor' strokeOpacity='0.25' />
+        <path d='M12 2a10 10 0 0 1 10 10' stroke='currentColor' strokeOpacity='0.75' />
       </svg>
     </div>
   );
