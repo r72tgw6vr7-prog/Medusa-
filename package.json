@@ -1,7 +1,7 @@
 {
-  "name": "new-client-site",
+  "name": "medusa-tattoo",
   "version": "1.0.0",
-  "description": "React/TypeScript Website Template - Premium Client Site",
+  "description": "Medusa Tattoo München - Premium Tattoo Studio Website",
   "main": "src/index.tsx",
   "type": "module",
   "engines": {
@@ -71,14 +71,13 @@
     ]
   },
   "keywords": [
+    "tattoo",
+    "münchen",
     "website",
-    "template",
-    "react",
-    "typescript",
-    "tailwind",
-    "premium"
+    "luxury",
+    "react"
   ],
-  "author": "Web Developer Template",
+  "author": "Medusa Tattoo München",
   "license": "MIT",
   "dependencies": {
     "@emotion/babel-plugin": "^11.13.5",
