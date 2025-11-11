@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, FileText, Mail } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { PageHeader } from '@/components/atoms';
 
 interface DatenschutzPageProps {
   language?: 'DE' | 'EN';

@@ -290,7 +290,7 @@ export function ServiceHighlights({ onServiceClick }: ServiceHighlightsProps) {
                           className='w-full h-full'
                           style={{
                             backgroundImage: `
-                              radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 25% 25%, rgba(125, 49, 93, 0.1) 0%, transparent 50%),
                               radial-gradient(circle at 75% 75%, rgba(192, 192, 192, 0.05) 0%, transparent 50%)
                             `,
                           }}

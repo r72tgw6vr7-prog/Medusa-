@@ -1,3 +1,2 @@
-// Re-export Container from UI
-export { default as Container } from '../ui/Container';
-export type { ContainerProps } from '../ui/Container';
+// Re-export Container from local primitives
+export { Container } from './Container.primitives';

@@ -39,7 +39,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           left: '4px',
           width: '66px',
           height: '40px',
-          backgroundColor: 'var(--brand-gold)',
+          backgroundColor: 'var(--brand-primary)',
           borderRadius: '9999px',
           transform: isGerman ? 'translateX(0px)' : 'translateX(66px)',
           transition: 'transform 300ms ease-in-out',

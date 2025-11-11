@@ -12,7 +12,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookService: _onBo
   return (
     <div className='min-h-screen relative z-10'>
       <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
       <ServicesPageInteractive />
       <Footer />
     </div>

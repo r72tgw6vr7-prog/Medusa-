@@ -64,7 +64,7 @@ export const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
   const originalSrc = target.dataset.originalSrc || target.src;
 
   // Set placeholder image
-  target.src = '/images/placeholder.svg';
+  target.src = '/assets/images/icons/placeholder.svg';
 
   // Log the error for debugging
   console.warn('Image failed to load:', originalSrc);
@@ -75,7 +75,7 @@ export const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 
 export const safeImageSrc = (src?: string | null) => {
   if (!src || src === '' || src === 'undefined' || src === 'null') {
-    return '/images/placeholder.svg';
+    return '/assets/images/icons/placeholder.svg';
   }
   return src;
 };

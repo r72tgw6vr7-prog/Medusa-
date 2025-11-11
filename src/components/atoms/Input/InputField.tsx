@@ -32,7 +32,7 @@ export const InputField: React.FC<InputFieldProps> = ({
     border-2
     rounded-lg 
     overflow-hidden
-    ${error ? 'border-red-500' : 'border-[var(--brand-gold)] focus-within:border-[var(--brand-gold)]'}
+    ${error ? 'border-red-500' : 'border-[var(--brand-primary)] focus-within:border-[var(--brand-primary)]'}
   `;
 
   const inputStyles = `
@@ -58,7 +58,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className={containerStyles}>
       {label && (
-        <label className='text-[var(--brand-gold)] font-semibold text-sm md:text-base mb-8 block'>
+        <label className='text-[var(--brand-primary)] font-semibold text-sm md:text-base mb-8 block'>
           {label}
         </label>
       )}

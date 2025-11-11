@@ -49,7 +49,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         case 'bordered':
           return {
             backgroundColor: designTokens.colors.backgroundAlpha[85],
-            border: `1px solid ${designTokens.colors.goldAlpha[20]}`,
+            border: `1px solid ${designTokens.colors.magentaAlpha[20]}`,
             boxShadow: 'none',
           };
         case 'glass':
@@ -82,8 +82,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         backgroundRepeat: 'no-repeat',
       }),
       ...(selected && {
-        borderColor: designTokens.colors.gold.primary,
-        boxShadow: `0 0 0 2px ${designTokens.colors.gold.primary}`,
+        borderColor: designTokens.colors.magenta.primary,
+        boxShadow: `0 0 0 2px ${designTokens.colors.magenta.primary}`,
       }),
       ...(hover && {
         cursor: 'pointer',
@@ -136,7 +136,7 @@ export const CardHeader: React.FC<{
       {title && (
         <h3
           style={{
-            color: designTokens.colors.gold.primary,
+            color: designTokens.colors.magenta.primary,
             fontSize: '18px',
             fontWeight: designTokens.typography.fontWeight.semibold,
             margin: 0,
@@ -146,7 +146,7 @@ export const CardHeader: React.FC<{
         </h3>
       )}
       {subtitle && (
-        <p style={{ color: designTokens.colors.chrome, fontSize: '14px', margin: '4px 0 0 0' }}>
+        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px', margin: '4px 0 0 0' }}>
           {subtitle}
         </p>
       )}

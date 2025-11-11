@@ -41,12 +41,12 @@ export interface EmailResponse {
 const EMAIL_TEMPLATES: Record<string, Record<'DE' | 'EN', EmailTemplate>> = {
   'booking-confirmation': {
     DE: {
-      subject: 'Buchungsbestätigung - Medusa Tattoo München',
+      subject: 'Booking Confirmation - Your Business Name',
       html: generateBookingConfirmationHTML('DE'),
       text: generateBookingConfirmationText('DE'),
     },
     EN: {
-      subject: 'Booking Confirmation - Medusa Tattoo Munich',
+      subject: 'Booking Confirmation - Your Business Name',
       html: generateBookingConfirmationHTML('EN'),
       text: generateBookingConfirmationText('EN'),
     },
@@ -77,12 +77,12 @@ const EMAIL_TEMPLATES: Record<string, Record<'DE' | 'EN', EmailTemplate>> = {
   },
   'payment-confirmation': {
     DE: {
-      subject: 'Zahlungsbestätigung - Medusa Tattoo München',
+      subject: 'Payment Confirmation - Your Business Name',
       html: generatePaymentConfirmationHTML('DE'),
       text: generatePaymentConfirmationText('DE'),
     },
     EN: {
-      subject: 'Payment Confirmation - Medusa Tattoo Munich',
+      subject: 'Payment Confirmation - Your Business Name',
       html: generatePaymentConfirmationHTML('EN'),
       text: generatePaymentConfirmationText('EN'),
     },
@@ -356,7 +356,7 @@ function generateBookingConfirmationHTML(language: 'DE' | 'EN'): string {
       <body>
         <div class="container">
           <div class="header">
-            <h1>🐍 Medusa Tattoo München</h1>
+            <h1>Your Business Name</h1>
             <p>${language === 'DE' ? 'Buchungsbestätigung' : 'Booking Confirmation'}</p>
           </div>
           <div class="content">
@@ -393,8 +393,8 @@ function generateBookingConfirmationHTML(language: 'DE' | 'EN'): string {
 
 function generateBookingConfirmationText(language: 'DE' | 'EN'): string {
   return language === 'DE'
-    ? `Buchungsbestätigung - Medusa Tattoo München\n\nLiebe/r {{customerName}},\n\nVielen Dank für Ihre Buchungsanfrage!\n\nBuchungs-ID: {{bookingId}}\nKünstler: {{artistName}}\nService: {{serviceName}}\nGewünschter Termin: {{preferredDate}} um {{preferredTime}}\n\nWir werden uns innerhalb von 24 Stunden bei Ihnen melden.`
-    : `Booking Confirmation - Medusa Tattoo Munich\n\nDear {{customerName}},\n\nThank you for your booking request!\n\nBooking ID: {{bookingId}}\nArtist: {{artistName}}\nService: {{serviceName}}\nPreferred Date: {{preferredDate}} at {{preferredTime}}\n\nWe will contact you within 24 hours.`;
+    ? `Booking Confirmation - Your Business Name\n\nDear {{customerName}},\n\nThank you for your booking request!\n\nBooking ID: {{bookingId}}\nService Provider: {{artistName}}\nService: {{serviceName}}\nPreferred Date: {{preferredDate}} at {{preferredTime}}\n\nWe will contact you within 24 hours.`
+    : `Booking Confirmation - Your Business Name\n\nDear {{customerName}},\n\nThank you for your booking request!\n\nBooking ID: {{bookingId}}\nService Provider: {{artistName}}\nService: {{serviceName}}\nPreferred Date: {{preferredDate}} at {{preferredTime}}\n\nWe will contact you within 24 hours.`;
 }
 
 function generateBookingNotificationHTML(language: 'DE' | 'EN'): string {

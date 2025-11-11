@@ -27,14 +27,14 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   className = '',
 }) => {
   const baseClasses =
-    'flex flex-col items-center bg-[#0A0A0AB0] w-[400px] pt-[41px] pb-[55px] rounded-2xl border border-solid border-[var(--brand-gold)]';
+    'flex flex-col items-center bg-[#0A0A0AB0] w-[400px] pt-[41px] pb-[55px] rounded-2xl border border-solid border-[var(--brand-primary)]';
   const highlightedClasses = highlighted ? 'bg-[#0A0A0ACC] border-2' : '';
-  const shadowClasses = highlighted ? 'shadow-[0px_0px_20px_var(--brand-gold)26]' : '';
+  const shadowClasses = highlighted ? 'shadow-[0px_0px_20px_var(--brand-primary)26]' : '';
 
   return (
     <div className={`${baseClasses} ${highlightedClasses} ${shadowClasses} ${className}`}>
       <img src={iconUrl} alt={title} className='w-12 h-12 mb-8 rounded-2xl object-fill' />
-      <span className='text-[var(--brand-gold)] text-[31px] font-bold text-center mb-8'>
+      <span className='text-[var(--brand-primary)] text-[31px] font-bold text-center mb-8'>
         {title}
       </span>
       <span className='text-white text-base text-center mb-8'>{description}</span>

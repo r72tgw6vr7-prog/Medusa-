@@ -26,12 +26,12 @@
 .team-card-button-primary {
   background-color: transparent;
   color: var(--brand-white);
-  border: 2px solid var(--color-brand-gold);
+  border: 2px solid var(--brand-primary);
 }
 
 .team-card-button-primary:hover {
-  background-color: rgba(var(--color-brand-gold-rgb), 0.1);
-  border-color: var(--color-brand-gold-dark);
+  background-color: rgba(var(--brand-magenta-rgb), 0.1);
+  border-color: var(--brand-magenta-dark);
 }
 
 /* Service grid */
@@ -66,6 +66,6 @@
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-brand-gold);
+  outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
 }

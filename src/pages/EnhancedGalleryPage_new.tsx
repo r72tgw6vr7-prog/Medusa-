@@ -375,7 +375,7 @@ export const EnhancedGalleryPage: React.FC = () => {
               <div className='flex flex-wrap gap-0'>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-0 bg-[var(--brand-gold)]/10 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] font-medium transition-all duration-300 rounded-lg hover:bg-[var(--brand-gold)]/20'
+                  className='px-8 py-0 bg-[var(--brand-primary)]/10 border-2 border-[var(--brand-primary)] text-[var(--brand-primary)] font-medium transition-all duration-300 rounded-lg hover:bg-[var(--brand-primary)]/20'
                 >
                   {t('gallery.filters.allWorks')}
                 </button>
@@ -389,14 +389,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterArtist !== allArtistsLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-hover)]/30'
                     }`}
                   >
                     {filterArtist}
                   </button>
                   {showArtistDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[200px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-[100] min-w-[200px]'>
                       {i18nUniqueArtists.map((artist) => (
                         <button
                           key={artist}
@@ -404,7 +404,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterArtist(artist);
                             setShowArtistDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {artist}
                         </button>
@@ -422,14 +422,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterStyle !== allStylesLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-hover)]/30'
                     }`}
                   >
                     {filterStyle}
                   </button>
                   {showStyleDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto'>
+                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-[100] min-w-[200px] max-h-[400px] overflow-y-auto'>
                       {i18nUniqueStyles.map((style) => (
                         <button
                           key={style}
@@ -437,7 +437,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterStyle(style);
                             setShowStyleDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {style}
                         </button>
@@ -455,14 +455,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-6 py-3 font-medium transition-all duration-300 rounded-lg ${
                       filterYear !== allYearsLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold-hover)]/30'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-hover)]/30'
                     }`}
                   >
                     {filterYear}
                   </button>
                   {showYearDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-[100] min-w-[150px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[var(--deep-black)] border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-[100] min-w-[150px]'>
                       {i18nUniqueYears.map((year) => (
                         <button
                           key={year}
@@ -470,7 +470,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterYear(year);
                             setShowYearDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {year}
                         </button>
@@ -499,7 +499,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 <p className='text-xl text-[#C0C0C0] mb-8'>{t('gallery.noResults')}</p>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out'
+                  className='px-8 py-8 bg-[var(--brand-primary)] text-[#1A1A1A] font-medium hover:bg-[var(--brand-hover)] transition-colors rounded-lg transition duration-200 ease-out'
                 >
                   {t('gallery.filters.reset')}
                 </button>
@@ -526,10 +526,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       />
                       <div className='gallery-overlay'>
                         <h3 className='text-white font-bold text-lg'>{item.title}</h3>
-                        <p className='text-[var(--brand-gold)] font-medium'>{item.artist}</p>
+                        <p className='text-[var(--brand-primary)] font-medium'>{item.artist}</p>
                         <p className='text-white/70 text-sm'>{item.style}</p>
                         {item.featured && (
-                          <span className='inline-block mt-0 px-0 py-0 rounded-full bg-[var(--brand-gold)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
+                          <span className='inline-block mt-0 px-0 py-0 rounded-full bg-[var(--brand-primary)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
                             Featured
                           </span>
                         )}
@@ -548,7 +548,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <button
                       ref={loadMoreRef}
                       onClick={() => setShowAllPhotos(true)}
-                      className='group inline-flex items-center gap-0 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out'
+                      className='group inline-flex items-center gap-0 px-8 py-8 bg-[var(--brand-primary)] text-[var(--deep-black)] font-medium hover:bg-[var(--brand-hover)] transition-colors rounded-lg transition duration-200 ease-out'
                     >
                       <span>{t('gallery.filters.more')}</span>
                       <ChevronRight
@@ -622,7 +622,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                   <div className='space-y-8'>
                     <div>
                       <h2 className='text-2xl font-bold text-white mb-0'>{selectedImage.title}</h2>
-                      <p className='text-[var(--brand-gold)] text-lg font-medium'>
+                      <p className='text-[var(--brand-primary)] text-lg font-medium'>
                         {selectedImage.artist}
                       </p>
                     </div>
@@ -630,7 +630,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <div className='space-y-8'>
                       <div className='flex items-center gap-0'>
                         <span className='text-white/60 text-sm'>Stil:</span>
-                        <span className='px-0 py-0 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 text-[var(--brand-gold)] text-sm flex flex-col h-full'>
+                        <span className='px-0 py-0 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-sm flex flex-col h-full'>
                           {selectedImage.style}
                         </span>
                       </div>
@@ -645,7 +645,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                       </div>
                       {selectedImage.featured && (
                         <div className='flex items-center gap-0'>
-                          <span className='px-0 py-0 rounded-full bg-[var(--brand-gold)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
+                          <span className='px-0 py-0 rounded-full bg-[var(--brand-primary)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
                             Featured Work
                           </span>
                         </div>
@@ -655,7 +655,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <div className='pt-8 border-t border-white/10 flex flex-col h-full'>
                       <button
                         onClick={() => (window.location.href = '/booking')}
-                        className='w-full py-8 px-8 rounded-lg bg-[var(--brand-gold)] text-[var(--deep-black)] hover:bg-[var(--brand-gold)]/90 transition-colors font-bold text-lg shadow-lg shadow-[var(--brand-gold)]/20 flex flex-col h-full transition duration-200 ease-out'
+                        className='w-full py-8 px-8 rounded-lg bg-[var(--brand-primary)] text-[var(--deep-black)] hover:bg-[var(--brand-primary)]/90 transition-colors font-bold text-lg shadow-lg shadow-[var(--brand-primary)]/20 flex flex-col h-full transition duration-200 ease-out'
                       >
                         Termin buchen
                       </button>

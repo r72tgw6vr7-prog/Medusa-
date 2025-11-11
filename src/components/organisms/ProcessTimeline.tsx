@@ -4,7 +4,7 @@ import type { LucideProps } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Palette, Zap, Heart, CheckCircle, Sparkles } from 'lucide-react';
 const backgroundImage = '/assets/images/photos/backgrounds/process-timeline-bg.webp';
-import { useMedusaDesignSystem } from '../../../src/foundation/SimpleMedusaProvider';
+import { useBusinessDesignSystem } from '../../foundation';
 import { ProcessStepCard } from '../molecules/ProcessStepCard';
 
 interface TimelineStep {
@@ -27,7 +27,7 @@ interface TimelineStep {
 interface ProcessTimelineProps {}
 
 export function ProcessTimeline({}: ProcessTimelineProps) {
-  const { language } = useMedusaDesignSystem();
+  const { language } = useBusinessDesignSystem();
   const [isVisible, setIsVisible] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -280,7 +280,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
         >
           <motion.div
             className='inline-flex items-center space-x-0 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-brand-gold/20 border-2 border-brand-gold/40 px-8 py-8 rounded-2xl shadow-gold-glow-subtle'
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(212, 175, 55, 0.4)' }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(125, 49, 93, 0.4)' }}
             transition={{ duration: 0.3 }}
           >
             <CheckCircle size={24} className='text-brand-gold' />

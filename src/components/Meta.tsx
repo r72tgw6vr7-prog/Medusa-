@@ -106,7 +106,7 @@ export default function Meta({
 
     // Additional structured markup
     upsertMetaTag('name', 'application-name', 'Medusa Tattoo München');
-    upsertMetaTag('name', 'theme-color', '#d4af37'); // Gold theme
+    upsertMetaTag('name', 'theme-color', '#7d315d'); // Magenta theme
   }, [
     title,
     description,

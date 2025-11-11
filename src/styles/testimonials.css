@@ -16,7 +16,7 @@
 }
 
 .testimonials-swiper .swiper-pagination-bullet-active {
-  background: var(--color-brand-gold) !important;
+  background: var(--brand-primary) !important;
   width: 32px !important;
   border-radius: 6px !important;
 }

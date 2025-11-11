@@ -31,7 +31,7 @@ export const InputField: React.FC<InputFieldProps> = ({
     bg-[var(--deep-black)] 
     border border-solid 
     rounded-lg 
-    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[var(--brand-gold)]'}
+    ${error ? 'border-red-500' : 'border-[#C0BFBF33] focus-within:border-[var(--brand-primary)]'}
   `;
 
   const inputStyles = `

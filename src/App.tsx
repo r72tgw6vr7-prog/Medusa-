@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from '@/components/organisms/ServicesPage';
 import { ArtistsPage } from './pages/ArtistsPage';
-import { AftercarePage } from './pages/AftercarePage';
+// import { AftercarePage } from './pages/AftercarePage';
 import React, { Suspense, lazy } from 'react';
 // UniversalTextureBackground moved to main.tsx
-const EnhancedGalleryPage = lazy(() => import('./pages/EnhancedGalleryPage'));
+const InkedGalleryPage = lazy(() => import('./pages/InkedGalleryPage'));
 const BookingPage = lazy(() => import('./pages/BookingPage'));
 import { LegalPage } from './pages/LegalPage';
 import { ImpressumPage } from './pages/ImpressumPage';
@@ -19,15 +19,17 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
 import Meta from '@/components/Meta';
 // Fix import path to match actual directory structure
-import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
+import { BusinessProvider } from './foundation/BusinessProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
+import { ROUTES } from '../core/types/routes';
+import ROUTE_CONFIG from '../core/constants/routes';
 
 function App() {
   // Texture background is now handled in main.tsx
 
   return (
-    <SimpleMedusaProvider>
+    <BusinessProvider>
       <AppProvider initialLanguage='DE'>
         <LanguageProvider>
           <BrowserRouter>
@@ -40,15 +42,15 @@ function App() {
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
                     {/* Main Routes */}
-                    <Route path='/' element={<HomePage />} />
+                    <Route path={ROUTE_CONFIG[ROUTES.HOME].path} element={<HomePage />} />
                     <Route
-                      path='/services'
+                      path={ROUTE_CONFIG[ROUTES.SERVICES].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | Services'
                             description='Premium Tattoo- und Piercing-Services in München. Transparente Preise, Beratung und höchste Hygiene.'
-                            canonicalPath='/services'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.SERVICES].path}
                           />
                           <ServicesPage />
                         </>
@@ -56,39 +58,39 @@ function App() {
                     />
                     <Route path='/services-test' element={<ServicesTestPage />} />
                     <Route
-                      path='/artists'
+                      path={ROUTE_CONFIG[ROUTES.ARTISTS].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | Artists'
                             description='Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Termine und Portfolios.'
-                            canonicalPath='/artists'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.ARTISTS].path}
                           />
                           <ArtistsPage />
                         </>
                       }
                     />
                     <Route
-                      path='/gallery'
+                      path={ROUTE_CONFIG[ROUTES.GALLERY].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | Gallery'
                             description='Entdecken Sie unsere Galerie: Realismus, Fine-Line, Blackwork und mehr. Aktuelle Arbeiten aus München.'
-                            canonicalPath='/gallery'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.GALLERY].path}
                           />
                           <Suspense fallback={<div>Loading Gallery...</div>}>
-                            <EnhancedGalleryPage />
+                            <InkedGalleryPage />
                           </Suspense>
                         </>
                       }
                     />
 
                     {/* 301 Redirect from old pricing page to services */}
-                    <Route path='/pricing' element={<Navigate to='/services' replace />} />
-                    <Route path='/preise' element={<Navigate to='/services' replace />} />
+                    <Route path='/pricing' element={<Navigate to={ROUTE_CONFIG[ROUTES.SERVICES].path} replace />} />
+                    <Route path='/preise' element={<Navigate to={ROUTE_CONFIG[ROUTES.SERVICES].path} replace />} />
 
-                    <Route path='/aftercare' element={<AftercarePage />} />
+                    {/* <Route path='/aftercare' element={<AftercarePage />} /> */}
                     <Route
                       path='/agb'
                       element={
@@ -103,13 +105,13 @@ function App() {
                       }
                     />
                     <Route
-                      path='/booking'
+                      path={ROUTE_CONFIG[ROUTES.BOOKING].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | Booking'
                             description='Jetzt Termin bei Medusa Tattoo München buchen – schnelle Anfrage, zuverlässige Rückmeldung.'
-                            canonicalPath='/booking'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.BOOKING].path}
                           />
                           <Suspense fallback={<div>Loading Booking...</div>}>
                             <BookingPage />
@@ -117,30 +119,30 @@ function App() {
                         </>
                       }
                     />
-                    <Route path='/legal' element={<LegalPage />} />
-                    <Route path='/impressum' element={<ImpressumPage />} />
-                    <Route path='/datenschutz' element={<DatenschutzPage />} />
+                    <Route path={ROUTE_CONFIG[ROUTES.LEGAL].path} element={<LegalPage />} />
+                    <Route path={ROUTE_CONFIG[ROUTES.IMPRESSUM].path} element={<ImpressumPage />} />
+                    <Route path={ROUTE_CONFIG[ROUTES.DATENSCHUTZ].path} element={<DatenschutzPage />} />
                     <Route
-                      path='/faq'
+                      path={ROUTE_CONFIG[ROUTES.FAQ].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | FAQ'
                             description='Antworten zu Termin, Pflege, Preisen und Hygiene bei Medusa Tattoo München.'
-                            canonicalPath='/faq'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.FAQ].path}
                           />
                           <FAQPage />
                         </>
                       }
                     />
                     <Route
-                      path='/contact'
+                      path={ROUTE_CONFIG[ROUTES.CONTACT].path}
                       element={
                         <>
                           <Meta
                             title='Medusa Tattoo München | Kontakt'
                             description='Kontakt zu Medusa Tattoo München: Adresse, Telefon, E-Mail und Öffnungszeiten.'
-                            canonicalPath='/contact'
+                            canonicalPath={ROUTE_CONFIG[ROUTES.CONTACT].path}
                           />
                           <ContactPage />
                         </>
@@ -157,7 +159,7 @@ function App() {
           </BrowserRouter>
         </LanguageProvider>
       </AppProvider>
-    </SimpleMedusaProvider>
+    </BusinessProvider>
   );
 }
 

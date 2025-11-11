@@ -1,6 +1,5 @@
 import React from 'react';
-import Section from '../../ui/Section';
-import { Button } from '../../ui/button';
+import { Section, Button } from '@/components/atoms';
 
 interface ServiceCard {
   id: string;
@@ -60,13 +59,13 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
   };
 
   return (
-    <Section bg='none' className='bg-texture'>
+    <Section background='transparent' className='bg-texture'>
       {/* Header */}
       <div className='text-center space-y-8 mb-16'>
         <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
           Unser Angebot
         </p>
-        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-primary)]'>
           Alle Services Entdecken
         </h2>
         <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
@@ -78,7 +77,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
       <div className='service-card-grid grid grid-cols-1 md:grid-cols-2 gap-8'>
         {services.map((service) => {
           const baseClasses =
-            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow-strong border border-(--brand-gold)/20 hover:border-(--brand-gold)/60 flex flex-col h-full';
+            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow-strong border border-[var(--brand-primary)]/20 hover:border-[var(--brand-primary)]/60 flex flex-col h-full';
           return (
             <article
               key={service.id}
@@ -100,7 +99,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                   style={{
                     backgroundColor:
                       service.id === 'tattoo'
-                        ? 'rgba(var(--color-brand-gold-rgb), 0.15)'
+                        ? 'rgba(var(--brand-magenta-rgb), 0.15)'
                         : 'rgba(var(--color-accent-silver-rgb), 0.15)',
                   }}
                 />
@@ -128,7 +127,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     <span
                       className="font-['Playfair_Display'] text-lg"
                       style={{
-                        color: 'var(--brand-gold)',
+                        color: 'var(--brand-primary)',
                         opacity: 0.9,
                       }}
                     >

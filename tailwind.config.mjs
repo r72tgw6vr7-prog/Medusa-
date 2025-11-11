@@ -130,44 +130,23 @@ export default {
     'h-button-lg',
   ],
   theme: {
+    screens: {
+      sm: '640px', // mobile
+      md: '768px', // tablet
+      lg: '1024px', // desktop
+      xl: '1280px', // wide
+    },
     extend: {
-      // Import all colors from Figma
       colors: {
-        ...extractColors(tokens.color['www.figma.com']),
-        // Brand colors using CSS variables - the SINGLE SOURCE OF TRUTH
-        'brand-background': 'var(--deep-black)', // #222222
-        'brand-white': 'var(--base-white)', // #FFFFFF
-        'brand-gold': 'var(--brand-gold)', // #D4AF37
-        'brand-chrome': 'var(--chrome-silver)', // #C0C0C0
-        'brand-gold-hover': 'var(--brand-gold-hover)', // #C19B26
-        'brand-gold-30': 'rgba(212, 175, 55, 0.3)',
-        'brand-chrome-30': 'rgba(192, 192, 192, 0.3)',
-        'brand-gold-10': 'rgba(212, 175, 55, 0.1)',
-        'brand-gold-20': 'rgba(212, 175, 55, 0.2)',
-        'brand-gold-40': 'rgba(212, 175, 55, 0.4)',
-        'brand-chrome-10': 'rgba(192, 192, 192, 0.1)',
-        'brand-chrome-20': 'rgba(192, 192, 192, 0.2)',
-        // Semantic brand colors
-        'antique-gold': 'var(--brand-gold)', // #D4AF37
-        'deep-black': 'var(--deep-black)', // #222222
-        'base-white': 'var(--base-white)', // #FFFFFF
-        'antique-gold-hover': 'var(--brand-gold-hover)', // #C19B26
-        // Text colors
-        'text-primary': 'var(--base-white)', // #FFFFFF
-        'text-secondary': 'rgba(255, 255, 255, 0.8)',
-        'text-tertiary': 'rgba(255, 255, 255, 0.6)',
-        // Accent colors
-        'accent-primary': 'var(--brand-gold)', // #D4AF37
-        'accent-hover': 'var(--brand-gold-hover)', // #C19B26
-        'accent-active': '#A8821A',
-        // Chrome colors
-        'chrome-primary': 'var(--chrome-silver)', // #C0C0C0
-        'chrome-hover': '#A8A8A8',
-        // Border colors
-        'border-default': 'rgba(192, 192, 192, 0.15)',
-        'border-hover': 'rgba(212, 175, 55, 0.4)',
-        'border-focus': 'var(--brand-gold)', // #D4AF37
-        'border-navigation': 'rgba(212, 175, 55, 0.1)',
+        brand: {
+          DEFAULT: '#7d315d',
+          primary: '#7d315d',
+          magenta: '#7d315d',
+          hover: '#6b2953',
+          dark: '#5a2446',
+        },
+        background: '#000000',
+        white: '#FFFFFF',
       },
       
       // Background overlay tokens for universal texture system
@@ -186,10 +165,10 @@ export default {
         'dropdown': '200px',  // For dropdown menus
         'dropdown-sm': '150px', // For smaller dropdown menus
         'dropdown-lg': '250px', // For larger dropdown menus
-        'container': '1140px',  // Standard container
-        'container-sm': '768px', // Small container
-        'container-lg': '1320px', // Large container
-        'container-xl': '1433px', // Extra large container (matches Figma)
+        'container': '1440px',  // Standard container (matches --container-default)
+        'container-sm': '768px', // Small container (tablet breakpoint)
+        'container-lg': '1440px', // Large container (same as default)
+        'container-narrow': '1024px', // Narrow container (matches --container-narrow)
         'modal': '640px',      // Standard modal width
         'modal-lg': '768px',   // Large modal
         'card': '280px',       // Standard card width
@@ -237,21 +216,21 @@ export default {
       
       // Custom box shadows
       boxShadow: {
-        // Brand glows
-        'gold-glow-subtle': '0 0 10px rgba(212, 175, 55, 0.2)',
-        'gold-glow': '0 0 20px rgba(212, 175, 55, 0.3)',
-        'gold-glow-strong': '0 0 30px rgba(212, 175, 55, 0.4)',
-        'gold-glow-medium': '0 4px 20px rgba(212, 175, 55, 0.3)',
+        // Brand glows - updated to magenta
+        'gold-glow-subtle': '0 0 10px rgba(125, 49, 93, 0.2)',
+        'gold-glow': '0 0 20px rgba(125, 49, 93, 0.3)',
+        'gold-glow-strong': '0 0 30px rgba(125, 49, 93, 0.4)',
+        'gold-glow-medium': '0 4px 20px rgba(125, 49, 93, 0.3)',
         'chrome-glow': '0 0 15px rgba(192, 192, 192, 0.3)',
         // Utility shadows
         'sm': '0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08)',
         'md': '0 4px 6px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08)',
         'lg': '0 10px 15px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.08)',
         'xl': '0 20px 25px rgba(0, 0, 0, 0.12), 0 10px 10px rgba(0, 0, 0, 0.08)',
-        'gold': '0 4px 12px rgba(212, 175, 55, 0.3)',
-        'gold-hover': '0 6px 16px rgba(212, 175, 55, 0.4)',
-        'gold-active': '0 2px 8px rgba(212, 175, 55, 0.5)',
-        'focus-ring': '0 0 0 3px rgba(212, 175, 55, 0.4)',
+        'gold': '0 4px 12px rgba(78, 42, 63, 0.3)',
+        'gold-hover': '0 6px 16px rgba(78, 42, 63, 0.4)',
+        'gold-active': '0 2px 8px rgba(78, 42, 63, 0.5)',
+        'focus-ring': '0 0 0 3px rgba(78, 42, 63, 0.4)',
       },
       
       // Border radius values

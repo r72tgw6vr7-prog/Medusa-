@@ -126,7 +126,7 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
       {(title || artist) && (
         <div className='absolute bottom-0 inset-x-0 bg-linear-to-t from-black to-transparent p-8'>
           {title && <h3 className='text-white text-lg font-bold'>{title}</h3>}
-          {artist && <p className='text-[var(--brand-gold)] text-sm'>{artist}</p>}
+          {artist && <p className='text-[var(--brand-primary)] text-sm'>{artist}</p>}
         </div>
       )}
     </button>

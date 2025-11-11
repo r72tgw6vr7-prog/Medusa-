@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Check, Pen, Zap, MessageCircle } from 'lucide-react';
-import Section from './ui/Section';
+import { Section } from '@/components/atoms';
 
 // Define the data structure for price items
 interface PriceItem {
@@ -23,7 +23,7 @@ interface PricingCard {
 // Array of pricing data
 const pricingData: PricingCard[] = [
   {
-    icon: <Pen className='h-12 w-12 text-[var(--brand-gold)]' />,
+    icon: <Pen className='h-12 w-12 text-[var(--brand-primary)]' />,
     title: 'Custom\nTattoo Designs',
     description:
       'Individuelle Kunstwerke ab 150€/Stunde. Kostenlose Erstberatung und Design-Entwicklung.',
@@ -36,7 +36,7 @@ const pricingData: PricingCard[] = [
     ctaVariant: 'link',
   },
   {
-    icon: <Zap className='h-12 w-12 text-[var(--brand-gold)]' />,
+    icon: <Zap className='h-12 w-12 text-[var(--brand-primary)]' />,
     title: 'Professionelle\nPiercings',
     description:
       'Sterile Behandlung ab 45€ inkl. Premium-Grundschmuck. Titan-Erstschmuck und Nachkontrolle inklusive.',
@@ -45,7 +45,7 @@ const pricingData: PricingCard[] = [
     ctaVariant: 'link',
   },
   {
-    icon: <MessageCircle className='h-12 w-12 text-[var(--brand-gold)]' />,
+    icon: <MessageCircle className='h-12 w-12 text-[var(--brand-primary)]' />,
     title: 'Kostenlose\nBeratung',
     description: 'Design-Beratung kostenfrei. KI-Vorschau inklusive. Vor-Ort oder WhatsApp.',
     ctaText: 'Jetzt beraten lassen',
@@ -58,7 +58,6 @@ export const PricingSection: React.FC = () => {
   return (
     <Section
       className='py-16 lg:py-24 relative z-10'
-      containerSize='default'
       aria-labelledby='pricing-section-title'
       id='pricing-section'
     >
@@ -66,7 +65,7 @@ export const PricingSection: React.FC = () => {
       <div className='text-center space-y-8 mb-16'>
         <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>Preise</p>
         <h2
-          className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'
+          className='font-headline text-3xl md:text-4xl text-[var(--brand-primary)]'
           id='pricing-section-title'
         >
           Services mit transparenten Preisen
@@ -82,7 +81,7 @@ export const PricingSection: React.FC = () => {
         {pricingData.map((card, index) => (
           <article
             key={index}
-            className='pricing-card group relative flex h-full flex-col rounded-3xl border border-[var(--brand-gold)]/40 bg-[#101010] p-8 shadow-[0_0_24px_rgba(0,0,0,0.3)] transition-shadow duration-300 hover:border-[var(--brand-gold)] hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]'
+            className='pricing-card group relative flex h-full flex-col rounded-3xl border border-[var(--brand-primary)]/40 bg-[var(--color-surface-dark)] p-8 shadow-lg transition-shadow duration-300 hover:border-[var(--brand-primary)] hover:shadow-gold-glow-strong'
             data-card-type={card.title.toLowerCase().replace(/\s+/g, '-')}
           >
             {/* Free badge for the last card */}
@@ -94,7 +93,7 @@ export const PricingSection: React.FC = () => {
 
             {/* Icon in circular container */}
             <div className='mb-8 flex justify-center'>
-              <div className='flex h-20 w-20 items-center justify-center rounded-full border border-[var(--brand-gold)]/70 bg-[#151515] flex-col h-full'>
+              <div className='flex h-20 w-20 items-center justify-center rounded-full border border-[var(--brand-primary)]/70 bg-[var(--color-surface-medium)] flex-col h-full'>
                 <div className='pricing-card-icon transition-transform duration-500 group-hover:rotate-360'>
                   {card.icon}
                 </div>
@@ -103,7 +102,7 @@ export const PricingSection: React.FC = () => {
 
             {/* Title section */}
             <div className='mb-8 text-center'>
-              <h3 className='whitespace-pre-line font-playfair text-2xl font-semibold text-[var(--brand-gold)] md:text-3xl'>
+              <h3 className='whitespace-pre-line font-playfair text-2xl font-semibold text-[var(--brand-primary)] md:text-3xl'>
                 {card.title}
               </h3>
             </div>

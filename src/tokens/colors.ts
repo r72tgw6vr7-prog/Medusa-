@@ -10,10 +10,10 @@ const colors = {
   // Brand colors
   brand: {
     gold: {
-      DEFAULT: 'var(--color-brand-gold, #D4AF37)',
-      hover: 'var(--color-brand-gold-hover, #E5C15A)', // 10% lighter
-      active: 'var(--color-brand-gold-active, #C29B2E)', // 10% darker
-      subtle: 'var(--color-brand-gold-subtle, rgba(212, 175, 55, 0.1))',
+      DEFAULT: 'var(--color-brand-gold, #7d315d)',
+      hover: 'var(--color-brand-gold-hover, #9d4675)', // 10% lighter
+      active: 'var(--color-brand-gold-active, #6d2345)', // 10% darker
+      subtle: 'var(--color-brand-gold-subtle, rgba(125, 49, 93, 0.1))',
     },
     charcoal: {
       DEFAULT: 'var(--color-brand-charcoal, #222222)',

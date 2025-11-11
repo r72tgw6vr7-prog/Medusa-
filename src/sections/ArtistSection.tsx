@@ -35,7 +35,7 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
       <div className='flex flex-col items-start w-full max-w-[1064px] mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center self-stretch mb-0'>
-          <span className='text-[#D4AF37] text-[42px] font-bold'>{title}</span>
+          <span className='text-[#7d315d] text-[42px] font-bold'>{title}</span>
         </div>
 
         {/* Divider */}
@@ -43,7 +43,7 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
           <div
             className='w-[351px] h-[3px]'
             style={{
-              background: 'linear-gradient(180deg, #00000000, #D4AF37, #00000000)',
+              background: 'linear-gradient(180deg, #00000000, #7d315d, #00000000)',
             }}
           />
         </div>

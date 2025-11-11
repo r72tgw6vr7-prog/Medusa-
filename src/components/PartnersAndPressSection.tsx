@@ -33,7 +33,7 @@ const PartnersAndPressSection: React.FC = () => {
       <div className='max-w-[1104px] mx-auto px-8 md:px-8'>
         {/* Heading */}
         <div className='text-center mb-8'>
-          <h2 className="font-['Inter'] text-sm font-normal leading-snug tracking-widest uppercase text-[var(--brand-gold)] mb-0">
+          <h2 className="font-['Inter'] text-sm font-normal leading-snug tracking-widest uppercase text-[var(--brand-primary)] mb-0">
             Unsere Partner & Presse
           </h2>
           <p className="font-['Inter'] text-xs font-light leading-relaxed text-white/70">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { PageBackground } from '../components/atoms/PageBackground';
-import { PageHeader } from '../components/ui/PageHeader';
+import { PageHeader } from '@/components/atoms';
 
 export const LegalPage: React.FC = () => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -441,7 +441,7 @@ export const LegalPage: React.FC = () => {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className='fixed bottom-8 right-8 bg-[var(--brand-gold)] text-black p-8 rounded-xl shadow-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 z-50'
+          className='fixed bottom-8 right-8 bg-brand-magenta text-black p-8 rounded-xl shadow-lg hover:bg-brand-magenta-hover transition-all duration-200 z-50'
           aria-label='Zurück nach oben'
         >
           <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>

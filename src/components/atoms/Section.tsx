@@ -16,6 +16,7 @@ type SectionProps = {
   id?: string;
   ariaLabel?: string;
   ariaLabelledBy?: string;
+  style?: React.CSSProperties;
 };
 
 type SpacingKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -67,6 +68,7 @@ export function Section({
   id,
   ariaLabel,
   ariaLabelledBy,
+  style,
 }: SectionProps) {
   const content = (
     <div className='relative w-full h-full'>
@@ -83,6 +85,7 @@ export function Section({
       id={id}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
+      style={style}
       className={`
         relative
         w-full

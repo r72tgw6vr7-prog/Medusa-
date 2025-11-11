@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { Footer } from '@/components/pages';
 import { ImageWithFallback } from '@/components/atoms/ImageWithFallback';
 import { BeforeAfterSlider } from '@/components/BeforeAfterSlider';
+import { Section } from '@/components/atoms';
 import { useLanguage } from '../contexts/LanguageContext';
 import '../styles/gallery-grid.css';
 
@@ -107,12 +108,13 @@ export const EnhancedGalleryPage: React.FC = () => {
 
   // Focus management refs
   const dialogRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const loadMoreRef = useRef<HTMLButtonElement>(null);
 
   // Check for reduced motion preference
   const prefersReducedMotion = useRef(
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    typeof globalThis !== 'undefined' &&
+      'matchMedia' in globalThis &&
+      (globalThis as any).matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
 
   // Intersection Observer for Load More button fade-in
@@ -216,8 +218,8 @@ export const EnhancedGalleryPage: React.FC = () => {
         setSelectedImage(null);
       }
     };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    globalThis.addEventListener('keydown', handleEsc as any);
+    return () => globalThis.removeEventListener('keydown', handleEsc as any);
   }, [selectedImage]);
 
   useEffect(() => {
@@ -226,8 +228,8 @@ export const EnhancedGalleryPage: React.FC = () => {
       if (e.key === 'ArrowLeft') goToPrevious();
       if (e.key === 'ArrowRight') goToNext();
     };
-    window.addEventListener('keydown', handleArrowKeys);
-    return () => window.removeEventListener('keydown', handleArrowKeys);
+    globalThis.addEventListener('keydown', handleArrowKeys as any);
+    return () => globalThis.removeEventListener('keydown', handleArrowKeys as any);
   }, [selectedImage, goToPrevious, goToNext]);
 
   // Lock body scroll when lightbox open
@@ -280,47 +282,46 @@ export const EnhancedGalleryPage: React.FC = () => {
     <MotionConfig reducedMotion={prefersReducedMotion.current ? 'always' : 'never'}>
       <div className='min-h-screen'>
         <MainNavigation />
-        <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
+        
 
-        {/* Page Header - Matches Services page exactly */}
-        <section className='relative z-10 py-8 md:py-8 lg:py-16'>
-          <div className='px-8 md:px-8 lg:px-16'>
-            <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
-              <div className='text-center space-y-8'>
-                <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                  Medusa München
-                </p>
-                <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
-                  {t('gallery.title')}
-                </h1>
-                <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
-                  {t('gallery.subtitle')}
-                </p>
-              </div>
+        {/* Page Header */}
+        <Section background='transparent' style={{ paddingTop: 'var(--first-section-offset)' }}>
+          <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+            <div className='text-center space-y-8'>
+              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+                Medusa München
+              </p>
+              <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-primary)]'>
+                {t('gallery.title')}
+              </h1>
+              <p className='text-lg text-[var(--chrome-silver)] max-w-2xl mx-auto font-body leading-relaxed'>
+                {t('gallery.subtitle')}
+              </p>
             </div>
           </div>
-        </section>
+        </Section>
 
         {/* Before/After Slider Section */}
-        <BeforeAfterSlider
-          beforeSrc='/images/placeholder-tattoo.jpg'
-          afterSrc='/images/placeholder-tattoo.jpg'
-          labelBefore={t('slider.before')}
-          labelAfter={t('slider.after')}
-          heading={t('slider.heading')}
-          initial={50}
-          aspect='16/9'
-        />
+        <Section background='transparent'>
+          <BeforeAfterSlider
+            beforeSrc='/images/placeholder-tattoo.jpg'
+            afterSrc='/images/placeholder-tattoo.jpg'
+            labelBefore={t('slider.before')}
+            labelAfter={t('slider.after')}
+            heading={t('slider.heading')}
+            initial={50}
+            aspect='16/9'
+          />
+        </Section>
 
         {/* Gallery Content */}
-        <section className='relative z-10 py-8 md:py-8 lg:py-16'>
-          <div className='px-8 md:px-8 lg:px-16'>
+        <Section background='transparent'>
             {/* Filter Controls */}
             <div className='flex flex-wrap gap-8 items-center justify-between mb-16'>
               <div className='flex flex-wrap gap-8'>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-8 bg-[var(--brand-gold)]/10 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] font-semibold text-base transition-all duration-200 rounded-xl hover:bg-[var(--brand-gold)]/20'
+                  className='px-8 py-8 bg-[var(--brand-primary)]/10 border-2 border-[var(--brand-primary)] text-[var(--brand-primary)] font-semibold text-base transition-all duration-200 rounded-xl hover:bg-[var(--brand-primary)]/20'
                 >
                   {t('gallery.filters.allWorks')}
                 </button>
@@ -334,14 +335,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterArtist !== allArtistsLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-primary)]/50'
                     }`}
                   >
                     {filterArtist}
                   </button>
                   {showArtistDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-black/80 backdrop-blur-sm border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-100 min-w-[200px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[rgba(var(--color-surface-darker-rgb),0.8)] backdrop-blur-sm border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-100 min-w-[200px]'>
                       {i18nUniqueArtists.map((artist: string) => (
                         <button
                           key={artist}
@@ -349,7 +350,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterArtist(artist);
                             setShowArtistDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {artist}
                         </button>
@@ -367,14 +368,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterStyle !== allStylesLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-primary)]/50'
                     }`}
                   >
                     {filterStyle}
                   </button>
                   {showStyleDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-black/80 backdrop-blur-sm border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-100 min-w-[200px] max-h-[400px] overflow-y-auto'>
+                    <div className='absolute top-full mt-0 left-0 bg-[rgba(var(--color-surface-darker-rgb),0.8)] backdrop-blur-sm border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-100 min-w-[200px] max-h-[400px] overflow-y-auto'>
                       {i18nUniqueStyles.map((style: string) => (
                         <button
                           key={style}
@@ -382,7 +383,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterStyle(style);
                             setShowStyleDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {style}
                         </button>
@@ -400,14 +401,14 @@ export const EnhancedGalleryPage: React.FC = () => {
                     }}
                     className={`px-8 py-4 font-semibold text-base transition-all duration-200 rounded-xl ${
                       filterYear !== allYearsLabel
-                        ? 'bg-[var(--brand-gold)] text-[var(--deep-black)] border-2 border-[var(--brand-gold)]'
-                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-gold)]/50'
+                        ? 'bg-[var(--brand-primary)] text-[var(--deep-black)] border-2 border-[var(--brand-primary)]'
+                        : 'bg-white/5 text-white border-2 border-white/10 hover:border-[var(--brand-primary)]/50'
                     }`}
                   >
                     {filterYear}
                   </button>
                   {showYearDropdown && (
-                    <div className='absolute top-full mt-0 left-0 bg-black/80 backdrop-blur-sm border border-[var(--brand-gold)]/20 rounded-lg shadow-lg z-100 min-w-[150px]'>
+                    <div className='absolute top-full mt-0 left-0 bg-[rgba(var(--color-surface-darker-rgb),0.8)] backdrop-blur-sm border border-[var(--brand-primary)]/20 rounded-lg shadow-lg z-100 min-w-[150px]'>
                       {i18nUniqueYears.map((year: string) => (
                         <button
                           key={year}
@@ -415,7 +416,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                             setFilterYear(year);
                             setShowYearDropdown(false);
                           }}
-                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-gold-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
+                          className='block w-full text-left px-8 py-0 text-white hover:bg-[var(--brand-hover)]/10 transition-colors first:rounded-t-lg last:rounded-b-lg transition duration-200 ease-out'
                         >
                           {year}
                         </button>
@@ -441,10 +442,10 @@ export const EnhancedGalleryPage: React.FC = () => {
 
             {filteredItems.length === 0 ? (
               <div className='text-center py-24'>
-                <p className='text-xl text-[#C0C0C0] mb-8'>{t('gallery.noResults')}</p>
+                <p className='text-xl text-[var(--chrome-silver)] mb-8'>{t('gallery.noResults')}</p>
                 <button
                   onClick={resetFilters}
-                  className='px-8 py-8 bg-[var(--brand-gold)] text-[#1A1A1A] font-medium hover:bg-[var(--brand-gold-hover)] transition-colors rounded-lg transition duration-200 ease-out'
+                  className='px-8 py-8 bg-[var(--brand-primary)] text-[var(--deep-black)] font-medium hover:bg-[var(--brand-hover)] transition-colors rounded-lg transition duration-200 ease-out'
                 >
                   {t('gallery.filters.reset')}
                 </button>
@@ -471,10 +472,10 @@ export const EnhancedGalleryPage: React.FC = () => {
                       />
                       <div className='gallery-overlay'>
                         <h3 className='text-white font-bold text-lg'>{item.title}</h3>
-                        <p className='text-[var(--brand-gold)] font-medium'>{item.artist}</p>
+                        <p className='text-[var(--brand-primary)] font-medium'>{item.artist}</p>
                         <p className='text-white/70 text-sm'>{item.style}</p>
                         {item.featured && (
-                          <span className='inline-block mt-0 px-0 py-0 rounded-full bg-[var(--brand-gold)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
+                          <span className='inline-block mt-0 px-0 py-0 rounded-full bg-[var(--brand-primary)] text-[var(--deep-black)] text-xs font-bold flex flex-col h-full'>
                             Featured
                           </span>
                         )}
@@ -493,7 +494,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                     <button
                       ref={loadMoreRef}
                       onClick={() => setShowAllPhotos(true)}
-                      className='group inline-flex items-center justify-center gap-8 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 rounded-xl'
+                      className='group inline-flex items-center justify-center gap-8 px-8 py-8 bg-[var(--brand-primary)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-hover)] transition-all duration-200 rounded-xl'
                     >
                       <span>{t('gallery.filters.more')}</span>
                       <ChevronRight
@@ -505,8 +506,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 )}
               </>
             )}
-          </div>
-        </section>
+        </Section>
 
         {/* Lightbox Modal */}
         <AnimatePresence>
@@ -514,7 +514,7 @@ export const EnhancedGalleryPage: React.FC = () => {
             <motion.div
               ref={dialogRef}
               {...animationConfig}
-              className='fixed inset-0 bg-black/95 z-50 flex items-center justify-center'
+              className='fixed inset-0 bg-[rgba(var(--color-surface-darker-rgb),0.95)] z-50 flex items-center justify-center'
               onClick={() => setSelectedImage(null)}
             >
               <motion.div
@@ -525,7 +525,7 @@ export const EnhancedGalleryPage: React.FC = () => {
                 <ImageWithFallback
                   src={selectedImage.image}
                   alt={selectedImage.title || 'Gallery image'}
-                  className='max-w-[100vw] max-h-[100vh] w-auto h-auto object-contain'
+                  className='max-w-[100vw] max-h-screen w-auto h-auto object-contain'
                   fallback='/images/placeholder-tattoo.jpg'
                 />
               </motion.div>

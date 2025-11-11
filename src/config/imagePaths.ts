@@ -14,27 +14,32 @@
 export const IMAGE_PATHS = {
   // Artist team photos
   artists: {
-    eli: '/assets/images/photos/artists/picture.webp',
-    aaron: '/assets/images/photos/artists/aaron.webp',
-    oliver: '/assets/images/photos/artists/oliver.webp',
-    vive: '/assets/images/photos/artists/vivi.webp',
-    angie: '/assets/images/photos/artists/picture.webp',
-    debi: '/assets/images/photos/artists/debi.webp',
-    loui: '/assets/images/photos/artists/loui@1200w.webp',
-    sasha: '/assets/images/photos/artists/picture.webp',
+    eli: '/assets/images/icons/placeholder.svg',
+    aaron: '/assets/images/icons/placeholder.svg',
+    oliver: '/assets/images/icons/placeholder.svg',
+    vive: '/assets/images/icons/placeholder.svg',
+    angie: '/assets/images/icons/placeholder.svg',
+    debi: '/assets/images/icons/placeholder.svg',
+    loui: '/assets/images/icons/placeholder.svg',
+    sasha: '/assets/images/icons/placeholder.svg',
   },
 
   // Studio interior photos
   studio: {
-    interior1: '/assets/images/photos/studio/img3876.webp',
-    interior2: '/assets/images/photos/studio/img3914.webp',
-    interior3: '/assets/images/photos/studio/img3947.webp',
+    // Use existing placeholder for now to ensure something is displayed
+    interior1: '/assets/images/icons/placeholder.svg',
+    interior2: '/assets/images/icons/placeholder.svg',
+    interior3: '/assets/images/icons/placeholder.svg',
+    // Original paths (currently empty files)
+    // interior1: '/images/studio/studio-interior-1.jpg',
+    // interior2: '/images/studio/studio-interior-2.jpg',
+    // interior3: '/images/studio/studio-interior-3.jpg',
   },
 
   // Service card backgrounds
   services: {
-    tattoo: '/assets/images/photos/backgrounds/tattoo-card-bg.webp',
-    piercing: '/assets/images/photos/backgrounds/piercing-card-bg.webp',
+    tattoo: '/assets/images/icons/placeholder.svg',
+    piercing: '/assets/images/icons/placeholder.svg',
   },
 
   // Icons and logos
@@ -45,7 +50,7 @@ export const IMAGE_PATHS = {
 
   // Hero section
   hero: {
-    background: '/assets/images/photos/hero/medusatattooartwork.webp',
+    background: '/assets/images/icons/placeholder.svg',
     trustBadge1: '/assets/images/svg/Container_2.svg',
     trustBadge2: '/assets/images/svg/Container_3.svg',
     trustBadge3: '/assets/images/svg/Container_4.svg',
@@ -54,16 +59,16 @@ export const IMAGE_PATHS = {
 
   // Partners logos
   partners: {
-    nannybag: '/assets/images/photos/partners/nannybag-logo.svg',
-    iamrobot: '/assets/images/photos/partners/iamrobot-logo.svg',
-    partner3: '/assets/images/photos/partners/partner3-logo.svg',
-    bqla: '/assets/images/photos/partners/bqla-logo.svg',
+    nannybag: '/assets/images/icons/placeholder.svg',
+    iamrobot: '/assets/images/icons/placeholder.svg',
+    partner3: '/assets/images/icons/placeholder.svg',
+    bqla: '/assets/images/icons/placeholder.svg',
   },
 
   // Fallback images
   fallback: {
     placeholder: '/assets/images/icons/placeholder.svg',
-    artist: '/assets/images/photos/artists/picture.webp',
+    artist: '/assets/images/icons/placeholder.svg',
   },
 } as const;
 
@@ -75,9 +80,15 @@ export function getImagePath<T extends ImageCategory>(category: T, key: ImageKey
   return IMAGE_PATHS[category][key] as string;
 }
 
+// Type for all possible image paths in our system
+type ImagePathValue = string;
+
 // Validate that an image path exists (client-side check)
 export function isValidImagePath(path: string): boolean {
-  return Object.values(IMAGE_PATHS)
-    .flatMap((category) => Object.values(category))
-    .includes(path as any);
+  // Get all image paths as a flattened array of strings
+  const allImagePaths = Object.values(IMAGE_PATHS)
+    .flatMap((category) => Object.values(category)) as ImagePathValue[];
+  
+  // Check if the given path exists in our defined paths
+  return allImagePaths.includes(path);
 }

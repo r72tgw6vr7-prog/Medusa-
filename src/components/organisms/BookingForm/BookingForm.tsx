@@ -1,13 +1,12 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { bookingSchema, BookingFormData } from '@/schemas/bookingSchema';
-import { Input } from '@/components/ui/input/Input';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea/Textarea';
-import { Select } from '@/components/ui/select/Select';
+import { Input, Button, Textarea, Select } from '@/components/atoms';
 import { ChangeEvent } from 'react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
+import './BookingForm.css';
 
 const timeSlots = [
   { value: '09:00', label: '9:00 AM' },
@@ -27,7 +26,11 @@ const guestOptions = Array.from({ length: 20 }, (_, i) => ({
   label: i === 0 ? '1 person' : `${i + 1} people`,
 }));
 
-export function BookingForm() {
+interface BookingFormProps {
+  className?: string;
+}
+
+export function BookingForm({ className = '' }: BookingFormProps) {
   const {
     control,
     register,
@@ -46,17 +49,28 @@ export function BookingForm() {
   // Define onSubmit with the correct type
   const onSubmit = async (data: BookingFormData) => {
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const resp = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          date: data.date,
+          time: data.time,
+          guests: data.guests ?? 1,
+          specialRequests: data.specialRequests || '',
+        }),
+      });
 
-      console.log('Booking submitted:', data);
+      const result = await resp.json().catch(() => ({ success: false }));
+      if (!resp.ok || !result?.success) {
+        throw new Error(result?.message || 'Booking failed');
+      }
 
-      // Show success message
       toast.success('Booking submitted successfully!', {
         description: 'We will contact you shortly to confirm your reservation.',
       });
-
-      // Reset form
       reset();
     } catch (error) {
       console.error('Error submitting booking:', error);
@@ -67,73 +81,109 @@ export function BookingForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        // Cast data to BookingFormData
-        onSubmit(data as unknown as BookingFormData);
-      })}
-      className='space-y-8 w-full max-w-4xl mx-auto'
-      noValidate
-    >
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+    <div className={`booking-form-container ${className}`}>
+      <div className="container mx-auto max-w-3xl px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
+            Book Your Appointment
+          </h2>
+          <p className="text-white/60 max-w-lg mx-auto">
+            Ready to get inked? Booking an appointment is easy and convenient. Simply fill out the form below to schedule your consultation or tattoo session.
+          </p>
+        </div>
+        
+        <form
+          onSubmit={handleSubmit((data) => {
+            // Cast data to BookingFormData
+            onSubmit(data as unknown as BookingFormData);
+          })}
+          className="space-y-8 w-full"
+          noValidate
+        >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Name */}
-        <div className='space-y-0'>
-          <label htmlFor='name' className='block text-sm font-medium'>
+        <div className='form-group'>
+          <label htmlFor='name' className="block text-sm font-medium text-white/80 mb-0">
             Full Name *
           </label>
-          <Input id='name' placeholder='John Doe' error={!!errors.name} {...register('name')} />
-          {errors.name && <p className='text-sm text-red-600'>{errors.name.message}</p>}
+          <Input 
+            id='name' 
+            placeholder='John Doe' 
+            error={errors.name?.message} 
+            {...register('name')} 
+            className={cn(
+              'bg-white/5 border',
+              errors.name ? 'border-red-500' : 'border-white/20',
+              'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+            )}
+          />
+          {errors.name && <p className="text-sm text-red-500 mt-0">{errors.name.message}</p>}
         </div>
 
         {/* Email */}
-        <div className='space-y-0'>
-          <label htmlFor='email' className='block text-sm font-medium'>
-            Email *
+        <div className='form-group'>
+          <label htmlFor='email' className="block text-sm font-medium text-white/80 mb-0">
+            Email Address *
           </label>
           <Input
             id='email'
             type='email'
             placeholder='your@email.com'
-            error={!!errors.email}
+            error={errors.email?.message}
             {...register('email')}
+            className={cn(
+              'bg-white/5 border',
+              errors.email ? 'border-red-500' : 'border-white/20',
+              'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+            )}
           />
-          {errors.email && <p className='text-sm text-red-600'>{errors.email.message}</p>}
+          {errors.email && <p className="text-sm text-red-500 mt-0">{errors.email.message}</p>}
         </div>
 
         {/* Phone */}
-        <div className='space-y-0'>
-          <label htmlFor='phone' className='block text-sm font-medium'>
+        <div className='form-group'>
+          <label htmlFor='phone' className="block text-sm font-medium text-white/80 mb-0">
             Phone Number *
           </label>
           <Input
             id='phone'
             type='tel'
             placeholder='+1 (123) 456-7890'
-            error={!!errors.phone}
+            error={errors.phone?.message}
             {...register('phone')}
+            className={cn(
+              'bg-white/5 border',
+              errors.phone ? 'border-red-500' : 'border-white/20',
+              'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+            )}
           />
-          {errors.phone && <p className='text-sm text-red-600'>{errors.phone.message}</p>}
+          {errors.phone && <p className="text-sm text-red-500 mt-0">{errors.phone.message}</p>}
         </div>
 
         {/* Date */}
-        <div className='space-y-0'>
-          <label htmlFor='date' className='block text-sm font-medium'>
-            Date *
+        <div className='form-group'>
+          <label htmlFor='date' className="block text-sm font-medium text-white/80 mb-0">
+            Preferred Date *
           </label>
           <Input
             id='date'
             type='date'
             min={new Date().toISOString().split('T')[0]}
-            error={!!errors.date}
+            error={errors.date?.message}
             {...register('date')}
+            className={cn(
+              'bg-white/5 border',
+              errors.date ? 'border-red-500' : 'border-white/20',
+              'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+            )}
           />
-          {errors.date && <p className='text-sm text-red-600'>{errors.date.message}</p>}
+          {errors.date && <p className="text-sm text-red-500 mt-0">{errors.date.message}</p>}
         </div>
 
         {/* Time */}
-        <div className='space-y-0'>
-          <label htmlFor='time' className='block text-sm font-medium'>
-            Time *
+        <div className='form-group'>
+          <label htmlFor='time' className="block text-sm font-medium text-white/80 mb-0">
+            Preferred Time *
           </label>
           <Controller
             name='time'
@@ -141,10 +191,14 @@ export function BookingForm() {
             render={({ field }) => (
               <Select
                 id='time'
-                error={!!errors.time}
                 value={field.value}
                 onChange={field.onChange}
                 placeholder='Select a time'
+                className={cn(
+                  'bg-white/5 border',
+                  errors.time ? 'border-red-500' : 'border-white/20',
+                  'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+                )}
               >
                 {timeSlots.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -154,12 +208,12 @@ export function BookingForm() {
               </Select>
             )}
           />
-          {errors.time && <p className='text-sm text-red-600'>{errors.time.message}</p>}
+          {errors.time && <p className="text-sm text-red-500 mt-0">{errors.time.message}</p>}
         </div>
 
         {/* Guests */}
-        <div className='space-y-0'>
-          <label htmlFor='guests' className='block text-sm font-medium'>
+        <div className='form-group'>
+          <label htmlFor='guests' className="block text-sm font-medium text-white/80 mb-0">
             Number of Guests *
           </label>
           <Controller
@@ -168,11 +222,15 @@ export function BookingForm() {
             render={({ field }) => (
               <Select
                 id='guests'
-                error={!!errors.guests}
                 value={field.value?.toString()}
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-                  field.onChange(parseInt(e.target.value, 10))
+                  field.onChange(Number.parseInt(e.target.value, 10))
                 }
+                className={cn(
+                  'bg-white/5 border',
+                  errors.guests ? 'border-red-500' : 'border-white/20',
+                  'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+                )}
               >
                 {guestOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -182,43 +240,51 @@ export function BookingForm() {
               </Select>
             )}
           />
-          {errors.guests && <p className='text-sm text-red-600'>{errors.guests.message}</p>}
+          {errors.guests && <p className="text-sm text-red-500 mt-0">{errors.guests.message}</p>}
         </div>
       </div>
 
       {/* Special Requests */}
-      <div className='space-y-0'>
-        <label htmlFor='specialRequests' className='block text-sm font-medium'>
+      <div className='form-group md:col-span-2'>
+        <label htmlFor='specialRequests' className="block text-sm font-medium text-white/80 mb-0">
           Special Requests (Optional)
         </label>
         <Textarea
           id='specialRequests'
           placeholder='Any special requirements or notes...'
           rows={4}
-          error={!!errors.specialRequests}
+          error={errors.specialRequests?.message}
           {...register('specialRequests')}
+          className={cn(
+            'bg-white/5 border',
+            errors.specialRequests ? 'border-red-500' : 'border-white/20',
+            'w-full p-3 rounded-md text-white focus:border-white/50 transition-all'
+          )}
         />
-        <p className='text-xs text-gray-500'>
+        <p className="text-xs text-white/50 mt-0">
           {errors.specialRequests ? (
-            <span className='text-red-600'>{errors.specialRequests.message}</span>
+            <span className='text-red-500'>{errors.specialRequests.message}</span>
           ) : (
             'Maximum 500 characters'
           )}
         </p>
       </div>
 
-      <div className='pt-0'>
+      <div className='flex justify-center mt-8'>
         <Button
           type='submit'
           className={cn(
-            'w-full py-3 text-base',
+            'inline-flex items-center gap-3 bg-transparent border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-full font-medium transition-all duration-300 group',
             isSubmitting ? 'opacity-70 cursor-not-allowed' : '',
           )}
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Book Now'}
+          <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
       </div>
-    </form>
+      </form>
+    </div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BookingForm } from '@/components/organisms/BookingForm/BookingForm';
-import { Card } from '@/components/ui/card/Card';
 
 export default function BookingPage() {
   return (
@@ -14,9 +13,9 @@ export default function BookingPage() {
           </p>
         </div>
 
-        <Card className='p-8 md:p-8'>
+        <div className='p-8 md:p-8 border border-white/10 rounded-2xl bg-black/30 backdrop-blur-sm'>
           <BookingForm />
-        </Card>
+        </div>
 
         <div className='mt-8 text-center text-sm text-gray-500'>
           <p>

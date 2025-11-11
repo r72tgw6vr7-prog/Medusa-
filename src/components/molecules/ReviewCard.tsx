@@ -22,7 +22,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       stars.push(
         <Star
           key={i}
-          className='w-6 h-6 fill-[var(--brand-gold)] text-[var(--brand-gold)]'
+          className='w-6 h-6 fill-[var(--brand-primary)] text-[var(--brand-primary)]'
           aria-label='star'
         />,
       );
@@ -32,7 +32,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
   return (
     <div
-      className={`flex flex-col items-start bg-[var(--deep-black)CC] w-[340px] py-[25px] rounded-2xl border border-solid border-[var(--brand-gold)] shadow-[0px_4px_12px_#0000004D] ${className}`}
+      className={`flex flex-col items-start bg-[var(--deep-black)CC] w-[340px] py-[25px] rounded-2xl border border-solid border-[var(--brand-primary)] shadow-[0px_4px_12px_#0000004D] ${className}`}
     >
       <div className='flex mb-0.5 mx-8'>{renderStars()}</div>
       <div className='flex flex-col items-center self-stretch mb-8 mx-8'>

@@ -25,7 +25,7 @@ import { Shield, Award, Heart } from 'lucide-react';
  * BRAND COMPLIANCE:
  * - Background: var(--deep-black) only
  * - Text: #FFFFFF
- * - Gold: var(--brand-gold) (icons, titles, borders)
+ * - Gold: var(--brand-primary) (icons, titles, borders)
  * - Chrome: #C0C0C0 (not used here)
  * - Typography: Playfair Display (titles), Inter (descriptions)
  * - Effects: Gold glow only (no drop shadows)
@@ -57,7 +57,7 @@ export function TrustSignals() {
               e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
             }}
             onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
+              e.currentTarget.style.outline = '2px solid var(--brand-primary)';
               e.currentTarget.style.outlineOffset = '2px';
             }}
             onBlur={(e) => {
@@ -68,7 +68,7 @@ export function TrustSignals() {
             <div className='flex justify-center mb-0 lg:mb-8'>
               <div
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
-                style={{ background: 'var(--brand-gold)' }}
+                style={{ background: 'var(--brand-primary)' }}
               >
                 <Shield
                   size={16}
@@ -86,7 +86,7 @@ export function TrustSignals() {
                 fontSize: '14px',
                 fontWeight: 700,
                 lineHeight: 1.1,
-                color: 'var(--brand-gold)',
+                color: 'var(--brand-primary)',
               }}
             >
               Certified
@@ -126,7 +126,7 @@ export function TrustSignals() {
               e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
             }}
             onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
+              e.currentTarget.style.outline = '2px solid var(--brand-primary)';
               e.currentTarget.style.outlineOffset = '2px';
             }}
             onBlur={(e) => {
@@ -139,7 +139,7 @@ export function TrustSignals() {
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
                 style={{
                   background:
-                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+                    'linear-gradient(to right, var(--brand-hover), var(--brand-primary))',
                 }}
               >
                 <Award size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
@@ -154,7 +154,7 @@ export function TrustSignals() {
                 fontSize: '14px',
                 fontWeight: 700,
                 lineHeight: 1.1,
-                color: 'var(--brand-gold)',
+                color: 'var(--brand-primary)',
               }}
             >
               25+ Years
@@ -194,7 +194,7 @@ export function TrustSignals() {
               e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
             }}
             onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
+              e.currentTarget.style.outline = '2px solid var(--brand-primary)';
               e.currentTarget.style.outlineOffset = '2px';
             }}
             onBlur={(e) => {
@@ -207,7 +207,7 @@ export function TrustSignals() {
                 className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
                 style={{
                   background:
-                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+                    'linear-gradient(to right, var(--brand-hover), var(--brand-primary))',
                 }}
               >
                 <Heart size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
@@ -222,7 +222,7 @@ export function TrustSignals() {
                 fontSize: '14px',
                 fontWeight: 700,
                 lineHeight: 1.1,
-                color: 'var(--brand-gold)',
+                color: 'var(--brand-primary)',
               }}
             >
               Premium Aftercare

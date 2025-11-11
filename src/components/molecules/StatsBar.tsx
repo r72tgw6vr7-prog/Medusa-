@@ -24,7 +24,7 @@ export const StatsBar: React.FC<StatsBarProps> = ({ stats, className = '' }) => 
               className='flex flex-col items-center justify-center text-center'
             >
               <img src={stat.icon} alt='' className='w-8 h-8 mb-0' aria-hidden='true' />
-              <p className='text-[var(--brand-gold)] font-bold text-xl md:text-2xl'>{stat.value}</p>
+              <p className='text-[var(--brand-primary)] font-bold text-xl md:text-2xl'>{stat.value}</p>
               <p className='text-white text-sm'>{stat.label}</p>
             </div>
           ))}

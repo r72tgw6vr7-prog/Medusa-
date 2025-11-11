@@ -1,8 +1,12 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import '../../styles/testimonials.css';
+import React from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/atoms';
 
 export interface Testimonial {
   id: number;
@@ -33,7 +37,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const Star = () => (
-  <svg className='w-5 h-5 fill-[#D4A841] text-[#D4A841]' viewBox='0 0 20 20'>
+  <svg className='w-5 h-5 fill-[var(--brand-primary)] text-[var(--brand-primary)]' viewBox='0 0 20 20'>
     <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
   </svg>
 );
@@ -49,62 +53,50 @@ export default function TestimonialsCarousel({
   testimonialsList = testimonials,
   title = 'Was Kunden sagen',
 }: TestimonialsCarouselProps) {
+  const [api, setApi] = React.useState<CarouselApi | null>(null);
+
+  // Simple autoplay: advance every 5s
+  React.useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => {
+      api.scrollNext();
+    }, 5000);
+    return () => clearInterval(id);
+  }, [api]);
+
   return (
     <section className={`py-20 relative z-10 ${className}`} aria-label='Customer testimonials'>
       <div className='responsive-container safe-area-padding'>
-        <h2 className='font-playfair text-4xl md:text-5xl font-bold text-[var(--brand-gold)] text-center mb-16'>
+        <h2 className='font-playfair text-4xl md:text-5xl font-bold text-[var(--brand-primary)] text-center mb-16'>
           {title}
         </h2>
 
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          spaceBetween={24}
-          slidesPerView={1.15}
-          centeredSlides={false}
-          pagination={{
-            clickable: true,
-            bulletClass: 'swiper-pagination-bullet !bg-white/30',
-            bulletActiveClass: 'swiper-pagination-bullet-active !bg-[#D4A841]',
-          }}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          breakpoints={{
-            640: {
-              slidesPerView: 1.5,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 2.2,
-              spaceBetween: 24,
-            },
-            1024: {
-              slidesPerView: 2.5,
-              spaceBetween: 32,
-            },
-          }}
-          className='testimonials-swiper'
-          aria-label='Customer testimonials carousel'
-        >
-          {testimonialsList.map((testimonial) => (
-            <SwiperSlide key={testimonial.id}>
-              <div className='bg-white/5 border border-[var(--brand-gold)]/30 rounded-2xl p-8 h-full'>
-                <div className='flex gap-0 mb-8'>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} />
-                  ))}
+        <Carousel setApi={setApi} className='[--gap:1.5rem]'>
+          <CarouselContent>
+            {testimonialsList.map((testimonial) => (
+              <CarouselItem
+                key={testimonial.id}
+                className='basis-full sm:basis-[85%] md:basis-[66%] lg:basis-[40%]'
+              >
+                <div className='bg-white/5 border border-(--brand-gold)/30 rounded-2xl p-8 h-full'>
+                  <div className='flex gap-0 mb-8'>
+                    {[1, 2, 3, 4, 5].map((k) => (
+                      <Star key={`star-${k}`} />
+                    ))}
+                  </div>
+
+                  <p className='text-white text-base leading-relaxed mb-8'>"{testimonial.text}"</p>
+
+                  <p className='text-[var(--chrome-silver)] text-sm'>
+                    — {testimonial.author}, {testimonial.source}
+                  </p>
                 </div>
-
-                <p className='text-white text-base leading-relaxed mb-8'>"{testimonial.text}"</p>
-
-                <p className='text-[#C0C0C0] text-sm'>
-                  — {testimonial.author}, {testimonial.source}
-                </p>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className='hidden md:flex' />
+          <CarouselNext className='hidden md:flex' />
+        </Carousel>
       </div>
     </section>
   );

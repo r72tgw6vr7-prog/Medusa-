@@ -10,7 +10,7 @@
   inset: 0;
   transform: scaleX(0);
   transform-origin: left;
-  background: var(--color-brand-gold-dark);
+  background: var(--brand-magenta-dark);
 }
 .timeline-fill.is-visible {
   transform: scaleX(1);

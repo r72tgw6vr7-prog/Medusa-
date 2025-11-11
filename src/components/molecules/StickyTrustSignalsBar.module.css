@@ -51,14 +51,14 @@
   /* Icon sizing */
   width: 18px !important;
   height: 18px !important;
-  color: var(--brand-gold);
+  color: var(--brand-primary);
 }
 
 .trustSignalNumber {
   /* Number text */
   font-size: 18px !important;
   font-weight: 600;
-  color: var(--brand-gold);
+  color: var(--brand-primary);
   line-height: 1;
 }
 

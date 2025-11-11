@@ -1,20 +1,174 @@
-/* StudioShowcase specific styles - PIXEL-PERFECT IMPLEMENTATION */
+/* ==============================================
+   STUDIO SHOWCASE COMPONENT STYLES
+   MAGENTA BRAND EDITION
+   ============================================== */
 
+/* General section styles */
+.studio-section-wrapper {
+  /* Use design-system foundation variables */
+  font-family: var(--font-family-primary, 'Inter', sans-serif);
+  color: var(--color-text-primary, white);
+  /* Prevent context bleed */
+  position: relative;
+  z-index: 1;
+}
+
+/* Section titles */
+.section-title {
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+
+.section-subtitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  max-width: 38rem;
+  line-height: var(--line-height-normal);
+}
+
+/* Story section styles */
+.studio-story-section {
+  padding: var(--space-8) 0;
+}
+
+.story-images {
+  width: 100%;
+  overflow: hidden;
+}
+
+.studio-thumbnail img {
+  transition: transform 0.3s ease;
+}
+
+.studio-thumbnail:hover img {
+  transform: scale(1.05);
+}
+
+.studio-hours h4 {
+  position: relative;
+  padding-left: var(--space-2);
+}
+
+.studio-hours h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  height: 1rem;
+  width: 3px;
+  /* Use primary brand color with fallback */
+  background-color: var(--brand-primary, #7d315d);
+}
+
+.studio-description {
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+}
+
+.about-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Stats styling - Updated for brand consistency */
+.stat-item {
+  padding: var(--space-2);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Brand-consistent stat icon */
+.stat-icon {
+  background-color: var(--brand-primary, #7d315d);
+  color: var(--color-text-primary, white);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  box-shadow: var(--shadow-gold-glow, 0 0 15px rgba(125, 49, 93, 0.4));
+  transform: scale(1.05);
+}
+
+.stat-count {
+  color: var(--color-text-primary, white);
+  margin-bottom: var(--space-1);
+}
+
+.stat-label {
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.8));
+  font-weight: var(--font-weight-medium, 500);
+}
+
+/* Workflow section styles */
+.workflow-section {
+  background-color: var(--color-surface-medium);
+}
+
+.step-item {
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 3px solid var(--brand-magenta);
+}
+
+.step-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-number {
+  font-family: var(--font-family-heading);
+  color: var(--brand-magenta);
+}
+
+.step-title {
+  color: var(--color-text-primary);
+}
+
+.step-description {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.process-image-container {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.process-image-container img {
+  transition: transform 0.5s ease;
+}
+
+.process-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Original carousel styles - kept and enhanced */
 .studio-showcase {
   height: 350px; /* Default for mobile */
   width: 100%;
   position: relative;
   overflow: hidden;
   max-height: 600px; /* Maximum height cap */
+  isolation: isolate; /* Create stacking context to prevent conflicts */
 }
 
-/* Common styling for all carousel images */
+/* Common styling for Studio carousel image - with z-index to avoid conflicts with SalonCarousel */
 .studio-carousel-image {
   background-size: cover;
   background-position: center;
   transform: translateZ(0);
   will-change: opacity;
   transition: opacity 1s ease-in-out;
+  z-index: 1;
 }
 
 /* Background image is applied inline via style={{ backgroundImage: `url(...)` }} */
@@ -24,24 +178,33 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(34, 34, 34, 0.8);
+  background-color: var(--color-surface-darker, #000000);
   z-index: -1;
 }
 
 /* Hover effect for the logo */
-.medusa-logo {
-  text-shadow: 0 0 15px rgba(var(--color-brand-gold-rgb), 0.5);
-  transition: text-shadow 0.3s ease;
+.studio-showcase .medusa-logo {
+  /* Use design system variable with fallback */
+  color: var(--brand-primary, #7d315d);
+  /* Support for both RGB and direct value formats */
+  text-shadow: 0 0 15px var(--shadow-gold-glow-subtle, rgba(125, 49, 93, 0.5));
+  transition: all 0.3s ease;
+  /* Ensure no conflicts with SalonCarousel */
+  position: relative;
+  z-index: 15;
 }
 
 .studio-showcase:hover .medusa-logo {
-  text-shadow: 0 0 25px rgba(var(--color-brand-gold-rgb), 0.8);
+  /* Enhanced glow on hover */
+  text-shadow: 0 0 25px var(--shadow-gold-glow, rgba(125, 49, 93, 0.8));
+  /* Prevent hover conflicts */
+  transform: translateZ(0);
 }
 
 /* Carousel navigation dots */
 .carousel-dots {
   position: absolute;
-  bottom: 24px;
+  bottom: var(--space-3);
   left: 0;
   right: 0;
   display: flex;
@@ -59,7 +222,7 @@
 }
 
 .carousel-dot.active {
-  background-color: var(--color-brand-gold);
+  background-color: var(--brand-magenta);
   transform: scale(1.2);
 }
 

@@ -35,65 +35,65 @@ export const zIndex = {
 export const glassmorphism = {
   navigation: {
     default: {
-      background: 'rgba(34, 34, 34, 0.45)', // 45% opacity - hero visibility
+      background: 'rgba(0, 0, 0, 0.45)', // 45% opacity - hero visibility
       blur: 'blur(24px)', // Strong frosted glass
       webkitBlur: 'blur(24px)', // Safari support
-      border: '1px solid rgba(212, 175, 55, 0.1)',
+      border: '1px solid rgba(125, 49, 93, 0.1)',
       zIndex: zIndex.navigation,
     },
     scrolled: {
-      background: 'rgba(34, 34, 34, 0.65)', // 65% opacity - readability
+      background: 'rgba(0, 0, 0, 0.65)', // 65% opacity - readability
       blur: 'blur(24px)', // Strong frosted glass
       webkitBlur: 'blur(24px)', // Safari support
-      border: '1px solid rgba(212, 175, 55, 0.15)',
+      border: '1px solid rgba(125, 49, 93, 0.15)',
       zIndex: zIndex.navigation,
     },
   },
   trustBadges: {
-    background: 'rgba(34, 34, 34, 0.7)', // 70% opacity
+    background: 'rgba(0, 0, 0, 0.7)', // 70% opacity
     blur: 'blur(16px)', // Medium blur
     webkitBlur: 'blur(16px)', // Safari support
-    border: '1px solid rgba(212, 175, 55, 0.2)',
+    border: '1px solid rgba(125, 49, 93, 0.2)',
     zIndex: zIndex.trustBadges,
   },
   serviceCards: {
-    background: 'rgba(34, 34, 34, 0.7)', // 70% opacity
+    background: 'rgba(0, 0, 0, 0.7)', // 70% opacity
     blur: 'blur(16px)', // Medium blur
     webkitBlur: 'blur(16px)', // Safari support
-    border: '1px solid rgba(212, 175, 55, 0.15)',
+    border: '1px solid rgba(125, 49, 93, 0.15)',
     zIndex: zIndex.card,
   },
   statsBar: {
-    background: 'rgba(34, 34, 34, 0.85)', // 85% opacity
+    background: 'rgba(0, 0, 0, 0.85)', // 85% opacity
     blur: 'blur(20px)', // Strong blur
     webkitBlur: 'blur(20px)', // Safari support
-    border: '1px solid rgba(212, 175, 55, 0.2)',
+    border: '1px solid rgba(125, 49, 93, 0.2)',
     zIndex: zIndex.content,
   },
   // Legacy aliases for backward compatibility
   card: {
-    background: 'rgba(34, 34, 34, 0.7)',
+    background: 'rgba(0, 0, 0, 0.7)',
     blur: 'blur(16px)',
     webkitBlur: 'blur(16px)',
-    border: '1px solid rgba(212, 175, 55, 0.15)',
+    border: '1px solid rgba(125, 49, 93, 0.15)',
   },
   badge: {
-    background: 'rgba(34, 34, 34, 0.6)',
+    background: 'rgba(0, 0, 0, 0.6)',
     blur: 'blur(10px)',
     webkitBlur: 'blur(10px)',
-    border: '1px solid rgba(212, 175, 55, 0.15)',
+    border: '1px solid rgba(125, 49, 93, 0.15)',
   },
   footer: {
-    background: 'rgba(34, 34, 34, 0.85)',
+    background: 'rgba(0, 0, 0, 0.85)',
     blur: 'blur(20px)',
     webkitBlur: 'blur(20px)',
-    border: '1px solid rgba(212, 175, 55, 0.2)',
+    border: '1px solid rgba(125, 49, 93, 0.2)',
   },
   modal: {
-    background: 'rgba(34, 34, 34, 0.9)',
+    background: 'rgba(0, 0, 0, 0.9)',
     blur: 'blur(24px)',
     webkitBlur: 'blur(24px)',
-    border: '1px solid rgba(212, 175, 55, 0.25)',
+    border: '1px solid rgba(125, 49, 93, 0.25)',
   },
 };
 
@@ -117,56 +117,45 @@ export const breakpoints = {
 // ========================================
 
 export const colors = {
-  background: '#222222', // Changed from #1A1A1A per Figma spec
-  gold: {
-    primary: '#D4AF37',
-    border: 'rgba(212, 175, 55, 0.2)',
-    // Extended palette from styles/design-tokens.ts
-    50: '#FBF7E9',
-    100: '#F7EFD3',
-    200: '#F3E7BD',
-    300: '#EFDF97',
-    400: '#EBD771',
-    500: '#D4AF37', // Primary
-    600: '#B38F1D',
-    700: '#926F03',
-    800: '#715000',
-    900: '#503000',
+  background: '#000000', // Pure black for professional sophistication
+  magenta: {
+    primary: '#7d315d',
   },
   white: '#FFFFFF',
-  chrome: '#C0C0C0',
   // Alpha variants
   backgroundAlpha: {
-    45: 'rgba(34, 34, 34, 0.45)', // Updated to #222222 base
-    60: 'rgba(34, 34, 34, 0.6)',
-    65: 'rgba(34, 34, 34, 0.65)',
-    70: 'rgba(34, 34, 34, 0.7)',
-    75: 'rgba(34, 34, 34, 0.75)',
-    85: 'rgba(34, 34, 34, 0.85)',
-    90: 'rgba(34, 34, 34, 0.9)',
+    45: 'rgba(0, 0, 0, 0.45)', // Pure black base
+    60: 'rgba(0, 0, 0, 0.6)',
+    65: 'rgba(0, 0, 0, 0.65)',
+    70: 'rgba(0, 0, 0, 0.7)',
+    75: 'rgba(0, 0, 0, 0.75)',
+    85: 'rgba(0, 0, 0, 0.85)',
+    90: 'rgba(0, 0, 0, 0.9)',
   },
-  goldAlpha: {
-    10: 'rgba(212, 175, 55, 0.1)',
-    15: 'rgba(212, 175, 55, 0.15)',
-    20: 'rgba(212, 175, 55, 0.2)',
-    25: 'rgba(212, 175, 55, 0.25)',
+  magentaAlpha: {
+    10: 'rgba(125, 49, 93, 0.1)',
+    15: 'rgba(125, 49, 93, 0.15)',
+    20: 'rgba(125, 49, 93, 0.2)',
+    25: 'rgba(125, 49, 93, 0.25)',
   },
+  // Legacy gold removed; use brand.primary and magentaAlpha instead
   // Brand aliases expected by legacy styles
   brand: {
-    gold: '#D4AF37',
-    background: '#222222',
+    primary: '#7d315d',
+    magenta: '#7d315d',
+    background: '#000000',
     white: '#FFFFFF',
   },
   // Semantic color roles expected by legacy glassmorphism utilities
   semantic: {
     borders: {
-      navigation: 'rgba(212, 175, 55, 0.1)',
-      default: 'rgba(212, 175, 55, 0.15)',
-      hover: 'rgba(212, 175, 55, 0.2)',
+      navigation: 'rgba(125, 49, 93, 0.1)',
+      default: 'rgba(125, 49, 93, 0.15)',
+      hover: 'rgba(125, 49, 93, 0.2)',
     },
     accent: {
-      hover: '#B69121',
-      active: '#926F03',
+      hover: '#6b2953',
+      active: '#5a2446',
     },
   },
 };
@@ -326,20 +315,20 @@ export const shadows = {
   lg: '0 8px 16px rgba(0, 0, 0, 0.05), 0 4px 8px rgba(0, 0, 0, 0.1)',
   xl: '0 16px 32px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.1)',
   '2xl': '0 24px 48px rgba(0, 0, 0, 0.05), 0 12px 24px rgba(0, 0, 0, 0.1)',
-  // Gold accent shadows
-  'gold-sm': '0 2px 4px rgba(212, 175, 55, 0.1)',
-  'gold-md': '0 4px 8px rgba(212, 175, 55, 0.15)',
-  'gold-lg': '0 8px 16px rgba(212, 175, 55, 0.2)',
-  'gold-xl': '0 16px 32px rgba(212, 175, 55, 0.25)',
-  // Gold glow from brand-tokens.ts
-  'gold-glow': '0 0 24px rgba(212, 175, 55, 0.4)',
-  'gold-glow-strong': '0 0 32px rgba(212, 175, 55, 0.6)',
-  'gold-glow-subtle': '0 0 16px rgba(212, 175, 55, 0.2)',
+  // Magenta accent shadows (remapped from gold)
+  'brand-sm': '0 2px 4px rgba(125, 49, 93, 0.12)',
+  'brand-md': '0 4px 8px rgba(125, 49, 93, 0.18)',
+  'brand-lg': '0 8px 16px rgba(125, 49, 93, 0.24)',
+  'brand-xl': '0 16px 32px rgba(125, 49, 93, 0.28)',
+  // Glow
+  'brand-glow': '0 0 24px rgba(125, 49, 93, 0.4)',
+  'brand-glow-strong': '0 0 32px rgba(125, 49, 93, 0.6)',
+  'brand-glow-subtle': '0 0 16px rgba(125, 49, 93, 0.25)',
   // Ambient light
-  'ambient-sm': '0 0 16px rgba(212, 175, 55, 0.1)',
-  'ambient-md': '0 0 32px rgba(212, 175, 55, 0.15)',
-  'ambient-lg': '0 0 48px rgba(212, 175, 55, 0.2)',
-  'ambient-xl': '0 0 64px rgba(212, 175, 55, 0.25)',
+  'ambient-sm': '0 0 16px rgba(125, 49, 93, 0.1)',
+  'ambient-md': '0 0 32px rgba(125, 49, 93, 0.15)',
+  'ambient-lg': '0 0 48px rgba(125, 49, 93, 0.2)',
+  'ambient-xl': '0 0 64px rgba(125, 49, 93, 0.25)',
 };
 
 // ========================================
@@ -423,7 +412,7 @@ export const accessibility = {
     goldOnDark: 4.8, // Gold (#D4AF37) on dark (#1A1A1A) - PASS AA
   },
   minTouchTarget: 44, // iOS/Android minimum (44×44px)
-  focusOutline: '2px solid #D4AF37', // Gold focus ring for keyboard navigation
+  focusOutline: '2px solid #7d315d', // Brand focus ring for keyboard navigation
   reducedMotion: 'prefers-reduced-motion: reduce', // Respect user preferences
 };
 

@@ -6,16 +6,18 @@
  */
 
 import {
-  SimpleMedusaProvider,
-  useMedusaDesignSystem,
+  BusinessProvider,
+  useBusinessDesignSystem,
   designSystemTokens,
-} from './SimpleMedusaProvider';
+} from './BusinessProvider';
 
 // Re-export design tokens
 export { designTokens } from '../design-tokens';
 
 // Export everything
-export { SimpleMedusaProvider, useMedusaDesignSystem, designSystemTokens };
+export { BusinessProvider, useBusinessDesignSystem, designSystemTokens };
 
 // Re-export for convenience and backward compatibility
-export const MedusaDesignSystemProvider = SimpleMedusaProvider;
+export const MedusaDesignSystemProvider = BusinessProvider;
+export const SimpleMedusaProvider = BusinessProvider;
+export const useMedusaDesignSystem = useBusinessDesignSystem;

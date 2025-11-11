@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TeamGrid.css';
-import Section from '../ui/Section';
-import { Button } from '../ui/button';
-import type { ContainerSize } from '../ui/Container';
+import { Section, Button } from '@/components/atoms';
+type ContainerSize = 'default' | 'wide' | 'narrow';
 import ArtistCard from '../molecules/Card/ArtistCard';
 import { ArtistBioModal } from '../molecules/ArtistBioModal';
 
@@ -62,7 +61,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'loui',
       name: 'Loui',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
@@ -74,7 +73,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'angie',
       name: 'Angie',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
@@ -86,7 +85,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'aaron',
       name: 'Aaron',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Piercing Artist',
       roleIcon: 'Target',
       specialties: ['Dermal', 'Industrial', 'Complex Piercings'],
@@ -98,7 +97,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'oliver',
       name: 'Oliver',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Geometric', 'Blackwork', 'Minimalist'],
@@ -110,7 +109,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'elena',
       name: 'Elena',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Color', 'New School', 'Custom Design'],
@@ -122,7 +121,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'max',
       name: 'Max',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Piercing Artist',
       roleIcon: 'Target',
       specialties: ['Surface', 'Microdermal', 'Body Modifications'],
@@ -134,7 +133,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'sophia',
       name: 'Sophia',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Fine Line', 'Script', 'Ornamental'],
@@ -146,7 +145,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     {
       slug: 'leo',
       name: 'Leo',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Dark Art', 'Horror', 'Biomechanical'],
@@ -228,9 +227,8 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
 
   return (
     <Section
-      bg='none'
+      background='transparent'
       className='py-16 lg:py-24'
-      containerSize={containerSize}
       aria-label='Artist Team'
     >
       <div className='team-heading'>

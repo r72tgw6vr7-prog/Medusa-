@@ -5,8 +5,8 @@ export const GalleryStats: React.FC = () => {
   const stats = getStats();
 
   return (
-    <div className='bg-[var(--deep-black)]/90 backdrop-blur-md border border-[var(--brand-gold)]/20 rounded-xl p-8 mb-8'>
-      <h3 className='text-[var(--brand-gold)] text-lg font-semibold mb-8'>
+    <div className='bg-[var(--deep-black)]/90 backdrop-blur-md border border-[var(--brand-primary)]/20 rounded-xl p-8 mb-8'>
+      <h3 className='text-[var(--brand-primary)] text-lg font-semibold mb-8'>
         📊 Portfolio Statistics
       </h3>
 
@@ -17,7 +17,7 @@ export const GalleryStats: React.FC = () => {
         </div>
 
         <div>
-          <div className='text-2xl font-bold text-[var(--brand-gold)]'>{stats.featured}</div>
+          <div className='text-2xl font-bold text-[var(--brand-primary)]'>{stats.featured}</div>
           <div className='text-sm text-white/60'>Featured</div>
         </div>
 
@@ -39,7 +39,7 @@ export const GalleryStats: React.FC = () => {
           {Object.entries(stats.byArtist).map(([artist, count]) => (
             <span
               key={artist}
-              className='px-0 py-0 rounded-full bg-[var(--brand-gold)]/10 border border-[var(--brand-gold)]/20 text-[var(--brand-gold)] text-xs'
+              className='px-0 py-0 rounded-full bg-[var(--brand-primary)]/10 border border-[var(--brand-primary)]/20 text-[var(--brand-primary)] text-xs'
             >
               {artist}: {count.toString()}
             </span>

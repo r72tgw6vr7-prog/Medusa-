@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Section from '@/components/ui/Section';
+import { Section } from '@/components/atoms';
 import './HeroSection.css';
 import { TRUST_BADGES, TrustBadgeItem } from './TrustBadges';
 
@@ -26,8 +26,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = ({
-  backgroundImage = '/assets/images/photos/hero/medusatattooartwork.webp',
-  _title = 'Münchens Tattoo-Künstler am Marienplatz',
+  backgroundImage = '/assets/images/hero/business-hero.webp',
+  _title = 'Professional Service Providers',
   _subtitle = '27 Jahre Erfahrung • 10.000+ Google Bewertungen • EU-Zertifiziert',
   _ctaButtons = [
     {
@@ -80,15 +80,21 @@ export const HeroSection: React.FC<React.PropsWithChildren<HeroSectionProps>> = 
           }}
         />
 
-        {/* Glass overlay layer */}
-        <div className='absolute inset-0 z-20 bg-black/45' />
+        {/* Overlays: lighter black + magenta radial glow */}
+        <div className='absolute inset-0 z-20 bg-[rgba(var(--color-surface-darker-rgb),0.3)]' />
+        <div
+          className='absolute inset-0 z-20 pointer-events-none'
+          style={{
+            background:
+              'radial-gradient(45% 60% at 50% 40%, rgba(var(--color-brand-primary-rgb), 0.25) 0%, rgba(var(--color-brand-primary-rgb), 0) 60%)',
+          }}
+        />
 
         {/* Content area */}
         <div className='relative z-20 flex-1 flex flex-col'>
           <Section
-            bg='none'
+            background='transparent'
             className='flex-1 flex flex-col justify-center py-16 lg:py-24'
-            containerSize='default'
           >
             {children}
           </Section>

@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { PageHeader } from '@/components/atoms';
 
 const FAQ_SECTIONS = [
   {
@@ -119,15 +119,15 @@ export function FAQPageNew() {
                       className='rounded-3xl border border-[#C0C0C0]/25 bg-[rgba(34,34,34,0.85)] backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-300'
                     >
                       <button
-                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-brand-magenta focus:ring-offset-2 focus:ring-offset-deep-black'
                         onClick={() => setOpenSection(isOpen ? null : idx)}
                         aria-expanded={isOpen}
                       >
-                        <span className='font-headline text-2xl md:text-3xl text-[var(--brand-gold)]'>
+                        <span className='font-headline text-2xl md:text-3xl text-brand-magenta'>
                           {section.title}
                         </span>
                         <span
-                          className={`ml-4 text-[var(--brand-gold)] transition-transform duration-300 ${
+                          className={`ml-4 text-brand-magenta transition-transform duration-300 ${
                             isOpen ? 'rotate-90' : ''
                           }`}
                         >
@@ -143,7 +143,7 @@ export function FAQPageNew() {
                         <div className='px-8 pb-8 space-y-8 border-t border-[#C0C0C0]/20'>
                           {section.questions.map((q) => (
                             <div key={q.q} className='space-y-8'>
-                              <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-gold)]'>
+                              <h3 className='font-headline text-xl md:text-2xl text-brand-magenta'>
                                 {q.q}
                               </h3>
                               <p className='font-body text-base md:text-lg text-white/85 leading-relaxed'>

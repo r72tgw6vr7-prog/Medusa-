@@ -98,6 +98,26 @@
   z-index: 7;
 }
 
+/* Section margin/spacing utilities - for vertical separation between sections */
+.section-spacing {
+  margin-top: 5rem; /* 80px - mobile */
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    margin-top: 6rem; /* 96px - tablet */
+    margin-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    margin-top: 8rem; /* 128px - desktop */
+    margin-bottom: 8rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .section-padding-lg {
     padding-top: 6rem; /* 96px - desktop */

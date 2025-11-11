@@ -71,18 +71,7 @@ export const ImageChecker: React.FC = () => {
         console.groupEnd();
       }
 
-      // Also create a visibility marker in the DOM
-      const marker = document.createElement('div');
-      marker.id = 'image-check-marker';
-      marker.style.position = 'fixed';
-      marker.style.top = '0';
-      marker.style.right = '0';
-      marker.style.padding = '5px';
-      marker.style.background = 'rgba(0,0,0,0.5)';
-      marker.style.color = 'white';
-      marker.style.zIndex = '9999';
-      marker.textContent = `Images checked: ${checks.filter((c) => c.exists).length}/${checks.length} OK`;
-      document.body.appendChild(marker);
+      // DOM marker removed to avoid direct DOM writes
     };
 
     checkAllImages();

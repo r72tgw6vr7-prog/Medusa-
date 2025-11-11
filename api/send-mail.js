@@ -88,8 +88,8 @@ export default async function handler(req, res) {
     // Simulate email sending process
     // In production, integrate with SendGrid, Nodemailer, or similar service
     const emailData = {
-      from: 'noreply@medusatattoo.de',
-      to: 'info@medusatattoo.de',
+      from: 'noreply@your-business.com',
+      to: 'info@your-business.com',
       subject: `${language === 'DE' ? 'Neue Kontaktanfrage' : 'New Contact Request'}: ${subject}`,
       html: generateEmailTemplate({
         name,
@@ -101,7 +101,7 @@ export default async function handler(req, res) {
         timestamp: submissionTime.toISOString()
       }),
       text: `
-        New contact form submission from Medusa Tattoo website:
+        New contact form submission from business website:
         
         Name: ${name}
         Email: ${email}
@@ -166,7 +166,7 @@ function generateEmailTemplate({ name, email, phone, subject, message, language,
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Contact Form Submission - Medusa Tattoo</title>
+        <title>Contact Form Submission - Your Business</title>
         <style>
           body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -236,7 +236,7 @@ function generateEmailTemplate({ name, email, phone, subject, message, language,
       <body>
         <div class="container">
           <div class="header">
-            <h1>🐍 Medusa Tattoo München</h1>
+            <h1>Your Business Name</h1>
             <p style="margin: 8px 0 0 0; font-size: 14px;">
               ${language === 'DE' ? 'Neue Kontaktanfrage' : 'New Contact Request'}
             </p>
@@ -284,8 +284,8 @@ function generateEmailTemplate({ name, email, phone, subject, message, language,
           <div class="footer">
             <p>
               ${language === 'DE' 
-                ? 'Diese Nachricht wurde über das Kontaktformular der Medusa Tattoo Website gesendet.'
-                : 'This message was sent via the Medusa Tattoo website contact form.'
+                ? 'This message was sent via the business website contact form.'
+                : 'This message was sent via the business website contact form.'
               }
             </p>
           </div>

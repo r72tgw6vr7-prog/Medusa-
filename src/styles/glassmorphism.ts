@@ -7,7 +7,7 @@ import { designTokens } from '../design-tokens';
 export const createGlassmorphism = (
   backgroundColor: string = 'rgba(34, 34, 34, 0.7)',
   blurAmount: string = '14px',
-  borderColor: string = 'rgba(212, 175, 55, 0.1)',
+  borderColor: string = 'rgba(125, 49, 93, 0.1)',
   borderWidth: string = '1px',
 ) => {
   return {
@@ -27,7 +27,7 @@ export const glassmorphism = {
       '14px',
       designTokens.colors.semantic.borders.navigation,
     ),
-    boxShadow: designTokens.shadows['gold-sm'],
+    boxShadow: designTokens.shadows['brand-sm'],
   },
 
   // Card glassmorphism
@@ -54,7 +54,7 @@ export const glassmorphism = {
     transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     '&:hover': {
       background: 'rgba(34, 34, 34, 0.8)',
-      boxShadow: designTokens.shadows['gold-sm'],
+      boxShadow: designTokens.shadows['brand-sm'],
       borderColor: designTokens.colors.semantic.borders.hover,
     },
   },
@@ -66,7 +66,7 @@ export const glassmorphism = {
       '20px',
       designTokens.colors.semantic.borders.hover,
     ),
-    boxShadow: designTokens.shadows['gold-md'],
+    boxShadow: designTokens.shadows['brand-md'],
   },
 };
 
@@ -99,7 +99,7 @@ export const goldenGlow = {
 // Button styles
 export const buttonStyles = {
   primary: {
-    backgroundColor: designTokens.colors.brand.gold,
+    backgroundColor: designTokens.colors.brand.primary,
     color: designTokens.colors.brand.background,
     padding: '12px 24px',
     borderRadius: designTokens.borderRadius.sm,
@@ -109,7 +109,7 @@ export const buttonStyles = {
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: designTokens.colors.semantic.accent.hover,
-      boxShadow: designTokens.shadows['gold-md'],
+      boxShadow: designTokens.shadows['brand-md'],
     },
     '&:active': {
       backgroundColor: designTokens.colors.semantic.accent.active,
@@ -124,14 +124,14 @@ export const buttonStyles = {
     borderRadius: designTokens.borderRadius.sm,
     fontWeight: designTokens.typography.fontWeight.medium,
     transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    border: `2px solid ${designTokens.colors.brand.gold}`,
+    border: `2px solid ${designTokens.colors.brand.primary}`,
     cursor: 'pointer',
     '&:hover': {
-      backgroundColor: 'rgba(212, 175, 55, 0.1)',
-      boxShadow: designTokens.shadows['gold-sm'],
+      backgroundColor: 'rgba(125, 49, 93, 0.1)',
+      boxShadow: designTokens.shadows['brand-sm'],
     },
     '&:active': {
-      backgroundColor: 'rgba(212, 175, 55, 0.2)',
+      backgroundColor: 'rgba(125, 49, 93, 0.2)',
       transform: 'translateY(1px)',
     },
   },

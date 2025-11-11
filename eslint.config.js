@@ -8,6 +8,9 @@ import medusaPlugin from './eslint-plugin-medusa.js';
 
 export default [
   {
+    ignores: ['archived/**']
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescriptParser,

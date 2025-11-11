@@ -12,7 +12,7 @@ export const AccessibleButton = forwardRef<HTMLButtonElement, AccessibleButtonPr
       'rounded font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors';
     const variantClasses = {
       primary:
-        'bg-[var(--brand-gold)] hover:bg-[var(--brand-gold-hover)] text-[var(--deep-black)] focus:ring-[var(--brand-gold)]',
+        'bg-[var(--brand-primary)] hover:bg-[var(--brand-hover)] text-[var(--deep-black)] focus:ring-[var(--brand-primary)]',
       secondary: 'bg-[#C0C0C0]/20 hover:bg-[#C0C0C0]/30 text-white focus:ring-[#C0C0C0]',
       destructive: 'bg-[#C0C0C0] hover:bg-[#A8A8A8] text-[var(--deep-black)] focus:ring-[#C0C0C0]',
       'chateau-green':

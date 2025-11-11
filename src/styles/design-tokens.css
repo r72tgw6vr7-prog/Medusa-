@@ -14,10 +14,10 @@
   --spacing-12: 96px; /* 6rem */
 
   /* Colors */
-  --brand-gold: #d4af37;
-  --brand-gold-hover: #c9a428;
-  --brand-gold-10: rgba(212, 175, 55, 0.1);
-  --brand-gold-20: rgba(212, 175, 55, 0.2);
+  --brand-gold: #7d315d;
+  --brand-gold-hover: #9d4675;
+  --brand-gold-10: rgba(125, 49, 93, 0.1);
+  --brand-gold-20: rgba(125, 49, 93, 0.2);
   --deep-black: #1a1a1a;
   --border-color: rgba(255, 255, 255, 0.1);
   --text-primary: #ffffff;

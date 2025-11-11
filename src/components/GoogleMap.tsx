@@ -31,10 +31,10 @@ const GoogleMap: React.FC<Props> = ({
   if (showFallback) {
     return (
       <div
-        className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'
+        className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-primary)]/20'
         style={{ minHeight: height }}
       >
-        <MapPin className='text-[var(--brand-gold)] w-16 h-16 mb-8' />
+        <MapPin className='text-[var(--brand-primary)] w-16 h-16 mb-8' />
         <h3 className='text-white text-xl font-semibold mb-0'>Medusa Tattoo München</h3>
         <p className='text-white/70 text-sm mb-8 max-w-xs'>Altheimer Eck 11, 80331 München</p>
         <div className='flex flex-col sm:flex-row gap-0'>
@@ -42,7 +42,7 @@ const GoogleMap: React.FC<Props> = ({
             href='https://maps.google.com/?q=Medusa+Tattoo+München+Altheimer+Eck+11+80331+München'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-0 bg-[var(--brand-gold)] text-black px-8 py-0 rounded-lg hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex items-center gap-0 bg-[var(--brand-primary)] text-black px-8 py-0 rounded-lg hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
           >
             <ExternalLink size={16} />
             Karte öffnen
@@ -51,7 +51,7 @@ const GoogleMap: React.FC<Props> = ({
             href='https://www.google.com/maps/dir//Medusa+Tattoo+München,+Altheimer+Eck+11,+80331+München'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-0 border border-[var(--brand-gold)] text-[var(--brand-gold)] px-8 py-0 rounded-lg hover:bg-[var(--brand-gold)]/10 transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex items-center gap-0 border border-[var(--brand-primary)] text-[var(--brand-primary)] px-8 py-0 rounded-lg hover:bg-[var(--brand-primary)]/10 transition-colors font-medium transition duration-200 ease-out'
           >
             Route planen
           </a>

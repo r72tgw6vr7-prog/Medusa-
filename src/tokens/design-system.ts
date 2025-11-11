@@ -14,7 +14,7 @@ export const designTokens = {
     warning: '#F59E0B',
     error: '#EF4444',
     // Legacy brand colors for backward compatibility
-    brandGold: '#d4af37',
+    brandGold: '#7d315d',
     brandChrome: '#c0c0c0',
     brandBackground: '#222222',
     brandWhite: '#ffffff',
@@ -106,10 +106,10 @@ export const designTokens = {
     md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
     lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
     // Gold glow shadows
-    goldSubtle: '0 0 10px rgba(212, 175, 55, 0.2)',
-    gold: '0 0 20px rgba(212, 175, 55, 0.3)',
-    goldStrong: '0 0 30px rgba(212, 175, 55, 0.4)',
-    goldMedium: '0 4px 20px rgba(212, 175, 55, 0.3)',
+    goldSubtle: '0 0 10px rgba(125, 49, 93, 0.2)',
+    gold: '0 0 20px rgba(125, 49, 93, 0.3)',
+    goldStrong: '0 0 30px rgba(125, 49, 93, 0.4)',
+    goldMedium: '0 4px 20px rgba(125, 49, 93, 0.3)',
   },
   borderRadius: {
     sm: '4px',

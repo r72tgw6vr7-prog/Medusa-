@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { PageHeader } from '@/components/atoms';
 import { MapPin, Phone, Mail, Clock, Instagram, Star } from 'lucide-react';
 
 interface ContactFormData {
@@ -13,23 +13,23 @@ interface ContactFormData {
 }
 
 const studioInfo = {
-  name: 'MEDUSA TATTOO MÜNCHEN',
+  name: 'BUSINESS NAME',
   address: {
-    street: 'Altheimer Eck 11',
-    city: '80331 München',
+    street: 'Your Street Address',
+    city: 'Your City, Postal Code',
   },
   contact: {
-    phone: '+49 (0) 89 269 313',
-    email: 'info@medusa-tattoo.de',
+    phone: '+1 (555) 123-4567',
+    email: 'info@your-business.com',
   },
   hours: {
-    weekdays: 'Mo-Fr: 11:30-18:30',
-    saturday: 'Sa: 11:00-16:00',
-    sunday: 'So: Geschlossen',
+    weekdays: 'Mon-Fri: 9:00-17:00',
+    saturday: 'Sat: 10:00-14:00',
+    sunday: 'Sun: Closed',
   },
   social: {
-    instagram: '@medusa_tattoo_munich',
-    facebook: 'Medusa Tattoo München',
+    instagram: '@your_business',
+    facebook: 'Your Business Name',
     googleRating: 4.9,
   },
 };
@@ -45,10 +45,24 @@ export const ContactPage: React.FC = () => {
     reset,
   } = useForm<ContactFormData>();
 
-  const onSubmit = async (_data: ContactFormData) => {
+  const onSubmit = async (formData: ContactFormData) => {
     try {
       setSubmitError(null);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          language: 'DE',
+        }),
+      });
+      const result = await resp.json().catch(() => ({ success: false }));
+      if (!resp.ok || !result?.success) {
+        throw new Error(result?.message || 'CONTACT_FAILED');
+      }
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
@@ -91,7 +105,7 @@ export const ContactPage: React.FC = () => {
                   <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
                     Kontaktformular
                   </p>
-                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
+                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-primary)]">
                     Schreiben Sie uns
                   </h2>
                   <p className='text-white/70 font-body'>
@@ -102,15 +116,15 @@ export const ContactPage: React.FC = () => {
 
                 {isSubmitted ? (
                   <div
-                    className='flex h-full flex-col items-center justify-center border border-[var(--brand-gold)]/60 bg-[var(--brand-gold)]/10 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)]'
+                    className='flex h-full flex-col items-center justify-center border border-[var(--brand-primary)]/60 bg-[var(--brand-primary)]/10 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)]'
                     style={{
                       gap: 'var(--spacing-4)',
                       borderRadius: 'var(--radius-2xl)',
                       padding: 'var(--spacing-8)',
                     }}
                   >
-                    <div className='text-5xl text-[var(--brand-gold)]'>✓</div>
-                    <h3 className="font-['Playfair_Display'] text-2xl text-[var(--brand-gold)]">
+                    <div className='text-5xl text-[var(--brand-primary)]'>✓</div>
+                    <h3 className="font-['Playfair_Display'] text-2xl text-[var(--brand-primary)]">
                       Nachricht gesendet!
                     </h3>
                     <p className='max-w-md text-white/80 font-body'>
@@ -141,7 +155,7 @@ export const ContactPage: React.FC = () => {
                             message: 'Name muss mindestens 2 Zeichen lang sein',
                           },
                         })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
+                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]/80 focus:border-transparent ${
                           errors.name ? 'border-red-500/70' : 'border-white/10'
                         }`}
                         placeholder='Ihr Name'
@@ -166,7 +180,7 @@ export const ContactPage: React.FC = () => {
                             message: 'Ungültige E-Mail-Adresse',
                           },
                         })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
+                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]/80 focus:border-transparent ${
                           errors.email ? 'border-red-500/70' : 'border-white/10'
                         }`}
                         placeholder='ihre.email@beispiel.de'
@@ -193,7 +207,7 @@ export const ContactPage: React.FC = () => {
                             message: 'Betreff muss mindestens 3 Zeichen lang sein',
                           },
                         })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
+                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]/80 focus:border-transparent ${
                           errors.subject ? 'border-red-500/70' : 'border-white/10'
                         }`}
                         placeholder='Worum geht es?'
@@ -220,7 +234,7 @@ export const ContactPage: React.FC = () => {
                             message: 'Nachricht muss mindestens 10 Zeichen lang sein',
                           },
                         })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/[0.03] text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent resize-none ${
+                        className={`w-full rounded-xl border px-8 py-4 bg-white/[0.03] text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)]/80 focus:border-transparent resize-none ${
                           errors.message ? 'border-red-500/70' : 'border-white/10'
                         }`}
                         placeholder='Ihre Nachricht an uns...'
@@ -239,7 +253,7 @@ export const ContactPage: React.FC = () => {
                     <button
                       type='submit'
                       disabled={isSubmitting}
-                      className='flex flex-col h-full h-12 w-full inline-flex items-center justify-center rounded-xl bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold text-lg tracking-wide transition-all duration-300 hover:bg-[var(--brand-gold-hover)] hover:shadow-[0_12px_40px_rgba(212,175,55,0.35)] disabled:opacity-60 disabled:cursor-not-allowed'
+                      className='flex flex-col h-full h-12 w-full inline-flex items-center justify-center rounded-xl bg-[var(--brand-primary)] text-[#1A1A1A] font-semibold text-lg tracking-wide transition-all duration-300 hover:bg-[var(--brand-hover)] hover:shadow-[0_12px_40px_rgba(125,49,93,0.35)] disabled:opacity-60 disabled:cursor-not-allowed'
                     >
                       {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
                     </button>
@@ -255,20 +269,19 @@ export const ContactPage: React.FC = () => {
                   <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
                     Studio & Service
                   </p>
-                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
+                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-primary)]">
                     Unser Studio
                   </h2>
                   <p className='text-white/70 font-body'>
-                    Besuchen Sie uns im Herzen von München oder vereinbaren Sie einen
-                    Beratungstermin.
+                    Visit us at our location or schedule a consultation appointment.
                   </p>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)' }}>
                   <div className='bg-black/45 border border-white/10 rounded-2xl p-8 flex flex-col h-full'>
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <MapPin className='text-[var(--brand-gold)]' size={22} />
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
+                        <MapPin className='text-[var(--brand-primary)]' size={22} />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>Adresse</h3>
@@ -281,14 +294,14 @@ export const ContactPage: React.FC = () => {
 
                   <div className='bg-black/45 border border-white/10 rounded-2xl p-8 space-y-8 flex flex-col h-full'>
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Phone className='text-[var(--brand-gold)]' size={22} />
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
+                        <Phone className='text-[var(--brand-primary)]' size={22} />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>Telefon</h3>
                         <a
                           href={`tel:${studioInfo.contact.phone.replaceAll(/\s/g, '')}`}
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out'
+                          className='text-white/80 hover:text-[var(--brand-primary)] transition-colors duration-200 ease-out'
                         >
                           {studioInfo.contact.phone}
                         </a>
@@ -296,14 +309,14 @@ export const ContactPage: React.FC = () => {
                     </div>
 
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Mail className='text-[var(--brand-gold)]' size={22} />
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
+                        <Mail className='text-[var(--brand-primary)]' size={22} />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>E-Mail</h3>
                         <a
                           href={`mailto:${studioInfo.contact.email}`}
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out break-all'
+                          className='text-white/80 hover:text-[var(--brand-primary)] transition-colors duration-200 ease-out break-all'
                         >
                           {studioInfo.contact.email}
                         </a>
@@ -313,8 +326,8 @@ export const ContactPage: React.FC = () => {
 
                   <div className='bg-black/45 border border-white/10 rounded-2xl p-8 flex flex-col h-full'>
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Clock className='text-[var(--brand-gold)]' size={22} />
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
+                        <Clock className='text-[var(--brand-primary)]' size={22} />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>Öffnungszeiten</h3>
@@ -329,14 +342,14 @@ export const ContactPage: React.FC = () => {
 
                   <div className='bg-black/45 border border-white/10 rounded-2xl p-8 space-y-8 flex flex-col h-full'>
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Instagram className='text-[var(--brand-gold)]' size={22} />
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
+                        <Instagram className='text-[var(--brand-primary)]' size={22} />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>Instagram</h3>
                         <a
                           href='https://instagram.com/medusa_tattoo_munich'
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out'
+                          className='text-white/80 hover:text-[var(--brand-primary)] transition-colors duration-200 ease-out'
                           target='_blank'
                           rel='noopener noreferrer'
                         >
@@ -346,9 +359,9 @@ export const ContactPage: React.FC = () => {
                     </div>
 
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
                         <svg
-                          className='text-[var(--brand-gold)]'
+                          className='text-[var(--brand-primary)]'
                           width='22'
                           height='22'
                           fill='currentColor'
@@ -364,17 +377,17 @@ export const ContactPage: React.FC = () => {
                     </div>
 
                     <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
+                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-primary)]/15 h-12 flex items-center justify-center shrink-0'>
                         <Star
-                          className='text-[var(--brand-gold)]'
+                          className='text-[var(--brand-primary)]'
                           size={20}
-                          fill='var(--brand-gold)'
+                          fill='var(--brand-primary)'
                         />
                       </div>
                       <div>
                         <h3 className='text-white font-semibold text-lg mb-0'>Google Reviews</h3>
                         <div className='flex items-center gap-0'>
-                          <span className='text-[var(--brand-gold)] font-bold text-xl'>
+                          <span className='text-[var(--brand-primary)] font-bold text-xl'>
                             {studioInfo.social.googleRating}
                           </span>
                           <span className='text-white/75'>★ Bewertungen</span>

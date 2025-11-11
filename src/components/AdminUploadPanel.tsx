@@ -97,8 +97,8 @@ export function AdminUploadPanel() {
 
   if (!isLoggedIn) {
     return (
-      <div className='max-w-md mx-auto mt-8 p-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'>
-        <h2 className='text-2xl font-bold mb-8 text-[var(--brand-gold)]'>Admin Login</h2>
+      <div className='max-w-md mx-auto mt-8 p-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-primary)]/20'>
+        <h2 className='text-2xl font-bold mb-8 text-[var(--brand-primary)]'>Admin Login</h2>
         <form onSubmit={handleLogin} className='space-y-8'>
           <div>
             <label className='block text-sm font-medium text-gray-200 mb-0'>Email</label>
@@ -106,7 +106,7 @@ export function AdminUploadPanel() {
               type='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-gold)]'
+              className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-primary)]'
             />
           </div>
           <div>
@@ -115,13 +115,13 @@ export function AdminUploadPanel() {
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-gold)]'
+              className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-primary)]'
             />
           </div>
           {error && <p className='text-red-400 text-sm'>{error}</p>}
           <button
             type='submit'
-            className='w-full bg-[var(--brand-gold)] text-black py-0 px-8 rounded-md hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
+            className='w-full bg-[var(--brand-primary)] text-black py-0 px-8 rounded-md hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
           >
             Anmelden
           </button>
@@ -131,9 +131,9 @@ export function AdminUploadPanel() {
   }
 
   return (
-    <div className='max-w-4xl mx-auto mt-8 p-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'>
+    <div className='max-w-4xl mx-auto mt-8 p-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-primary)]/20'>
       <div className='flex justify-between items-center mb-8'>
-        <h2 className='text-2xl font-bold text-[var(--brand-gold)]'>Fotos hochladen</h2>
+        <h2 className='text-2xl font-bold text-[var(--brand-primary)]'>Fotos hochladen</h2>
         <button
           onClick={() => setIsLoggedIn(false)}
           className='text-gray-400 hover:text-white transition-colors transition duration-200 ease-out'
@@ -147,7 +147,7 @@ export function AdminUploadPanel() {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-gold)]'
+          className='w-full px-0 py-0 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-[var(--brand-primary)]'
         >
           <option value='tattoos'>Tattoos</option>
           <option value='piercings'>Piercings</option>
@@ -158,22 +158,22 @@ export function AdminUploadPanel() {
       <div
         {...getRootProps()}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
-          ${isDragActive ? 'border-[var(--brand-gold)] bg-[var(--brand-gold)]/10' : 'border-gray-600 hover:border-[var(--brand-gold)]/50'}
+          ${isDragActive ? 'border-[var(--brand-primary)] bg-[var(--brand-primary)]/10' : 'border-gray-600 hover:border-[var(--brand-primary)]/50'}
           ${uploading ? 'cursor-not-allowed opacity-50' : ''}`}
       >
         <input {...getInputProps()} />
         <div className='flex flex-col items-center gap-0'>
           {uploading ? (
             <>
-              <Loader2 className='w-10 h-10 text-[var(--brand-gold)] animate-spin' />
+              <Loader2 className='w-10 h-10 text-[var(--brand-primary)] animate-spin' />
               <p className='text-gray-300'>Hochladen...</p>
             </>
           ) : (
             <>
               {isDragActive ? (
                 <>
-                  <Upload className='w-10 h-10 text-[var(--brand-gold)]' />
-                  <p className='text-[var(--brand-gold)]'>Fotos hier ablegen...</p>
+                  <Upload className='w-10 h-10 text-[var(--brand-primary)]' />
+                  <p className='text-[var(--brand-primary)]'>Fotos hier ablegen...</p>
                 </>
               ) : (
                 <>

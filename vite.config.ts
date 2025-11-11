@@ -56,6 +56,33 @@ export default defineConfig({
           }
         });
       }
+    },
+    {
+      name: 'api-dev-handler',
+      configureServer(server) {
+        // Bridge Dev -> Local serverless handlers for API routes
+        const attachNodeHandler = (route: string, modulePath: string) => {
+          server.middlewares.use(route, async (req, res) => {
+            try {
+              const mod = (await import(modulePath)) as Record<string, unknown>;
+              const candidate = (mod as Record<string, unknown>).default ?? (mod as Record<string, unknown>).handler ?? mod;
+              const handler = candidate as unknown;
+              if (typeof handler !== 'function') throw new Error('Invalid API handler export');
+              // Call Node-style handler(req, res)
+              return (handler as (req: unknown, res: unknown) => unknown)(req, res);
+            } catch (error) {
+              console.error(`API handler error for ${route}:`, error);
+              res.statusCode = 500;
+              res.end(JSON.stringify({ success: false, error: 'API handler failed' }));
+            }
+          });
+        };
+        attachNodeHandler('/api/booking', path.resolve(__dirname, './api/booking.js'));
+        attachNodeHandler('/api/contact', path.resolve(__dirname, './api/contact.js'));
+        attachNodeHandler('/api/health', path.resolve(__dirname, './api/health.js'));
+        attachNodeHandler('/api/email/sendgrid', path.resolve(__dirname, './api/email/sendgrid.js'));
+        attachNodeHandler('/api/newsletter', path.resolve(__dirname, './api/newsletter.js'));
+      }
     }
   ],
   base: '/',

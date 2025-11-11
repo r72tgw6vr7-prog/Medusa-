@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Section from '@/components/ui/Section';
+import { Section } from '@/components/atoms';
 
 interface GalleryImage {
   id: string;
@@ -45,11 +45,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       : false;
 
   return (
-    <Section className={`py-16 lg:py-24 ${className} relative z-10`} containerSize='default'>
+    <Section className={`py-16 lg:py-24 ${className} relative z-10`}>
       {/* Header */}
       <div className='text-center space-y-8 mb-16'>
         <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>Galerie</p>
-        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>{title}</h2>
+        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-primary)]'>{title}</h2>
         <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
           {subtitle}
         </p>
@@ -85,7 +85,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             <div className='absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex flex-col h-full' />
 
             {/* Gold border on hover */}
-            <div className='absolute inset-0 border-2 border-transparent group-hover:border-[var(--brand-gold)] rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
+            <div className='absolute inset-0 border-2 border-transparent group-hover:border-[var(--brand-primary)] rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
 
             {/* Optional: Image info overlay on hover */}
             <div className='absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-linear-to-t from-black/80 to-transparent flex flex-col h-full'>
@@ -110,7 +110,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
         >
           <button
             onClick={() => navigate('/gallery')}
-            className='inline-flex items-center justify-center gap-8 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+            className='inline-flex items-center justify-center gap-8 px-8 py-8 bg-[var(--brand-primary)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-hover)] transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
           >
             Zur Galerie
             <ArrowRight className='w-5 h-5' />

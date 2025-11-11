@@ -12,38 +12,30 @@ import React from 'react';
 import { TeamGrid, Footer } from '@/components/pages';
 import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { CarouselBadges } from '@/components/CarouselBadges';
-import './ArtistsPage.css';
+import { Section, PageHeader } from '@/components/atoms';
 
 export function ArtistsPage() {
   return (
     <main className='artists-page w-full min-h-screen relative z-10'>
       {/* Navigation */}
       <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
-
-      {/* Page Header - Matches Services page exactly */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
-            <div className='text-center space-y-8'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Medusa München
-              </p>
-              <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
-                Künstler
-              </h1>
-              <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
-                Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.
-              </p>
-            </div>
-          </div>
+      {/* Page Header - standardized */}
+      <Section spacing='md'>
+        <div className='mx-auto w-full max-w-[1104px]'>
+          <PageHeader
+            eyebrow='Medusa München'
+            title='Künstler'
+            subtitle='Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen.'
+            alignment='center'
+            maxWidth='md'
+          />
         </div>
-      </section>
+      </Section>
 
       {/* Artists Grid Section */}
-      <section className='section-padding relative z-10'>
+      <Section spacing='md'>
         <TeamGrid containerSize='wide' />
-      </section>
+      </Section>
 
       {/* Trust Statistics Strip */}
       <CarouselBadges />

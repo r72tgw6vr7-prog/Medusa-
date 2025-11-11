@@ -100,7 +100,7 @@
   outline: none;
   box-shadow:
     0 0 0 2px var(--color-text-primary),
-    0 0 0 4px var(--color-brand-gold);
+    0 0 0 4px var(--brand-primary);
 }
 
 .focus-ring-chrome {
@@ -143,7 +143,7 @@
 
 /* Color Transitions */
 .color-gold-to-chrome {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
   transition-property: color;
   transition-duration: var(--transition-duration-normal);
   transition-timing-function: var(--transition-easing-smooth);
@@ -161,7 +161,7 @@
 }
 
 .color-chrome-to-gold:hover {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 /* Motion Preferences */
@@ -198,7 +198,7 @@
   outline: none;
   box-shadow:
     0 0 0 2px var(--color-text-primary),
-    0 0 0 4px var(--color-brand-gold);
+    0 0 0 4px var(--brand-primary);
 }
 
 .preset-button-gold {
@@ -220,7 +220,7 @@
   outline: none;
   box-shadow:
     0 0 0 2px var(--color-text-primary),
-    0 0 0 4px var(--color-brand-gold);
+    0 0 0 4px var(--brand-primary);
 }
 
 .preset-card {
@@ -242,7 +242,7 @@
 }
 
 .preset-link:hover {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
   filter: brightness(1.1);
 }
 

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { ChevronDown, MessageCircle, Globe } from 'lucide-react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { PageHeader } from '@/components/atoms';
 import { PageBackground } from '../components/atoms/PageBackground';
+import { Section } from '@/components/atoms';
 
 interface FAQItem {
   id: string;
@@ -182,12 +183,10 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
     <PageBackground>
       <div className='text-white flex flex-col'>
         <MainNavigation />
-        <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
-
         <main className='flex-1'>
-          {/* Page Header - Matches Services page exactly */}
-          <section className='section-padding relative z-10'>
-            <div className='responsive-container safe-area-padding'>
+          {/* Page Header - Standardized with Section + PageHeader */}
+          <Section background='transparent' className='pt-32'>
+            <div className='mx-auto w-full max-w-[1104px]'>
               <PageHeader
                 eyebrow='Medusa München'
                 title={t.title}
@@ -195,7 +194,7 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
                 alignment='center'
               />
             </div>
-          </section>
+          </Section>
 
           {/* FAQ Sections */}
           <section className='section-padding bg-deep-black'>
@@ -205,7 +204,7 @@ export function FAQPage({ language = 'DE', onLanguageChange }: FAQPageProps) {
                   <div key={section.id} className='space-y-8'>
                     <div className='text-center space-y-8'>
                       <p className='text-sm uppercase tracking-[0.25em] text-white/60'>FAQ</p>
-                      <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+                      <h2 className='font-headline text-3xl md:text-4xl text-brand-magenta'>
                         {section.title}
                       </h2>
                     </div>

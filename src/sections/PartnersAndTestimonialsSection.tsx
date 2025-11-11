@@ -1,25 +1,26 @@
 import React from 'react';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
 import './PartnersAndTestimonialsSection.css';
+import { IMAGE_PATHS } from '../config/imagePaths';
 
 // PARTNER LOGOS - REFINEMENT #4: Only 4 real partners - FIXED WITH CORRECT PATHS
 const partnerLogos = [
   {
     id: 'iamrobot',
     name: 'I AM ROBOT',
-    src: '/assets/images/photos/partners/iamrobot-logo.svg',
+    src: IMAGE_PATHS.partners.iamrobot,
     alt: 'I AM ROBOT NFC Chip Implants Logo',
   },
   {
     id: 'nannybag',
     name: 'nannybag',
-    src: '/assets/images/photos/partners/nannybag-logo.svg',
+    src: IMAGE_PATHS.partners.nannybag,
     alt: 'nannybag Logo',
   },
   {
     id: 'bqla',
     name: 'BQLA',
-    src: '/assets/images/photos/partners/bqla-logo.svg',
+    src: IMAGE_PATHS.partners.bqla,
     alt: 'BQLA Partner Logo',
   },
 ];
@@ -43,7 +44,7 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
       <div className='max-w-[1200px] mx-auto px-8 sm:px-8 lg:px-16 py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
         <div className='text-center mb-8'>
-          <h2 className="font-['Playfair_Display'] text-[32px] lg:text-[48px] font-semibold leading-tight text-[#D4AF37]">
+          <h2 className="font-['Playfair_Display'] text-[32px] lg:text-[48px] font-semibold leading-tight text-[var(--brand-primary)]">
             {titlePartners}
           </h2>
         </div>
@@ -67,7 +68,7 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       console.error('Failed to load logo:', logo.src);
-                      target.style.display = 'none';
+                      target.src = IMAGE_PATHS.fallback.placeholder;
                     }}
                   />
                 </div>

@@ -69,7 +69,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
+  border-bottom: 1px solid rgba(var(--brand-magenta-rgb), 0.1);
   position: sticky;
   top: 0;
   background: rgba(var(--color-surface-darker-rgb), 0.8);
@@ -82,7 +82,7 @@
   margin: 0;
   font-size: var(--text-h2-mobile);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .close-button {
@@ -155,8 +155,8 @@
 }
 
 .service-card.selected {
-  border-color: var(--color-brand-gold);
-  box-shadow: 0 0 0 2px var(--color-brand-gold);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px var(--brand-primary);
 }
 
 .service-card:hover {
@@ -167,14 +167,14 @@
 .service-icon {
   font-size: 2rem;
   margin-bottom: var(--space-2);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .service-card h4 {
   margin: 0;
   font-size: var(--text-h4-desktop);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .price {

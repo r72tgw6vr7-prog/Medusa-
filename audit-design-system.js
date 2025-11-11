@@ -17,8 +17,8 @@ const path = require('path');
 // Configuration: Rules & Settings
 // -------------------------------
 const CONFIG = {
-  // Directory to scan (overridden by CLI arg)
-  rootDir: process.argv[2] || './src',
+  // Directory to scan (fixed to repository src to prevent path traversal)
+  rootDir: path.resolve(__dirname, 'src'),
   debug: process.argv.includes('--debug'),
 
   // Forbidden spacing: Any spacing class not aligned to 8px system is a violation.
@@ -47,6 +47,14 @@ const CONFIG = {
   // Output file
   reportFile: 'design-system-audit-report.json'
 };
+
+// Restrict scanning to within the repository root (directory of this script)
+const ALLOWED_ROOT = fs.realpathSync(path.resolve(__dirname, '.'));
+
+function isPathInside(parent, child) {
+  const rel = path.relative(parent, child);
+  return !!rel && !rel.startsWith('..') && !path.isAbsolute(rel);
+}
 
 // -------------------------------
 // Utilities
@@ -358,7 +366,25 @@ function writeReport(violations, rootDir) {
   console.log('Medusa Design System Audit');
   console.log('Scanning:', absDir);
 
-  const files = walkDir(absDir);
+  // Resolve real path and enforce scanning within allowed root
+  let realAbsDir;
+  try {
+    realAbsDir = fs.realpathSync(absDir);
+  } catch (e) {
+    console.error('Error resolving real path:', e?.message || e);
+    process.exit(1);
+  }
+
+  const realAllowed = ALLOWED_ROOT;
+  const inside = realAbsDir === realAllowed || isPathInside(realAllowed, realAbsDir);
+  if (!inside) {
+    console.error('Error: Target directory is outside of the repository root and is not allowed.');
+    console.error('Allowed root:', realAllowed);
+    console.error('Requested path:', realAbsDir);
+    process.exit(1);
+  }
+
+  const files = walkDir(realAbsDir);
   console.log(`Found ${files.length} source files (.tsx/.jsx).`);
 
   const allViolations = [];
@@ -369,7 +395,7 @@ function writeReport(violations, rootDir) {
   }
 
   printSummary(allViolations);
-  const reportPath = writeReport(allViolations, absDir);
+  const reportPath = writeReport(allViolations, realAbsDir);
   console.log(`\nFull report written to: ${reportPath}`);
   console.log('Tip: Re-run with --debug for detailed logs.');
 })();

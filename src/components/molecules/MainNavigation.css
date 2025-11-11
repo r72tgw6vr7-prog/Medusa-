@@ -14,29 +14,19 @@
   left: 0 !important;
   right: 0 !important;
   z-index: 9998 !important;
-  background: rgba(26, 26, 26, 0.4) !important;
   width: 100% !important;
   -webkit-backdrop-filter: blur(8px) saturate(150%);
   backdrop-filter: blur(8px) saturate(150%);
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease !important;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.08) !important;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Logo/text colors for transparent state */
-.navigation .nav-logo,
-.navigation .nav-link {
-  color: #ffffff;
-  transition: color 0.3s ease;
-}
+/* Colors are controlled via Tailwind token classes on elements */
 
 /* Buttons for transparent state */
-.navigation .hero-appointment-cta {
-  border-color: #d4af37;
-  color: #c0c0c0;
-}
+/* CTA colors are provided via Tailwind classes in JSX */
 
 /* Language Toggle Animation */
 .language-toggle {
@@ -45,15 +35,10 @@
   height: 48px;
   padding: 4px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(212, 175, 55, 0.2);
   display: flex;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    0 0 5px rgba(212, 175, 55, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -61,14 +46,11 @@
   position: absolute;
   width: 56px;
   height: 40px;
-  background: linear-gradient(145deg, #d4af37, #c9a62c);
+  background: linear-gradient(145deg, var(--brand-primary), var(--brand-accent));
   border-radius: 20px;
   transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
   left: 4px;
   top: 4px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .language-toggle__indicator--en {
@@ -92,59 +74,14 @@
   letter-spacing: 0.03em;
 }
 
-.nav-cta {
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  color: #d4af37 !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-cta:hover {
-  background: rgba(212, 175, 55, 0.2);
-  border-color: rgba(212, 175, 55, 0.5);
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.2),
-    0 0 15px rgba(212, 175, 55, 0.4);
-  transform: translateY(-2px);
-}
-
-.language-toggle__button--active {
-  color: #000000;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.language-toggle__button--inactive {
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.language-toggle__button:hover.language-toggle__button--inactive {
-  color: rgba(255, 255, 255, 0.9);
-}
-
 /* ============================================
    PHASE 2: SOLID NAVIGATION (WHEN SCROLLED)
    ============================================ */
 
 /* Scrolled state - Enhanced glassmorphism */
 .navigation.scrolled {
-  background: rgba(26, 26, 26, 0.6) !important;
   -webkit-backdrop-filter: blur(10px) saturate(160%);
   backdrop-filter: blur(10px) saturate(160%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15) !important;
-}
-
-/* Logo/text colors for scrolled state (remain white) */
-.navigation.scrolled .nav-logo,
-.navigation.scrolled .nav-link {
-  color: #ffffff;
-}
-
-/* Buttons for scrolled state */
-.navigation.scrolled .hero-appointment-cta {
-  border-color: #d4af37;
-  color: #c0c0c0;
 }
 
 /* ============================================
@@ -159,11 +96,11 @@
   width: 48px;
   height: 48px;
   border-radius: 16px;
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  background: rgba(10, 10, 10, 0.75) !important;
+  border: 1px solid rgba(var(--color-brand-primary-rgb), 0.45);
+  background: rgba(var(--color-surface-darker-rgb), 0.75) !important;
   box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.45),
-    0 0 20px rgba(212, 175, 55, 0.18);
+    0 6px 18px rgba(var(--color-surface-darker-rgb), 0.45),
+    0 0 20px rgba(var(--color-brand-primary-rgb), 0.18);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
@@ -200,16 +137,16 @@
 .mobile-menu-button:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.5),
-    0 0 28px rgba(212, 175, 55, 0.28);
-  border-color: rgba(212, 175, 55, 0.6);
+    0 10px 24px rgba(var(--color-surface-darker-rgb), 0.5),
+    0 0 28px rgba(var(--color-brand-primary-rgb), 0.28);
+  border-color: rgba(var(--color-brand-primary-rgb), 0.6);
 }
 
 .mobile-menu-button.is-open {
-  background: rgba(24, 24, 24, 0.9);
+  background: rgba(var(--color-surface-darker-rgb), 0.9);
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.55),
-    0 0 32px rgba(212, 175, 55, 0.32);
+    0 12px 32px rgba(var(--color-surface-darker-rgb), 0.55),
+    0 0 32px rgba(var(--color-brand-primary-rgb), 0.32);
 }
 
 .mobile-menu-button__box {
@@ -232,9 +169,6 @@
   width: 26px !important;
   height: 3px !important;
   border-radius: 2px !important;
-  background-color: #d4af37 !important;
-  background: #d4af37 !important;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7) !important;
   display: block !important;
   content: '' !important;
   visibility: visible !important;
@@ -249,7 +183,6 @@
     opacity 0.3s ease,
     top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
   /* Force visibility */
-  filter: brightness(1.2) !important;
 }
 
 .mobile-menu-button__line--top {
@@ -296,7 +229,7 @@
   /* Overlay padding under the header */
   padding: 16px 24px 32px;
   /* More transparent, glassy overlay */
-  background: rgba(26, 26, 26, 0.35);
+  background: rgba(var(--color-surface-darker-rgb), 0.35);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
   backdrop-filter: blur(14px) saturate(180%);
   /* Keep nav (z: 9998) and burger (z: 10002) above */
@@ -312,13 +245,13 @@
   position: relative;
   width: min(300px, calc(100% - 32px));
   border-radius: 32px;
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  background: rgba(26, 26, 26, 0.95);
+  border: 1px solid rgba(var(--color-brand-primary-rgb), 0.25);
+  background: rgba(var(--color-surface-darker-rgb), 0.95);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.35),
-    0 0 20px rgba(212, 175, 55, 0.15);
+    0 18px 40px rgba(var(--color-surface-darker-rgb), 0.35),
+    0 0 20px rgba(var(--color-brand-primary-rgb), 0.15);
   padding: 24px 24px 32px;
   display: flex;
   flex-direction: column;
@@ -336,7 +269,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(155deg, rgba(255, 255, 255, 0.08), rgba(212, 175, 55, 0.05));
+  background: linear-gradient(155deg, rgba(var(--color-text-primary-rgb), 0.08), rgba(var(--color-brand-primary-rgb), 0.05));
   opacity: 0.3;
   pointer-events: none;
 }
@@ -355,7 +288,7 @@
 
 .mobile-nav-link {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-heading);
   font-size: 24px;
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.02em;
@@ -370,7 +303,7 @@
 
 .mobile-nav-link:hover {
   transform: translateX(8px);
-  color: #d4af37;
+  color: var(--brand-primary);
 }
 
 .mobile-menu-overlay__language {
@@ -392,15 +325,7 @@
     padding: 12px 16px;
   }
 
-  /* Always show solid background on mobile when scrolled */
-  .navigation.scrolled {
-    background: #1a1a1a;
-  }
-
-  /* Mobile menu open state */
-  .navigation.menu-open {
-    background: #1a1a1a;
-  }
+  /* Background handled by Tailwind classes in JSX for scrolled/open states */
 
   /* Mobile menu overlay animations (portal-safe via body class) */
   body.menu-open .mobile-menu-overlay {

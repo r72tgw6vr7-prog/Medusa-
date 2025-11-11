@@ -1,0 +1,98 @@
+/* 
+   Inked Gallery Styles
+   This CSS implements a gallery grid layout similar to the inked-template.webflow.io design
+*/
+
+.inked-gallery-header {
+  padding-top: 2rem;
+}
+
+/* 
+  Gallery Grid Layout
+  Uses CSS Grid with auto-fit to create a responsive masonry-like layout
+*/
+.inked-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Gallery Items */
+.inked-gallery-item {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Make certain items span rows or columns for visual interest */
+.inked-gallery-item:nth-child(5n+1) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.inked-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.5s ease;
+}
+
+/* Overlay for gallery items */
+.inked-gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Hover effects */
+.inked-gallery-item:hover img {
+  filter: grayscale(30%);
+  transform: scale(1.05);
+}
+
+.inked-gallery-item:hover .inked-gallery-overlay {
+  opacity: 1;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .inked-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .inked-gallery-item {
+    height: 360px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .inked-gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  .inked-gallery-item {
+    height: 400px;
+  }
+  
+  /* Create a more interesting grid layout on larger screens */
+  .inked-gallery-item:nth-child(8n+1),
+  .inked-gallery-item:nth-child(8n+8) {
+    grid-column: span 2;
+    grid-row: span 2;
+    height: auto;
+  }
+}

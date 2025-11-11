@@ -93,20 +93,20 @@ function getBackgroundClassForVariant(variant: string): string {
 function getBorderClassForVariant(variant: string): string {
   switch (variant) {
     case 'navigation':
-      return 'border border-[rgba(212,175,55,0.1)]';
+      return 'border border-[rgba(125,49,93,0.1)]';
     case 'navigation-scrolled':
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(125,49,93,0.15)]';
     case 'trustBadge':
-      return 'border border-[rgba(212,175,55,0.2)]';
+      return 'border border-[rgba(125,49,93,0.2)]';
     case 'card':
     case 'service':
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(125,49,93,0.15)]';
     case 'stats':
-      return 'border border-[rgba(212,175,55,0.2)]';
+      return 'border border-[rgba(125,49,93,0.2)]';
     case 'modal':
-      return 'border border-[rgba(212,175,55,0.25)]';
+      return 'border border-[rgba(125,49,93,0.25)]';
     default:
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(125,49,93,0.15)]';
   }
 }
 
@@ -197,7 +197,7 @@ export const getGlassmorphismStyles = (
         background: 'rgba(34, 34, 34, 0.7)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
-        border: '1px solid rgba(212, 175, 55, 0.1)',
+        border: '1px solid rgba(125, 49, 93, 0.1)',
       };
   }
 };
@@ -205,15 +205,15 @@ export const getGlassmorphismStyles = (
 // Predefined glow effects to combine with glassmorphism
 export const goldGlowEffect = {
   subtle: {
-    boxShadow: '0 0 10px rgba(212, 175, 55, 0.2)',
+    boxShadow: '0 0 10px rgba(125, 49, 93, 0.2)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   standard: {
-    boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
+    boxShadow: '0 0 20px rgba(125, 49, 93, 0.3)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   strong: {
-    boxShadow: '0 0 30px rgba(212, 175, 55, 0.4)',
+    boxShadow: '0 0 30px rgba(125, 49, 93, 0.4)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
 };

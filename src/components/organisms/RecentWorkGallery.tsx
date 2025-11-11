@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Instagram } from 'lucide-react';
-import { useMedusaDesignSystem } from '../../../src/foundation/SimpleMedusaProvider';
+import { useBusinessDesignSystem } from '../../foundation';
 import { getFeaturedPortfolio } from '../../data/imageData';
 import { getImageProps } from '../../utils/imageUtils';
 
@@ -20,7 +20,7 @@ interface GalleryImage {
 interface RecentWorkGalleryProps {}
 
 export function RecentWorkGallery({}: RecentWorkGalleryProps) {
-  const { language } = useMedusaDesignSystem();
+  const { language } = useBusinessDesignSystem();
   const [activeFilter, setActiveFilter] = useState<'all' | 'style' | 'artist'>('all');
   const [styleFilter, setStyleFilter] = useState<string>('all');
   const [artistFilter, setArtistFilter] = useState<string>('all');

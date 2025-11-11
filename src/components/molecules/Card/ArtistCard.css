@@ -115,7 +115,7 @@
 }
 .artist-card-social a:hover,
 .team-card-social a:hover {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 .artist-card-bottom-info,
 .team-card-bottom-info {
@@ -166,12 +166,12 @@
 .team-card-button-primary {
   background-color: transparent;
   color: var(--color-text-primary);
-  border: 2px solid var(--color-brand-gold);
+  border: 2px solid var(--brand-primary);
 }
 .artist-card-button-primary:hover,
 .team-card-button-primary:hover {
-  background-color: rgba(var(--color-brand-gold-rgb), 0.1);
-  border-color: var(--color-brand-gold-hover);
+  background-color: rgba(var(--brand-magenta-rgb), 0.1);
+  border-color: var(--brand-hover);
 }
 .artist-card-button-secondary,
 .team-card-button-secondary {
@@ -182,10 +182,10 @@
 .artist-card-button-secondary:hover,
 .team-card-button-secondary:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-brand-gold);
+  border-color: var(--brand-primary);
 }
 .icon {
-  color: var(--color-brand-gold-hover);
+  color: var(--brand-hover);
   opacity: 0.7;
 }
 /* Role badge on card */
@@ -196,7 +196,7 @@
   justify-content: center;
   gap: var(--space-1, 8px);
   background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--color-brand-gold);
+  border: 1px solid var(--brand-primary);
   border-radius: 9999px;
   color: var(--color-text-primary);
   padding: var(--space-0-5, 6px) var(--space-1-5, 12px);

@@ -30,3 +30,4 @@ export * from './AccessibilityEnhancements';
 // export * from './GDPRCompliance'; // REMOVED - duplicate, using molecules/GDPRCompliance
 export * from './ConsentManager';
 // export * from './PricingPageSimple'; // REMOVED - using src/pages/PricingPage.tsx instead
+export * from './StudioShowcase';

@@ -190,8 +190,10 @@ export function MainNavigation() {
         id='main-navigation'
         aria-label='Main navigation'
         className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
-          scrolled ? 'scrolled' : ''
-        } ${menuOpen ? 'menu-open' : ''}`}
+          scrolled || menuOpen
+            ? 'bg-overlay-heavy border-b border-border-navigation shadow-md'
+            : 'bg-overlay-medium border-b border-border-navigation shadow-sm'
+        } ${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
         <div className='mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-16'>
@@ -231,14 +233,18 @@ export function MainNavigation() {
           </div>
 
           <div className='hidden items-center gap-8 xl:flex'>
-            <div className='language-toggle' role='group' aria-label='Language selection'>
+            <div
+              className='language-toggle bg-overlay-subtle border border-border-navigation shadow-gold-glow-subtle rounded-full'
+              role='group'
+              aria-label='Language selection'
+            >
               <div
                 className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
               />
               <button
                 type='button'
                 className={`language-toggle__button ${
-                  isGerman ? 'language-toggle__button--active' : 'language-toggle__button--inactive'
+                  isGerman ? 'text-deep-black' : 'text-text-primary hover:text-text-primary/90'
                 }`}
                 onClick={() => switchLanguage('de')}
               >
@@ -247,7 +253,7 @@ export function MainNavigation() {
               <button
                 type='button'
                 className={`language-toggle__button ${
-                  isGerman ? 'language-toggle__button--inactive' : 'language-toggle__button--active'
+                  isGerman ? 'text-text-primary hover:text-text-primary/90' : 'text-deep-black'
                 }`}
                 onClick={() => switchLanguage('en')}
               >
@@ -270,9 +276,9 @@ export function MainNavigation() {
               }`}
             >
               <span aria-hidden className='mobile-menu-button__box'>
-                <span className='mobile-menu-button__line mobile-menu-button__line--top' />
-                <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
-                <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
+                <span className='mobile-menu-button__line mobile-menu-button__line--top bg-brand-gold shadow-gold-glow' />
+                <span className='mobile-menu-button__line mobile-menu-button__line--middle bg-brand-gold shadow-gold-glow' />
+                <span className='mobile-menu-button__line mobile-menu-button__line--bottom bg-brand-gold shadow-gold-glow' />
               </span>
               <span className='sr-only'>{menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}</span>
             </button>
@@ -287,11 +293,11 @@ export function MainNavigation() {
               role='dialog'
               aria-modal='true'
               aria-labelledby='mobile-menu-title'
-              className='mobile-menu-overlay'
+              className='mobile-menu-overlay bg-overlay-medium'
               onClick={handleOverlayClick}
               onKeyDown={handleNavKeyDown}
             >
-              <div className='mobile-menu-overlay__panel'>
+              <div className='mobile-menu-overlay__panel bg-overlay-heavy border border-border-navigation shadow-md rounded-3xl'>
                 <h2 id='mobile-menu-title' className='sr-only'>
                   Main Menu
                 </h2>
@@ -315,7 +321,11 @@ export function MainNavigation() {
                 </nav>
 
                 <div className='mobile-menu-overlay__language'>
-                  <div className='language-toggle' role='group' aria-label='Language selection'>
+                  <div
+                    className='language-toggle bg-overlay-subtle border border-border-navigation shadow-gold-glow-subtle rounded-full'
+                    role='group'
+                    aria-label='Language selection'
+                  >
                     <div
                       className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
                     />
@@ -323,8 +333,8 @@ export function MainNavigation() {
                       type='button'
                       className={`language-toggle__button ${
                         isGerman
-                          ? 'language-toggle__button--active'
-                          : 'language-toggle__button--inactive'
+                          ? 'text-deep-black'
+                          : 'text-text-primary hover:text-text-primary/90'
                       }`}
                       onClick={() => switchLanguage('de')}
                       tabIndex={menuOpen ? 0 : -1}
@@ -335,8 +345,8 @@ export function MainNavigation() {
                       type='button'
                       className={`language-toggle__button ${
                         isGerman
-                          ? 'language-toggle__button--inactive'
-                          : 'language-toggle__button--active'
+                          ? 'text-text-primary hover:text-text-primary/90'
+                          : 'text-deep-black'
                       }`}
                       onClick={() => switchLanguage('en')}
                       tabIndex={menuOpen ? 0 : -1}
@@ -350,7 +360,7 @@ export function MainNavigation() {
                   <Link
                     to='/booking'
                     onClick={closeMenu}
-                    className='hero-appointment-cta nav-cta inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold transition-all duration-300'
+                    className='bg-brand-gold/10 border border-brand-gold/30 text-brand-gold hover:bg-brand-gold/20 hover:border-brand-gold/50 hover:shadow-gold-glow-medium hover:-translate-y-0.5 transition-all duration-300 cubic-bezier-custom inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold'
                     aria-label={t('nav.booking')}
                     tabIndex={menuOpen ? 0 : -1}
                   >

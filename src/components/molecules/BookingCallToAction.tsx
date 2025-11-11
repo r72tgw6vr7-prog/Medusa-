@@ -19,7 +19,7 @@ import {
   Star,
 } from 'lucide-react';
 import { useLuxuryInteractions, LuxuryButton, LuxuryInput } from '../atoms/MicroInteractions';
-import { useMedusaDesignSystem } from '../../../src/foundation/SimpleMedusaProvider';
+import { useBusinessDesignSystem } from '../../foundation/BusinessProvider';
 
 // Updated to use consolidated asset structure
 const newBackgroundImage = '/assets/images/photos/backgrounds/tattoo-card-bg.webp';
@@ -38,7 +38,7 @@ interface FormData {
 }
 
 export function BookingCallToAction({ onBookNow }: BookingCallToActionProps) {
-  const { language } = useMedusaDesignSystem();
+  const { language } = useBusinessDesignSystem();
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
@@ -212,7 +212,7 @@ export function BookingCallToAction({ onBookNow }: BookingCallToActionProps) {
           src={newBackgroundImage}
           alt='Professional tattoo artist at work in luxury studio with cinematic lighting'
           className='w-full h-full object-cover object-center scale-110'
-          onError={(e) => (e.currentTarget.src = '/images/placeholder.jpg')}
+          onError={(e) => (e.currentTarget.src = '/assets/images/icons/placeholder.svg')}
         />
 
         {/* Enhanced Luxury Gradient Overlay */}
@@ -226,7 +226,7 @@ export function BookingCallToAction({ onBookNow }: BookingCallToActionProps) {
         <div
           className='absolute inset-0 opacity-10'
           style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.2) 0%, transparent 50%), 
+            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(125, 49, 93, 0.2) 0%, transparent 50%), 
                            radial-gradient(circle at 75% 75%, rgba(192, 192, 192, 0.1) 0%, transparent 50%)`,
           }}
         ></div>
@@ -247,7 +247,7 @@ export function BookingCallToAction({ onBookNow }: BookingCallToActionProps) {
           <motion.h2
             className='text-headline-xl font-headline text-brand-gold mb-8 relative magnetic-cursor-target'
             style={{
-              textShadow: '0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.2)',
+              textShadow: '0 0 20px rgba(125, 49, 93, 0.4), 0 0 40px rgba(125, 49, 93, 0.2)',
             }}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}

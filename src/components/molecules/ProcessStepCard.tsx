@@ -29,7 +29,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <div
         className={`
         relative z-10 shrink-0 w-12 h-12 rounded-full flex items-center justify-center
-        ${isActive || isComplete ? 'bg-[var(--brand-gold)]' : 'bg-[var(--deep-black)] border border-[var(--brand-gold)]'}
+        ${isActive || isComplete ? 'bg-[var(--brand-primary)]' : 'bg-[var(--deep-black)] border border-[var(--brand-primary)]'}
         ${isComplete ? 'text-white' : ''}
       `}
       >
@@ -48,15 +48,15 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
 
       {/* Vertical Line Connector */}
       {!isLast && (
-        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--brand-gold)] to-[var(--deep-black)]' />
+        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--brand-primary)] to-[var(--deep-black)]' />
       )}
 
       {/* Content */}
       <div className='ml-8'>
         <div className='flex items-center mb-0'>
-          <IconComponent size={32} className='text-[var(--brand-gold)] mr-0' />
+          <IconComponent size={32} className='text-[var(--brand-primary)] mr-0' />
           <h3
-            className={`text-xl font-bold ${isActive ? 'text-[var(--brand-gold)]' : 'text-white'}`}
+            className={`text-xl font-bold ${isActive ? 'text-[var(--brand-primary)]' : 'text-white'}`}
           >
             {title}
           </h3>

@@ -56,12 +56,12 @@ export const CarouselBadges: React.FC = () => {
         position: 'sticky',
         top: 0,
         zIndex: 40,
-        backgroundColor: '#000000',
-        height: '64px',
+        backgroundColor: 'var(--color-surface-dark)',
+        height: 'var(--space-8)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        borderBottom: '1px solid rgba(var(--color-text-primary-rgb), 0.05)',
         padding: 0,
         margin: 0,
       }}
@@ -71,7 +71,7 @@ export const CarouselBadges: React.FC = () => {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 20px',
+          padding: '0 var(--space-2-5)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -96,13 +96,17 @@ export const CarouselBadges: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: 'rgba(var(--color-text-primary-rgb), 0.9)',
                   transition: 'color 0.3s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text-primary)')}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = 'rgba(var(--color-text-primary-rgb), 0.9)')
+                }
               >
-                <div style={{ width: '20px', height: '20px', flexShrink: 0, color: '#ffffff' }}>
+                <div
+                  style={{ width: '20px', height: '20px', flexShrink: 0, color: 'var(--color-text-primary)' }}
+                >
                   <IconComponent className='w-full h-full' />
                 </div>
                 <div
@@ -126,7 +130,7 @@ export const CarouselBadges: React.FC = () => {
                     style={{
                       fontFamily: 'Inter, sans-serif',
                       fontSize: '12px',
-                      color: 'rgba(255, 255, 255, 0.7)',
+                      color: 'rgba(var(--color-text-primary-rgb), 0.7)',
                       whiteSpace: 'nowrap',
                     }}
                   >

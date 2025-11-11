@@ -11,23 +11,25 @@
 
 /* 1) TOKENS */
 :root {
-  /* colors */
-  --color-brand-gold: #d4af37;
-  --brand-gold: #d4af37;
+  /* colors - MAGENTA BRAND */
+  --brand-primary: #7d315d; /* Primary Magenta (updated) */
+  --brand-secondary: #612749; /* Darker Magenta */
+  --brand-accent: #c58db0; /* Light Magenta */
+  --brand-hover: #6b2953; /* Hover Magenta */
   --brand-white: #ffffff;
-  --shadow-gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
-  --color-brand-gold-hover: #c9a961;
-  --color-brand-gold-dark: #a68646;
-  --color-brand-gold-light: #e8d4b8;
-  --color-brand-gold-rgb: 212, 175, 55;
-  --brand-gold-hover: #e5c158; /* hover gold as per spec */
-  --deep-black: #1a1a1a; /* surface darker */
+  --shadow-primary-glow: 0 0 15px rgba(125, 49, 93, 0.3);
+  --color-brand-primary-hover: #6b2953;
+  --color-brand-primary-dark: #5a2446;
+  --color-brand-primary-light: #c58db0;
+  --color-brand-primary-rgb: 125, 49, 93;
+  --brand-primary-hover: #6b2953;
+  --deep-black: #000000; /* pure black */
   --base-white: #ffffff;
   --chrome-silver: #c0c0c0;
-  --shadow-gold-intense: 0 4px 20px rgba(var(--color-brand-gold-rgb), 0.3);
-  --color-surface-dark: #222222;
-  --color-surface-darker: #1a1a1a;
-  --color-surface-darker-rgb: 26, 26, 26;
+  --shadow-primary-intense: 0 4px 20px rgba(var(--color-brand-primary-rgb), 0.3);
+  --color-surface-dark: #000000;
+  --color-surface-darker: #000000;
+  --color-surface-darker-rgb: 0, 0, 0;
   --color-surface-medium: #2a2a2a;
   --color-surface-light: #3a3a3a;
   --color-text-primary: #ffffff;
@@ -38,9 +40,27 @@
   --color-accent-silver-rgb: 192, 192, 192;
   --color-accent-grey: #a8a8a8;
 
+  /* Brand Magenta Variables - Primary Brand Color */
+  --brand-magenta: #7d315d;
+  --brand-magenta-hover: #6b2953;
+  --brand-magenta-dark: #5a2446;
+  --brand-magenta-light: #c58db0;
+  --brand-magenta-rgb: 125, 49, 93;
+
+  /* Neon/Glow Variables */
+  --neon-magenta-rgb: 125, 49, 93;
+  --neon-magenta: rgba(var(--neon-magenta-rgb), 1);
+  --neon-magenta-hover: rgba(var(--neon-magenta-rgb), 0.8);
+  --neon-magenta-dark: rgba(var(--neon-magenta-rgb), 0.6);
+  --neon-magenta-light: rgba(var(--neon-magenta-rgb), 0.4);
+
   /* Status Colors */
   --color-error-red: #dc2626;
   --color-success-green: #16a34a;
+
+  /* Social Brand Colors */
+  --brand-whatsapp: #25D366;
+  --brand-whatsapp-hover: #20BA5A;
 
   /* spacing (8px grid) */
   --space-0-5: 4px; /* 0.5 unit */
@@ -94,24 +114,27 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.2);
 
-  /* Gold glow shadows */
-  --shadow-gold-sm: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
-  --shadow-gold-md: 0 0 12px 4px rgba(var(--color-brand-gold-rgb), 0.4);
-  --shadow-gold-lg: 0 0 16px 6px rgba(var(--color-brand-gold-rgb), 0.5);
-  --shadow-gold: 0 4px 12px rgba(var(--color-brand-gold-rgb), 0.3);
-  --shadow-gold-hover: 0 6px 16px rgba(var(--color-brand-gold-rgb), 0.4);
-  --shadow-gold-active: 0 2px 8px rgba(var(--color-brand-gold-rgb), 0.5);
+  /* Magenta glow shadows (legacy gold names for compatibility) */
+  --shadow-gold-sm: 0 0 8px 2px rgba(var(--brand-magenta-rgb), 0.3);
+  --shadow-gold-md: 0 0 12px 4px rgba(var(--brand-magenta-rgb), 0.4);
+  --shadow-gold-lg: 0 0 16px 6px rgba(var(--brand-magenta-rgb), 0.5);
+  --shadow-gold: 0 4px 12px rgba(var(--brand-magenta-rgb), 0.3);
+  --shadow-gold-hover: 0 6px 16px rgba(var(--brand-magenta-rgb), 0.4);
+  --shadow-gold-active: 0 2px 8px rgba(var(--brand-magenta-rgb), 0.5);
 
   /* Silver/Chrome shadows */
   --shadow-silver-sm: 0 0 8px 2px rgba(var(--color-accent-silver-rgb), 0.3);
 
   /* Focus rings */
-  --shadow-focus-ring: 0 0 0 3px rgba(var(--color-brand-gold-rgb), 0.4);
+  --shadow-focus-ring: 0 0 0 3px rgba(var(--brand-magenta-rgb), 0.4);
   --shadow-focus-ring-white: 0 0 0 2px var(--color-text-primary);
 
   /* Combined shadows */
   --shadow-card-premium:
-    0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--color-brand-gold-rgb), 0.15);
+    0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--brand-magenta-rgb), 0.15);
+  --shadow-neon-sm: 0 0 10px rgba(var(--neon-magenta-rgb), 0.35);
+  --shadow-neon-md: 0 0 20px rgba(var(--neon-magenta-rgb), 0.4), 0 0 40px rgba(var(--neon-magenta-rgb), 0.25);
+  --shadow-neon-lg: 0 0 30px rgba(var(--neon-magenta-rgb), 0.5), 0 0 60px rgba(var(--neon-magenta-rgb), 0.3);
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
@@ -212,10 +235,10 @@
 /* stylelint-disable */
 /* @theme is Tailwind v4 syntax - required for theme customization */
 @theme {
-  /* Brand colors - primary gold palette */
-  --color-brand-500: var(--color-brand-gold);
-  --color-brand-600: var(--color-brand-gold-hover);
-  --color-brand-700: var(--color-brand-gold-dark);
+  /* Brand colors - primary palette */
+  --color-brand-500: var(--brand-primary);
+  --color-brand-600: var(--brand-hover);
+  --color-brand-700: var(--brand-magenta-dark);
 
   /* Surface colors - backgrounds */
   --color-surface-900: var(--color-surface-dark);
@@ -347,13 +370,13 @@
   }
 
   :where(a) {
-    color: var(--color-brand-gold);
+    color: var(--brand-primary);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   :where(a:hover) {
-    color: var(--color-brand-gold-hover);
+    color: var(--brand-primary-hover);
   }
 
   :where(button, .button) {
@@ -369,7 +392,30 @@
     select:focus-visible,
     textarea:focus-visible
   ) {
-    outline: 2px solid var(--color-brand-gold);
+    outline: 2px solid var(--brand-primary);
     outline-offset: 2px;
+  }
+}
+
+/* 4) COMPONENT UTILITIES - Neon/Glow */
+@layer components {
+  .neon-glow {
+    box-shadow: var(--shadow-neon-md);
+  }
+  .neon-glow-sm {
+    box-shadow: var(--shadow-neon-sm);
+  }
+  .neon-glow-lg {
+    box-shadow: var(--shadow-neon-lg);
+  }
+  .text-neon {
+    text-shadow: 0 0 6px rgba(var(--neon-magenta-rgb), 0.6),
+      0 0 16px rgba(var(--neon-magenta-rgb), 0.3);
+  }
+  .ring-neon {
+    box-shadow: 0 0 0 3px rgba(var(--neon-magenta-rgb), 0.45) !important;
+  }
+  .hover\:neon-glow:hover {
+    box-shadow: var(--shadow-neon-lg);
   }
 }

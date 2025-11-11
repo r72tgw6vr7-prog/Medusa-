@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-# Medusa-
-Medusa tattoo website
-=======
-# Medusa Tattoo München - Luxury Tattoo Salon Website
+# Professional Business Website
 
-A world-class, production-ready website for Medusa Tattoo München, built with React, TypeScript, and Tailwind CSS v4. Features a comprehensive design system, WCAG AA accessibility, and full German/English multi-language support.
+A world-class, production-ready website template built with React, TypeScript, and Tailwind CSS v4. Features a comprehensive design system, WCAG AA accessibility, and multi-language support.
 
 ---
 
@@ -43,8 +39,8 @@ A world-class, production-ready website for Medusa Tattoo München, built with R
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/medusa-tattoo-muenchen.git
-cd medusa-tattoo-muenchen
+git clone https://github.com/your-org/business-website.git
+cd business-website
 
 # Install dependencies
 npm install
@@ -81,7 +77,7 @@ RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key_here
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 # Production URL
-VITE_SITE_URL=https://medusa-tattoo-muenchen.de
+VITE_SITE_URL=https://your-business.com
 ```
 
 ### Getting API Keys
@@ -477,7 +473,7 @@ import './styles/globals.css';
 **Project Repository**: [GitHub URL]
 **Design System Lead**: [Name]
 **Developer Lead**: [Name]
-**Client Contact**: Medusa Tattoo München
+**Client Contact**: Your Business Name
 
 **Documentation**:
 - Design Tokens: `/DESIGN_SYSTEM_TOKENS_GUIDE.md`
@@ -489,7 +485,7 @@ import './styles/globals.css';
 
 ## 📄 License
 
-Proprietary - © 2025 Medusa Tattoo München. All rights reserved.
+MIT License - © 2025 Business Website Template.
 
 ---
 
@@ -507,4 +503,3 @@ Proprietary - © 2025 Medusa Tattoo München. All rights reserved.
 **Last Updated**: January 2025
 **Version**: 1.0.0
 **Status**: Production Ready (Pending Backend Integration)
->>>>>>> 119cc3f (Add foundation files and fix deployment)

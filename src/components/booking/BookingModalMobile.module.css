@@ -78,7 +78,7 @@
 
 .retry-button {
   padding: var(--space-1) var(--space-3);
-  background: var(--color-brand-gold);
+  background: var(--brand-primary);
   color: var(--color-surface-darker);
   border: none;
   border-radius: var(--space-1);
@@ -91,7 +91,7 @@
 }
 
 .retry-button:hover {
-  background: var(--color-brand-gold-hover);
+  background: var(--brand-hover);
 }
 
 .retry-button:disabled {
@@ -180,7 +180,7 @@
 
 .close-confirmation-button {
   padding: var(--space-2) var(--space-4);
-  background: var(--color-brand-gold);
+  background: var(--brand-primary);
   color: var(--color-success-green);
   border: none;
   border-radius: var(--space-1);
@@ -192,7 +192,7 @@
 }
 
 .close-confirmation-button:hover {
-  background: var(--color-brand-gold-hover);
+  background: var(--brand-hover);
 }
 
 /* Form Error Messages */
@@ -270,7 +270,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(var(--color-brand-gold-rgb), 0.1);
+  border-bottom: 1px solid rgba(var(--brand-magenta-rgb), 0.1);
   position: sticky;
   top: 0;
   background: rgba(var(--color-surface-darker-rgb), 0.8);
@@ -283,7 +283,7 @@
   margin: 0;
   font-size: var(--text-h2-mobile);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .close-button {
@@ -353,8 +353,8 @@
 }
 
 .service-card.selected {
-  border-color: var(--color-brand-gold);
-  box-shadow: 0 0 0 var(--space-1) rgba(var(--color-brand-gold-rgb), 0.3);
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 var(--space-1) rgba(var(--brand-magenta-rgb), 0.3);
 }
 
 .service-icon {
@@ -372,7 +372,7 @@
   margin: 0 0 var(--space-1);
   font-size: var(--text-h2-mobile);
   font-weight: var(--font-weight-bold);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .price {
@@ -398,7 +398,7 @@
 
 .features svg {
   margin-right: var(--space-1);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
   flex-shrink: 0;
 }
 
@@ -420,7 +420,7 @@
 }
 
 .artist-card.selected {
-  border-color: var(--color-brand-gold);
+  border-color: var(--brand-primary);
 }
 
 .artist-photo {
@@ -456,7 +456,7 @@
 }
 
 .specialty {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
   font-size: var(--text-body-small);
   margin-top: var(--space-1);
 }
@@ -473,7 +473,7 @@
   margin-bottom: var(--space-2);
   font-size: var(--text-body-small);
   font-weight: var(--font-weight-medium);
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
 }
 
 .form-group label svg {
@@ -501,7 +501,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--color-brand-gold);
+  border-color: var(--brand-primary);
 }
 
 .checkbox-group {
@@ -528,7 +528,7 @@
   justify-content: center;
   width: 100%;
   padding: var(--space-2);
-  background: var(--color-brand-gold);
+  background: var(--brand-primary);
   color: var(--color-surface-darker);
   border: none;
   border-radius: var(--space-1);

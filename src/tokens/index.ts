@@ -85,13 +85,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Links */
 a {
-  color: var(--color-brand-gold);
+  color: var(--brand-primary);
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  color: var(--color-brand-gold-hover);
+  color: var(--brand-hover);
   text-decoration: underline;
 }
 

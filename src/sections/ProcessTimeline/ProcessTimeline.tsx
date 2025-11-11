@@ -149,7 +149,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
       className='relative w-full py-16 text-white md:py-24'
       aria-label={copy.headline}
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%), url(${BACKGROUND_IMAGE})`,
+        backgroundImage: `linear-gradient(180deg, rgba(var(--color-surface-darker-rgb), 0.92) 0%, rgba(var(--color-surface-darker-rgb), 0.96) 100%), url(${BACKGROUND_IMAGE})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -160,7 +160,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
           <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
             {copy.eyebrow}
           </p>
-          <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+          <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-primary)]'>
             {copy.headline}
           </h2>
           <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>

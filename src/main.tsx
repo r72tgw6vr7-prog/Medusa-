@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css'; // Imports system.css now
+import './styles/inked-theme.css'; // Import Inked theme styles
+import './styles/inked-gallery.css'; // Import Inked gallery styles
 import { UniversalTextureBackground } from '@/components/atoms/UniversalTextureBackground';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

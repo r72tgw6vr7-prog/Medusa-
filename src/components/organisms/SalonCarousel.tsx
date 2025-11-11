@@ -9,12 +9,8 @@ import { useDrag } from '@use-gesture/react';
 // import salonEnvironment2 from 'figma:asset/18d7dc765a127cfdd40662c47bde9b6355824894.png';
 
 // Temporary placeholder images
-import salonMainLevel from '/assets/images/photos/studio/img3876.webp';
-import salonUpperLevel from '/assets/images/photos/studio/img3914.webp';
-import salonTreatmentRoom from '/assets/images/photos/studio/img3947.webp';
-import salonEnvironment1 from '/assets/images/photos/studio/img3969.webp';
-import salonEnvironment2 from '/assets/images/photos/studio/img3994.webp';
-import { useMedusaDesignSystem } from '../../foundation';
+import { IMAGE_PATHS } from '../../config/imagePaths';
+import { useBusinessDesignSystem } from '../../foundation';
 
 interface SalonImage {
   /** Source URL of the image */
@@ -60,34 +56,34 @@ export function SalonCarousel({
   className = '',
   heading = 'MEDUSA',
 }: SalonCarouselProps) {
-  // Get language from Medusa design system
-  const { language } = useMedusaDesignSystem();
+  // Get language from Business design system
+  const { language } = useBusinessDesignSystem();
 
   // Default salon images if none provided
   const defaultSalonImages: SalonImage[] = [
     {
-      src: salonMainLevel,
+      src: IMAGE_PATHS.studio.interior1,
       alt: 'Medusa Salon main level with elegant spiral staircase and professional workstations',
       caption: language === 'DE' ? 'Hauptbereich des Medusa Salons' : 'Medusa Salon Main Area',
     },
     {
-      src: salonUpperLevel,
+      src: IMAGE_PATHS.studio.interior2,
       alt: 'Medusa Salon upper level workspace with modern equipment and comfortable seating',
       caption: language === 'DE' ? 'Obere Ebene des Salons' : 'Salon Upper Level',
     },
     {
-      src: salonTreatmentRoom,
+      src: IMAGE_PATHS.studio.interior3,
       alt: 'Professional treatment room with premium equipment and luxury finishes',
       caption:
         language === 'DE' ? 'Professioneller Behandlungsraum' : 'Professional Treatment Room',
     },
     {
-      src: salonEnvironment1,
+      src: IMAGE_PATHS.studio.interior1,
       alt: 'Medusa Salon sophisticated interior with premium atmosphere and modern design',
       caption: language === 'DE' ? 'Elegantes Salon-Interieur' : 'Sophisticated Salon Interior',
     },
     {
-      src: salonEnvironment2,
+      src: IMAGE_PATHS.studio.interior2,
       alt: 'Medusa Salon luxury environment showcasing professional workspace and elegant ambiance',
       caption: language === 'DE' ? 'Luxuriöse Salonumgebung' : 'Luxury Salon Environment',
     },
@@ -362,7 +358,7 @@ export function SalonCarousel({
                 src={salonImages[currentSlide].src}
                 alt={salonImages[currentSlide].alt}
                 className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'brightness-110 saturate-110' : ''}`}
-                onError={(e) => (e.currentTarget.src = '/images/placeholder.jpg')}
+                onError={(e) => (e.currentTarget.src = '/assets/images/icons/placeholder.svg')}
               />
 
               {/* Image caption if provided */}
