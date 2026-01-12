@@ -1,0 +1,143 @@
+/* scroll-enhance.css - Smooth scrolling and scroll-driven animation enhancements */
+
+/* Base classes for smooth scrolling */
+html.lenis {
+  height: auto;
+  scroll-behavior: auto !important; /* Disable native scroll-behavior to avoid conflicts */
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* Ensure scroll-behavior is handled by JS */
+}
+
+/* Prevent event bubbling on iframes during scroll */
+html.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Override normal scrolling behavior within elements that should maintain native scroll */
+html.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Hide scrollbar but keep functionality */
+html.lenis-scrolling::-webkit-scrollbar {
+  display: none;
+}
+
+html.lenis-scrolling {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  overflow-y: auto; /* Fallback for browsers without scrollbar-width support */
+}
+
+/* Parallax layer classes */
+.parallax-layer {
+  will-change: transform;
+}
+
+.parallax-layer-background {
+  /* Background parallax speed is slower */
+  --parallax-speed: 0.18;
+}
+
+.parallax-layer-mid {
+  /* Mid-ground parallax speed is medium */
+  --parallax-speed: 0.45;
+}
+
+.parallax-layer-foreground {
+  /* Foreground parallax speed is faster */
+  --parallax-speed: 0.85;
+}
+
+/* Section elevation when in viewport focus zone */
+.section-elevation {
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+.section-elevation.is-active {
+  transform: translateY(-8px);
+  z-index: 2;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Reveal animation classes */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Debug overlay for developers */
+.scroll-debug-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.scroll-debug-active .scroll-debug-overlay {
+  display: block;
+}
+
+.scroll-debug-ruler {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.scroll-debug-ruler.top-25 {
+  top: 25%;
+}
+.scroll-debug-ruler.center {
+  top: 50%;
+}
+.scroll-debug-ruler.bottom-25 {
+  top: 75%;
+}
+.scroll-debug-ruler.focal-top {
+  top: 35%;
+}
+.scroll-debug-ruler.focal-bottom {
+  top: 65%;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    transform: none !important; /* Disable parallax */
+  }
+
+  .section-elevation.is-active {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .reveal-element {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html.lenis {
+    scroll-behavior: auto !important;
+  }
+}
