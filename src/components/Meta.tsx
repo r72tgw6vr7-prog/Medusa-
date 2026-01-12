@@ -14,7 +14,7 @@ interface MetaProps {
   alternateLocale?: string[];
 }
 
-const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://medusa-tattoo.com';
+const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
 const DEFAULT_OG_IMAGE = '/images/og-medusa-tattoo-munich.jpg';
 
 function upsertMetaTag(attr: 'name' | 'property', key: string, content: string) {
@@ -106,7 +106,7 @@ export default function Meta({
 
     // Additional structured markup
     upsertMetaTag('name', 'application-name', 'Medusa Tattoo München');
-    upsertMetaTag('name', 'theme-color', '#d4af37'); // Gold theme
+    upsertMetaTag('name', 'theme-color', 'rgb(212 175 55)'); // Gold theme
   }, [
     title,
     description,
