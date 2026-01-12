@@ -4,6 +4,20 @@
   "buildCommand": "npm run build:force",
   "outputDirectory": "dist",
   "installCommand": "npm ci",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "medusa-tattoo.com" }],
+      "destination": "https://www.muenchen-tattoo-studio.de/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.medusa-tattoo.com" }],
+      "destination": "https://www.muenchen-tattoo-studio.de/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!.*\\..*|assets/|favicon|robots\\.txt|sitemap\\.xml).*)",
