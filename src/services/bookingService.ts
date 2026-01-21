@@ -2,12 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 export interface BookingRequest {
   serviceId: string;
-  artistId: string;
+  artistId?: string;
   name: string;
   email: string;
   phone: string;
   date: string;
   message?: string;
+  projectDetails?: string;
+  paymentMethod?: 'cash' | 'card' | 'bank_transfer';
   gdprConsent: boolean;
 }
 
@@ -38,7 +40,7 @@ export const submitBooking = async (_data: BookingRequest): Promise<BookingRespo
 // Validate booking form data
 export const validateBookingData = (data: Partial<BookingRequest>): string | null => {
   if (!data.serviceId) return 'Please select a service';
-  if (!data.artistId) return 'Please select an artist';
+  if (!data.paymentMethod) return 'Please select a payment method';
   if (!data.name?.trim()) return 'Name is required';
   if (!data.email?.trim()) return 'Email is required';
   if (!/\S+@\S+\.\S+/.test(data.email)) return 'Please enter a valid email';

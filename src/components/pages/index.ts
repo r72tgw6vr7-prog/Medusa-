@@ -4,3 +4,5 @@ export { default as TeamGrid } from './TeamGrid';
 // Re-export any existing pages
 export * from './ServicesPageInteractive';
 export * from './ServicesPageInteractive.example';
+export * from './TattooServicesPage';
+export * from './PiercingServicesPage';

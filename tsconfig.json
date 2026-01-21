@@ -5,6 +5,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,7 +19,8 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/types/*": ["./src/types/*"]
+      "@/types/*": ["./src/types/*"],
+      "@/core/*": ["./core/*"]
     },
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -25,7 +28,8 @@
   },
   "include": [
     "src",
-    "src/types/css.d.ts"
+    "src/types/css.d.ts",
+    "src/types/modules.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,0 +1,817 @@
+[
+  {
+    "name": "PageHeading",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/PageHeading.tsx",
+    "exportType": "default",
+    "props": [
+      "eyebrow?: string",
+      "title: string",
+      "subtitle?: string"
+    ],
+    "description": "PageHeading component"
+  },
+  {
+    "name": "Meta",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/Meta.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "description: string",
+      "canonicalPath: string",
+      "ogType?: 'website' | 'article' | 'business.business'",
+      "twitterCard?: 'summary' | 'summary_large_image'",
+      "keywords?: string[]",
+      "author?: string",
+      "robots?: string",
+      "hreflang?: { [lang: string]: string"
+    ],
+    "description": "Meta component"
+  },
+  {
+    "name": "SectionHeading",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/SectionHeading.tsx",
+    "exportType": "default",
+    "props": [
+      "eyebrow?: string",
+      "title: string",
+      "subtitle?: string"
+    ],
+    "description": "SectionHeading component"
+  },
+  {
+    "name": "LayoutGridDemo",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/layout-grid-demo.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "LayoutGridDemo component"
+  },
+  {
+    "name": "PreFooterBookingCTA",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/PreFooterBookingCTA.tsx",
+    "exportType": "default",
+    "props": [
+      "readonly selectedArtist?: string",
+      "readonly selectedService?: string"
+    ],
+    "description": "Final booking call-to-action section above footer with animated breathing chrome glow effect"
+  },
+  {
+    "name": "RadialStat",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/RadialStat.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "RadialStat component"
+  },
+  {
+    "name": "PricingSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/PricingSection.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "PricingSection component"
+  },
+  {
+    "name": "JapanesePrinciples",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/JapanesePrinciples.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "JapanesePrinciples component"
+  },
+  {
+    "name": "LazySection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/LazySection.tsx",
+    "exportType": "named",
+    "props": [
+      "children: ReactNode",
+      "className?: string",
+      "rootMargin?: string",
+      "fallback?: ReactNode"
+    ],
+    "description": "Reduces initial load by deferring heavy components until needed"
+  },
+  {
+    "name": "BladeAccordion",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/BladeAccordion.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "BladeAccordion component"
+  },
+  {
+    "name": "HeroParallax",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/hero-parallax.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "HeroParallax component"
+  },
+  {
+    "name": "Header",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/hero-parallax.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "Header component"
+  },
+  {
+    "name": "ProductCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/hero-parallax.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "ProductCard component"
+  },
+  {
+    "name": "LayoutGrid",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/layout-grid.tsx",
+    "exportType": "named",
+    "props": [
+      "cards: Card[]"
+    ],
+    "description": "LayoutGrid component"
+  },
+  {
+    "name": "LuxuryButton",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/LuxuryButton.tsx",
+    "exportType": "named",
+    "props": [
+      "variant?: 'surface' | 'chrome-dark' | 'chrome-light' | 'metallic'\n  size?: 'sm' | 'md' | 'lg'"
+    ],
+    "description": "Chrome variants reserved for dark backgrounds or metallic effects"
+  },
+  {
+    "name": "MedusaInput",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/ui/input/MedusaInput.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "- Helper text and error message display"
+  },
+  {
+    "name": "ArtistsSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/sections/ArtistsSection.tsx",
+    "exportType": "default",
+    "props": [
+      "artists: Artist[]",
+      "className?: string"
+    ],
+    "description": "- Chrome accents throughout"
+  },
+  {
+    "name": "ContactInfoCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/ContactInfoCard.tsx",
+    "exportType": "default",
+    "props": [
+      "icon: string",
+      "title: string",
+      "value: string",
+      "href?: string",
+      "className?: string"
+    ],
+    "description": "ContactInfoCard component"
+  },
+  {
+    "name": "MainNavigation",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/MainNavigation.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "MainNavigation component"
+  },
+  {
+    "name": "ProcessStepCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/ProcessStepCard.tsx",
+    "exportType": "default",
+    "props": [
+      "number: number",
+      "title: string",
+      "description: string",
+      "icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>",
+      "isActive?: boolean",
+      "isComplete?: boolean",
+      "isLast?: boolean",
+      "className?: string"
+    ],
+    "description": "ProcessStepCard component"
+  },
+  {
+    "name": "LanguageToggle",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/LanguageToggle.tsx",
+    "exportType": "default",
+    "props": [
+      "onLanguageChange?: (language: 'DE' | 'EN') => void"
+    ],
+    "description": "LanguageToggle component"
+  },
+  {
+    "name": "StatsBar",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/StatsBar.tsx",
+    "exportType": "default",
+    "props": [
+      "stats: StatItem[]",
+      "className?: string"
+    ],
+    "description": "StatsBar component"
+  },
+  {
+    "name": "TrustBadgesBar",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/TrustBadgesBar.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "TrustBadgesBar component"
+  },
+  {
+    "name": "ArtistBioModal",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/ArtistBioModal.tsx",
+    "exportType": "named",
+    "props": [
+      "artist: Artist",
+      "onClose: () => void"
+    ],
+    "description": "ArtistBioModal component"
+  },
+  {
+    "name": "NewsletterForm",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/NewsletterForm.tsx",
+    "exportType": "default",
+    "props": [
+      "onSubmit: (email: string) => Promise<void>",
+      "className?: string"
+    ],
+    "description": "NewsletterForm component"
+  },
+  {
+    "name": "ReviewCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/ReviewCard.tsx",
+    "exportType": "default",
+    "props": [
+      "rating: number",
+      "author: string",
+      "source: string",
+      "className?: string"
+    ],
+    "description": "ReviewCard component"
+  },
+  {
+    "name": "BeforeAfterCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/BeforeAfterCard.tsx",
+    "exportType": "default",
+    "props": [
+      "beforeImage: string",
+      "afterImage: string",
+      "beforeLabel?: string",
+      "afterLabel?: string",
+      "title?: string",
+      "artist?: string",
+      "onCardClick?: () => void",
+      "className?: string"
+    ],
+    "description": "BeforeAfterCard component"
+  },
+  {
+    "name": "FocusTrap",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/FocusTrap.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "FocusTrap component"
+  },
+  {
+    "name": "FAQItem",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/FAQItem.tsx",
+    "exportType": "default",
+    "props": [
+      "question: string",
+      "answer: string",
+      "isOpen?: boolean",
+      "onToggle?: () => void",
+      "className?: string"
+    ],
+    "description": "FAQItem component"
+  },
+  {
+    "name": "GDPRCompliance",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/GDPRCompliance.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "GDPRCompliance component"
+  },
+  {
+    "name": "CookieConsentBanner",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/CookieConsentBanner.tsx",
+    "exportType": "named",
+    "props": [
+      "onNavigate: (page: PageType) => void"
+    ],
+    "description": "CookieConsentBanner component"
+  },
+  {
+    "name": "TrustBadgeCarousel",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/TrustBadgeCarousel.tsx",
+    "exportType": "default",
+    "props": [
+      "badges: TrustBadge[]",
+      "className?: string",
+      "autoScroll?: boolean",
+      "speed?: number"
+    ],
+    "description": "TrustBadgeCarousel component"
+  },
+  {
+    "name": "ServiceCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/ServiceCard.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle?: string",
+      "description: string",
+      "price?: string",
+      "duration?: string",
+      "features?: ServiceFeature[] | string[]",
+      "buttonText?: string",
+      "onButtonClick?: () => void",
+      "highlighted?: boolean",
+      "popular?: boolean",
+      "className?: string",
+      "backgroundImage?: string",
+      "backgroundImageAlt?: string",
+      "icon?: React.ComponentType<{ size?: number",
+      "className?: string"
+    ],
+    "description": "ServiceCard component"
+  },
+  {
+    "name": "PriceCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/PriceCard.tsx",
+    "exportType": "default",
+    "props": [
+      "iconUrl: string",
+      "title: string",
+      "description: string",
+      "features: PriceFeature[]",
+      "ctaText: string",
+      "onCtaClick?: () => void",
+      "highlighted?: boolean",
+      "className?: string"
+    ],
+    "description": "PriceCard component"
+  },
+  {
+    "name": "TrustBadgesMarquee",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/TrustBadgesMarquee.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "TrustBadgesMarquee component"
+  },
+  {
+    "name": "TrustSignals",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/TrustSignals.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "TrustSignals component"
+  },
+  {
+    "name": "ArtistCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/Card/ArtistCard.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "ArtistCard component"
+  },
+  {
+    "name": "ServiceCards",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/molecules/Card/ServiceCards.tsx",
+    "exportType": "default",
+    "props": [
+      "services?: ServiceCard[]"
+    ],
+    "description": "ServiceCards component"
+  },
+  {
+    "name": "TrustBadge",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/atoms/TrustBadge.tsx",
+    "exportType": "default",
+    "props": [
+      "icon: string",
+      "text: string",
+      "className?: string"
+    ],
+    "description": "TrustBadge component"
+  },
+  {
+    "name": "Icon",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/atoms/Icon/Icon.tsx",
+    "exportType": "default",
+    "props": [
+      "icon?: React.ComponentType<LucideProps>",
+      "size?: number",
+      "className?: string",
+      "children?: React.ReactNode",
+      "strokeWidth?: number",
+      "fill?: string",
+      "viewBox?: string",
+      "onClick?: () => void",
+      "'aria-label'?: string"
+    ],
+    "description": "Icon component"
+  },
+  {
+    "name": "BookingModalMobile",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/BookingModalMobile.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "BookingModalMobile component"
+  },
+  {
+    "name": "PaymentStep",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/PaymentStep.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string",
+      "paymentMethod: PaymentMethod",
+      "setPaymentMethod: (method: PaymentMethod) => void",
+      "submissionError: string | null",
+      "canProceed: boolean",
+      "onBack: () => void",
+      "onSubmit: (e: React.FormEvent) => void"
+    ],
+    "description": "PaymentStep component"
+  },
+  {
+    "name": "ServiceSelectionStep",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/ServiceSelectionStep.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string",
+      "selectedService: string | null",
+      "setSelectedService: (service: string) => void",
+      "projectDetails: string",
+      "setProjectDetails: (details: string) => void",
+      "canProceed: boolean",
+      "onNext: () => void"
+    ],
+    "description": "ServiceSelectionStep component"
+  },
+  {
+    "name": "ConfirmationStep",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/ConfirmationStep.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string",
+      "language: string",
+      "bookingResult: BookingResult",
+      "onClose?: () => void"
+    ],
+    "description": "ConfirmationStep component"
+  },
+  {
+    "name": "LoadingOverlay",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/FeedbackStates.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string"
+    ],
+    "description": "LoadingOverlay component"
+  },
+  {
+    "name": "ErrorState",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/FeedbackStates.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string",
+      "error: string",
+      "isSubmitting: boolean",
+      "onRetry: () => void"
+    ],
+    "description": "ErrorState component"
+  },
+  {
+    "name": "PersonalInfoStep",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/booking/steps/PersonalInfoStep.tsx",
+    "exportType": "named",
+    "props": [
+      "t: (key: string) => string",
+      "formData: BookingFormData",
+      "setFormData: React.Dispatch<React.SetStateAction<BookingFormData>>",
+      "canProceed: boolean",
+      "onBack: () => void",
+      "onNext: () => void",
+      "onSubmit: (e: React.FormEvent) => void"
+    ],
+    "description": "PersonalInfoStep component"
+  },
+  {
+    "name": "Footer",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/layout/Footer.tsx",
+    "exportType": "named",
+    "props": [
+      "className?: string"
+    ],
+    "description": "Contrast: 12.5:1 - AAA compliant"
+  },
+  {
+    "name": "ArtistCard",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/cards/ArtistCard.tsx",
+    "exportType": "default",
+    "props": [
+      "artist: Artist",
+      "isRevealed: boolean",
+      "index: number"
+    ],
+    "description": "- Deep black background (#0a0a0a)"
+  },
+  {
+    "name": "ArtistCardJapanese",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/cards/ArtistCardJapanese.tsx",
+    "exportType": "default",
+    "props": [
+      "name: string",
+      "role: ArtistRole",
+      "specialties: string[]",
+      "experience: string",
+      "instagramHandle: string",
+      "imageUrl: string",
+      "className?: string",
+      "onClick?: () => void",
+      "onBookClick?: () => void",
+      "onGalleryClick?: () => void",
+      "bookHref?: string",
+      "galleryHref?: string",
+      "imagePosition?: string",
+      "isSelected?: boolean",
+      "variant?: 'light' | 'dark'"
+    ],
+    "description": "ArtistCardJapanese component"
+  },
+  {
+    "name": "FAQSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/seo/FAQSection.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "FAQSection component"
+  },
+  {
+    "name": "LocationSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/seo/LocationSection.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "LocationSection component"
+  },
+  {
+    "name": "SkipLink",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/accessibility/SkipLink.tsx",
+    "exportType": "default",
+    "props": [
+      "targetId?: string"
+    ],
+    "description": "Renders a visually hidden link that becomes visible when focused."
+  },
+  {
+    "name": "VisuallyHidden",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/accessibility/VisuallyHidden.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "<VisuallyHidden as=\"div\">Hidden div content</VisuallyHidden>"
+  },
+  {
+    "name": "ServicesPageInteractive",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/pages/ServicesPageInteractive.tsx",
+    "exportType": "default",
+    "props": [
+      "className?: string"
+    ],
+    "description": "ServicesPageInteractive component"
+  },
+  {
+    "name": "ServicesPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/organisms/ServicesPage.tsx",
+    "exportType": "default",
+    "props": [
+      "onBookService?: (serviceId: string) => void"
+    ],
+    "description": "ServicesPage component"
+  },
+  {
+    "name": "TestimonialsCarousel",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/components/organisms/TestimonialsCarousel.tsx",
+    "exportType": "default",
+    "props": [
+      "className?: string",
+      "testimonialsList?: Testimonial[]",
+      "title?: string"
+    ],
+    "description": "TestimonialsCarousel component"
+  },
+  {
+    "name": "BeforeAfterSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/BeforeAfterSection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle?: string",
+      "images: BeforeAfterImage[]",
+      "className?: string"
+    ],
+    "description": "BeforeAfterSection component"
+  },
+  {
+    "name": "ServicesSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/ServicesSection.tsx",
+    "exportType": "default",
+    "props": [
+      "quickLinks?: ServicesQuickLink[]",
+      "title?: string",
+      "subtitle?: string",
+      "packages?: ServicePackage[]",
+      "onBookClick?: (packageTitle: string) => void",
+      "className?: string"
+    ],
+    "description": "ServicesSection component"
+  },
+  {
+    "name": "GallerySection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/GallerySection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle: string",
+      "images: GalleryImage[]",
+      "instagramUsername?: string",
+      "onImageClick?: (image: GalleryImage) => void",
+      "className?: string",
+      "maxImages?: number"
+    ],
+    "description": "GallerySection component"
+  },
+  {
+    "name": "TRUST_BADGES",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/TrustBadges.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "TRUST_BADGES component"
+  },
+  {
+    "name": "TrustSignalsSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/TrustSignalsSection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle: string",
+      "partners: Partner[]",
+      "reviews: Review[]",
+      "badges: Array<{\n    iconUrl: string",
+      "text: string"
+    ],
+    "description": "TrustSignalsSection component"
+  },
+  {
+    "name": "ArtistSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/ArtistSection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle: string",
+      "artists: Artist[]",
+      "onBookClick?: (artistName: string) => void",
+      "_onGalleryClick?: (artistName: string) => void",
+      "className?: string"
+    ],
+    "description": "ArtistSection component"
+  },
+  {
+    "name": "BookingSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/BookingSection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle?: string",
+      "className?: string"
+    ],
+    "description": "BookingSection component"
+  },
+  {
+    "name": "PartnersAndTestimonialsSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/PartnersAndTestimonialsSection.tsx",
+    "exportType": "default",
+    "props": [
+      "titlePartners?: string",
+      "subtitlePartners?: string",
+      "titleTestimonials?: string"
+    ],
+    "description": "PartnersAndTestimonialsSection component"
+  },
+  {
+    "name": "ContactSection",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/ContactSection.tsx",
+    "exportType": "default",
+    "props": [
+      "title: string",
+      "subtitle: string",
+      "contactInfo: ContactInfo[]",
+      "socialLinks: SocialLink[]",
+      "onSubmit: (data: ContactFormData) => Promise<void>",
+      "className?: string"
+    ],
+    "description": "ContactSection component"
+  },
+  {
+    "name": "ProcessTimeline",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/sections/ProcessTimeline/ProcessTimeline.tsx",
+    "exportType": "named",
+    "props": [],
+    "description": "ProcessTimeline component"
+  },
+  {
+    "name": "ArtistsPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/ArtistsPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "Japanese-inspired luxury artist showcase page"
+  },
+  {
+    "name": "ImpressumPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/ImpressumPage.tsx",
+    "exportType": "default",
+    "props": [
+      "language?: 'DE' | 'EN'"
+    ],
+    "description": "ImpressumPage component"
+  },
+  {
+    "name": "AGBPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/AGBPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "AGBPage component"
+  },
+  {
+    "name": "BookingPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/BookingPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "Booking page with appointment form for tattoo/piercing consultations."
+  },
+  {
+    "name": "AftercarePage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/AftercarePage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "AftercarePage component"
+  },
+  {
+    "name": "ContactPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/ContactPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "ContactPage component"
+  },
+  {
+    "name": "FAQPageNew",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/FAQPageNew.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "FAQPageNew component"
+  },
+  {
+    "name": "LegalPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/LegalPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "LegalPage component"
+  },
+  {
+    "name": "GalleryPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/GalleryPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "Gallery page with interactive layout grid for tattoo/piercing work."
+  },
+  {
+    "name": "ColorTestPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/ColorTestPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "Tests chrome colors, Ma spacing, luxury shadows, and WCAG compliance"
+  },
+  {
+    "name": "NotFoundPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/NotFoundPage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "NotFoundPage component"
+  },
+  {
+    "name": "DatenschutzPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/DatenschutzPage.tsx",
+    "exportType": "default",
+    "props": [
+      "language?: 'DE' | 'EN'"
+    ],
+    "description": "DatenschutzPage component"
+  },
+  {
+    "name": "HomePage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/pages/HomePage.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "HomePage component"
+  },
+  {
+    "name": "PlaygroundPage",
+    "filePath": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/src/app/playground/page.tsx",
+    "exportType": "default",
+    "props": [],
+    "description": "PlaygroundPage component"
+  }
+]

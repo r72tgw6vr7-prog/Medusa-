@@ -27,23 +27,23 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   className = '',
 }) => {
   const baseClasses =
-    'flex flex-col items-center bg-[#0A0A0AB0] w-[400px] pt-[41px] pb-[55px] rounded-2xl border border-solid border-[var(--brand-gold)]';
-  const highlightedClasses = highlighted ? 'bg-[#0A0A0ACC] border-2' : '';
-  const shadowClasses = highlighted ? 'shadow-[0px_0px_20px_var(--brand-gold)26]' : '';
+    'cool-lines-card flex flex-col items-center bg-[var(--color-surface-darker)]/70 w-card-md pt-10 pb-14 rounded-2xl border border-solid border-[var(--brand-accent)]';
+  const highlightedClasses = highlighted ? 'bg-[var(--color-surface-darker)]/80 border-2' : '';
+  const shadowClasses = highlighted ? 'shadow-[var(--shadow-chrome-lg)]' : '';
 
   return (
     <div className={`${baseClasses} ${highlightedClasses} ${shadowClasses} ${className}`}>
       <img src={iconUrl} alt={title} className='w-12 h-12 mb-8 rounded-2xl object-fill' />
-      <span className='text-[var(--brand-gold)] text-[31px] font-bold text-center mb-8'>
+      <span className='text-[var(--brand-accent)] text-3xl font-bold text-center mb-8'>
         {title}
       </span>
-      <span className='text-white text-base text-center mb-8'>{description}</span>
+      <span className='text-luxury-text-inverse text-base text-center mb-8'>{description}</span>
       <div className='flex flex-col items-start self-stretch mb-16 mx-8 gap-0'>
         {features.map((feature, index) => (
           <div key={index} className='flex items-center'>
             <img src={feature.iconUrl} alt='' className='w-4 h-4 mr-0 object-fill' />
             <div className='flex flex-col items-center'>
-              <span className='text-white text-[15px]'>{feature.text}</span>
+              <span className='text-luxury-text-inverse text-sm-15'>{feature.text}</span>
             </div>
           </div>
         ))}
@@ -55,7 +55,7 @@ export const PriceCard: React.FC<PriceCardProps> = ({
         onClick={onCtaClick}
         onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onCtaClick && onCtaClick()}
       >
-        <span className='text-white text-base'>{ctaText}</span>
+        <span className='text-luxury-text-inverse text-base'>{ctaText}</span>
       </div>
     </div>
   );

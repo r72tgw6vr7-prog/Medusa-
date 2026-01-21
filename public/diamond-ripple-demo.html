@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diamond Ripple Background Demo</title>
+    <style>
+      :root {
+        --ripple-duration: 600ms;
+        --glow-intensity: 0.8;
+        --animate-cell-ripple: diamond-ripple var(--ripple-duration) ease-out var(--ripple-delay, 0ms) both;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #0b0b0b;
+        color: #fff;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      .stage {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        padding: 64px 24px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .content h1 {
+        font-size: clamp(28px, 4vw, 64px);
+        margin: 0 0 12px;
+      }
+
+      .content p {
+        margin: 0;
+        max-width: 60ch;
+        opacity: 0.8;
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .diamond-ripple-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        opacity: 0.65;
+      }
+
+      .diamond-ripple-grid {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        justify-content: center;
+        align-content: start;
+      }
+
+      .diamond-ripple-cell {
+        will-change: transform, opacity;
+        transform: translateZ(0) scale(var(--hover-scale, 1));
+        opacity: var(--hover-opacity, 0.35);
+        filter: drop-shadow(0 0 calc(12px * var(--hover-glow, 0)) rgba(212, 175, 55, calc(var(--hover-glow, 0) * var(--glow-intensity))));
+      }
+
+      .diamond-ripple-cell.animate-cell-ripple {
+        animation: var(--animate-cell-ripple);
+      }
+
+      @keyframes diamond-ripple {
+        0% {
+          transform: translateZ(0) scale(1);
+          opacity: 0.35;
+          filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+        }
+        40% {
+          transform: translateZ(0) scale(1.08);
+          opacity: 1;
+          filter: drop-shadow(0 0 12px rgba(212, 175, 55, var(--glow-intensity)));
+        }
+        100% {
+          transform: translateZ(0) scale(1);
+          opacity: 0.35;
+          filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .diamond-ripple-cell.animate-cell-ripple {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <div class="diamond-ripple-bg" id="bg">
+        <div class="diamond-ripple-grid" id="grid"></div>
+      </div>
+
+      <div class="content">
+        <h1>Diamond Pattern Ripple (Vector.svg)</h1>
+        <p>
+          Hover to see local glow/scale. Click anywhere to trigger a ripple wave.
+          This matches the Aceternity concept but uses your diamond SVG pattern.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const rows = 8;
+      const cols = 27;
+      const cellSize = 56;
+      const rippleDuration = 600;
+      const glowIntensity = 0.8;
+      const delayFactor = 0.6; // ms/px -> 300px away ~ 180ms delay
+
+      const grid = document.getElementById('grid');
+      const bg = document.getElementById('bg');
+
+      bg.style.setProperty('--ripple-duration', rippleDuration + 'ms');
+      bg.style.setProperty('--glow-intensity', glowIntensity);
+
+      // Grid sizing
+      grid.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
+      grid.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
+
+      // Treat Vector.svg as the full pattern and show a window of it per cell
+      const patternUrl = '/Vector.svg';
+
+      const cells = [];
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const el = document.createElement('div');
+          el.className = 'diamond-ripple-cell';
+          el.style.width = cellSize + 'px';
+          el.style.height = cellSize + 'px';
+          el.style.backgroundImage = `url(${patternUrl})`;
+          el.style.backgroundRepeat = 'no-repeat';
+          el.style.backgroundSize = `${cols * cellSize}px ${rows * cellSize}px`;
+          el.style.backgroundPosition = `${-c * cellSize}px ${-r * cellSize}px`;
+          grid.appendChild(el);
+          cells.push({ el, r, c });
+        }
+      }
+
+      // Hover: update a small neighborhood around the hovered cell, throttled via rAF.
+      let raf = 0;
+      let prevHover = [];
+      const radius = 3;
+
+      function clearPrev() {
+        for (const idx of prevHover) {
+          const cell = cells[idx];
+          if (!cell) continue;
+          cell.el.style.removeProperty('--hover-scale');
+          cell.el.style.removeProperty('--hover-opacity');
+          cell.el.style.removeProperty('--hover-glow');
+        }
+        prevHover = [];
+      }
+
+      function applyHover(clientX, clientY) {
+        const rect = bg.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
+          clearPrev();
+          return;
+        }
+
+        const gridW = cols * cellSize;
+        const gridLeft = (rect.width - gridW) / 2;
+        const gx = x - gridLeft;
+        const gy = y;
+
+        const colIdx = Math.floor(gx / cellSize);
+        const rowIdx = Math.floor(gy / cellSize);
+
+        if (rowIdx < 0 || rowIdx >= rows || colIdx < 0 || colIdx >= cols) {
+          clearPrev();
+          return;
+        }
+
+        const next = [];
+
+        for (let r = Math.max(0, rowIdx - radius); r <= Math.min(rows - 1, rowIdx + radius); r++) {
+          for (let c = Math.max(0, colIdx - radius); c <= Math.min(cols - 1, colIdx + radius); c++) {
+            const idx = r * cols + c;
+            const dr = r - rowIdx;
+            const dc = c - colIdx;
+            const dist = Math.hypot(dr, dc);
+            const t = Math.max(0, 1 - dist / (radius + 0.0001));
+
+            const scale = 1 + 0.06 * t;
+            const opacity = 0.25 + 0.55 * t;
+            const glow = 0.4 + 0.6 * t;
+
+            const cell = cells[idx];
+            if (!cell) continue;
+            cell.el.style.setProperty('--hover-scale', scale);
+            cell.el.style.setProperty('--hover-opacity', opacity);
+            cell.el.style.setProperty('--hover-glow', glow);
+
+            next.push(idx);
+          }
+        }
+
+        // Reset old hover cells not in next
+        if (prevHover.length) {
+          const nextSet = new Set(next);
+          for (const idx of prevHover) {
+            if (nextSet.has(idx)) continue;
+            const cell = cells[idx];
+            if (!cell) continue;
+            cell.el.style.removeProperty('--hover-scale');
+            cell.el.style.removeProperty('--hover-opacity');
+            cell.el.style.removeProperty('--hover-glow');
+          }
+        }
+
+        prevHover = next;
+      }
+
+      window.addEventListener(
+        'pointermove',
+        (ev) => {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => applyHover(ev.clientX, ev.clientY));
+        },
+        { passive: true }
+      );
+
+      // Click ripple:
+      // delay = d(px) * delayFactor(ms/px)
+      // element.style.setProperty('--ripple-delay', delay + 'ms')
+      window.addEventListener(
+        'pointerdown',
+        (ev) => {
+          const rect = bg.getBoundingClientRect();
+          const x = ev.clientX - rect.left;
+          const y = ev.clientY - rect.top;
+
+          // Restart ripple by toggling the class.
+          for (const cell of cells) {
+            const centerX = cell.c * cellSize + cellSize / 2;
+            const centerY = cell.r * cellSize + cellSize / 2;
+            const d = Math.hypot(centerX - x, centerY - y);
+            const delay = Math.round(d * delayFactor);
+            cell.el.style.setProperty('--ripple-delay', delay + 'ms');
+            cell.el.classList.remove('animate-cell-ripple');
+          }
+
+          // Force a reflow once, then add the class back.
+          void grid.offsetHeight;
+
+          for (const cell of cells) {
+            cell.el.classList.add('animate-cell-ripple');
+          }
+        },
+        { passive: true }
+      );
+
+      window.addEventListener('blur', () => clearPrev());
+    </script>
+  </body>
+</html>

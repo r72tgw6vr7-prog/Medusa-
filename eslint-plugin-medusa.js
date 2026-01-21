@@ -97,13 +97,24 @@ function isSpacingToken(tok) {
 function isArbitraryValueToken(tok) {
   return /\[[^\]]+\]/.test(tok);
 }
+
+function isAllowedArbitraryToken(tok) {
+  const core = tok.split(":").pop() || tok;
+  const m = core.match(/\[([^\]]+)\]/);
+  if (!m) return false;
+  const inner = m[1];
+  return inner.includes("var(--");
+}
 function numericSuffix(tok) {
   const core = tok.split(":").pop() || tok;
   const m = core.match(/-(\d+)(?![a-zA-Z])/);
   return m ? parseInt(m[1], 10) : null;
 }
 function isMultipleOf8(n) {
-  return n % 8 === 0;
+  // Tailwind spacing: n corresponds to n * 4px (e.g., gap-4 = 16px)
+  // Check if pixel value (n * 4) is a multiple of 8px
+  // This is equivalent to checking if n is even
+  return (n * 4) % 8 === 0;
 }
 function replaceNumericSuffix(tok, newNum) {
   // replace last -<num> with -<newNum>
@@ -191,6 +202,8 @@ export default {
               if (/-?(auto|px)$/.test(core)) return; // ignore auto/px tailwind keywords
 
               if (isArbitraryValueToken(core)) {
+                // Allow bracket tokens only when backed by CSS variables (design-system.css)
+                if (isAllowedArbitraryToken(core)) return;
                 context.report({
                   node,
                   messageId: "arbitrary",
@@ -202,7 +215,8 @@ export default {
               const n = numericSuffix(core);
               if (n == null) return;
               if (!isMultipleOf8(n)) {
-                const rounded = Math.max(0, Math.round(n / 8) * 8);
+                // Round to nearest even number (which gives 8px multiples when * 4)
+                const rounded = Math.max(2, Math.round(n / 2) * 2);
                 const suggest = replaceNumericSuffix(core, rounded);
                 context.report({
                   node,
@@ -321,6 +335,43 @@ export default {
           }
         };
       }
-    }
+    },
+
+    "enforce-no-arbitrary-values": {
+      meta: {
+        type: "problem",
+        docs: {
+          description:
+            "Disallow Tailwind arbitrary values (bracket syntax) unless they reference CSS variables (var(--...)).",
+          recommended: true
+        },
+        messages: {
+          forbidden: "Arbitrary value '{{token}}' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility."
+        },
+        schema: []
+      },
+      create(context) {
+        return {
+          JSXAttribute(node) {
+            if (!node.name || (node.name.name !== "className" && node.name.name !== "class")) return;
+            const classInfo = getClassTextFromAttribute(node);
+            if (!classInfo) return;
+
+            const tokens = splitClasses(classInfo.text);
+            tokens.forEach((tok) => {
+              const core = tok.split(":").pop() || tok;
+              if (!isArbitraryValueToken(core)) return;
+              if (isAllowedArbitraryToken(core)) return;
+
+              context.report({
+                node,
+                messageId: "forbidden",
+                data: { token: tok }
+              });
+            });
+          }
+        };
+      }
+    },
   }
 };

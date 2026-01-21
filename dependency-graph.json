@@ -1,0 +1,1052 @@
+{
+  "vitest.config.ts": [
+    "vitest/config",
+    "node:path"
+  ],
+  "vite.config.ts": [
+    "vite",
+    "@vitejs/plugin-react",
+    "node:path",
+    "vite-plugin-compression"
+  ],
+  "playwright.config.ts": [
+    "@playwright/test"
+  ],
+  "design-system-extraction.ts": [],
+  "utils/performanceMonitor.ts": [],
+  "utils/connectionMonitor.ts": [],
+  "types/playwright.d.ts": [],
+  "templates/ComponentTemplate.tsx": [
+    "react"
+  ],
+  "src/vite-env.d.ts": [],
+  "src/routes.tsx": [
+    "./types/route-types"
+  ],
+  "src/main.tsx": [
+    "react",
+    "react-dom/client",
+    "./App",
+    "@/components/atoms/UniversalTextureBackground"
+  ],
+  "src/design-tokens.ts": [],
+  "src/App.tsx": [
+    "react-router-dom",
+    "./pages/HomePage",
+    "@/components/organisms/ServicesPage",
+    "./pages/ArtistsPage",
+    "./pages/AftercarePage",
+    "react",
+    "./pages/LegalPage",
+    "./pages/ImpressumPage",
+    "./pages/DatenschutzPage",
+    "./pages/AGBPage",
+    "./pages/FAQPageNew",
+    "./pages/ContactPage",
+    "./pages/NotFoundPage",
+    "./pages/ServicesTestPage",
+    "./contexts/LanguageContext",
+    "../core/state/AppContext",
+    "@/components/Meta",
+    "./foundation/SimpleMedusaProvider",
+    "@/components/ScrollToTop",
+    "@/components/AnalyticsProvider"
+  ],
+  "src/utils/imageValidator.ts": [
+    "../config/imagePaths",
+    "react"
+  ],
+  "src/utils/imageUtils.ts": [
+    "../types/artist"
+  ],
+  "src/utils/glassmorphism.ts": [
+    "../design-tokens"
+  ],
+  "src/utils/galleryUtils.ts": [],
+  "src/utils/galleryManifestLoader.ts": [],
+  "src/utils/errorReporting.ts": [
+    "@sentry/browser",
+    "logrocket"
+  ],
+  "src/utils/analytics.ts": [],
+  "src/types/routes.ts": [
+    "react"
+  ],
+  "src/types/route-types.ts": [],
+  "src/types/page-types.ts": [],
+  "src/types/modules.d.ts": [
+    "react"
+  ],
+  "src/types/footer.ts": [
+    "react"
+  ],
+  "src/types/design-tokens.d.ts": [],
+  "src/types/css.d.ts": [],
+  "src/types/core.ts": [],
+  "src/types/container.ts": [],
+  "src/types/components.ts": [],
+  "src/types/component-types.ts": [
+    "react",
+    "./route-types"
+  ],
+  "src/types/booking.ts": [],
+  "src/types/artist.ts": [],
+  "src/tokens/typography.ts": [],
+  "src/tokens/spacing.ts": [],
+  "src/tokens/index.ts": [
+    "./colors",
+    "./spacing",
+    "./typography",
+    "./breakpoints"
+  ],
+  "src/tokens/design-system.ts": [],
+  "src/tokens/colors.ts": [],
+  "src/tokens/breakpoints.ts": [],
+  "src/styles/glassmorphism.ts": [
+    "../design-tokens"
+  ],
+  "src/styles/animations.ts": [],
+  "src/services/zohoCRMService.ts": [],
+  "src/services/paymentService.ts": [],
+  "src/services/integrationTesting.ts": [],
+  "src/services/emailService.ts": [],
+  "src/services/bookingService.ts": [
+    "uuid"
+  ],
+  "src/sections/index.ts": [],
+  "src/sections/TrustSignalsSection.tsx": [
+    "react",
+    "@/components/atoms/Badge/Badge",
+    "@/components/molecules/ReviewCard"
+  ],
+  "src/sections/TrustBadges.tsx": [
+    "react"
+  ],
+  "src/sections/ServicesSection.tsx": [
+    "react",
+    "@/components/molecules/ServiceCard"
+  ],
+  "src/sections/PartnersAndTestimonialsSection.tsx": [
+    "react",
+    "@/components/organisms/TestimonialsCarousel",
+    "./PartnersAndTestimonialsSection.css"
+  ],
+  "src/sections/HeroSection.tsx": [
+    "react",
+    "framer-motion",
+    "@/components/ui/Section",
+    "./TrustBadges"
+  ],
+  "src/sections/GallerySection.tsx": [
+    "react",
+    "react-router-dom",
+    "lucide-react",
+    "framer-motion",
+    "@/components/ui/Section"
+  ],
+  "src/sections/FAQSection.tsx": [
+    "react",
+    "@/components/organisms/FAQAccordion"
+  ],
+  "src/sections/ContactSection.tsx": [
+    "react"
+  ],
+  "src/sections/BookingSection.tsx": [
+    "react",
+    "@/components/organisms/BookingForm/BookingForm"
+  ],
+  "src/sections/BeforeAfterSection.tsx": [
+    "react",
+    "@/components/molecules/BeforeAfterCard"
+  ],
+  "src/sections/ArtistSection.tsx": [
+    "react",
+    "@/components/molecules/Card/ArtistCard"
+  ],
+  "src/sections/ProcessTimeline/index.ts": [],
+  "src/sections/ProcessTimeline/ProcessTimeline.tsx": [
+    "react",
+    "react",
+    "lucide-react",
+    "lucide-react",
+    "../../styles/process-timeline.css"
+  ],
+  "src/schemas/bookingSchema.ts": [
+    "zod"
+  ],
+  "src/pages/ServicesTestPage.tsx": [
+    "react",
+    "../components/pages/ServicesPageInteractive",
+    "../../core/state/AppContext"
+  ],
+  "src/pages/NotFoundPage.tsx": [
+    "react"
+  ],
+  "src/pages/LegalPage.tsx": [
+    "react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/atoms/PageBackground",
+    "../components/ui/PageHeader"
+  ],
+  "src/pages/ImpressumPage.tsx": [
+    "react",
+    "@/components/molecules/MainNavigation",
+    "@/components/pages",
+    "@/components/ui/PageHeader"
+  ],
+  "src/pages/HomePage.tsx": [
+    "../sections/HeroSection",
+    "../sections/GallerySection",
+    "../sections/ProcessTimeline",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/molecules",
+    "../components/pages",
+    "../components/PricingSection",
+    "../sections/PartnersAndTestimonialsSection",
+    "../components/organisms/StudioCarousel",
+    "../components/CarouselBadges",
+    "../components/PreFooterBookingCTA",
+    "../components/layout/ErrorBoundary"
+  ],
+  "src/pages/HeroShowcase.tsx": [
+    "react"
+  ],
+  "src/pages/GalleryPage.tsx": [
+    "react",
+    "framer-motion",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader",
+    "../utils/galleryUtils"
+  ],
+  "src/pages/FAQPageNew.tsx": [
+    "react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader"
+  ],
+  "src/pages/FAQPage.tsx": [
+    "react",
+    "lucide-react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader",
+    "../components/atoms/PageBackground"
+  ],
+  "src/pages/EnhancedGalleryPage_new.tsx": [
+    "react",
+    "react-router-dom",
+    "framer-motion",
+    "lucide-react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/atoms/ImageWithFallback",
+    "../components/BeforeAfterSlider",
+    "../contexts/LanguageContext",
+    "../styles/gallery-grid.css"
+  ],
+  "src/pages/EnhancedGalleryPage.tsx": [
+    "react",
+    "react-router-dom",
+    "framer-motion",
+    "lucide-react",
+    "@/components/molecules/MainNavigation",
+    "@/components/pages",
+    "@/components/atoms/ImageWithFallback",
+    "@/components/BeforeAfterSlider",
+    "../contexts/LanguageContext",
+    "../styles/gallery-grid.css"
+  ],
+  "src/pages/DatenschutzPage.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader"
+  ],
+  "src/pages/ContactPage.tsx": [
+    "react",
+    "react-hook-form",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader",
+    "lucide-react"
+  ],
+  "src/pages/BookingPage.tsx": [
+    "react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/atoms/Button/Button",
+    "../components/organisms",
+    "lucide-react",
+    "../types/booking"
+  ],
+  "src/pages/ArtistsPage.tsx": [
+    "react",
+    "@/components/pages",
+    "@/components/molecules/MainNavigation",
+    "@/components/CarouselBadges",
+    "./ArtistsPage.css"
+  ],
+  "src/pages/AftercarePage.tsx": [
+    "react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader",
+    "lucide-react",
+    "../data/aftercare"
+  ],
+  "src/pages/AGBPage.tsx": [
+    "react",
+    "../components/molecules/MainNavigation",
+    "../components/pages",
+    "../components/ui/PageHeader"
+  ],
+  "src/lib/utils.ts": [],
+  "src/lib/gdpr-compliance.ts": [],
+  "src/lib/env.ts": [
+    "zod"
+  ],
+  "src/lib/csrf.ts": [],
+  "src/lib/forms/validators.ts": [
+    "zod"
+  ],
+  "src/lib/forms/utils.ts": [
+    "react-hook-form",
+    "zod",
+    "@hookform/resolvers/zod"
+  ],
+  "src/lib/forms/types.ts": [
+    "react-hook-form"
+  ],
+  "src/lib/animations/variants.ts": [
+    "framer-motion",
+    "./micro-transitions"
+  ],
+  "src/lib/animations/micro-transitions.ts": [],
+  "src/lib/animations/index.ts": [],
+  "src/lib/animations/hooks.ts": [
+    "framer-motion",
+    "react"
+  ],
+  "src/hooks/useReducedMotion.ts": [
+    "react"
+  ],
+  "src/hooks/useMediaQuery.ts": [
+    "react"
+  ],
+  "src/hooks/useKeyboardNav.ts": [
+    "react"
+  ],
+  "src/hooks/useAnalytics.ts": [
+    "react",
+    "react-router-dom",
+    "../utils/analytics"
+  ],
+  "src/foundation/index.ts": [
+    "./SimpleMedusaProvider"
+  ],
+  "src/foundation/SimpleMedusaProvider.tsx": [
+    "react",
+    "../design-tokens"
+  ],
+  "src/data/services.ts": [],
+  "src/data/partners.ts": [],
+  "src/data/imageData.ts": [],
+  "src/data/gallery.ts": [],
+  "src/data/artists.ts": [],
+  "src/data/aftercare.ts": [],
+  "src/contexts/LanguageContext.tsx": [
+    "react",
+    "@/locales/de.json",
+    "@/locales/en.json"
+  ],
+  "src/context/appReducer.tsx": [
+    "react"
+  ],
+  "src/constants/routes.ts": [
+    "react",
+    "../types/routes"
+  ],
+  "src/config/site.ts": [],
+  "src/config/imagePaths.ts": [],
+  "src/components/index.ts": [],
+  "src/components/StudioShowcase.tsx": [
+    "react",
+    "../styles/StudioShowcase.css"
+  ],
+  "src/components/StructuredData.tsx": [
+    "react",
+    "../lib/env"
+  ],
+  "src/components/ScrollToTop.tsx": [
+    "react",
+    "react-router-dom"
+  ],
+  "src/components/PricingSection.tsx": [
+    "react",
+    "lucide-react",
+    "./ui/Section"
+  ],
+  "src/components/PreFooterBookingCTA.tsx": [
+    "react",
+    "lucide-react",
+    "./atoms/Button/Button",
+    "./PreFooterBookingCTA.module.css",
+    "./ui/input/MedusaInput"
+  ],
+  "src/components/PhaseCArchiveExecutor.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/PartnersAndPressSection.tsx": [
+    "react",
+    "../data/partners",
+    "../styles/partners.css"
+  ],
+  "src/components/PWAConfiguration.tsx": [
+    "react"
+  ],
+  "src/components/Meta.tsx": [
+    "react"
+  ],
+  "src/components/GoogleMap.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/GalleryStats.tsx": [
+    "react",
+    "../utils/galleryUtils"
+  ],
+  "src/components/CookieConsentBanner.tsx": [
+    "react"
+  ],
+  "src/components/ConsentProvider.tsx": [
+    "react"
+  ],
+  "src/components/ConsentManager.tsx": [
+    "react"
+  ],
+  "src/components/CarouselBadges.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/BeforeAfterSlider.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/AssetNormalizationPanel.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/AnalyticsProvider.tsx": [
+    "react",
+    "../hooks/useAnalytics"
+  ],
+  "src/components/AdminUploadPanel.tsx": [
+    "react",
+    "react-dropzone",
+    "uuid",
+    "lucide-react"
+  ],
+  "src/components/AccessibilityEnhancements.tsx": [
+    "react"
+  ],
+  "src/components/ui/utils.ts": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "src/components/ui/types.ts": [
+    "react"
+  ],
+  "src/components/ui/index.ts": [],
+  "src/components/ui/dialog.tsx": [
+    "react"
+  ],
+  "src/components/ui/carousel.tsx": [
+    "react",
+    "embla-carousel-react",
+    "lucide-react",
+    "../../lib/utils",
+    "./button"
+  ],
+  "src/components/ui/calendar.tsx": [
+    "react",
+    "lucide-react",
+    "react-day-picker",
+    "../../lib/utils",
+    "./button"
+  ],
+  "src/components/ui/button.tsx": [
+    "react",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "../../lib/utils"
+  ],
+  "src/components/ui/Section.tsx": [
+    "react",
+    "./Container"
+  ],
+  "src/components/ui/PageHeader.tsx": [
+    "react"
+  ],
+  "src/components/ui/Loading.tsx": [
+    "lucide-react",
+    "../../lib/utils"
+  ],
+  "src/components/ui/Container.tsx": [
+    "react"
+  ],
+  "src/components/ui/textarea/Textarea.tsx": [
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/select/Select.tsx": [
+    "react",
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/radio/Radio.tsx": [
+    "react",
+    "@radix-ui/react-radio-group",
+    "../utils",
+    "lucide-react"
+  ],
+  "src/components/ui/label/Label.tsx": [
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/input/index.ts": [],
+  "src/components/ui/input/MedusaInput.tsx": [
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/input/Input.tsx": [
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/checkbox/Checkbox.tsx": [
+    "react",
+    "@radix-ui/react-slot",
+    "../utils",
+    "lucide-react"
+  ],
+  "src/components/ui/card/Card.tsx": [
+    "react",
+    "../utils"
+  ],
+  "src/components/ui/button/index.ts": [],
+  "src/components/ui/button/Button.tsx": [
+    "react",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "../utils",
+    "../accessibility/VisuallyHidden"
+  ],
+  "src/components/ui/accessibility/VisuallyHidden.tsx": [
+    "react",
+    "@radix-ui/react-slot",
+    "../utils"
+  ],
+  "src/components/primitives/Section.tsx": [
+    "react"
+  ],
+  "src/components/primitives/Card.tsx": [
+    "react"
+  ],
+  "src/components/pages/index.ts": [],
+  "src/components/pages/TeamGrid.tsx": [
+    "react",
+    "../ui/Section",
+    "../ui/button",
+    "../ui/Container",
+    "../molecules/Card/ArtistCard",
+    "../molecules/ArtistBioModal"
+  ],
+  "src/components/pages/ServicesPageInteractive.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react",
+    "../../../core/state/AppContext",
+    "../ui/button"
+  ],
+  "src/components/pages/ServicesPageInteractive.example.tsx": [
+    "react",
+    "../pages/ServicesPageInteractive",
+    "../../../core/state/AppContext"
+  ],
+  "src/components/pages/Footer.tsx": [
+    "react",
+    "lucide-react",
+    "../GoogleMap"
+  ],
+  "src/components/organisms/index.ts": [],
+  "src/components/organisms/TestimonialsCarousel.tsx": [
+    "swiper/react",
+    "swiper/modules",
+    "swiper/css",
+    "swiper/css/pagination",
+    "../../styles/testimonials.css"
+  ],
+  "src/components/organisms/StudioHero.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/organisms/StudioCarousel.tsx": [
+    "react",
+    "lucide-react",
+    "../../utils/imageUtils"
+  ],
+  "src/components/organisms/ServicesPage.tsx": [
+    "react",
+    "../pages/ServicesPageInteractive",
+    "../molecules/MainNavigation",
+    "../pages/Footer",
+    "../../types/routes"
+  ],
+  "src/components/organisms/ServiceHighlights.tsx": [
+    "react",
+    "lucide-react",
+    "../../foundation"
+  ],
+  "src/components/organisms/SalonCarousel.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react",
+    "@use-gesture/react",
+    "figma:asset/4ba4b5ee79fffa380a84277c61b38f32ff42ec37.png",
+    "figma:asset/45cd1fc2ed6614d86b0670b0fd926d0269967146.png",
+    "figma:asset/5a6857c9f59f892552b7bcbe4ad205d96df76db8.png",
+    "figma:asset/895ac0a94078e8a7cdf5f7e2f4e31a66ea5c6fae.png",
+    "figma:asset/18d7dc765a127cfdd40662c47bde9b6355824894.png",
+    "/assets/images/photos/studio/img3876.webp",
+    "/assets/images/photos/studio/img3914.webp",
+    "/assets/images/photos/studio/img3947.webp",
+    "/assets/images/photos/studio/img3969.webp",
+    "/assets/images/photos/studio/img3994.webp",
+    "../../foundation"
+  ],
+  "src/components/organisms/RecentWorkGallery.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react",
+    "../../../src/foundation/SimpleMedusaProvider",
+    "../../data/imageData",
+    "../../utils/imageUtils"
+  ],
+  "src/components/organisms/ProcessTimeline.tsx": [
+    "react",
+    "react",
+    "lucide-react",
+    "framer-motion",
+    "lucide-react",
+    "../../../src/foundation/SimpleMedusaProvider",
+    "../molecules/ProcessStepCard"
+  ],
+  "src/components/organisms/OurArtists.tsx": [
+    "react",
+    "framer-motion",
+    "../molecules/Card/ArtistCard",
+    "./ArtistDetailModal"
+  ],
+  "src/components/organisms/GalleryGrid.tsx": [
+    "react",
+    "../atoms/Button/Button"
+  ],
+  "src/components/organisms/FAQAccordion.tsx": [
+    "react",
+    "../molecules/FAQItem"
+  ],
+  "src/components/organisms/ContactForm.tsx": [
+    "react",
+    "../atoms/Input/InputField",
+    "../atoms/TextArea",
+    "../atoms/Button/Button"
+  ],
+  "src/components/organisms/ArtistShowcaseHero.tsx": [
+    "react"
+  ],
+  "src/components/organisms/ArtistPortfolio.tsx": [
+    "react",
+    "framer-motion"
+  ],
+  "src/components/organisms/ArtistDetailModal.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react"
+  ],
+  "src/components/organisms/ArtistDetailHero.tsx": [
+    "react"
+  ],
+  "src/components/organisms/AnimatedSection.tsx": [
+    "framer-motion",
+    "framer-motion",
+    "react",
+    "../../lib/animations/hooks"
+  ],
+  "src/components/organisms/BookingForm/BookingForm.tsx": [
+    "react-hook-form",
+    "@hookform/resolvers/zod",
+    "@/schemas/bookingSchema",
+    "@/components/ui/input/Input",
+    "@/components/ui/button",
+    "@/components/ui/textarea/Textarea",
+    "@/components/ui/select/Select",
+    "react",
+    "sonner",
+    "@/lib/utils"
+  ],
+  "src/components/molecules/index.ts": [],
+  "src/components/molecules/TrustSignals.tsx": [
+    "lucide-react"
+  ],
+  "src/components/molecules/TrustBadgesMarquee.tsx": [],
+  "src/components/molecules/TrustBadgesBar.tsx": [
+    "lucide-react",
+    "./TrustBadgesBar.module.css"
+  ],
+  "src/components/molecules/TrustBadges.tsx": [
+    "react",
+    "../../sections/TrustBadges",
+    "../organisms/OurArtists.module.css"
+  ],
+  "src/components/molecules/TrustBadgeCarousel.tsx": [
+    "react",
+    "../atoms/TrustBadge"
+  ],
+  "src/components/molecules/StickyTrustSignalsBar.tsx": [
+    "react",
+    "lucide-react",
+    "./StickyTrustSignalsBar.module.css"
+  ],
+  "src/components/molecules/StatsBar.tsx": [
+    "react"
+  ],
+  "src/components/molecules/StagingPrepAndSmoke.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/molecules/ServiceCard.tsx": [
+    "react"
+  ],
+  "src/components/molecules/ReviewCard.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/molecules/ProcessStepCard.tsx": [
+    "react",
+    "lucide-react",
+    "react"
+  ],
+  "src/components/molecules/PriceCard.tsx": [
+    "react"
+  ],
+  "src/components/molecules/NewsletterForm.tsx": [
+    "react"
+  ],
+  "src/components/molecules/MainNavigation.tsx": [
+    "react",
+    "react-dom",
+    "react-router-dom",
+    "../../contexts/LanguageContext",
+    "../accessibility/SkipLink",
+    "../../hooks/useKeyboardNav",
+    "./MainNavigation.css"
+  ],
+  "src/components/molecules/LanguageToggle.tsx": [
+    "react"
+  ],
+  "src/components/molecules/LanguageSwitcher.tsx": [
+    "react",
+    "@/contexts/LanguageContext",
+    "@/contexts/LanguageContext"
+  ],
+  "src/components/molecules/GDPRCompliance.tsx": [
+    "react"
+  ],
+  "src/components/molecules/FocusTrap.tsx": [
+    "react",
+    "@react-aria/focus"
+  ],
+  "src/components/molecules/FAQItem.tsx": [
+    "react"
+  ],
+  "src/components/molecules/DevBlankScreenTriage.tsx": [
+    "react",
+    "lucide-react",
+    "react-dom/client"
+  ],
+  "src/components/molecules/CookieConsentBanner.tsx": [
+    "react",
+    "../../types/page-types",
+    "@radix-ui/react-dialog",
+    "lucide-react"
+  ],
+  "src/components/molecules/ContactInfoCard.tsx": [
+    "react",
+    "../atoms/Icon"
+  ],
+  "src/components/molecules/BuildPreviewGate.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/molecules/BookingCallToAction.tsx": [
+    "react",
+    "framer-motion",
+    "lucide-react",
+    "../atoms/MicroInteractions",
+    "../../../src/foundation/SimpleMedusaProvider"
+  ],
+  "src/components/molecules/BeforeAfterCard.tsx": [
+    "react"
+  ],
+  "src/components/molecules/ArtistBioModal.tsx": [
+    "react",
+    "lucide-react",
+    "../../contexts/LanguageContext",
+    "./ArtistBioModal.css"
+  ],
+  "src/components/molecules/Card/ServiceCards.tsx": [
+    "react",
+    "../../ui/Section",
+    "../../ui/button"
+  ],
+  "src/components/molecules/Card/Card.tsx": [
+    "react",
+    "../../../design-tokens"
+  ],
+  "src/components/molecules/Card/ArtistCard.tsx": [
+    "react",
+    "./ArtistCard.css"
+  ],
+  "src/components/molecules/Card/ArtistCard.example.tsx": [
+    "react",
+    "./ArtistCard"
+  ],
+  "src/components/layouts/MainLayout.tsx": [
+    "react"
+  ],
+  "src/components/layout/LoadingSpinner.tsx": [
+    "react"
+  ],
+  "src/components/layout/ErrorBoundary.tsx": [
+    "react"
+  ],
+  "src/components/examples/SalonCarouselExample.tsx": [
+    "../organisms/SalonCarousel"
+  ],
+  "src/components/debug/ImageChecker.tsx": [
+    "react"
+  ],
+  "src/components/debug/HeadlessBrowserCheck.tsx": [
+    "react"
+  ],
+  "src/components/debug/BuildStateMonitor.tsx": [
+    "react"
+  ],
+  "src/components/booking/BookingModalMobile.tsx": [
+    "react",
+    "lucide-react",
+    "../atoms/Button",
+    "../molecules/Card/ArtistCard",
+    "../atoms/Input/FormInput",
+    "../../services/bookingService"
+  ],
+  "src/components/atoms/index.ts": [],
+  "src/components/atoms/UniversalTextureBackground.tsx": [
+    "react"
+  ],
+  "src/components/atoms/TrustBadge.tsx": [
+    "react"
+  ],
+  "src/components/atoms/TextArea.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Section.tsx": [],
+  "src/components/atoms/SafeImage.tsx": [
+    "react"
+  ],
+  "src/components/atoms/ResponsiveImage.tsx": [
+    "react"
+  ],
+  "src/components/atoms/PlaceholderImage.tsx": [],
+  "src/components/atoms/PageTitle.tsx": [
+    "react",
+    "framer-motion"
+  ],
+  "src/components/atoms/PageBackground.tsx": [
+    "react"
+  ],
+  "src/components/atoms/MicroInteractions.tsx": [
+    "react"
+  ],
+  "src/components/atoms/ImageWithLoader.tsx": [
+    "react",
+    "./SafeImage"
+  ],
+  "src/components/atoms/ImageWithFallback.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/atoms/Grid.tsx": [],
+  "src/components/atoms/GalleryImage.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Container.tsx": [],
+  "src/components/atoms/Container.primitives.tsx": [],
+  "src/components/atoms/AccessibleButton.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Input/index.ts": [
+    "./Input"
+  ],
+  "src/components/atoms/Input/InputField.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Input/Input.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Input/FormInput.tsx": [
+    "react"
+  ],
+  "src/components/atoms/Icon/index.ts": [
+    "./Icon"
+  ],
+  "src/components/atoms/Icon/Icon.tsx": [
+    "react",
+    "lucide-react"
+  ],
+  "src/components/atoms/Button/index.ts": [
+    "./Button"
+  ],
+  "src/components/atoms/Button/Button.tsx": [
+    "react",
+    "../../../design-tokens"
+  ],
+  "src/components/atoms/Badge/Badge.tsx": [
+    "react"
+  ],
+  "src/components/accessibility/VisuallyHidden.tsx": [
+    "react"
+  ],
+  "src/components/accessibility/SkipLink.tsx": [
+    "react",
+    "./VisuallyHidden"
+  ],
+  "src/app/providers/appReducer.tsx": [
+    "react"
+  ],
+  "src/app/providers/LanguageContext.tsx": [
+    "react",
+    "@/locales/de.json",
+    "@/locales/en.json"
+  ],
+  "src/app/booking/page.tsx": [
+    "react",
+    "@/components/organisms/BookingForm/BookingForm",
+    "@/components/ui/card/Card"
+  ],
+  "src/api/upload.ts": [
+    "@vercel/blob"
+  ],
+  "src/api/update-manifest.ts": [
+    "fs",
+    "path"
+  ],
+  "src/api/optimize-image.ts": [
+    "sharp"
+  ],
+  "src/api/manifest.ts": [
+    "fs",
+    "path"
+  ],
+  "src/api/handlers.ts": [
+    "../services/emailService",
+    "../services/zohoCRMService",
+    "../services/paymentService"
+  ],
+  "src/api/gallery-sync.ts": [],
+  "foundation/index.tsx": [
+    "./DesignSystem",
+    "./NavigationCore",
+    "./ComplianceCore"
+  ],
+  "foundation/SimpleMedusaProvider.tsx": [
+    "react"
+  ],
+  "foundation/SimpleComponentUtils.tsx": [],
+  "foundation/ResponsiveCore.tsx": [
+    "react",
+    "./MedusaDesignSystemProvider"
+  ],
+  "foundation/MedusaUtilityComponents.tsx": [
+    "react",
+    "framer-motion",
+    "./MedusaDesignSystem"
+  ],
+  "foundation/MedusaStyleGuide.tsx": [
+    "./MedusaDesignSystemProvider",
+    "./MedusaUtilityComponents"
+  ],
+  "foundation/MedusaDesignSystemV2.tsx": [
+    "react",
+    "../brand-tokens.json"
+  ],
+  "foundation/MedusaDesignSystem.tsx": [
+    "react",
+    "framer-motion"
+  ],
+  "foundation/MedusaComponents.tsx": [
+    "react",
+    "framer-motion",
+    "./MedusaDesignSystem"
+  ],
+  "foundation/LayoutSystem.tsx": [
+    "react",
+    "./DesignSystem"
+  ],
+  "foundation/EnhancedMedusaComponents.tsx": [
+    "react",
+    "framer-motion",
+    "./MedusaDesignSystemProvider"
+  ],
+  "foundation/DesignSystemUsageGuide.tsx": [
+    "./MedusaDesignSystemV2"
+  ],
+  "foundation/DesignSystem.tsx": [
+    "react"
+  ],
+  "foundation/ComplianceCore.tsx": [
+    "react",
+    "lucide-react",
+    "./DesignSystem"
+  ],
+  "foundation/AccessibilityCore.tsx": [
+    "react",
+    "./MedusaDesignSystemProvider"
+  ],
+  "data/artists-en.ts": [],
+  "data/artists-de.ts": [],
+  "core/types/routes.ts": [],
+  "core/types/index.ts": [],
+  "core/state/appReducer.ts": [
+    "../types/routes"
+  ],
+  "core/state/AppContext.tsx": [
+    "react",
+    "./appReducer",
+    "../types/routes",
+    "../constants/routes"
+  ],
+  "core/constants/routes.ts": [
+    "../types/routes"
+  ],
+  "core/constants/config.ts": [],
+  "components/layout/LoadingSpinner.tsx": [],
+  "components/layout/ErrorBoundary.tsx": [
+    "react"
+  ]
+}

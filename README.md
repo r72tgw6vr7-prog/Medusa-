@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# Medusa-
-Medusa tattoo website
-=======
 # Medusa Tattoo München - Luxury Tattoo Salon Website
 
 A world-class, production-ready website for Medusa Tattoo München, built with React, TypeScript, and Tailwind CSS v4. Features a comprehensive design system, WCAG AA accessibility, and full German/English multi-language support.
@@ -10,24 +6,18 @@ A world-class, production-ready website for Medusa Tattoo München, built with R
 
 ## 🎨 Design System
 
-**Brand Colors** (EXCLUSIVE - No other colors allowed):
-- Background: `#222222` (Deep black)
-- Text: `#FFFFFF` (Pure white)
-- Accents: `#D4AF37` (Gold)
-- Details: `#C0C0C0` (Chrome/Silver)
+Medusa uses a **60-30-10 color system** with chrome accents:
 
-**Typography**:
-- Headlines: Playfair Display
-- Body: Inter
-- Modular scale: 8px grid system
+- **Primary (60%):** `#171717` - Dominant backgrounds/text
+- **Surface (30%):** `#F3F3F3` - Cards/sections
+- **Grey (10%):** `#666666` - Borders/utilities
+- **Accent:** `#C0C0C0` - Chrome highlights (CTAs, focus)
 
-**Key Features**:
-- ✅ 4-color palette strict enforcement
-- ✅ Glassmorphic navigation
-- ✅ Gold glow effects (no other shadows)
-- ✅ WCAG AA accessibility compliance
-- ✅ Touch targets ≥ 44px
-- ✅ Responsive 320px to 2000px
+### Documentation
+
+- [Usage Guide](./DESIGN_SYSTEM_USAGE_GUIDE.md)
+- [Changelog](./CHANGELOG.md)
+- [Theme Constants](./lib/theme/README.md)
 
 ---
 
@@ -35,7 +25,7 @@ A world-class, production-ready website for Medusa Tattoo München, built with R
 
 ### Prerequisites
 
-- **Node.js**: 18.x or higher
+- **Node.js**: 20.x
 - **npm**: 9.x or higher
 - **Git**: Latest version
 
@@ -141,7 +131,7 @@ netlify deploy --prod
 **Build Settings**:
 - Build command: `npm run build`
 - Publish directory: `dist`
-- Node version: `18.x`
+- Node version: `20.x`
 
 ---
 
@@ -203,6 +193,22 @@ npm run test:p0:report   # Run P0 tests and open HTML report
 ```
 
 ---
+
+## SCROLL/ANIMATION RULES (MANDATORY)
+
+1. **Hero Parallax**: Framer Motion only (`src/components/ui/hero-parallax.tsx`). NO GSAP overrides.
+2. **Scroll Controller**: `src/lib/scroll.ts` singleton. Edit config only; no global kills.
+3. **Route Changes**: Scoped cleanup in `src/components/ScrollToTop.tsx` (DOM orphans only).
+4. **RAF**: Batch into single queue (`src/utils/rafQueue.ts`). No direct `requestAnimationFrame`.
+5. **Playground**: Never merge to prod. Delete after experiments.
+6. **Node**: Strictly 20.x (`engines` in `package.json`).
+
+## AI AGENT BEHAVIOR
+
+- ALWAYS run forensic grep first (no assumptions).
+- NO global `ScrollTrigger.killAll()` → scoped DOM-check only.
+- Verify design post-change: hero parallax identical.
+- Test: 5 navs → ScrollTrigger count stable + FPS 58+
 
 ## 🌐 Multi-Language Support
 
@@ -507,4 +513,3 @@ Proprietary - © 2025 Medusa Tattoo München. All rights reserved.
 **Last Updated**: January 2025
 **Version**: 1.0.0
 **Status**: Production Ready (Pending Backend Integration)
->>>>>>> 119cc3f (Add foundation files and fix deployment)

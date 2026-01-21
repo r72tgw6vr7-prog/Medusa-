@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getImageProps } from '../../utils/imageUtils';
+import { getImageProps } from '../../utils/image-utils';
 
 interface StudioImage {
   src: string;
@@ -93,12 +93,12 @@ const StudioCarousel: React.FC = () => {
 
   return (
     <section ref={containerRef} className='w-full py-16 md:py-16 overflow-hidden relative z-10'>
-      {/* Section Header - Contained - EMERGENCY FIX: 40px spacing */}
-      <div className='max-w-[1104px] mx-auto px-8 md:px-8 mb-8'>
-        <h2 className='font-playfair text-4xl md:text-5xl font-semibold text-[var(--brand-gold)] text-center'>
+      {/* Section Header - Contained - Primary Section Heading */}
+      <div className='max-w-276 mx-auto px-8 md:px-8 mb-8'>
+        <h2 className='font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-[var(--brand-accent)] text-center'>
           Unser Studio
         </h2>
-        <p className='font-inter text-lg text-[#C0C0C0] text-center mt-8'>
+        <p className='font-body text-lg text-brand-chrome text-center mt-4'>
           Ein Blick in unser professionelles, EU-zertifiziertes Tattoo-Studio im Herzen Münchens
         </p>
       </div>
@@ -106,7 +106,7 @@ const StudioCarousel: React.FC = () => {
       {/* FULL-WIDTH CAROUSEL - FIXED: 16:9 aspect ratio with max height limit */}
       <div className='relative w-full'>
         {/* Main Image Container - Fixed aspect ratio 16:9 */}
-        <div className='relative w-full aspect-[16/9] max-h-[80vh] overflow-hidden bg-[#1a1a1a]'>
+        <div className='relative w-full aspect-video max-h-[70vh] overflow-hidden bg-luxury-bg-dark'>
           {/* Images */}
           {STUDIO_IMAGES.map((image, index) => (
             <div
@@ -115,40 +115,65 @@ const StudioCarousel: React.FC = () => {
                 index === currentIndex ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <img
-                {...getImageProps(image.src, image.alt, {
+              {(() => {
+                const imgProps = getImageProps(image.src, image.alt, {
                   sizes: '100vw',
                   priority: image.priority || false,
-                })}
-                className='w-full h-full object-cover'
-                style={{ objectPosition: 'center center' }}
-              />
+                });
+
+                // Use <picture> for studio images with AVIF/WebP
+                if ('avifSrcSet' in imgProps) {
+                  return (
+                    <picture>
+                      <source type='image/avif' srcSet={imgProps.avifSrcSet} sizes='100vw' />
+                      <source type='image/webp' srcSet={imgProps.webpSrcSet} sizes='100vw' />
+                      <img
+                        src={imgProps.src}
+                        alt={imgProps.alt}
+                        loading={imgProps.loading}
+                        decoding={imgProps.decoding}
+                        fetchPriority={imgProps.fetchPriority}
+                        onError={imgProps.onError}
+                        className='w-full h-full object-cover'
+                        style={{ objectPosition: 'center center' }}
+                      />
+                    </picture>
+                  );
+                }
+
+                // Fallback for non-studio images
+                return (
+                  <img
+                    {...imgProps}
+                    className='w-full h-full object-cover'
+                    style={{ objectPosition: 'center center' }}
+                  />
+                );
+              })()}
               {/* Subtle Gradient Overlay - Bottom only */}
-              <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none' />
+              <div className='absolute inset-0 bg-gradient-to-t from-deep-black/30 via-transparent to-transparent pointer-events-none' />
             </div>
           ))}
 
           {/* Navigation Buttons - Brand Compliant */}
           <button
             onClick={goToPrevious}
-            className='absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[rgba(26,26,26,0.8)] backdrop-blur-sm flex items-center justify-center hover:bg-[rgba(212,175,55,0.9)] transition-all duration-300 z-10'
-            style={{ boxShadow: '0 0 16px rgba(192,192,192,0.3)' }}
+            className='absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-luxury-bg-dark/80 backdrop-blur-sm flex items-center justify-center hover:bg-brand-accent/90 transition-all duration-300 z-10 shadow-[var(--shadow-chrome-md)]'
             aria-label='Vorheriges Bild'
           >
-            <ChevronLeft className='w-6 h-6 text-white' />
+            <ChevronLeft className='w-6 h-6 text-luxury-text-inverse' />
           </button>
 
           <button
             onClick={goToNext}
-            className='absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[rgba(26,26,26,0.8)] backdrop-blur-sm flex items-center justify-center hover:bg-[rgba(212,175,55,0.9)] transition-all duration-300 z-10'
-            style={{ boxShadow: '0 0 16px rgba(192,192,192,0.3)' }}
+            className='absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-luxury-bg-dark/80 backdrop-blur-sm flex items-center justify-center hover:bg-brand-accent/90 transition-all duration-300 z-10 shadow-[var(--shadow-chrome-md)]'
             aria-label='Nächstes Bild'
           >
-            <ChevronRight className='w-6 h-6 text-white' />
+            <ChevronRight className='w-6 h-6 text-luxury-text-inverse' />
           </button>
 
           {/* Counter */}
-          <div className='absolute bottom-4 md:bottom-6 right-4 md:right-6 bg-[rgba(26,26,26,0.8)] backdrop-blur-sm text-white px-8 py-0 rounded-lg font-inter text-sm font-semibold z-10'>
+          <div className='absolute bottom-4 md:bottom-6 right-4 md:right-6 bg-luxury-bg-dark/80 backdrop-blur-sm text-luxury-text-inverse px-8 py-0 rounded-lg font-inter text-sm font-semibold z-10'>
             {currentIndex + 1} / {STUDIO_IMAGES.length}
           </div>
         </div>

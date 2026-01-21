@@ -1,0 +1,16 @@
+[
+  {
+    "lang": "de",
+    "namePlaceholder": "Ihr Name",
+    "emailPlaceholder": "ihre.email@beispiel.de",
+    "submitText": "Absenden",
+    "nameError": "Dieses Feld ist erforderlich"
+  },
+  {
+    "lang": "en",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your.email@example.com",
+    "submitText": "Absenden",
+    "nameError": "This field is required"
+  }
+]

@@ -51,7 +51,7 @@ import { ServicesPageInteractive } from './components/pages/ServicesPageInteract
 
 function ServicesPage() {
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-(--color-surface-dark)">
       <ServicesPageInteractive />
     </div>
   );
@@ -150,10 +150,10 @@ transition={{ delay: index * 0.1, duration: 0.4 }}
 ## Styling System
 
 ### Colors
-- **Background**: `#1A1A1A` (page), `#0F0F0F` (cards)
-- **Text**: `#FFFFFF` (primary), `#C0C0C0` (secondary), `#888888` (tertiary)
+- **Background**: `var(--color-surface-dark)` (page), `var(--color-surface-darker)` (cards)
+- **Text**: `var(--color-text-primary)` (primary), `var(--color-accent-silver)` (secondary), `rgb(136 136 136)` (tertiary)
 - **Borders**: `rgba(212,175,55,0.35)` default, `rgba(212,175,55,0.85)` selected
-- **Gold**: `#D4AF37` primary, `#C19B26` hover
+- **Gold**: `var(--brand-accent)` primary, `var(--brand-gold-hover)` hover
 
 ### Typography
 - **Page Title**: Playfair Display, 48/40/32px responsive

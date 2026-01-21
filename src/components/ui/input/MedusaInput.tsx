@@ -79,7 +79,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              'text-[15px] font-medium text-white/90', // Adjusted size and opacity
+              'text-sm-15 font-medium text-luxury-text-inverse/90', // Adjusted size and opacity
               hideLabel && 'sr-only',
             )}
           >
@@ -96,7 +96,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
         <div className='relative'>
           {leftIcon && (
             <div
-              className='absolute left-4 top-1/2 -translate-y-1/2 text-white/50'
+              className='absolute left-4 top-1/2 -translate-y-1/2 text-luxury-text-inverse/50'
               style={iconSize}
             >
               {leftIcon}
@@ -108,14 +108,14 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
             id={inputId}
             className={cn(
               // Base styles from design system - adjusted for compactness
-              'w-full bg-[rgba(34,34,34,0.8)] rounded-md',
+              'w-full bg-luxury-bg-dark/80 rounded-md',
               'text-base leading-snug font-body font-normal',
-              'text-white placeholder:text-white/40 placeholder:text-sm',
-              'border border-[rgba(192,192,192,0.3)]',
+              'text-luxury-text-inverse placeholder:text-luxury-text-inverse/40 placeholder:text-sm',
+              'border border-luxury-border-on-dark/30',
 
               // Mobile-first responsive sizing - more compact
-              'min-h-[42px] px-4 py-2.5',
-              'md:min-h-[40px] md:py-2',
+              'min-h-11 px-4 py-2.5',
+              'md:min-h-10 md:py-2',
 
               // Focus states from design system
               'focus:outline-none focus:border-[var(--brand-gold)]',
@@ -145,7 +145,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
 
           {rightIcon && (
             <div
-              className='absolute right-4 top-1/2 -translate-y-1/2 text-white/50'
+              className='absolute right-4 top-1/2 -translate-y-1/2 text-luxury-text-inverse/50'
               style={iconSize}
             >
               {rightIcon}
@@ -158,8 +158,8 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
           <p
             id={`${inputId}-description`}
             className={cn(
-              'text-xs mt-0.5', // Smaller text and tighter spacing
-              error ? 'text-red-400' : 'text-white/50',
+              'text-sm lg:text-xs mt-0.5', // Smaller text and tighter spacing
+              error ? 'text-red-400' : 'text-luxury-text-inverse/50',
             )}
           >
             {error && typeof error === 'string' ? error : helper}

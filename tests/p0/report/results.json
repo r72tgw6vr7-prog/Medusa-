@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "/Users/yos/Work/CascadeProjects/Medusa-Web/playwright.config.ts",
-    "rootDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+    "configFile": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/playwright.config.ts",
+    "rootDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -10,7 +10,9 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 1
+    },
     "preserveOutput": "always",
     "reporter": [
       [
@@ -37,13 +39,15 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
+        "outputDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+        "testDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -51,13 +55,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
+        "outputDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+        "testDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -65,13 +71,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
+        "outputDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "webkit",
         "name": "webkit",
-        "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+        "testDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -79,13 +87,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
+        "outputDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
-        "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+        "testDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -93,13 +103,15 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests/p0/artifacts",
+        "outputDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests/p0/artifacts",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "Mobile Safari",
         "name": "Mobile Safari",
-        "testDir": "/Users/yos/Work/CascadeProjects/Medusa-Web/tests",
+        "testDir": "/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -108,9 +120,10 @@
       }
     ],
     "shard": null,
+    "tags": [],
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
-    "version": "1.56.1",
+    "version": "1.57.0",
     "workers": 7,
     "webServer": {
       "command": "npm run dev",
@@ -119,17 +132,64 @@
       "timeout": 120000
     }
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Error: No tests found",
-      "stack": "Error: No tests found"
+      "title": "mobile-audit.spec.ts",
+      "file": "mobile-audit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "mobile audit",
+          "file": "mobile-audit.spec.ts",
+          "line": 107,
+          "column": 15,
+          "specs": [
+            {
+              "title": "audit public routes at phone breakpoints",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 900000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 45263,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-20T08:00:01.118Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "49c66a255e65644dcdb8-2fcb3423f691d46c3d1b",
+              "file": "mobile-audit.spec.ts",
+              "line": 108,
+              "column": 3
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-11-05T21:37:29.243Z",
-    "duration": 62.488999999999976,
-    "expected": 0,
+    "startTime": "2026-01-20T08:00:00.628Z",
+    "duration": 45955.156,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

@@ -7,7 +7,8 @@
 import React, { useState } from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { SectionHeading } from '../components/SectionHeading';
+import { Card } from '../components/ui/Card';
 
 const FAQ_SECTIONS = [
   {
@@ -94,66 +95,68 @@ export function FAQPageNew() {
   const [openSection, setOpenSection] = useState<number | null>(null);
 
   return (
-    <div className='min-h-screen text-white flex flex-col relative z-10'>
+    <div className='min-h-screen text-luxury-text-inverse flex flex-col relative z-10 bg-luxury-bg-dark'>
       <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
         <section className='section-padding'>
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-[1104px] space-y-16'>
+            <div className='mx-auto w-full max-w-container-main space-y-16'>
               {/* Page Header - Matches Services page exactly */}
-              <PageHeader
+              <SectionHeading
                 eyebrow='Medusa München'
                 title='Häufige Fragen (FAQ)'
                 subtitle='Alles, was Sie zur Buchung, Pflege und zu unseren Künstlern wissen müssen.'
-                alignment='center'
               />
 
               <div className='space-y-8'>
                 {FAQ_SECTIONS.map((section, idx) => {
                   const isOpen = openSection === idx;
                   return (
-                    <div
+                    <Card
                       key={section.title}
-                      className='rounded-3xl border border-[#C0C0C0]/25 bg-[rgba(34,34,34,0.85)] backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-all duration-300'
+                      variant="default"
+                      size="default"
+                      asChild
                     >
-                      <button
-                        className='w-full px-8 py-8 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
-                        onClick={() => setOpenSection(isOpen ? null : idx)}
-                        aria-expanded={isOpen}
-                      >
-                        <span className='font-headline text-2xl md:text-3xl text-[var(--brand-gold)]'>
-                          {section.title}
-                        </span>
-                        <span
-                          className={`ml-4 text-[var(--brand-gold)] transition-transform duration-300 ${
-                            isOpen ? 'rotate-90' : ''
-                          }`}
+                      <div>
+                        <button
+                          className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                          onClick={() => setOpenSection(isOpen ? null : idx)}
+                          aria-expanded={isOpen}
                         >
-                          ▶
-                        </span>
-                      </button>
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ${
-                          isOpen ? 'max-h-[800px]' : 'max-h-0'
-                        }`}
-                        aria-hidden={!isOpen}
-                      >
-                        <div className='px-8 pb-8 space-y-8 border-t border-[#C0C0C0]/20'>
-                          {section.questions.map((q) => (
-                            <div key={q.q} className='space-y-8'>
-                              <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-gold)]'>
-                                {q.q}
-                              </h3>
-                              <p className='font-body text-base md:text-lg text-white/85 leading-relaxed'>
-                                {q.a}
-                              </p>
-                            </div>
-                          ))}
+                          <span className='font-headline text-2xl md:text-3xl text-[var(--brand-accent)]'>
+                            {section.title}
+                          </span>
+                          <span
+                            className={`ml-4 text-[var(--brand-accent)] transition-transform duration-300 ${
+                              isOpen ? 'rotate-90' : ''
+                            }`}
+                          >
+                            ▶
+                          </span>
+                        </button>
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ${
+                            isOpen ? 'max-h-screen' : 'max-h-0'
+                          }`}
+                          aria-hidden={!isOpen}
+                        >
+                          <div className='pt-8 space-y-8 border-t border-brand-chrome/20'>
+                            {section.questions.map((q) => (
+                              <div key={q.q} className='space-y-8'>
+                                <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-accent)]'>
+                                  {q.q}
+                                </h3>
+                                <p className='font-body text-base md:text-lg text-luxury-text-inverse/85 leading-relaxed'>
+                                  {q.a}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   );
                 })}
               </div>

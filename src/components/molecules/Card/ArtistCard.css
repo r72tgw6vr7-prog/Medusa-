@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4, 32px);
-  max-width: 1200px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: var(--space-8, 64px) 0;
 }
@@ -11,9 +11,9 @@
   position: relative;
   border-radius: var(--radius-md, 12px);
   overflow: hidden;
-  background-color: #000;
+  background-color: var(--deep-black);
   aspect-ratio: 0.6;
-  box-shadow: 0 4px 20px #00000080;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0.5);
   transition: transform 0.3s ease;
   min-width: 240px;
   max-width: 1fr;
@@ -39,7 +39,12 @@
 .team-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, #0000, #0009 60%, #000000e6);
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0),
+    rgb(0 0 0 / 0.6) 60%,
+    rgb(0 0 0 / 0.902)
+  );
 }
 .artist-card-name-top,
 .team-card-name-top {
@@ -64,13 +69,13 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(0, 0, 0, 0.85) 24px,
-    rgba(0, 0, 0, 0.95)
+    rgb(0 0 0 / 0.85) 24px,
+    rgb(0 0 0 / 0.95)
   );
 }
 .artist-card-specialties,
 .team-card-specialties {
-  font-size: 15px;
+  font-size: var(--text-body-small);
   line-height: 1.4;
   color: var(--color-text-primary);
   margin-bottom: var(--space-2-5, 20px);
@@ -95,8 +100,8 @@
 }
 .artist-card-experience span,
 .team-card-experience span {
-  font-size: 12px;
-  color: #ffffffb3;
+  font-size: var(--text-label);
+  color: rgb(var(--color-text-primary-rgb) / 0.7);
 }
 .artist-card-social,
 .team-card-social {
@@ -108,14 +113,14 @@
 }
 .artist-card-social a,
 .team-card-social a {
-  font-size: 14px;
-  color: #ffffff80;
+  font-size: var(--text-body-small);
+  color: rgb(var(--color-text-primary-rgb) / 0.5);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 .artist-card-social a:hover,
 .team-card-social a:hover {
-  color: var(--color-brand-gold);
+  color: var(--brand-accent);
 }
 .artist-card-bottom-info,
 .team-card-bottom-info {
@@ -156,7 +161,7 @@
   padding: var(--space-1-5, 12px) 0;
   min-height: 44px;
   border-radius: var(--radius-md, 8px);
-  font-size: 16px;
+  font-size: var(--text-body);
   font-weight: 500;
   text-align: center;
   cursor: pointer;
@@ -166,26 +171,26 @@
 .team-card-button-primary {
   background-color: transparent;
   color: var(--color-text-primary);
-  border: 2px solid var(--color-brand-gold);
+  border: 2px solid var(--brand-accent);
 }
 .artist-card-button-primary:hover,
 .team-card-button-primary:hover {
-  background-color: rgba(var(--color-brand-gold-rgb), 0.1);
-  border-color: var(--color-brand-gold-hover);
+  background-color: rgba(var(--brand-accent-rgb), 0.1);
+  border-color: var(--brand-accent);
 }
 .artist-card-button-secondary,
 .team-card-button-secondary {
   background-color: transparent;
   color: var(--color-text-primary);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgb(var(--color-text-primary-rgb) / 0.4);
 }
 .artist-card-button-secondary:hover,
 .team-card-button-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-brand-gold);
+  background-color: rgb(var(--color-text-primary-rgb) / 0.1);
+  border-color: var(--brand-accent);
 }
 .icon {
-  color: var(--color-brand-gold-hover);
+  color: var(--brand-accent);
   opacity: 0.7;
 }
 /* Role badge on card */
@@ -195,15 +200,15 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-1, 8px);
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid var(--color-brand-gold);
+  background-color: rgb(0 0 0 / 0.4);
+  border: 1px solid var(--brand-accent);
   border-radius: 9999px;
   color: var(--color-text-primary);
   padding: var(--space-0-5, 6px) var(--space-1-5, 12px);
-  font-size: 12px;
+  font-size: var(--text-label);
   white-space: nowrap;
   width: fit-content;
-  margin: 0 auto 12px;
+  margin: 0 auto var(--space-1-5);
 }
 /* Ensure badge sits above specialties inside content regardless of previous rules */
 .artist-card-content .team-role-badge {
@@ -211,7 +216,7 @@
   align-self: center;
   margin: 0 auto var(--space-1-5, 12px);
 }
-@media (max-width: 576px) {
+@media (max-width: 640px) {
   .artist-card,
   .team-card {
     width: 100%;

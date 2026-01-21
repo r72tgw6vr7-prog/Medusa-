@@ -1,15 +1,11 @@
-import { useEffect, useMemo, useRef, useState, createContext, useContext } from 'react';
+import { useMemo, useRef } from 'react';
 import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import type { LucideProps } from 'lucide-react';
 import { Heart, MessageCircle, Palette, Zap } from 'lucide-react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { SectionHeading } from '../../components/SectionHeading';
+import { useLanguage as useGlobalLanguage } from '@/contexts/LanguageContext';
 import '../../styles/process-timeline.css';
-
-// Simple language context
-const LanguageContext = createContext<'DE' | 'EN'>('DE');
-export const useLanguage = () => {
-  const language = useContext(LanguageContext);
-  return { language };
-};
 
 interface TimelineStep {
   id: string;
@@ -113,25 +109,12 @@ const STEPS: TimelineStep[] = [
 ];
 
 export function ProcessTimeline({}: ProcessTimelineProps) {
-  const { language } = useLanguage();
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { language: globalLang } = useGlobalLanguage();
+  // Convert lowercase 'de'/'en' to uppercase 'DE'/'EN' for local content lookup
+  const language = globalLang.toUpperCase() as 'DE' | 'EN';
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { amount: 0.3, once: true });
+  const reducedMotion = useReducedMotion();
 
   const markerPositions = useMemo(() => {
     if (STEPS.length <= 1) {
@@ -145,32 +128,34 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
 
   return (
     <section
-      ref={sectionRef}
-      className='relative w-full py-16 text-white md:py-24'
+      className='process-timeline-section relative w-full py-16 text-luxury-text-inverse md:py-24'
       aria-label={copy.headline}
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%), url(${BACKGROUND_IMAGE})`,
+        backgroundImage: `linear-gradient(180deg, rgba(var(--color-surface-darker-rgb), 0.7) 0%, rgba(var(--color-surface-darker-rgb), 0.82) 100%), url(${BACKGROUND_IMAGE})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className='relative mx-auto max-w-[1104px] px-8'>
-        <div className='text-center space-y-8'>
-          <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-            {copy.eyebrow}
-          </p>
-          <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-            {copy.headline}
-          </h2>
-          <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
-            {copy.subtitle}
-          </p>
-        </div>
+      <div ref={ref} className='relative z-10 mx-auto max-w-container-main px-8'>
+        <motion.div
+          initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : (reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 })}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <SectionHeading eyebrow={copy.eyebrow} title={copy.headline} subtitle={copy.subtitle} level="primary" />
+        </motion.div>
 
         <div className='relative mt-16 mb-16'>
           <div className='timeline'>
-            <div className={`timeline-fill ${isVisible ? 'is-visible' : ''}`} aria-hidden='true' />
+            <motion.div
+              initial={reducedMotion ? { scaleX: 1 } : { scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : (reducedMotion ? { scaleX: 1 } : { scaleX: 0 })}
+              transition={{ duration: 0.9, delay: reducedMotion ? 0 : 0.225, ease: "easeOut" }}
+              style={{ originX: 0 }}
+              className='timeline-fill'
+              aria-hidden='true'
+            />
           </div>
           {markerPositions.map((left, index) => (
             <div
@@ -179,29 +164,39 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
               style={{ left }}
               aria-hidden='true'
             >
-              <div className='flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold bg-deep-black text-sm font-semibold text-brand-gold shadow-gold-glow'>
+              <motion.div
+                initial={reducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : (reducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 })}
+                transition={{ duration: 0.4, delay: reducedMotion ? 0 : 1.1 + index * 0.1, ease: "easeOut" }}
+                className='flex h-10 w-10 items-center justify-center rounded-full border border-brand-accent bg-luxury-bg-dark text-sm font-semibold text-brand-accent shadow-chrome-glow'
+              >
                 {index + 1}
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
 
         <div className='grid grid-cols-2 gap-8 md:grid-cols-2 lg:grid-cols-4'>
-          {STEPS.map((step) => {
+          {STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
-              <article key={step.id} className='flex flex-col h-full p-8 md:p-8'>
-                <div className='mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-brand-gold/60 bg-brand-gold/10 text-brand-gold md:mb-8 md:h-14 md:w-14 flex-col h-full'>
-                  <Icon size={20} className='md:hidden' />
-                  <Icon size={24} className='hidden md:block' />
+              <motion.article
+                initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : (reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 })}
+                transition={{ duration: 0.5, delay: reducedMotion ? 0 : 1.7 + index * 0.15, ease: "easeOut" }}
+                className='flex flex-col h-full items-center p-8 text-center md:p-8'
+              >
+                <div className='mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-brand-accent/60 bg-brand-accent/10 text-brand-accent shadow-chrome-glow md:mb-8 md:h-14 md:w-14'>
+                  <Icon size={24} className='md:hidden' />
+                  <Icon size={28} className='hidden md:block' />
                 </div>
-                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-brand-gold md:text-2xl">
+                <h3 className="font-heading text-xl font-semibold text-brand-accent md:text-3xl">
                   {step.title[language] ?? step.title.EN}
                 </h3>
-                <p className='mt-0 text-xs leading-5 text-white/80 md:mt-8 md:text-sm md:leading-6'>
+                <p className='mt-0 text-sm leading-5 text-white/80 md:mt-8 md:text-base md:leading-6'>
                   {step.description[language] ?? step.description.EN}
                 </p>
-              </article>
+              </motion.article>
             );
           })}
         </div>

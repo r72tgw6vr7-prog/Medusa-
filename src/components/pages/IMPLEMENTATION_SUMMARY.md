@@ -35,8 +35,8 @@ I have successfully created the **ServicesPageInteractive** component following 
 ## 🎨 Design System Compliance
 
 ### ✅ **Colors & Styling**
-- **Background**: `#1A1A1A` (page) / `#0F0F0F` (cards) - **EXACT MATCH**
-- **Gold System**: `#D4AF37` primary, `#C19B26` hover - **EXACT MATCH**  
+- **Background**: `var(--color-surface-dark)` (page) / `var(--color-surface-darker)` (cards) - **EXACT MATCH**
+- **Gold System**: `var(--brand-accent)` primary, `var(--brand-gold-hover)` hover - **EXACT MATCH**  
 - **Typography**: Playfair Display + Inter - **EXACT MATCH**
 - **Borders**: `rgba(212,175,55,0.35)` / `rgba(212,175,55,0.85)` - **EXACT MATCH**
 

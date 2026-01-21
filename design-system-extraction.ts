@@ -49,21 +49,21 @@ export const MedusaDesignSystem = {
   // 3. COLORS & OPACITY
   // ============================================================================
   colors: {
-    brand: { gold: '#D4AF37', goldHover: '#E5C158', white: '#FFFFFF', black: '#1A1A1A' },
-    surface: { dark: '#222222', darker: '#1A1A1A' },
+    brand: { accent: 'rgb(212 175 55)', accentHover: 'rgb(229 193 88)', white: 'rgb(255 255 255)', black: 'rgb(26 26 26)' },
+    surface: { dark: 'rgb(34 34 34)', darker: 'rgb(26 26 26)' },
     text: {
-      primary: '#FFFFFF',
+      primary: 'rgb(255 255 255)',
       secondary: 'rgba(255, 255, 255, 0.8)',
       tertiary: 'rgba(255, 255, 255, 0.75)',
       muted: 'rgba(255, 255, 255, 0.7)',
       subtle: 'rgba(255, 255, 255, 0.6)',
       faint: 'rgba(255, 255, 255, 0.5)',
-      gold: '#D4AF37',
+      accent: 'rgb(212 175 55)',
     },
     border: {
       default: 'rgba(255, 255, 255, 0.1)',
-      gold: '#D4AF37',
-      goldHover: 'rgba(212, 175, 55, 0.8)',
+      accent: 'rgb(212 175 55)',
+      accentHover: 'rgba(212, 175, 55, 0.8)',
     },
   },
 
@@ -111,13 +111,13 @@ export const MedusaDesignSystem = {
       borderRadius: 'rounded-2xl',
       border: '2px',
       iconSize: '56px',
-      iconBg: '#D4AF37',
+      iconBg: 'rgb(212 175 55)',
     },
     serviceCard: {
       padding: 'p-8',
       borderRadius: 'rounded-3xl',
       border: '2px',
-      bg: '#222222',
+      bg: 'rgb(34 34 34)',
       gap: 'gap-8',
     },
   },

@@ -15,16 +15,25 @@ const buttonVariants = cva(
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        gold: 'bg-[var(--brand-gold)] text-[var(--deep-black)] hover:bg-[var(--brand-gold-hover)]',
+        // Chrome accent variants (v2.0 design system)
+        chrome: 'bg-[var(--brand-accent)] text-[var(--deep-black)] hover:bg-[var(--brand-accent-hover)]',
+        outlineChrome:
+          'border border-[var(--brand-accent)] text-[var(--brand-accent)] bg-transparent hover:bg-[var(--brand-accent)]/10',
+        ghostChrome: 'text-[var(--brand-accent)] bg-transparent hover:bg-[var(--brand-accent)]/10',
+        // Deprecated aliases for backward compatibility
+        /** @deprecated Use 'chrome' instead */
+        gold: 'bg-[var(--brand-accent)] text-[var(--deep-black)] hover:bg-[var(--brand-accent-hover)]',
+        /** @deprecated Use 'outlineChrome' instead */
         outlineGold:
-          'border border-[var(--brand-gold)] text-[var(--brand-gold)] bg-transparent hover:bg-[var(--brand-gold)]/10',
-        ghostGold: 'text-[var(--brand-gold)] bg-transparent hover:bg-[var(--brand-gold)]/10',
+          'border border-[var(--brand-accent)] text-[var(--brand-accent)] bg-transparent hover:bg-[var(--brand-accent)]/10',
+        /** @deprecated Use 'ghostChrome' instead */
+        ghostGold: 'text-[var(--brand-accent)] bg-transparent hover:bg-[var(--brand-accent)]/10',
       },
       size: {
-        default: 'h-10 px-4 py-2',
-        sm: 'h-9 rounded-md px-3',
+        default: 'h-11 px-4 py-2 lg:h-10',
+        sm: 'h-11 rounded-md px-3 lg:h-9',
         lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        icon: 'h-11 w-11 lg:h-10 lg:w-10',
       },
     },
     defaultVariants: {

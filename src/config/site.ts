@@ -4,7 +4,7 @@ export const siteConfig = {
   contact: {
     address: 'Altheimer Eck 11, 80331 München',
     phone: '+49 (0) 89 269 313',
-    email: 'medusa@in-tattoo.de',
+    email: 'info@medusa-tattoo.de',
     hours: {
       weekdays: '12:00 - 20:00',
       saturday: '12:00 - 20:00',

@@ -1,18 +1,19 @@
-// Import scheduler first to ensure it's initialized before React tries to use it
-import 'scheduler';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css'; // Imports system.css now
-import { UniversalTextureBackground } from '@/components/atoms/UniversalTextureBackground';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.tsx';
+import './index.css';
+import { initI18n } from '@/i18n';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <>
-      {/* Texture rendered OUTSIDE App */}
-      <UniversalTextureBackground />
-      {/* App rendered ON TOP */}
-      <App />
-    </>
-  </React.StrictMode>,
-);
+void initI18n().finally(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <BrowserRouter>
+        {/* Clean dark background - no decorative elements */}
+        <div className="min-h-screen bg-luxury-bg-dark text-luxury-text-inverse">
+          <App />
+        </div>
+      </BrowserRouter>
+    </StrictMode>
+  );
+});

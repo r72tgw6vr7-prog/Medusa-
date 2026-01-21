@@ -8,7 +8,7 @@
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
-const BASE_URL = process.env.VITE_SITE_URL || 'https://medusa-tattoo.com';
+const BASE_URL = process.env.VITE_SITE_URL || 'https://www.velo-bar.com';
 
 const routes = [
   { url: '/', changefreq: 'weekly', priority: '1.0' },

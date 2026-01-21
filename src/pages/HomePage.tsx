@@ -1,18 +1,19 @@
+import type { ReactNode } from 'react';
 import { HeroParallax } from '@/components/ui/hero-parallax';
 import { GallerySection } from '../sections/GallerySection';
 import { ProcessTimeline } from '../sections/ProcessTimeline';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { ServiceCards } from '../components/molecules';
-import { TeamGrid } from '../components/pages';
+import { BladeAccordion } from '../components/ui/BladeAccordion';
 import PricingSection from '../components/PricingSection';
 import { PartnersAndTestimonialsSection } from '../sections/PartnersAndTestimonialsSection';
 import StudioCarousel from '../components/organisms/StudioCarousel';
-import { CarouselBadges } from '../components/CarouselBadges';
 import { PreFooterBookingCTA } from '../components/PreFooterBookingCTA';
 import ErrorBoundary from '../components/layout/ErrorBoundary';
 import { LazySection } from '../components/LazySection';
 import { GALLERY_IMAGES } from '@/content/gallery-images';
+import { useSectionTransition } from '@/hooks/useSectionTransition';
+import { TrustSignals } from '../components/molecules/TrustSignals';
 
 // Hero parallax product data - using actual gallery images with optimized sources
 const heroProducts = GALLERY_IMAGES.slice(0, 15).map((img, index) => ({
@@ -36,10 +37,26 @@ const sampleGalleryImages = GALLERY_IMAGES.slice(0, 8).map((img) => ({
   category: img.category,
 }));
 
+const SectionTransitionWrapper = ({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  const { ref, className: visibleClass } = useSectionTransition({ threshold: 0.2 });
+
+  return (
+    <div ref={ref} className={`section-transition ${visibleClass} ${className}`.trim()}>
+      {children}
+    </div>
+  );
+};
+
 export function HomePage() {
   return (
     <ErrorBoundary>
-      <div className='min-h-screen flex flex-col relative'>
+      <div className='min-h-screen flex flex-col relative bg-luxury-bg-dark'>
         {/* Navigation */}
         <ErrorBoundary>
           <MainNavigation />
@@ -47,77 +64,90 @@ export function HomePage() {
 
         {/* 1. Hero Section - Load immediately (above fold) */}
         <ErrorBoundary>
-          <HeroParallax products={heroProducts} />
+          <SectionTransitionWrapper>
+            <HeroParallax products={heroProducts} />
+          </SectionTransitionWrapper>
         </ErrorBoundary>
 
-        {/* 2. Team Grid - Load immediately (likely above fold) */}
+        {/* 2. Artist Blade Accordion - Load immediately (second section) */}
         <ErrorBoundary>
-          <TeamGrid />
+          <SectionTransitionWrapper>
+            <BladeAccordion />
+          </SectionTransitionWrapper>
         </ErrorBoundary>
 
-        {/* 3. Service Cards - Lazy load */}
+        {/* 3. Studio Carousel - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <ServiceCards />
+            <SectionTransitionWrapper>
+              <StudioCarousel />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
-        {/* 4. Studio Carousel - Lazy load */}
+        {/* 4. Pricing Section - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <StudioCarousel />
+            <SectionTransitionWrapper>
+              <PricingSection />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
-        {/* 4.5. Carousel Badges - Lazy load */}
+        {/* 5. Trust Signals - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <CarouselBadges />
-          </ErrorBoundary>
-        </LazySection>
-
-        {/* 5. Pricing Section - Lazy load */}
-        <LazySection>
-          <ErrorBoundary>
-            <PricingSection />
+            <SectionTransitionWrapper>
+              <TrustSignals />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
         {/* 6. Process Timeline - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <ProcessTimeline />
+            <SectionTransitionWrapper>
+              <ProcessTimeline />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
         {/* 7. Gallery Section - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <GallerySection
-              title='Unsere Kunstwerke'
-              subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
-              images={sampleGalleryImages}
-            />
+            <SectionTransitionWrapper>
+              <GallerySection
+                title='Unsere Kunstwerke'
+                subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
+                images={sampleGalleryImages}
+              />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
         {/* 8. Partners & Testimonials - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <PartnersAndTestimonialsSection />
+            <SectionTransitionWrapper>
+              <PartnersAndTestimonialsSection />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
-        {/* 9. Pre-Footer Booking CTA - Lazy load */}
+        {/* 11. Pre-Footer Booking CTA - Lazy load */}
         <LazySection>
           <ErrorBoundary>
-            <PreFooterBookingCTA />
+            <SectionTransitionWrapper>
+              <PreFooterBookingCTA />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
         </LazySection>
 
         {/* Footer - Always load */}
         <ErrorBoundary>
-          <Footer />
+          <SectionTransitionWrapper>
+            <Footer />
+          </SectionTransitionWrapper>
         </ErrorBoundary>
       </div>
     </ErrorBoundary>

@@ -1,0 +1,124 @@
+{
+  "timestamp": "2026-01-19T09:30:52.557Z",
+  "methodology": "Token occurrence counting across TSX/JSX/CSS files",
+  "expected": {
+    "dark": 60,
+    "white": 30,
+    "accent": 10
+  },
+  "actual": {
+    "dark": 25.7,
+    "white": 34.6,
+    "accent": 39.7
+  },
+  "rawCounts": {
+    "dark": 388,
+    "white": 523,
+    "accent": 600
+  },
+  "pageBreakdown": {
+    "Footer": {
+      "dark": 4,
+      "white": 58,
+      "accent": 13,
+      "file": "components/pages/Footer.tsx"
+    },
+    "ServicesPageInteractive.example": {
+      "dark": 3,
+      "white": 0,
+      "accent": 0,
+      "file": "components/pages/ServicesPageInteractive.example.tsx"
+    },
+    "ServicesPageInteractive": {
+      "dark": 3,
+      "white": 7,
+      "accent": 7,
+      "file": "components/pages/ServicesPageInteractive.tsx"
+    },
+    "TeamGrid": {
+      "dark": 1,
+      "white": 2,
+      "accent": 0,
+      "file": "components/pages/TeamGrid.tsx"
+    },
+    "index": {
+      "dark": 0,
+      "white": 0,
+      "accent": 0,
+      "file": "components/pages/index.ts"
+    },
+    "AGBPage": {
+      "dark": 1,
+      "white": 2,
+      "accent": 3,
+      "file": "pages/AGBPage.tsx"
+    },
+    "AftercarePage": {
+      "dark": 6,
+      "white": 15,
+      "accent": 26,
+      "file": "pages/AftercarePage.tsx"
+    },
+    "ArtistsPage": {
+      "dark": 1,
+      "white": 0,
+      "accent": 0,
+      "file": "pages/ArtistsPage.tsx"
+    },
+    "BookingPage": {
+      "dark": 1,
+      "white": 1,
+      "accent": 0,
+      "file": "pages/BookingPage.tsx"
+    },
+    "ContactPage": {
+      "dark": 3,
+      "white": 37,
+      "accent": 37,
+      "file": "pages/ContactPage.tsx"
+    },
+    "DatenschutzPage": {
+      "dark": 2,
+      "white": 5,
+      "accent": 12,
+      "file": "pages/DatenschutzPage.tsx"
+    },
+    "FAQPageNew": {
+      "dark": 2,
+      "white": 2,
+      "accent": 5,
+      "file": "pages/FAQPageNew.tsx"
+    },
+    "GalleryPage": {
+      "dark": 1,
+      "white": 0,
+      "accent": 0,
+      "file": "pages/GalleryPage.tsx"
+    },
+    "HomePage": {
+      "dark": 1,
+      "white": 0,
+      "accent": 0,
+      "file": "pages/HomePage.tsx"
+    },
+    "ImpressumPage": {
+      "dark": 1,
+      "white": 14,
+      "accent": 11,
+      "file": "pages/ImpressumPage.tsx"
+    },
+    "LegalPage": {
+      "dark": 2,
+      "white": 1,
+      "accent": 12,
+      "file": "pages/LegalPage.tsx"
+    },
+    "NotFoundPage": {
+      "dark": 1,
+      "white": 0,
+      "accent": 2,
+      "file": "pages/NotFoundPage.tsx"
+    }
+  },
+  "filesScanned": 198
+}

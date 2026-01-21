@@ -1,0 +1,1906 @@
+[
+  {
+    "component": "src/App.tsx",
+    "line": 85,
+    "text": "Loading...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/__tests__/Button.test.tsx",
+    "line": 7,
+    "text": "Click Me",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/GoogleMap.tsx",
+    "line": 38,
+    "text": "Medusa Tattoo München",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/GoogleMap.tsx",
+    "line": 39,
+    "text": "Altheimer Eck 11, 80331 München",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/GoogleMap.tsx",
+    "line": 59,
+    "text": "Karte temporär nicht verfügbar",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/PricingSection.tsx",
+    "line": 67,
+    "text": "Preise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/accessibility/VisuallyHidden.tsx",
+    "line": 17,
+    "text": "This text is hidden but read by screen readers",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/accessibility/VisuallyHidden.tsx",
+    "line": 21,
+    "text": "Hidden div content",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/atoms/GalleryImage.tsx",
+    "line": 74,
+    "text": "Bild nicht verfügbar",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/atoms/ImageWithFallback.tsx",
+    "line": 160,
+    "text": "Failed to load",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/atoms/TextArea.tsx",
+    "line": 45,
+    "text": "{label &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/atoms/TrustBadge.tsx",
+    "line": 13,
+    "text": "{icon &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/booking/BookingModalMobile.tsx",
+    "line": 157,
+    "text": "1/3",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/booking/BookingModalMobile.tsx",
+    "line": 159,
+    "text": "2/3",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/booking/BookingModalMobile.tsx",
+    "line": 161,
+    "text": "3/3",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 147,
+    "text": "Build State Monitor",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 150,
+    "text": "Component Status:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 152,
+    "text": "TeamGrid Present: {buildInfo.componentsPresent?.teamGrid ? '✅' : '❌'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 153,
+    "text": "Team Cards Count: {buildInfo.componentsPresent?.teamCards || 0}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 158,
+    "text": "CSS Variables:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 160,
+    "text": "--brand-gold: {buildInfo.cssVariables?.brandGold}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 161,
+    "text": "--brand-background: {buildInfo.cssVariables?.brandBackground}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 166,
+    "text": "File Status:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 172,
+    "text": "- {new Date(file.lastModified).toLocaleTimeString()}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 180,
+    "text": "Performance:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 182,
+    "text": "DOM Loaded: {buildInfo.performanceTiming?.domLoaded}ms",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/BuildStateMonitor.tsx",
+    "line": 183,
+    "text": "Window Loaded: {buildInfo.performanceTiming?.windowLoaded}ms",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 154,
+    "text": "Headless Browser Check",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 159,
+    "text": "Component Status:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 161,
+    "text": "TeamGrid: {snapshot.teamGridPresent ? '✅' : '❌'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 162,
+    "text": "Team Cards: {snapshot.teamCardsCount}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 170,
+    "text": "CSS Variables:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 172,
+    "text": "--brand-gold: {snapshot.cssVariables.brandGold}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 173,
+    "text": "--brand-background: {snapshot.cssVariables.brandBackground}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 174,
+    "text": "--brand-white: {snapshot.cssVariables.brandWhite}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 180,
+    "text": "First Card Style:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 192,
+    "text": "Snapshot taken: {new Date(snapshot.timestamp).toLocaleTimeString()}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/HeadlessBrowserCheck.tsx",
+    "line": 196,
+    "text": "No snapshot data available",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/ImageChecker.tsx",
+    "line": 92,
+    "text": "Checking image URLs...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/debug/ImageChecker.tsx",
+    "line": 109,
+    "text": "Image URL Check Results",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/examples/SalonCarouselExample.tsx",
+    "line": 28,
+    "text": "Default SalonCarousel",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/examples/SalonCarouselExample.tsx",
+    "line": 33,
+    "text": "Custom SalonCarousel",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/examples/SalonCarouselExample.tsx",
+    "line": 51,
+    "text": "Minimal SalonCarousel",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/layouts/MainLayout.tsx",
+    "line": 23,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/layouts/MainLayout.tsx",
+    "line": 24,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/layouts/MainLayout.tsx",
+    "line": 25,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BeforeAfterCard.tsx",
+    "line": 127,
+    "text": "{title &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BookingCallToAction.tsx",
+    "line": 455,
+    "text": "Wird gesendet...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 188,
+    "text": "Build Preview Gate",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 196,
+    "text": "Commands",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 204,
+    "text": "Clear Vite Cache",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 213,
+    "text": "Start Dev Server",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 222,
+    "text": "Build Production",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 231,
+    "text": "Start Preview Server",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 242,
+    "text": "Running: {currentCommand}...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 249,
+    "text": "Output Log",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 255,
+    "text": "No commands executed yet...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 293,
+    "text": "Local:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 305,
+    "text": "Network:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 322,
+    "text": "Verification Checklist",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 337,
+    "text": "{item.checked &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 358,
+    "text": "✅ READY TO DEPLOY",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 359,
+    "text": "All checks passed. Preview is green.",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 366,
+    "text": "❌ DO NOT DEPLOY",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/BuildPreviewGate.tsx",
+    "line": 367,
+    "text": "Complete all checks before deploying.",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/Card/Card.tsx",
+    "line": 152,
+    "text": "{action &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/CookieConsentBanner.tsx",
+    "line": 84,
+    "text": "Cookie-Einstellungen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/CookieConsentBanner.tsx",
+    "line": 144,
+    "text": "Essentielle Cookies",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/CookieConsentBanner.tsx",
+    "line": 161,
+    "text": "Analyse-Cookies",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/CookieConsentBanner.tsx",
+    "line": 180,
+    "text": "Marketing-Cookies",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 96,
+    "text": "Current Dev Server:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 106,
+    "text": "Open",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 114,
+    "text": "Quick Actions",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 128,
+    "text": "Export Report",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 135,
+    "text": "Individual Steps",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 179,
+    "text": "Triage Steps",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 221,
+    "text": "Activity Log",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 227,
+    "text": "No activity yet. Run triage to begin.",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/DevBlankScreenTriage.tsx",
+    "line": 231,
+    "text": "[{log.timestamp.toLocaleTimeString()}]",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/NewsletterForm.tsx",
+    "line": 4,
+    "text": "Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/ProcessStepCard.tsx",
+    "line": 9,
+    "text": "& RefAttributes",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/ReviewCard.tsx",
+    "line": 42,
+    "text": "— {author}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/ReviewCard.tsx",
+    "line": 42,
+    "text": "{source &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/ReviewCard.tsx",
+    "line": 43,
+    "text": ", {source}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/ServiceCard.tsx",
+    "line": 107,
+    "text": "BELIEBT",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 406,
+    "text": "Running Workflow...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 411,
+    "text": "Run Staging Preparation",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 424,
+    "text": "Playwright installed - E2E tests available",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 429,
+    "text": "Playwright not installed - E2E tests skipped",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 467,
+    "text": "Total: {testResults.length}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 482,
+    "text": "Activity Log",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 494,
+    "text": "[{log.timestamp.toLocaleTimeString()}]",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 515,
+    "text": "Download DEPLOY_README.md",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 522,
+    "text": "Download STAGING_CHECKLIST.md",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 539,
+    "text": "npm install -D @playwright/test",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/StagingPrepAndSmoke.tsx",
+    "line": 540,
+    "text": "npx playwright install",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/molecules/useDevBlankScreenTriage.ts",
+    "line": 313,
+    "text": "HELLO",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistDetailHero.tsx",
+    "line": 41,
+    "text": "Spezialisierung",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistDetailHero.tsx",
+    "line": 51,
+    "text": "Erfahrung",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistDetailModal.tsx",
+    "line": 232,
+    "text": "Termin buchen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistDetailModal.tsx",
+    "line": 357,
+    "text": "Alle Arbeiten ansehen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistDetailModal.tsx",
+    "line": 388,
+    "text": "Jetzt Termin buchen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ArtistPortfolio.tsx",
+    "line": 21,
+    "text": "Portfolio",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 87,
+    "text": "{t('booking.labels.name')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 90,
+    "text": "{errors.name &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 96,
+    "text": "{t('booking.labels.email')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 105,
+    "text": "{errors.email &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 111,
+    "text": "{t('booking.labels.phone')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 120,
+    "text": "{errors.phone &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 126,
+    "text": "{t('booking.labels.date')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 135,
+    "text": "{errors.date &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 141,
+    "text": "{t('booking.labels.time')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 162,
+    "text": "{errors.time &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 168,
+    "text": "{t('booking.labels.guests')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/BookingForm/BookingForm.tsx",
+    "line": 190,
+    "text": "{errors.guests &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ContactForm.tsx",
+    "line": 21,
+    "text": "Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ContactForm.tsx",
+    "line": 152,
+    "text": "{errors.message &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/OurArtists.tsx",
+    "line": 163,
+    "text": "{selectedArtist &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/ProcessTimeline.tsx",
+    "line": 12,
+    "text": "& RefAttributes",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/organisms/TestimonialsCarousel.tsx",
+    "line": 99,
+    "text": "\"{testimonial.text}\"",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/Footer.tsx",
+    "line": 143,
+    "text": "MEDUSA",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/ServicesPageInteractive.example.tsx",
+    "line": 33,
+    "text": "Welcome to Medusa Tattoo",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/ServicesPageInteractive.example.tsx",
+    "line": 41,
+    "text": "About Us",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/TeamGrid.tsx",
+    "line": 237,
+    "text": "Unser Meisterteam",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/TeamGrid.tsx",
+    "line": 253,
+    "text": "Loading team members...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/pages/TeamGrid.tsx",
+    "line": 257,
+    "text": "No team members found.",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/FAQSection.tsx",
+    "line": 101,
+    "text": "Für Einheimische:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/FAQSection.tsx",
+    "line": 109,
+    "text": "Für Touristen:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/FAQSection.tsx",
+    "line": 117,
+    "text": "Für Erstbesucher:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 23,
+    "text": "Marienplatz",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 34,
+    "text": "Viktualienmarkt",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 45,
+    "text": "ÖPNV perfekt",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 56,
+    "text": "Innenstadt",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 70,
+    "text": "Für Einheimische:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/LocationSection.tsx",
+    "line": 78,
+    "text": "Für Touristen:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/TrustBar.tsx",
+    "line": 11,
+    "text": "English & German Spoken",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/TrustBar.tsx",
+    "line": 17,
+    "text": "Premium Hygiene Standards",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/TrustBar.tsx",
+    "line": 23,
+    "text": "Certified Artists",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/TrustBar.tsx",
+    "line": 29,
+    "text": "Walk-ins Welcome",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/seo/TrustBar.tsx",
+    "line": 35,
+    "text": "Direkt am Marienplatz",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 70,
+    "text": "Default (1440px)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 70,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 71,
+    "text": "Narrow (960px)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 71,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 72,
+    "text": "Wide (1600px)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 72,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Container.tsx",
+    "line": 73,
+    "text": "Full width (no max)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/DiamondRippleBackground.tsx",
+    "line": 83,
+    "text": "0 && requestedCount",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/DiamondRippleBackground.tsx",
+    "line": 177,
+    "text": "= rows || colIdx",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Loading.tsx",
+    "line": 12,
+    "text": "{text &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/PageHeader.tsx",
+    "line": 60,
+    "text": "Häufige Fragen (FAQ)",
+    "kind": "attr:title",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/PageHeader.tsx",
+    "line": 61,
+    "text": "Alles, was Sie zur Buchung wissen müssen.",
+    "kind": "attr:title",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 98,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 99,
+    "text": "Section title",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 99,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 103,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 104,
+    "text": "Content constrained to 960px",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 104,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 108,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 109,
+    "text": "Wide content",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 109,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 113,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 114,
+    "text": "Full width content with inner padding",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/Section.tsx",
+    "line": 114,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/accessibility/VisuallyHidden.tsx",
+    "line": 19,
+    "text": "This text is only visible to screen readers",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/accessibility/VisuallyHidden.tsx",
+    "line": 23,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/accessibility/VisuallyHidden.tsx",
+    "line": 24,
+    "text": "Close modal",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/accessibility/VisuallyHidden.tsx",
+    "line": 24,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/accessibility/VisuallyHidden.tsx",
+    "line": 25,
+    "text": "*",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 57,
+    "text": "Click me",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 61,
+    "text": "}>Save",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 69,
+    "text": "Processing...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 143,
+    "text": "Loading...",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 162,
+    "text": "Button",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/button/Button.tsx",
+    "line": 65,
+    "text": "Close dialog",
+    "kind": "attr:aria-label",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/carousel.tsx",
+    "line": 198,
+    "text": "Previous slide",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/carousel.tsx",
+    "line": 226,
+    "text": "Next slide",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/layout-grid.tsx",
+    "line": 177,
+    "text": "Click to expand",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/components/ui/layout-grid.tsx",
+    "line": 218,
+    "text": "Close",
+    "kind": "attr:aria-label",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/config/imagePaths.ts",
+    "line": 74,
+    "text": "(category: T, key: ImageKey",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/data/aftercare.ts",
+    "line": 514,
+    "text": "= 1 && day",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/data/aftercare.ts",
+    "line": 515,
+    "text": "= 4 && day",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/data/aftercare.ts",
+    "line": 516,
+    "text": "= 8 && day",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/data/aftercare.ts",
+    "line": 517,
+    "text": "= 15 && day",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/i18n/index.ts",
+    "line": 26,
+    "text": "Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/env.ts",
+    "line": 119,
+    "text": "(key: K): NonNullable",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/types.ts",
+    "line": 31,
+    "text": "= UseFormReturn",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/utils.ts",
+    "line": 32,
+    "text": ">(schema: z.ZodObject",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/utils.ts",
+    "line": 51,
+    "text": "(form: UseFormReturn",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/utils.ts",
+    "line": 51,
+    "text": ", name: Path",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/utils.ts",
+    "line": 58,
+    "text": "(form: UseFormReturn",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/validators.ts",
+    "line": 101,
+    "text": ">(schema: T): z.ZodObject",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/lib/forms/validators.ts",
+    "line": 108,
+    "text": "= z.infer",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/AGBPage.tsx",
+    "line": 31,
+    "text": "§ 1 Geltungsbereich",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/AGBPage.tsx",
+    "line": 53,
+    "text": "Stand: vorläufige Fassung",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/AftercarePage.tsx",
+    "line": 354,
+    "text": "Mo-Fr: 11:30-18:30, Sa: 11:00-18:00",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 122,
+    "text": "{t('contact.labels.name')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 139,
+    "text": "{errors.name &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 147,
+    "text": "{t('contact.labels.email')}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 174,
+    "text": "Betreff",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 201,
+    "text": "Nachricht",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 269,
+    "text": "Adresse",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 285,
+    "text": "Telefon",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 300,
+    "text": "E-Mail",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 319,
+    "text": "Öffnungszeiten",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 335,
+    "text": "Instagram",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 360,
+    "text": "Facebook",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 374,
+    "text": "Google Reviews",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ContactPage.tsx",
+    "line": 379,
+    "text": "Bewertungen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/DatenschutzPage.tsx",
+    "line": 236,
+    "text": "{paragraph ||",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 206,
+    "text": "Versicherer: [Name der Versicherungsgesellschaft]",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 207,
+    "text": "Geltungsbereich: Deutschland/EU",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 208,
+    "text": "Deckungssumme: [Betrag in EUR]",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 213,
+    "text": "Streitschlichtung",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 233,
+    "text": "Haftung für Inhalte",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/ImpressumPage.tsx",
+    "line": 244,
+    "text": "Haftung für Links",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 49,
+    "text": "Inhaltsverzeichnis",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 155,
+    "text": "§ 2 Leistungen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 278,
+    "text": "Schwangerschaft oder Stillzeit",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 279,
+    "text": "Akute oder chronische Hautkrankheiten im Behandlungsbereich",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 280,
+    "text": "Blutgerinnungsstörungen oder Einnahme blutverdünnender Medikamente",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 281,
+    "text": "Diabetes mellitus (ohne ärztliche Unbedenklichkeitsbescheinigung)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 282,
+    "text": "Immunschwäche oder Einnahme immunsuppressiver Medikamente",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 283,
+    "text": "Epilepsie (ohne ärztliche Unbedenklichkeitsbescheinigung)",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 284,
+    "text": "Bekannte Allergien gegen Farbstoffe oder Metalle",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 341,
+    "text": "§ 7 Urheberrecht",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 374,
+    "text": "§ 8 Datenschutz",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/LegalPage.tsx",
+    "line": 429,
+    "text": "(5) Mündliche Nebenabreden bestehen nicht.",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/NotFoundPage.tsx",
+    "line": 7,
+    "text": "404",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/pages/NotFoundPage.tsx",
+    "line": 8,
+    "text": "Page Not Found",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/BeforeAfterSection.tsx",
+    "line": 28,
+    "text": "{subtitle &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/BookingSection.tsx",
+    "line": 21,
+    "text": "{subtitle &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ContactSection.tsx",
+    "line": 31,
+    "text": "Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ContactSection.tsx",
+    "line": 81,
+    "text": "Kontaktiere uns",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ContactSection.tsx",
+    "line": 181,
+    "text": "{info.icon &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ContactSection.tsx",
+    "line": 202,
+    "text": "Folge uns",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/FAQSection.tsx",
+    "line": 26,
+    "text": "{subtitle &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/GallerySection.tsx",
+    "line": 50,
+    "text": "Galerie",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ProcessTimeline/ProcessTimeline.tsx",
+    "line": 16,
+    "text": "& RefAttributes",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ProcessTimeline/ProcessTimeline.tsx",
+    "line": 59,
+    "text": "& RefAttributes",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/ServicesSection.tsx",
+    "line": 73,
+    "text": "{title &&",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/sections/TrustSignalsSection.tsx",
+    "line": 67,
+    "text": "Was Kunden sagen",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 345,
+    "text": "${language === 'DE' ? 'Buchungsbestätigung' : 'Booking Confirmation'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 359,
+    "text": "🐍 Medusa Tattoo München",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 360,
+    "text": "${language === 'DE' ? 'Buchungsbestätigung' : 'Booking Confirmation'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 363,
+    "text": "${language === 'DE' ? 'Liebe/r {{customerName}},' : 'Dear {{customerName}},'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 364,
+    "text": "${language === 'DE' ? 'Vielen Dank für Ihre Buchungsanfrage!' : 'Thank you for your booking request!'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 367,
+    "text": "${language === 'DE' ? 'Buchungs-ID' : 'Booking ID'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 372,
+    "text": "${language === 'DE' ? 'Künstler' : 'Artist'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 377,
+    "text": "${language === 'DE' ? 'Service' : 'Service'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 382,
+    "text": "${language === 'DE' ? 'Gewünschter Termin' : 'Preferred Date'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 386,
+    "text": "${language === 'DE' ? 'Wir werden uns innerhalb von 24 Stunden bei Ihnen melden.' : 'We will contact you within 24 hours.'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 401,
+    "text": "${language === 'DE' ? 'Neue Buchungsanfrage' : 'New Booking Request'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 401,
+    "text": "${language === 'DE' ? 'Kunde' : 'Customer'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 401,
+    "text": "{{customerName}} ({{customerEmail}})",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 401,
+    "text": "${language === 'DE' ? 'Buchungs-ID' : 'Booking ID'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 401,
+    "text": "{{bookingId}}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "${language === 'DE' ? 'Neue Kontaktanfrage' : 'New Contact Request'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "${language === 'DE' ? 'Von' : 'From'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "{{name}} ({{email}})",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "${language === 'DE' ? 'Betreff' : 'Subject'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "{{subject}}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 409,
+    "text": "${language === 'DE' ? 'Nachricht' : 'Message'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "${language === 'DE' ? 'Zahlungsbestätigung' : 'Payment Confirmation'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "${language === 'DE' ? 'Ihre Zahlung wurde erfolgreich verarbeitet.' : 'Your payment has been processed successfully.'}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "${language === 'DE' ? 'Zahlungs-ID' : 'Payment ID'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "{{paymentId}}",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "${language === 'DE' ? 'Betrag' : 'Amount'}:",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/services/emailService.ts",
+    "line": 417,
+    "text": "{{amount}}€",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/types/core.ts",
+    "line": 22,
+    "text": "Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/utils/image-validator.ts",
+    "line": 93,
+    "text": "new Promise",
+    "kind": "jsxText",
+    "suggestedKey": ""
+  },
+  {
+    "component": "src/utils/image-validator.ts",
+    "line": 23,
+    "text": "Eli",
+    "kind": "attr:alt",
+    "suggestedKey": ""
+  }
+]

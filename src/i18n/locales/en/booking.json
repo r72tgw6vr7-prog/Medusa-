@@ -1,0 +1,90 @@
+{
+  "eyebrow": "Booking",
+  "title": "Book Appointment",
+  "subtitle": "Schedule a consultation for your next tattoo or piercing.",
+  "labels": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Number of Guests",
+    "specialRequests": "Special Requests (Optional)"
+  },
+  "placeholders": {
+    "name": "John Doe",
+    "email": "your@email.com",
+    "phone": "+1 (123) 456-7890",
+    "time": "Select a time",
+    "specialRequests": "Any special requirements or notes..."
+  },
+  "submit": "Book Now",
+  "submitting": "Submitting...",
+  "maxChars": "Maximum 500 characters",
+  "toasts": {
+    "success": "Booking submitted",
+    "successBody": "We'll contact you shortly to confirm your reservation.",
+    "error": "Failed to submit booking",
+    "errorBody": "Please try again or contact us directly."
+  },
+  "modal": {
+    "title": "Book Appointment",
+    "personalTitle": "Your details",
+    "serviceQuestion": "What would you like to book?",
+    "projectLabel": "Project details (optional)",
+    "next": "Next",
+    "back": "Back",
+    "close": "Close"
+  },
+  "payment": {
+    "title": "Payment",
+    "methodLabel": "Payment Method",
+    "cash": "Cash",
+    "card": "Card",
+    "bankTransfer": "Bank Transfer",
+    "submitBooking": "Request Appointment"
+  },
+  "loading": {
+    "submitting": "Your booking is being submitted..."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "retry": "Try again",
+    "retryLoading": "Trying to resend...",
+    "completeAllSteps": "Please complete all steps"
+  },
+  "confirmation": {
+    "title": "Appointment confirmed!",
+    "subtitle": "Your appointment request has been successfully submitted.",
+    "bookingNumber": "Booking Number:",
+    "service": "Service:",
+    "date": "Date:",
+    "emailNote": "We have sent a confirmation email with all details. Please check your inbox and spam folder.",
+    "closeButton": "Close"
+  },
+  "gdpr": {
+    "consent": "I agree to the processing of my data according to the privacy policy.*"
+  },
+  "services": {
+    "tattoo": {
+      "title": "Tattoo Artistry",
+      "price": "from €150/hr",
+      "features": {
+        "custom": "Custom Designs",
+        "experienced": "Experienced Artists",
+        "hygiene": "Highest Hygiene Standards",
+        "consultation": "Personal Consultation"
+      }
+    },
+    "piercing": {
+      "title": "Piercing",
+      "price": "from €30",
+      "features": {
+        "consultation": "Professional Consultation",
+        "quality": "High-Quality Jewelry",
+        "sterile": "Sterile Working",
+        "aftercare": "Comprehensive Aftercare"
+      }
+    }
+  }
+}

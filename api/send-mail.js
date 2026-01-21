@@ -170,22 +170,22 @@ function generateEmailTemplate({ name, email, phone, subject, message, language,
         <style>
           body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #222222;
-            color: #FFFFFF;
+            background-color: rgb(34 34 34);
+            color: rgb(255 255 255);
             margin: 0;
             padding: 20px;
           }
           .container {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #222222;
-            border: 1px solid #D4AF37;
+            background-color: rgb(34 34 34);
+            border: 1px solid rgb(212 175 55);
             border-radius: 8px;
             overflow: hidden;
           }
           .header {
-            background: linear-gradient(135deg, #D4AF37, #B8941F);
-            color: #222222;
+            background: linear-gradient(135deg, rgb(212 175 55), rgb(184 148 31));
+            color: rgb(34 34 34);
             padding: 20px;
             text-align: center;
           }
@@ -201,34 +201,34 @@ function generateEmailTemplate({ name, email, phone, subject, message, language,
           .field {
             margin-bottom: 16px;
             padding-bottom: 16px;
-            border-bottom: 1px solid #C0C0C0;
+            border-bottom: 1px solid rgb(192 192 192);
           }
           .field:last-child {
             border-bottom: none;
           }
           .label {
             font-weight: 600;
-            color: #D4AF37;
+            color: rgb(212 175 55);
             margin-bottom: 4px;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
           }
           .value {
-            color: #FFFFFF;
+            color: rgb(255 255 255);
             font-size: 16px;
             line-height: 1.4;
             white-space: pre-wrap;
           }
           .footer {
-            background-color: #1A1A1A;
+            background-color: rgb(26 26 26);
             padding: 16px 20px;
             text-align: center;
-            border-top: 1px solid #D4AF37;
+            border-top: 1px solid rgb(212 175 55);
           }
           .footer p {
             margin: 0;
-            color: #C0C0C0;
+            color: rgb(192 192 192);
             font-size: 12px;
           }
         </style>

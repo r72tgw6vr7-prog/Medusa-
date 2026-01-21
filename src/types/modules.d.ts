@@ -28,6 +28,8 @@ declare module '*.webp' {
   export default content;
 }
 
+declare module 'web-vitals';
+
 declare module 'motion/react' {
   import { ComponentType, PropsWithChildren } from 'react';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from '../components/ui/Container';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
 import './PartnersAndTestimonialsSection.css';
 
@@ -40,14 +41,14 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
 
   return (
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
-      <div className='max-w-[1200px] mx-auto px-8 sm:px-8 lg:px-16 py-16 md:py-24 lg:py-24'>
+      <Container className='py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
-        <div className='text-center mb-8'>
-          <h2 className="font-['Playfair_Display'] text-[32px] lg:text-[48px] font-semibold leading-tight text-[#D4AF37]">
+        <div className='text-center mb-4'>
+          <h3 className="font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-brand-accent">
             {titlePartners}
-          </h2>
+          </h3>
         </div>
-        <p className='text-center text-white/70 text-[14px] mb-16 font-[Inter]'>
+        <p className='text-center text-white/70 text-sm mb-16 font-body'>
           {subtitlePartners}
         </p>
 
@@ -75,7 +76,7 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
       {/* TESTIMONIALS */}
       <TestimonialsCarousel title={titleTestimonials} />

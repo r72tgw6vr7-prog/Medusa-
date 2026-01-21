@@ -13,18 +13,34 @@
 
 /* Hide scrollbars while maintaining functionality */
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari, Edge WebKit */
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge Legacy */
+  scrollbar-width: none; /* Firefox and modern browsers */
 }
 
 /* Touch target size for accessibility */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
+}
+
+@media (max-width: 1023px) {
+  .touch-target-mobile {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+
+  .touch-target-mobile-inline {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .touch-target-mobile-center {
+    justify-content: center;
+  }
 }
 
 /* Snap scrolling helpers */
@@ -54,36 +70,36 @@
   scroll-behavior: smooth;
 }
 
-/* Section spacing utilities */
+/* Section spacing utilities (mobile-first tokens) */
 .section-padding {
-  padding-top: 3rem; /* 48px - mobile */
-  padding-bottom: 3rem;
+  padding-top: var(--section-padding-mobile);
+  padding-bottom: var(--section-padding-mobile);
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding-top: 4rem; /* 64px - tablet */
-    padding-bottom: 4rem;
+    padding-top: var(--section-padding-tablet);
+    padding-bottom: var(--section-padding-tablet);
   }
 }
 
 @media (min-width: 1024px) {
   .section-padding {
-    padding-top: 5rem; /* 80px - desktop */
-    padding-bottom: 5rem;
+    padding-top: var(--section-padding-desktop);
+    padding-bottom: var(--section-padding-desktop);
   }
 }
 
 /* Larger section spacing for better visual separation */
 .section-padding-lg {
-  padding-top: 4rem; /* 64px - mobile */
-  padding-bottom: 4rem;
+  padding-top: var(--section-padding-lg-mobile);
+  padding-bottom: var(--section-padding-lg-mobile);
 }
 
 @media (min-width: 768px) {
   .section-padding-lg {
-    padding-top: 5rem; /* 80px - tablet */
-    padding-bottom: 5rem;
+    padding-top: var(--section-padding-lg-tablet);
+    padding-bottom: var(--section-padding-lg-tablet);
   }
 }
 
@@ -100,7 +116,98 @@
 
 @media (min-width: 1024px) {
   .section-padding-lg {
-    padding-top: 6rem; /* 96px - desktop */
-    padding-bottom: 6rem;
+    padding-top: var(--section-padding-lg-desktop);
+    padding-bottom: var(--section-padding-lg-desktop);
+  }
+}
+
+/* Section component shell spacing (mobile-first, preserves desktop) */
+.section-shell {
+  padding-top: var(--section-shell-padding-mobile);
+  padding-bottom: var(--section-shell-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding-top: var(--section-shell-padding-tablet);
+    padding-bottom: var(--section-shell-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-top: var(--section-shell-padding-desktop);
+    padding-bottom: var(--section-shell-padding-desktop);
+  }
+}
+
+:root {
+  --animate-cell-ripple: diamond-ripple var(--ripple-duration, 600ms) ease-out var(--ripple-delay, 0ms) both;
+}
+
+.diamond-cell {
+  transform: scale(calc(1 + (var(--hover, 0) * 0.06)));
+  filter: drop-shadow(
+    0 0 calc(var(--hover, 0) * 14px)
+      rgb(99 102 241 / calc(var(--glow-intensity, 0.8) * var(--hover, 0)))
+  );
+  transition: transform 120ms ease-out, filter 120ms ease-out, opacity 120ms ease-out;
+}
+
+.diamond-cell.is-rippling {
+  animation: var(--animate-cell-ripple);
+}
+
+@keyframes diamond-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+    filter: drop-shadow(0 0 0 rgb(99 102 241 / 0));
+  }
+  40% {
+    transform: scale(1.08);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgb(99 102 241 / var(--glow-intensity, 0.8)));
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+    filter: drop-shadow(0 0 0 rgb(99 102 241 / 0));
+  }
+}
+
+/* Fullscreen SVG ripple effect */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Hover glow effect for background */
+.svg-background-hover {
+  transition: filter 300ms ease;
+}
+
+.svg-background-hover:hover {
+  filter: brightness(1.1) saturate(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diamond-cell {
+    transition: none;
+  }
+
+  .diamond-cell.is-rippling {
+    animation: none;
+    opacity: 0.55;
+  }
+  
+  @keyframes ripple {
+    0%, 100% { opacity: 0.3; }
   }
 }

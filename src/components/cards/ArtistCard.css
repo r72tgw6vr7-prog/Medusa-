@@ -1,0 +1,270 @@
+/* ============================================
+ * ArtistCard.css - 6 Hover Enhancements
+ * ============================================
+ * 
+ * Enhancements:
+ * 1. Chrome Glow Edge - Pulsing neon border
+ * 2. Content Lift - Text shifts up + chrome underline
+ * 3. Shadow Depth - Dramatic shadow + chrome rim light
+ * 4. Neighbor Shrink - Adjacent cards scale to 0.95
+ * 5. Image Zoom - Photo zooms 105% inside card
+ * 6. Overlay Fade - Dark overlay fades 40% → 0%
+ */
+
+/* ============================================
+ * CSS Custom Properties (Animation Constants)
+ * ============================================ */
+:root {
+  /* Animation Durations */
+  --artist-card-duration: 400ms;
+  --artist-content-duration: 300ms;
+  --artist-image-duration: 600ms;
+  --artist-overlay-duration: 350ms;
+  --artist-glow-pulse-duration: 2s;
+  
+  /* Easing Functions */
+  --artist-easing-lift: cubic-bezier(0.4, 0, 0.2, 1);
+  --artist-easing-zoom: cubic-bezier(0.22, 1, 0.36, 1);
+  --artist-easing-glow: ease-in-out;
+  
+  /* Colors */
+  --artist-chrome: var(--brand-chrome, #C0C0C0);
+  --artist-chrome-glow: rgba(192, 192, 192, 0.3);
+  --artist-chrome-glow-bright: rgba(192, 192, 192, 0.5);
+  --artist-shadow-dark: rgba(0, 0, 0, 0.8);
+  --artist-overlay-color: rgba(10, 10, 10, 0.4);
+}
+
+/* ============================================
+ * Category Indicator (Subtle Circle)
+ * ============================================ */
+.artist-category-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artist-category-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--artist-chrome);
+  box-shadow: 
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 8px rgba(192, 192, 192, 0.4);
+  transition: 
+    transform var(--artist-content-duration) var(--artist-easing-lift),
+    box-shadow var(--artist-content-duration) var(--artist-easing-lift);
+}
+
+/* Piercing artists get a ring instead of filled dot */
+.artist-card-wrapper[data-category="piercing"] .artist-category-dot {
+  background: transparent;
+  border: 2px solid var(--artist-chrome);
+  box-shadow: 
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 8px rgba(192, 192, 192, 0.3);
+}
+
+/* Hover enhancement for indicator */
+.artist-card-image-container:hover .artist-category-dot {
+  transform: scale(1.25);
+  box-shadow: 
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 12px rgba(192, 192, 192, 0.6);
+}
+
+/* ============================================
+ * Card Wrapper Base Styles
+ * ============================================ */
+.artist-card-wrapper {
+  position: relative;
+}
+
+/* ============================================
+ * Image Container - Base + Hover Effects
+ * ============================================ */
+.artist-card-image-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(192, 192, 192, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: 
+    transform var(--artist-card-duration) ease-out,
+    box-shadow var(--artist-card-duration) ease-out,
+    border-color var(--artist-card-duration) ease-out;
+  will-change: transform, box-shadow;
+}
+
+/* Enhancement 1: Chrome Glow Edge (Pulsing) */
+@keyframes chrome-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 0 20px var(--artist-chrome-glow);
+  }
+  50% { 
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 0 30px var(--artist-chrome-glow-bright);
+  }
+}
+
+.artist-card-image-container:hover {
+  border-color: var(--artist-chrome);
+  animation: chrome-pulse var(--artist-glow-pulse-duration) var(--artist-easing-glow) infinite;
+}
+
+/* Enhancement 3: Shadow Depth (on hover) */
+.artist-card-image-container:hover {
+  box-shadow: 
+    0 20px 60px var(--artist-shadow-dark),
+    0 -2px 0 rgba(192, 192, 192, 0.4); /* Chrome rim light on top */
+}
+
+/* ============================================
+ * Image - Zoom Effect
+ * ============================================ */
+.artist-card-image {
+  transition: transform var(--artist-image-duration) var(--artist-easing-zoom);
+  will-change: transform;
+}
+
+/* Enhancement 5: Image Zoom (105%) */
+.artist-card-image-container:hover .artist-card-image {
+  transform: scale(1.05);
+}
+
+/* ============================================
+ * Overlay - Fade Effect
+ * ============================================ */
+.artist-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--artist-overlay-color);
+  transition: background var(--artist-overlay-duration) ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Enhancement 6: Overlay Fade (40% → 0%) */
+.artist-card-image-container:hover .artist-card-overlay {
+  background: rgba(10, 10, 10, 0);
+}
+
+/* ============================================
+ * Content - Lift Effect
+ * ============================================ */
+.artist-card-content {
+  transition: transform var(--artist-content-duration) var(--artist-easing-lift);
+}
+
+/* Enhancement 2: Content Lift (-8px) */
+.artist-card-wrapper:hover .artist-card-content {
+  transform: translateY(-8px);
+}
+
+/* ============================================
+ * Artist Name - Chrome Underline on Hover
+ * ============================================ */
+.artist-card-name {
+  position: relative;
+}
+
+.artist-card-name::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--artist-chrome);
+  margin-top: 4px;
+  transition: width var(--artist-content-duration) var(--artist-easing-lift);
+}
+
+/* Enhancement 2 (part 2): Chrome underline appears */
+.artist-card-wrapper:hover .artist-card-name::after {
+  width: 100%;
+}
+
+/* ============================================
+ * Enhancement 4: Neighbor Shrink
+ * Uses CSS :has() for previous sibling detection
+ * ============================================ */
+
+/* Next sibling shrinks when current card is hovered */
+.artist-card-wrapper:hover + .artist-card-wrapper {
+  transform: scale(0.95);
+  transition: transform var(--artist-content-duration) ease-out;
+}
+
+/* Previous sibling shrinks (using :has()) */
+.artist-card-wrapper:has(+ .artist-card-wrapper:hover) {
+  transform: scale(0.95);
+  transition: transform var(--artist-content-duration) ease-out;
+}
+
+/* Ensure non-hovered, non-adjacent cards reset properly */
+.artist-card-wrapper {
+  transition: transform var(--artist-content-duration) ease-out;
+}
+
+/* ============================================
+ * Reduced Motion - Accessibility
+ * ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .artist-card-image-container,
+  .artist-card-image,
+  .artist-card-overlay,
+  .artist-card-content,
+  .artist-card-name::after,
+  .artist-card-wrapper,
+  .artist-category-dot {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Instant hover state without animation */
+  .artist-card-image-container:hover {
+    border-color: var(--artist-chrome);
+    box-shadow: 
+      0 20px 60px var(--artist-shadow-dark),
+      0 0 20px var(--artist-chrome-glow);
+  }
+  
+  .artist-card-image-container:hover .artist-card-image {
+    transform: scale(1.05);
+  }
+  
+  .artist-card-image-container:hover .artist-card-overlay {
+    background: rgba(10, 10, 10, 0);
+  }
+  
+  .artist-card-wrapper:hover .artist-card-content {
+    transform: translateY(-8px);
+  }
+  
+  .artist-card-wrapper:hover .artist-card-name::after {
+    width: 100%;
+  }
+  
+  .artist-card-wrapper:hover + .artist-card-wrapper,
+  .artist-card-wrapper:has(+ .artist-card-wrapper:hover) {
+    transform: scale(0.95);
+  }
+}
+
+/* ============================================
+ * Reduced Motion - Category indicator
+ * ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .artist-category-dot {
+    transition: none !important;
+  }
+}

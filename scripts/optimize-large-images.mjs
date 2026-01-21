@@ -103,13 +103,26 @@ async function main() {
   console.log('===========================\n');
 
   // Images to optimize (flagged by Lighthouse audit)
-  const imagesToOptimize = [
-    {
-      input: 'public/assets/images/photos/studio/img3876.webp',
-      output: 'public/assets/images/photos/studio/optimized',
-      name: 'img3876',
-    },
-  ];
+  const imagesToOptimize = [];
+
+  // Optimize all studio images (source folder) into /optimized (responsive AVIF/WebP)
+  const studioDir = path.join(PUBLIC_DIR, 'assets/images/photos/studio');
+  const studioOptimizedDir = path.join('public/assets/images/photos/studio/optimized');
+  try {
+    const studioFiles = await fs.readdir(studioDir);
+    for (const file of studioFiles) {
+      if (!file.match(/\.(jpg|jpeg|png|webp)$/i)) continue;
+      if (file.includes('-') || file.includes('@')) continue;
+
+      imagesToOptimize.push({
+        input: path.join('public/assets/images/photos/studio', file),
+        output: studioOptimizedDir,
+        name: path.parse(file).name,
+      });
+    }
+  } catch (error) {
+    console.log(`Skipping studio images: ${error.message}`);
+  }
 
   // Also optimize artist images
   const artistsDir = path.join(PUBLIC_DIR, 'assets/images/photos/artists');

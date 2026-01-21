@@ -1,0 +1,21 @@
+/* Booking Form Enhancements – subtle, brand-consistent */
+
+.booking-form {
+  /* Vertical rhythm between logical groups */
+  gap: var(--space-4);
+}
+
+/* Gold focus ring on interactive controls */
+.booking-form input:focus-visible,
+.booking-form textarea:focus-visible,
+.booking-form select:focus-visible {
+  outline: calc(var(--space-0-5) / 2) solid var(--color-brand-accent);
+  outline-offset: calc(var(--space-0-5) / 2);
+}
+
+/* Divider used if forms grow further */
+.booking-form hr {
+  border: 0;
+  border-top: 1px solid rgba(var(--color-brand-accent-rgb), 0.25);
+  margin: var(--space-4) 0;
+}

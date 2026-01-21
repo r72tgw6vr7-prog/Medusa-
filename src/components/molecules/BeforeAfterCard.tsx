@@ -99,7 +99,7 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(sliderPosition)}
-          className='absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize'
+          className='absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
           style={{ left: `${sliderPosition}%` }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -108,25 +108,25 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
         >
           <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <div className='w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center'>
-              <span className='text-[var(--deep-black)] text-xs'>↔</span>
+              <span className='text-luxury-text-primary text-sm lg:text-xs'>↔</span>
             </div>
           </div>
         </div>
 
         {/* Labels */}
-        <div className='absolute top-4 left-4 bg-[#1A1A1A] bg-opacity-90 px-0 py-0 rounded-full'>
-          <span className='text-white text-sm'>{beforeLabel}</span>
+        <div className='absolute top-4 left-4 bg-luxury-bg-dark/90 px-0 py-0 rounded-full'>
+          <span className='text-luxury-text-inverse text-sm'>{beforeLabel}</span>
         </div>
-        <div className='absolute top-4 right-4 bg-[#1A1A1A] bg-opacity-90 px-0 py-0 rounded-full'>
-          <span className='text-white text-sm'>{afterLabel}</span>
+        <div className='absolute top-4 right-4 bg-luxury-bg-dark/90 px-0 py-0 rounded-full'>
+          <span className='text-luxury-text-inverse text-sm'>{afterLabel}</span>
         </div>
       </div>
 
       {/* Caption */}
       {(title || artist) && (
         <div className='absolute bottom-0 inset-x-0 bg-linear-to-t from-black to-transparent p-8'>
-          {title && <h3 className='text-white text-lg font-bold'>{title}</h3>}
-          {artist && <p className='text-[var(--brand-gold)] text-sm'>{artist}</p>}
+          {title && <h3 className='text-luxury-text-inverse text-lg font-bold'>{title}</h3>}
+          {artist && <p className='text-brand-chrome text-sm'>{artist}</p>}
         </div>
       )}
     </button>

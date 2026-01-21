@@ -13,13 +13,16 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/', i18nKey: 'nav.home', isActive: (path) => path === '/' },
-  { to: '/services', i18nKey: 'nav.services', isActive: (path) => path.startsWith('/services') },
-  { to: '/artists', i18nKey: 'nav.artists', isActive: (path) => path.startsWith('/artists') },
-  { to: '/gallery', i18nKey: 'nav.gallery', isActive: (path) => path.startsWith('/gallery') },
-  { to: '/booking', i18nKey: 'nav.booking', isActive: (path) => path.startsWith('/booking') },
-  { to: '/faq', i18nKey: 'nav.faq', isActive: (path) => path.startsWith('/faq') },
-  { to: '/contact', i18nKey: 'nav.contact', isActive: (path) => path.startsWith('/contact') },
+  { to: '/gallery', i18nKey: 'common.nav.gallery', isActive: (path) => path.startsWith('/gallery') },
+  { to: '/artists', i18nKey: 'common.nav.artists', isActive: (path) => path.startsWith('/artists') },
+  { to: '/faq', i18nKey: 'common.nav.faq', isActive: (path) => path.startsWith('/faq') },
+  { to: '/contact', i18nKey: 'common.nav.contact', isActive: (path) => path.startsWith('/contact') },
+  { to: '/booking', i18nKey: 'common.nav.booking', isActive: (path) => path.startsWith('/booking') },
+];
+
+const SERVICES_ITEMS = [
+  { to: '/services/tattoos', i18nKey: 'nav.tattoos' },
+  { to: '/services/piercings', i18nKey: 'nav.piercings' },
 ];
 
 export function MainNavigation() {
@@ -32,29 +35,51 @@ export function MainNavigation() {
   const isGerman = language === 'de';
 
   useEffect(() => {
-    const handleScroll = () => {
+    const heroHeightRef = { current: window.innerHeight };
+    let rafId = 0;
+
+    const computeHeroHeight = () => {
       const heroSection =
         document.querySelector('.hero-section') ||
         document.querySelector('[class*="hero"]') ||
         document.querySelector('section:first-of-type');
 
-      let heroHeight = window.innerHeight;
+      heroHeightRef.current =
+        heroSection instanceof HTMLElement ? heroSection.offsetHeight : window.innerHeight;
+    };
 
-      if (heroSection) {
-        heroHeight = (heroSection as HTMLElement).offsetHeight;
-      }
-
-      const isPastHero = window.scrollY > heroHeight - 100;
+    const updateScrolledState = () => {
+      const isPastHero = window.scrollY > heroHeightRef.current - 100;
       setScrolled((prev) => (prev === isPastHero ? prev : isPastHero));
     };
 
-    document.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        updateScrolledState();
+      });
+    };
+
+    const onResize = () => {
+      computeHeroHeight();
+      updateScrolledState();
+    };
+
+    computeHeroHeight();
+    updateScrolledState();
+
+    document.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
 
     return () => {
-      document.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
     };
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -147,11 +172,9 @@ export function MainNavigation() {
     }
 
     window.addEventListener('resize', updateHeaderHeight);
-    document.addEventListener('scroll', updateHeaderHeight, { passive: true });
 
     return () => {
       window.removeEventListener('resize', updateHeaderHeight);
-      document.removeEventListener('scroll', updateHeaderHeight);
       if (resizeObserver && nav) {
         resizeObserver.disconnect();
       }
@@ -194,30 +217,57 @@ export function MainNavigation() {
         } ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
-        <div className='mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-8 px-8 sm:px-16'>
+        <div className='container-wide mx-auto flex h-20 items-center justify-between gap-8 px-8 md:px-8'>
           <Link
             to='/'
-            className="nav-logo text-[28px] leading-none tracking-tight text-brand-gold sm:text-[36px] md:text-[48px] font-['Playfair_Display'] font-bold"
+            className='nav-logo font-headline text-2xl sm:text-3xl md:text-4xl leading-none tracking-tight text-brand-accent font-bold'
           >
             MEDUSA
           </Link>
 
-          <div className='hidden flex-1 xl:flex'>
+          <div className='hidden flex-1 lg:flex'>
             <ul
               className='flex w-full items-center justify-center gap-16'
-              role='menubar'
-              aria-orientation='horizontal'
             >
+              <li className='nav-dropdown'>
+                <Link
+                  to='/services/tattoos'
+                  className={`nav-link nav-dropdown__trigger font-body text-base md:text-lg font-medium transition-all duration-300 ${
+                    location.pathname.startsWith('/services')
+                      ? 'text-brand-accent'
+                      : 'text-luxury-text-inverse hover:text-brand-accent'
+                  }`}
+                  aria-haspopup='true'
+                  aria-expanded='false'
+                >
+                  {t('common.nav.services')}
+                </Link>
+                <div className='nav-dropdown__menu' role='menu'>
+                  {SERVICES_ITEMS.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className='nav-dropdown__item'
+                      role='menuitem'
+                    >
+                      {t(item.i18nKey)}
+                    </Link>
+                  ))}
+                </div>
+              </li>
               {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
                 const active = isActive(location.pathname);
 
                 return (
-                  <li key={to} role='none'>
+                  <li key={to}>
                     <Link
                       to={to}
-                      role='menuitem'
                       className={`nav-link font-body text-base md:text-lg font-medium transition-all duration-300 ${
-                        active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
+                        to === '/booking'
+                          ? 'nav-cta rounded-md px-4 py-2 text-brand-accent hover:bg-brand-accent/20'
+                          : active
+                            ? 'text-brand-accent'
+                            : 'text-luxury-text-inverse hover:text-brand-accent'
                       }`}
                       aria-current={active ? 'page' : undefined}
                       tabIndex={0}
@@ -230,7 +280,7 @@ export function MainNavigation() {
             </ul>
           </div>
 
-          <div className='hidden items-center gap-8 xl:flex'>
+          <div className='hidden items-center gap-8 lg:flex'>
             <div className='language-toggle' role='group' aria-label='Language selection'>
               <div
                 className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
@@ -256,16 +306,16 @@ export function MainNavigation() {
             </div>
           </div>
 
-          <div className='flex items-center xl:hidden'>
+          <div className='flex items-center lg:hidden'>
             <button
               ref={openButtonRef}
               type='button'
               aria-controls='mobile-menu-overlay'
               aria-expanded={menuOpen}
               aria-haspopup='true'
-              aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
+              aria-label={menuOpen ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
               onClick={() => setMenuOpen((value) => !value)}
-              className={`mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold/70 ${
+              className={`mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/70 ${
                 menuOpen ? 'is-open' : ''
               }`}
             >
@@ -274,7 +324,9 @@ export function MainNavigation() {
                 <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
                 <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
               </span>
-              <span className='sr-only'>{menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}</span>
+              <span className='sr-only'>
+                {menuOpen ? t('common.nav.closeMenu') : t('common.nav.openMenu')}
+              </span>
             </button>
           </div>
         </div>
@@ -296,6 +348,21 @@ export function MainNavigation() {
                   Main Menu
                 </h2>
                 <nav className='mobile-menu-overlay__links' aria-label='Mobile navigation'>
+                  <div className='mobile-nav-group'>
+                    <span className='mobile-nav-group__title'>{t('common.nav.services')}</span>
+                    {SERVICES_ITEMS.map((item) => (
+                      <Link
+                        key={`mobile-${item.to}`}
+                        to={item.to}
+                        onClick={closeMenu}
+                        className={`mobile-nav-link ${location.pathname.startsWith(item.to) ? 'text-brand-accent' : 'text-luxury-text-inverse hover:text-brand-accent'}`}
+                        aria-current={location.pathname.startsWith(item.to) ? 'page' : undefined}
+                        tabIndex={menuOpen ? 0 : -1}
+                      >
+                        {t(item.i18nKey)}
+                      </Link>
+                    ))}
+                  </div>
                   {NAV_ITEMS.map(({ to, i18nKey, isActive }) => {
                     const active = isActive(location.pathname);
 
@@ -304,7 +371,7 @@ export function MainNavigation() {
                         key={`mobile-${to}`}
                         to={to}
                         onClick={closeMenu}
-                        className={`mobile-nav-link ${active ? 'text-brand-gold' : 'text-white hover:text-brand-gold'}`}
+                        className={`mobile-nav-link ${active ? 'text-brand-accent' : 'text-luxury-text-inverse hover:text-brand-accent'}`}
                         aria-current={active ? 'page' : undefined}
                         tabIndex={menuOpen ? 0 : -1}
                       >
@@ -351,10 +418,10 @@ export function MainNavigation() {
                     to='/booking'
                     onClick={closeMenu}
                     className='hero-appointment-cta nav-cta inline-flex h-12 w-full items-center justify-center rounded-lg text-base font-semibold transition-all duration-300'
-                    aria-label={t('nav.booking')}
+                    aria-label={t('common.nav.booking')}
                     tabIndex={menuOpen ? 0 : -1}
                   >
-                    {t('nav.bookingShort')}
+                    {t('common.nav.bookingShort')}
                   </Link>
                 </div>
               </div>

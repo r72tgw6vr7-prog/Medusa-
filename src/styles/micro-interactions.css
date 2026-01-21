@@ -9,7 +9,7 @@
 
 .hover-lift:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-gold-md);
+  box-shadow: var(--shadow-chrome-md);
 }
 
 .hover-scale {
@@ -20,22 +20,22 @@
 
 .hover-scale:hover {
   transform: scale(1.02);
-  box-shadow: var(--shadow-gold-md);
+  box-shadow: var(--shadow-chrome-md);
 }
 
 /* Focus States */
-.focus-gold {
+.focus-chrome {
   transition:
     box-shadow 200ms cubic-bezier(0.4, 0.2, 0.2, 1),
     border-color 200ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.focus-gold:focus-visible {
+.focus-chrome:focus-visible {
   outline: none;
   box-shadow:
     0 0 0 2px var(--brand-background),
-    0 0 0 4px var(--brand-gold);
-  border-color: var(--brand-gold);
+    0 0 0 4px var(--brand-accent);
+  border-color: var(--brand-accent);
 }
 
 /* Loading States */
@@ -43,7 +43,7 @@
   background: linear-gradient(
     90deg,
     var(--brand-background) 0%,
-    var(--brand-gold-hover) 50%,
+    var(--brand-accent-hover) 50%,
     var(--brand-background) 100%
   );
   background-size: 200% 100%;
@@ -88,38 +88,38 @@
   }
 }
 
-/* Gold Glow Effects */
-.gold-glow {
+/* Chrome Glow Effects */
+.chrome-glow {
   transition: box-shadow 200ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.gold-glow:hover {
-  box-shadow: 0 0 32px rgba(var(--color-brand-gold-rgb), 0.2);
+.chrome-glow:hover {
+  box-shadow: 0 0 32px rgba(var(--color-brand-accent-rgb), 0.2);
 }
 
-.gold-glow-subtle {
+.chrome-glow-subtle {
   transition: box-shadow 200ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.gold-glow-subtle:hover {
-  box-shadow: 0 0 16px rgba(var(--color-brand-gold-rgb), 0.1);
+.chrome-glow-subtle:hover {
+  box-shadow: 0 0 16px rgba(var(--color-brand-accent-rgb), 0.1);
 }
 
-.gold-glow-intense {
+.chrome-glow-intense {
   transition: box-shadow 200ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.gold-glow-intense:hover {
-  box-shadow: 0 0 48px rgba(var(--color-brand-gold-rgb), 0.3);
+.chrome-glow-intense:hover {
+  box-shadow: 0 0 48px rgba(var(--color-brand-accent-rgb), 0.3);
 }
 
 /* Smooth Gradients */
-.gradient-gold {
-  background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-hover) 100%);
+.gradient-chrome {
+  background: linear-gradient(135deg, var(--brand-accent) 0%, var(--brand-accent-hover) 100%);
   transition: opacity 200ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.gradient-gold:hover {
+.gradient-chrome:hover {
   opacity: 0.9;
 }
 
@@ -135,7 +135,7 @@
 .loading-spinner {
   width: var(--space-3);
   height: var(--space-3);
-  border: 2px solid var(--brand-gold);
+  border: 2px solid var(--brand-accent);
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 800ms linear infinite;
@@ -164,7 +164,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(var(--color-brand-gold-rgb), 0.2) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(var(--color-brand-accent-rgb), 0.2) 0%, transparent 100%);
   transform: translateX(-100%);
   transition: transform 500ms cubic-bezier(0.4, 0.2, 0.2, 1);
 }
@@ -213,12 +213,177 @@
 .card-premium:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.1),
-    0 8px 32px rgba(var(--color-brand-gold-rgb), 0.15);
+    0 4px 16px rgb(0 0 0 / 0.1),
+    0 8px 32px rgba(var(--color-brand-accent-rgb), 0.15);
 }
 
 /* Text Selection */
 ::selection {
-  background: rgba(var(--color-brand-gold-rgb), 0.2);
-  color: var(--brand-gold);
+  background: rgba(var(--color-brand-accent-rgb), 0.2);
+  color: var(--brand-accent);
+}
+
+/* ===========================================
+   DEPTH BLUR - Hero Section Frame Effects
+   =========================================== */
+
+/* Inactive hero frame - blurred and darkened */
+.hero-frame-inactive {
+  filter: blur(4px) brightness(0.7);
+  opacity: 0.6;
+  transition: 
+    filter 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 400ms ease-out;
+  will-change: filter, opacity;
+}
+
+/* Active hero frame - sharp with chrome glow */
+.hero-frame-active {
+  filter: blur(0) brightness(1);
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+  border: 2px solid var(--brand-chrome, #C0C0C0);
+  transition: 
+    filter 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 400ms ease-out;
+}
+
+/* ===========================================
+   TEXT FADE DELAY - 200ms after frame settles
+   =========================================== */
+
+/* Text hidden state (before frame aligns) */
+.hero-frame-text {
+  transition: opacity 300ms ease-out;
+}
+
+.hero-text-hidden {
+  opacity: 0;
+}
+
+/* Text visible state (200ms delay handled by JS, then 300ms fade) */
+.hero-text-visible {
+  opacity: 1;
+}
+
+/* Override hover behavior when text should show */
+.hero-text-visible.group-hover\/product\:opacity-100 {
+  opacity: 1;
+}
+
+/* ===========================================
+   CHROME REVEAL - Border Draw-in Animation
+   =========================================== */
+
+/* Container for border reveal effect */
+.chrome-border-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated border using pseudo-element */
+.chrome-border-reveal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--brand-chrome, #C0C0C0);
+  border-radius: inherit;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Revealed state - border fully visible */
+.chrome-border-reveal[data-revealed="true"]::before,
+.chrome-border-reveal.revealed::before {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Chrome glow when revealed */
+.chrome-border-reveal[data-revealed="true"],
+.chrome-border-reveal.revealed {
+  box-shadow: 0 0 16px rgba(192, 192, 192, 0.25);
+}
+
+/* ===========================================
+   CHROME BORDER GLOW - Universal Borders
+   =========================================== */
+
+/* Default chrome border with hover glow */
+.chrome-border-glow {
+  border: 1px solid rgba(192, 192, 192, 0.2);
+  transition: 
+    border-color 300ms ease-out, 
+    box-shadow 300ms ease-out;
+}
+
+.chrome-border-glow:hover,
+.chrome-border-glow:focus-visible {
+  border-color: var(--brand-chrome, #C0C0C0);
+  box-shadow: 0 0 12px rgba(192, 192, 192, 0.25);
+}
+
+/* Static chrome glow (no hover - for footer dividers) */
+.chrome-border-glow-static {
+  border-color: var(--brand-chrome, #C0C0C0);
+  box-shadow: 0 0 12px rgba(192, 192, 192, 0.25);
+}
+
+/* Chrome divider line with glow */
+.chrome-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-chrome, #C0C0C0) 20%,
+    var(--brand-chrome, #C0C0C0) 80%,
+    transparent
+  );
+  box-shadow: 0 0 8px rgba(192, 192, 192, 0.3);
+}
+
+/* ===========================================
+   REDUCED MOTION - Accessibility
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-frame-inactive,
+  .hero-frame-active {
+    transition: none;
+    filter: none;
+  }
+  
+  .hero-frame-active {
+    /* Keep chrome glow but remove blur effect */
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+    border: 2px solid var(--brand-chrome, #C0C0C0);
+  }
+  
+  .chrome-border-reveal::before {
+    transition: none;
+    clip-path: inset(0 0 0 0); /* Show full border immediately */
+  }
+  
+  .chrome-border-glow,
+  .chrome-border-glow-static {
+    transition: none;
+  }
+  
+  /* Text fade - instant visibility for reduced motion */
+  .hero-frame-text,
+  .hero-text-hidden,
+  .hero-text-visible {
+    transition: none;
+    opacity: 1;
+  }
+  
+  /* Hero section - disable background shift animation */
+  .hero-section {
+    background-color: #0a0a0a !important;
+    transition: none;
+  }
 }

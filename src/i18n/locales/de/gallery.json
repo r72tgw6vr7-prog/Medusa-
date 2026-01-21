@@ -1,0 +1,13 @@
+{
+  "title": "Galerie",
+  "subtitle": "Eine Sammlung meisterhafter Kunstwerke unserer talentierten Künstler. Entdecken Sie die Vielfalt unseres Studios.",
+  "noResults": "Keine Kunstwerke gefunden",
+  "filters": {
+    "allWorks": "Alle Arbeiten",
+    "allArtists": "Alle Künstler",
+    "allStyles": "Alle Stile",
+    "allYears": "Alle Jahre",
+    "reset": "Filter zurücksetzen",
+    "more": "Mehr anzeigen"
+  }
+}

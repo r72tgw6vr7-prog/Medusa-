@@ -27,3 +27,4 @@ chromewebdata_*.report.html
 public/test-*.html
 public/diagnose.js
 public/texture-*-test.html
+.aider*

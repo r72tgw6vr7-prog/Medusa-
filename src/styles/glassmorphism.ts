@@ -1,13 +1,10 @@
 // Glassmorphism effects for Medusa Tattoo Website
-// Based on design-tokens-complete.json specifications
-
-import { designTokens } from '../design-tokens';
 
 // Helper function to create CSS-in-JS glassmorphism effects
 export const createGlassmorphism = (
-  backgroundColor: string = 'rgba(34, 34, 34, 0.7)',
+  backgroundColor: string = 'rgba(var(--color-surface-darker-rgb), 0.7)',
   blurAmount: string = '14px',
-  borderColor: string = 'rgba(212, 175, 55, 0.1)',
+  borderColor: string = 'rgba(var(--color-accent-silver-rgb), 0.1)',
   borderWidth: string = '1px',
 ) => {
   return {
@@ -23,75 +20,75 @@ export const glassmorphism = {
   // Navigation bar glassmorphism
   navigation: {
     ...createGlassmorphism(
-      designTokens.glassmorphism.navigation.default.background,
+      'rgba(var(--color-surface-darker-rgb), 0.45)',
       '14px',
-      designTokens.colors.semantic.borders.navigation,
+      'rgba(var(--brand-accent-rgb), 0.10)',
     ),
-    boxShadow: designTokens.shadows['gold-sm'],
+    boxShadow: 'var(--shadow-chrome-sm)',
   },
 
   // Card glassmorphism
   card: {
     ...createGlassmorphism(
-      designTokens.glassmorphism.card.background,
+      'rgba(var(--color-surface-darker-rgb), 0.70)',
       '10px',
-      designTokens.colors.semantic.borders.default,
+      'rgba(var(--brand-accent-rgb), 0.15)',
     ),
   },
 
   // Hero section overlay glassmorphism
   heroOverlay: {
-    ...createGlassmorphism('rgba(34, 34, 34, 0.4)', '5px', 'transparent', '0px'),
+    ...createGlassmorphism('rgba(var(--color-surface-darker-rgb), 0.4)', '5px', 'transparent', '0px'),
   },
 
   // Trust badge glassmorphism
   trustBadge: {
     ...createGlassmorphism(
-      'rgba(34, 34, 34, 0.6)',
+      'rgba(var(--color-surface-darker-rgb), 0.6)',
       '8px',
-      designTokens.colors.semantic.borders.default,
+      'rgba(var(--brand-accent-rgb), 0.15)',
     ),
     transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     '&:hover': {
-      background: 'rgba(34, 34, 34, 0.8)',
-      boxShadow: designTokens.shadows['gold-sm'],
-      borderColor: designTokens.colors.semantic.borders.hover,
+      background: 'rgba(var(--color-surface-darker-rgb), 0.8)',
+      boxShadow: 'var(--shadow-chrome-sm)',
+      borderColor: 'rgba(var(--brand-accent-rgb), 0.20)',
     },
   },
 
   // Modal glassmorphism
   modal: {
     ...createGlassmorphism(
-      designTokens.glassmorphism.modal.background,
+      'rgba(var(--color-surface-darker-rgb), 0.90)',
       '20px',
-      designTokens.colors.semantic.borders.hover,
+      'rgba(var(--brand-accent-rgb), 0.20)',
     ),
-    boxShadow: designTokens.shadows['gold-md'],
+    boxShadow: 'var(--shadow-chrome-md)',
   },
 };
 
 // Golden glow effects
 export const goldenGlow = {
   subtle: {
-    boxShadow: designTokens.shadows['ambient-sm'],
+    boxShadow: 'var(--shadow-chrome-sm)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   standard: {
-    boxShadow: designTokens.shadows['ambient-md'],
+    boxShadow: 'var(--shadow-chrome-md)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   strong: {
-    boxShadow: designTokens.shadows['ambient-lg'],
+    boxShadow: 'var(--shadow-chrome-lg)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   hover: {
     '&:hover': {
-      boxShadow: designTokens.shadows['ambient-md'],
+      boxShadow: 'var(--shadow-chrome-md)',
     },
   },
   active: {
     '&:active': {
-      boxShadow: designTokens.shadows['ambient-lg'],
+      boxShadow: 'var(--shadow-chrome-lg)',
     },
   },
 };
@@ -99,39 +96,39 @@ export const goldenGlow = {
 // Button styles
 export const buttonStyles = {
   primary: {
-    backgroundColor: designTokens.colors.brand.gold,
-    color: designTokens.colors.brand.background,
+    backgroundColor: 'var(--brand-accent)',
+    color: 'var(--deep-black)',
     padding: '12px 24px',
-    borderRadius: designTokens.borderRadius.sm,
-    fontWeight: designTokens.typography.fontWeight.semibold,
+    borderRadius: 'var(--radius-md)',
+    fontWeight: 600,
     transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     border: 'none',
     cursor: 'pointer',
     '&:hover': {
-      backgroundColor: designTokens.colors.semantic.accent.hover,
-      boxShadow: designTokens.shadows['gold-md'],
+      backgroundColor: 'var(--brand-accent)',
+      boxShadow: 'var(--shadow-chrome-md)',
     },
     '&:active': {
-      backgroundColor: designTokens.colors.semantic.accent.active,
+      backgroundColor: 'var(--brand-accent)',
       transform: 'translateY(1px)',
     },
   },
 
   secondary: {
     backgroundColor: 'transparent',
-    color: designTokens.colors.brand.white,
+    color: 'var(--base-white)',
     padding: '10px 22px',
-    borderRadius: designTokens.borderRadius.sm,
-    fontWeight: designTokens.typography.fontWeight.medium,
+    borderRadius: 'var(--radius-md)',
+    fontWeight: 500,
     transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    border: `2px solid ${designTokens.colors.brand.gold}`,
+    border: '2px solid var(--brand-accent)',
     cursor: 'pointer',
     '&:hover': {
-      backgroundColor: 'rgba(212, 175, 55, 0.1)',
-      boxShadow: designTokens.shadows['gold-sm'],
+      backgroundColor: 'rgba(var(--color-accent-silver-rgb), 0.1)',
+      boxShadow: 'var(--shadow-chrome-sm)',
     },
     '&:active': {
-      backgroundColor: 'rgba(212, 175, 55, 0.2)',
+      backgroundColor: 'rgba(var(--color-accent-silver-rgb), 0.2)',
       transform: 'translateY(1px)',
     },
   },

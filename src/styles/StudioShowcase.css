@@ -24,18 +24,18 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(34, 34, 34, 0.8);
+  background-color: rgb(var(--color-surface-darker-rgb) / 0.8);
   z-index: -1;
 }
 
 /* Hover effect for the logo */
 .medusa-logo {
-  text-shadow: 0 0 15px rgba(var(--color-brand-gold-rgb), 0.5);
+  text-shadow: 0 0 15px rgba(var(--color-brand-accent-rgb), 0.5);
   transition: text-shadow 0.3s ease;
 }
 
 .studio-showcase:hover .medusa-logo {
-  text-shadow: 0 0 25px rgba(var(--color-brand-gold-rgb), 0.8);
+  text-shadow: 0 0 25px rgba(var(--color-brand-accent-rgb), 0.8);
 }
 
 /* Carousel navigation dots */
@@ -59,7 +59,7 @@
 }
 
 .carousel-dot.active {
-  background-color: var(--color-brand-gold);
+  background-color: var(--color-brand-accent);
   transform: scale(1.2);
 }
 

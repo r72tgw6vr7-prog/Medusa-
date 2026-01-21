@@ -95,7 +95,8 @@ class PerformanceMonitor {
       console.log('1. Reload the page');
       console.log('2. Check your internet connection');
       console.log('3. Clear browser cache');
-      console.log('4. Try a different browser');
+      git commit -m "Update hero copy (EN/DE)" --no-verify
+console.log('4. Try a different browser');
       console.groupEnd();
     }
   }

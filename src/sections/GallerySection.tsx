@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Section from '@/components/ui/Section';
-
+import { SectionHeading } from '@/components/SectionHeading';
 interface GalleryImage {
   id: string;
   imageUrl: string;
@@ -46,13 +46,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
   return (
     <Section className={`py-16 lg:py-24 ${className} relative z-10`} containerSize='default'>
-      {/* Header */}
-      <div className='text-center space-y-8 mb-16'>
-        <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>Galerie</p>
-        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>{title}</h2>
-        <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
-          {subtitle}
-        </p>
+      {/* Header - Primary Section (h2) */}
+      <div className='mb-16'>
+        <SectionHeading eyebrow="Galerie" title={title} subtitle={subtitle} level="primary" />
       </div>
 
       {/* Gallery Grid - Sample Preview */}
@@ -74,6 +70,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             <img
               src={image.imageUrl}
               alt={image.title}
+              width={640}
+              height={640}
+              loading="lazy"
               className='w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500'
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -82,15 +81,15 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             />
 
             {/* Hover overlay */}
-            <div className='absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex flex-col h-full' />
+            <div className='absolute inset-0 bg-luxury-bg-dark/0 group-hover:bg-luxury-bg-dark/40 transition-all duration-300 flex flex-col h-full' />
 
-            {/* Gold border on hover */}
-            <div className='absolute inset-0 border-2 border-transparent group-hover:border-[var(--brand-gold)] rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
+            {/* Chrome border on hover */}
+            <div className='absolute inset-0 border-2 border-transparent group-hover:border-(--brand-accent) rounded-2xl transition-all duration-300 pointer-events-none flex flex-col h-full' />
 
             {/* Optional: Image info overlay on hover */}
             <div className='absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-linear-to-t from-black/80 to-transparent flex flex-col h-full'>
-              <p className='text-white font-semibold text-sm'>{image.title}</p>
-              <p className='text-gray-300 text-xs'>{image.category}</p>
+              <p className='text-luxury-text-inverse font-semibold text-sm'>{image.title}</p>
+              <p className='text-luxury-text-inverse/70 text-sm lg:text-xs'>{image.category}</p>
             </div>
           </motion.div>
         ))}
@@ -110,7 +109,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
         >
           <button
             onClick={() => navigate('/gallery')}
-            className='inline-flex items-center justify-center gap-8 px-8 py-8 bg-[var(--brand-gold)] text-[var(--deep-black)] font-semibold text-lg hover:bg-[var(--brand-gold-hover)] transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+            className='inline-flex items-center justify-center gap-8 px-8 py-8 bg-(--brand-accent) text-(--deep-black) font-semibold text-lg hover:bg-(--brand-accent-hover) transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
           >
             Zur Galerie
             <ArrowRight className='w-5 h-5' />

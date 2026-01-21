@@ -46,6 +46,8 @@ export const useScrollDepthTracking = () => {
   useEffect(() => {
     let maxScrollPercentage = 0;
 
+    let rafId = 0;
+
     const handleScroll = () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -57,18 +59,22 @@ export const useScrollDepthTracking = () => {
       }
     };
 
-    // Throttle scroll events
-    let timeoutId: NodeJS.Timeout;
+    // Throttle scroll events using RAF to avoid setTimeout churn on fast scroll
     const throttledHandleScroll = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(handleScroll, 100);
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        handleScroll();
+      });
     };
 
-    window.addEventListener('scroll', throttledHandleScroll);
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
     };
   }, []);
 };

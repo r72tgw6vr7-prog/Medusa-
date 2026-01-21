@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { Card } from '../ui/Card';
 
 interface ReviewCardProps {
   rating: number; // Out of 5
@@ -22,7 +23,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       stars.push(
         <Star
           key={i}
-          className='w-6 h-6 fill-[var(--brand-gold)] text-[var(--brand-gold)]'
+          className='w-6 h-6 fill-[var(--brand-accent)] text-[var(--brand-accent)]'
           aria-label='star'
         />,
       );
@@ -31,18 +32,23 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   };
 
   return (
-    <div
-      className={`flex flex-col items-start bg-[var(--deep-black)CC] w-[340px] py-[25px] rounded-2xl border border-solid border-[var(--brand-gold)] shadow-[0px_4px_12px_#0000004D] ${className}`}
+    <Card
+      variant="default"
+      size="default"
+      className={`w-card-sm ${className}`}
+      asChild
     >
-      <div className='flex mb-0.5 mx-8'>{renderStars()}</div>
-      <div className='flex flex-col items-center self-stretch mb-8 mx-8'>
-        <span className='text-white text-[15px] w-[280px]'>{content}</span>
+      <div className='flex flex-col items-start'>
+        <div className='flex mb-0.5 mx-8'>{renderStars()}</div>
+        <div className='flex flex-col items-center self-stretch mb-8 mx-8'>
+          <span className='text-luxury-text-inverse text-sm-15 w-72'>{content}</span>
+        </div>
+        <div className='flex items-start ml-8 gap-px'>
+          <span className='text-luxury-text-inverse text-sm-15'>— {author}</span>
+          {source && <span className='text-luxury-text-inverse text-sm-15 ml-0'>, {source}</span>}
+        </div>
       </div>
-      <div className='flex items-start ml-8 gap-px'>
-        <span className='text-white text-[15px]'>— {author}</span>
-        {source && <span className='text-white text-[15px] ml-0'>, {source}</span>}
-      </div>
-    </div>
+    </Card>
   );
 };
 

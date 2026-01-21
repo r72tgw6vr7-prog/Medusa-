@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { Footer } from '@/components/pages';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { SectionHeading } from '@/components/SectionHeading';
 
 interface ImpressumPageProps {
   language?: 'DE' | 'EN';
@@ -33,11 +33,11 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
           content: [
             'Telefon München: 089 910994',
             'Telefon Ingolstadt: 0841 910994',
-            'E-Mail: Medusa@in-tattoo.de',
-            'Website: www.medusa-tattoo.de',
+            'E-Mail: info@medusa-tattoo.de',
+            'Website: www.muenchen-tattoo-studio.de',
             '',
             'Ansprechpartner: Oliver Loichinger',
-            'E-Mail: oliver@in-tattoo.de',
+            'E-Mail: info@medusa-tattoo.de',
           ],
         },
         registration: {
@@ -85,11 +85,11 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
           content: [
             'Phone Munich: +49 89 910994',
             'Phone Ingolstadt: +49 841 910994',
-            'Email: Medusa@in-tattoo.de',
-            'Website: www.medusa-tattoo.de',
+            'Email: info@medusa-tattoo.de',
+            'Website: www.muenchen-tattoo-studio.de',
             '',
             'Contact person: Oliver Loichinger',
-            'Email: oliver@in-tattoo.de',
+            'Email: info@medusa-tattoo.de',
           ],
         },
         registration: {
@@ -117,25 +117,23 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
 
   const t = content[language];
   return (
-    <div className='min-h-screen bg-brand-background text-brand-white flex flex-col'>
+    <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative'>
       <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
 
       <main className='flex-1'>
         <section className='section-padding relative z-10'>
           <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-[1104px]'>
+            <div className='mx-auto w-full max-w-container-main'>
               {/* Page Header - Matches Services page exactly */}
-              <PageHeader
+              <SectionHeading
                 eyebrow='Medusa München'
                 title={t.title}
                 subtitle={t.subtitle}
-                alignment='center'
               />
 
               <div className='space-y-16'>
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>{t.sections.tmg.title}</h2>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>{t.sections.tmg.title}</h2>
                   <div className='space-y-0 text-brand-white/85'>
                     {t.sections.tmg.content.map((line, index) => (
                       <p
@@ -155,7 +153,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>
                     {t.sections.contact.title}
                   </h2>
                   <div className='space-y-0 text-brand-white/85'>
@@ -168,7 +166,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>
                     {t.sections.registration.title}
                   </h2>
                   <div className='space-y-0 text-brand-white/85'>
@@ -177,7 +175,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                         key={index}
                         className={
                           line.includes('Amtsgericht') || line.includes('Local court')
-                            ? 'text-sm text-white/60'
+                            ? 'text-sm text-luxury-text-inverse/60'
                             : ''
                         }
                       >
@@ -188,7 +186,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>
                     {t.sections.responsible.title}
                   </h2>
                   <div className='space-y-0 text-brand-white/85'>
@@ -199,7 +197,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>
                     Berufshaftpflichtversicherung
                   </h2>
                   <div className='space-y-0 text-brand-white/85'>
@@ -210,7 +208,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Streitschlichtung</h2>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>Streitschlichtung</h2>
                   <p className='text-brand-white/85'>
                     Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
                     bereit:
@@ -219,19 +217,19 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                     href='https://ec.europa.eu/consumers/odr'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex text-brand-gold hover:text-brand-gold/80 underline transition-colors duration-200 ease-out'
+                    className='inline-flex text-brand-accent hover:text-brand-accent/80 underline transition-colors duration-200 ease-out'
                   >
                     https://ec.europa.eu/consumers/odr
                   </a>
-                  <p className='text-sm text-white/80'>
+                  <p className='text-sm text-luxury-text-inverse/80'>
                     Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
                     Verbraucherschlichtungsstelle teilzunehmen.
                   </p>
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Haftung für Inhalte</h2>
-                  <p className='text-sm text-white/80 leading-relaxed'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Inhalte</h2>
+                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
                     Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind
                     wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
@@ -241,8 +239,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>Haftung für Links</h2>
-                  <p className='text-sm text-white/80 leading-relaxed'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Links</h2>
+                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir
                     keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine
                     Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
@@ -251,18 +249,18 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                 </section>
 
                 <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-gold'>
+                  <h2 className='text-2xl font-semibold text-brand-accent'>
                     {t.sections.copyright.title}
                   </h2>
                   <p className='font-semibold text-brand-white/90'>
                     {t.sections.copyright.content[0]}
                   </p>
-                  <p className='text-sm text-white/80 leading-relaxed'>
+                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     {language === 'DE'
                       ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
                       : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'}
                   </p>
-                  <p className='text-sm text-white/80 leading-relaxed'>
+                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     {language === 'DE'
                       ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
                       : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'}

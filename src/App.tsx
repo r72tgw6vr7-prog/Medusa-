@@ -1,27 +1,75 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
-import { ServicesPage } from '@/components/organisms/ServicesPage';
-import { ArtistsPage } from './pages/ArtistsPage';
-import { AftercarePage } from './pages/AftercarePage';
 import React, { Suspense, lazy } from 'react';
-// UniversalTextureBackground moved to main.tsx
-const EnhancedGalleryPage = lazy(() => import('./pages/EnhancedGalleryPage'));
-const BookingPage = lazy(() => import('./pages/BookingPage'));
-import { LegalPage } from './pages/LegalPage';
-import { ImpressumPage } from './pages/ImpressumPage';
-import { DatenschutzPage } from './pages/DatenschutzPage';
-import AGBPage from './pages/AGBPage';
-import { FAQPageNew as FAQPage } from './pages/FAQPageNew';
-import { ContactPage } from './pages/ContactPage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { ServicesTestPage } from './pages/ServicesTestPage';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { useLanguage } from './contexts/LanguageContext';
 import { AppProvider } from '../core/state/AppContext';
 import Meta from '@/components/Meta';
+import LocaleRouteSync from '@/i18n/LocaleRouteSync';
 // Fix import path to match actual directory structure
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
+import { MotionProvider } from '@/providers/MotionProvider';
+
+interface LocalizedMetaProps {
+  pageKey: string;
+  basePath: string; // German/default path, starts with '/'
+  canonicalPath: string; // Current locale's canonical path, starts with '/'
+}
+
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
+
+const toEnglishPath = (basePath: string) => {
+  if (basePath === '/') return '/en';
+  return `/en${basePath}`;
+};
+
+const LocalizedMeta: React.FC<LocalizedMetaProps> = ({ pageKey, basePath, canonicalPath }) => {
+  const { language, t } = useLanguage();
+
+  const title = t(`common.meta.${pageKey}.title`);
+  const description = t(`common.meta.${pageKey}.description`);
+
+  return (
+    <Meta
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      hreflang={{
+        de: `${SITE_URL}${basePath}`,
+        en: `${SITE_URL}${toEnglishPath(basePath)}`,
+      }}
+      locale={language === 'en' ? 'en_US' : 'de_DE'}
+      alternateLocale={language === 'en' ? ['de_DE'] : ['en_US']}
+    />
+  );
+};
+
+const homePageImport = import('./pages/HomePage');
+const HomePage = lazy(() => homePageImport.then((m) => ({ default: m.HomePage })));
+const TattooServicesPage = lazy(() =>
+  import('@/components/pages/TattooServicesPage').then((m) => ({ default: m.TattooServicesPage })),
+);
+const PiercingServicesPage = lazy(() =>
+  import('@/components/pages/PiercingServicesPage').then((m) => ({ default: m.PiercingServicesPage })),
+);
+const ArtistsPage = lazy(() => import('./pages/ArtistsPage').then((m) => ({ default: m.ArtistsPage })));
+const GalleryPage = lazy(() => import('./pages/GalleryPage').then((m) => ({ default: m.GalleryPage })));
+const BookingPage = lazy(() => import('./pages/BookingPage').then((m) => ({ default: m.BookingPage })));
+const AftercarePage = lazy(() =>
+  import('./pages/AftercarePage').then((m) => ({ default: m.AftercarePage })),
+);
+const LegalPage = lazy(() => import('./pages/LegalPage').then((m) => ({ default: m.LegalPage })));
+const ImpressumPage = lazy(() =>
+  import('./pages/ImpressumPage').then((m) => ({ default: m.ImpressumPage })),
+);
+const DatenschutzPage = lazy(() =>
+  import('./pages/DatenschutzPage').then((m) => ({ default: m.DatenschutzPage })),
+);
+const AGBPage = lazy(() => import('./pages/AGBPage'));
+const FAQPage = lazy(() => import('./pages/FAQPageNew').then((m) => ({ default: m.FAQPageNew })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 function App() {
   // Texture background is now handled in main.tsx
@@ -30,7 +78,8 @@ function App() {
     <SimpleMedusaProvider>
       <AppProvider initialLanguage='DE'>
         <LanguageProvider>
-          <BrowserRouter>
+          <MotionProvider config={{ scrollProgressEnabled: true, parallaxEnabled: true, cursorTrailEnabled: false }}>
+            <LocaleRouteSync />
             <ScrollToTop />
             <AnalyticsProvider>
               {/* All page content (texture moved to main.tsx) */}
@@ -39,29 +88,54 @@ function App() {
                 {/* Content above texture */}
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
-                    {/* Main Routes */}
-                    <Route path='/' element={<HomePage />} />
-                    <Route
-                      path='/services'
-                      element={
-                        <>
-                          <Meta
-                            title='Medusa Tattoo München | Services'
-                            description='Premium Tattoo- und Piercing-Services in München. Transparente Preise, Beratung und höchste Hygiene.'
-                            canonicalPath='/services'
+                      {/* Main Routes */}
+                      <Route
+                        path='/'
+                        element={
+                          <>
+                          <LocalizedMeta
+                            pageKey='home'
+                            basePath='/'
+                            canonicalPath='/'
                           />
-                          <ServicesPage />
+                          <HomePage />
                         </>
                       }
                     />
-                    <Route path='/services-test' element={<ServicesTestPage />} />
+                    <Route path='/services' element={<Navigate to='/services/tattoos' replace />} />
+                    <Route
+                      path='/services/tattoos'
+                      element={
+                        <>
+                          <LocalizedMeta
+                            pageKey='services'
+                            basePath='/services/tattoos'
+                            canonicalPath='/services/tattoos'
+                          />
+                          <TattooServicesPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/services/piercings'
+                      element={
+                        <>
+                          <LocalizedMeta
+                            pageKey='services'
+                            basePath='/services/piercings'
+                            canonicalPath='/services/piercings'
+                          />
+                          <PiercingServicesPage />
+                        </>
+                      }
+                    />
                     <Route
                       path='/artists'
                       element={
                         <>
-                          <Meta
-                            title='Medusa Tattoo München | Artists'
-                            description='Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Termine und Portfolios.'
+                          <LocalizedMeta
+                            pageKey='artists'
+                            basePath='/artists'
                             canonicalPath='/artists'
                           />
                           <ArtistsPage />
@@ -72,18 +146,29 @@ function App() {
                       path='/gallery'
                       element={
                         <>
-                          <Meta
-                            title='Medusa Tattoo München | Gallery'
-                            description='Entdecken Sie unsere Galerie: Realismus, Fine-Line, Blackwork und mehr. Aktuelle Arbeiten aus München.'
+                          <LocalizedMeta
+                            pageKey='gallery'
+                            basePath='/gallery'
                             canonicalPath='/gallery'
                           />
-                          <Suspense fallback={<div>Loading Gallery...</div>}>
-                            <EnhancedGalleryPage />
-                          </Suspense>
+                          <GalleryPage />
                         </>
                       }
                     />
-
+                    <Route
+                      path='/booking'
+                      element={
+                        <>
+                          <LocalizedMeta
+                            pageKey='booking'
+                            basePath='/booking'
+                            canonicalPath='/booking'
+                          />
+                          <BookingPage />
+                        </>
+                      }
+                    />
+                    
                     {/* 301 Redirect from old pricing page to services */}
                     <Route path='/pricing' element={<Navigate to='/services' replace />} />
                     <Route path='/preise' element={<Navigate to='/services' replace />} />
@@ -102,31 +187,16 @@ function App() {
                         </>
                       }
                     />
-                    <Route
-                      path='/booking'
-                      element={
-                        <>
-                          <Meta
-                            title='Medusa Tattoo München | Booking'
-                            description='Jetzt Termin bei Medusa Tattoo München buchen – schnelle Anfrage, zuverlässige Rückmeldung.'
-                            canonicalPath='/booking'
-                          />
-                          <Suspense fallback={<div>Loading Booking...</div>}>
-                            <BookingPage />
-                          </Suspense>
-                        </>
-                      }
-                    />
-                    <Route path='/legal' element={<LegalPage />} />
+                                        <Route path='/legal' element={<LegalPage />} />
                     <Route path='/impressum' element={<ImpressumPage />} />
                     <Route path='/datenschutz' element={<DatenschutzPage />} />
                     <Route
                       path='/faq'
                       element={
                         <>
-                          <Meta
-                            title='Medusa Tattoo München | FAQ'
-                            description='Antworten zu Termin, Pflege, Preisen und Hygiene bei Medusa Tattoo München.'
+                          <LocalizedMeta
+                            pageKey='faq'
+                            basePath='/faq'
                             canonicalPath='/faq'
                           />
                           <FAQPage />
@@ -137,9 +207,9 @@ function App() {
                       path='/contact'
                       element={
                         <>
-                          <Meta
-                            title='Medusa Tattoo München | Kontakt'
-                            description='Kontakt zu Medusa Tattoo München: Adresse, Telefon, E-Mail und Öffnungszeiten.'
+                          <LocalizedMeta
+                            pageKey='contact'
+                            basePath='/contact'
                             canonicalPath='/contact'
                           />
                           <ContactPage />
@@ -147,14 +217,93 @@ function App() {
                       }
                     />
 
+                    {/* English Routes (path prefix) */}
+                    <Route
+                      path='/en'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='home' basePath='/' canonicalPath='/en' />
+                          <HomePage />
+                        </>
+                      }
+                    />
+                    <Route path='/en/services' element={<Navigate to='/en/services/tattoos' replace />} />
+                    <Route
+                      path='/en/services/tattoos'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='services' basePath='/services/tattoos' canonicalPath='/en/services/tattoos' />
+                          <TattooServicesPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/services/piercings'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='services' basePath='/services/piercings' canonicalPath='/en/services/piercings' />
+                          <PiercingServicesPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/artists'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='artists' basePath='/artists' canonicalPath='/en/artists' />
+                          <ArtistsPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/gallery'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='gallery' basePath='/gallery' canonicalPath='/en/gallery' />
+                          <GalleryPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/booking'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='booking' basePath='/booking' canonicalPath='/en/booking' />
+                          <BookingPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/faq'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='faq' basePath='/faq' canonicalPath='/en/faq' />
+                          <FAQPage />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/en/contact'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='contact' basePath='/contact' canonicalPath='/en/contact' />
+                          <ContactPage />
+                        </>
+                      }
+                    />
+
+                    {/* Legacy English mapping */}
+                    <Route path='/en/pricing' element={<Navigate to='/en/services' replace />} />
+                    <Route path='/en/preise' element={<Navigate to='/en/services' replace />} />
+
                     {/* 404 Route */}
                     <Route path='*' element={<NotFoundPage />} />
-                  </Routes>
-                </Suspense>
-              </div>{' '}
-              {/* End content wrapper */}
-            </AnalyticsProvider>
-          </BrowserRouter>
+                </Routes>
+              </Suspense>
+            </div>{' '}
+            {/* End content wrapper */}
+          </AnalyticsProvider>
+          </MotionProvider>
         </LanguageProvider>
       </AppProvider>
     </SimpleMedusaProvider>

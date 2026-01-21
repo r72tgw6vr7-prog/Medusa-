@@ -35,9 +35,9 @@ export const TRANSITIONS = {
   hover: {
     scale: 'transition-transform duration-200 ease-smooth hover:scale-105',
     scaleSubtle: 'transition-transform duration-200 ease-smooth hover:scale-102',
-    goldGlow: 'transition-shadow duration-300 ease-smooth hover:shadow-gold-subtle',
-    goldGlowMedium: 'transition-shadow duration-300 ease-smooth hover:shadow-gold-medium',
-    goldGlowStrong: 'transition-shadow duration-300 ease-smooth hover:shadow-gold-strong',
+    goldGlow: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-subtle',
+    goldGlowMedium: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-medium',
+    goldGlowStrong: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-strong',
     chromeGlow: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-subtle',
     chromeGlowMedium: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-medium',
     brightness: 'transition-all duration-200 ease-smooth hover:brightness-110',
@@ -48,10 +48,10 @@ export const TRANSITIONS = {
   // Focus effects
   focus: {
     goldRing:
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 transition-shadow duration-200',
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 transition-shadow duration-200',
     chromeRing:
       'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-2 transition-shadow duration-200',
-    goldGlow: 'focus-visible:shadow-gold-subtle transition-shadow duration-200 ease-smooth',
+    goldGlow: 'focus-visible:shadow-chrome-subtle transition-shadow duration-200 ease-smooth',
     chromeGlow: 'focus-visible:shadow-chrome-subtle transition-shadow duration-200 ease-smooth',
   },
 
@@ -65,14 +65,14 @@ export const TRANSITIONS = {
   // Color transitions
   color: {
     goldToChrome:
-      'transition-colors duration-300 ease-smooth text-brand-gold hover:text-brand-chrome',
+      'transition-colors duration-300 ease-smooth text-brand-accent hover:text-brand-chrome',
     chromeToGold:
-      'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-gold',
+      'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-accent',
     goldToChromeBackground:
-      'transition-colors duration-300 ease-smooth bg-brand-gold hover:bg-brand-chrome',
+      'transition-colors duration-300 ease-smooth bg-brand-accent hover:bg-brand-chrome',
     chromeToDark:
       'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-dark',
-    darkToGold: 'transition-colors duration-300 ease-smooth text-brand-dark hover:text-brand-gold',
+    darkToGold: 'transition-colors duration-300 ease-smooth text-brand-dark hover:text-brand-accent',
     bgDarkToLight: 'transition-colors duration-300 ease-smooth bg-brand-dark hover:bg-brand-light',
   },
 
@@ -117,7 +117,7 @@ export const TRANSITION_PRESETS = {
     TRANSITIONS.hover.scaleSubtle,
     TRANSITIONS.active.scale,
     TRANSITIONS.focus.goldRing,
-    TRANSITIONS.hover.goldGlow,
+    TRANSITIONS.hover.chromeGlow,
   ),
 
   buttonChrome: combineTransitions(
@@ -128,10 +128,10 @@ export const TRANSITION_PRESETS = {
   ),
 
   // Card transitions
-  card: combineTransitions(TRANSITIONS.hover.goldGlow, TRANSITIONS.hover.scaleSubtle),
+  card: combineTransitions(TRANSITIONS.hover.chromeGlow, TRANSITIONS.hover.scaleSubtle),
 
   cardGold: combineTransitions(
-    TRANSITIONS.hover.goldGlowMedium,
+    TRANSITIONS.hover.chromeGlowMedium,
     TRANSITIONS.hover.scaleSubtle,
     TRANSITIONS.hover.brightnessSubtle,
   ),

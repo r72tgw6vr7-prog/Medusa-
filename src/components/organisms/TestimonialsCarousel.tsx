@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Card } from '../ui/Card';
 import '../../styles/testimonials.css';
 
 export interface Testimonial {
@@ -33,7 +34,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const Star = () => (
-  <svg className='w-5 h-5 fill-[#D4A841] text-[#D4A841]' viewBox='0 0 20 20'>
+  <svg className='w-5 h-5 fill-brand-accent text-brand-accent' viewBox='0 0 20 20'>
     <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
   </svg>
 );
@@ -52,9 +53,9 @@ export default function TestimonialsCarousel({
   return (
     <section className={`py-20 relative z-10 ${className}`} aria-label='Customer testimonials'>
       <div className='responsive-container safe-area-padding'>
-        <h2 className='font-playfair text-4xl md:text-5xl font-bold text-[var(--brand-gold)] text-center mb-16'>
+        <h3 className='font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-[var(--brand-accent)] text-center mb-16'>
           {title}
-        </h2>
+        </h3>
 
         <Swiper
           modules={[Pagination, Autoplay]}
@@ -64,7 +65,7 @@ export default function TestimonialsCarousel({
           pagination={{
             clickable: true,
             bulletClass: 'swiper-pagination-bullet !bg-white/30',
-            bulletActiveClass: 'swiper-pagination-bullet-active !bg-[#D4A841]',
+            bulletActiveClass: 'swiper-pagination-bullet-active !bg-brand-accent',
           }}
           autoplay={{
             delay: 5000,
@@ -89,19 +90,21 @@ export default function TestimonialsCarousel({
         >
           {testimonialsList.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <div className='bg-white/5 border border-[var(--brand-gold)]/30 rounded-2xl p-8 h-full'>
-                <div className='flex gap-0 mb-8'>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} />
-                  ))}
+              <Card variant="default" size="default" asChild>
+                <div className='h-full'>
+                  <div className='flex gap-0 mb-8'>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} />
+                    ))}
+                  </div>
+
+                  <p className='text-luxury-text-inverse text-base leading-relaxed mb-8'>"{testimonial.text}"</p>
+
+                  <p className='text-brand-chrome text-sm'>
+                    — {testimonial.author}, {testimonial.source}
+                  </p>
                 </div>
-
-                <p className='text-white text-base leading-relaxed mb-8'>"{testimonial.text}"</p>
-
-                <p className='text-[#C0C0C0] text-sm'>
-                  — {testimonial.author}, {testimonial.source}
-                </p>
-              </div>
+              </Card>
             </SwiperSlide>
           ))}
         </Swiper>

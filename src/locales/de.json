@@ -2,6 +2,8 @@
   "nav": {
     "home": "Startseite",
     "services": "Leistungen",
+    "tattoos": "Tattoos",
+    "piercings": "Piercings",
     "artists": "Künstler",
     "gallery": "Galerie",
     "pricing": "Preise",
@@ -13,14 +15,50 @@
     "closeMenu": "Menü schließen"
   },
   "hero": {
-    "title": "Luxury Tattoo Art in München",
-    "subtitle": "Meisterhafte Tätowierungen seit 2010",
-    "cta": "Termin vereinbaren"
+    "title": "Wo andere Trends folgen, setzen wir sie.",
+    "subtitle": "30 Jahre. 30.000 Tattoos. Jedes Genre gemeistert.",
+    "cta": "Lass uns über deins sprechen"
   },
   "footer": {
     "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
     "legal": "Impressum",
     "privacy": "Datenschutz"
+  },
+  "meta": {
+    "home": {
+      "title": "Medusa Tattoo München – Premium Tattoo & Piercing Studio am Marienplatz",
+      "description": "Premium Tattoo- und Piercing-Studio in München. Beratung, transparente Preise, höchste Hygiene und erfahrene Artists."
+    },
+    "services": {
+      "title": "Medusa Tattoo München | Leistungen",
+      "description": "Tattoo- und Piercing-Leistungen – transparente Preise, Beratung und höchste Hygienestandards."
+    },
+    "artists": {
+      "title": "Medusa Tattoo München | Künstler",
+      "description": "Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Portfolios und Termine."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Eine Auswahl unserer Arbeiten – entdecken Sie Stile und Inspiration."
+    },
+    "booking": {
+      "title": "Termin vereinbaren",
+      "description": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing.",
+      "h1": "Termin Buchen",
+      "subtitle": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing."
+    },
+    "faq": {
+      "title": "FAQ | Medusa Tattoo München",
+      "description": "Antworten zu Termin, Pflege, Preisen und Hygiene."
+    },
+    "contact": {
+      "title": "Kontakt | Medusa Tattoo München",
+      "description": "Kontakt – Adresse, Telefon, E-Mail und Öffnungszeiten."
+    },
+    "agb": {
+      "title": "AGB | Medusa Tattoo München",
+      "description": "Allgemeine Geschäftsbedingungen für Leistungen und Buchungen."
+    }
   },
   "gallery": {
     "title": "Galerie",
@@ -39,5 +77,120 @@
     "heading": "Vorher & Nachher",
     "before": "Vorher",
     "after": "Nachher"
+  },
+  "gallery": {
+    "noResults": "Keine Kunstwerke gefunden"
+  },
+  "contact": {
+    "eyebrow": "Kontaktieren Sie uns",
+    "title": "Kontakt",
+    "subtitle": "Wir begleiten Sie von der ersten Idee bis zum finalen Meisterwerk. Schreiben Sie uns – wir melden uns zeitnah zurück.",
+    "labels": {
+      "name": "Name",
+      "email": "E-Mail",
+      "subject": "Betreff",
+      "message": "Nachricht"
+    },
+    "placeholders": {
+      "name": "Ihr Name",
+      "email": "ihre.email@beispiel.de",
+      "subject": "Worum geht es?",
+      "message": "Ihre Nachricht an uns..."
+    },
+    "successTitle": "Nachricht gesendet!",
+    "successBody": "Vielen Dank für Ihre Nachricht. Wir melden uns so schnell wie möglich bei Ihnen."
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse an",
+    "minLength": "Muss mindestens {{count}} Zeichen lang sein",
+    "maxLength": "Darf maximal {{count}} Zeichen lang sein"
+  },
+  "booking": {
+    "labels": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefonnummer",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "guests": "Anzahl Gäste",
+      "specialRequests": "Sonderwünsche (optional)"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "ihre.email@beispiel.de",
+      "phone": "+49 (0) 89 269 313",
+      "time": "Uhrzeit wählen",
+      "specialRequests": "Kurzbeschreibung (z.B. Stil, Körperstelle, Größe, Referenzen)"
+    },
+    "submit": "Termin vereinbaren",
+    "submitting": "Wird gesendet...",
+    "maxChars": "Maximal 500 Zeichen",
+    "toasts": {
+      "success": "Buchungsanfrage gesendet",
+      "successBody": "Wir melden uns in Kürze zur Bestätigung Ihrer Reservierung.",
+      "error": "Buchungsanfrage fehlgeschlagen",
+      "errorBody": "Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt."
+    },
+    "modal": {
+      "title": "Termin buchen",
+      "personalTitle": "Deine Daten",
+      "serviceQuestion": "Was möchtest du buchen?",
+      "projectLabel": "Was genau? (optional)",
+      "next": "Weiter",
+      "back": "Zurück",
+      "close": "Schließen"
+    },
+    "payment": {
+      "title": "Zahlung",
+      "methodLabel": "Bezahlmethode",
+      "cash": "Bar",
+      "card": "Karte",
+      "bankTransfer": "Überweisung",
+      "submitBooking": "Termin anfragen"
+    },
+    "loading": {
+      "submitting": "Ihre Buchung wird übermittelt..."
+    },
+    "error": {
+      "title": "Etwas ist schiefgelaufen",
+      "retry": "Erneut versuchen",
+      "retryLoading": "Versuche erneut zu senden...",
+      "completeAllSteps": "Bitte vervollständigen Sie alle Schritte"
+    },
+    "confirmation": {
+      "title": "Termin bestätigt!",
+      "subtitle": "Ihre Terminbuchung wurde erfolgreich übermittelt.",
+      "bookingNumber": "Buchungsnummer:",
+      "service": "Service:",
+      "date": "Datum:",
+      "emailNote": "Wir haben eine Bestätigungs-E-Mail mit allen Details gesendet. Bitte überprüfen Sie Ihr Postfach und den Spam-Ordner.",
+      "closeButton": "Schließen"
+    },
+    "gdpr": {
+      "consent": "Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.*"
+    },
+    "services": {
+      "tattoo": {
+        "title": "Tattoo Artistry",
+        "price": "ab €150/Std",
+        "features": {
+          "custom": "Individuelle Designs",
+          "experienced": "Erfahrene Künstler",
+          "hygiene": "Höchste Hygienestandards",
+          "consultation": "Persönliche Beratung"
+        }
+      },
+      "piercing": {
+        "title": "Piercing",
+        "price": "ab €30",
+        "features": {
+          "consultation": "Professionelle Beratung",
+          "quality": "Hochwertiger Schmuck",
+          "sterile": "Steriles Arbeiten",
+          "aftercare": "Umfassende Nachsorge"
+        }
+      }
+    }
   }
 }

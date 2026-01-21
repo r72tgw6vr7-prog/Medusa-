@@ -1,0 +1,64 @@
+{
+  "close": "Close",
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "tattoos": "Tattoos",
+    "piercings": "Piercings",
+    "artists": "Artists",
+    "gallery": "Gallery",
+    "pricing": "Pricing",
+    "booking": "Book Appointment",
+    "bookingShort": "Book",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "copyright": " 2025 Medusa Tattoo Munich. All rights reserved.",
+    "legal": "Imprint",
+    "privacy": "Privacy Policy"
+  },
+  "meta": {
+    "home": {
+      "title": "Medusa Tattoo Munich – Premium Tattoo & Piercing Studio in Munich",
+      "description": "Premium tattoo and piercing studio in Munich. Consultation, transparent pricing, highest hygiene standards and experienced artists."
+    },
+    "services": {
+      "title": "Medusa Tattoo Munich | Services",
+      "description": "Tattoo and piercing services – transparent pricing, consultation and hygiene standards."
+    },
+    "artists": {
+      "title": "Medusa Tattoo Munich | Artists",
+      "description": "Meet our team of specialized tattoo artists. Portfolios and booking information."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "A collection of works from our artists – explore styles and inspiration."
+    },
+    "booking": {
+      "title": "Book Appointment",
+      "description": "Schedule a consultation for your next tattoo or piercing.",
+      "h1": "Book Appointment",
+      "subtitle": "Schedule a consultation for your next tattoo or piercing."
+    },
+    "faq": {
+      "title": "FAQ | Medusa Tattoo Munich",
+      "description": "Answers about appointments, aftercare, pricing and hygiene."
+    },
+    "contact": {
+      "title": "Contact | Medusa Tattoo Munich",
+      "description": "Contact us — address, phone, email and opening hours."
+    },
+    "agb": {
+      "title": "Terms & Conditions | Medusa Tattoo Munich",
+      "description": "General terms and conditions for services and bookings."
+    }
+  },
+  "slider": {
+    "heading": "Before & After",
+    "before": "Before",
+    "after": "After"
+  }
+}

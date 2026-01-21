@@ -25,8 +25,8 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
         alignItems: 'center',
         width: '140px',
         height: '48px',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        border: '1px solid rgba(255, 255, 255, 0.15)',
+        backgroundColor: 'rgba(var(--color-text-primary-rgb), 0.1)',
+        border: '1px solid rgba(var(--color-text-primary-rgb), 0.15)',
         borderRadius: '9999px',
         padding: '4px',
       }}
@@ -39,7 +39,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           left: '4px',
           width: '66px',
           height: '40px',
-          backgroundColor: 'var(--brand-gold)',
+          backgroundColor: 'var(--brand-accent)',
           borderRadius: '9999px',
           transform: isGerman ? 'translateX(0px)' : 'translateX(66px)',
           transition: 'transform 300ms ease-in-out',
@@ -50,6 +50,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
       {/* DE Button */}
       <button
         onClick={handleGermanClick}
+        className="rounded-full"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -58,7 +59,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: isGerman ? '#000000' : '#FFFFFF',
+          color: isGerman ? 'var(--deep-black)' : 'var(--color-text-primary)',
           fontWeight: 600,
           fontSize: '16px',
           lineHeight: '1',
@@ -83,7 +84,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: isGerman ? '#FFFFFF' : '#000000',
+          color: isGerman ? 'var(--color-text-primary)' : 'var(--deep-black)',
           fontWeight: 600,
           fontSize: '16px',
           lineHeight: '1',

@@ -1,42 +1,35 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
-import { MapPin, Phone, Mail, Clock, Instagram, Star } from 'lucide-react';
+import { PageHeading } from '../components/PageHeading';
+import { Button } from '@/components/ui/button';
+import { Shield, Award, Check, Heart, Calendar, MessageCircle, Copy } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
   email: string;
-  subject: string;
   message: string;
 }
 
 const studioInfo = {
-  name: 'MEDUSA TATTOO MÜNCHEN',
-  address: {
-    street: 'Altheimer Eck 11',
-    city: '80331 München',
-  },
   contact: {
-    phone: '+49 (0) 89 269 313',
     email: 'info@medusa-tattoo.de',
   },
-  hours: {
-    weekdays: 'Mo-Fr: 11:30-18:30',
-    saturday: 'Sa: 11:00-16:00',
-    sunday: 'So: Geschlossen',
-  },
-  social: {
-    instagram: '@medusa_tattoo_munich',
-    facebook: 'Medusa Tattoo München',
-    googleRating: 4.9,
-  },
 };
+
+const trustBadges = [
+  { icon: Shield, title: 'EU Zertifiziert', subtitle: 'Höchste Standards' },
+  { icon: Award, title: 'Preisgekrönt 2024', subtitle: 'Ausgezeichnet' },
+  { icon: Check, title: 'Sterile Ausrüstung', subtitle: '100% Hygiene' },
+  { icon: Heart, title: '27 Jahre Erfahrung', subtitle: 'Seit 1994' },
+];
 
 export const ContactPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const {
     register,
@@ -44,6 +37,26 @@ export const ContactPage: React.FC = () => {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactFormData>();
+
+  const { t } = useLanguage();
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(studioInfo.contact.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = studioInfo.contact.email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   const onSubmit = async (_data: ContactFormData) => {
     try {
@@ -59,333 +72,257 @@ export const ContactPage: React.FC = () => {
         // eslint-disable-next-line no-console
         console.error('Form submission error:', error);
       }
-      setSubmitError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+      setSubmitError(t('validation.required') || 'An error occurred. Please try again.');
     }
   };
 
   return (
-    <div className='min-h-screen relative z-10'>
+    <div className='min-h-screen relative z-10 bg-luxury-bg-dark'>
       <MainNavigation />
-      <div className='h-24 md:h-32' aria-hidden='true' />
 
-      {/* Page Header - Matches Services page exactly */}
-      <section className='section-padding relative z-10'>
+      {/* Hero Section */}
+      <section className='pt-32 pb-12 md:pt-40 md:pb-16 relative z-10'>
         <div className='responsive-container safe-area-padding'>
-          <PageHeader
-            eyebrow='Kontaktieren Sie uns'
-            title='Kontakt'
-            subtitle='Wir begleiten Sie von der ersten Idee bis zum finalen Meisterwerk. Schreiben Sie uns – wir melden uns zeitnah zurück.'
-            alignment='center'
+          <PageHeading
+            eyebrow={t('contact.eyebrow')}
+            title={t('contact.title')}
+            subtitle={t('contact.subtitle')}
           />
         </div>
       </section>
 
-      {/* Content */}
-      <section className='section-padding'>
+      {/* 4 Feature Tiles Row */}
+      <section className='pb-12 md:pb-16'>
         <div className='responsive-container safe-area-padding'>
-          <div className='grid gap-8 lg:grid-cols-12'>
-            <div className='lg:col-span-7'>
-              {/* Contact Form */}
-              <div className='flex flex-col' style={{ gap: 'var(--spacing-8)' }}>
-                <div className='flex flex-col' style={{ gap: 'var(--spacing-4)' }}>
-                  <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
-                    Kontaktformular
-                  </p>
-                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
-                    Schreiben Sie uns
-                  </h2>
-                  <p className='text-white/70 font-body'>
-                    Hinterlassen Sie uns eine Nachricht – unser Team meldet sich innerhalb von 24
-                    Stunden.
-                  </p>
-                </div>
-
-                {isSubmitted ? (
-                  <div
-                    className='flex h-full flex-col items-center justify-center border border-[var(--brand-gold)]/60 bg-[var(--brand-gold)]/10 text-center backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.45)]'
-                    style={{
-                      gap: 'var(--spacing-4)',
-                      borderRadius: 'var(--radius-2xl)',
-                      padding: 'var(--spacing-8)',
-                    }}
-                  >
-                    <div className='text-5xl text-[var(--brand-gold)]'>✓</div>
-                    <h3 className="font-['Playfair_Display'] text-2xl text-[var(--brand-gold)]">
-                      Nachricht gesendet!
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+            {trustBadges.map((badge) => {
+              const Icon = badge.icon;
+              return (
+                <div
+                  key={badge.title}
+                  className='flex flex-col h-full items-start gap-4 p-6 rounded-xl border border-white/10 bg-luxury-bg-dark/40'
+                >
+                  <Icon className='text-(--brand-accent)' size={24} />
+                  <div>
+                    <h3 className='text-luxury-text-inverse font-semibold text-sm'>
+                      {badge.title}
                     </h3>
-                    <p className='max-w-md text-white/80 font-body'>
-                      Vielen Dank für Ihre Nachricht. Wir melden uns so schnell wie möglich bei
-                      Ihnen.
+                    <p className='text-luxury-text-inverse/60 text-sm lg:text-xs'>
+                      {badge.subtitle}
                     </p>
                   </div>
-                ) : (
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className='flex h-full flex-col border border-white/10 bg-black/40 backdrop-blur-lg shadow-[0_20px_60px_rgba(0,0,0,0.45)] p-8 md:p-16'
-                    style={{ gap: 'var(--spacing-4)', borderRadius: 'var(--radius-2xl)' }}
-                  >
-                    <div className='flex flex-col' style={{ gap: 'var(--spacing-4)' }}>
-                      <label
-                        htmlFor='name'
-                        className='block text-white/90 font-semibold tracking-wide'
-                      >
-                        Name <span className='text-red-500'>*</span>
-                      </label>
-                      <input
-                        id='name'
-                        type='text'
-                        {...register('name', {
-                          required: 'Name ist erforderlich',
-                          minLength: {
-                            value: 2,
-                            message: 'Name muss mindestens 2 Zeichen lang sein',
-                          },
-                        })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
-                          errors.name ? 'border-red-500/70' : 'border-white/10'
-                        }`}
-                        placeholder='Ihr Name'
-                      />
-                      {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
-                    </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-                    <div className='flex flex-col' style={{ gap: 'var(--spacing-4)' }}>
-                      <label
-                        htmlFor='email'
-                        className='block text-white/90 font-semibold tracking-wide'
-                      >
-                        E-Mail <span className='text-red-500'>*</span>
-                      </label>
-                      <input
-                        id='email'
-                        type='email'
-                        {...register('email', {
-                          required: 'E-Mail ist erforderlich',
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: 'Ungültige E-Mail-Adresse',
-                          },
-                        })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
-                          errors.email ? 'border-red-500/70' : 'border-white/10'
-                        }`}
-                        placeholder='ihre.email@beispiel.de'
-                      />
-                      {errors.email && (
-                        <p className='text-sm text-red-400'>{errors.email.message}</p>
-                      )}
-                    </div>
+      {/* Direct Email Section */}
+      <section className='pb-12 md:pb-16'>
+        <div className='responsive-container safe-area-padding'>
+          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
+            Direct Email
+          </p>
+          <button
+            onClick={handleCopyEmail}
+            className='w-full flex items-center justify-between gap-4 p-4 md:p-6 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 group cursor-pointer touch-target-mobile'
+          >
+            <div className='text-left'>
+              <p className='text-luxury-text-inverse font-medium text-base md:text-lg'>
+                {studioInfo.contact.email}
+              </p>
+              <p className='text-luxury-text-inverse/50 text-sm lg:text-xs uppercase tracking-wider mt-2'>
+                {copied ? 'Copied!' : 'Click to copy'}
+              </p>
+            </div>
+            <span className='inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 group-hover:bg-white/10 transition-colors duration-200'>
+              {copied ? (
+                <Check className='text-(--brand-accent)' size={18} />
+              ) : (
+                <Copy className='text-luxury-text-inverse/70' size={18} />
+              )}
+            </span>
+          </button>
+        </div>
+      </section>
 
-                    <div className='flex flex-col' style={{ gap: 'var(--spacing-4)' }}>
-                      <label
-                        htmlFor='subject'
-                        className='block text-white/90 font-semibold tracking-wide'
-                      >
-                        Betreff <span className='text-red-500'>*</span>
-                      </label>
-                      <input
-                        id='subject'
-                        type='text'
-                        {...register('subject', {
-                          required: 'Betreff ist erforderlich',
-                          minLength: {
-                            value: 3,
-                            message: 'Betreff muss mindestens 3 Zeichen lang sein',
-                          },
-                        })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/3 text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent ${
-                          errors.subject ? 'border-red-500/70' : 'border-white/10'
-                        }`}
-                        placeholder='Worum geht es?'
-                      />
-                      {errors.subject && (
-                        <p className='text-sm text-red-400'>{errors.subject.message}</p>
-                      )}
-                    </div>
+      {/* Other Ways Section */}
+      <section className='pb-12 md:pb-16'>
+        <div className='responsive-container safe-area-padding'>
+          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
+            Other Ways
+          </p>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            {/* Calendly Tile */}
+            <a
+              href='https://calendly.com/medusa-tattoo'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex flex-col h-full items-center justify-center gap-4 p-8 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 touch-target-mobile'
+            >
+              <Calendar className='text-(--brand-accent)' size={28} />
+              <div className='text-center'>
+                <h3 className='text-luxury-text-inverse font-semibold'>Calendly</h3>
+                <p className='text-luxury-text-inverse/60 text-sm'>Book 30min</p>
+              </div>
+            </a>
 
-                    <div className='flex flex-col' style={{ gap: 'var(--spacing-4)' }}>
-                      <label
-                        htmlFor='message'
-                        className='block text-white/90 font-semibold tracking-wide'
-                      >
-                        Nachricht <span className='text-red-500'>*</span>
-                      </label>
-                      <textarea
-                        id='message'
-                        rows={4}
-                        {...register('message', {
-                          required: 'Nachricht ist erforderlich',
-                          minLength: {
-                            value: 10,
-                            message: 'Nachricht muss mindestens 10 Zeichen lang sein',
-                          },
-                        })}
-                        className={`w-full rounded-xl border px-8 py-4 bg-white/[0.03] text-white placeholder-white/50 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-[var(--brand-gold)]/80 focus:border-transparent resize-none ${
-                          errors.message ? 'border-red-500/70' : 'border-white/10'
-                        }`}
-                        placeholder='Ihre Nachricht an uns...'
-                      />
-                      {errors.message && (
-                        <p className='text-sm text-red-400'>{errors.message.message}</p>
-                      )}
-                    </div>
+            {/* WhatsApp Tile */}
+            <a
+              href='https://wa.me/4917612345678'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex flex-col h-full items-center justify-center gap-4 p-8 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 touch-target-mobile'
+            >
+              <MessageCircle className='text-(--brand-accent)' size={28} />
+              <div className='text-center'>
+                <h3 className='text-luxury-text-inverse font-semibold'>WhatsApp</h3>
+                <p className='text-luxury-text-inverse/60 text-sm'>Direct message</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
 
-                    {submitError && (
-                      <div className='bg-red-500/10 border border-red-500/60 text-red-300 rounded-xl px-8 py-8 flex flex-col h-full'>
-                        <p className='text-sm'>{submitError}</p>
-                      </div>
-                    )}
+      {/* Contact Form Section */}
+      <section className='pb-16 md:pb-24'>
+        <div className='responsive-container safe-area-padding'>
+          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-6'>
+            Or send me a quick message
+          </p>
 
-                    <button
-                      type='submit'
-                      disabled={isSubmitting}
-                      className='flex flex-col h-full h-12 w-full inline-flex items-center justify-center rounded-xl bg-[var(--brand-gold)] text-[#1A1A1A] font-semibold text-lg tracking-wide transition-all duration-300 hover:bg-[var(--brand-gold-hover)] hover:shadow-[0_12px_40px_rgba(212,175,55,0.35)] disabled:opacity-60 disabled:cursor-not-allowed'
-                    >
-                      {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
-                    </button>
-                  </form>
+          {isSubmitted ? (
+            <div className='flex flex-col items-center justify-center gap-4 rounded-xl border border-(--brand-accent)/60 bg-(--brand-accent)/10 text-center p-8'>
+              <div className='text-5xl text-(--brand-accent)'>✓</div>
+              <h3 className='font-headline text-2xl text-(--brand-accent)'>
+                {t('contact.successTitle')}
+              </h3>
+              <p className='max-w-md text-luxury-text-inverse/80 font-body'>
+                {t('contact.successBody')}
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className='flex flex-col gap-4 border border-white/10 bg-luxury-bg-dark/40 p-6 md:p-8 rounded-xl'
+            >
+              <div className='flex flex-col gap-2'>
+                <label
+                  htmlFor='name'
+                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                >
+                  {t('contact.labels.name')} <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  id='name'
+                  type='text'
+                  {...register('name', {
+                    required: t('validation.required'),
+                    minLength: {
+                      value: 2,
+                      message: t('validation.minLength').replace('{{count}}', '2'),
+                    },
+                  })}
+                  className={`w-full rounded-lg border px-4 py-3 bg-white/3 text-luxury-text-inverse placeholder-white/40 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-(--brand-accent)/80 focus:border-transparent touch-target-mobile ${
+                    errors.name ? 'border-red-500/70' : 'border-white/10'
+                  }`}
+                  placeholder={t('contact.placeholders.name')}
+                />
+                {errors.name && (
+                  <p className='text-sm text-red-400'>{errors.name.message}</p>
                 )}
               </div>
-            </div>
 
-            {/* Studio Details */}
-            <div className='lg:col-span-5'>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)' }}>
-                  <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
-                    Studio & Service
-                  </p>
-                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl text-[var(--brand-gold)]">
-                    Unser Studio
-                  </h2>
-                  <p className='text-white/70 font-body'>
-                    Besuchen Sie uns im Herzen von München oder vereinbaren Sie einen
-                    Beratungstermin.
-                  </p>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)' }}>
-                  <div className='bg-black/45 border border-white/10 rounded-2xl p-8 flex flex-col h-full'>
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <MapPin className='text-[var(--brand-gold)]' size={22} />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Adresse</h3>
-                        <p className='text-white/85 font-medium'>{studioInfo.name}</p>
-                        <p className='text-white/70'>{studioInfo.address.street}</p>
-                        <p className='text-white/70'>{studioInfo.address.city}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='bg-black/45 border border-white/10 rounded-2xl p-8 space-y-8 flex flex-col h-full'>
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Phone className='text-[var(--brand-gold)]' size={22} />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Telefon</h3>
-                        <a
-                          href={`tel:${studioInfo.contact.phone.replaceAll(/\s/g, '')}`}
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out'
-                        >
-                          {studioInfo.contact.phone}
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Mail className='text-[var(--brand-gold)]' size={22} />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>E-Mail</h3>
-                        <a
-                          href={`mailto:${studioInfo.contact.email}`}
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out break-all'
-                        >
-                          {studioInfo.contact.email}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='bg-black/45 border border-white/10 rounded-2xl p-8 flex flex-col h-full'>
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Clock className='text-[var(--brand-gold)]' size={22} />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Öffnungszeiten</h3>
-                        <ul className='text-white/75 space-y-0 font-body text-sm'>
-                          <li>{studioInfo.hours.weekdays}</li>
-                          <li>{studioInfo.hours.saturday}</li>
-                          <li>{studioInfo.hours.sunday}</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='bg-black/45 border border-white/10 rounded-2xl p-8 space-y-8 flex flex-col h-full'>
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Instagram className='text-[var(--brand-gold)]' size={22} />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Instagram</h3>
-                        <a
-                          href='https://instagram.com/medusa_tattoo_munich'
-                          className='text-white/80 hover:text-[var(--brand-gold)] transition-colors duration-200 ease-out'
-                          target='_blank'
-                          rel='noopener noreferrer'
-                        >
-                          {studioInfo.social.instagram}
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <svg
-                          className='text-[var(--brand-gold)]'
-                          width='22'
-                          height='22'
-                          fill='currentColor'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Facebook</h3>
-                        <p className='text-white/80'>{studioInfo.social.facebook}</p>
-                      </div>
-                    </div>
-
-                    <div className='flex items-start gap-8'>
-                      <div className='flex flex-col h-full rounded-full bg-[var(--brand-gold)]/15 h-12 flex items-center justify-center shrink-0'>
-                        <Star
-                          className='text-[var(--brand-gold)]'
-                          size={20}
-                          fill='var(--brand-gold)'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-white font-semibold text-lg mb-0'>Google Reviews</h3>
-                        <div className='flex items-center gap-0'>
-                          <span className='text-[var(--brand-gold)] font-bold text-xl'>
-                            {studioInfo.social.googleRating}
-                          </span>
-                          <span className='text-white/75'>★ Bewertungen</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className='flex flex-col gap-2'>
+                <label
+                  htmlFor='email'
+                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                >
+                  {t('contact.labels.email')} <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  id='email'
+                  type='email'
+                  {...register('email', {
+                    required: t('validation.required'),
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: t('validation.email'),
+                    },
+                  })}
+                  className={`w-full rounded-lg border px-4 py-3 bg-white/3 text-luxury-text-inverse placeholder-white/40 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-(--brand-accent)/80 focus:border-transparent touch-target-mobile ${
+                    errors.email ? 'border-red-500/70' : 'border-white/10'
+                  }`}
+                  placeholder={t('contact.placeholders.email')}
+                />
+                {errors.email && (
+                  <p className='text-sm text-red-400'>{errors.email.message}</p>
+                )}
               </div>
-            </div>
-          </div>
+
+              <div className='flex flex-col gap-2'>
+                <label
+                  htmlFor='message'
+                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                >
+                  {t('contact.labels.message')} <span className='text-red-500'>*</span>
+                </label>
+                <textarea
+                  id='message'
+                  rows={4}
+                  {...register('message', {
+                    required: t('validation.required'),
+                    minLength: {
+                      value: 10,
+                      message: t('validation.minLength').replace('{{count}}', '10'),
+                    },
+                  })}
+                  className={`w-full rounded-lg border px-4 py-3 bg-white/3 text-luxury-text-inverse placeholder-white/40 transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-(--brand-accent)/80 focus:border-transparent resize-none touch-target-mobile ${
+                    errors.message ? 'border-red-500/70' : 'border-white/10'
+                  }`}
+                  placeholder={t('contact.placeholders.message')}
+                />
+                {errors.message && (
+                  <p className='text-sm text-red-400'>{errors.message.message}</p>
+                )}
+              </div>
+
+              <div className='flex items-start gap-2 mt-2'>
+                <input
+                  type='checkbox'
+                  id='privacy'
+                  required
+                  className='mt-2 w-4 h-4 rounded border-white/20 bg-white/5 text-(--brand-accent) focus:ring-(--brand-accent)/50 touch-target-mobile'
+                />
+                <label htmlFor='privacy' className='text-sm text-luxury-text-inverse/70'>
+                  I have read and accept the{' '}
+                  <a
+                    href='/datenschutz'
+                    className='underline hover:text-(--brand-accent) transition-colors duration-200'
+                  >
+                    privacy policy
+                  </a>{' '}
+                  *
+                </label>
+              </div>
+
+              {submitError && (
+                <div className='bg-red-500/10 border border-red-500/60 text-red-300 rounded-lg px-4 py-4'>
+                  <p className='text-sm'>{submitError}</p>
+                </div>
+              )}
+
+              <Button
+                type='submit'
+                variant='chrome'
+                className='w-full text-base rounded-lg h-12 mt-2'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : '→ Send'}
+              </Button>
+            </form>
+          )}
         </div>
       </section>
 

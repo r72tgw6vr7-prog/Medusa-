@@ -62,7 +62,7 @@ html.lenis-scrolling {
 .section-elevation.is-active {
   transform: translateY(-8px);
   z-index: 2;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.12);
 }
 
 /* Reveal animation classes */
@@ -101,7 +101,7 @@ html.lenis-scrolling {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(255, 0, 0, 0.5);
+  background: rgb(255 0 0 / 0.5);
 }
 
 .scroll-debug-ruler.top-25 {

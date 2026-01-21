@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArtistCard } from '@/components/molecules/Card/ArtistCard';
+import { ArtistCardJapanese } from '@/components/cards/ArtistCardJapanese';
 
 interface Artist {
   name: string;
@@ -31,32 +31,28 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`flex flex-col items-start bg-white ${className}`}>
-      <div className='flex flex-col items-start w-full max-w-[1064px] mx-auto'>
-        {/* Header */}
-        <div className='flex flex-col items-center self-stretch mb-0'>
-          <span className='text-[#D4AF37] text-[42px] font-bold'>{title}</span>
+    <section className={`bg-luxury-bg-dark py-ma-md ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header with Ma spacing */}
+        <div className="text-center mb-ma-sm">
+          <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-luxury-text-inverse mb-4">
+            {title}
+          </h2>
+          
+          {/* Chrome accent divider */}
+          <div className="flex justify-center mb-6">
+            <div className="w-24 h-px bg-luxury-accent-chrome" />
+          </div>
+          
+          <p className="text-lg text-luxury-text-inverse-muted font-light max-w-2xl mx-auto">
+            {subtitle}
+          </p>
         </div>
 
-        {/* Divider */}
-        <div className='flex flex-col items-center self-stretch mb-8'>
-          <div
-            className='w-[351px] h-[3px]'
-            style={{
-              background: 'linear-gradient(180deg, #00000000, #D4AF37, #00000000)',
-            }}
-          />
-        </div>
-
-        {/* Subtitle */}
-        <div className='flex flex-col items-center self-stretch mb-8'>
-          <span className='text-white text-[21px]'>{subtitle}</span>
-        </div>
-
-        {/* Artist Grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8'>
+        {/* Artist Grid - with Ma spacing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-ma-xs">
           {artists.map((artist, index) => (
-            <ArtistCard
+            <ArtistCardJapanese
               key={index}
               name={artist.name}
               role={artist.role}
@@ -64,12 +60,13 @@ export const ArtistSection: React.FC<ArtistSectionProps> = ({
               specialties={artist.specialties}
               experience={artist.experience}
               instagramHandle={artist.instagramHandle}
-              onClick={() => onBookClick?.(artist.name)}
+              onBookClick={onBookClick ? () => onBookClick(artist.name) : undefined}
+              variant="dark"
             />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

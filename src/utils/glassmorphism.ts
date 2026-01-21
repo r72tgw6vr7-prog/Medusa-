@@ -2,7 +2,7 @@
  * Glassmorphism Utilities for Medusa Tattoo Website
  *
  * Provides standardized glassmorphism effects throughout the site
- * for consistent look and feel. Uses design tokens from design-tokens.ts
+ * for consistent look and feel.
  *
  * Based on the brand specification requiring:
  * - Navigation: 45% → 65% opacity with 24px blur
@@ -11,21 +11,19 @@
  * - Modal overlays: 85-90% opacity with blur
  */
 
-import { glassmorphism as glassmorphismTokens } from '../design-tokens';
-
 /**
  * Creates a set of glassmorphism CSS properties with consistent patterns
  *
- * @param backgroundColor - RGBA background color (default: rgba(34, 34, 34, 0.7))
+ * @param backgroundColor - RGB background color (default: rgb(var(--color-surface-darker-rgb) / 0.7))
  * @param blurAmount - CSS blur value (default: 14px)
- * @param borderColor - RGBA border color (default: rgba(212, 175, 55, 0.1))
+ * @param borderColor - RGB border color (default: rgb(var(--color-accent-silver-rgb) / 0.1))
  * @param borderWidth - Border width (default: 1px)
  * @returns Object with CSS-in-JS compatible glassmorphism properties
  */
 export const createGlassmorphismEffect = (
-  backgroundColor: string = 'rgba(34, 34, 34, 0.7)',
+  backgroundColor: string = 'rgb(var(--color-surface-darker-rgb) / 0.7)',
   blurAmount: string = '14px',
-  borderColor: string = 'rgba(212, 175, 55, 0.1)',
+  borderColor: string = 'rgb(var(--color-accent-silver-rgb) / 0.1)',
   borderWidth: string = '1px',
 ) => {
   return {
@@ -70,20 +68,20 @@ export const getGlassmorphismClasses = (
 function getBackgroundClassForVariant(variant: string): string {
   switch (variant) {
     case 'navigation':
-      return 'bg-[rgba(34,34,34,0.45)]'; // Default non-scrolled state
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.45)]'; // Default non-scrolled state
     case 'navigation-scrolled':
-      return 'bg-[rgba(34,34,34,0.65)]'; // Scrolled state
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.65)]'; // Scrolled state
     case 'trustBadge':
-      return 'bg-[rgba(34,34,34,0.6)]';
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.6)]';
     case 'card':
     case 'service':
-      return 'bg-[rgba(34,34,34,0.7)]';
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.7)]';
     case 'stats':
-      return 'bg-[rgba(34,34,34,0.85)]';
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.85)]';
     case 'modal':
-      return 'bg-[rgba(34,34,34,0.9)]';
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.9)]';
     default:
-      return 'bg-[rgba(34,34,34,0.7)]';
+      return 'bg-[rgba(var(--color-surface-darker-rgb),0.7)]';
   }
 }
 
@@ -93,20 +91,20 @@ function getBackgroundClassForVariant(variant: string): string {
 function getBorderClassForVariant(variant: string): string {
   switch (variant) {
     case 'navigation':
-      return 'border border-[rgba(212,175,55,0.1)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.1)]';
     case 'navigation-scrolled':
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
     case 'trustBadge':
-      return 'border border-[rgba(212,175,55,0.2)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.2)]';
     case 'card':
     case 'service':
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
     case 'stats':
-      return 'border border-[rgba(212,175,55,0.2)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.2)]';
     case 'modal':
-      return 'border border-[rgba(212,175,55,0.25)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.25)]';
     default:
-      return 'border border-[rgba(212,175,55,0.15)]';
+      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
   }
 }
 
@@ -147,73 +145,72 @@ export const getGlassmorphismStyles = (
     | 'stats'
     | 'modal',
 ): React.CSSProperties => {
-  // Use our predefined variants from design-tokens.ts
   switch (variant) {
     case 'navigation':
       return {
-        background: glassmorphismTokens.navigation.default.background,
-        backdropFilter: glassmorphismTokens.navigation.default.blur,
-        WebkitBackdropFilter: glassmorphismTokens.navigation.default.webkitBlur,
-        borderBottom: glassmorphismTokens.navigation.default.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.45)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderBottom: '1px solid rgba(var(--color-accent-silver-rgb), 0.1)',
       };
     case 'navigation-scrolled':
       return {
-        background: glassmorphismTokens.navigation.scrolled.background,
-        backdropFilter: glassmorphismTokens.navigation.scrolled.blur,
-        WebkitBackdropFilter: glassmorphismTokens.navigation.scrolled.webkitBlur,
-        borderBottom: glassmorphismTokens.navigation.scrolled.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.65)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderBottom: '1px solid rgba(var(--color-accent-silver-rgb), 0.15)',
       };
     case 'trustBadge':
       return {
-        background: glassmorphismTokens.trustBadges.background,
-        backdropFilter: glassmorphismTokens.trustBadges.blur,
-        WebkitBackdropFilter: glassmorphismTokens.trustBadges.webkitBlur,
-        border: glassmorphismTokens.trustBadges.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.2)',
       };
     case 'card':
     case 'service':
       return {
-        background: glassmorphismTokens.serviceCards.background,
-        backdropFilter: glassmorphismTokens.serviceCards.blur,
-        WebkitBackdropFilter: glassmorphismTokens.serviceCards.webkitBlur,
-        border: glassmorphismTokens.serviceCards.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.15)',
       };
     case 'stats':
       return {
-        background: glassmorphismTokens.statsBar.background,
-        backdropFilter: glassmorphismTokens.statsBar.blur,
-        WebkitBackdropFilter: glassmorphismTokens.statsBar.webkitBlur,
-        border: glassmorphismTokens.statsBar.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.85)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.2)',
       };
     case 'modal':
       return {
-        background: glassmorphismTokens.modal.background,
-        backdropFilter: glassmorphismTokens.modal.blur,
-        WebkitBackdropFilter: glassmorphismTokens.modal.webkitBlur,
-        border: glassmorphismTokens.modal.border,
+        background: 'rgba(var(--color-surface-darker-rgb), 0.9)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.25)',
       };
     default:
       return {
-        background: 'rgba(34, 34, 34, 0.7)',
+        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
-        border: '1px solid rgba(212, 175, 55, 0.1)',
+        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.1)',
       };
   }
 };
 
 // Predefined glow effects to combine with glassmorphism
-export const goldGlowEffect = {
+export const chromeGlowEffect = {
   subtle: {
-    boxShadow: '0 0 10px rgba(212, 175, 55, 0.2)',
+    boxShadow: '0 0 10px rgba(var(--color-accent-silver-rgb), 0.2)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   standard: {
-    boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
+    boxShadow: '0 0 20px rgba(var(--color-accent-silver-rgb), 0.3)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
   strong: {
-    boxShadow: '0 0 30px rgba(212, 175, 55, 0.4)',
+    boxShadow: '0 0 30px rgba(var(--color-accent-silver-rgb), 0.4)',
     transition: 'box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   },
 };
@@ -224,5 +221,5 @@ export default {
   getGlassmorphismClasses,
   getBlurClassForVariant,
   getGlassmorphismStyles,
-  goldGlowEffect,
+  chromeGlowEffect,
 };

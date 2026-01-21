@@ -29,12 +29,12 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <div
         className={`
         relative z-10 shrink-0 w-12 h-12 rounded-full flex items-center justify-center
-        ${isActive || isComplete ? 'bg-[var(--brand-gold)]' : 'bg-[var(--deep-black)] border border-[var(--brand-gold)]'}
-        ${isComplete ? 'text-white' : ''}
+        ${isActive || isComplete ? 'bg-[var(--brand-accent)]' : 'bg-[var(--deep-black)] border border-[var(--brand-accent)]'}
+        ${isComplete ? 'text-luxury-text-inverse' : ''}
       `}
       >
         {isComplete ? (
-          <svg className='w-6 h-6 text-white' fill='currentColor' viewBox='0 0 20 20'>
+          <svg className='w-6 h-6 text-luxury-text-inverse' fill='currentColor' viewBox='0 0 20 20'>
             <path
               fillRule='evenodd'
               d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'
@@ -42,26 +42,26 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
             />
           </svg>
         ) : (
-          <span className='text-white font-bold text-lg md:text-xl'>{number}</span>
+          <span className='text-luxury-text-inverse font-bold text-lg md:text-xl'>{number}</span>
         )}
       </div>
 
       {/* Vertical Line Connector */}
       {!isLast && (
-        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--brand-gold)] to-[var(--deep-black)]' />
+        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--brand-accent)] to-[var(--deep-black)]' />
       )}
 
       {/* Content */}
       <div className='ml-8'>
         <div className='flex items-center mb-0'>
-          <IconComponent size={32} className='text-[var(--brand-gold)] mr-0' />
+          <IconComponent size={32} className='text-[var(--brand-accent)] mr-0' />
           <h3
-            className={`text-xl font-bold ${isActive ? 'text-[var(--brand-gold)]' : 'text-white'}`}
+            className={`text-xl font-bold ${isActive ? 'text-[var(--brand-accent)]' : 'text-luxury-text-inverse'}`}
           >
             {title}
           </h3>
         </div>
-        <p className='text-[#C0BFBF] text-base max-w-md'>{description}</p>
+        <p className='text-[var(--color-accent-silver)] text-base max-w-md'>{description}</p>
       </div>
     </div>
   );

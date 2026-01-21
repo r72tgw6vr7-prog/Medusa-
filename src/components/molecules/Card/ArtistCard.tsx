@@ -81,14 +81,14 @@ export const ArtistCard: React.FC<ArtistProps> = ({
 
         {/* Artist name badge at top */}
         <div className='artist-card-name-top'>
-          <span className='inline-block px-8 py-0 bg-black/40 backdrop-blur-sm rounded-md text-white text-sm font-medium border border-brand-gold/20'>
+          <span className='inline-block px-8 py-0 bg-luxury-bg-dark/40 backdrop-blur-sm rounded-md text-luxury-text-inverse text-sm font-medium border border-brand-accent/20'>
             {name}
           </span>
         </div>
 
         {/* Selection checkmark */}
         {isSelected && (
-          <div className='absolute top-8 right-8 z-4 w-24 h-24 bg-brand-gold rounded-full flex items-center justify-center shadow-gold-glow'>
+          <div className='absolute top-8 right-8 z-4 w-24 h-24 bg-brand-accent rounded-full flex items-center justify-center shadow-chrome-glow'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='16'
@@ -99,7 +99,7 @@ export const ArtistCard: React.FC<ArtistProps> = ({
               strokeWidth='3'
               strokeLinecap='round'
               strokeLinejoin='round'
-              className='text-black'
+              className='text-luxury-text-primary'
             >
               <polyline points='20 6 9 17 4 12' />
             </svg>

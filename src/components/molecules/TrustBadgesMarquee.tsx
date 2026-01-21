@@ -22,13 +22,12 @@ export default function TrustBadgesMarquee() {
     left: 0,
     width: '100%',
     height: '120px',
-    zIndex: 20,
     overflow: 'hidden',
-    background: 'rgba(255, 255, 255, 0.08)',
+    background: 'rgb(var(--color-text-primary-rgb) / 0.08)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
-    borderTop: '1px solid rgba(255, 255, 255, 0.18)',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.37)',
+    borderTop: '1px solid rgb(var(--color-text-primary-rgb) / 0.18)',
+    boxShadow: 'inset 0 1px 0 rgb(var(--color-text-primary-rgb) / 0.06), 0 8px 32px rgb(0 0 0 / 0.37)',
   } as React.CSSProperties;
 
   const trackStyle = {
@@ -58,7 +57,7 @@ export default function TrustBadgesMarquee() {
     fontFamily: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial',
     fontSize: '14px',
     fontWeight: 500,
-    color: '#FFFFFF',
+    color: 'rgb(255 255 255)',
     whiteSpace: 'nowrap' as const,
   };
 
@@ -68,8 +67,7 @@ export default function TrustBadgesMarquee() {
     top: 0,
     height: '100%',
     width: '128px',
-    background: 'linear-gradient(to right, rgba(255,255,255,0.16), rgba(255,255,255,0))',
-    zIndex: 30,
+    background: 'linear-gradient(to right, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
   };
 
   const maskRightStyle = {
@@ -78,12 +76,11 @@ export default function TrustBadgesMarquee() {
     top: 0,
     height: '100%',
     width: '128px',
-    background: 'linear-gradient(to left, rgba(255,255,255,0.16), rgba(255,255,255,0))',
-    zIndex: 30,
+    background: 'linear-gradient(to left, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
   };
 
   return (
-    <div style={containerStyle} role='region' aria-label='Trust badges'>
+    <div className="z-20" style={containerStyle} role='region' aria-label='Trust badges'>
       {/* Scoped keyframes for smooth, slow right-to-left marquee */}
       <style>{`
         @keyframes marqueeLeft {
@@ -91,8 +88,8 @@ export default function TrustBadgesMarquee() {
           100% { transform: translateX(-50%); }
         }
       `}</style>
-      <div style={maskLeftStyle} aria-hidden />
-      <div style={maskRightStyle} aria-hidden />
+      <div className="z-30" style={maskLeftStyle} aria-hidden />
+      <div className="z-30" style={maskRightStyle} aria-hidden />
       <div style={trackStyle}>
         {badges.concat(badges).map((badge, index) => (
           <div key={index} style={badgeItemStyle}>

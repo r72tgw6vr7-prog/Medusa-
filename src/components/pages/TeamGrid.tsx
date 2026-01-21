@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './TeamGrid.css';
-import Section from '../ui/Section';
-import { Button } from '../ui/button';
-import type { ContainerSize } from '../ui/Container';
-import ArtistCard from '../molecules/Card/ArtistCard';
+import { ArtistCard, type Artist as ArtistCardType } from '../cards/ArtistCard';
 import { ArtistBioModal } from '../molecules/ArtistBioModal';
+import { PageHeading } from '../PageHeading';
 
 interface TeamMember {
   id: string;
@@ -12,7 +10,7 @@ interface TeamMember {
   name: string;
   fullName?: string;
   role: string;
-  category: string;
+  category: 'tattoo' | 'piercing';
   photo: string;
   photoAlt?: string;
   specialties: string[];
@@ -33,9 +31,6 @@ interface TeamData {
   team: TeamMember[];
 }
 
-// Add render timestamp for verification
-const RENDER_TIMESTAMP = Date.now();
-
 interface Artist {
   slug: string;
   name: string;
@@ -48,45 +43,19 @@ interface Artist {
   instagram: string;
   bookable: boolean;
   featured: boolean;
+  category: 'tattoo' | 'piercing';
   bio?: {
     de: string;
     en: string;
   };
 }
 
-type TeamGridProps = { containerSize?: ContainerSize };
-
-const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
-  // Fallback: show 8 cards if team.json is empty or missing (not used if team.json loads successfully)
+const TeamGrid: React.FC = () => {
   const defaultArtists: Artist[] = [
-    {
-      slug: 'loui',
-      name: 'Loui',
-      photo: '/images/placeholder.jpg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
-      experience: '8+ Jahre',
-      instagram: '@loui_medusa',
-      bookable: true,
-      featured: false,
-    },
-    {
-      slug: 'angie',
-      name: 'Angie',
-      photo: '/images/placeholder.jpg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
-      experience: '6+ Jahre',
-      instagram: '@angie_medusa',
-      bookable: true,
-      featured: false,
-    },
     {
       slug: 'aaron',
       name: 'Aaron',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Piercing Artist',
       roleIcon: 'Target',
       specialties: ['Dermal', 'Industrial', 'Complex Piercings'],
@@ -94,11 +63,38 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
       instagram: '@aaron_medusa',
       bookable: true,
       featured: false,
+      category: 'piercing',
+    },
+    {
+      slug: 'angie',
+      name: 'Angie',
+      photo: '/assets/images/icons/placeholder.svg',
+      role: 'Tattoo Artist',
+      roleIcon: 'Pen',
+      specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
+      experience: '6+ Jahre',
+      instagram: '@angie_medusa',
+      bookable: true,
+      featured: false,
+      category: 'tattoo',
+    },
+    {
+      slug: 'loui',
+      name: 'Loui',
+      photo: '/assets/images/icons/placeholder.svg',
+      role: 'Tattoo Artist',
+      roleIcon: 'Pen',
+      specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
+      experience: '8+ Jahre',
+      instagram: '@loui_medusa',
+      bookable: true,
+      featured: false,
+      category: 'tattoo',
     },
     {
       slug: 'oliver',
       name: 'Oliver',
-      photo: '/images/placeholder.jpg',
+      photo: '/assets/images/icons/placeholder.svg',
       role: 'Tattoo Artist',
       roleIcon: 'Pen',
       specialties: ['Geometric', 'Blackwork', 'Minimalist'],
@@ -106,70 +102,24 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
       instagram: '@oli_medusa',
       bookable: true,
       featured: false,
-    },
-    {
-      slug: 'elena',
-      name: 'Elena',
-      photo: '/images/placeholder.jpg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Color', 'New School', 'Custom Design'],
-      experience: '7+ Jahre',
-      instagram: '@elena_medusa',
-      bookable: true,
-      featured: false,
-    },
-    {
-      slug: 'max',
-      name: 'Max',
-      photo: '/images/placeholder.jpg',
-      role: 'Piercing Artist',
-      roleIcon: 'Target',
-      specialties: ['Surface', 'Microdermal', 'Body Modifications'],
-      experience: '9+ Jahre',
-      instagram: '@max_medusa',
-      bookable: true,
-      featured: false,
-    },
-    {
-      slug: 'sophia',
-      name: 'Sophia',
-      photo: '/images/placeholder.jpg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Fine Line', 'Script', 'Ornamental'],
-      experience: '4+ Jahre',
-      instagram: '@sophia_medusa',
-      bookable: true,
-      featured: false,
-    },
-    {
-      slug: 'leo',
-      name: 'Leo',
-      photo: '/images/placeholder.jpg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Dark Art', 'Horror', 'Biomechanical'],
-      experience: '6+ Jahre',
-      instagram: '@leo_medusa',
-      bookable: true,
-      featured: false,
+      category: 'tattoo',
     },
   ];
+
   const [artists, setArtists] = useState<Artist[]>([]);
-  const [renderCount, setRenderCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
+  const observerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Fetch team data
   useEffect(() => {
-    // Fetch team data from public directory
     const loadTeamData = async () => {
       try {
         setLoading(true);
         const response = await fetch('/team.json');
         const teamData: TeamData = await response.json();
 
-        // Convert from the team.json data format to our component format
         const artistsData: Artist[] = teamData.team.map((member: TeamMember) => ({
           slug: member.slug,
           name: member.name,
@@ -187,25 +137,16 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
           instagram: member.instagram,
           bookable: member.bookable,
           featured: member.featured,
+          category: member.category,
           bio: typeof member.bio === 'string' ? undefined : member.bio,
         }));
 
-        // Sort: featured artists first, then by order in JSON
-        artistsData.sort((a, b) => {
-          if (a.featured && !b.featured) return -1;
-          if (!a.featured && b.featured) return 1;
-          return 0;
-        });
+        // Sort alphabetically by first name (name field)
+        artistsData.sort((a, b) => a.name.localeCompare(b.name));
 
-        if (artistsData.length > 0) {
-          setArtists(artistsData);
-        } else {
-          // fallback to default 8 cards
-          setArtists(defaultArtists);
-        }
+        setArtists(artistsData.length > 0 ? artistsData : defaultArtists);
       } catch (error) {
         console.error('Error loading team data:', error);
-        // Fallback to default 8 cards if fetch fails
         setArtists(defaultArtists);
       } finally {
         setLoading(false);
@@ -213,104 +154,108 @@ const TeamGrid: React.FC<TeamGridProps> = ({ containerSize = 'default' }) => {
     };
 
     loadTeamData();
-
-    // Update render count for tracking rerenders
-    setRenderCount((prev) => prev + 1);
-
-    // Cleanup function
-    return () => {
-      const marker = document.getElementById('teamgrid-render-marker');
-      if (marker) {
-        marker.remove();
-      }
-    };
   }, []);
 
+  // IntersectionObserver for scroll-reveal with staggered delays
+  useEffect(() => {
+    const observers = observerRefs.current.map((ref, index) => {
+      if (!ref) return null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                setRevealedIndices((prev) => new Set(prev).add(index));
+              }, index * 200);
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '-50px',
+        }
+      );
+
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, [artists.length]);
+
+  // Convert Artist to ArtistCard format
+  const toArtistCardFormat = (artist: Artist, index: number): ArtistCardType => {
+    const description = artist.bio?.en
+      ? artist.bio.en.split('\n')[0]
+      : `Specializing in ${artist.specialties.join(', ')}. ${artist.experience} of professional experience.`;
+
+    return {
+      id: artist.slug || String(index),
+      name: artist.fullName || artist.name,
+      discipline: artist.role,
+      description,
+      image_url: artist.photo,
+      display_order: index,
+      category: artist.category,
+    };
+  };
+
   return (
-    <Section
-      bg='none'
-      className='py-16 lg:py-24'
-      containerSize={containerSize}
-      aria-label='Artist Team'
+    <section
+      className="min-h-screen bg-luxury-bg-dark section-padding"
+      style={{ marginTop: 'var(--first-section-offset)' }}
     >
-      <div className='team-heading'>
-        <h2>Unser Meisterteam</h2>
-        {/* Add data attributes for verification */}
-        {process.env.NODE_ENV === 'development' && (
-          <small
-            className='render-info team-render-timestamp'
-            data-timestamp={RENDER_TIMESTAMP}
-            data-render-count={renderCount}
-          >
-            Updated: {new Date().toLocaleTimeString()}
-          </small>
-        )}
-      </div>
-      <div className='team-grid'>
-        {loading ? (
-          <div className='text-center py-8'>
-            <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-brand-gold flex flex-col h-full'></div>
-            <p className='mt-0 text-brand-chrome'>Loading team members...</p>
+      <div className="responsive-container safe-area-padding">
+        <div className="mx-auto w-full max-w-7xl">
+          {/* Section header - exact template structure */}
+          <div className="mb-32">
+            <PageHeading 
+              eyebrow="Medusa München"
+              title="Our Artists" 
+              subtitle="Treffen Sie unser erfahrenes Team von Tätowierern und Piercern"
+            />
           </div>
-        ) : artists.length === 0 ? (
-          <div className='text-center py-8'>
-            <p className='text-brand-chrome'>No team members found.</p>
-          </div>
-        ) : (
-          artists.map((artist, index) => {
-            // Hide action buttons for non-artist roles (manager/info)
-            const HIDE_ACTIONS_FOR = new Set<string>(['oliver', 'sascha', 'Oliver', 'Sascha']);
-            const hideActions =
-              HIDE_ACTIONS_FOR.has(artist.slug) || HIDE_ACTIONS_FOR.has(artist.name);
-            return (
-              <div key={artist.slug || index} className='team-card-wrap'>
+
+          {/* Artist cards with alternating layout */}
+          <div className="space-y-40">
+            {loading ? (
+              <div className="text-center py-8">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40"></div>
+                <p className="mt-4 text-luxury-text-inverse/50">Loading team members...</p>
+              </div>
+            ) : artists.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-luxury-text-inverse/50">No team members found.</p>
+              </div>
+            ) : (
+              artists.map((artist, index) => (
                 <div
-                  onClick={() => setSelectedArtist(artist)}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedArtist(artist)}
-                  role='button'
-                  tabIndex={0}
-                  aria-label={`View ${artist.name}'s biography`}
-                  style={{ cursor: 'pointer' }}
+                  key={artist.slug || index}
+                  ref={(el) => {
+                    observerRefs.current[index] = el;
+                  }}
+                  className="relative"
                 >
                   <ArtistCard
-                    name={artist.name}
-                    role={{ name: artist.role, icon: 'pen-icon.svg' }}
-                    imageUrl={artist.photo}
-                    specialties={artist.specialties}
-                    experience={artist.experience}
-                    instagramHandle={artist.instagram}
+                    artist={toArtistCardFormat(artist, index)}
+                    isRevealed={revealedIndices.has(index)}
+                    index={index}
                   />
                 </div>
-                {!hideActions && (
-                  <div className='team-card-actions'>
-                    {artist.bookable && (
-                      <Button variant='gold' asChild className='flex-1'>
-                        <a
-                          href={`/booking?artist=${encodeURIComponent(artist.name)}`}
-                          className='no-underline'
-                        >
-                          Jetzt Buchen
-                        </a>
-                      </Button>
-                    )}
-                    <Button variant='outlineGold' asChild className='flex-1'>
-                      <a href={`/gallery#${artist.slug}`} className='no-underline'>
-                        Galerie
-                      </a>
-                    </Button>
-                  </div>
-                )}
-              </div>
-            );
-          })
-        )}
+              ))
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Artist Biography Modal */}
       {selectedArtist && (
         <ArtistBioModal artist={selectedArtist} onClose={() => setSelectedArtist(null)} />
       )}
-    </Section>
+    </section>
   );
 };
 

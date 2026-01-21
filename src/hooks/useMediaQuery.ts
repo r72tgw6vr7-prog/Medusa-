@@ -71,7 +71,7 @@ export const useMediaQuery = (query: string): boolean => {
       mediaQuery.removeListener(handler);
       window.removeEventListener('resize', debouncedResizeHandler);
     };
-  }, [query]);
+  }, [query, isHydrated]);
 
   return matches;
 };

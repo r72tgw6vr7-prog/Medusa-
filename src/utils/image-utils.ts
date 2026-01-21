@@ -64,7 +64,7 @@ export const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
   const originalSrc = target.dataset.originalSrc || target.src;
 
   // Set placeholder image
-  target.src = '/images/placeholder.svg';
+  target.src = '/assets/images/icons/placeholder.svg';
 
   // Log the error for debugging
   console.warn('Image failed to load:', originalSrc);
@@ -75,14 +75,14 @@ export const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 
 export const safeImageSrc = (src?: string | null) => {
   if (!src || src === '' || src === 'undefined' || src === 'null') {
-    return '/images/placeholder.svg';
+    return '/assets/images/icons/placeholder.svg';
   }
-  return src;
+  return encodeURI(src);
 };
 
 // Check if image source is a placeholder
 export const isPlaceholderImage = (src: string) => {
-  return src.includes('placeholder') || src === '/images/placeholder.svg';
+  return src.includes('placeholder') || src === '/assets/images/icons/placeholder.svg';
 };
 
 interface ResponsiveImageConfig {
@@ -94,27 +94,54 @@ interface ResponsiveImageConfig {
 // Get optimized image props for React components
 export const getImageProps = (src?: string, alt?: string, config: ResponsiveImageConfig = {}) => {
   const {
-    sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+    sizes = '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw',
     priority = false,
-    quality = 85,
+    quality: _quality = 85,
   } = config;
 
-  // For studio images, use a simpler approach without srcset
-  // to avoid 404s for missing responsive variants
-  if (src?.includes('/studio/') || src?.includes('-studio-carrousel/')) {
+  // For studio images, use optimized AVIF/WebP variants
+  if (src?.includes('/studio/')) {
+    const filename = src.split('/').pop()?.replace(/\.(jpg|jpeg|png|webp)$/i, '') || '';
+    const optimizedBase = encodeURI(
+      src.replace(
+      /\/[^\/]+\.(jpg|jpeg|png|webp)$/i,
+      `/optimized/${filename}`,
+      ),
+    );
+
+    // Generate AVIF srcset (best compression)
+    const avifSrcSet = [
+      `${optimizedBase}-640w.avif 640w`,
+      `${optimizedBase}-1024w.avif 1024w`,
+      `${optimizedBase}-1920w.avif 1920w`,
+      `${optimizedBase}-2560w.avif 2560w`,
+    ].join(', ');
+
+    // Generate WebP srcset (fallback)
+    const webpSrcSet = [
+      `${optimizedBase}-640w.webp 640w`,
+      `${optimizedBase}-1024w.webp 1024w`,
+      `${optimizedBase}-1920w.webp 1920w`,
+      `${optimizedBase}-2560w.webp 2560w`,
+    ].join(', ');
+
     return {
+      // Return data for <picture> element rendering
+      avifSrcSet,
+      webpSrcSet,
       src: safeImageSrc(src),
       alt: alt || 'Image',
+      sizes,
       onError: handleImageError,
       'data-original-src': src,
       loading: priority ? ('eager' as const) : ('lazy' as const),
       decoding: priority ? ('sync' as const) : ('async' as const),
-      fetchpriority: priority ? ('high' as const) : ('auto' as const),
+      fetchPriority: priority ? ('high' as const) : ('auto' as const),
     };
   }
 
   // Get base path and extension for other images
-  const basePath = src ? src.replace(/\.(jpg|jpeg|png|webp)$/i, '') : '';
+  const basePath = src ? encodeURI(src.replace(/\.(jpg|jpeg|png|webp)$/i, '')) : '';
   const ext = src?.match(/\.(jpg|jpeg|png|webp)$/i)?.[0] || '.webp';
 
   // Generate srcset for WebP and original format (conservative approach)
@@ -131,6 +158,6 @@ export const getImageProps = (src?: string, alt?: string, config: ResponsiveImag
     'data-original-src': src,
     loading: priority ? ('eager' as const) : ('lazy' as const),
     decoding: priority ? ('sync' as const) : ('async' as const),
-    fetchpriority: priority ? ('high' as const) : ('auto' as const),
+    fetchPriority: priority ? ('high' as const) : ('auto' as const),
   };
 };

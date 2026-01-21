@@ -2,7 +2,7 @@
 export const portfolioImages = [
   {
     id: 'tattoo-1',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Black and gray tattoo artwork',
     category: 'tattoo' as const,
     featured: true,
@@ -11,7 +11,7 @@ export const portfolioImages = [
   },
   {
     id: 'tattoo-2',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Geometric tattoo design',
     category: 'tattoo' as const,
     featured: true,
@@ -20,7 +20,7 @@ export const portfolioImages = [
   },
   {
     id: 'tattoo-3',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Traditional tattoo artwork',
     category: 'tattoo' as const,
     featured: false,
@@ -29,7 +29,7 @@ export const portfolioImages = [
   },
   {
     id: 'tattoo-4',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Realistic portrait tattoo',
     category: 'tattoo' as const,
     featured: false,
@@ -38,7 +38,7 @@ export const portfolioImages = [
   },
   {
     id: 'piercing-1',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Professional piercing work',
     category: 'piercing' as const,
     featured: true,
@@ -47,7 +47,7 @@ export const portfolioImages = [
   },
   {
     id: 'piercing-2',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Premium piercing jewelry',
     category: 'piercing' as const,
     featured: true,
@@ -56,7 +56,7 @@ export const portfolioImages = [
   },
   {
     id: 'piercing-3',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Facial piercing setup',
     category: 'piercing' as const,
     featured: false,
@@ -65,7 +65,7 @@ export const portfolioImages = [
   },
   {
     id: 'piercing-4',
-    src: '/images/placeholder.svg',
+    src: '/assets/images/icons/placeholder.svg',
     alt: 'Luxury piercing collection',
     category: 'piercing' as const,
     featured: false,

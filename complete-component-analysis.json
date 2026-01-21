@@ -1,0 +1,1111 @@
+[
+  {
+    "name": "Icon",
+    "path": "src/components/atoms/Icon/Icon.tsx",
+    "category": "atom",
+    "props": {
+      "interface": "interface IconProps {\n  icon?: React.ComponentType<LucideProps>;\n  size?: number;\n  className?: string;\n  children?: React.ReactNode;\n  color?: string;\n  strokeWidth?: number;\n  fill?: string;\n  viewBox?: string;\n  onClick?: () => void;\n  'aria-label'?: string;\n}",
+      "required": [],
+      "optional": ["icon?", "size?", "className?", "children?", "color?", "strokeWidth?", "fill?", "viewBox?", "onClick?", "aria-label?"]
+    },
+    "variants": {
+      "size": ["24 (default)", "custom number"],
+      "viewBox": ["0 0 24 24 (default)", "custom"]
+    },
+    "styling": {
+      "method": "Tailwind + Props",
+      "background": "transparent",
+      "border": "none",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "none",
+      "text": "color prop / className"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "svg or span",
+      "ariaProps": ["aria-label"],
+      "focusManagement": "Accepts onClick and aria-label for accessibility"
+    },
+    "dependencies": ["react", "lucide-react"],
+    "description": "Flexible icon wrapper that renders Lucide icons or custom SVG children"
+  },
+  {
+    "name": "TrustBadge",
+    "path": "src/components/atoms/TrustBadge.tsx",
+    "category": "atom",
+    "props": {
+      "interface": "interface TrustBadgeProps {\n  icon: string;\n  text: string;\n  className?: string;\n}",
+      "required": ["icon", "text"],
+      "optional": ["className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[var(--deep-black)]/60 backdrop-blur-md",
+      "border": "border border-white/10 hover:border-[var(--brand-accent)]/40",
+      "radius": "rounded-full",
+      "shadow": "hover:shadow-[var(--shadow-chrome-sm)]",
+      "padding": "px-4 py-3",
+      "text": "text-white font-medium text-sm"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": ["aria-hidden on icon"],
+      "focusManagement": "None - display only component"
+    },
+    "dependencies": ["react"],
+    "description": "Displays a trust indicator with icon and text in a pill-shaped badge"
+  },
+  {
+    "name": "ArtistBioModal",
+    "path": "src/components/molecules/ArtistBioModal.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface Artist {\n  slug: string;\n  name: string;\n  fullName?: string;\n  role: string;\n  photo: string;\n  photoAlt?: string;\n  specialties: string[];\n  experience: string;\n  instagram: string;\n  bio?: { de: string; en: string; };\n  certifications?: string[];\n}\n\ninterface ArtistBioModalProps {\n  artist: Artist;\n  onClose: () => void;\n}",
+      "required": ["artist", "onClose"],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "CSS Module + Tailwind",
+      "background": "linear-gradient(to right, rgba(...darker, 0.3) 0%, rgb(...darker/0.92) 40%, rgb(...darker/0.95) 100%) with backdrop-blur",
+      "border": "border border-[var(--color-accent-silver)]/60",
+      "radius": "var(--radius-lg)",
+      "shadow": "0 0 var(--space-5) rgb(...silver/0.5), 0 0 var(--space-10) rgba(...darker, 0.6)",
+      "padding": "0 (horizontal split layout)",
+      "text": "various classes defined in CSS module"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "dialog with role='dialog'",
+      "ariaProps": ["aria-modal='true'", "aria-labelledby", "aria-describedby", "aria-label on buttons"],
+      "focusManagement": "Focus trap implementation, ESC to close, keyboard navigation between focusable elements"
+    },
+    "dependencies": ["react", "lucide-react (X icon)", "../../contexts/LanguageContext", "./ArtistBioModal.css"],
+    "description": "Full-featured modal displaying artist biography with photo, specialties, portfolio, and booking CTAs"
+  },
+  {
+    "name": "BeforeAfterCard",
+    "path": "src/components/molecules/BeforeAfterCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface BeforeAfterCardProps {\n  beforeImage: string;\n  afterImage: string;\n  beforeLabel?: string;\n  afterLabel?: string;\n  title?: string;\n  artist?: string;\n  onCardClick?: () => void;\n  className?: string;\n}",
+      "required": ["beforeImage", "afterImage"],
+      "optional": ["beforeLabel?", "afterLabel?", "title?", "artist?", "onCardClick?", "className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-deep-black/90 on labels, linear gradient on caption",
+      "border": "none on card",
+      "radius": "rounded-2xl on container, rounded-full on labels",
+      "shadow": "none",
+      "padding": "px-0 py-0 on labels, p-8 on caption",
+      "text": "text-white text-sm on labels, text-lg font-bold on title"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "button with role='slider'",
+      "ariaProps": ["aria-label", "aria-valuemin", "aria-valuemax", "aria-valuenow"],
+      "focusManagement": "Keyboard navigation with arrow keys, focus outline on slider"
+    },
+    "dependencies": ["react"],
+    "description": "Interactive before/after image comparison slider with draggable handle and keyboard controls"
+  },
+  {
+    "name": "ArtistCard",
+    "path": "src/components/molecules/Card/ArtistCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ArtistRole {\n  name: string;\n  icon: string;\n}\n\ninterface ArtistProps {\n  name: string;\n  role: ArtistRole;\n  specialties: string[];\n  experience: string;\n  instagramHandle: string;\n  imageUrl: string;\n  className?: string;\n  onClick?: () => void;\n  onBookClick?: () => void;\n  onGalleryClick?: () => void;\n  bookHref?: string;\n  galleryHref?: string;\n  imagePosition?: string;\n  isSelected?: boolean;\n}",
+      "required": ["name", "role", "specialties", "experience", "instagramHandle", "imageUrl"],
+      "optional": ["className?", "onClick?", "onBookClick?", "onGalleryClick?", "bookHref?", "galleryHref?", "imagePosition?", "isSelected?"]
+    },
+    "variants": {
+      "imagePosition": ["center (default)", "custom CSS position"],
+      "isSelected": ["false (default)", "true"]
+    },
+    "styling": {
+      "method": "CSS Module + Tailwind",
+      "background": "var(--deep-black) with linear gradient overlays",
+      "border": "border-brand-accent/20",
+      "radius": "var(--radius-md, 12px)",
+      "shadow": "0 4px 20px rgb(0 0 0 / 0.5)",
+      "padding": "var(--space-3, 24px) at bottom",
+      "text": "Various sizes from CSS module - white/gold accent colors"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='button'",
+      "ariaProps": ["aria-label", "aria-label on links"],
+      "focusManagement": "Keyboard navigation with Enter/Space, tabIndex=0 when clickable"
+    },
+    "dependencies": ["react", "./ArtistCard.css"],
+    "description": "Artist profile card with image, role, specialties, and action buttons for booking and gallery"
+  },
+  {
+    "name": "ServiceCards",
+    "path": "src/components/molecules/Card/ServiceCards.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ServiceCard {\n  id: string;\n  backgroundImage: string;\n  icon: 'crown' | 'diamond';\n  struckTitle: string;\n  mainTitle: string;\n  bullets: string[];\n  price: string;\n  ctaText: string;\n  ctaHref: string;\n  ctaVariant: 'default' | 'secondary';\n}\n\ninterface ServiceCardsProps {\n  services?: ServiceCard[];\n}",
+      "required": [],
+      "optional": ["services?"]
+    },
+    "variants": {
+      "icon": ["crown", "diamond"],
+      "ctaVariant": ["default", "secondary"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "backgroundSize: cover with gradient overlays (linear-gradient to bottom, transparent 0%, rgb(0 0 0 / 0.9) 100%)",
+      "border": "border border-(--brand-accent)/20 hover:border-(--brand-accent)/60",
+      "radius": "rounded-3xl",
+      "shadow": "shadow-lg hover:shadow-chrome-glow-strong",
+      "padding": "service-card-padding class",
+      "text": "Playfair Display for labels, Poppins for titles, Inter for bullets"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "article",
+      "ariaProps": ["aria-label"],
+      "focusManagement": "Links are keyboard navigable"
+    },
+    "dependencies": ["react", "../../ui/Section", "../../ui/button", "../../SectionHeading"],
+    "description": "Grid of service offering cards with background images, pricing, and feature lists"
+  },
+  {
+    "name": "ContactInfoCard",
+    "path": "src/components/molecules/ContactInfoCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ContactInfoCardProps {\n  icon: string;\n  title: string;\n  value: string;\n  href?: string;\n  className?: string;\n}",
+      "required": ["icon", "title", "value"],
+      "optional": ["href?", "className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind + Card component",
+      "background": "from Card component (variant='default')",
+      "border": "from Card component",
+      "radius": "from Card component",
+      "shadow": "from Card component",
+      "padding": "from Card component (size='sm')",
+      "text": "text-brand-chrome text-sm for title, text-white text-base for value"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "Card with optional anchor wrapper",
+      "ariaProps": ["target='_blank' rel='noopener noreferrer' on links"],
+      "focusManagement": "Standard link focus behavior when href provided"
+    },
+    "dependencies": ["react", "../atoms/Icon", "../ui/Card"],
+    "description": "Contact information display card with icon, title, and value (optionally linkable)"
+  },
+  {
+    "name": "CookieConsentBanner",
+    "path": "src/components/molecules/CookieConsentBanner.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface CookieConsentBannerProps {\n  onNavigate: (page: PageType) => void;\n}\n\nexport interface CookiePreferences {\n  essential: boolean;\n  analytics: boolean;\n  marketing: boolean;\n}",
+      "required": ["onNavigate"],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind + Radix UI Dialog",
+      "background": "bg-(--color-surface-dark)/95 backdrop-blur-lg for banner, bg-brand-background for dialog",
+      "border": "border-t border-brand-accent/20 on banner, border border-brand-chrome/20 on dialog",
+      "radius": "rounded-lg on buttons, rounded-xl on dialog",
+      "shadow": "none specified",
+      "padding": "p-8 on banner, p-8 on dialog",
+      "text": "text-brand-accent for heading, text-brand-white for body, text-sm for descriptions"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "Dialog with proper roles",
+      "ariaProps": ["aria-label on checkboxes"],
+      "focusManagement": "Radix UI Dialog handles focus management"
+    },
+    "dependencies": ["react", "../../types/page-types", "@radix-ui/react-dialog", "lucide-react (X icon)", "../ui/Card"],
+    "description": "GDPR-compliant cookie consent banner with customizable preferences and localStorage persistence"
+  },
+  {
+    "name": "FAQItem",
+    "path": "src/components/molecules/FAQItem.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface FAQItemProps {\n  question: string;\n  answer: string;\n  isOpen?: boolean;\n  onToggle?: () => void;\n  className?: string;\n}",
+      "required": ["question", "answer"],
+      "optional": ["isOpen?", "onToggle?", "className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind",
+      "background": "transparent",
+      "border": "border-b border-brand-chrome/20",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "py-8 on button and answer",
+      "text": "text-lg font-medium text-brand-accent for question, text-white/80 for answer"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "button with proper controls",
+      "ariaProps": ["aria-expanded", "aria-controls"],
+      "focusManagement": "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent"
+    },
+    "dependencies": ["react"],
+    "description": "Expandable FAQ accordion item with smooth height transitions"
+  },
+  {
+    "name": "FocusTrap",
+    "path": "src/components/molecules/FocusTrap.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "type FocusTrapProps = {\n  children: React.ReactNode;\n  isActive?: boolean;\n}",
+      "required": ["children"],
+      "optional": ["isActive?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "None - utility component",
+      "background": "n/a",
+      "border": "n/a",
+      "radius": "n/a",
+      "shadow": "n/a",
+      "padding": "n/a",
+      "text": "n/a"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div wrapper",
+      "ariaProps": [],
+      "focusManagement": "Uses @react-aria/focus FocusScope - contains focus within children, restores focus on unmount, auto-focuses first element"
+    },
+    "dependencies": ["react", "@react-aria/focus"],
+    "description": "Accessibility utility that traps keyboard focus within its children (for modals/dialogs)"
+  },
+  {
+    "name": "GDPRCompliance",
+    "path": "src/components/molecules/GDPRCompliance.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "No props - FC with no parameters",
+      "required": [],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "None - logic only",
+      "background": "n/a",
+      "border": "n/a",
+      "radius": "n/a",
+      "shadow": "n/a",
+      "padding": "n/a",
+      "text": "n/a"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "Returns null - no rendering",
+      "ariaProps": [],
+      "focusManagement": "None"
+    },
+    "dependencies": ["react"],
+    "description": "Logic-only component that disables third-party tracking when cookie consent is not given"
+  },
+  {
+    "name": "LanguageToggle",
+    "path": "src/components/molecules/LanguageToggle.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface LanguageToggleProps {\n  onLanguageChange?: (language: 'DE' | 'EN') => void;\n}",
+      "required": [],
+      "optional": ["onLanguageChange?"]
+    },
+    "variants": {
+      "language": ["DE", "EN"]
+    },
+    "styling": {
+      "method": "Inline styles",
+      "background": "rgba(var(--color-text-primary-rgb), 0.1) container, var(--brand-accent) for sliding pill",
+      "border": "1px solid rgba(var(--color-text-primary-rgb), 0.15)",
+      "radius": "borderRadius: '9999px' (fully rounded)",
+      "shadow": "none",
+      "padding": "padding: '4px' on container",
+      "text": "color changes between var(--deep-black) and var(--color-text-primary) based on active state"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "buttons with role='group'",
+      "ariaProps": ["aria-label on buttons"],
+      "focusManagement": "Standard button focus"
+    },
+    "dependencies": ["react"],
+    "description": "Animated language toggle between German and English with sliding gold pill indicator"
+  },
+  {
+    "name": "MainNavigation",
+    "path": "src/components/molecules/MainNavigation.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "No props interface - uses context internally",
+      "required": [],
+      "optional": []
+    },
+    "variants": {
+      "scrolled": ["false (transparent glassmorphism)", "true (enhanced glassmorphism)"],
+      "menuOpen": ["false", "true"]
+    },
+    "styling": {
+      "method": "CSS Module + Tailwind",
+      "background": "rgba(var(--color-surface-darker-rgb), 0.4) default, 0.6 when scrolled, with backdrop-blur",
+      "border": "border-bottom with chrome accent colors",
+      "radius": "var(--radius-lg) on menu button",
+      "shadow": "box-shadow changes on scroll and hover states",
+      "padding": "px-4 sm:px-8, h-20",
+      "text": "text-brand-accent for logo, text-white for links"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "nav with SkipLink",
+      "ariaProps": ["aria-label='Main navigation'", "aria-controls", "aria-expanded", "aria-haspopup", "aria-current"],
+      "focusManagement": "Focus trap in mobile menu, keyboard navigation, ESC to close"
+    },
+    "dependencies": ["react", "react-dom (createPortal)", "react-router-dom", "../../contexts/LanguageContext", "../accessibility/SkipLink", "../../hooks/useKeyboardNav", "./MainNavigation.css"],
+    "description": "Responsive main navigation with glassmorphism, mobile menu, language toggle, and scroll-based transitions"
+  },
+  {
+    "name": "NewsletterForm",
+    "path": "src/components/molecules/NewsletterForm.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface NewsletterFormProps {\n  onSubmit: (email: string) => Promise<void>;\n  className?: string;\n}",
+      "required": ["onSubmit"],
+      "optional": ["className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-white/10 on input, bg-[var(--brand-accent)] on button",
+      "border": "border-brand-chrome/30 on input (border-red-500 on error)",
+      "radius": "rounded-lg",
+      "shadow": "none",
+      "padding": "px-4 py-3 on input, px-6 py-3 on button",
+      "text": "text-white for input, placeholder-white/50, text-sm for errors"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "form with label",
+      "ariaProps": ["aria-invalid", "aria-describedby", "role='alert'", "role='status'"],
+      "focusManagement": "focus:outline-none focus:ring-2 focus:ring-brand-accent"
+    },
+    "dependencies": ["react"],
+    "description": "Newsletter subscription form with email validation, error handling, and success states"
+  },
+  {
+    "name": "PriceCard",
+    "path": "src/components/molecules/PriceCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface PriceFeature {\n  text: string;\n  iconUrl: string;\n}\n\ninterface PriceCardProps {\n  iconUrl: string;\n  title: string;\n  description: string;\n  features: PriceFeature[];\n  ctaText: string;\n  onCtaClick?: () => void;\n  highlighted?: boolean;\n  className?: string;\n}",
+      "required": ["iconUrl", "title", "description", "features", "ctaText"],
+      "optional": ["onCtaClick?", "highlighted?", "className?"]
+    },
+    "variants": {
+      "highlighted": ["false (default)", "true"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[var(--color-surface-darker)]/70 (80 when highlighted)",
+      "border": "border border-solid border-[var(--brand-accent)] (border-2 when highlighted)",
+      "radius": "rounded-2xl",
+      "shadow": "shadow-[var(--shadow-chrome-lg)] when highlighted",
+      "padding": "pt-10 pb-14",
+      "text": "text-[var(--brand-accent)] text-[31px] font-bold for title, text-white for description"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='button'",
+      "ariaProps": [],
+      "focusManagement": "tabIndex=0, onKeyDown for Enter/Space"
+    },
+    "dependencies": ["react"],
+    "description": "Pricing tier card with icon, features list, and CTA button"
+  },
+  {
+    "name": "ProcessStepCard",
+    "path": "src/components/molecules/ProcessStepCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ProcessStepCardProps {\n  number: number;\n  title: string;\n  description: string;\n  icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;\n  isActive?: boolean;\n  isComplete?: boolean;\n  isLast?: boolean;\n  className?: string;\n}",
+      "required": ["number", "title", "description", "icon"],
+      "optional": ["isActive?", "isComplete?", "isLast?", "className?"]
+    },
+    "variants": {
+      "isActive": ["false", "true"],
+      "isComplete": ["false", "true"],
+      "isLast": ["false", "true"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[var(--brand-accent)] when active/complete, bg-[var(--deep-black)] otherwise",
+      "border": "border border-[var(--brand-accent)] when inactive",
+      "radius": "rounded-full on step circle",
+      "shadow": "none",
+      "padding": "ml-8 on content",
+      "text": "text-white for number, text-[var(--brand-accent)] for icon and active title, text-white for inactive title"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "None"
+    },
+    "dependencies": ["react", "lucide-react"],
+    "description": "Process step indicator with number, icon, title, description, and vertical connector line"
+  },
+  {
+    "name": "ReviewCard",
+    "path": "src/components/molecules/ReviewCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ReviewCardProps {\n  rating: number;\n  content: string;\n  author: string;\n  source: string;\n  className?: string;\n}",
+      "required": ["rating", "content", "author", "source"],
+      "optional": ["className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind + Card component",
+      "background": "from Card component",
+      "border": "from Card component",
+      "radius": "from Card component",
+      "shadow": "from Card component",
+      "padding": "from Card component",
+      "text": "text-white text-sm-15"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "Card wrapper",
+      "ariaProps": ["aria-label='star' on Star icons"],
+      "focusManagement": "None - display only"
+    },
+    "dependencies": ["react", "lucide-react (Star)", "../ui/Card"],
+    "description": "Customer review card with star rating, content, author name, and source"
+  },
+  {
+    "name": "ServiceCard",
+    "path": "src/components/molecules/ServiceCard.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface ServiceFeature {\n  text: string;\n  iconUrl?: string;\n}\n\ninterface ServiceCardProps {\n  title: string;\n  subtitle?: string;\n  description: string;\n  price?: string;\n  duration?: string;\n  features?: ServiceFeature[] | string[];\n  buttonText?: string;\n  onButtonClick?: () => void;\n  highlighted?: boolean;\n  popular?: boolean;\n  className?: string;\n  backgroundImage?: string;\n  backgroundImageAlt?: string;\n  icon?: React.ComponentType<{ size?: number; className?: string }>;\n  accentColor?: 'chrome' | 'gold';\n  animationDelay?: number;\n  isVisible?: boolean;\n  isHovered?: boolean;\n  onMouseEnter?: () => void;\n  onMouseLeave?: () => void;\n  iconUrl?: string;\n  ctaText?: string;\n  onCtaClick?: () => void;\n}",
+      "required": ["title", "description"],
+      "optional": ["many optional props"]
+    },
+    "variants": {
+      "accentColor": ["chrome (default)", "gold"],
+      "highlighted": ["false", "true"],
+      "popular": ["false", "true"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-black/60 backdrop-blur",
+      "border": "border-brand-accent when highlighted, border-[var(--brand-accent)]/30 otherwise",
+      "radius": "rounded-2xl",
+      "shadow": "shadow-chrome-glow",
+      "padding": "p-4 md:p-5",
+      "text": "text-brand-accent or text-brand-chrome based on variant for title, text-sm md:text-base for description"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='group'",
+      "ariaProps": [],
+      "focusManagement": "focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] on button, tabIndex=0, onKeyDown for Enter/Space"
+    },
+    "dependencies": ["react"],
+    "description": "Service offering card with icon, title, description, features list, pricing, and CTA button"
+  },
+  {
+    "name": "StatsBar",
+    "path": "src/components/molecules/StatsBar.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface StatItem {\n  icon: string;\n  value: string;\n  label: string;\n}\n\ninterface StatsBarProps {\n  stats: StatItem[];\n  className?: string;\n}",
+      "required": ["stats"],
+      "optional": ["className?"]
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[var(--deep-black)]/80 backdrop-blur-sm",
+      "border": "border-t border-b border-white/10",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "py-4",
+      "text": "text-[var(--brand-accent)] font-bold text-xl md:text-2xl for value, text-white text-sm for label"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": ["aria-hidden='true' on icons"],
+      "focusManagement": "None - display only"
+    },
+    "dependencies": ["react"],
+    "description": "Statistics bar displaying multiple stat items in a horizontal grid with icons"
+  },
+  {
+    "name": "TrustBadgeCarousel",
+    "path": "src/components/molecules/TrustBadgeCarousel.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "interface TrustBadge {\n  icon: string;\n  text: string;\n}\n\ninterface TrustBadgeCarouselProps {\n  badges: TrustBadge[];\n  className?: string;\n  autoScroll?: boolean;\n  speed?: number;\n}",
+      "required": ["badges"],
+      "optional": ["className?", "autoScroll?", "speed?"]
+    },
+    "variants": {
+      "autoScroll": ["true (default)", "false"],
+      "speed": ["30000 (default, 30 seconds)", "custom number"]
+    },
+    "styling": {
+      "method": "Tailwind + inline styles",
+      "background": "gradient fade overlays (linear-to-r/l from-[var(--deep-black)] to-transparent)",
+      "border": "none on container",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "py-0 px-8 on scroll container",
+      "text": "inherited from TrustBadge atoms"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "Respects prefers-reduced-motion, uses IntersectionObserver to pause when off-screen"
+    },
+    "dependencies": ["react", "../atoms/TrustBadge"],
+    "description": "Auto-scrolling horizontal carousel of trust badges with smooth continuous loop and gradient fades"
+  },
+  {
+    "name": "TrustBadgesBar",
+    "path": "src/components/molecules/TrustBadgesBar.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "No props - self-contained",
+      "required": [],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "CSS Modules",
+      "background": "var(--brand-background)",
+      "border": "border-bottom: 1px solid rgb(var(--color-accent-silver-rgb) / 0.1)",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "var(--space-1) var(--space-2-5)",
+      "text": "text-lg font-bold text-brand-accent for numbers, text-xs text-chrome-silver for labels"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "None - display only"
+    },
+    "dependencies": ["react", "lucide-react", "./TrustBadgesBar.module.css"],
+    "description": "Horizontal bar displaying trust badges with Lucide icons, numbers, and labels"
+  },
+  {
+    "name": "TrustBadgesMarquee",
+    "path": "src/components/molecules/TrustBadgesMarquee.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "No props - self-contained default export",
+      "required": [],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "Inline styles",
+      "background": "rgb(var(--color-text-primary-rgb) / 0.08) with backdrop-blur",
+      "border": "border-top: 1px solid rgb(var(--color-text-primary-rgb) / 0.18)",
+      "radius": "none",
+      "shadow": "inset 0 1px 0 rgb(var(--color-text-primary-rgb) / 0.06), 0 8px 32px rgb(0 0 0 / 0.37)",
+      "padding": "0 64px",
+      "text": "text-sm font-medium text-white"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='region'",
+      "ariaProps": ["aria-label='Trust badges'", "aria-hidden on masks"],
+      "focusManagement": "Respects prefers-reduced-motion, animation stops when disabled"
+    },
+    "dependencies": ["react"],
+    "description": "Full-width marquee banner with infinite scroll animation displaying trust badges with icons"
+  },
+  {
+    "name": "TrustSignals",
+    "path": "src/components/molecules/TrustSignals.tsx",
+    "category": "molecule",
+    "props": {
+      "interface": "No props - self-contained",
+      "required": [],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "CSS Module",
+      "background": "var(--deep-black)",
+      "border": "border: 1px solid rgba(var(--color-accent-silver-rgb), 0.2)",
+      "radius": "var(--radius-lg)",
+      "shadow": "box-shadow: 0 0 24px rgba(var(--color-accent-silver-rgb), 0.15), hover: 0 0 32px rgba(..., 0.25)",
+      "padding": "var(--space-2) on badge, var(--space-16) vertical on section",
+      "text": "Various sizes defined in CSS module"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "section",
+      "ariaProps": ["aria-label", "tabIndex={0}", "role='group'"],
+      "focusManagement": "focus-visible:outline on badges"
+    },
+    "dependencies": ["react", "lucide-react (Shield, Award, Heart)", "./TrustSignals.css"],
+    "description": "Three-column grid of trust indicators with icons, titles, and descriptions following Japanese design principles"
+  },
+  {
+    "name": "BladeAccordion",
+    "path": "src/components/ui/BladeAccordion.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "No props for main component - maps artist data internally from @/data/artists",
+      "required": [],
+      "optional": []
+    },
+    "variants": {
+      "breakpoint": ["mobile", "tablet", "desktop"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[#0a0a0a] with gradient overlays",
+      "border": "border-r border-white/10",
+      "radius": "none on blades",
+      "shadow": "none",
+      "padding": "p-6 lg:p-16 on content, p-8 on mobile",
+      "text": "text-white with various sizes, tracking-tight/wide for headings"
+    },
+    "motion": {
+      "usesFramerMotion": true,
+      "animatedElements": ["motion.div (blade expansion)", "motion.button (hover/tap)", "AnimatePresence for state transitions"]
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='button'",
+      "ariaProps": ["aria-label"],
+      "focusManagement": "Keyboard navigation, tabIndex support, respects prefers-reduced-motion"
+    },
+    "dependencies": ["react", "framer-motion", "react-router-dom", "@/data/artists"],
+    "description": "Full-height horizontal blade accordion for artist profiles with grayscale-to-color transitions and responsive mobile stack"
+  },
+  {
+    "name": "Card",
+    "path": "src/components/ui/Card.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {\n  asChild?: boolean;\n}",
+      "required": [],
+      "optional": ["variant?", "size?", "className?", "asChild?"]
+    },
+    "variants": {
+      "variant": ["default", "featured", "elevated"],
+      "size": ["default", "sm", "lg"]
+    },
+    "styling": {
+      "method": "CVA (class-variance-authority) + Tailwind",
+      "background": "bg-[var(--surface-card-bg)]",
+      "border": "border-2 border-[var(--surface-card-border)]",
+      "radius": "rounded-[24px]",
+      "shadow": "shadow-[var(--surface-card-shadow)] (varies by variant)",
+      "padding": "p-8 (default), p-6 (sm), p-10 (lg)",
+      "text": "inherited"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)] focus-visible:ring-offset-4"
+    },
+    "dependencies": ["react", "class-variance-authority", "@/lib/utils"],
+    "description": "Flexible card primitive with variant and size options using design system tokens"
+  },
+  {
+    "name": "Container",
+    "path": "src/components/ui/Container.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivElement>> {\n  readonly children: React.ReactNode;\n  readonly size?: ContainerSize;\n}\n\nexport type ContainerSize = 'default' | 'narrow' | 'wide' | 'full';",
+      "required": ["children"],
+      "optional": ["size?", "className?"]
+    },
+    "variants": {
+      "size": ["default (1280px)", "narrow (960px)", "wide (1600px)", "full (no max-width)"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "none",
+      "border": "none",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "px-4 sm:px-6 lg:px-8 (responsive)",
+      "text": "inherited"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "None"
+    },
+    "dependencies": ["react"],
+    "description": "Responsive container component with max-width variants and consistent horizontal padding"
+  },
+  {
+    "name": "Section",
+    "path": "src/components/ui/Section.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {\n  children: React.ReactNode;\n  bg?: SectionBg;\n  containerSize?: ContainerSize;\n  as?: SectionElement;\n  className?: string;\n}\n\nexport type SectionBg = 'none' | 'base' | 'dark' | 'darker' | 'darkest' | 'chrome';\ntype SectionElement = 'section' | 'article' | 'div' | 'main' | 'aside';",
+      "required": ["children"],
+      "optional": ["bg?", "containerSize?", "as?", "className?"]
+    },
+    "variants": {
+      "bg": ["none", "base", "dark (default)", "darker", "darkest", "chrome"],
+      "as": ["section (default)", "article", "div", "main", "aside"],
+      "containerSize": ["default", "narrow", "wide", "full"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "varies by bg prop (bg-luxury-bg-base, bg-luxury-bg-dark, etc.)",
+      "border": "none",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "py-16 md:py-20 lg:py-24 (responsive vertical)",
+      "text": "inherited"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "Configurable via 'as' prop",
+      "ariaProps": [],
+      "focusManagement": "None"
+    },
+    "dependencies": ["react", "./Container"],
+    "description": "Page section wrapper with background variants, responsive padding, and automatic Container wrapping"
+  },
+  {
+    "name": "LuxuryButton",
+    "path": "src/components/ui/LuxuryButton.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "interface LuxuryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'surface' | 'chrome-dark' | 'chrome-light' | 'metallic';\n  size?: 'sm' | 'md' | 'lg';\n}",
+      "required": [],
+      "optional": ["variant?", "size?", "className?"]
+    },
+    "variants": {
+      "variant": ["surface (default)", "chrome-dark", "chrome-light", "metallic"],
+      "size": ["sm", "md (default)", "lg"]
+    },
+    "styling": {
+      "method": "Tailwind + cn utility",
+      "background": "bg-white (surface), bg-luxury-accent-chrome (chrome-dark), bg-luxury-accent-chrome-safe (chrome-light), button-chrome-metallic gradient (metallic)",
+      "border": "border border-luxury-border-light (surface)",
+      "radius": "rounded-lg",
+      "shadow": "hover:shadow-luxury-lg, hover:shadow-chrome-glow (chrome variants)",
+      "padding": "px-4 py-2 (sm), px-6 py-3 (md), px-8 py-4 (lg)",
+      "text": "text-luxury-text-primary or text-white based on variant"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "button",
+      "ariaProps": [],
+      "focusManagement": "focus-ring-universal"
+    },
+    "dependencies": ["react", "@/lib/utils"],
+    "description": "Luxury design system button with chrome and surface variants optimized for contrast ratios"
+  },
+  {
+    "name": "Button",
+    "path": "src/components/ui/button.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}",
+      "required": [],
+      "optional": ["variant?", "size?", "className?", "asChild?"]
+    },
+    "variants": {
+      "variant": ["default", "destructive", "outline", "secondary", "ghost", "link", "chrome", "outlineChrome", "ghostChrome", "gold (deprecated)", "outlineGold (deprecated)", "ghostGold (deprecated)"],
+      "size": ["default", "sm", "lg", "icon"]
+    },
+    "styling": {
+      "method": "CVA + Tailwind",
+      "background": "varies by variant (bg-primary, bg-[var(--brand-accent)], transparent, etc.)",
+      "border": "border on outline variants",
+      "radius": "rounded-md",
+      "shadow": "none",
+      "padding": "px-4 py-2 (default), px-3 (sm), px-8 (lg)",
+      "text": "text-sm font-medium, colors vary by variant"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "button or Slot",
+      "ariaProps": [],
+      "focusManagement": "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    },
+    "dependencies": ["react", "@radix-ui/react-slot", "class-variance-authority", "../../lib/utils"],
+    "description": "Versatile button component with multiple variants including chrome/gold accents for design system"
+  },
+  {
+    "name": "MedusaInput",
+    "path": "src/components/ui/input/MedusaInput.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "export interface MedusaInputProps extends InputHTMLAttributes {\n  label?: string;\n  helper?: string;\n  error?: string | boolean;\n  leftIcon?: React.ReactNode;\n  rightIcon?: React.ReactNode;\n  wrapperClassName?: string;\n  className?: string;\n  hideLabel?: boolean;\n  fullWidth?: boolean;\n}",
+      "required": [],
+      "optional": ["label?", "helper?", "error?", "leftIcon?", "rightIcon?", "wrapperClassName?", "className?", "hideLabel?", "fullWidth?"]
+    },
+    "variants": {
+      "fullWidth": ["true (default)", "false"],
+      "error": ["false", "true", "string message"]
+    },
+    "styling": {
+      "method": "Tailwind + cn utility",
+      "background": "bg-[rgba(34,34,34,0.8)]",
+      "border": "border border-[rgba(192,192,192,0.3)], red-500 on error",
+      "radius": "rounded-md",
+      "shadow": "focus:shadow-[0_0_10px_rgba(212,175,55,0.2)], focus:shadow-[0_0_0_1px_#ef4444] on error",
+      "padding": "min-h-[42px] px-4 py-2.5 md:min-h-[40px] md:py-2, pl-12/pr-12 with icons",
+      "text": "text-base text-white placeholder:text-white/40"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "label + input",
+      "ariaProps": ["aria-invalid", "aria-describedby"],
+      "focusManagement": "focus:outline-none focus:border-[var(--brand-gold)]"
+    },
+    "dependencies": ["react", "../utils (cn)"],
+    "description": "Unified input component with label, helper text, error states, icon support, and consistent styling"
+  },
+  {
+    "name": "HeroParallax",
+    "path": "src/components/ui/hero-parallax.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "{\n  products: {\n    title: string;\n    link: string;\n    thumbnail: string;\n    fallbackSrc?: string;\n    priority?: boolean;\n  }[];\n}",
+      "required": ["products"],
+      "optional": []
+    },
+    "variants": {},
+    "styling": {
+      "method": "Tailwind + inline motion styles",
+      "background": "transparent with inset-0 overlays (bg-black opacity-0 group-hover:opacity-80)",
+      "border": "none",
+      "radius": "none on cards",
+      "shadow": "group-hover/product:shadow-2xl",
+      "padding": "pb-ma-md on container, p-[var(--space-2)] on header",
+      "text": "text-5xl md:text-6xl lg:text-7xl text-brand-accent for heading"
+    },
+    "motion": {
+      "usesFramerMotion": true,
+      "animatedElements": ["motion.div (parallax scroll transforms)", "motion.button (CTA)", "ProductCard with x translate and whileHover"]
+    },
+    "accessibility": {
+      "semanticHTML": "div",
+      "ariaProps": [],
+      "focusManagement": "Respects prefers-reduced-motion, focus styles on CTA button"
+    },
+    "dependencies": ["react", "framer-motion", "@/contexts/LanguageContext"],
+    "description": "Parallax scrolling hero section with 3D transforms, rotating product grid, and responsive image loading"
+  },
+  {
+    "name": "LayoutGrid",
+    "path": "src/components/ui/layout-grid.tsx",
+    "category": "ui-primitive",
+    "props": {
+      "interface": "export type Card = {\n  id: number;\n  title: string;\n  thumbnail: string;\n  fallbackSrc?: string;\n  className?: string;\n  content: React.ReactNode;\n};\n\ninterface LayoutGridProps {\n  cards: Card[];\n}",
+      "required": ["cards"],
+      "optional": []
+    },
+    "variants": {
+      "selected": ["null", "Card"]
+    },
+    "styling": {
+      "method": "Tailwind + CSS custom properties",
+      "background": "bg-[rgb(10,10,10)]",
+      "border": "none",
+      "radius": "rounded-lg",
+      "shadow": "hover:shadow-[0_0_20px_rgba(192,192,192,0.3)]",
+      "padding": "p-6 md:p-8 on container, px-8 pb-4 on selected content",
+      "text": "varies"
+    },
+    "motion": {
+      "usesFramerMotion": true,
+      "animatedElements": ["motion.div (card expansion)", "motion.img (layoutId)", "AnimatePresence for overlay"]
+    },
+    "accessibility": {
+      "semanticHTML": "div with role='button'",
+      "ariaProps": ["aria-label", "aria-hidden on spotlight"],
+      "focusManagement": "tabIndex={0}, onKeyDown for Enter, focus-visible:outline-none focus-visible:ring-2"
+    },
+    "dependencies": ["react", "framer-motion", "@/lib/utils"],
+    "description": "Interactive grid layout with spotlight effect, card expansion, and modal-like selection behavior"
+  },
+  {
+    "name": "ArtistCard",
+    "path": "src/components/cards/ArtistCard.tsx",
+    "category": "card",
+    "props": {
+      "interface": "export interface Artist {\n  id: string;\n  name: string;\n  discipline: string;\n  description: string | null;\n  image_url: string | null;\n  display_order: number;\n}\n\ninterface ArtistCardProps {\n  artist: Artist;\n  isRevealed: boolean;\n  index: number;\n}",
+      "required": ["artist", "isRevealed", "index"],
+      "optional": []
+    },
+    "variants": {
+      "isEven": ["true", "false (alternates layout)"],
+      "isRevealed": ["false", "true"]
+    },
+    "styling": {
+      "method": "Tailwind",
+      "background": "bg-[#0a0a0a]",
+      "border": "border border-white/10",
+      "radius": "none",
+      "shadow": "none",
+      "padding": "px-8 lg:px-16 py-12",
+      "text": "text-white text-4xl lg:text-5xl xl:text-6xl for name, text-white/60 text-sm for discipline"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "div with grid layout",
+      "ariaProps": [],
+      "focusManagement": "None"
+    },
+    "dependencies": ["react"],
+    "description": "Japanese-inspired artist card with curtain reveal animation and alternating two-column layout"
+  },
+  {
+    "name": "ArtistCardJapanese",
+    "path": "src/components/cards/ArtistCardJapanese.tsx",
+    "category": "card",
+    "props": {
+      "interface": "interface ArtistRole {\n  name: string;\n  icon: string;\n}\n\ninterface ArtistCardJapaneseProps {\n  name: string;\n  role: ArtistRole;\n  specialties: string[];\n  experience: string;\n  instagramHandle: string;\n  imageUrl: string;\n  className?: string;\n  onClick?: () => void;\n  onBookClick?: () => void;\n  onGalleryClick?: () => void;\n  bookHref?: string;\n  galleryHref?: string;\n  imagePosition?: string;\n  isSelected?: boolean;\n  variant?: 'light' | 'dark';\n}",
+      "required": ["name", "role", "specialties", "experience", "instagramHandle", "imageUrl"],
+      "optional": ["className?", "onClick?", "onBookClick?", "onGalleryClick?", "bookHref?", "galleryHref?", "imagePosition?", "isSelected?", "variant?"]
+    },
+    "variants": {
+      "variant": ["light (default)", "dark"],
+      "isSelected": ["false", "true"]
+    },
+    "styling": {
+      "method": "Tailwind with static variant classes",
+      "background": "bg-luxury-bg-surface (light), bg-luxury-bg-dark-elevated (dark), linear gradients for bokashi effect",
+      "border": "border-luxury-border-subtle (light), border-luxury-border-on-dark (dark)",
+      "radius": "borderRadius: '6px 8px 7px 9px' (wabi-sabi irregular)",
+      "shadow": "shadow-luxury hover:shadow-luxury-lg",
+      "padding": "p-ma-xs on content overlay",
+      "text": "text-luxury-text-inverse, text-luxury-text-inverse-muted for various elements"
+    },
+    "motion": {
+      "usesFramerMotion": false,
+      "animatedElements": []
+    },
+    "accessibility": {
+      "semanticHTML": "button or article based on onClick",
+      "ariaProps": ["aria-label", "aria-label on links"],
+      "focusManagement": "focus-visible:ring-2, keyboard navigation with Enter/Space"
+    },
+    "dependencies": ["react"],
+    "description": "Japanese aesthetic artist card with Ma spacing, Bokashi gradients, Wabi-sabi irregular borders, and Kasane-no-irome layering"
+  }
+]

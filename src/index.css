@@ -1,15 +1,58 @@
+/**
+ 
+ DESKTOP BREAKPOINT (≥1024px) IS PRODUCTION-LOCKED
+ 
+ DO NOT MODIFY desktop styles, layouts, or spacing.
+ 
+ All responsive work targets tablet/mobile/large-mobile only.
+ 
+*/
 /* Tailwind v4 directives - MUST be first */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-/* Font imports - expanded weights */
+/* Font imports - must be right after tailwindcss import */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Design system - contains all tokens, base styles and components */
 @import './styles/design-system.css';
 @import './styles/utility-classes.css';
+@import './styles/micro-interactions.css';
+/* Section transition animations */
+@import './styles/section-transitions.css';
 /* Restored responsive layout primitives (phone frame fix) */
 @import './styles/responsive-layout.css';
+
+/* Tailwind v4 config and source - after all @imports */
+@config "../tailwind.config.mjs";
+@source "../src/**/*.{js,jsx,ts,tsx}";
+@source "../index.html";
+
+/* Force Tailwind v4 to generate footer chrome surface utilities - must come after all @imports */
+@source inline("bg-luxury-bg-chrome text-luxury-text-primary");
+
+/* Force Tailwind v4 to generate luxury tokens and ma spacing (safelist patterns don't work in v4) */
+@source inline("bg-luxury-bg-chrome bg-luxury-bg-dark bg-luxury-bg-base bg-luxury-bg-surface bg-luxury-bg-elevated bg-luxury-bg-dark-elevated bg-luxury-bg-dark-hover");
+@source inline("text-luxury-text-primary text-luxury-text-secondary text-luxury-text-tertiary text-luxury-text-muted text-luxury-text-inverse text-luxury-text-inverse-muted");
+@source inline("border-luxury-border-subtle border-luxury-border-light border-luxury-border-medium border-luxury-border-dark border-luxury-border-on-dark border-luxury-border-chrome");
+@source inline("shadow-luxury shadow-luxury-sm shadow-luxury-lg shadow-luxury-xl shadow-chrome-glow shadow-chrome-lift shadow-chrome-glow-subtle");
+@source inline("py-ma-xs py-ma-sm py-ma-md py-ma-lg py-ma-xl px-ma-xs px-ma-sm px-ma-md px-ma-lg px-ma-xl p-ma-xs p-ma-sm p-ma-md p-ma-lg p-ma-xl");
+@source inline("mt-ma-xs mt-ma-sm mt-ma-md mt-ma-lg mt-ma-xl mb-ma-xs mb-ma-sm mb-ma-md mb-ma-lg mb-ma-xl gap-ma-xs gap-ma-sm gap-ma-md gap-ma-lg gap-ma-xl");
+
+/* Hero depth blur and chrome reveal animation classes */
+@source inline("hero-frame-active hero-frame-inactive chrome-border-reveal chrome-border-glow chrome-border-glow-static chrome-divider");
+
+/* Cool Lines effect system classes */
+@source inline("cool-lines-card cool-lines-divider cool-lines-cta");
+
+/* Dynamic class patterns found in audit - ServiceCard accent system, form states, overlays */
+@source inline("bg-white/3 bg-white/5 bg-white/10 bg-luxury-bg-dark/20 bg-luxury-bg-dark/30 bg-luxury-bg-dark/40 bg-luxury-bg-dark/50 bg-luxury-bg-dark/60");
+@source inline("hover:bg-brand-accent/10 hover:bg-luxury-bg-chrome/10");
+@source inline("ring-brand-accent ring-luxury-border-chrome focus:ring-brand-accent focus:ring-luxury-border-chrome");
+
+/* ServiceCard accent color system - computed at runtime via accent object lookup */
+@source inline("text-brand-accent bg-brand-accent border-brand-accent bg-brand-accent/10 hover:bg-brand-accent hover:text-brand-background");
+@source inline("text-brand-chrome bg-brand-chrome border-brand-chrome bg-brand-chrome/10 hover:bg-brand-chrome hover:text-brand-background");
 
 /* Critical: Full viewport height for React SPA */
 html,
@@ -19,8 +62,19 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
+  /* FOUNDATION: Lock dark background at root level */
+  background-color: var(--deep-black, #0a0a0a);
+  color: var(--color-text-primary, #ffffff);
+}
+
+/* FIXED: Allow vertical scroll but prevent horizontal overflow */
+html {
+  scroll-behavior: smooth;
+  /* Offset scroll for fixed header so anchors don't hide under nav */
+  scroll-padding-top: var(--header-height, 80px);
 }
 
 body {
   overflow-y: auto;
+  overflow-x: clip;
 }

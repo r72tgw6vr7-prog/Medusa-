@@ -1,8 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-// Import translation files
-import deTranslations from '@/locales/de.json';
-import enTranslations from '@/locales/en.json';
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useTransition, ReactNode } from 'react';
+import { getI18nInstance, getLocale, setLocale, splitTranslationKey, NAMESPACES } from '@/i18n';
 
 // Define supported languages
 export type Language = 'de' | 'en';
@@ -12,6 +9,7 @@ export interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  isChangingLanguage: boolean;
 }
 
 // Create the context
@@ -27,71 +25,67 @@ interface LanguageProviderProps {
  * Manages language state and provides translation functionality
  */
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  // State for current language (default to browser language or 'de')
-  const [language, setLanguageState] = useState<Language>(() => {
-    try {
-      // Try to get from localStorage first
-      const savedLanguage = localStorage.getItem('language') as Language;
-      if (savedLanguage === 'de' || savedLanguage === 'en') {
-        return savedLanguage;
-      }
+  const i18n = getI18nInstance();
+  const [language, setLanguageState] = useState<Language>(() => getLocale());
+  const [isPending, startTransition] = useTransition();
 
-      // If not in localStorage, try browser language
-      const browserLang = navigator.language.split('-')[0];
-      if (browserLang === 'de' || browserLang === 'en') {
-        return browserLang as Language;
-      }
-    } catch (e) {
-      // Handle errors that might occur during testing
-      console.warn('Error accessing localStorage or navigator:', e);
-    }
+  const setLanguage = useCallback((lang: Language) => {
+    if (lang === language) return;
+    
+    // Preload all namespaces for the new language before switching
+    const preloadPromises = NAMESPACES.map(ns => 
+      i18n.loadNamespaces([ns]).catch(() => {})
+    );
+    
+    // Use startTransition to mark the language change as non-urgent
+    // This prevents the UI from flashing during the async operation
+    Promise.all(preloadPromises).then(() => {
+      startTransition(() => {
+        void setLocale(lang);
+      });
+    });
+  }, [language, i18n]);
 
-    // Default to German
-    return 'de';
-  });
-
-  // Get translations based on language
-  const translations = language === 'de' ? deTranslations : enTranslations;
-
-  // Function to set language and save to localStorage
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem('language', lang);
-  };
-
-  // Effect to save language to localStorage when it changes
   useEffect(() => {
-    localStorage.setItem('language', language);
-    // Update document lang attribute
-    document.documentElement.lang = language;
-  }, [language]);
+    const handler = (_lng: string) => {
+      setLanguageState((prev) => {
+        const next = getLocale();
+        return prev === next ? prev : next;
+      });
+    };
+
+    i18n.on('languageChanged', handler);
+    return () => {
+      i18n.off('languageChanged', handler);
+    };
+  }, [i18n]);
 
   /**
    * Translation function to get string by key
    * Supports nested keys like 'nav.home'
+   * Now depends on language state to re-render when language changes
    */
-  const t = (key: string): string => {
-    const keys = key.split('.');
-    let value: Record<string, unknown> | string | undefined = translations;
+  const t = useMemo(() => {
+    return (fullKey: string): string => {
+      const { namespace, key } = splitTranslationKey(fullKey);
 
-    for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k] as Record<string, unknown> | string;
-      } else {
-        console.warn(`Translation key not found: ${key}`);
-        return key; // Return the key if translation not found
+      // Check if namespace is loaded for CURRENT language (not just any language)
+      if (!i18n.hasResourceBundle(language, namespace)) {
+        // Synchronously trigger load - the useTransition in setLanguage handles the async waiting
+        void i18n.loadNamespaces([namespace]);
       }
-    }
 
-    return typeof value === 'string' ? value : key;
-  };
+      return i18n.t(key, { ns: namespace });
+    };
+  }, [i18n, language]);
 
-  // Context value
-  const contextValue: LanguageContextType = {
+  // Context value - memoize to prevent unnecessary re-renders
+  const contextValue: LanguageContextType = useMemo(() => ({
     language,
     setLanguage,
     t,
-  };
+    isChangingLanguage: isPending,
+  }), [language, setLanguage, t, isPending]);
 
   return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 };

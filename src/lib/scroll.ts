@@ -5,7 +5,7 @@
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 declare global {
   interface Window {
@@ -27,12 +27,12 @@ interface ScrollConfig {
 }
 
 const defaultConfig: ScrollConfig = {
-  smoothScroll: true,
+  smoothScroll: false, // DISABLED - Using native CSS smooth scroll for better performance
   debugMode: false, // Toggle with window.__SCROLL_DEBUG
   mobileDisabled: true, // Disable smooth scroll on mobile
-  parallaxEnabled: true,
-  sectionElevationEnabled: true,
-  revealOnScrollEnabled: true,
+  parallaxEnabled: false, // DISABLED - Too heavy, causes slowness
+  sectionElevationEnabled: false, // DISABLED - Too heavy, causes slowness
+  revealOnScrollEnabled: false, // DISABLED - Too heavy, causes slowness
 };
 
 // Main scroll controller
@@ -43,7 +43,6 @@ class ScrollController {
   private prefersReducedMotion: boolean;
   private initialized: boolean = false;
   private rafId: number = 0;
-  private gsapTickerCallback: ((time: number) => void) | null = null;
   private scrollTweens: gsap.core.Tween[] = [];
   private scrollTriggers: ScrollTrigger[] = [];
 
@@ -100,28 +99,36 @@ class ScrollController {
     // Add Lenis classes to document
     document.documentElement.classList.add('lenis', 'lenis-smooth');
 
-    // Initialize Lenis
+    // Initialize Lenis with PERFORMANCE-OPTIMIZED settings (faster, less smooth but snappier)
     this.lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Improved exponential easing
+      duration: 0.8, // REDUCED from 1.4 - Faster response
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out (faster)
+      gestureOrientation: 'vertical',
       orientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      // Lower smoothing on mobile if not disabled entirely
-      ...(this.isMobile && { duration: 0.8, touchMultiplier: 1.5 }),
+      wheelMultiplier: 1.2, // INCREASED from 0.8 - Faster scrolling
+      touchMultiplier: 1.8, // INCREASED from 1.5 - More responsive touch
+      infinite: false,
+      // Faster on mobile too
+      ...(this.isMobile && { duration: 0.6, touchMultiplier: 2.0 }),
     });
+
+    // Drive Lenis from native RAF (avoid GSAP ticker hijacking)
+    const raf = (time: number) => {
+      if (!this.lenis) return;
+      this.lenis.raf(time);
+      this.rafId = requestAnimationFrame(raf);
+    };
+    this.rafId = requestAnimationFrame(raf);
 
     // Keep ScrollTrigger in sync with Lenis
     this.lenis.on('scroll', ScrollTrigger.update);
-
-    // Drive Lenis from GSAP ticker (single frame loop)
-    gsap.ticker.lagSmoothing(0);
-    this.gsapTickerCallback = (time) => {
-      if (!this.lenis) return;
-      this.lenis.raf(time * 1000); // Convert GSAP time to milliseconds
-    };
-    gsap.ticker.add(this.gsapTickerCallback);
+    
+    // Configure ScrollTrigger defaults - MINIMAL refreshing
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+    });
   }
 
   /**
@@ -130,6 +137,10 @@ class ScrollController {
   private initScrollAnimations(): void {
     // Apply effects only if motion is not reduced
     if (this.prefersReducedMotion) return;
+
+    // DISABLED ALL ANIMATIONS FOR PERFORMANCE
+    // Keeping this function for future use if needed
+    return;
 
     // Initialize different animation types based on config
     if (this.config.parallaxEnabled) {
@@ -175,7 +186,7 @@ class ScrollController {
         speedFactor = parseFloat(layer.dataset.parallaxSpeed);
       }
 
-      // Create parallax effect
+      // Create parallax effect with smooth scrubbing
       const tween = gsap.to(layer, {
         y: () => {
           const scrollDistance = window.scrollY;
@@ -185,7 +196,7 @@ class ScrollController {
         scrollTrigger: {
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
+          scrub: 1.2, // Smooth scrub - higher = smoother but more lag
         },
       });
 
@@ -261,7 +272,8 @@ class ScrollController {
         end: '+=120%', // Pin for 120% of viewport height
         pin: true,
         pinSpacing: true,
-        scrub: 0.6, // Smooth scrubbing effect
+        scrub: 1.5, // Smoother scrubbing (higher = smoother)
+        anticipatePin: 1, // Prevents jump when pinning starts
       });
 
       this.scrollTriggers.push(trigger);
@@ -278,7 +290,8 @@ class ScrollController {
           end: `+=${pinDuration}`,
           pin: true,
           pinSpacing: true,
-          scrub: 0.6,
+          scrub: 1.5,
+          anticipatePin: 1,
         });
 
         this.scrollTriggers.push(trigger);
@@ -296,12 +309,23 @@ class ScrollController {
     // If motion is reduced, we keep everything disabled.
     if (this.prefersReducedMotion) return;
 
-    // Kill only triggers/tweens created by this controller.
+    // Kill controller-owned triggers/tweens first
     this.scrollTriggers.forEach((trigger) => trigger.kill());
     this.scrollTriggers = [];
 
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
+    // CRITICAL: Kill ALL ScrollTrigger instances globally to prevent memory leaks
+    // This catches any ScrollTriggers created by other components (framer-motion, etc.)
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    
+    // Clear any GSAP tweens that might be orphaned
+    gsap.killTweensOf('*');
+
+    // Refresh ScrollTrigger to clear internal state
+    ScrollTrigger.clearScrollMemory();
+    ScrollTrigger.refresh(true);
+
 
     this.initScrollAnimations();
   }
@@ -362,6 +386,13 @@ class ScrollController {
       // Resume animations when tab is visible again
       if (this.lenis) {
         this.lenis.start();
+        const raf = (time: number) => {
+          if (!this.lenis) return;
+          this.lenis.raf(time);
+          this.rafId = requestAnimationFrame(raf);
+        };
+        cancelAnimationFrame(this.rafId);
+        this.rafId = requestAnimationFrame(raf);
       }
     }
   };
@@ -401,10 +432,6 @@ class ScrollController {
    * Clean up Lenis instance
    */
   private destroyLenis(): void {
-    if (this.gsapTickerCallback) {
-      gsap.ticker.remove(this.gsapTickerCallback);
-      this.gsapTickerCallback = null;
-    }
     if (this.lenis) {
       this.lenis.destroy();
       this.lenis = null;
@@ -432,9 +459,12 @@ class ScrollController {
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
 
-    // Kill all ScrollTrigger instances
+    // Kill all ScrollTrigger instances and clear memory
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    ScrollTrigger.refresh();
+    gsap.killTweensOf('*');
+    ScrollTrigger.normalizeScroll(false); // Disable normalized scroll
+    ScrollTrigger.clearScrollMemory();
+    ScrollTrigger.refresh(true);
 
     // Remove debug overlay
     const overlay = document.querySelector('.scroll-debug-overlay');
@@ -482,6 +512,14 @@ class ScrollController {
         window.scrollTo({ top: target, behavior: 'smooth', ...options });
       }
     }
+
+  }
+
+  /**
+   * Get the Lenis instance for direct access
+   */
+  public getLenis(): Lenis | null {
+    return this.lenis;
   }
 }
 

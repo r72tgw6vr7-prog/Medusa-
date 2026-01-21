@@ -1,0 +1,61 @@
+// Import scheduler first to ensure it's initialized before React tries to use it
+import 'scheduler';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css'; // Imports system.css now
+import { DiamondRippleBackground } from '@/components/ui/DiamondRippleBackground';
+
+declare global {
+  interface Window {
+    __ACTIVE_SCROLLTRIGGERS?: number;
+  }
+}
+// Import smooth scroll system (dev-only: avoids bundling GSAP/ScrollTrigger/Lenis into prod critical path)
+if (import.meta.env.DEV) {
+  void import('@/lib/scrollEnhance');
+}
+import { initI18n } from '@/i18n';
+
+if (import.meta.env.DEV) {
+  const intervalId = window.setInterval(() => {
+    if (!window.__SCROLL_DEBUG) return;
+    void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      window.__ACTIVE_SCROLLTRIGGERS = ScrollTrigger.getAll().length;
+    });
+  }, 2000);
+
+  let stopFps: (() => void) | null = null;
+
+  void import('@/utils/performance').then(({ initPerformanceMonitoring, initFpsMonitoring }) => {
+    void initPerformanceMonitoring();
+    stopFps = initFpsMonitoring();
+  });
+
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      window.clearInterval(intervalId);
+      stopFps?.();
+    });
+  }
+}
+
+void initI18n().finally(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <>
+        {/* Universal diamond background - fixed behind everything */}
+        <DiamondRippleBackground
+          diamondSVG='/Vector.svg'
+          className='fixed inset-0 z-0'
+          rows={14}
+          cols={36}
+          cellSize={52}
+          interactive
+        />
+        {/* App rendered ON TOP with relative z-index */}
+        <App />
+      </>
+    </React.StrictMode>,
+  );
+});

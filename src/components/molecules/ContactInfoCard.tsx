@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from '../atoms/Icon';
+import { Card } from '../ui/Card';
 
 interface ContactInfoCardProps {
   icon: string;
@@ -10,29 +11,29 @@ interface ContactInfoCardProps {
 }
 
 export const ContactInfoCard: React.FC<ContactInfoCardProps> = ({
-  icon,
+  icon: _icon,
   title,
   value,
   href,
   className = '',
 }) => {
   const content = (
-    <div
-      className={`flex items-start p-6 bg-[var(--deep-black)] rounded-lg border border-solid border-[#C0BFBF33] ${className}`}
-    >
-      <Icon size={24} className='text-[var(--brand-gold)] mr-8' />
-      <div className='flex flex-col'>
-        <span className='text-[#C0BFBF] text-sm mb-0'>{title}</span>
-        <span className='text-white text-base'>{value}</span>
+    <Card variant="default" size="sm" asChild>
+      <div className={`flex items-start ${className}`}>
+        <Icon size={24} className='text-brand-accent mr-4 md:mr-6' />
+        <div className='flex flex-col'>
+          <span className='text-brand-chrome text-sm mb-0'>{title}</span>
+          <span className='text-luxury-text-inverse text-base'>{value}</span>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 
   if (href) {
     return (
       <a
         href={href}
-        className='block hover:opacity-90 transition-opacity transition duration-200 ease-out'
+        className='block hover:opacity-90 transition-opacity duration-200 ease-out'
         target='_blank'
         rel='noopener noreferrer'
       >

@@ -2,6 +2,8 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "tattoos": "Tattoos",
+    "piercings": "Piercings",
     "artists": "Artists",
     "gallery": "Gallery",
     "pricing": "Pricing",
@@ -13,14 +15,50 @@
     "closeMenu": "Close menu"
   },
   "hero": {
-    "title": "Luxury Tattoo Art in Munich",
-    "subtitle": "Masterful Tattoos since 2010",
-    "cta": "Book Appointment"
+    "title": "Where Others Chase Trends, We Define Them.",
+    "subtitle": "30 years. 30,000 tattoos. Every genre mastered.",
+    "cta": "Let's Talk About Yours"
   },
   "footer": {
     "copyright": " 2025 Medusa Tattoo Munich. All rights reserved.",
     "legal": "Imprint",
     "privacy": "Privacy Policy"
+  },
+  "meta": {
+    "home": {
+      "title": "Medusa Tattoo Munich – Premium Tattoo & Piercing Studio in Munich",
+      "description": "Premium tattoo and piercing studio in Munich. Consultation, transparent pricing, highest hygiene standards and experienced artists."
+    },
+    "services": {
+      "title": "Medusa Tattoo Munich | Services",
+      "description": "Tattoo and piercing services – transparent pricing, consultation and hygiene standards."
+    },
+    "artists": {
+      "title": "Medusa Tattoo Munich | Artists",
+      "description": "Meet our team of specialized tattoo artists. Portfolios and booking information."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "A collection of works from our artists – explore styles and inspiration."
+    },
+    "booking": {
+      "title": "Book Appointment",
+      "description": "Schedule a consultation for your next tattoo or piercing.",
+      "h1": "Book Appointment",
+      "subtitle": "Schedule a consultation for your next tattoo or piercing."
+    },
+    "faq": {
+      "title": "FAQ | Medusa Tattoo Munich",
+      "description": "Answers about appointments, aftercare, pricing and hygiene."
+    },
+    "contact": {
+      "title": "Contact | Medusa Tattoo Munich",
+      "description": "Contact us — address, phone, email and opening hours."
+    },
+    "agb": {
+      "title": "Terms & Conditions | Medusa Tattoo Munich",
+      "description": "General terms and conditions for services and bookings."
+    }
   },
   "gallery": {
     "title": "Gallery",
@@ -38,5 +76,120 @@
     "heading": "Before & After",
     "before": "Before",
     "after": "After"
+  },
+  "gallery": {
+    "noResults": "No artworks found"
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title": "Contact",
+    "subtitle": "We guide you from the first idea to the final masterpiece. Send us a message and we'll reply shortly.",
+    "labels": {
+      "name": "Name",
+      "email": "E-mail",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "email": "your.email@example.com",
+      "subject": "What's this about?",
+      "message": "Your message to us..."
+    },
+    "successTitle": "Message sent!",
+    "successBody": "Thank you for your message. We'll get back to you as soon as possible."
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "minLength": "Must be at least {{count}} characters",
+    "maxLength": "Must be at most {{count}} characters"
+  },
+  "booking": {
+    "labels": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Number of Guests",
+      "specialRequests": "Special Requests (Optional)"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "your@email.com",
+      "phone": "+1 (123) 456-7890",
+      "time": "Select a time",
+      "specialRequests": "Any special requirements or notes..."
+    },
+    "submit": "Book Now",
+    "submitting": "Submitting...",
+    "maxChars": "Maximum 500 characters",
+    "toasts": {
+      "success": "Booking submitted",
+      "successBody": "We'll contact you shortly to confirm your reservation.",
+      "error": "Failed to submit booking",
+      "errorBody": "Please try again or contact us directly."
+    },
+    "modal": {
+      "title": "Book Appointment",
+      "personalTitle": "Your details",
+      "serviceQuestion": "What would you like to book?",
+      "projectLabel": "Project details (optional)",
+      "next": "Next",
+      "back": "Back",
+      "close": "Close"
+    },
+    "payment": {
+      "title": "Payment",
+      "methodLabel": "Payment Method",
+      "cash": "Cash",
+      "card": "Card",
+      "bankTransfer": "Bank Transfer",
+      "submitBooking": "Request Appointment"
+    },
+    "loading": {
+      "submitting": "Your booking is being submitted..."
+    },
+    "error": {
+      "title": "Something went wrong",
+      "retry": "Try again",
+      "retryLoading": "Trying to resend...",
+      "completeAllSteps": "Please complete all steps"
+    },
+    "confirmation": {
+      "title": "Appointment confirmed!",
+      "subtitle": "Your appointment request has been successfully submitted.",
+      "bookingNumber": "Booking Number:",
+      "service": "Service:",
+      "date": "Date:",
+      "emailNote": "We have sent a confirmation email with all details. Please check your inbox and spam folder.",
+      "closeButton": "Close"
+    },
+    "gdpr": {
+      "consent": "I agree to the processing of my data according to the privacy policy.*"
+    },
+    "services": {
+      "tattoo": {
+        "title": "Tattoo Artistry",
+        "price": "from €150/hr",
+        "features": {
+          "custom": "Custom Designs",
+          "experienced": "Experienced Artists",
+          "hygiene": "Highest Hygiene Standards",
+          "consultation": "Personal Consultation"
+        }
+      },
+      "piercing": {
+        "title": "Piercing",
+        "price": "from €30",
+        "features": {
+          "consultation": "Professional Consultation",
+          "quality": "High-Quality Jewelry",
+          "sterile": "Sterile Working",
+          "aftercare": "Comprehensive Aftercare"
+        }
+      }
+    }
   }
 }

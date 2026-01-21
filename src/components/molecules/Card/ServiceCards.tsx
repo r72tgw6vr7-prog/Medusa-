@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from '../../ui/Section';
 import { Button } from '../../ui/button';
+import { SectionHeading } from '../../SectionHeading';
 
 interface ServiceCard {
   id: string;
@@ -62,23 +63,19 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
   return (
     <Section bg='none' className='bg-texture'>
       {/* Header */}
-      <div className='text-center space-y-8 mb-16'>
-        <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-          Unser Angebot
-        </p>
-        <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-          Alle Services Entdecken
-        </h2>
-        <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
-          Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit
-        </p>
+      <div className='mb-16'>
+        <SectionHeading
+          eyebrow="Unser Angebot"
+          title="Alle Services Entdecken"
+          subtitle="Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit"
+        />
       </div>
 
       {/* Cards Grid */}
       <div className='service-card-grid grid grid-cols-1 md:grid-cols-2 gap-8'>
         {services.map((service) => {
           const baseClasses =
-            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-[360px] md:min-h-[500px] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-gold-glow-strong border border-(--brand-gold)/20 hover:border-(--brand-gold)/60 flex flex-col h-full';
+            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-service md:min-h-[32rem] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-chrome-glow-strong border border-(--brand-accent)/20 hover:border-(--brand-accent)/60 flex flex-col h-full';
           return (
             <article
               key={service.id}
@@ -100,7 +97,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                   style={{
                     backgroundColor:
                       service.id === 'tattoo'
-                        ? 'rgba(var(--color-brand-gold-rgb), 0.15)'
+                        ? 'rgba(var(--brand-accent-rgb), 0.15)'
                         : 'rgba(var(--color-accent-silver-rgb), 0.15)',
                   }}
                 />
@@ -108,8 +105,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                 <div
                   className='absolute inset-0'
                   style={{
-                    background:
-                      'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 100%)',
+                    background: 'linear-gradient(to bottom, transparent 0%, var(--luxury-bg-dark) 100%)',
                   }}
                 />
               </div>
@@ -128,7 +124,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     <span
                       className="font-['Playfair_Display'] text-lg"
                       style={{
-                        color: 'var(--brand-gold)',
+                        color: 'var(--brand-accent)',
                         opacity: 0.9,
                       }}
                     >
@@ -149,7 +145,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     {service.bullets.map((bullet, index) => (
                       <li
                         key={index}
-                        className="service-card-list-item text-white font-['Inter'] text-sm"
+                        className="service-card-list-item text-luxury-text-inverse font-['Inter'] text-sm"
                       >
                         {bullet}
                       </li>
@@ -167,8 +163,8 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
 
                     <a href={service.ctaHref} className='no-underline'>
                       {(() => {
-                        const btnVariant: 'gold' | 'outlineGold' =
-                          service.ctaVariant === 'secondary' ? 'outlineGold' : 'gold';
+                        const btnVariant: 'chrome' | 'outlineChrome' =
+                          service.ctaVariant === 'secondary' ? 'outlineChrome' : 'chrome';
                         return (
                           <Button
                             variant={btnVariant}

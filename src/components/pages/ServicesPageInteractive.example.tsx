@@ -11,7 +11,7 @@ import { AppProvider } from '../../../core/state/AppContext';
 // Example 1: Standalone Services Page
 export function ServicesPage() {
   return (
-    <div className='min-h-screen bg-[#1A1A1A]'>
+    <div className='min-h-screen bg-brand-background'>
       {/* Your existing navigation component */}
       {/* <MainNavigation /> */}
 
@@ -27,7 +27,7 @@ export function ServicesPage() {
 // Example 2: As part of a larger page with other sections
 export function HomePage() {
   return (
-    <div className='min-h-screen bg-[#1A1A1A]'>
+    <div className='min-h-screen bg-brand-background'>
       {/* Hero Section */}
       <section className='py-24'>
         <h1>Welcome to Medusa Tattoo</h1>
@@ -48,7 +48,7 @@ export function HomePage() {
 export function App() {
   return (
     <AppProvider initialLanguage='DE'>
-      <div className='min-h-screen bg-[#1A1A1A]'>
+      <div className='min-h-screen bg-brand-background'>
         <ServicesPageInteractive />
 
         {/* Booking Flow Modal will be handled by AppContext */}

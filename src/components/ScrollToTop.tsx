@@ -42,24 +42,43 @@ const ScrollToTop: React.FC = () => {
       return;
     }
 
-    // Always scroll to top on route change (including back/forward for consistency)
-    // Immediate scroll to top
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
-    // Also scroll the content container if it exists
-    const scrollRoot = document.querySelector('[data-scroll-root]') as HTMLElement | null;
-    if (scrollRoot && 'scrollTo' in scrollRoot) {
-      scrollRoot.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }
+    const prefersReducedMotion =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
 
-    // Force scroll after a brief delay to ensure DOM is ready
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-      if (scrollRoot) {
-        scrollRoot.scrollTop = 0;
-      }
+    // Default: keep route transitions cheap and deterministic
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
-  }, [pathname, hash]); // Removed navType and key dependencies for simpler, more reliable behavior
+
+    // Dev-only: if ScrollTrigger is active during debugging, clean up stale triggers and refresh.
+    if (import.meta.env.DEV) {
+      void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          const triggerElement = trigger.trigger;
+          if (triggerElement && triggerElement instanceof Element) {
+            if (!document.documentElement.contains(triggerElement)) {
+              trigger.kill();
+            }
+            return;
+          }
+
+          const varsTrigger = (trigger as unknown as { vars?: { trigger?: unknown } }).vars?.trigger;
+          if (typeof varsTrigger === 'string') {
+            const el = document.querySelector(varsTrigger);
+            if (!el) {
+              trigger.kill();
+            }
+          }
+        });
+
+        window.setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 100);
+      });
+    }
+  }, [pathname, hash]);
 
   return null; // This component doesn't render anything
 };

@@ -344,13 +344,13 @@ function generateBookingConfirmationHTML(language: 'DE' | 'EN'): string {
         <meta charset="utf-8">
         <title>${language === 'DE' ? 'Buchungsbestätigung' : 'Booking Confirmation'}</title>
         <style>
-          body { font-family: Arial, sans-serif; background-color: #222; color: #fff; margin: 0; padding: 20px; }
-          .container { max-width: 600px; margin: 0 auto; background: #222; border: 1px solid #D4AF37; border-radius: 8px; }
-          .header { background: linear-gradient(135deg, #D4AF37, #B8941F); color: #222; padding: 20px; text-align: center; }
+          body { font-family: Arial, sans-serif; background-color: rgb(34 34 34); color: rgb(255 255 255); margin: 0; padding: 20px; }
+          .container { max-width: 600px; margin: 0 auto; background: rgb(34 34 34); border: 1px solid rgb(192 192 192); border-radius: 8px; }
+          .header { background: linear-gradient(135deg, rgb(192 192 192), rgb(168 168 168)); color: rgb(34 34 34); padding: 20px; text-align: center; }
           .content { padding: 20px; }
-          .field { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #C0C0C0; }
-          .label { font-weight: 600; color: #D4AF37; margin-bottom: 4px; }
-          .value { color: #fff; }
+          .field { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgb(192 192 192); }
+          .label { font-weight: 600; color: rgb(192 192 192); margin-bottom: 4px; }
+          .value { color: rgb(255 255 255); }
         </style>
       </head>
       <body>

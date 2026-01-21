@@ -31,18 +31,18 @@ const GoogleMap: React.FC<Props> = ({
   if (showFallback) {
     return (
       <div
-        className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'
+        className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-accent)]/20'
         style={{ minHeight: height }}
       >
-        <MapPin className='text-[var(--brand-gold)] w-16 h-16 mb-8' />
-        <h3 className='text-white text-xl font-semibold mb-0'>Medusa Tattoo München</h3>
-        <p className='text-white/70 text-sm mb-8 max-w-xs'>Altheimer Eck 11, 80331 München</p>
+        <MapPin className='text-[var(--brand-accent)] w-16 h-16 mb-8' />
+        <h3 className='text-luxury-text-inverse text-xl font-semibold mb-0'>Medusa Tattoo München</h3>
+        <p className='text-luxury-text-inverse/70 text-sm mb-8 max-w-xs'>Altheimer Eck 11, 80331 München</p>
         <div className='flex flex-col sm:flex-row gap-0'>
           <a
             href='https://maps.google.com/?q=Medusa+Tattoo+München+Altheimer+Eck+11+80331+München'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-0 bg-[var(--brand-gold)] text-black px-8 py-0 rounded-lg hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex items-center gap-0 bg-(--brand-accent) text-luxury-text-primary px-8 py-0 rounded-lg hover:bg-[var(--brand-accent-hover)] transition-colors font-medium transition duration-200 ease-out'
           >
             <ExternalLink size={16} />
             Karte öffnen
@@ -51,12 +51,14 @@ const GoogleMap: React.FC<Props> = ({
             href='https://www.google.com/maps/dir//Medusa+Tattoo+München,+Altheimer+Eck+11,+80331+München'
             target='_blank'
             rel='noopener noreferrer'
-            className='inline-flex items-center gap-0 border border-[var(--brand-gold)] text-[var(--brand-gold)] px-8 py-0 rounded-lg hover:bg-[var(--brand-gold)]/10 transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex items-center gap-0 border border-[var(--brand-accent)] text-[var(--brand-accent)] px-8 py-0 rounded-lg hover:bg-[var(--brand-accent)]/10 transition-colors font-medium transition duration-200 ease-out'
           >
             Route planen
           </a>
         </div>
-        <p className='text-white/50 text-xs mt-8'>Karte temporär nicht verfügbar</p>
+        <p className='text-luxury-text-inverse/50 text-sm lg:text-xs mt-8'>
+          Karte temporär nicht verfügbar
+        </p>
       </div>
     );
   }
@@ -85,7 +87,7 @@ const GoogleMap: React.FC<Props> = ({
         <div className='absolute top-2 right-2 z-10'>
           <button
             onClick={() => setShowFallback(true)}
-            className='bg-black/50 text-white text-xs px-0 py-0 rounded hover:bg-black/70 transition duration-200 ease-out'
+            className='bg-luxury-bg-dark/50 text-luxury-text-inverse text-sm lg:text-xs px-0 py-0 rounded hover:bg-luxury-bg-dark/70 transition duration-200 ease-out'
           >
             Static Map
           </button>

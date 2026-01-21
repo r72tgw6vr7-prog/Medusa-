@@ -1,0 +1,64 @@
+{
+  "close": "Schließen",
+  "nav": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "tattoos": "Tattoos",
+    "piercings": "Piercings",
+    "artists": "Künstler",
+    "gallery": "Galerie",
+    "pricing": "Preise",
+    "booking": "Termin buchen",
+    "bookingShort": "Termin",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "openMenu": "Navigationsmenü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "footer": {
+    "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
+    "legal": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "meta": {
+    "home": {
+      "title": "Medusa Tattoo München – Premium Tattoo & Piercing Studio am Marienplatz",
+      "description": "Premium Tattoo- und Piercing-Studio in München. Beratung, transparente Preise, höchste Hygiene und erfahrene Artists."
+    },
+    "services": {
+      "title": "Medusa Tattoo München | Leistungen",
+      "description": "Tattoo- und Piercing-Leistungen – transparente Preise, Beratung und höchste Hygienestandards."
+    },
+    "artists": {
+      "title": "Medusa Tattoo München | Künstler",
+      "description": "Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Portfolios und Termine."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Eine Auswahl unserer Arbeiten – entdecken Sie Stile und Inspiration."
+    },
+    "booking": {
+      "title": "Termin vereinbaren",
+      "description": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing.",
+      "h1": "Termin Buchen",
+      "subtitle": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing."
+    },
+    "faq": {
+      "title": "FAQ | Medusa Tattoo München",
+      "description": "Antworten zu Termin, Pflege, Preisen und Hygiene."
+    },
+    "contact": {
+      "title": "Kontakt | Medusa Tattoo München",
+      "description": "Kontakt – Adresse, Telefon, E-Mail und Öffnungszeiten."
+    },
+    "agb": {
+      "title": "AGB | Medusa Tattoo München",
+      "description": "Allgemeine Geschäftsbedingungen für Leistungen und Buchungen."
+    }
+  },
+  "slider": {
+    "heading": "Vorher & Nachher",
+    "before": "Vorher",
+    "after": "Nachher"
+  }
+}
