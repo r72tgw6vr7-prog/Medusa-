@@ -66,17 +66,21 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
   return (
     <div
       ref={containerRef}
-      className="void-grid-container w-full h-full p-6 md:p-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl mx-auto gap-3 md:gap-4 relative"
+      className="w-screen h-full px-4 md:px-6 py-6 md:py-8 relative"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       style={{
+        background: 'var(--bg-page)',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
+        gap: '1rem',
         '--spotlight-x': `${mousePos.x}px`,
         '--spotlight-y': `${mousePos.y}px`,
         '--spotlight-size': '280px',
       } as React.CSSProperties}
     >
-      {/* Void overlay with spotlight cutout */}
+      {/* Spotlight overlay - subtle dim only, no dark background */}
       <div
         className={cn(
           "void-overlay pointer-events-none absolute inset-0 z-20 transition-opacity duration-300",
@@ -84,28 +88,33 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
         )}
         style={{
           background: spotlightEnabled
-            ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, rgba(10, 10, 10, 0.6) 100%)`
+            ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, rgba(0, 0, 0, 0.3) 100%)`
             : 'transparent',
         }}
         aria-hidden="true"
       />
       
       {cards.map((card, i) => (
-        <div key={i} className={cn("void-grid-item", card.className === "md:col-span-2" ? "col-span-2" : "col-span-1")}>
+        <div key={i} className={cn("relative", card.className === "md:col-span-2" ? "md:col-span-2" : "")}>
           <motion.div
             onClick={() => handleClick(card)}
             className={cn(
-              "relative overflow-hidden cursor-pointer",
-              "aspect-square", // Smaller, consistent sizing
-              "transition-shadow duration-200 ease-out",
-              "hover:shadow-[0_0_20px_rgba(192,192,192,0.3)]", // Chrome shadow on hover
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(192,192,192)] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(10,10,10)]",
+              "gallery-frame relative overflow-hidden cursor-pointer",
+              "aspect-square rounded-xl",
+              "border border-[var(--card-border)]",
+              "transition-all duration-300 ease-out",
+              "hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)] focus-visible:ring-offset-2",
               selected?.id === card.id
-                ? "rounded-lg absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                ? "absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
-                ? "z-40 bg-[rgb(10,10,10)] rounded-lg"
-                : "bg-[rgb(10,10,10)] rounded-lg"
+                ? "z-40"
+                : ""
             )}
+            style={{
+              boxShadow: 'var(--surface-card-shadow)',
+              background: 'transparent',
+            }}
             layoutId={`card-${card.id}`}
             tabIndex={0}
             role="button"
@@ -113,7 +122,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
             onKeyDown={(e) => e.key === 'Enter' && handleClick(card)}
           >
             {selected?.id === card.id && <SelectedCard selected={selected} />}
-            <div className="void-grid-frame relative block h-full w-full">
+            <div className="relative block h-full w-full">
               <ImageComponent card={card} />
             </div>
           </motion.div>
@@ -123,7 +132,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
         {selected && (
           <motion.div
             onClick={handleOutsideClick}
-            className="absolute h-full w-full left-0 top-0 bg-luxury-bg-dark opacity-0 z-30"
+            className="absolute h-full w-full left-0 top-0 bg-luxury-bg-dark opacity-0 z-30 flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.3 }}
             exit={{ opacity: 0 }}

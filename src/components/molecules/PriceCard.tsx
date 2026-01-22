@@ -26,37 +26,80 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   highlighted = false,
   className = '',
 }) => {
-  const baseClasses =
-    'cool-lines-card flex flex-col items-center bg-[var(--color-surface-darker)]/70 w-card-md pt-10 pb-14 rounded-2xl border border-solid border-[var(--brand-accent)]';
-  const highlightedClasses = highlighted ? 'bg-[var(--color-surface-darker)]/80 border-2' : '';
-  const shadowClasses = highlighted ? 'shadow-[var(--shadow-chrome-lg)]' : '';
-
   return (
-    <div className={`${baseClasses} ${highlightedClasses} ${shadowClasses} ${className}`}>
-      <img src={iconUrl} alt={title} className='w-12 h-12 mb-8 rounded-2xl object-fill' />
-      <span className='text-[var(--brand-accent)] text-3xl font-bold text-center mb-8'>
+    <div 
+      className={`
+        bg-[#000000]
+        border border-[rgba(192,192,192,0.91)]
+        shadow-[0px_4px_12px_rgba(0,0,0,0.4),0px_0px_20px_rgba(192,192,192,0.3),inset_0px_1px_0px_2px_rgba(192,192,192,0.1)]
+        rounded-[32px]
+        p-8
+        flex flex-col text-center
+        h-full
+        ${className}
+      `}
+    >
+      {/* Icon */}
+      {iconUrl && (
+        <img 
+          src={iconUrl} 
+          alt={title} 
+          className='w-12 h-12 mb-8 rounded-2xl object-fill' 
+        />
+      )}
+
+      {/* Top labels */}
+      <div className="flex justify-between items-center mb-6">
+        <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
+          Paket
+        </span>
+        <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
+          Flexibel
+        </span>
+      </div>
+
+      {/* Heading */}
+      <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white mb-6">
         {title}
-      </span>
-      <span className='text-luxury-text-inverse text-base text-center mb-8'>{description}</span>
-      <div className='flex flex-col items-start self-stretch mb-16 mx-8 gap-0'>
+      </h3>
+
+      {/* Description */}
+      <p className="font-normal text-sm leading-7 text-white/70 mb-8 flex-1">
+        {description}
+      </p>
+
+      {/* List */}
+      <ul className="space-y-4 mb-8">
         {features.map((feature, index) => (
-          <div key={index} className='flex items-center'>
-            <img src={feature.iconUrl} alt='' className='w-4 h-4 mr-0 object-fill' />
-            <div className='flex flex-col items-center'>
-              <span className='text-luxury-text-inverse text-sm-15'>{feature.text}</span>
-            </div>
-          </div>
+          <li key={index} className="flex items-start gap-3">
+            {feature.iconUrl && (
+              <img 
+                src={feature.iconUrl} 
+                alt="" 
+                className="w-4 h-4 text-[color:var(--text-secondary)] shrink-0 mt-1 object-fill" 
+              />
+            )}
+            <span className="font-normal text-base leading-[23px] text-white/80">
+              {feature.text}
+            </span>
+          </li>
         ))}
-      </div>
-      <div
-        className='flex flex-col items-start cursor-pointer'
-        role='button'
-        tabIndex={0}
+      </ul>
+
+      {/* Button */}
+      <button
         onClick={onCtaClick}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onCtaClick && onCtaClick()}
+        className="
+          w-full h-12.5
+          border border-[color:var(--text-secondary)]
+          rounded-3xl
+          font-semibold text-sm leading-5 text-white
+          hover:bg-[color:var(--text-secondary)] hover:text-black
+          transition-all duration-200
+        "
       >
-        <span className='text-luxury-text-inverse text-base'>{ctaText}</span>
-      </div>
+        {ctaText}
+      </button>
     </div>
   );
 };

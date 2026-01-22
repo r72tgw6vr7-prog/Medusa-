@@ -1,73 +1,59 @@
 /* ============================================
-   VOID GRID - Gallery Spotlight Reveal
-   Dark aesthetic with mouse-as-flashlight
+   GALLERY FRAMES - Full Viewport Packed Layout
+   Token-based design with subtle hover elevation
+   Edge-to-edge frame packing on desktop/iPad
    ============================================ */
 
-/* Void grid section - pitch black background */
-.void-grid-container {
-  position: relative;
-  background-color: rgb(10, 10, 10);
-  isolation: isolate;
+/* Mobile: Force single column full-width */
+@media (max-width: 767px) {
+  .gallery-grid-mobile {
+    grid-template-columns: 1fr !important;
+  }
 }
 
-/* Individual grid items - dim by default when spotlight active */
-.void-grid-item {
-  position: relative;
-  transition: opacity 0.2s ease-out;
+/* Tablet: Optimize for 2-3 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery-grid-tablet {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+  }
 }
 
-/* Hover state for grid items - chrome shadow glow */
-.void-grid-item:hover {
-  z-index: 25;
+/* Gallery frame hover - subtle elevation with chrome accent */
+.gallery-frame:hover {
+  border-color: var(--brand-accent);
 }
 
-/* Image styling within grid */
-.void-grid-item img {
-  filter: brightness(0.2);
-  transition: filter 0.3s ease-out, transform 0.3s ease-out;
+/* Image styling - full brightness, subtle scale on hover */
+.gallery-frame img {
+  transition: transform 0.3s ease-out;
 }
 
-.void-grid-item:hover img,
-.void-grid-item:focus-visible img {
-  filter: brightness(1);
+.gallery-frame:hover img,
+.gallery-frame:focus-visible img {
   transform: scale(1.02);
 }
 
-/* Chrome frame + glow pulled from brand tokens */
-.void-grid-frame {
-  border: 1px solid rgba(var(--color-brand-accent-rgb), 0.35);
-  border-radius: 0.75rem;
-  background-color: rgb(10, 10, 10);
-  box-shadow:
-    0 0 20px rgba(var(--color-brand-accent-rgb), 0.15),
-    inset 0 0 12px rgba(var(--color-brand-accent-rgb), 0.12);
-  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-
-.void-grid-item:hover .void-grid-frame,
-.void-grid-item:focus-visible .void-grid-frame {
-  border-color: var(--brand-accent);
-  box-shadow:
-    0 0 32px rgba(var(--color-brand-accent-rgb), 0.45),
-    inset 0 0 16px rgba(var(--color-brand-accent-rgb), 0.2);
-}
-
-/* Reduced motion: disable spotlight animations */
+/* Reduced motion: disable animations */
 @media (prefers-reduced-motion: reduce) {
   .void-overlay {
     display: none !important;
   }
   
-  .void-grid-item img {
-    transition: none;
+  .gallery-frame,
+  .gallery-frame img {
+    transition: none !important;
   }
   
-  .void-grid-item:hover img {
-    transform: none;
+  .gallery-frame:hover {
+    transform: none !important;
+  }
+  
+  .gallery-frame:hover img {
+    transform: none !important;
   }
 }
 
-/* Touch devices: ensure full visibility */
+/* Touch devices: ensure full visibility and no spotlight */
 @media (hover: none) and (pointer: coarse) {
   .void-overlay {
     display: none !important;

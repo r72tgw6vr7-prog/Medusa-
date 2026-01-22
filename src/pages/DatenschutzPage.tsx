@@ -5,6 +5,8 @@ import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { SectionHeading } from '../components/SectionHeading';
 import { Card } from '@/components/ui/Card';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 interface DatenschutzPageProps {
   language?: 'DE' | 'EN';
@@ -163,9 +165,8 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
       <MainNavigation />
 
       <main className='flex-1'>
-        <section ref={sectionRef} className='section-padding relative z-10'>
-          <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-container-main'>
+        <Section variant="default" spacing="normal">
+          <Container size="default">
               {/* Page Header - Standardized */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -177,7 +178,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                   title={t.title}
                   subtitle={t.subtitle}
                 />
-                <p className='text-sm text-luxury-text-inverse/60 text-center'>{t.lastUpdated}</p>
+                <p className="text-xs md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6 text-center">{t.lastUpdated}</p>
               </motion.div>
 
               {/* Introduction */}
@@ -188,7 +189,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
               >
                 <Card variant="default" size="default" asChild>
                   <div>
-                  <p className='text-base text-luxury-text-inverse/70 leading-relaxed'>{t.introduction}</p>
+                  <p className="text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed">{t.introduction}</p>
                   </div>
                 </Card>
               </motion.div>
@@ -275,9 +276,8 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                   </a>
                 </div>
               </motion.div>
-            </div>
-          </div>
-        </section>
+          </Container>
+        </Section>
       </main>
 
       <Footer />

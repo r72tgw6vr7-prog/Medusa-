@@ -29,7 +29,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <div
         className={`
         relative z-10 shrink-0 w-12 h-12 rounded-full flex items-center justify-center
-        ${isActive || isComplete ? 'bg-[var(--brand-accent)]' : 'bg-[var(--deep-black)] border border-[var(--brand-accent)]'}
+        ${isActive || isComplete ? 'bg-[var(--accent-chrome)]' : 'bg-[var(--deep-black)] border border-[var(--accent-chrome)]'}
         ${isComplete ? 'text-luxury-text-inverse' : ''}
       `}
       >
@@ -48,7 +48,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
 
       {/* Vertical Line Connector */}
       {!isLast && (
-        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--brand-accent)] to-[var(--deep-black)]' />
+        <div className='absolute ml-8 mt-8 w-0.5 h-16 bg-linear-to-b from-[var(--accent-chrome)] to-[var(--deep-black)]' />
       )}
 
       {/* Content */}
@@ -61,7 +61,7 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
             {title}
           </h3>
         </div>
-        <p className='text-[var(--color-accent-silver)] text-base max-w-md'>{description}</p>
+        <p className='text-[var(--accent-chrome)] text-base max-w-md'>{description}</p>
       </div>
     </div>
   );

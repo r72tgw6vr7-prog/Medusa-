@@ -2,6 +2,8 @@ import React from 'react';
 import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { Footer } from '@/components/pages';
 import { SectionHeading } from '@/components/SectionHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 interface ImpressumPageProps {
   language?: 'DE' | 'EN';
@@ -121,9 +123,8 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
       <MainNavigation />
 
       <main className='flex-1'>
-        <section className='section-padding relative z-10'>
-          <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-container-main'>
+        <Section variant="default" spacing="normal">
+          <Container size="default">
               {/* Page Header - Matches Services page exactly */}
               <SectionHeading
                 eyebrow='Medusa München'
@@ -175,7 +176,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                         key={index}
                         className={
                           line.includes('Amtsgericht') || line.includes('Local court')
-                            ? 'text-sm text-luxury-text-inverse/60'
+                            ? 'text-xs md:text-sm text-luxury-text-inverse/60'
                             : ''
                         }
                       >
@@ -221,7 +222,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                   >
                     https://ec.europa.eu/consumers/odr
                   </a>
-                  <p className='text-sm text-luxury-text-inverse/80'>
+                  <p className="text-xs md:text-sm text-luxury-text-inverse/60">
                     Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
                     Verbraucherschlichtungsstelle teilzunehmen.
                   </p>
@@ -229,7 +230,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
 
                 <section className='space-y-8'>
                   <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Inhalte</h2>
-                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
+                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
                     Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind
                     wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
@@ -240,7 +241,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
 
                 <section className='space-y-8'>
                   <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Links</h2>
-                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
+                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir
                     keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine
                     Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
@@ -255,21 +256,20 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
                   <p className='font-semibold text-brand-white/90'>
                     {t.sections.copyright.content[0]}
                   </p>
-                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
+                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     {language === 'DE'
                       ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
                       : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'}
                   </p>
-                  <p className='text-sm text-luxury-text-inverse/80 leading-relaxed'>
+                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
                     {language === 'DE'
                       ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
                       : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'}
                   </p>
                 </section>
               </div>
-            </div>
-          </div>
-        </section>
+          </Container>
+        </Section>
       </main>
 
       <Footer />

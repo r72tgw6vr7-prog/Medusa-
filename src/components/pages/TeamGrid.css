@@ -42,12 +42,13 @@
 
 .team-card {
   position: relative;
-  border-radius: 12px;
+  border-radius: var(--card-radius);
   overflow: hidden;
-  background-color: var(--color-surface-darker);
+  background-color: var(--card-bg);
   /* Taller cards */
   aspect-ratio: 0.6;
-  box-shadow: 0 4px 20px rgba(var(--color-surface-darker-rgb), 0.5);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: transform 0.3s ease;
 }
 

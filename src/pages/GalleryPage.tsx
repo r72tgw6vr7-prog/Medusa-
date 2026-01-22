@@ -10,39 +10,50 @@ import { LayoutGridDemo } from '@/components/layout-grid-demo';
 import { GALLERY_IMAGES } from '@/content/gallery-images';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageHeading } from '../components/PageHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import './GalleryPage.css';
 
 export function GalleryPage() {
   const { t } = useLanguage();
 
   return (
-    <main className='gallery-page w-full min-h-screen relative z-10 bg-luxury-bg-dark'>
-      {/* Navigation */}
-      <MainNavigation />
+    <>
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-modal focus:px-8 focus:py-4 focus:bg-brand-accent focus:text-deep-black focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+      <div className='gallery-page w-full min-h-screen relative z-10 bg-luxury-bg-dark'>
+        {/* Navigation */}
+        <MainNavigation />
+
+        <main id="main-content">
 
       {/* Page Header */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-276 flex flex-col gap-16'>
-            <PageHeading
-              eyebrow="Medusa München"
-              title={t('gallery.title')}
-              subtitle={t('gallery.subtitle')}
-            />
-          </div>
-        </div>
-      </section>
+      <Section variant="default" spacing="normal" bg="dark">
+        <Container size="wide">
+          <PageHeading
+            eyebrow="Medusa München"
+            title={t('gallery.title')}
+            subtitle={t('gallery.subtitle')}
+          />
+        </Container>
+      </Section>
 
-      {/* Gallery Grid Section */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <LayoutGridDemo images={GALLERY_IMAGES} />
-        </div>
-      </section>
+      {/* Gallery Grid Section - Full Viewport Width */}
+      <Section variant="default" spacing="normal" bg="dark">
+        <LayoutGridDemo images={GALLERY_IMAGES} />
+      </Section>
 
-      {/* Footer */}
-      <Footer />
-    </main>
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }
 

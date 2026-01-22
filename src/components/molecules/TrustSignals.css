@@ -99,7 +99,7 @@
 }
 
 .trust-badge:focus-visible {
-  outline: 2px solid var(--brand-accent);
+  outline: 2px solid var(--accent-chrome);
   outline-offset: 2px;
 }
 
@@ -130,7 +130,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: var(--brand-accent);
+  background: var(--accent-chrome);
 }
 
 @media (min-width: 1024px) {

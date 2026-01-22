@@ -67,6 +67,12 @@ export default {
     'max-h-dropdown-lg',
     'h-button',
     'h-button-lg',
+    // Container component width variants (from Container.tsx)
+    'max-w-full',
+    'max-w-[1600px]',
+    'max-w-[1440px]',
+    'max-w-[1024px]',
+    'max-w-[800px]',
     // Luxury color system (ma spacing + luxury tokens)
     {
       pattern: /^(p|m|gap|py|px|my|mx|pt|pb|pl|pr|mt|mb|ml|mr)-(ma-(xs|sm|md|lg|xl))$/,
@@ -84,13 +90,13 @@ export default {
       // These Tailwind extensions provide utility class patterns only
       colors: {
         // ========================================
-        // TIER 1: PRIMITIVES (never use directly)
+        // TIER 1: PRIMITIVES (use CSS vars when possible)
         // ========================================
         primitive: {
-          black: '#0a0a0a',        // Universal deep black
-          white: '#FFFFFF',
+          black: 'var(--deep-black)',
+          white: 'var(--base-white)',
           surface: '#F3F3F3',
-          chrome: '#C0C0C0',       // ⚠️ DARK BACKGROUNDS ONLY
+          chrome: 'var(--accent-chrome)',
           'chrome-safe': '#767676', // WCAG AAA on light (7:1 ratio)
         },
 
@@ -100,31 +106,31 @@ export default {
         luxury: {
           // 60% - Backgrounds
           bg: {
-            base: '#FFFFFF',           // Pure white base
-            surface: '#F3F3F3',        // Cards, elevated sections
-            elevated: '#FAFAFA',       // Hover states on cards
-            dark: '#0a0a0a',           // Universal deep black page bg
-            'dark-elevated': '#1a1a1c', // Charcoal surfaces/cards
-            'dark-hover': '#252528',   // Hover on dark sections
-            chrome: '#C0C0C0',         // Chrome as surface (footer, premium sections)
+            base: 'var(--base-white)',
+            surface: '#F3F3F3',
+            elevated: '#FAFAFA',
+            dark: 'var(--deep-black)',
+            'dark-elevated': 'var(--deep-black)',
+            'dark-hover': '#252528',
+            chrome: 'var(--accent-chrome)',
           },
 
           // 30% - Text
           text: {
-            primary: '#0a0a0a',        // AAA on white/surface (21:1)
-            secondary: '#1a1a1a',      // Hierarchy tier 2
-            tertiary: '#525252',       // Subtle labels
-            muted: '#666666',          // Disabled states
-            inverse: '#FFFFFF',        // On dark backgrounds
-            'inverse-muted': 'rgba(255, 255, 255, 0.8)', // Secondary on dark
+            primary: '#0a0a0a',
+            secondary: '#1a1a1a',
+            tertiary: '#525252',
+            muted: '#666666',
+            inverse: 'var(--base-white)',
+            'inverse-muted': 'var(--text-secondary)',
           },
 
           // 10% - Accents (CRITICAL USAGE RULES)
           accent: {
             // ✅ USE ON DARK (#0a0a0a) ONLY - 12.5:1 contrast
-            chrome: '#C0C0C0',
-            'chrome-hover': '#E8E8E8',
-            'chrome-glow': 'rgba(192, 192, 192, 0.4)',
+            chrome: 'var(--brand-accent)',
+            'chrome-hover': 'var(--brand-accent-hover)',
+            'chrome-glow': 'var(--chrome-glow-bright)',
             
             // ✅ USE ON LIGHT (#F3F3F3/#FFF) - 4.54:1 contrast
             'chrome-safe': '#767676',
@@ -137,12 +143,12 @@ export default {
 
           // Borders with warm undertones (wabi-sabi)
           border: {
-            subtle: 'hsl(30, 3%, 92%)',    // Barely visible dividers
-            light: 'hsl(30, 3%, 88%)',     // Standard borders on light
-            medium: 'hsl(30, 3%, 70%)',    // Emphasized borders
-            dark: 'hsl(30, 3%, 20%)',      // Strong contrast on light
-            'on-dark': 'hsl(30, 3%, 50%)', // Borders on dark backgrounds
-            chrome: '#C0C0C0',             // Chrome borders (dark bg only)
+            subtle: 'hsl(30, 3%, 92%)',
+            light: 'hsl(30, 3%, 88%)',
+            medium: 'hsl(30, 3%, 70%)',
+            dark: 'hsl(30, 3%, 20%)',
+            'on-dark': 'hsl(30, 3%, 50%)',
+            chrome: 'var(--brand-accent)',
           },
         },
 

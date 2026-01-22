@@ -1,5 +1,6 @@
 import React from 'react';
-import Section from '../../ui/Section';
+import Section from '../../primitives/Section';
+import Container from '../../ui/Container';
 import { Button } from '../../ui/button';
 import { SectionHeading } from '../../SectionHeading';
 
@@ -61,127 +62,130 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
   };
 
   return (
-    <Section bg='none' className='bg-texture'>
-      {/* Header */}
-      <div className='mb-16'>
-        <SectionHeading
-          eyebrow="Unser Angebot"
-          title="Alle Services Entdecken"
-          subtitle="Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit"
-        />
-      </div>
+    <Section bg='none' spacing='none' variant='default' className='py-16 md:py-20 lg:py-24 bg-texture'>
+      <Container size='default'>
+        {/* Header */}
+        <div className='mb-16'>
+          <SectionHeading
+            eyebrow="Unser Angebot"
+            title="Alle Services Entdecken"
+            subtitle="Entdecken Sie unsere zwei Hauptbereiche der Kunstfertigkeit"
+          />
+        </div>
 
-      {/* Cards Grid */}
-      <div className='service-card-grid grid grid-cols-1 md:grid-cols-2 gap-8'>
-        {services.map((service) => {
-          const baseClasses =
-            'group relative rounded-3xl overflow-hidden min-h-80 sm:min-h-service md:min-h-[32rem] transition-transform transition-colors duration-300 hover:scale-[1.02] shadow-lg hover:shadow-chrome-glow-strong border border-(--brand-accent)/20 hover:border-(--brand-accent)/60 flex flex-col h-full';
-          return (
-            <article
-              key={service.id}
-              className={baseClasses}
-              aria-label={`${service.mainTitle} service card`}
-            >
-              {/* Background Image with Gradient Overlay */}
-              <div
-                className='absolute inset-0'
-                style={{
-                  backgroundImage: `url(${service.backgroundImage})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
+        {/* Cards Grid */}
+        <div className='service-card-grid grid grid-cols-1 md:grid-cols-2 gap-8'>
+          {services.map((service) => {
+            const baseClasses =
+              'chrome-card group relative overflow-hidden min-h-80 sm:min-h-service md:min-h-[32rem] transition-transform transition-colors duration-300 hover:scale-[1.02] flex flex-col h-full';
+            return (
+              <article
+                key={service.id}
+                className={baseClasses}
+                aria-label={`${service.mainTitle} service card`}
               >
-                {/* Background Tint */}
+                {/* Background Image with Gradient Overlay */}
                 <div
                   className='absolute inset-0'
                   style={{
-                    backgroundColor:
-                      service.id === 'tattoo'
-                        ? 'rgba(var(--brand-accent-rgb), 0.15)'
-                        : 'rgba(var(--color-accent-silver-rgb), 0.15)',
+                    backgroundImage: `url(${service.backgroundImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
-                />
-                {/* Dark Gradient Overlay */}
-                <div
-                  className='absolute inset-0'
-                  style={{
-                    background: 'linear-gradient(to bottom, transparent 0%, var(--luxury-bg-dark) 100%)',
-                  }}
-                />
-              </div>
+                >
+                  {/* Background Tint */}
+                  <div
+                    className='absolute inset-0'
+                    style={{
+                      backgroundColor:
+                        service.id === 'tattoo'
+                          ? 'rgba(var(--brand-accent-rgb), 0.15)'
+                          : 'rgba(var(--color-accent-silver-rgb), 0.15)',
+                    }}
+                  />
+                  {/* Dark Gradient Overlay */}
+                  <div
+                    className='absolute inset-0'
+                    style={{
+                      background:
+                        'linear-gradient(to bottom, transparent 0%, var(--luxury-bg-dark) 100%)',
+                    }}
+                  />
+                </div>
 
-              {/* Positioned icon (gold circle removed) */}
-              <div className='absolute top-6 left-6 sm:top-8 sm:left-8 md:top-12 md:left-12 z-10'>
-                {getIcon(service.icon)}
-              </div>
+                {/* Positioned icon (gold circle removed) */}
+                <div className='absolute top-6 left-6 sm:top-8 sm:left-8 md:top-12 md:left-12 z-10'>
+                  {getIcon(service.icon)}
+                </div>
 
-              {/* Content */}
-              <div className='service-card-padding relative h-full flex flex-col justify-end items-center'>
-                {/* Text Content */}
-                <div className='service-card-content text-center'>
-                  {/* Small label (no strike-through) */}
-                  <div className='flex items-center gap-0 justify-center'>
-                    <span
-                      className="font-['Playfair_Display'] text-lg"
-                      style={{
-                        color: 'var(--brand-accent)',
-                        opacity: 0.9,
-                      }}
-                    >
-                      {service.struckTitle}
-                    </span>
-                  </div>
-
-                  {/* Main Title */}
-                  <h3
-                    className="font-['Poppins'] text-2xl md:text-4xl font-bold leading-tight"
-                    style={{ color: 'var(--brand-white)' }}
-                  >
-                    {service.mainTitle}
-                  </h3>
-
-                  {/* Bullet Points */}
-                  <ul className='service-card-list space-y-0'>
-                    {service.bullets.map((bullet, index) => (
-                      <li
-                        key={index}
-                        className="service-card-list-item text-luxury-text-inverse font-['Inter'] text-sm"
+                {/* Content */}
+                <div className='service-card-padding relative h-full flex flex-col justify-end items-center'>
+                  {/* Text Content */}
+                  <div className='service-card-content text-center'>
+                    {/* Small label (no strike-through) */}
+                    <div className='flex items-center gap-0 justify-center'>
+                      <span
+                        className="font-['Playfair_Display'] text-lg"
+                        style={{
+                          color: 'var(--brand-accent)',
+                          opacity: 0.9,
+                        }}
                       >
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
+                        {service.struckTitle}
+                      </span>
+                    </div>
 
-                  {/* Price and CTA */}
-                  <div className='service-card-footer'>
-                    <span
-                      className="font-['Poppins'] text-2xl font-bold text-center block"
+                    {/* Main Title */}
+                    <h3
+                      className="font-['Poppins'] text-2xl md:text-4xl font-bold leading-tight"
                       style={{ color: 'var(--brand-white)' }}
                     >
-                      {service.price}
-                    </span>
+                      {service.mainTitle}
+                    </h3>
 
-                    <a href={service.ctaHref} className='no-underline'>
-                      {(() => {
-                        const btnVariant: 'chrome' | 'outlineChrome' =
-                          service.ctaVariant === 'secondary' ? 'outlineChrome' : 'chrome';
-                        return (
-                          <Button
-                            variant={btnVariant}
-                            className='w-full inline-flex items-center justify-center text-center transition-colors duration-300'
-                          >
-                            {service.ctaText}
-                          </Button>
-                        );
-                      })()}
-                    </a>
+                    {/* Bullet Points */}
+                    <ul className='service-card-list space-y-0'>
+                      {service.bullets.map((bullet, index) => (
+                        <li
+                          key={index}
+                          className="service-card-list-item text-luxury-text-inverse font-['Inter'] text-sm"
+                        >
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Price and CTA */}
+                    <div className='service-card-footer'>
+                      <span
+                        className="font-['Poppins'] text-2xl font-bold text-center block"
+                        style={{ color: 'var(--brand-white)' }}
+                      >
+                        {service.price}
+                      </span>
+
+                      <a href={service.ctaHref} className='no-underline'>
+                        {(() => {
+                          const btnVariant: 'chrome' | 'outlineChrome' =
+                            service.ctaVariant === 'secondary' ? 'outlineChrome' : 'chrome';
+                          return (
+                            <Button
+                              variant={btnVariant}
+                              className='w-full inline-flex items-center justify-center text-center transition-colors duration-300'
+                            >
+                              {service.ctaText}
+                            </Button>
+                          );
+                        })()}
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
+              </article>
+            );
+          })}
+        </div>
+      </Container>
     </Section>
   );
 };

@@ -6,6 +6,8 @@ import { Footer } from '../components/pages';
 import { PageHeading } from '../components/PageHeading';
 import { Button } from '@/components/ui/button';
 import { Shield, Award, Check, Heart, Calendar, MessageCircle, Copy } from 'lucide-react';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 interface ContactFormData {
   name: string;
@@ -81,19 +83,19 @@ export const ContactPage: React.FC = () => {
       <MainNavigation />
 
       {/* Hero Section */}
-      <section className='pt-32 pb-12 md:pt-40 md:pb-16 relative z-10'>
-        <div className='responsive-container safe-area-padding'>
+      <Section variant="default" spacing="normal" className="pt-32 md:pt-40" bg="dark">
+        <Container size="default">
           <PageHeading
             eyebrow={t('contact.eyebrow')}
             title={t('contact.title')}
             subtitle={t('contact.subtitle')}
           />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* 4 Feature Tiles Row */}
-      <section className='pb-12 md:pb-16'>
-        <div className='responsive-container safe-area-padding'>
+      <Section variant="default" spacing="tight" bg="dark">
+        <Container size="default">
           <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
             {trustBadges.map((badge) => {
               const Icon = badge.icon;
@@ -102,12 +104,12 @@ export const ContactPage: React.FC = () => {
                   key={badge.title}
                   className='flex flex-col h-full items-start gap-4 p-6 rounded-xl border border-white/10 bg-luxury-bg-dark/40'
                 >
-                  <Icon className='text-(--brand-accent)' size={24} />
+                  <Icon className='text-[var(--accent-chrome)]' size={24} />
                   <div>
-                    <h3 className='text-luxury-text-inverse font-semibold text-sm'>
+                    <h3 className='text-luxury-text-inverse font-semibold text-base lg:text-sm'>
                       {badge.title}
                     </h3>
-                    <p className='text-luxury-text-inverse/60 text-sm lg:text-xs'>
+                    <p className='text-base md:text-sm text-luxury-text-inverse/70'>
                       {badge.subtitle}
                     </p>
                   </div>
@@ -115,13 +117,13 @@ export const ContactPage: React.FC = () => {
               );
             })}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Direct Email Section */}
-      <section className='pb-12 md:pb-16'>
-        <div className='responsive-container safe-area-padding'>
-          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
+      <Section variant="default" spacing="tight" bg="dark">
+        <Container size="default">
+          <p className='text-base md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
             Direct Email
           </p>
           <button
@@ -129,28 +131,28 @@ export const ContactPage: React.FC = () => {
             className='w-full flex items-center justify-between gap-4 p-4 md:p-6 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 group cursor-pointer touch-target-mobile'
           >
             <div className='text-left'>
-              <p className='text-luxury-text-inverse font-medium text-base md:text-lg'>
+              <p className='text-luxury-text-inverse font-medium text-base lg:text-sm'>
                 {studioInfo.contact.email}
               </p>
-              <p className='text-luxury-text-inverse/50 text-sm lg:text-xs uppercase tracking-wider mt-2'>
+              <p className='text-base md:text-sm text-luxury-text-inverse/50 uppercase tracking-wider mt-2'>
                 {copied ? 'Copied!' : 'Click to copy'}
               </p>
             </div>
             <span className='inline-flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 group-hover:bg-white/10 transition-colors duration-200'>
               {copied ? (
-                <Check className='text-(--brand-accent)' size={18} />
+                <Check className='text-[var(--accent-chrome)]' size={18} />
               ) : (
                 <Copy className='text-luxury-text-inverse/70' size={18} />
               )}
             </span>
           </button>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Other Ways Section */}
-      <section className='pb-12 md:pb-16'>
-        <div className='responsive-container safe-area-padding'>
-          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
+      <Section variant="default" spacing="tight" bg="dark">
+        <Container size="default">
+          <p className='text-base md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-4'>
             Other Ways
           </p>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -161,10 +163,10 @@ export const ContactPage: React.FC = () => {
               rel='noopener noreferrer'
               className='flex flex-col h-full items-center justify-center gap-4 p-8 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 touch-target-mobile'
             >
-              <Calendar className='text-(--brand-accent)' size={28} />
+              <Calendar className='text-[var(--accent-chrome)]' size={28} />
               <div className='text-center'>
-                <h3 className='text-luxury-text-inverse font-semibold'>Calendly</h3>
-                <p className='text-luxury-text-inverse/60 text-sm'>Book 30min</p>
+                <h3 className='text-luxury-text-inverse font-semibold text-base lg:text-sm'>Calendly</h3>
+                <p className='text-base md:text-sm text-luxury-text-inverse/60'>Book 30min</p>
               </div>
             </a>
 
@@ -175,30 +177,30 @@ export const ContactPage: React.FC = () => {
               rel='noopener noreferrer'
               className='flex flex-col h-full items-center justify-center gap-4 p-8 rounded-xl border border-white/10 bg-luxury-bg-dark/40 hover:border-white/20 transition-colors duration-200 touch-target-mobile'
             >
-              <MessageCircle className='text-(--brand-accent)' size={28} />
+              <MessageCircle className='text-[var(--accent-chrome)]' size={28} />
               <div className='text-center'>
-                <h3 className='text-luxury-text-inverse font-semibold'>WhatsApp</h3>
-                <p className='text-luxury-text-inverse/60 text-sm'>Direct message</p>
+                <h3 className='text-luxury-text-inverse font-semibold text-base lg:text-sm'>WhatsApp</h3>
+                <p className='text-base md:text-sm text-luxury-text-inverse/60'>Direct message</p>
               </div>
             </a>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Contact Form Section */}
-      <section className='pb-16 md:pb-24'>
-        <div className='responsive-container safe-area-padding'>
-          <p className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60 mb-6'>
+      <Section variant="default" spacing="normal" bg="dark">
+        <Container size="default">
+          <p className='text-base md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6'>
             Or send me a quick message
           </p>
 
           {isSubmitted ? (
-            <div className='flex flex-col items-center justify-center gap-4 rounded-xl border border-(--brand-accent)/60 bg-(--brand-accent)/10 text-center p-8'>
+            <div className='flex flex-col items-center justify-center gap-4 rounded-xl border border-[var(--accent-chrome)]/60 bg-[var(--accent-chrome)]/10 text-center p-8'>
               <div className='text-5xl text-(--brand-accent)'>✓</div>
               <h3 className='font-headline text-2xl text-(--brand-accent)'>
                 {t('contact.successTitle')}
               </h3>
-              <p className='max-w-md text-luxury-text-inverse/80 font-body'>
+              <p className='text-base lg:text-sm text-luxury-text-inverse/80 font-body'>
                 {t('contact.successBody')}
               </p>
             </div>
@@ -210,7 +212,7 @@ export const ContactPage: React.FC = () => {
               <div className='flex flex-col gap-2'>
                 <label
                   htmlFor='name'
-                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                  className='block text-base lg:text-sm font-medium text-luxury-text-inverse mb-2'
                 >
                   {t('contact.labels.name')} <span className='text-red-500'>*</span>
                 </label>
@@ -230,14 +232,14 @@ export const ContactPage: React.FC = () => {
                   placeholder={t('contact.placeholders.name')}
                 />
                 {errors.name && (
-                  <p className='text-sm text-red-400'>{errors.name.message}</p>
+                  <p className="text-base md:text-sm text-red-400 mt-2">{errors.name.message}</p>
                 )}
               </div>
 
               <div className='flex flex-col gap-2'>
                 <label
                   htmlFor='email'
-                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                  className='block text-base lg:text-sm font-medium text-luxury-text-inverse mb-2'
                 >
                   {t('contact.labels.email')} <span className='text-red-500'>*</span>
                 </label>
@@ -257,14 +259,14 @@ export const ContactPage: React.FC = () => {
                   placeholder={t('contact.placeholders.email')}
                 />
                 {errors.email && (
-                  <p className='text-sm text-red-400'>{errors.email.message}</p>
+                  <p className="text-base md:text-sm text-red-400 mt-2">{errors.email.message}</p>
                 )}
               </div>
 
               <div className='flex flex-col gap-2'>
                 <label
                   htmlFor='message'
-                  className='text-sm lg:text-xs uppercase tracking-widest text-luxury-text-inverse/60'
+                  className='block text-base lg:text-sm font-medium text-luxury-text-inverse mb-2'
                 >
                   {t('contact.labels.message')} <span className='text-red-500'>*</span>
                 </label>
@@ -284,22 +286,24 @@ export const ContactPage: React.FC = () => {
                   placeholder={t('contact.placeholders.message')}
                 />
                 {errors.message && (
-                  <p className='text-sm text-red-400'>{errors.message.message}</p>
+                  <p className='text-base md:text-sm text-red-400'>{errors.message.message}</p>
                 )}
               </div>
 
               <div className='flex items-start gap-2 mt-2'>
-                <input
-                  type='checkbox'
-                  id='privacy'
-                  required
-                  className='mt-2 w-4 h-4 rounded border-white/20 bg-white/5 text-(--brand-accent) focus:ring-(--brand-accent)/50 touch-target-mobile'
-                />
-                <label htmlFor='privacy' className='text-sm text-luxury-text-inverse/70'>
+                <div className='min-h-11 min-w-11 flex items-start justify-center pt-2'>
+                  <input
+                    type='checkbox'
+                    id='privacy'
+                    required
+                    className='w-4 h-4 rounded border-white/20 bg-white/5 text-[var(--accent-chrome)] focus:ring-[var(--accent-chrome)]/50' 
+                  />
+                </div>
+                <label htmlFor='privacy' className='text-base md:text-sm text-luxury-text-inverse/70'>
                   I have read and accept the{' '}
                   <a
                     href='/datenschutz'
-                    className='underline hover:text-(--brand-accent) transition-colors duration-200'
+                    className='underline hover:text-(--brand-accent) transition-colors duration-200 inline-block min-h-11 py-2'
                   >
                     privacy policy
                   </a>{' '}
@@ -309,7 +313,7 @@ export const ContactPage: React.FC = () => {
 
               {submitError && (
                 <div className='bg-red-500/10 border border-red-500/60 text-red-300 rounded-lg px-4 py-4'>
-                  <p className='text-sm'>{submitError}</p>
+                  <p className='text-base md:text-sm'>{submitError}</p>
                 </div>
               )}
 
@@ -323,8 +327,8 @@ export const ContactPage: React.FC = () => {
               </Button>
             </form>
           )}
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <Footer />
     </div>

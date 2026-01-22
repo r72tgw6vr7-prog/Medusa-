@@ -23,7 +23,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       stars.push(
         <Star
           key={i}
-          className='w-6 h-6 fill-[var(--brand-accent)] text-[var(--brand-accent)]'
+          className='w-6 h-6 fill-[var(--accent-chrome)] text-[var(--accent-chrome)]' 
           aria-label='star'
         />,
       );

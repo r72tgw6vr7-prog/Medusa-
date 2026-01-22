@@ -1,15 +1,16 @@
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { Slot } from '@radix-ui/react-slot';
 
 const cardVariants = cva(
-  'flex flex-col h-full rounded-3xl border-2 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] chrome-border-glow',
+  'flex flex-col h-full rounded-[32px] border transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--card-bg)]',
   {
     variants: {
       variant: {
-        default: 'bg-[var(--surface-card-bg)] border-[var(--surface-card-border)] shadow-[var(--surface-card-shadow)] hover:border-[var(--brand-accent)]/70 hover:shadow-chrome-glow-subtle',
-        featured: 'bg-[var(--surface-card-bg)] border-[var(--surface-card-border-featured)] shadow-[var(--surface-card-shadow-featured)] scale-[1.01] shadow-chrome-glow',
-        elevated: 'bg-[var(--surface-card-bg)] border-[var(--surface-card-border)] shadow-[var(--shadow-md)] hover:border-[var(--brand-accent)]/70 hover:shadow-chrome-glow',
+        default: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)]',
+        featured: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)] scale-[1.01]',
+        elevated: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)]',
       },
       size: {
         default: 'p-8',
@@ -29,13 +30,17 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, Variant
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+    const shouldUseSlot = asChild && React.Children.count(children) === 1;
+    const Component = shouldUseSlot ? Slot : 'div';
     return (
-      <div
+      <Component
         className={cn(cardVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </Component>
     );
   }
 );

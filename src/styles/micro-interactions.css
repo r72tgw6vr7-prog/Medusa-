@@ -381,9 +381,9 @@
     opacity: 1;
   }
   
-  /* Hero section - disable background shift animation */
+  /* Hero section - unified background (no animation) */
   .hero-section {
-    background-color: #0a0a0a !important;
+    background-color: #1A1A1A !important;
     transition: none;
   }
 }

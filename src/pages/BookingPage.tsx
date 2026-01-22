@@ -8,6 +8,8 @@ import { MainNavigation } from '../components/molecules/MainNavigation';
 import { BookingModalMobile } from '@/components/booking/BookingModalMobile';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageHeading } from '../components/PageHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import './BookingPage.css';
 
 export function BookingPage() {
@@ -19,24 +21,22 @@ export function BookingPage() {
       <MainNavigation />
 
       {/* Hero Section */}
-      <section className='pt-32 pb-12 md:pt-40 md:pb-16 relative z-10'>
-        <div className='responsive-container safe-area-padding'>
+      <Section variant="default" spacing="normal" bg="dark">
+        <Container size="default">
           <PageHeading
             eyebrow={t('booking.eyebrow')}
             title={t('booking.title')}
             subtitle={t('booking.subtitle')}
           />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Booking Wizard */}
-      <section className='pb-12 md:pb-16 relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='max-w-4xl mx-auto'>
-            <BookingModalMobile />
-          </div>
-        </div>
-      </section>
+      <Section variant="default" spacing="tight" bg="dark">
+        <Container size="narrow">
+          <BookingModalMobile />
+        </Container>
+      </Section>
 
       {/* Footer */}
       <Footer />

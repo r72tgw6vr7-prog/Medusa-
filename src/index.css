@@ -20,7 +20,7 @@
 @import './styles/micro-interactions.css';
 /* Section transition animations */
 @import './styles/section-transitions.css';
-/* Restored responsive layout primitives (phone frame fix) */
+/* Safe area utilities (responsive-container now in design-system.css) */
 @import './styles/responsive-layout.css';
 
 /* Tailwind v4 config and source - after all @imports */
@@ -63,7 +63,7 @@ body,
   margin: 0;
   padding: 0;
   /* FOUNDATION: Lock dark background at root level */
-  background-color: var(--deep-black, #0a0a0a);
+  background-color: #1A1A1A;
   color: var(--color-text-primary, #ffffff);
 }
 
@@ -72,9 +72,10 @@ html {
   scroll-behavior: smooth;
   /* Offset scroll for fixed header so anchors don't hide under nav */
   scroll-padding-top: var(--header-height, 80px);
+  overflow-y: auto;
 }
 
 body {
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: clip;
 }

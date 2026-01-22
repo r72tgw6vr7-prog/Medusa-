@@ -5,7 +5,6 @@ import {
   useScroll,
   useTransform,
   useSpring,
-  useReducedMotion,
   type MotionValue,
 } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -52,19 +51,16 @@ export const HeroParallax = ({
     offset: ["start start", "end start"],
   });
   const { scrollY } = useScroll();
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = false;
 
   // ===========================================
-  // BACKGROUND SHIFT: #0a0a0a → #1a1a1c on scroll
+  // UNIFIED BACKGROUND: #1A1A1A (matches Artist page)
   // ===========================================
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["#0a0a0a", "#141416", "#1a1a1c"]
+    ["#1A1A1A", "#1A1A1A", "#1A1A1A"]
   );
-  
-  // Spring-smoothed background for fluid feel
-  const smoothBackground = useSpring(backgroundColor, { stiffness: 100, damping: 30 });
 
   const springConfig = ANIMATION.SMOOTH_SPRING;
 
@@ -101,16 +97,16 @@ export const HeroParallax = ({
         height: '180vh', 
         perspective: '1000px', 
         transformStyle: 'preserve-3d',
-        // Background shift: scroll-linked color transition
-        background: prefersReducedMotion ? '#0a0a0a' : undefined,
+        // Unified background: canonical dark value
+        background: prefersReducedMotion ? '#1A1A1A' : undefined,
       }}
-      className="hero-section pb-ma-md antialiased relative flex flex-col self-auto overflow-hidden"
+      className="hero-section pb-ma-md antialiased relative flex flex-col self-auto overflow-x-clip"
     >
       {/* Background shift layer - animated with scroll */}
       {!prefersReducedMotion && (
         <motion.div 
           className="absolute inset-0 -z-10"
-          style={{ backgroundColor: smoothBackground }}
+          style={{ backgroundColor }}
         />
       )}
       <Header opacity={prefersReducedMotion ? 1 : heroOpacity} />
@@ -123,7 +119,7 @@ export const HeroParallax = ({
         }}
         className=""
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-12 mb-12">
+        <motion.div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-12 mb-12">
           {firstRow.map((product, index) => (
             <ProductCard
               product={product}
@@ -134,7 +130,7 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row mb-12 space-x-12">
+        <motion.div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-12 mb-12">
           {secondRow.map((product, index) => (
             <ProductCard
               product={product}
@@ -145,7 +141,7 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-12">
+        <motion.div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-12">
           {thirdRow.map((product, index) => (
             <ProductCard
               product={product}
@@ -170,10 +166,13 @@ export const Header = ({
   
   return (
     <motion.div
-      className="absolute inset-0 z-20 flex items-center justify-center px-(--space-2)"
+      className="absolute inset-0 z-20 flex items-center justify-center px-(--space-2) pointer-events-none"
       style={{ opacity, transform: 'translateY(calc(-1.2 * var(--space-8)))' }}
     >
-      <div className="max-w-7xl w-full flex flex-col items-center text-center gap-(--space-6)" style={{ transform: 'translateY(-500px)' }}>
+      <div
+        className="max-w-7xl w-full flex flex-col items-center text-center gap-(--space-6) pointer-events-auto"
+        style={{ transform: 'translateY(-500px)' }}
+      >
         {/* Heading - design system typography */}
         <h1
           className="font-headline text-(length:--heading-hero-fluid) font-bold tracking-tight leading-tight text-brand-accent"
@@ -232,7 +231,7 @@ export const ProductCard = ({
   const [isRevealed, setIsRevealed] = useState(false);
   const [isAligned, setIsAligned] = useState(false);
   const [showText, setShowText] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = false;
 
   // Calculate stagger delay based on position (100ms per frame)
   const staggerDelay = (rowIndex * 5 + index) * ANIMATION.STAGGER_OFFSET;
@@ -316,6 +315,7 @@ export const ProductCard = ({
 
   // Determine CSS classes based on state
   const revealClass = isRevealed ? 'chrome-border-reveal revealed' : 'chrome-border-reveal';
+  const isHeroLcpCandidate = rowIndex === 0 && index === 0;
 
   // Depth blur + chrome glow: inline styles for reliable application
   const frameStyles: React.CSSProperties = prefersReducedMotion
@@ -372,7 +372,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className={`group/product h-96 w-96 relative shrink-0 rounded-lg overflow-hidden ${revealClass}`}
+      className={`group/product aspect-square w-full relative rounded-lg overflow-hidden ${revealClass}`}
       data-revealed={isRevealed}
       data-aligned={isAligned}
     >
@@ -387,9 +387,10 @@ export const ProductCard = ({
             src={product.fallbackSrc ? encodeURI(product.fallbackSrc) : encodeURI(`${product.thumbnail}-640w.webp`)}
             height="600"
             width="600"
-            className="object-cover object-top-left absolute h-full w-full inset-0"
+            className="max-w-full object-cover object-top-left absolute h-full w-full inset-0"
             alt={product.title}
-            loading={product.priority ? "eager" : "lazy"}
+            loading={isHeroLcpCandidate ? "eager" : "lazy"}
+            fetchPriority={isHeroLcpCandidate ? "high" : "auto"}
             decoding="async"
           />
         </picture>

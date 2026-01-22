@@ -92,10 +92,10 @@ const StudioCarousel: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className='w-full py-16 md:py-16 overflow-hidden relative z-10'>
+    <section ref={containerRef} className='w-full py-16 md:py-16 overflow-hidden relative z-10' aria-labelledby="studio-carousel-heading">
       {/* Section Header - Contained - Primary Section Heading */}
       <div className='max-w-276 mx-auto px-8 md:px-8 mb-8'>
-        <h2 className='font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-[var(--brand-accent)] text-center'>
+        <h2 id="studio-carousel-heading" className='font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-[var(--accent-chrome)] text-center'>
           Unser Studio
         </h2>
         <p className='font-body text-lg text-brand-chrome text-center mt-4'>
@@ -104,7 +104,7 @@ const StudioCarousel: React.FC = () => {
       </div>
 
       {/* FULL-WIDTH CAROUSEL - FIXED: 16:9 aspect ratio with max height limit */}
-      <div className='relative w-full'>
+      <div className='relative w-full' role="region" aria-roledescription="carousel" aria-label="Studio photos carousel">
         {/* Main Image Container - Fixed aspect ratio 16:9 */}
         <div className='relative w-full aspect-video max-h-[70vh] overflow-hidden bg-luxury-bg-dark'>
           {/* Images */}
@@ -158,7 +158,7 @@ const StudioCarousel: React.FC = () => {
           {/* Navigation Buttons - Brand Compliant */}
           <button
             onClick={goToPrevious}
-            className='absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-luxury-bg-dark/80 backdrop-blur-sm flex items-center justify-center hover:bg-brand-accent/90 transition-all duration-300 z-10 shadow-[var(--shadow-chrome-md)]'
+            className='absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-luxury-bg-dark/80 backdrop-blur-sm flex items-center justify-center hover:bg-[var(--accent-chrome)]/90 transition-all duration-300 z-10 shadow-[var(--shadow-chrome-md)]'
             aria-label='Vorheriges Bild'
           >
             <ChevronLeft className='w-6 h-6 text-luxury-text-inverse' />
@@ -173,8 +173,8 @@ const StudioCarousel: React.FC = () => {
           </button>
 
           {/* Counter */}
-          <div className='absolute bottom-4 md:bottom-6 right-4 md:right-6 bg-luxury-bg-dark/80 backdrop-blur-sm text-luxury-text-inverse px-8 py-0 rounded-lg font-inter text-sm font-semibold z-10'>
-            {currentIndex + 1} / {STUDIO_IMAGES.length}
+          <div className='absolute bottom-4 md:bottom-6 right-4 md:right-6 bg-luxury-bg-dark/80 backdrop-blur-sm text-luxury-text-inverse px-8 py-0 rounded-lg font-inter text-sm font-semibold z-10' aria-live="polite" aria-atomic="true">
+            <span className="sr-only">Slide </span>{currentIndex + 1}<span className="sr-only"> of </span> / {STUDIO_IMAGES.length}
           </div>
         </div>
 

@@ -52,32 +52,7 @@ const ScrollToTop: React.FC = () => {
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
     });
 
-    // Dev-only: if ScrollTrigger is active during debugging, clean up stale triggers and refresh.
-    if (import.meta.env.DEV) {
-      void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.getAll().forEach((trigger) => {
-          const triggerElement = trigger.trigger;
-          if (triggerElement && triggerElement instanceof Element) {
-            if (!document.documentElement.contains(triggerElement)) {
-              trigger.kill();
-            }
-            return;
-          }
-
-          const varsTrigger = (trigger as unknown as { vars?: { trigger?: unknown } }).vars?.trigger;
-          if (typeof varsTrigger === 'string') {
-            const el = document.querySelector(varsTrigger);
-            if (!el) {
-              trigger.kill();
-            }
-          }
-        });
-
-        window.setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 100);
-      });
-    }
+    // GSAP removed - no cleanup needed
   }, [pathname, hash]);
 
   return null; // This component doesn't render anything

@@ -1,22 +1,42 @@
-import React, { useMemo, useState, useCallback, useRef } from 'react';
+import React, { useMemo, useState, useCallback, useRef, lazy, Suspense } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import { Sparkles, Zap, Shield, Euro, ChevronRight } from 'lucide-react';
 import { useApp } from '../../../core/state/AppContext';
-import { Button } from '../ui/button';
 import { SectionHeading } from '../SectionHeading';
 import { Card } from '../ui/Card';
 import { MainNavigation } from '../molecules/MainNavigation';
 import { Footer } from '../pages';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
 } from '../../styles/animations';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import '@/styles/paket-cards.css';
+
+// Dynamic imports for Swiper to reduce initial bundle
+const SwiperComponent = lazy(() => 
+  Promise.all([
+    import('swiper/react'),
+    import('swiper/modules'),
+    import('swiper/css'),
+    import('swiper/css/pagination')
+  ]).then(([swiperReact, swiperModules]) => ({
+    default: ({ children, ...props }: any) => {
+      const { Swiper, SwiperSlide } = swiperReact;
+      const { Pagination } = swiperModules;
+      return (
+        <Swiper modules={[Pagination]} {...props}>
+          {children}
+        </Swiper>
+      );
+    }
+  }))
+);
+
+const SwiperSlideComponent = lazy(() => 
+  import('swiper/react').then(({ SwiperSlide }) => ({ default: SwiperSlide }))
+);
 
 const categories = [
   {
@@ -186,89 +206,96 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
   const renderServiceCard = (service: (typeof currentServices)[number]) => {
     const isSelected = selectedPacket === service.id;
     return (
-      <Card
+      <motion.div
         key={service.id}
-        variant={isSelected ? 'featured' : 'default'}
-        className="flex flex-col h-full"
-        asChild
+        variants={fadeInUpVariants}
+        className="
+          paket-card flex flex-col text-center 
+          cursor-pointer
+          h-full
+        "
+        onClick={() => setSelectedPacket(isSelected ? null : service.id)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
       >
-        <motion.div
-          variants={fadeInUpVariants}
-          className="paket-card flex flex-col h-full cursor-pointer"
-          onClick={() => setSelectedPacket(isSelected ? null : service.id)}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        {/* Top labels */}
+        <div className="flex justify-between items-center mb-6">
+          <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
+            Paket
+          </span>
+          <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
+            {service.duration ?? 'Flexibel'}
+          </span>
+        </div>
+
+        {/* Heading */}
+        <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-[36px] text-white mb-6">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="font-normal text-sm leading-[28px] text-white/70 mb-8 flex-1">
+          {service.description}
+        </p>
+
+        {/* Price */}
+        <div className="flex items-center gap-2 mb-8">
+          <Euro size={18} className="text-[color:var(--text-secondary)]" />
+          <span className="font-semibold text-xl leading-7 text-[color:var(--text-secondary)]">
+            {formatPrice(service.priceFrom, service.priceUnit)}
+          </span>
+        </div>
+
+        {/* List */}
+        <ul className="space-y-4 mb-8">
+          {service.features.map((feature, featureIndex) => (
+            <li key={featureIndex} className="flex items-start gap-3">
+              <ChevronRight
+                size={16}
+                className="text-[color:var(--text-secondary)] flex-shrink-0 mt-1"
+              />
+              <span className="font-normal text-base leading-[23px] text-white/80">
+                {feature}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Button */}
+        <button
+          onClick={() => handleServiceBooking(service.id)}
+          className="
+            w-full h-[50px]
+            border border-[color:var(--text-secondary)]
+            rounded-[24px]
+            font-semibold text-sm leading-5 text-white
+            hover:bg-[color:var(--text-secondary)] hover:text-black
+            transition-all duration-200
+          "
+          aria-label={`${service.cta} für ${service.title}`}
         >
-          <div className='flex flex-col gap-8 h-full'>
-            <div className='flex items-center justify-between'>
-              <span className='text-sm font-semibold uppercase tracking-wider text-brand-chrome/80'>
-                Paket
-              </span>
-              <span className='text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                {service.duration ?? 'Flexibel'}
-              </span>
-            </div>
-
-            <h3 className='font-headline text-2xl md:text-3xl text-luxury-text-inverse'>
-              {service.title}
-            </h3>
-
-            <p className='text-base leading-7 text-luxury-text-inverse/70 flex-1 font-body'>
-              {service.description}
-            </p>
-
-            <div className='flex items-center gap-8 text-brand-chrome font-semibold text-xl'>
-              <Euro size={18} />
-              <span>{formatPrice(service.priceFrom, service.priceUnit)}</span>
-            </div>
-
-            <ul className='space-y-8 text-sm text-luxury-text-inverse/80 font-body'>
-              {service.features.map((feature, featureIndex) => (
-                <li key={featureIndex}>
-                  <motion.div
-                    className='flex items-center gap-8'
-                    variants={fadeInUpVariants}
-                  >
-                    <ChevronRight
-                      size={16}
-                      className='text-brand-chrome shrink-0'
-                    />
-                    <span>{feature}</span>
-                  </motion.div>
-                </li>
-              ))}
-            </ul>
-
-            <Button
-              onClick={() => handleServiceBooking(service.id)}
-              variant='outlineChrome'
-              className='w-full flex items-center justify-center rounded-lg px-4 py-4 text-sm font-semibold transition-all duration-200 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
-              aria-label={`${service.cta} für ${service.title}`}
-            >
-              {service.cta}
-            </Button>
-          </div>
-        </motion.div>
-      </Card>
+          {service.cta}
+        </button>
+      </motion.div>
     );
   };
 
   return (
     <main className={`tattoo-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark ${className}`}>
       <MainNavigation />
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-container-main flex flex-col gap-16'>
+      <Section variant="default" spacing="normal" bg="dark">
+        <Container size="default">
+          <div className='flex flex-col gap-16'>
             <SectionHeading
               eyebrow="Medusa München"
               title="Tattoo"
-            subtitle="Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen."
-          />
+              subtitle="Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen."
+            />
 
-          <div
-            className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center justify-items-center max-w-4xl mx-auto'
-            aria-label='Service-Kategorien'
-          >
+            <div
+              className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center justify-items-center max-w-4xl mx-auto'
+              aria-label='Service-Kategorien'
+            >
             {categories.map((category) => {
               const IconComponent = category.icon;
               const isActive = activeCategory === category.id;
@@ -277,17 +304,17 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
                 <>
                   <div className='flex items-center justify-between mb-8'>
                     <div
-                      className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-brand-accent'
+                      className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-[var(--accent-chrome)]'
                     >
                       <IconComponent size={20} className='text-luxury-text-primary' />
                     </div>
-                    <span className='text-sm lg:text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                    <span className='text-base lg:text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
                       ab {category.priceFrom}
                     </span>
                   </div>
                   <div className='space-y-8 flex-1'>
                     <h3 className='font-headline text-2xl text-brand-chrome'>{category.title}</h3>
-                    <p className='text-sm md:text-base text-luxury-text-inverse/75 leading-relaxed font-body'>
+                    <p className="text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed font-body">
                       {category.subtitle}
                     </p>
                   </div>
@@ -295,7 +322,7 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
               );
 
               const buttonClassName =
-                'flex flex-col h-full transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-4 focus-visible:ring-offset-(--deep-black) hover-scale';
+                'flex flex-col h-full';
 
               return (
                 <Card 
@@ -305,36 +332,24 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
                   className="flex flex-col h-full"
                   asChild
                 >
-                  {isActive ? (
-                    <button
-                      type="button"
-                      aria-pressed="true"
-                      className={buttonClassName}
-                      onClick={() => handleCategoryChange(category.id as CategoryId)}
-                      aria-label={`Select ${category.title} category`}
-                    >
-                      {buttonContent}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      aria-pressed="false"
-                      className={buttonClassName}
-                      onClick={() => handleCategoryChange(category.id as CategoryId)}
-                      aria-label={`Select ${category.title} category`}
-                    >
-                      {buttonContent}
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    aria-pressed={isActive}
+                    className={buttonClassName}
+                    onClick={() => handleCategoryChange(category.id as CategoryId)}
+                    aria-label={`Select ${category.title} category`}
+                  >
+                    {buttonContent}
+                  </button>
                 </Card>
               );
             })}
           </div>
           </div>
-        </div>
+        </Container>
 
         {/* Bottom cards section - wider container */}
-        <div className='w-full max-w-container-packages mx-auto px-6 lg:px-12 mt-20'>
+        <Container size="wide" className="mt-20 overflow-x-clip">
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeCategory}
@@ -354,7 +369,7 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
               />
 
               {isDesktop ? (
-                <div className={`paket-cards-wrapper lg:grid lg:grid-cols-1 lg:gap-16 lg:justify-center lg:justify-items-center ${
+                <div className={`paket-cards-wrapper lg:grid lg:grid-cols-4 lg:gap-4 lg:justify-center lg:justify-items-center ${
                   (currentServices.length as number) >= 4 ? 'lg:grid-cols-4' :
                   (currentServices.length as number) === 3 ? 'lg:grid-cols-3' :
                   (currentServices.length as number) === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-1'
@@ -366,28 +381,37 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
                   ))}
                 </div>
               ) : (
-                <Swiper
-                  modules={[Pagination]}
-                  slidesPerView={1}
-                  spaceBetween={16}
-                  pagination={{
-                    clickable: true,
-                    bulletClass: 'swiper-pagination-bullet !bg-white/30',
-                    bulletActiveClass: 'swiper-pagination-bullet-active !bg-brand-accent',
-                  }}
-                  className='paket-cards-swiper'
-                >
-                  {currentServices.map((service) => (
-                    <SwiperSlide key={service.id} className='h-auto!'>
-                      {renderServiceCard(service)}
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <div className='w-full overflow-x-clip'>
+                  <Suspense
+                    fallback={
+                      <div className="min-h-100 flex items-center justify-center text-luxury-text-inverse">
+                        Loading...
+                      </div>
+                    }
+                  >
+                    <SwiperComponent
+                      slidesPerView={1}
+                      spaceBetween={16}
+                      pagination={{
+                        clickable: true,
+                        bulletClass: 'swiper-pagination-bullet !bg-white/30',
+                        bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
+                      }}
+                      className='paket-cards-swiper'
+                    >
+                      {currentServices.map((service) => (
+                        <SwiperSlideComponent key={service.id} className='h-auto! w-full'>
+                          {renderServiceCard(service)}
+                        </SwiperSlideComponent>
+                      ))}
+                    </SwiperComponent>
+                  </Suspense>
+                </div>
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
-    </section>
+        </Container>
+      </Section>
       <Footer />
     </main>
   );

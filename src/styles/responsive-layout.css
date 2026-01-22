@@ -1,32 +1,9 @@
 /* Responsive layout primitives extracted from backup
-   Provides .responsive-container, safe-area padding, and section spacing adjustments
+   Provides safe-area padding and section spacing adjustments
    Phone frame / viewport integrity restoration.
+   
+   Note: .responsive-container moved to design-system.css (single source of truth)
 */
-
-.responsive-container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem; /* 16px */
-  padding-right: 1rem;
-  max-width: 100%;
-}
-
-@media (min-width: 768px) {
-  .responsive-container {
-    padding-left: 2rem; /* 32px */
-    padding-right: 2rem;
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .responsive-container {
-    padding-left: 3rem; /* 48px */
-    padding-right: 3rem;
-    max-width: 1280px;
-  }
-}
 
 /* Safe area support for notch devices - mobile only */
 @media (max-width: 640px) {

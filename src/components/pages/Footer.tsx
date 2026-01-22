@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
               <button
                 type='submit'
                 disabled={!email || !agreeMarketing}
-                className='flex flex-col h-full w-full bg-brand-accent text-luxury-bg-dark font-body font-semibold py-4 px-6 rounded-lg hover:bg-brand-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 touch-target-mobile'
+                className='flex flex-col h-full w-full bg-[var(--accent-chrome)] text-[var(--deep-black)] font-body font-semibold py-4 px-6 rounded-lg hover:bg-[var(--accent-chrome)]/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 touch-target-mobile' 
               >
                 Abonnieren
               </button>

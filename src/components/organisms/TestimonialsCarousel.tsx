@@ -3,6 +3,8 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Card } from '../ui/Card';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import '../../styles/testimonials.css';
 
 export interface Testimonial {
@@ -51,9 +53,9 @@ export default function TestimonialsCarousel({
   title = 'Was Kunden sagen',
 }: TestimonialsCarouselProps) {
   return (
-    <section className={`py-20 relative z-10 ${className}`} aria-label='Customer testimonials'>
-      <div className='responsive-container safe-area-padding'>
-        <h3 className='font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-[var(--brand-accent)] text-center mb-16'>
+    <Section variant="default" spacing="normal" className={className} aria-label='Customer testimonials'>
+      <Container size="default">
+        <h3 className='font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-(--brand-accent) text-center mb-16'>
           {title}
         </h3>
 
@@ -65,7 +67,7 @@ export default function TestimonialsCarousel({
           pagination={{
             clickable: true,
             bulletClass: 'swiper-pagination-bullet !bg-white/30',
-            bulletActiveClass: 'swiper-pagination-bullet-active !bg-brand-accent',
+            bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
           }}
           autoplay={{
             delay: 5000,
@@ -108,7 +110,7 @@ export default function TestimonialsCarousel({
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

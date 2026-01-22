@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '@/components/atoms/Badge/Badge';
+// import { Badge } from '@/components/atoms/Badge/Badge';
 import { ReviewCard } from '@/components/molecules/ReviewCard';
 import Container from '@/components/ui/Container';
 
@@ -97,7 +97,10 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
           {/* Trust Badges */}
           <div className='flex flex-wrap justify-center gap-8 mt-16'>
             {badges.map((badge, index) => (
-              <Badge key={index} iconUrl={badge.iconUrl} text={badge.text} />
+              <div key={index} className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full">
+                <img src={badge.iconUrl} alt="" className="w-4 h-4" />
+                <span className="text-sm">{badge.text}</span>
+              </div>
             ))}
           </div>
         </Container>

@@ -12,7 +12,7 @@ export const NotFoundPage: React.FC = () => {
         />
         <a
           href='/'
-          className='inline-block bg-brand-accent text-brand-background px-8 py-0 rounded-lg font-medium hover:bg-brand-accent-hover transition duration-200 ease-out'
+          className='inline-block bg-[var(--accent-chrome)] text-[var(--deep-black)] px-8 py-0 rounded-lg font-medium hover:bg-[var(--accent-chrome)]/80 transition duration-200 ease-out' 
         >
           Go Home
         </a>

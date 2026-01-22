@@ -1,5 +1,7 @@
 import { HelpCircle, Clock, MapPin, Euro, Shield, Languages } from 'lucide-react';
 import { Card } from '../ui/Card';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 const faqData = [
   {
@@ -42,8 +44,8 @@ const faqData = [
 
 export function FAQSection() {
   return (
-    <section className="py-16 bg-luxury-bg-dark">
-      <div className="container mx-auto px-8">
+    <Section bg="dark">
+      <Container size="default">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-accent mb-8">
             Häufig gestellte Fragen
@@ -66,7 +68,7 @@ export function FAQSection() {
               >
                 <div className="flex flex-col h-full">
                   <div className="flex items-start gap-8">
-                    <div className="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center shrink-0">
+                    <div className="w-12 bg-brand-accent/10 rounded-lg flex items-center justify-center shrink-0 flex-col h-full">
                       <IconComponent className="w-6 h-6 text-brand-accent" />
                     </div>
                     <div className="flex-1">
@@ -82,7 +84,7 @@ export function FAQSection() {
                         {faq.keywords.map((keyword, keywordIndex) => (
                           <span 
                             key={keywordIndex}
-                            className="text-sm lg:text-xs text-luxury-text-inverse/40 bg-luxury-text-inverse/5 px-2 py-2 rounded"
+                            className="text-sm lg:text-xs text-luxury-text-inverse/40 bg-luxury-text-inverse/5 px-2 py-2 rounded flex flex-col h-full"
                           >
                             {keyword}
                           </span>
@@ -129,7 +131,7 @@ export function FAQSection() {
             </div>
           </div>
         </Card>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

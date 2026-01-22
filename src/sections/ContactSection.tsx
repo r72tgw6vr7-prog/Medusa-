@@ -45,7 +45,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div className='container mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-16'>
         {/* Header */}
         <div className='text-center mb-6 md:mb-10 lg:mb-16'>
-          <h2 className='text-brand-accent text-5xl font-bold mb-4 md:mb-6'>{title}</h2>
+          <h2 className='text-[var(--accent-chrome)] text-5xl font-bold mb-4 md:mb-6'>{title}</h2>
           <p className='text-luxury-text-inverse text-lg max-w-2xl mx-auto'>{subtitle}</p>
         </div>
 
@@ -153,7 +153,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   name='privacyPolicy'
                   type='checkbox'
                   required
-                  className='mt-0 mr-0 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black) touch-target-mobile'
+                  className='mt-0 mr-0 focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] touch-target-mobile' 
                   aria-required='true'
                 />
                 <label
@@ -165,7 +165,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
               <button
                 type='submit'
-                className='bg-brand-accent text-black px-6 md:px-8 py-4 rounded hover:opacity-80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black) flex flex-col h-full touch-target-mobile'
+                className='bg-[var(--accent-chrome)] text-[var(--deep-black)] px-6 md:px-8 py-4 rounded hover:bg-[var(--accent-chrome)]/80 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] flex flex-col h-full touch-target-mobile' 
                 aria-label='Nachricht absenden'
               >
                 Senden
@@ -188,7 +188,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     {info.href ? (
                       <a
                         href={info.href}
-                        className='text-brand-accent hover:underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline'
+                        className='text-[var(--accent-chrome)] hover:underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline' 
                       >
                         {info.value}
                       </a>
@@ -210,7 +210,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     href={social.url}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='p-0 rounded-full hover:bg-brand-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black) flex flex-col h-full touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                    className='p-0 rounded-full hover:bg-[var(--accent-chrome)]/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] flex flex-col h-full touch-target-mobile touch-target-mobile-inline touch-target-mobile-center' 
                     aria-label={social.label}
                   >
                     <img src={social.icon} alt={social.label} className='w-6 h-6' />

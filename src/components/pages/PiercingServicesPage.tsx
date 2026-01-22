@@ -1,22 +1,40 @@
-import React, { useMemo, useState, useCallback, useRef } from 'react';
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import React, { useMemo, useState, useCallback, useRef, lazy, Suspense } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Gem, Sparkles, Wrench, Euro, ChevronRight, ChevronDown, MessageCircle } from 'lucide-react';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useApp } from '../../../core/state/AppContext';
-import { Button } from '../ui/button';
 import { SectionHeading } from '../SectionHeading';
 import { Card } from '../ui/Card';
 import { MainNavigation } from '../molecules/MainNavigation';
 import { Footer } from '../pages';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
 } from '../../styles/animations';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import '@/styles/paket-cards.css';
+
+// Dynamic imports for Swiper to keep bundle small
+const SwiperComponent = lazy(() =>
+  Promise.all([
+    import('swiper/react'),
+    import('swiper/modules'),
+    import('swiper/css'),
+    import('swiper/css/pagination'),
+  ]).then(([swiperReact, swiperModules]) => {
+    const { Swiper } = swiperReact;
+    const { Pagination } = swiperModules;
+    return {
+      default: ({ children, ...props }: any) => (
+        <Swiper modules={[Pagination]} {...props}>
+          {children}
+        </Swiper>
+      ),
+    };
+  }),
+);
+
+const SwiperSlideComponent = lazy(() =>
+  import('swiper/react').then(({ SwiperSlide }) => ({ default: SwiperSlide })),
+);
 
 // ============================================
 // PREISLISTE DATA - STECHEN (Piercing Prices)
@@ -250,10 +268,11 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
   const [isAnimating, setIsAnimating] = useState(false);
   const { openBooking } = useApp();
-  const prefersReducedMotion = useReducedMotion();
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
+
+  // Intersection Observer to trigger animations when in view
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(containerRef, { amount: 0.1, once: true });
 
@@ -274,6 +293,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
     [activeCategory, isAnimating],
   );
 
+  // Debounced booking handler to prevent accidental double-invocation
   const handleServiceBooking = useMemo(() => {
     let t: number | undefined;
     return (serviceId: string) => {
@@ -282,87 +302,194 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
     };
   }, [openBooking]);
 
+  const renderServiceCard = (service: (typeof currentServices)[number]) => {
+    const isSelected = selectedPacket === service.id;
+    const priceList = activeCategory === 'stechen' ? PREISLISTE_STECHEN[service.id] : null;
+    const hasDetails = !!(priceList && priceList.items && priceList.items.length > 0);
+    const isExpanded = expandedCard === service.id && hasDetails;
+    return (
+      <motion.div
+        key={service.id}
+        variants={fadeInUpVariants}
+        className="paket-card flex flex-col h-full min-w-[280px] max-w-[303px] cursor-pointer text-center"
+        whileHover={!isExpanded ? { scale: 1.02 } : undefined}
+        whileTap={!isExpanded ? { scale: 0.98 } : undefined}
+      >
+        <div className='flex flex-col gap-8 h-full'>
+          <div className='flex items-center justify-between'>
+            <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
+              {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
+            </span>
+            <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
+              {service.duration ?? 'Flexibel'}
+            </span>
+          </div>
+
+          <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white">
+            {service.title}
+          </h3>
+
+          <p className="font-normal text-sm leading-7 text-white/70 flex-1">
+            {service.description}
+          </p>
+
+          <div className="flex items-center gap-2">
+            <Euro size={18} className="text-[color:var(--text-secondary)]" />
+            <span className="font-semibold text-xl leading-7 text-[color:var(--text-secondary)]">
+              {formatPrice(service.priceFrom, service.priceUnit)}
+            </span>
+          </div>
+
+          {hasDetails && (
+            <>
+              <button
+                type="button"
+                onClick={e => {
+                  e.stopPropagation();
+                  setExpandedCard(isExpanded ? null : service.id);
+                }}
+                className="flex items-center justify-between w-full py-2 text-sm font-semibold text-[color:var(--text-secondary)] hover:text-[color:var(--text-secondary)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[rgba(192,192,192,0.91)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000] rounded"
+                aria-expanded={isExpanded}
+                aria-controls={`price-details-${service.id}`}
+              >
+                <span>{isExpanded ? 'Preisliste ausblenden' : 'Alle Preise anzeigen'}</span>
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <AnimatePresence>
+                {isExpanded && (
+                  <motion.div
+                    id={`price-details-${service.id}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="border-t border-white/10 pt-4">
+                      <div className="grid grid-cols-[1fr_auto_auto] gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-white/50">
+                        <span>Piercing</span>
+                        <span className="w-12 text-right">1</span>
+                        <span className="w-12 text-right">2</span>
+                      </div>
+                      <ul className="space-y-2">
+                        {priceList.items.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="grid grid-cols-[1fr_auto_auto] gap-2 text-sm text-white/80 py-2 border-b border-white/5 last:border-b-0"
+                          >
+                            <span className="truncate">{item.name}</span>
+                            <span className="w-12 text-right font-semibold text-[color:var(--text-secondary)]/90">{item.price1}</span>
+                            <span className="w-12 text-right font-semibold text-[color:var(--text-secondary)]/90">{item.price2 ?? '—'}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {priceList.note && (
+                        <p className="mt-4 text-xs text-white/50 italic text-center">
+                          {priceList.note}
+                        </p>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
+
+          <ul className='space-y-4 text-sm text-white/80'>
+            {service.features.map((feature, featureIndex) => (
+              <motion.li
+                key={featureIndex}
+                className='flex items-center gap-4'
+                variants={fadeInUpVariants}
+              >
+                <ChevronRight
+                  size={16}
+                  className='text-[color:var(--text-secondary)] shrink-0 mt-2'
+                />
+                <span className="font-normal text-base leading-[23px]">{feature}</span>
+              </motion.li>
+            ))}
+          </ul>
+
+          <button
+            onClick={() => handleServiceBooking(service.id)}
+            className="w-full h-12.5 border border-[color:var(--text-secondary)] rounded-3xl font-semibold text-sm leading-5 text-white hover:bg-[color:var(--text-secondary)] hover:text-black transition-all duration-200"
+            aria-label={`${service.cta} für ${service.title}`}
+          >
+            {service.cta}
+          </button>
+        </div>
+      </motion.div>
+    );
+  };
+
   return (
     <main className={`piercing-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark ${className}`}>
       <MainNavigation />
       <section className='section-padding relative z-10'>
         <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-container-main flex flex-col gap-16'>
+          <div className='mx-auto w-full max-w-container-main flex flex-col text-center gap-4'>
             <SectionHeading
               eyebrow="Medusa München"
               title="Piercing"
               subtitle="Professionelles Piercing mit über 5 Jahren Erfahrung und höchsten Hygienestandards."
             />
 
-            <div className='flex items-center justify-center gap-4 p-6 rounded-2xl bg-brand-accent/10 border border-brand-accent/20'>
-              <MessageCircle size={24} className='text-brand-accent' />
+            {/* FREE Consultation Banner */}
+            <div className='flex items-center justify-center gap-4 p-6 rounded-2xl bg-[var(--accent-chrome)]/10 border border-[var(--accent-chrome)]/20'>
+              <MessageCircle size={24} className='text-[var(--accent-chrome)]' />
               <div className='text-center'>
                 <p className='font-headline text-lg text-brand-chrome'>Kostenlose Beratung</p>
                 <p className='text-sm text-luxury-text-inverse/70 font-body'>Allow us to help you choose the right team member and piercing</p>
               </div>
             </div>
 
-            <div
-              className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-4xl mx-auto'
+            {/* Top 3 Category Cards - Centered */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-4xl mx-auto'
+              role='tablist'
               aria-label='Service-Kategorien'
             >
               {categories.map((category) => {
                 const IconComponent = category.icon;
                 const isActive = activeCategory === category.id;
 
-                const buttonContent = (
-                  <>
-                    <div className='flex items-center justify-between mb-8'>
-                      <div
-                        className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-brand-accent'
-                      >
-                        <IconComponent size={20} className='text-luxury-text-primary' />
-                      </div>
-                      <span className='text-sm lg:text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                        ab {category.priceFrom}
-                      </span>
-                    </div>
-                    <div className='space-y-8 flex-1'>
-                      <h3 className='font-headline text-2xl text-brand-chrome'>{category.title}</h3>
-                      <p className='text-sm md:text-base text-luxury-text-inverse/75 leading-relaxed font-body'>
-                        {category.subtitle}
-                      </p>
-                    </div>
-                  </>
-                );
-
-                const buttonClassName =
-                  'flex flex-col h-full transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-4 focus-visible:ring-offset-(--deep-black) hover-scale';
-
                 return (
-                  <Card 
+                  <Card
                     key={category.id}
                     variant={isActive ? 'featured' : 'default'}
                     size="default"
-                    className="flex flex-col h-full"
                     asChild
                   >
-                    {isActive ? (
-                      <button
-                        type="button"
-                        aria-pressed="true"
-                        className={buttonClassName}
-                        onClick={() => handleCategoryChange(category.id as CategoryId)}
-                        aria-label={`Select ${category.title} category`}
-                      >
-                        {buttonContent}
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        aria-pressed="false"
-                        className={buttonClassName}
-                        onClick={() => handleCategoryChange(category.id as CategoryId)}
-                        aria-label={`Select ${category.title} category`}
-                      >
-                        {buttonContent}
-                      </button>
-                    )}
+                    <button
+                      id={`tab-${category.id}`}
+                      role='tab'
+                      aria-selected={isActive}
+                      aria-controls={`panel-${category.id}`}
+                      tabIndex={isActive ? 0 : -1}
+                      className="flex flex-col h-full transition-transform duration-300"
+                      onClick={() => handleCategoryChange(category.id as CategoryId)}
+                      aria-label={`Select ${category.title} category`}
+                    >
+                      <div className='flex items-center justify-between mb-8'>
+                        <div
+                          className='h-14 w-14 flex items-center justify-center rounded-full bg-[var(--accent-chrome)]' 
+                        >
+                          <IconComponent size={20} className='text-luxury-text-primary' />
+                        </div>
+                        <span className='text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                          ab {category.priceFrom}
+                        </span>
+                      </div>
+                      <div className='space-y-8 flex-1'>
+                        <h3 className='font-headline text-2xl text-brand-chrome'>{category.title}</h3>
+                        <p className='text-sm md:text-base text-luxury-text-inverse/75 leading-relaxed font-body'>
+                          {category.subtitle}
+                        </p>
+                      </div>
+                    </button>
                   </Card>
                 );
               })}
@@ -370,12 +497,16 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
           </div>
         </div>
 
+        {/* Bottom cards section - wider container */}
         <div className='w-full px-6 lg:px-12 mt-20'>
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeCategory}
               ref={containerRef}
               className='space-y-12'
+              role='tabpanel'
+              id={`panel-${activeCategory}`}
+              aria-labelledby={`tab-${activeCategory}`}
               aria-live='polite'
               aria-label={`Showing ${activeCategoryMeta?.title} services`}
               variants={containerVariants}
@@ -389,329 +520,35 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
                 subtitle={activeCategoryMeta?.subtitle}
               />
 
-              <div className='w-full flex justify-center'>
-                {isDesktop ? (
-                  <div className={`inline-grid grid-cols-1 md:grid-cols-2 gap-16 justify-items-center ${
-                    (currentServices.length as number) >= 5 ? 'lg:grid-cols-5' :
-                    (currentServices.length as number) === 4 ? 'lg:grid-cols-4' :
-                    (currentServices.length as number) === 3 ? 'lg:grid-cols-3' :
-                    (currentServices.length as number) === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-1'
-                  }`}>
-                    {currentServices.map((service) => {
-                      const isSelected = selectedPacket === service.id;
-                      const priceList = activeCategory === 'stechen' ? PREISLISTE_STECHEN[service.id] : null;
-                      const hasDetails = !!(priceList && priceList.items && priceList.items.length > 0);
-                      const isExpanded = expandedCard === service.id && hasDetails;
-                      return (
-                        <Card 
-                          key={service.id} 
-                          variant={isSelected ? 'featured' : 'default'}
-                          className="flex flex-col h-full"
-                          asChild
-                        >
-                          <motion.div
-                            variants={fadeInUpVariants}
-                            className="flex flex-col h-full min-w-(--paket-card-min-width) max-w-(--paket-card-max-width)"
-                            whileHover={!isExpanded ? { scale: 1.02 } : undefined}
-                            whileTap={!isExpanded ? { scale: 0.98 } : undefined}
-                          >
-                            <div className='flex flex-col gap-8 h-full'>
-                              <div className='flex items-center justify-between'>
-                                <span className='text-sm font-semibold uppercase tracking-wider text-brand-chrome/80'>
-                                  {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
-                                </span>
-                                <span className='text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                                  {service.duration ?? 'Flexibel'}
-                                </span>
-                              </div>
-
-                              <h3 className='font-headline text-2xl md:text-3xl text-luxury-text-inverse'>
-                                {service.title}
-                              </h3>
-
-                              <p className='text-base leading-7 text-luxury-text-inverse/70 flex-1 font-body'>
-                                {service.description}
-                              </p>
-
-                              <div className='flex items-center gap-8 text-brand-chrome font-semibold text-xl'>
-                                <Euro size={18} />
-                                <span>{formatPrice(service.priceFrom, service.priceUnit)}</span>
-                              </div>
-
-                              {hasDetails && (
-                                <>
-                                  {isExpanded ? (
-                                    <button
-                                      type="button"
-                                      onClick={e => {
-                                        e.stopPropagation();
-                                        setExpandedCard(null);
-                                      }}
-                                      className="flex items-center justify-between w-full py-2 text-sm font-semibold text-brand-chrome/80 hover:text-brand-chrome transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black) rounded touch-target-mobile"
-                                      aria-expanded="true"
-                                    >
-                                      <span>Preisliste ausblenden</span>
-                                      <ChevronDown
-                                        size={18}
-                                        className="transition-transform duration-300 rotate-180"
-                                      />
-                                    </button>
-                                  ) : (
-                                    <button
-                                      type="button"
-                                      onClick={e => {
-                                        e.stopPropagation();
-                                        setExpandedCard(service.id);
-                                      }}
-                                      className="flex items-center justify-between w-full py-2 text-sm font-semibold text-brand-chrome/80 hover:text-brand-chrome transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black) rounded touch-target-mobile"
-                                      aria-expanded="false"
-                                    >
-                                      <span>Alle Preise anzeigen</span>
-                                      <ChevronDown
-                                        size={18}
-                                        className="transition-transform duration-300"
-                                      />
-                                    </button>
-                                  )}
-                                  <AnimatePresence>
-                                    {isExpanded && (
-                                      <motion.div
-                                        id={`price-details-${service.id}`}
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: 'easeInOut' }}
-                                        className="overflow-hidden"
-                                      >
-                                        <div className="border-t border-luxury-text-inverse/10 pt-4">
-                                          <div className="paket-price-grid mb-2 text-sm lg:text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/50">
-                                            <span>Piercing</span>
-                                            <span className="w-12 text-right">1</span>
-                                            <span className="w-12 text-right">2</span>
-                                          </div>
-                                          <ul className="space-y-2 divide-y divide-luxury-text-inverse/5">
-                                            {priceList.items.map((item, idx) => (
-                                              <li
-                                                key={idx}
-                                                className="paket-price-grid py-2 text-sm text-luxury-text-inverse/80"
-                                              >
-                                                <span className="font-body truncate">{item.name}</span>
-                                                <span className="w-12 text-right font-semibold text-brand-chrome/90">{item.price1}</span>
-                                                <span className="w-12 text-right font-semibold text-brand-chrome/90">{item.price2 ?? '—'}</span>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                          {priceList.note && (
-                                            <p className="mt-4 text-sm lg:text-xs text-luxury-text-inverse/50 italic text-center">
-                                              {priceList.note}
-                                            </p>
-                                          )}
-                                        </div>
-                                      </motion.div>
-                                    )}
-                                  </AnimatePresence>
-                                </>
-                              )}
-
-                              <ul className='space-y-8 text-sm text-luxury-text-inverse/80 font-body'>
-                                {service.features.map((feature, featureIndex) => (
-                                  <li key={featureIndex}>
-                                    <motion.div
-                                      className='flex items-center gap-8'
-                                      variants={fadeInUpVariants}
-                                    >
-                                      <ChevronRight
-                                        size={16}
-                                        className='text-brand-chrome shrink-0'
-                                      />
-                                      <span>{feature}</span>
-                                    </motion.div>
-                                  </li>
-                                ))}
-                              </ul>
-
-                              <Button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleServiceBooking(service.id);
-                                }}
-                                variant={isSelected ? 'chrome' : 'outlineChrome'}
-                                className="w-full flex items-center justify-center rounded-xl px-8 py-6 text-base font-semibold transition-all duration-200 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)"
-                                aria-label={`${service.cta} für ${service.title}`}
-                              >
-                                {service.cta}
-                              </Button>
-                            </div>
-                          </motion.div>
-                        </Card>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <Swiper
-                    modules={[Pagination]}
-                    slidesPerView={1}
-                    spaceBetween={16}
-                    pagination={{
-                      clickable: true,
-                      bulletClass: 'swiper-pagination-bullet !bg-white/30',
-                      bulletActiveClass: 'swiper-pagination-bullet-active !bg-brand-accent',
-                    }}
-                    className='paket-cards-swiper'
-                  >
-                    {currentServices.map((service) => {
-                      const isSelected = selectedPacket === service.id;
-                      const priceList = activeCategory === 'stechen' ? PREISLISTE_STECHEN[service.id] : null;
-                      const hasDetails = !!(priceList && priceList.items && priceList.items.length > 0);
-                      const isExpanded = expandedCard === service.id && hasDetails;
-                      return (
-                        <SwiperSlide key={service.id} className='h-auto!'>
-                          <Card 
-                            variant={isSelected ? 'featured' : 'default'}
-                            className="flex flex-col h-full"
-                            asChild
-                          >
-                            <motion.div
-                              variants={fadeInUpVariants}
-                              className="flex flex-col h-full min-w-(--paket-card-min-width) max-w-(--paket-card-max-width)"
-                              whileHover={!isExpanded ? { scale: 1.02 } : undefined}
-                              whileTap={!isExpanded ? { scale: 0.98 } : undefined}
-                            >
-                              <div className='flex flex-col gap-8 h-full'>
-                                <div className='flex items-center justify-between'>
-                                  <span className='text-sm font-semibold uppercase tracking-wider text-brand-chrome/80'>
-                                    {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
-                                  </span>
-                                  <span className='text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                                    {service.duration ?? 'Flexibel'}
-                                  </span>
-                                </div>
-
-                                <h3 className='font-headline text-2xl md:text-3xl text-luxury-text-inverse'>
-                                  {service.title}
-                                </h3>
-
-                                <p className='text-base leading-7 text-luxury-text-inverse/70 flex-1 font-body'>
-                                  {service.description}
-                                </p>
-
-                                <div className='flex items-center gap-8 text-brand-chrome font-semibold text-xl'>
-                                  <Euro size={18} />
-                                  <span>{formatPrice(service.priceFrom, service.priceUnit)}</span>
-                                </div>
-
-                                {hasDetails && (
-                                  <>
-                                    {isExpanded ? (
-                                      <button
-                                        type="button"
-                                        onClick={e => {
-                                          e.stopPropagation();
-                                          setExpandedCard(null);
-                                        }}
-                                        className="flex items-center justify-between w-full py-2 text-sm font-semibold text-brand-chrome/80 hover:text-brand-chrome transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black) rounded touch-target-mobile"
-                                        aria-expanded="true"
-                                      >
-                                        <span>Preisliste ausblenden</span>
-                                        <ChevronDown
-                                          size={18}
-                                          className="transition-transform duration-300 rotate-180"
-                                        />
-                                      </button>
-                                    ) : (
-                                      <button
-                                        type="button"
-                                        onClick={e => {
-                                          e.stopPropagation();
-                                          setExpandedCard(service.id);
-                                        }}
-                                        className="flex items-center justify-between w-full py-2 text-sm font-semibold text-brand-chrome/80 hover:text-brand-chrome transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black) rounded touch-target-mobile"
-                                        aria-expanded="false"
-                                      >
-                                        <span>Alle Preise anzeigen</span>
-                                        <ChevronDown
-                                          size={18}
-                                          className="transition-transform duration-300"
-                                        />
-                                      </button>
-                                    )}
-                                    <AnimatePresence>
-                                      {isExpanded && (
-                                        <motion.div
-                                          id={`price-details-${service.id}`}
-                                          initial={{ height: 0, opacity: 0 }}
-                                          animate={{ height: 'auto', opacity: 1 }}
-                                          exit={{ height: 0, opacity: 0 }}
-                                          transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: 'easeInOut' }}
-                                          className="overflow-hidden"
-                                        >
-                                          <div className="border-t border-luxury-text-inverse/10 pt-4">
-                                            <div className="paket-price-grid mb-2 text-sm lg:text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/50">
-                                              <span>Piercing</span>
-                                              <span className="w-12 text-right">1</span>
-                                              <span className="w-12 text-right">2</span>
-                                            </div>
-                                            <ul className="space-y-2 divide-y divide-luxury-text-inverse/5">
-                                              {priceList.items.map((item, idx) => (
-                                                <li
-                                                  key={idx}
-                                                  className="paket-price-grid py-2 text-sm text-luxury-text-inverse/80"
-                                                >
-                                                  <span className="font-body truncate">{item.name}</span>
-                                                  <span className="w-12 text-right font-semibold text-brand-chrome/90">{item.price1}</span>
-                                                  <span className="w-12 text-right font-semibold text-brand-chrome/90">{item.price2 ?? '—'}</span>
-                                                </li>
-                                              ))}
-                                            </ul>
-                                            {priceList.note && (
-                                              <p className="mt-4 text-sm lg:text-xs text-luxury-text-inverse/50 italic text-center">
-                                                {priceList.note}
-                                              </p>
-                                            )}
-                                          </div>
-                                        </motion.div>
-                                      )}
-                                    </AnimatePresence>
-                                  </>
-                                )}
-
-                                <ul className='space-y-8 text-sm text-luxury-text-inverse/80 font-body'>
-                                  {service.features.map((feature, featureIndex) => (
-                                    <li key={featureIndex}>
-                                      <motion.div
-                                        className='flex items-center gap-8'
-                                        variants={fadeInUpVariants}
-                                      >
-                                        <ChevronRight
-                                          size={16}
-                                          className='text-brand-chrome shrink-0'
-                                        />
-                                        <span>{feature}</span>
-                                      </motion.div>
-                                    </li>
-                                  ))}
-                                </ul>
-
-                                <Button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleServiceBooking(service.id);
-                                  }}
-                                  variant={isSelected ? 'chrome' : 'outlineChrome'}
-                                  className="w-full flex items-center justify-center rounded-xl px-8 py-6 text-base font-semibold transition-all duration-200 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)"
-                                  aria-label={`${service.cta} für ${service.title}`}
-                                >
-                                  {service.cta}
-                                </Button>
-                              </div>
-                            </motion.div>
-                          </Card>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-                )}
-              </div>
+              {isDesktop ? (
+  <div className='w-full flex justify-center'>
+    <div className='paket-cards-wrapper grid grid-cols-4 gap-4 justify-items-center'>
+      {currentServices.map((service) => renderServiceCard(service))}
+    </div>
+  </div>
+) : (
+  <div className='w-full overflow-x-clip'>
+    <Suspense
+      fallback={<div className='min-h-[100px] flex items-center justify-center text-luxury-text-inverse'>Loading...</div>}
+    >
+      <SwiperComponent
+        slidesPerView={1}
+        spaceBetween={16}
+        pagination={{
+          clickable: true,
+          bulletClass: 'swiper-pagination-bullet !bg-white/30',
+          bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
+        }}
+      >
+        {currentServices.map((service) => (
+          <SwiperSlideComponent key={service.id} className='h-auto w-full'>
+            {renderServiceCard(service)}
+          </SwiperSlideComponent>
+        ))}
+      </SwiperComponent>
+    </Suspense>
+  </div>
+)}
             </motion.div>
           </AnimatePresence>
         </div>

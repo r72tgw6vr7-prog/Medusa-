@@ -3,12 +3,7 @@
  * Lightweight monitoring to help prevent timeout issues
  */
 
-// Add type declaration for Vite's import.meta.env
-interface ImportMetaEnv {
-  DEV: boolean;
-  PROD: boolean;
-  MODE: string;
-}
+import { useState, useEffect } from 'react';
 
 
 
@@ -90,13 +85,12 @@ class PerformanceMonitor {
 
   // Suggest recovery actions
   private suggestRecovery() {
-    if (import.meta.env.DEV) {
+    if (process.env.NODE_ENV === 'development') {
       console.group('Recovery suggestions:');
       console.log('1. Reload the page');
       console.log('2. Check your internet connection');
       console.log('3. Clear browser cache');
-      git commit -m "Update hero copy (EN/DE)" --no-verify
-console.log('4. Try a different browser');
+      console.log('4. Try a different browser');
       console.groupEnd();
     }
   }
@@ -117,9 +111,9 @@ export const performanceMonitor = new PerformanceMonitor();
 
 // React hook for component performance tracking
 export const usePerformanceTracking = (componentName: string) => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   
-  React.useEffect(() => {
+  useEffect(() => {
     const endTracking = performanceMonitor.trackComponentMount(componentName);
     setIsLoading(false);
     

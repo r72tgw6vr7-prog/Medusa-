@@ -80,6 +80,10 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
           src={afterImage}
           alt='Nach der Behandlung'
           className='absolute inset-0 w-full h-full object-cover'
+          loading="lazy"
+          width="400"
+          height="400"
+          decoding="async"
         />
 
         {/* Before Image (Clipped) */}
@@ -88,6 +92,10 @@ export const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
             src={beforeImage}
             alt='Vor der Behandlung'
             className='absolute inset-0 w-full h-full object-cover'
+            loading="lazy"
+            width="400"
+            height="400"
+            decoding="async"
           />
         </div>
 

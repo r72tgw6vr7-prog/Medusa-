@@ -79,7 +79,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              'text-sm-15 font-medium text-luxury-text-inverse/90', // Adjusted size and opacity
+              'text-base lg:text-sm font-medium text-luxury-text-inverse/90', // Adjusted size and opacity
               hideLabel && 'sr-only',
             )}
           >
@@ -107,22 +107,12 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
             ref={ref}
             id={inputId}
             className={cn(
-              // Base styles from design system - adjusted for compactness
-              'w-full bg-luxury-bg-dark/80 rounded-md',
-              'text-base leading-snug font-body font-normal',
-              'text-luxury-text-inverse placeholder:text-luxury-text-inverse/40 placeholder:text-sm',
-              'border border-luxury-border-on-dark/30',
-
-              // Mobile-first responsive sizing - more compact
-              'min-h-11 px-4 py-2.5',
-              'md:min-h-10 md:py-2',
-
+              "flex h-12 w-full rounded-lg border border-luxury-border-on-dark bg-luxury-bg-dark-elevated px-4 py-3 text-base text-luxury-text-inverse file:border-0 file:bg-transparent file:text-base file:font-medium placeholder:text-luxury-text-inverse-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-luxury-accent-chrome focus-visible:ring-offset-2 focus-visible:ring-offset-luxury-bg-dark disabled:cursor-not-allowed disabled:opacity-50",
               // Focus states from design system
-              'focus:outline-none focus:border-[var(--brand-gold)]',
-              'focus:shadow-[0_0_10px_rgba(212,175,55,0.2)]',
-
+              'focus:outline-none focus:border-[var(--accent-chrome)]',
+              'focus:shadow-[0_0_10px_rgba(192,192,192,0.2)]',
               // Hover state
-              'hover:border-[var(--brand-gold)]/50',
+              'hover:border-[var(--accent-chrome)]/50',
 
               // Error state
               error && 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_1px_#ef4444]',

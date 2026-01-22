@@ -1,24 +1,35 @@
 import { MapPin, Train, ShoppingBag, Landmark } from 'lucide-react';
-import Section from '@/components/ui/Section';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import { Card } from '../ui/Card';
 
 export function LocationSection() {
   return (
-    <Section bg='dark' aria-labelledby='location-section-title'>
-      <div className='text-center mb-16'>
-          <h2 className='font-headline text-3xl md:text-4xl text-(--brand-accent)' id='location-section-title'>
+    <Section
+      bg='dark'
+      spacing='none'
+      variant='default'
+      className='py-16 md:py-20 lg:py-24'
+      aria-labelledby='location-section-title'
+    >
+      <Container size='default'>
+        <div className='text-center mb-16'>
+          <h2
+            className='font-headline text-3xl md:text-4xl text-[var(--accent-chrome)]'
+            id='location-section-title'
+          >
             Tattoo Studio direkt am Marienplatz
           </h2>
           <p className='text-base text-luxury-text-inverse/70 max-w-3xl mx-auto font-body leading-relaxed'>
-            Im Herzen Münchens gelegen – die beste Lage für Ihr Tattoo Erlebnis. 
-            Erreichbar von überall in der Stadt und perfekt für Touristen und Einheimische.
+            Im Herzen Münchens gelegen – die beste Lage für Ihr Tattoo Erlebnis. Erreichbar von überall
+            in der Stadt und perfekt für Touristen und Einheimische.
           </p>
         </div>
 
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16'>
           {/* Marienplatz - Main Location */}
           <div className='text-center flex flex-col h-full'>
-            <div className='w-16 h-16 bg-luxury-text-inverse/5 rounded-full flex items-center justify-center mx-auto mb-8'>
+            <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <Landmark className='w-8 h-8 text-(--brand-accent)' />
             </div>
             <h3 className='font-semibold text-luxury-text-inverse mb-0'>Marienplatz</h3>
@@ -29,7 +40,7 @@ export function LocationSection() {
 
           {/* Viktualienmarkt - Tourist attraction */}
           <div className='text-center flex flex-col h-full'>
-            <div className='w-16 h-16 bg-luxury-text-inverse/5 rounded-full flex items-center justify-center mx-auto mb-8'>
+            <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <ShoppingBag className='w-8 h-8 text-(--brand-accent)' />
             </div>
             <h3 className='font-semibold text-luxury-text-inverse mb-0'>Viktualienmarkt</h3>
@@ -40,7 +51,7 @@ export function LocationSection() {
 
           {/* Public Transport */}
           <div className='text-center flex flex-col h-full'>
-            <div className='w-16 h-16 bg-luxury-text-inverse/5 rounded-full flex items-center justify-center mx-auto mb-8'>
+            <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <Train className='w-8 h-8 text-(--brand-accent)' />
             </div>
             <h3 className='font-semibold text-luxury-text-inverse mb-0'>ÖPNV perfekt</h3>
@@ -51,7 +62,7 @@ export function LocationSection() {
 
           {/* City Center */}
           <div className='text-center flex flex-col h-full'>
-            <div className='w-16 h-16 bg-luxury-text-inverse/5 rounded-full flex items-center justify-center mx-auto mb-8'>
+            <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <MapPin className='w-8 h-8 text-(--brand-accent)' />
             </div>
             <h3 className='font-semibold text-luxury-text-inverse mb-0'>Innenstadt</h3>
@@ -71,21 +82,21 @@ export function LocationSection() {
               <div>
                 <h4 className='font-semibold mb-0 text-luxury-text-inverse'>Für Einheimische:</h4>
                 <p className='text-sm'>
-                  Unser Tattoo Studio in München Innenstadt ist von allen Stadtteilen perfekt erreichbar. 
-                  Ob aus Schwabing, Haidhausen, Neuhausen oder Sendling – die Anreise mit öffentlichen 
+                  Unser Tattoo Studio in München Innenstadt ist von allen Stadtteilen perfekt erreichbar.
+                  Ob aus Schwabing, Haidhausen, Neuhausen oder Sendling – die Anreise mit öffentlichen
                   Verkehrsmitteln dauert maximal 20 Minuten.
                 </p>
               </div>
               <div>
                 <h4 className='font-semibold mb-0 text-luxury-text-inverse'>Für Touristen:</h4>
                 <p className='text-sm'>
-                  Als zentral gelegenes Tattoo Studio am Marienplatz sind wir die perfekte Adresse für 
-                  Besucher Münchens. Kombinieren Sie Ihr Tattoo mit einem Bummel über den Viktualienmarkt 
+                  Als zentral gelegenes Tattoo Studio am Marienplatz sind wir die perfekte Adresse für
+                  Besucher Münchens. Kombinieren Sie Ihr Tattoo mit einem Bummel über den Viktualienmarkt
                   oder einer Tour durch die Altstadt.
                 </p>
               </div>
             </div>
-            
+
             {/* Keywords for SEO */}
             <div className='mt-8 pt-8 border-t border-luxury-text-inverse/10'>
               <div className='flex flex-wrap gap-0 text-sm'>
@@ -108,6 +119,7 @@ export function LocationSection() {
             </div>
           </div>
         </Card>
+      </Container>
     </Section>
   );
 }

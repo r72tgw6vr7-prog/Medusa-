@@ -9,6 +9,8 @@ import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { SectionHeading } from '../components/SectionHeading';
 import { Card } from '../components/ui/Card';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 const FAQ_SECTIONS = [
   {
@@ -99,9 +101,9 @@ export function FAQPageNew() {
       <MainNavigation />
 
       <main className='flex-1'>
-        <section className='section-padding'>
-          <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-container-main space-y-16'>
+        <Section variant="default" spacing="normal">
+          <Container size="default">
+            <div className='space-y-16'>
               {/* Page Header - Matches Services page exactly */}
               <SectionHeading
                 eyebrow='Medusa München'
@@ -121,15 +123,15 @@ export function FAQPageNew() {
                     >
                       <div>
                         <button
-                          className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                          className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
                           onClick={() => setOpenSection(isOpen ? null : idx)}
                           aria-expanded={isOpen}
                         >
-                          <span className='font-headline text-2xl md:text-3xl text-[var(--brand-accent)]'>
+                          <span className='font-headline text-2xl md:text-3xl text-[var(--accent-chrome)]'>
                             {section.title}
                           </span>
                           <span
-                            className={`ml-4 text-[var(--brand-accent)] transition-transform duration-300 ${
+                            className={`ml-4 text-[var(--accent-chrome)] transition-transform duration-300 ${
                               isOpen ? 'rotate-90' : ''
                             }`}
                           >
@@ -145,7 +147,7 @@ export function FAQPageNew() {
                           <div className='pt-8 space-y-8 border-t border-brand-chrome/20'>
                             {section.questions.map((q) => (
                               <div key={q.q} className='space-y-8'>
-                                <h3 className='font-headline text-xl md:text-2xl text-[var(--brand-accent)]'>
+                                <h3 className='font-headline text-xl md:text-2xl text-[var(--accent-chrome)]'>
                                   {q.q}
                                 </h3>
                                 <p className='font-body text-base md:text-lg text-luxury-text-inverse/85 leading-relaxed'>
@@ -161,8 +163,8 @@ export function FAQPageNew() {
                 })}
               </div>
             </div>
-          </div>
-        </section>
+          </Container>
+        </Section>
       </main>
 
       <Footer />

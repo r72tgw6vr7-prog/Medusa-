@@ -210,18 +210,20 @@ export const LegalPage: React.FC = () => {
                 className="w-full min-w-0 overflow-hidden lg:overflow-visible"
                 asChild
               >
-                <section id={section.id} className='scroll-mt-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent mb-8 wrap-break-word lg:break-normal'>
+                <div>
+                  <h3 className="font-headline text-xl text-luxury-text-inverse mb-4">
                     {section.title}
-                  </h2>
-                  <div className='space-y-8 text-brand-lightGray leading-relaxed wrap-break-word lg:break-normal'>
-                    {section.content.map((paragraph, pIndex) => (
-                      <p key={pIndex}>
-                        {paragraph}
-                      </p>
-                    ))}
+                  </h3>
+                  <div className="space-y-4">
+                    <ul className="space-y-2 ml-6 list-disc">
+                      {section.content.map((item: string, index: number) => (
+                        <li key={index} className="text-base lg:text-sm text-luxury-text-inverse/70">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </section>
+                </div>
               </Card>
             ))}
         </div>
@@ -237,6 +239,7 @@ export const LegalPage: React.FC = () => {
         className='fixed bottom-8 right-8 bg-brand-chrome text-luxury-text-primary p-8 rounded-xl shadow-lg hover:bg-accent-hover transition-all duration-200 z-50 focus:outline-none focus:ring-2 focus:ring-brand-chrome focus:ring-offset-2 focus:ring-offset-luxury-bg-dark'
         aria-label='Zurück nach oben'
       >
+        <p className="text-xs md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6">Zurück nach oben</p>
         <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
           <path
             strokeLinecap='round'

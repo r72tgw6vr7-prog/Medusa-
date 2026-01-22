@@ -17,8 +17,8 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   // Primary: text-3xl md:text-4xl lg:text-5xl (30-48px)
   // Secondary: text-2xl md:text-3xl lg:text-4xl (24-36px)
   const headingClasses = level === 'primary'
-    ? 'font-headline text-[length:var(--heading-section-primary-fluid)] font-bold tracking-tight leading-tight text-[--brand-accent]'
-    : 'font-headline text-[length:var(--heading-section-secondary-fluid)] font-semibold tracking-normal leading-snug text-[--brand-accent]';
+    ? 'font-headline text-[length:var(--heading-section-primary-fluid)] font-bold tracking-tight leading-tight text-[var(--accent-chrome)]'
+    : 'font-headline text-[length:var(--heading-section-secondary-fluid)] font-semibold tracking-normal leading-snug text-[var(--accent-chrome)]';
 
   const Tag = level === 'primary' ? 'h2' : 'h3';
 

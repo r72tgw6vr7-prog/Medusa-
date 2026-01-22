@@ -13,6 +13,8 @@
 
 /* ============================================
  * CSS Custom Properties (Animation Constants)
+ * All color/shadow tokens now centralized in design-system.css
+ * These animation-specific tokens remain component-scoped
  * ============================================ */
 :root {
   /* Animation Durations */
@@ -27,11 +29,7 @@
   --artist-easing-zoom: cubic-bezier(0.22, 1, 0.36, 1);
   --artist-easing-glow: ease-in-out;
   
-  /* Colors */
-  --artist-chrome: var(--brand-chrome, #C0C0C0);
-  --artist-chrome-glow: rgba(192, 192, 192, 0.3);
-  --artist-chrome-glow-bright: rgba(192, 192, 192, 0.5);
-  --artist-shadow-dark: rgba(0, 0, 0, 0.8);
+  /* Overlay color (animation-specific) */
   --artist-overlay-color: rgba(10, 10, 10, 0.4);
 }
 
@@ -94,8 +92,10 @@
 .artist-card-image-container {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(192, 192, 192, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: 
     transform var(--artist-card-duration) ease-out,
     box-shadow var(--artist-card-duration) ease-out,
@@ -107,13 +107,15 @@
 @keyframes chrome-pulse {
   0%, 100% { 
     box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.3),
-      0 0 20px var(--artist-chrome-glow);
+      var(--card-shadow-depth),
+      var(--card-shadow-glow),
+      var(--card-shadow-inner);
   }
   50% { 
     box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.3),
-      0 0 30px var(--artist-chrome-glow-bright);
+      var(--card-shadow-depth),
+      var(--card-shadow-hover-glow),
+      var(--card-shadow-inner);
   }
 }
 
@@ -125,8 +127,9 @@
 /* Enhancement 3: Shadow Depth (on hover) */
 .artist-card-image-container:hover {
   box-shadow: 
-    0 20px 60px var(--artist-shadow-dark),
-    0 -2px 0 rgba(192, 192, 192, 0.4); /* Chrome rim light on top */
+    var(--card-shadow-depth),
+    var(--card-shadow-hover-glow),
+    var(--card-shadow-inner);
 }
 
 /* ============================================

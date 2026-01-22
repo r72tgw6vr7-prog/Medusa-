@@ -58,15 +58,11 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
   // Modern design system classes (transparent, centered, compact)
   const baseClasses = [
-    'cool-lines-card relative flex h-full w-full',
+    'cool-lines-card chrome-card relative flex h-full w-full',
     'max-w-sm lg:max-w-sm',
-    'flex-col justify-between rounded-2xl',
-    'border',
-    highlighted ? 'border-brand-accent' : 'border-[var(--brand-accent)]/30',
-    'bg-luxury-bg-dark-elevated/60 backdrop-blur',
+    'flex-col justify-between',
     'p-4 md:p-5',
     'mx-auto',
-    'shadow-chrome-glow',
   ].join(' ');
   const borderClasses = '';
   const padding = '';
@@ -74,13 +70,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   // Static variant map - complete Tailwind class strings (no interpolation)
   const ACCENT_VARIANTS = {
     gold: {
-      icon: 'w-14 h-14 bg-brand-accent/10 rounded-full flex items-center justify-center mb-6',
-      iconText: 'text-brand-accent',
-      iconStroke: 'var(--brand-accent)',
-      title: 'text-brand-accent text-lg md:text-xl font-semibold leading-tight mb-2',
-      featureIcon: 'w-5 h-5 bg-brand-accent/10 rounded-full flex items-center justify-center mr-3',
-      btnHighlighted: 'bg-brand-accent text-brand-background shadow-chrome-glow-subtle hover:shadow-chrome-glow',
-      btnOutline: 'bg-transparent border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-brand-background',
+      icon: 'w-14 h-14 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mb-6',
+      iconText: 'text-[var(--accent-chrome)]',
+      iconStroke: 'rgb(192 192 192)',
+      title: 'text-[var(--accent-chrome)] text-lg md:text-xl font-semibold leading-tight mb-2',
+      featureIcon: 'w-5 h-5 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mr-3',
+      btnHighlighted: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] shadow-chrome-glow-subtle hover:shadow-chrome-glow',
+      btnOutline: 'bg-transparent border border-[var(--accent-chrome)] text-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)] hover:text-brand-background',
     },
     chrome: {
       icon: 'w-14 h-14 bg-brand-chrome/10 rounded-full flex items-center justify-center mb-6',
@@ -103,7 +99,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       role='group'
     >
       {popular && (
-        <div className='absolute -top-2 inset-x-0 mx-auto w-24 bg-brand-accent rounded-full py-0 text-center z-10'>
+        <div className='absolute -top-2 inset-x-0 mx-auto w-24 bg-[var(--accent-chrome)] rounded-full py-0 text-center z-10'>
           <span className='text-brand-background text-sm lg:text-xs font-bold'>BELIEBT</span>
         </div>
       )}

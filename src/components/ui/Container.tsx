@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ContainerSize = 'default' | 'narrow' | 'wide' | 'full';
+export type ContainerSize = 'full' | 'wide' | 'default' | 'narrow' | 'form';
 
 export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivElement>> {
   /**
@@ -10,10 +10,11 @@ export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivEle
 
   /**
    * Size variant for container max-width
-   * - default: 1280px
-   * - narrow: 960px
-   * - wide: 1600px
-   * - full: no max-width (fluid)
+   * - full: 100vw (no max-width, fluid)
+   * - wide: 1600px (galleries, card grids, footer)
+   * - default: 1440px (mixed content, general)
+   * - narrow: 1024px (text-heavy, articles)
+   * - form: 800px (forms, focused actions)
    */
   readonly size?: ContainerSize;
 }
@@ -24,7 +25,7 @@ export interface ContainerProps extends Readonly<React.HTMLAttributes<HTMLDivEle
  * - Centers content with mx-auto
  * - Responsive padding (Tailwind utilities only):
  *   - default (mobile): px-4 (16px)
- *   - sm (tablet):     sm:px-6 (24px)
+ *   - md (tablet):     md:px-6 (24px)
  *   - lg (desktop):    lg:px-8 (32px)
  * - Size variants control max-width via Tailwind arbitrary values
  *
@@ -37,19 +38,20 @@ const Container: React.FC<ContainerProps> = ({
   ...props
 }) => {
   const sizeClassMap: Record<ContainerSize, string> = {
-    default: 'max-w-[1440px]',
-    narrow: 'max-w-[960px]',
-    wide: 'max-w-[1600px]',
     full: 'max-w-full',
+    wide: 'max-w-[1600px]',
+    default: 'max-w-[1440px]',
+    narrow: 'max-w-[1024px]',
+    form: 'max-w-[800px]',
   };
 
   const classes = [
     'w-full',
     sizeClassMap[size],
     'mx-auto',
-    'px-4', // mobile: 16px
-    'sm:px-6', // tablet: 24px
-    'lg:px-8', // desktop: 32px
+    'px-6', // mobile: 24px
+    'md:px-8', // tablet: 32px
+    'lg:px-12', // desktop: 48px
     className,
   ]
     .filter(Boolean)
@@ -67,8 +69,9 @@ export default React.memo(Container);
 /**
  * Example usage:
  *
- * <Container>Default (1440px)</Container>
- * <Container size="narrow">Narrow (960px)</Container>
- * <Container size="wide">Wide (1600px)</Container>
- * <Container size="full">Full width (no max)</Container>
+ * <Container size="full">Full width (100vw)</Container>
+ * <Container size="wide">Wide (1600px) - galleries, cards</Container>
+ * <Container>Default (1440px) - general content</Container>
+ * <Container size="narrow">Narrow (1024px) - text-heavy</Container>
+ * <Container size="form">Form (800px) - forms</Container>
  */

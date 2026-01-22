@@ -78,18 +78,18 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
   return (
     <>
       {/* Main Banner */}
-      <div className='fixed bottom-0 left-0 right-0 bg-(--color-surface-dark)/95 backdrop-blur-lg border-t border-brand-accent/20 p-8 z-50'>
+      <div className='fixed bottom-0 left-0 right-0 bg-(--color-surface-dark)/95 backdrop-blur-lg border-t border-[var(--accent-chrome)]/20 p-8 z-50'>
         <div className='max-w-container-main mx-auto'>
           <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-8'>
             <div className='flex-1'>
-              <h2 className='text-xl font-headline text-brand-accent mb-0'>Cookie-Einstellungen</h2>
+              <h2 className='text-xl font-headline text-[var(--accent-chrome)] mb-0'>Cookie-Einstellungen</h2>
               <p className='text-brand-white text-sm mb-8 md:mb-0'>
                 Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu
                 bieten. Essentielle Cookies sind für die Grundfunktionen erforderlich. Optional
                 können Sie Analyse- und Marketing-Cookies zulassen.{' '}
                 <button
                   onClick={() => onNavigate('datenschutz')}
-                  className='text-brand-accent hover:text-brand-accent-hover underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline'
+                  className='text-[var(--accent-chrome)] hover:text-[var(--accent-chrome)]/80 underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline'
                 >
                   Mehr erfahren
                 </button>
@@ -98,7 +98,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
             <div className='flex flex-col sm:flex-row gap-0 w-full md:w-auto'>
               <button
                 onClick={() => setShowPreferences(true)}
-                className='px-8 py-0 border border-brand-accent text-brand-accent hover:bg-brand-accent-hover/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
+                className='px-8 py-0 border border-[var(--accent-chrome)] text-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)]/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
                 Anpassen
               </button>
@@ -110,7 +110,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
               </button>
               <button
                 onClick={handleAcceptAll}
-                className='px-8 py-0 bg-brand-accent text-brand-background hover:bg-brand-accent-hover rounded-lg transition duration-200 ease-out touch-target-mobile'
+                className='px-8 py-0 bg-[var(--accent-chrome)] text-[var(--deep-black)] hover:bg-[var(--accent-chrome)]/80 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
                 Alle akzeptieren
               </button>
@@ -210,7 +210,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
               </Dialog.Close>
               <button
                 onClick={handleSavePreferences}
-                className='px-8 py-0 bg-brand-accent text-brand-background hover:bg-brand-accent-hover rounded-lg transition-colors duration-200 ease-out touch-target-mobile'
+                className="px-4 py-2 text-base lg:text-sm font-medium bg-luxury-accent-chrome text-luxury-text-primary rounded hover:bg-luxury-accent-chrome-hover transition-colors duration-200 ease-out touch-target-mobile"
               >
                 Einstellungen speichern
               </button>

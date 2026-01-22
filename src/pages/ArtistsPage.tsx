@@ -15,16 +15,29 @@ import './ArtistsPage.css';
 
 export function ArtistsPage() {
   return (
-    <main className='artists-page w-full min-h-screen relative z-10 bg-luxury-bg-dark'>
-      {/* Navigation */}
-      <MainNavigation />
+    <>
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-modal focus:px-8 focus:py-4 focus:bg-brand-accent focus:text-deep-black focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+      <div className='artists-page w-full min-h-screen relative z-10 bg-luxury-bg-dark overflow-x-clip'>
+        {/* Navigation */}
+        <MainNavigation />
 
-      {/* Artists Section - exact template implementation */}
-      <TeamGrid />
+        <main id="main-content">
 
-      {/* Footer */}
-      <Footer />
-    </main>
+        {/* Artists Section - exact template implementation */}
+        <TeamGrid />
+
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }
 

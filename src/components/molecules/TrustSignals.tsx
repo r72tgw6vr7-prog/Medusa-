@@ -68,7 +68,7 @@ export function TrustSignals() {
             return (
               <motion.div
                 key={badge.title}
-                className="cool-lines-card group relative flex flex-col h-full p-8 rounded-xl backdrop-blur border border-white/15 bg-linear-to-br from-white/8 via-white/4 to-white/2 transition-all duration-500 hover:border-white/40"
+                className="cool-lines-card chrome-card group relative flex flex-col h-full p-8 transition-all duration-500"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{
                   opacity: 1,
@@ -80,20 +80,17 @@ export function TrustSignals() {
                   },
                 }}
                 viewport={{ once: true, margin: '-50px' }}
-                style={{
-                  boxShadow:
-                    'inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.5)',
-                }}
+                style={{ boxShadow: 'var(--card-shadow)' }}
                 whileHover={{
                   boxShadow:
-                    'inset 0 1px 0 rgba(255,255,255,0.1), 0 0 25px rgba(255,255,255,0.4), 0 0 50px rgba(0,255,255,0.2)',
+                    'var(--card-shadow-depth), var(--card-shadow-hover-glow), var(--card-shadow-inner)',
                 }}
                 role="group"
                 aria-label={badge.ariaLabel}
               >
                 {/* Icon */}
                 <motion.div
-                  className="mb-8 inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-white/10 to-white/5 border border-white/20"
+                  className="mb-8 inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-white/10 to-white/5 border border-white/20 flex-col h-full"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 >

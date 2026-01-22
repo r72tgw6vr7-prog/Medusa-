@@ -41,7 +41,7 @@
 /* Buttons for transparent state */
 .navigation .hero-appointment-cta {
   border-color: var(--color-brand-accent);
-  color: var(--color-accent-silver);
+  color: var(--accent-chrome);
 }
 
 /* Language Toggle Animation */
@@ -99,15 +99,15 @@
 }
 
 .nav-cta {
-  background: rgba(var(--color-accent-silver-rgb), 0.1);
+  background: var(--accent-chrome);
   border: calc(var(--space-0-5) / 4) solid rgba(var(--color-accent-silver-rgb), 0.3);
-  color: var(--color-brand-accent) !important;
+  color: var(--deep-black) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-cta:hover {
-  background: rgba(var(--color-accent-silver-rgb), 0.2);
-  border-color: rgba(var(--color-accent-silver-rgb), 0.5);
+  background: rgba(var(--color-accent-silver-rgb), 0.8);
+  border-color: rgba(var(--color-accent-silver-rgb), 0.9);
   box-shadow:
     0 calc(var(--space-1) - (var(--space-0-5) / 4)) var(--space-2-5) rgb(0 0 0 / 0.2),
     0 0 calc(var(--space-2) - (var(--space-0-5) / 4)) rgba(var(--color-accent-silver-rgb), 0.4);
@@ -225,7 +225,7 @@
 /* Buttons for scrolled state */
 .navigation.scrolled .hero-appointment-cta {
   border-color: var(--color-brand-accent);
-  color: var(--color-accent-silver);
+  color: var(--accent-chrome);
 }
 
 /* ============================================
@@ -511,12 +511,12 @@
 
   /* Always show solid background on mobile when scrolled */
   .navigation.scrolled {
-    background: var(--color-surface-darker);
+    background: var(--bg-page);
   }
 
   /* Mobile menu open state */
   .navigation.menu-open {
-    background: var(--color-surface-darker);
+    background: var(--bg-page);
   }
 
   /* Mobile menu overlay animations (portal-safe via body class) */

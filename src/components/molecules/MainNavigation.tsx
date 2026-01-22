@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { SkipLink } from '../accessibility/SkipLink';
 import { useKeyboardNav } from '../../hooks/useKeyboardNav';
 import './MainNavigation.css';
 
@@ -207,17 +206,16 @@ export function MainNavigation() {
 
   return (
     <>
-      <SkipLink />
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <nav
         id='main-navigation'
         aria-label='Main navigation'
-        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 sm:px-8 transition-all duration-300 ease-out ${
+        className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 md:px-8 transition-all duration-300 ease-out ${
           scrolled ? 'scrolled' : ''
         } ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
-        <div className='container-wide mx-auto flex h-20 items-center justify-between gap-8 px-8 md:px-8'>
+        <div className='container-wide mx-auto flex h-20 items-center justify-between gap-8 px-4 md:px-6 lg:px-8'>
           <Link
             to='/'
             className='nav-logo font-headline text-2xl sm:text-3xl md:text-4xl leading-none tracking-tight text-brand-accent font-bold'
@@ -262,12 +260,12 @@ export function MainNavigation() {
                   <li key={to}>
                     <Link
                       to={to}
-                      className={`nav-link font-body text-base md:text-lg font-medium transition-all duration-300 ${
+                      className={`nav-link font-body text-base lg:text-sm font-medium text-luxury-text-inverse hover:text-luxury-accent-chrome transition-colors duration-200 ${
                         to === '/booking'
-                          ? 'nav-cta rounded-md px-4 py-2 text-brand-accent hover:bg-brand-accent/20'
+                          ? 'nav-cta rounded-md px-4 py-2 text-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)]/20'
                           : active
-                            ? 'text-brand-accent'
-                            : 'text-luxury-text-inverse hover:text-brand-accent'
+                            ? 'text-[var(--accent-chrome)]'
+                            : 'text-luxury-text-inverse hover:text-[var(--accent-chrome)]'
                       }`}
                       aria-current={active ? 'page' : undefined}
                       tabIndex={0}

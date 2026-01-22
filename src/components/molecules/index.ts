@@ -1,6 +1,4 @@
-export * from './Card/ArtistCard';
 export * from './Card/ServiceCards';
-export * from './Card/Card';
 export * from './BeforeAfterCard';
 export * from './ContactInfoCard';
 export * from './FAQItem';

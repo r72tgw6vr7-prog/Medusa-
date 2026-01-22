@@ -82,8 +82,8 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
         className={`w-full px-6 py-3 text-base font-medium rounded-lg
           ${
             isSuccess
-              ? 'bg-[var(--brand-accent)] text-[var(--deep-black)] cursor-default'
-              : 'bg-[var(--brand-accent)] text-luxury-text-inverse hover:bg-[var(--brand-accent-hover)]'
+              ? 'bg-[var(--accent-chrome)] text-[var(--deep-black)] cursor-default'
+              : 'bg-[var(--accent-chrome)] text-luxury-text-inverse hover:bg-[var(--accent-chrome)]/80'
           } transition-colors disabled:opacity-50`}
       >
         {isSubmitting

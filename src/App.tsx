@@ -7,9 +7,10 @@ import Meta from '@/components/Meta';
 import LocaleRouteSync from '@/i18n/LocaleRouteSync';
 // Fix import path to match actual directory structure
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
-import ScrollToTop from '@/components/ScrollToTop';
+import { initScroll } from '@/lib/scroll-minimal';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import { MotionProvider } from '@/providers/MotionProvider';
+import ScrollToTop from '@/components/ScrollToTop';
 
 interface LocalizedMetaProps {
   pageKey: string;

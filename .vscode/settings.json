@@ -19,7 +19,11 @@
             "approve": true,
             "matchCommandLine": true
         },
-        "uniq": true
+        "uniq": true,
+        "/^node scripts/check-ctas\\.mjs$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     },
     "snyk.advanced.organization": "59706c3e-5a3b-4924-b868-a1b9497e755d",
     "snyk.advanced.autoSelectOrganization": true

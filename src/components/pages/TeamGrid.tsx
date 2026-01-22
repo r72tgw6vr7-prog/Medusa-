@@ -3,6 +3,8 @@ import './TeamGrid.css';
 import { ArtistCard, type Artist as ArtistCardType } from '../cards/ArtistCard';
 import { ArtistBioModal } from '../molecules/ArtistBioModal';
 import { PageHeading } from '../PageHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 interface TeamMember {
   id: string;
@@ -204,58 +206,59 @@ const TeamGrid: React.FC = () => {
   };
 
   return (
-    <section
-      className="min-h-screen bg-luxury-bg-dark section-padding"
+    <Section
+      variant="default"
+      spacing="normal"
+      bg="dark"
+      className="min-h-screen"
       style={{ marginTop: 'var(--first-section-offset)' }}
     >
-      <div className="responsive-container safe-area-padding">
-        <div className="mx-auto w-full max-w-7xl">
-          {/* Section header - exact template structure */}
-          <div className="mb-32">
-            <PageHeading 
-              eyebrow="Medusa München"
-              title="Our Artists" 
-              subtitle="Treffen Sie unser erfahrenes Team von Tätowierern und Piercern"
-            />
-          </div>
-
-          {/* Artist cards with alternating layout */}
-          <div className="space-y-40">
-            {loading ? (
-              <div className="text-center py-8">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40"></div>
-                <p className="mt-4 text-luxury-text-inverse/50">Loading team members...</p>
-              </div>
-            ) : artists.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-luxury-text-inverse/50">No team members found.</p>
-              </div>
-            ) : (
-              artists.map((artist, index) => (
-                <div
-                  key={artist.slug || index}
-                  ref={(el) => {
-                    observerRefs.current[index] = el;
-                  }}
-                  className="relative"
-                >
-                  <ArtistCard
-                    artist={toArtistCardFormat(artist, index)}
-                    isRevealed={revealedIndices.has(index)}
-                    index={index}
-                  />
-                </div>
-              ))
-            )}
-          </div>
+      <Container size="default">
+        {/* Section header - exact template structure */}
+        <div className="mb-32">
+          <PageHeading
+            eyebrow="Medusa München"
+            title="Our Artists"
+            subtitle="Treffen Sie unser erfahrenes Team von Tätowierern und Piercern"
+          />
         </div>
-      </div>
+
+        {/* Artist cards with alternating layout */}
+        <div className="space-y-40">
+          {loading ? (
+            <div className="text-center py-8">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40"></div>
+              <p className="mt-4 text-luxury-text-inverse/50">Loading team members...</p>
+            </div>
+          ) : artists.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-luxury-text-inverse/50">No team members found.</p>
+            </div>
+          ) : (
+            artists.map((artist, index) => (
+              <div
+                key={artist.slug || index}
+                ref={(el) => {
+                  observerRefs.current[index] = el;
+                }}
+                className="relative"
+              >
+                <ArtistCard
+                  artist={toArtistCardFormat(artist, index)}
+                  isRevealed={revealedIndices.has(index)}
+                  index={index}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      </Container>
 
       {/* Artist Biography Modal */}
       {selectedArtist && (
         <ArtistBioModal artist={selectedArtist} onClose={() => setSelectedArtist(null)} />
       )}
-    </section>
+    </Section>
   );
 };
 

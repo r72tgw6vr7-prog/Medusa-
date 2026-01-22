@@ -139,22 +139,22 @@ const Blade: React.FC<BladeProps> = ({
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col justify-end p-6">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-luxury-text-inverse/20 backdrop-blur-sm w-fit">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 border border-luxury-text-inverse/20 backdrop-blur-sm w-fit">
               <div className="w-1 h-1 bg-luxury-text-inverse/60" />
-              <span className="text-luxury-text-inverse/60 text-sm lg:text-xs tracking-[0.2em] uppercase">
+              <span className="text-luxury-text-inverse/60 text-base lg:text-sm tracking-[0.2em] uppercase">
                 {artist.discipline}
               </span>
             </div>
             <h2 className="text-luxury-text-inverse text-2xl tracking-tight">{artist.name}</h2>
-            <p className="text-luxury-text-inverse/50 text-sm tracking-wide">{artist.specialty}</p>
+            <p className="text-luxury-text-inverse/50 text-base lg:text-sm tracking-wide">{artist.specialty}</p>
             <div className="w-16 h-px bg-gradient-to-r from-luxury-text-inverse/60 to-transparent" />
             <Link to={`/artists/${artist.slug}`}>
               <motion.button
-                className="group relative inline-flex items-center gap-3 px-6 py-3 bg-luxury-bg-base text-luxury-text-primary overflow-hidden"
+                className="group relative inline-flex items-center gap-4 px-6 py-4 bg-luxury-bg-base text-luxury-text-primary overflow-hidden"
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10 text-sm tracking-[0.2em] uppercase font-medium">
+                <span className="relative z-10 text-base lg:text-sm tracking-[0.2em] uppercase font-medium">
                   Profil ansehen
                 </span>
                 <svg 
@@ -170,7 +170,7 @@ const Blade: React.FC<BladeProps> = ({
           </div>
         </div>
 
-        <div className="absolute top-4 right-4 text-luxury-text-inverse/20 text-sm lg:text-xs tracking-[0.3em]">
+        <div className="absolute top-4 right-4 text-luxury-text-inverse/20 text-xs md:text-sm tracking-[0.3em]">
           {String(index + 1).padStart(2, '0')}/{String(total).padStart(2, '0')}
         </div>
       </motion.div>
@@ -261,7 +261,7 @@ const Blade: React.FC<BladeProps> = ({
             {/* Artist details */}
             <div className="space-y-4">
               {/* Discipline tag */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 border border-luxury-text-inverse/20 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-2 border border-luxury-text-inverse/20 backdrop-blur-sm">
                 <div className="w-1 h-1 bg-luxury-text-inverse/60" />
                 <span className="text-luxury-text-inverse/60 text-sm lg:text-xs tracking-[0.2em] uppercase">
                   {artist.discipline}
@@ -284,7 +284,7 @@ const Blade: React.FC<BladeProps> = ({
               {/* View Profile button */}
               <Link to={`/artists/${artist.slug}`}>
                 <motion.button
-                  className="group relative inline-flex items-center gap-3 px-6 py-3 bg-luxury-bg-base text-luxury-text-primary overflow-hidden"
+                  className="group relative inline-flex items-center gap-4 px-6 py-4 bg-luxury-bg-base text-luxury-text-primary overflow-hidden"
                   whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                   whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                   transition={{ duration: 0.2 }}
@@ -293,7 +293,7 @@ const Blade: React.FC<BladeProps> = ({
                     Profil ansehen
                   </span>
                   <svg 
-                    className="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-1" 
+                    className="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-1 transition duration-200 ease-out" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"

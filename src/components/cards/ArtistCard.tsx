@@ -71,6 +71,9 @@ export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
               alt={artist.name}
               className="artist-card-image w-full h-full object-cover grayscale"
               loading="lazy"
+              width="400"
+              height="500"
+              decoding="async"
             />
           )}
         </div>
@@ -119,7 +122,7 @@ export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
           style={{ transitionDelay: '800ms' }}
         >
           {/* Index number and divider */}
-          <div className="mb-3">
+          <div className="mb-4">
             <div className="flex items-center gap-4 mb-2">
               <span className="text-luxury-text-inverse/40 text-sm font-light tracking-[0.2em] uppercase">
                 {String(index + 1).padStart(2, '0')}

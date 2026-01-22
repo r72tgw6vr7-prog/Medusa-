@@ -2,6 +2,8 @@ import React from 'react';
 import { MainNavigation } from '../components/molecules/MainNavigation';
 import { Footer } from '../components/pages';
 import { SectionHeading } from '../components/SectionHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 export const AGBPage: React.FC = () => {
   return (
@@ -9,9 +11,8 @@ export const AGBPage: React.FC = () => {
       <MainNavigation />
 
       <main className='flex-1'>
-        <section className='section-padding relative z-10'>
-          <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-container-main'>
+        <Section variant="default" spacing="normal">
+          <Container size="default">
               {/* Page Header - Standardized */}
               <SectionHeading
                 eyebrow='Medusa München'
@@ -43,16 +44,15 @@ export const AGBPage: React.FC = () => {
                 <h2 className='font-headline text-2xl text-brand-chrome'>
                   § 3 Haftung & Nachsorge
                 </h2>
-                <p>
+                <p className='text-base lg:text-sm'>
                   Es gelten die in der Nachsorge beschriebenen Hinweise. Eine Haftung für
                   Missachtung der Pflegehinweise ist ausgeschlossen.
                 </p>
 
-                <p className='text-luxury-text-inverse/60 text-sm'>Stand: vorläufige Fassung</p>
+                <p className='text-xs md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6'>Stand: vorläufige Fassung</p>
               </section>
-            </div>
-          </div>
-        </section>
+          </Container>
+        </Section>
       </main>
 
       <Footer />

@@ -14,6 +14,7 @@ import { LazySection } from '../components/LazySection';
 import { GALLERY_IMAGES } from '@/content/gallery-images';
 import { useSectionTransition } from '@/hooks/useSectionTransition';
 import { TrustSignals } from '../components/molecules/TrustSignals';
+import { FAQSection } from '../components/seo/FAQSection';
 
 // Hero parallax product data - using actual gallery images with optimized sources
 const heroProducts = GALLERY_IMAGES.slice(0, 15).map((img, index) => ({
@@ -47,7 +48,7 @@ const SectionTransitionWrapper = ({
   const { ref, className: visibleClass } = useSectionTransition({ threshold: 0.2 });
 
   return (
-    <div ref={ref} className={`section-transition ${visibleClass} ${className}`.trim()}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={`section-transition ${visibleClass} ${className}`.trim()}>
       {children}
     </div>
   );
@@ -56,18 +57,27 @@ const SectionTransitionWrapper = ({
 export function HomePage() {
   return (
     <ErrorBoundary>
-      <div className='min-h-screen flex flex-col relative bg-luxury-bg-dark'>
+      {/* Skip to main content link for keyboard navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-8 focus:py-4 focus:bg-brand-accent focus:text-deep-black focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+      <div className='min-h-screen flex flex-col relative bg-luxury-bg-dark overflow-x-clip'>
         {/* Navigation */}
         <ErrorBoundary>
           <MainNavigation />
         </ErrorBoundary>
 
-        {/* 1. Hero Section - Load immediately (above fold) */}
-        <ErrorBoundary>
-          <SectionTransitionWrapper>
-            <HeroParallax products={heroProducts} />
-          </SectionTransitionWrapper>
-        </ErrorBoundary>
+        {/* Main content landmark */}
+        <main id="main-content">
+          {/* 1. Hero Section - Load immediately (above fold) */}
+          <ErrorBoundary>
+            <SectionTransitionWrapper className='pt-[calc(var(--header-height)+40px)]'>
+              <HeroParallax products={heroProducts} />
+            </SectionTransitionWrapper>
+          </ErrorBoundary>
 
         {/* 2. Artist Blade Accordion - Load immediately (second section) */}
         <ErrorBoundary>
@@ -125,7 +135,16 @@ export function HomePage() {
           </ErrorBoundary>
         </LazySection>
 
-        {/* 8. Partners & Testimonials - Lazy load */}
+        {/* 8. FAQ Section - Lazy load */}
+        <LazySection>
+          <ErrorBoundary>
+            <SectionTransitionWrapper>
+              <FAQSection />
+            </SectionTransitionWrapper>
+          </ErrorBoundary>
+        </LazySection>
+
+        {/* 9. Partners & Testimonials - Lazy load */}
         <LazySection>
           <ErrorBoundary>
             <SectionTransitionWrapper>
@@ -149,6 +168,7 @@ export function HomePage() {
             <Footer />
           </SectionTransitionWrapper>
         </ErrorBoundary>
+        </main>
       </div>
     </ErrorBoundary>
   );

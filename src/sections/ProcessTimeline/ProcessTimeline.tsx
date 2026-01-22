@@ -186,7 +186,7 @@ export function ProcessTimeline({}: ProcessTimelineProps) {
                 transition={{ duration: 0.5, delay: reducedMotion ? 0 : 1.7 + index * 0.15, ease: "easeOut" }}
                 className='flex flex-col h-full items-center p-8 text-center md:p-8'
               >
-                <div className='mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-brand-accent/60 bg-brand-accent/10 text-brand-accent shadow-chrome-glow md:mb-8 md:h-14 md:w-14'>
+                <div className="mb-8 flex h-10 w-10 items-center justify-center rounded-full border border-brand-accent/60 bg-brand-accent/10 text-brand-accent shadow-chrome-glow md:mb-8 md:h-14 md:w-14 flex-col h-full">
                   <Icon size={24} className='md:hidden' />
                   <Icon size={28} className='hidden md:block' />
                 </div>

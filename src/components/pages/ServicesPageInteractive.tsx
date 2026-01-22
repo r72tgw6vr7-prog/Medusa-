@@ -3,6 +3,8 @@ import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Sparkles, Zap, Shield, Heart, Euro, ChevronRight } from 'lucide-react';
 import { useApp } from '../../../core/state/AppContext';
 import { Button } from '../ui/button';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 
 const categories = [
   {
@@ -231,9 +233,9 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
   }, [openBooking]);
 
   return (
-    <section className={`section-padding relative z-10 ${className}`}>
-      <div className='responsive-container safe-area-padding'>
-        <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
+    <Section variant="default" spacing="normal" className={className}>
+      <Container size="default">
+        <div className='flex flex-col gap-16'>
           <div className='text-center space-y-8'>
             <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
               Medusa München
@@ -241,14 +243,14 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
             <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
               Unsere Services
             </h1>
-            <p className='text-lg text-[#C0C0C0] max-w-2xl mx-auto font-body leading-relaxed'>
+            <p className='text-lg text-[color:var(--text-secondary)] max-w-2xl mx-auto font-body leading-relaxed'>
               Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die
               perfekt zu Ihrem Projekt passen.
             </p>
           </div>
 
           <div
-            className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'
             role='tablist'
             aria-label='Service-Kategorien'
           >
@@ -256,8 +258,8 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
               const IconComponent = category.icon;
               const isActive = activeCategory === category.id;
               const buttonClass = isActive
-                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--brand-gold)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(212,175,55,0.45)] scale-[1.02]'
-                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--brand-gold)]/80 hover:scale-[1.02]';
+                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(192,192,192,0.4)] scale-[1.02]'
+                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--accent-chrome)]/80 hover:scale-[1.02]';
 
               return (
                 <button
@@ -324,14 +326,14 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                 {currentServices.map((service, index) => {
                   const stateClass =
                     index === 1
-                      ? 'border-[var(--brand-gold)] shadow-[0_20px_60px_rgba(212,175,55,0.35)] scale-[1.01]'
-                      : 'border-white/10 hover:border-[var(--brand-gold)]/70';
+                      ? 'border-[var(--accent-chrome)] shadow-[0_20px_60px_rgba(192,192,192,0.3)] scale-[1.01]'
+                      : 'border-white/10 hover:border-[var(--accent-chrome)]/70';
 
                   return (
                     <div key={service.id} className='flex flex-col h-full'>
                       <motion.div
                         variants={fadeInUpVariants}
-                        className={`flex flex-col h-full rounded-3xl border-2 bg-[#222222] transition-all duration-300 ${stateClass}`}
+                        className={`flex flex-col h-full rounded-3xl border-2 bg-[#1A1A1A] transition-all duration-300 ${stateClass}`}
                       >
                         <div className='flex flex-col gap-8 p-8 h-full'>
                           <div className='flex items-center justify-between'>
@@ -389,8 +391,8 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 };
 
