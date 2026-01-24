@@ -14,7 +14,7 @@
 }
 
 .team-heading h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-h2);
   color: var(--brand-accent);
@@ -93,7 +93,7 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border-radius: 8px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-body);
   color: var(--brand-accent);
@@ -115,7 +115,7 @@
 
 .team-card-specialties {
   font-size: var(--text-body);
-  line-height: 1.5;
+  line-height: var(--line-height-normal);
   color: var(--brand-white);
   margin-bottom: var(--space-2-5);
   text-align: center;

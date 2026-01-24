@@ -28,31 +28,27 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
       }}
     >
       {/* Dark overlay */}
-      <div className='absolute inset-0 bg-[rgba(var(--color-surface-darker-rgb),0.85)] z-auto' />
+      <div className='absolute inset-0 bg-[rgba(var(--color-surface-darker-rgb),0.85)] z-0' />
 
       {/* Animated background accent */}
-      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[rgba(var(--brand-accent-rgb),0.05)] to-transparent z-auto opacity-50' />
+      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[rgba(var(--brand-accent-rgb),0.05)] to-transparent z-0 opacity-50' />
 
       {/* Content */}
       <div className='relative z-10 max-w-230 mx-auto px-8 md:px-8'>
         {/* Heading */}
         <div className='text-center mb-16 md:mb-16'>
-          <h2 className='font-playfair text-4xl md:text-5xl lg:text-6xl font-semibold text-(--brand-accent) mb-8 md:mb-8'>
+          <h2 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--brand-accent) mb-8 md:mb-8'>
             Bereit für Ihr Meisterwerk?
           </h2>
-          <p className='font-inter text-lg md:text-xl lg:text-2xl text-luxury-text-inverse opacity-90 max-w-175 mx-auto'>
+          <p className='font-body text-(length:--text-lg) md:text-(length:--text-h4) text-luxury-text-inverse opacity-90 max-w-175 mx-auto leading-(--line-height-normal)'>
             Lassen Sie uns gemeinsam Ihre Vision in ein unvergessliches Kunstwerk verwandeln
           </p>
         </div>
 
         {/* Booking Form Card with BREATHING CHROME GLOW */}
-        <Card
-          variant="featured"
-          size="default"
-          className={`${styles['breathing-glow']} relative`}
-        >
+        <Card variant='featured' size='default' className={`${styles['breathing-glow']} relative`}>
           <div className='p-8 md:p-8 lg:p-16'>
-            <h3 className='font-playfair text-2xl md:text-3xl font-semibold text-(--brand-accent) text-center mb-8'>
+            <h3 className='font-headline text-(length:--text-h4) md:text-(length:--text-h3) font-semibold text-(--brand-accent) text-center mb-8'>
               Buchen Sie Ihren Termin
             </h3>
 
@@ -60,10 +56,12 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
               <Button
                 type='button'
                 variant='chrome'
-                className='cool-lines-cta w-full h-14 text-lg rounded-xl hover:shadow-chrome-glow transition duration-200 ease-out'
+                className='cool-lines-cta w-full h-14 text-(length:--text-lg) rounded-xl hover:shadow-chrome-glow transition duration-200 ease-out'
                 onClick={() => navigate('/booking')}
               >
-                {selectedService || selectedArtist ? 'Termin jetzt anfragen →' : 'Jetzt Termin sichern →'}
+                {selectedService || selectedArtist
+                  ? 'Termin jetzt anfragen →'
+                  : 'Jetzt Termin sichern →'}
               </Button>
             </div>
           </div>

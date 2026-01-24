@@ -19,14 +19,14 @@
 - **Status:** DONE
 
 ### 3. ✅ Dependencies: Version Conflicts Resolved
-- Ran `npm install` - all packages updated
+- Ran `pnpm install` - all packages updated
 - React, React-DOM, Scheduler now aligned
 - 0 vulnerabilities found
 - **Status:** DONE
 
 ### 4. ✅ Security: Hardcoded Password Removed
 - `AdminUploadPanel.tsx` now uses environment variables
-- Credentials moved to `VITE_ADMIN_EMAIL` and `VITE_ADMIN_PASSWORD`
+- Credentials moved to `ADMIN_EMAIL` and `ADMIN_PASSWORD`
 - Added security warning comment
 - **Status:** DONE
 
@@ -96,9 +96,10 @@ VITE_GEO_LAT="48.1374"
 VITE_GEO_LNG="11.5755"
 
 # === API KEYS (Replace with real values!) ===
-VITE_SENDGRID_API_KEY="<GET_FROM_SENDGRID>"
+# NOTE: Only VITE_* variables are exposed to the client. Treat non-VITE variables as server-only secrets.
+SENDGRID_API_KEY="<GET_FROM_SENDGRID>"
 VITE_GA4_MEASUREMENT_ID="<GET_FROM_GOOGLE_ANALYTICS>"
-VITE_GOOGLE_MAPS_API_KEY="AIzaSyAEOnSxOZzYYEMQpVTOwsxaMMKb_g4zFeQ"
+VITE_GOOGLE_MAPS_API_KEY="<REDACTED>"
 
 # === SOCIAL MEDIA ===
 VITE_INSTAGRAM_URL="https://instagram.com/medusa_tattoo_munich"
@@ -110,8 +111,8 @@ VITE_CURRENCIES_ACCEPTED="EUR"
 VITE_PAYMENT_METHODS="Cash,Credit Card,PayPal,Bank Transfer"
 
 # === ADMIN (Only if you need AdminUploadPanel in production - NOT RECOMMENDED) ===
-# VITE_ADMIN_EMAIL="<secure-email>"
-# VITE_ADMIN_PASSWORD="<secure-password>"
+# ADMIN_EMAIL="<secure-email>"
+# ADMIN_PASSWORD="<secure-password>"
 ```
 
 **Important Notes:**
@@ -124,26 +125,26 @@ VITE_PAYMENT_METHODS="Cash,Credit Card,PayPal,Bank Transfer"
 
 ### 3. Test Build Locally
 
-**Priority:** 🟡 HIGH - Recommended before deploying
+**Priority:** HIGH - Recommended before deploying
 
 ```bash
 # Build for production
-npm run build
+pnpm run build
 
 # Preview the production build
-npm run preview
+pnpm run preview
 
 # Open http://localhost:4173 and test:
-# ✓ All pages load
-# ✓ Images display
-# ✓ Contact form works (with real API keys)
-# ✓ Navigation works
-# ✓ No console errors
+# All pages load
+# Images display
+# Contact form works (with real API keys)
+# Navigation works
+# No console errors
 ```
 
 ---
 
-## ⚠️ RECOMMENDED (But Not Blocking)
+## RECOMMENDED (But Not Blocking)
 
 ### 1. Security: XSS Vulnerabilities
 
@@ -166,7 +167,7 @@ npm run preview
    };
    ```
 
-2. **Better:** Use Content Security Policy (already configured in `vite.config.ts` ✅)
+2. **Better:** Use Content Security Policy (already configured in `vite.config.ts` )
 
 3. **Best:** Implement proper image sanitization library
 
@@ -220,7 +221,7 @@ Or simply don't import them in production routes.
 1. **SendGrid (Recommended)**
    - Sign up: https://sendgrid.com
    - Create API key
-   - Set `VITE_SENDGRID_API_KEY` in Vercel
+   - Set `SENDGRID_API_KEY` in Vercel
 
 2. **Alternative:** Mailgun, Amazon SES, or SMTP
 

@@ -3,14 +3,9 @@
  * Monitors network connection to help identify timeout causes
  */
 
-// Add type declaration for Vite's import.meta.env
-interface ImportMetaEnv {
-  DEV: boolean;
-  PROD: boolean;
-  MODE: string;
-}
+import React from 'react';
 
-
+const isDev = typeof process !== 'undefined' ? process.env.NODE_ENV !== 'production' : false;
 
 class ConnectionMonitor {
   private isOnline: boolean = true;
@@ -27,15 +22,15 @@ class ConnectionMonitor {
       window.addEventListener('online', () => {
         this.isOnline = true;
         this.notifyListeners(true);
-        if (import.meta.env.DEV) {
-          console.log('Connection restored');
+        if (isDev) {
+          console.warn('Connection restored');
         }
       });
 
       window.addEventListener('offline', () => {
         this.isOnline = false;
         this.notifyListeners(false);
-        if (import.meta.env.DEV) {
+        if (isDev) {
           console.warn('Connection lost');
         }
       });
@@ -61,7 +56,7 @@ class ConnectionMonitor {
       const start = performance.now();
       
       // Try to fetch a small resource to test connection speed
-      const response = await fetch('/favicon.ico', { 
+      await fetch('/favicon.ico', { 
         cache: 'no-cache',
         mode: 'no-cors' 
       });

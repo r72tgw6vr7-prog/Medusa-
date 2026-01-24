@@ -2,6 +2,68 @@
   "eyebrow": "Get in touch",
   "title": "Contact",
   "subtitle": "We guide you from the first idea to the final masterpiece. Send us a message and we'll reply shortly.",
+  "sections": {
+    "directEmail": "Direct Email",
+    "otherWays": "Or contact us directly",
+    "quickMessage": "Send a message"
+  },
+  "reasons": {
+    "label": "What would you like to inquire about?",
+    "tattoo": {
+      "title": "Tattoo",
+      "subtitle": "Consultation & Booking"
+    },
+    "piercing": {
+      "title": "Piercing",
+      "subtitle": "Jewelry & Care"
+    },
+    "general": {
+      "title": "General",
+      "subtitle": "Questions & Other"
+    }
+  },
+  "actions": {
+    "clickToCopy": "Click to copy",
+    "copied": "Copied!"
+  },
+  "otherWays": {
+    "calendly": {
+      "subtitle": "Book 30min"
+    },
+    "whatsapp": {
+      "subtitle": "Direct message"
+    }
+  },
+  "privacyConsent": {
+    "prefix": "I have read and accept the",
+    "linkText": "privacy policy",
+    "suffix": "*"
+  },
+  "submit": {
+    "sending": "Sending...",
+    "send": "→ Send"
+  },
+  "errors": {
+    "submitFailed": "An error occurred. Please try again."
+  },
+  "trustBadges": {
+    "euCertified": {
+      "title": "EU Certified",
+      "subtitle": "Highest standards"
+    },
+    "award2024": {
+      "title": "Award-winning 2024",
+      "subtitle": "Recognized"
+    },
+    "sterileEquipment": {
+      "title": "Sterile equipment",
+      "subtitle": "100% hygiene"
+    },
+    "experience": {
+      "title": "27 years of experience",
+      "subtitle": "Since 1994"
+    }
+  },
   "labels": {
     "name": "Name",
     "email": "E-mail",

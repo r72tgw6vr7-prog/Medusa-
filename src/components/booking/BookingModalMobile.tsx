@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 import { X } from 'lucide-react';
-import { submitBooking, validateBookingData } from '../../services/bookingService';
+import { submitBooking, validateBookingData } from '@/services/bookingService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Meteors } from '@/components/ui/meteors';
 import {
   SERVICE_CONFIG,
   INITIAL_FORM_DATA,
@@ -84,95 +85,110 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         setIsSubmitting(false);
       }
     },
-    [selectedService, paymentMethod, projectDetails, formData, t]
+    [selectedService, paymentMethod, projectDetails, formData, t],
   );
 
   return (
     <div className='booking-modal-mobile'>
-      <div className='modal-header'>
-        <h2>{t('booking.modal.title') || 'Termin buchen'}</h2>
-        {onClose && (
-          <button
-            className='close-button touch-target-mobile'
-            onClick={onClose}
-            aria-label={t('booking.modal.close') || 'Close'}
-          >
-            <X size={24} />
-          </button>
-        )}
+      <div
+        aria-hidden='true'
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden',
+          opacity: 0.18,
+          zIndex: 0,
+        }}
+      >
+        <Meteors number={12} />
       </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div className='modal-header'>
+          <h2>{t('booking.modal.title') || 'Termin buchen'}</h2>
+          {onClose && (
+            <button
+              className='close-button touch-target-mobile'
+              onClick={onClose}
+              aria-label={t('booking.modal.close') || 'Close'}
+            >
+              <X size={24} />
+            </button>
+          )}
+        </div>
 
-      <div className='booking-progress' aria-label='Buchung Fortschritt'>
-        <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
-          1/3
-        </span>
-        <span className='booking-progress__divider' aria-hidden='true' />
-        <span className={`booking-progress__step ${step === 'personal' ? 'is-active' : ''}`}>
-          2/3
-        </span>
-        <span className='booking-progress__divider' aria-hidden='true' />
-        <span className={`booking-progress__step ${step === 'payment' ? 'is-active' : ''}`}>
-          3/3
-        </span>
-      </div>
+        <div className='booking-progress' aria-label='Buchung Fortschritt'>
+          <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
+            1/3
+          </span>
+          <span className='booking-progress__divider' aria-hidden='true' />
+          <span className={`booking-progress__step ${step === 'personal' ? 'is-active' : ''}`}>
+            2/3
+          </span>
+          <span className='booking-progress__divider' aria-hidden='true' />
+          <span className={`booking-progress__step ${step === 'payment' ? 'is-active' : ''}`}>
+            3/3
+          </span>
+        </div>
 
-      <div className='modal-body'>
-        {step === 'details' && (
-          <ServiceSelectionStep
+        <div className='modal-body'>
+          {step === 'details' && (
+            <ServiceSelectionStep
+              t={t}
+              selectedService={selectedService}
+              setSelectedService={setSelectedService}
+              projectDetails={projectDetails}
+              setProjectDetails={setProjectDetails}
+              canProceed={canProceedStep1}
+              onNext={() => setStep('personal')}
+            />
+          )}
+
+          {step === 'personal' && (
+            <PersonalInfoStep
+              t={t}
+              formData={formData}
+              setFormData={setFormData}
+              canProceed={canProceedStep2}
+              onBack={() => setStep('details')}
+              onNext={() => setStep('payment')}
+              onSubmit={handleSubmit}
+            />
+          )}
+
+          {step === 'payment' && (
+            <PaymentStep
+              t={t}
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+              submissionError={submissionError}
+              canProceed={canProceedStep3}
+              onBack={() => setStep('personal')}
+              onSubmit={handleSubmit}
+            />
+          )}
+        </div>
+
+        {isSubmitting && <LoadingOverlay t={t} />}
+
+        {step === 'error' && submissionError && (
+          <ErrorState
             t={t}
-            selectedService={selectedService}
-            setSelectedService={setSelectedService}
-            projectDetails={projectDetails}
-            setProjectDetails={setProjectDetails}
-            canProceed={canProceedStep1}
-            onNext={() => setStep('personal')}
+            error={submissionError}
+            isSubmitting={isSubmitting}
+            onRetry={() => setStep('payment')}
           />
         )}
 
-        {step === 'personal' && (
-          <PersonalInfoStep
+        {step === 'confirmation' && bookingResult && (
+          <ConfirmationStep
             t={t}
-            formData={formData}
-            setFormData={setFormData}
-            canProceed={canProceedStep2}
-            onBack={() => setStep('details')}
-            onNext={() => setStep('payment')}
-            onSubmit={handleSubmit}
-          />
-        )}
-
-        {step === 'payment' && (
-          <PaymentStep
-            t={t}
-            paymentMethod={paymentMethod}
-            setPaymentMethod={setPaymentMethod}
-            submissionError={submissionError}
-            canProceed={canProceedStep3}
-            onBack={() => setStep('personal')}
-            onSubmit={handleSubmit}
+            language={language}
+            bookingResult={bookingResult}
+            onClose={onClose}
           />
         )}
       </div>
-
-      {isSubmitting && <LoadingOverlay t={t} />}
-
-      {step === 'error' && submissionError && (
-        <ErrorState
-          t={t}
-          error={submissionError}
-          isSubmitting={isSubmitting}
-          onRetry={() => setStep('payment')}
-        />
-      )}
-
-      {step === 'confirmation' && bookingResult && (
-        <ConfirmationStep
-          t={t}
-          language={language}
-          bookingResult={bookingResult}
-          onClose={onClose}
-        />
-      )}
     </div>
   );
 };

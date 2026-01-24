@@ -17,7 +17,7 @@
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self' https://*.google.com https://*.googleapis.com https://*.gstatic.com;
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: localhost:* blob:;
+      script-src 'self' 'sha256-Jr9Fl37029VhYvVWPeghsu5JL7bmhAHkrK/DZdoqmiE=' 'sha256-8ExvGeARWXqsyCqWf4dS9Uu4WFTUfye9ipfY3P9ZeTs=' 'sha256-Tpu1/HwrJ18CWBP43IPqNrlZZTSZOzwGdiKHFTtEIGw=' https: http: localhost:* blob:;
       style-src 'self' 'unsafe-inline' https: http:;
       img-src 'self' data: https: http: blob:;
       font-src 'self' data: https: http:;
@@ -31,24 +31,46 @@
     ">
     
     <!-- Preload critical fonts for faster FCP -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap">
+    </noscript>
     
     <!-- Preload critical font files -->
     <link 
       rel="preload" 
       as="font" 
-      href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" 
+      href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" 
       type="font/woff2" 
       crossorigin>
     <link 
       rel="preload" 
       as="font" 
-      href="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtXK-F2qO0isEw.woff2" 
+      href="https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2" 
       type="font/woff2" 
       crossorigin>
 
     <!-- Preload critical resources for LCP optimization -->
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/images/photos/gallery/optimized/Biomechanic-400w.avif"
+      type="image/avif"
+      fetchpriority="high">
     <link 
       rel="preload" 
       as="image" 
@@ -72,8 +94,8 @@
       "name": "Medusa Tattoo München",
       "alternateName": "Medusa Tattoo Studio",
       "url": "https://www.muenchen-tattoo-studio.de",
-      "logo": "https://www.muenchen-tattoo-studio.de/images/medusa-logo.svg",
-      "image": "https://www.muenchen-tattoo-studio.de/images/og-medusa-tattoo-munich.jpg",
+      "logo": "https://www.muenchen-tattoo-studio.de/assets/images/icons/icon-192x192.png",
+      "image": "https://www.muenchen-tattoo-studio.de/assets/images/icons/icon-192x192.png",
       "description": "Premium Tattoo & Piercing Studio am Marienplatz in München. Spezialisiert auf Custom Tattoos, Cover-ups, Realistik, Japanese, Blackwork und Geometric Designs.",
       "priceRange": "€€€",
       "telephone": "+49-89-269313",

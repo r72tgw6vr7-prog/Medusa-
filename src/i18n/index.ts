@@ -7,7 +7,7 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'de';
 
 export const I18N_STORAGE_KEY = 'language';
-export const I18N_CACHE_VERSION = '3';
+export const I18N_CACHE_VERSION = '4';
 
 export const NAMESPACES = [
   'common',

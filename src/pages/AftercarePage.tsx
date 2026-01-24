@@ -4,10 +4,10 @@
 // Comprehensive tattoo aftercare guide with healing timeline, tips, products, and warnings
 
 import React, { useState } from 'react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { PageHeading } from '../components/PageHeading';
-import { SectionHeading } from '../components/SectionHeading';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { PageHeading } from '@/components/PageHeading';
+import { SectionHeading } from '@/components/SectionHeading';
 import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
@@ -29,7 +29,7 @@ import {
   AFTERCARE_TIPS,
   AFTERCARE_PRODUCTS,
   WARNING_SIGNS,
-} from '../data/aftercare';
+} from '@/data/aftercare';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export const AftercarePage: React.FC = () => {
@@ -51,12 +51,12 @@ export const AftercarePage: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-luxury-bg-dark'>
+    <div className='min-h-screen bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
 
       {/* Page Header - Matches Services page exactly */}
-      <Section variant="default" spacing="normal">
-        <Container size="default">
+      <Section variant='default' spacing='normal'>
+        <Container size='default'>
           <div className='flex flex-col gap-16'>
             <div className='text-center'>
               <PageHeading
@@ -66,7 +66,7 @@ export const AftercarePage: React.FC = () => {
               />
               <div className='flex items-center justify-center gap-8 text-luxury-text-inverse/70 -mt-8'>
                 <Clock size={20} />
-                <span className='text-base'>
+                <span className='text-(length:--text-body) font-body'>
                   Heilungsdauer: 2-4 Wochen oberflächlich, 3-6 Monate vollständig
                 </span>
               </div>
@@ -76,10 +76,10 @@ export const AftercarePage: React.FC = () => {
       </Section>
 
       {/* Healing Timeline Section - Container → Section → List */}
-      <Section variant="default" spacing="normal">
-        <Container size="default">
+      <Section variant='default' spacing='normal'>
+        <Container size='default'>
           <div className='mb-16'>
-            <SectionHeading eyebrow="Prozess" title="Heilungsphasen" />
+            <SectionHeading eyebrow='Prozess' title='Heilungsphasen' />
           </div>
 
           <div className='relative'>
@@ -95,41 +95,55 @@ export const AftercarePage: React.FC = () => {
             {AFTERCARE_PHASES.map((phase, index) => (
               <div key={phase.id} className='relative md:pl-24 pb-16 last:pb-0'>
                 {/* Phase icon */}
-                <div className='md:absolute md:left-0 w-14 h-14 bg-[var(--accent-chrome)] rounded-full flex items-center justify-center text-luxury-text-primary mb-8 md:mb-0 mx-auto md:mx-0'>
-                  <span className='hidden md:block font-bold text-xl'>{index + 1}</span>
+                <div className='md:absolute md:left-0 w-14 h-14 bg-(--accent-chrome) rounded-full flex items-center justify-center text-luxury-text-primary mb-8 md:mb-0 mx-auto md:mx-0'>
+                  <span className='hidden md:block font-bold text-(length:--text-lg)'>
+                    {index + 1}
+                  </span>
                   <span className='md:hidden'>{phaseIcons[index]}</span>
                 </div>
 
                 {/* Phase content */}
-                <Card variant="default" size="default" asChild>
+                <Card variant='default' size='default' asChild>
                   <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-0'>
                     <div>
-                      <span className='inline-block bg-brand-accent/10 text-brand-accent px-0 py-0 rounded-full text-sm lg:text-xs font-bold mb-0'>
+                      <span className='inline-block bg-brand-accent/10 text-brand-accent px-0 py-0 rounded-full text-(length:--text-sm) lg:text-(length:--text-label) font-bold mb-0'>
                         {phase.day}
                       </span>
-                      <h3 className='font-headline text-2xl text-brand-accent'>
+                      <h3 className='font-headline text-(length:--text-h4) text-brand-accent'>
                         {phase.title[language]}
                       </h3>
                     </div>
-                    <span className='text-(--chrome-silver) text-base lg:text-sm flex items-center gap-0'>
+                    <span className='text-(--chrome-silver) text-(length:--text-body) lg:text-(length:--text-sm) flex items-center gap-0'>
                       <Clock size={16} />
                       {phase.duration}
                     </span>
                   </div>
 
-                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed'>
+                  <p className='text-(length:--text-body) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal) font-body'>
                     {phase.description[language]}
                   </p>
 
-                  <button
-                    onClick={() => togglePhase(phase.id)}
-                    className='text-brand-accent hover:text-brand-accent-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
-                    aria-expanded={activePhase === phase.id}
-                    aria-controls={`phase-details-${phase.id}`}
-                  >
-                    {activePhase === phase.id ? 'Weniger anzeigen' : 'Details anzeigen'}
-                    <span className='text-lg'>{activePhase === phase.id ? '↑' : '→'}</span>
-                  </button>
+                  {activePhase === phase.id ? (
+                    <button
+                      onClick={() => togglePhase(phase.id)}
+                      className='text-brand-accent hover:text-brand-accent-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
+                      aria-expanded='true'
+                      aria-controls={`phase-details-${phase.id}`}
+                    >
+                      Weniger anzeigen
+                      <span className='text-(length:--text-lg)'>↑</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => togglePhase(phase.id)}
+                      className='text-brand-accent hover:text-brand-accent-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
+                      aria-expanded='false'
+                      aria-controls={`phase-details-${phase.id}`}
+                    >
+                      Details anzeigen
+                      <span className='text-(length:--text-lg)'>→</span>
+                    </button>
+                  )}
 
                   {activePhase === phase.id && (
                     <div
@@ -137,13 +151,16 @@ export const AftercarePage: React.FC = () => {
                       className='mt-8 space-y-8 border-t border-[rgba(var(--color-accent-silver-rgb),0.2)] pt-8'
                     >
                       <div>
-                        <h4 className='text-brand-accent font-bold mb-0 flex items-center gap-0'>
+                        <h4 className='text-brand-accent text-(length:--text-body) font-bold mb-0 flex items-center gap-0'>
                           <CheckCircle size={20} />
                           Anweisungen:
                         </h4>
                         <ul className='space-y-0'>
                           {phase.instructions.map((instruction, i) => (
-                            <li key={i} className='flex items-start gap-0 text-luxury-text-inverse/80'>
+                            <li
+                              key={i}
+                              className='flex items-start gap-0 text-(length:--text-body) text-luxury-text-inverse/80 leading-(--line-height-normal) font-body'
+                            >
                               <span className='text-brand-accent shrink-0 mt-0'>•</span>
                               <span>{instruction}</span>
                             </li>
@@ -160,16 +177,16 @@ export const AftercarePage: React.FC = () => {
       </Section>
 
       {/* Do's & Don'ts Section - Container → Section → Grid → Cards */}
-      <Section variant="default" spacing="normal">
-        <Container size="default">
+      <Section variant='default' spacing='normal'>
+        <Container size='default'>
           <div className='mb-16'>
-            <SectionHeading eyebrow="Anleitung" title="Do's & Don'ts" />
+            <SectionHeading eyebrow='Anleitung' title="Do's & Don'ts" />
           </div>
 
           <div className='grid md:grid-cols-2 gap-8'>
             {/* DO's */}
             <div>
-              <h3 className='font-headline text-2xl text-green-400 mb-8 flex items-center gap-0'>
+              <h3 className='font-headline text-(length:--text-h3) text-green-400 mb-8 flex items-center gap-0'>
                 <div className='w-10 min-h-10 rounded-full bg-green-400/20 flex flex-col h-full items-center justify-center'>
                   <CheckCircle size={24} />
                 </div>
@@ -180,21 +197,23 @@ export const AftercarePage: React.FC = () => {
                   <Card
                     key={tip.id}
                     variant={tip.critical ? 'featured' : 'default'}
-                    size="sm"
+                    size='sm'
                     asChild
                   >
                     <div>
-                    <div className='flex items-start gap-0'>
-                      <span className='text-2xl shrink-0'>{tip.icon}</span>
-                      <div className='flex-1'>
-                        <p className='text-luxury-text-inverse/90'>{tip.text[language]}</p>
-                        {tip.critical && (
-                          <span className='inline-block mt-0 text-sm lg:text-xs text-(--brand-accent) font-bold'>
-                            WICHTIG
-                          </span>
-                        )}
+                      <div className='flex items-start gap-0'>
+                        <span className='text-(length:--text-h4) shrink-0'>{tip.icon}</span>
+                        <div className='flex-1'>
+                          <p className='text-(length:--text-body) text-luxury-text-inverse/90 leading-(--line-height-normal) font-body'>
+                            {tip.text[language]}
+                          </p>
+                          {tip.critical && (
+                            <span className='inline-block mt-0 text-(length:--text-sm) lg:text-(length:--text-label) text-(--brand-accent) font-bold'>
+                              WICHTIG
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </Card>
                 ))}
@@ -203,9 +222,9 @@ export const AftercarePage: React.FC = () => {
 
             {/* DON'Ts */}
             <div>
-              <h3 className='font-headline text-2xl text-red-400 mb-8 flex items-center gap-0'>
+              <h3 className='font-headline text-(length:--text-h3) text-red-400 mb-8 flex items-center gap-0'>
                 <div className='w-10 min-h-10 rounded-full bg-red-400/20 flex flex-col h-full items-center justify-center'>
-                  <span className='text-3xl leading-none'>✕</span>
+                  <span className='text-(length:--text-h3) leading-none'>✕</span>
                 </div>
                 Was Sie NICHT tun sollten
               </h3>
@@ -214,21 +233,23 @@ export const AftercarePage: React.FC = () => {
                   <Card
                     key={tip.id}
                     variant={tip.critical ? 'featured' : 'default'}
-                    size="sm"
+                    size='sm'
                     asChild
                   >
                     <div>
-                    <div className='flex items-start gap-0'>
-                      <span className='text-2xl shrink-0'>{tip.icon}</span>
-                      <div className='flex-1'>
-                        <p className='text-luxury-text-inverse/90'>{tip.text[language]}</p>
-                        {tip.critical && (
-                          <span className='inline-block mt-0 text-sm lg:text-xs text-(--brand-accent) font-bold'>
-                            WICHTIG
-                          </span>
-                        )}
+                      <div className='flex items-start gap-0'>
+                        <span className='text-(length:--text-h4) shrink-0'>{tip.icon}</span>
+                        <div className='flex-1'>
+                          <p className='text-(length:--text-body) text-luxury-text-inverse/90 leading-(--line-height-normal) font-body'>
+                            {tip.text[language]}
+                          </p>
+                          {tip.critical && (
+                            <span className='inline-block mt-0 text-(length:--text-sm) lg:text-(length:--text-label) text-(--brand-accent) font-bold'>
+                              WICHTIG
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </Card>
                 ))}
@@ -239,10 +260,10 @@ export const AftercarePage: React.FC = () => {
       </Section>
 
       {/* Products Section - Container → Section → Grid → Cards */}
-      <Section variant="default" spacing="normal">
-        <Container size="default">
+      <Section variant='default' spacing='normal'>
+        <Container size='default'>
           <div className='mb-16'>
-            <SectionHeading eyebrow="Produkte" title="Empfohlene Produkte" />
+            <SectionHeading eyebrow='Produkte' title='Empfohlene Produkte' />
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8'>
@@ -250,24 +271,30 @@ export const AftercarePage: React.FC = () => {
               <Card
                 key={product.id}
                 variant={product.recommended ? 'featured' : 'default'}
-                size="default"
+                size='default'
                 asChild
               >
                 <div className='flex flex-col'>
                   {product.recommended && (
-                    <div className='flex flex-col h-full bg-[var(--brand-accent)] text-luxury-text-primary px-2 py-2 lg:py-(--space-0-5) rounded-full text-sm lg:text-xs font-bold mb-4 self-start'>
+                    <div className='flex flex-col h-full bg-(--brand-accent) text-luxury-text-primary px-2 py-2 lg:py-(--space-0-5) rounded-full text-(length:--text-sm) lg:text-(length:--text-label) font-bold mb-4 self-start'>
                       Empfohlen
                     </div>
                   )}
 
-                  <h3 className='font-bold text-luxury-text-inverse mb-0'>{product.name}</h3>
-                  <p className='text-[var(--chrome-silver)] text-sm mb-0 capitalize'>{product.category}</p>
-                  <p className='text-luxury-text-inverse/70 text-sm mb-4 flex-1'>
+                  <h3 className='font-bold text-(length:--text-body) text-luxury-text-inverse mb-0'>
+                    {product.name}
+                  </h3>
+                  <p className='text-(--chrome-silver) text-(length:--text-sm) mb-0 capitalize'>
+                    {product.category}
+                  </p>
+                  <p className='text-(length:--text-sm) text-luxury-text-inverse/70 mb-4 flex-1 leading-(--line-height-normal) font-body'>
                     {product.description[language]}
                   </p>
 
                   {product.price && (
-                    <p className='text-[var(--brand-accent)] font-bold mb-4'>{product.price}</p>
+                    <p className='text-(--brand-accent) text-(length:--text-body) font-bold mb-4'>
+                      {product.price}
+                    </p>
                   )}
 
                   {product.link && (
@@ -275,7 +302,7 @@ export const AftercarePage: React.FC = () => {
                       href={product.link}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-[var(--accent-chrome)] hover:text-[var(--accent-chrome)]/80 text-sm font-medium transition-colors duration-200 ease-out' 
+                      className='text-(--accent-chrome) hover:text-(--accent-chrome)/80 text-(length:--text-sm) font-medium transition-colors duration-200 ease-out'
                     >
                       Mehr erfahren
                     </a>
@@ -288,19 +315,24 @@ export const AftercarePage: React.FC = () => {
       </Section>
 
       {/* Warning Signs Section */}
-      <Section variant="default" spacing="normal" className="bg-red-500/10">
-        <Container size="narrow">
+      <Section variant='default' spacing='normal' className='bg-red-500/10'>
+        <Container size='narrow'>
           <div className='bg-red-500/20 border-2 border-red-500 rounded-xl p-8'>
-            <h2 className='font-sans text-3xl text-red-400 mb-8 flex items-center gap-0'>
+            <h2 className='font-headline text-(length:--text-h2) text-red-400 mb-8 flex items-center gap-0'>
               <AlertTriangle size={36} />
               Warnzeichen
             </h2>
 
-            <p className='text-luxury-text-inverse mb-8 text-lg'>{WARNING_SIGNS.description[language]}</p>
+            <p className='text-luxury-text-inverse mb-8 text-(length:--text-lg) leading-(--line-height-normal) font-body'>
+              {WARNING_SIGNS.description[language]}
+            </p>
 
             <ul className='space-y-0 mb-8'>
               {WARNING_SIGNS.signs.map((sign, index) => (
-                <li key={index} className='flex items-start gap-0 text-luxury-text-inverse'>
+                <li
+                  key={index}
+                  className='flex items-start gap-0 text-(length:--text-body) text-luxury-text-inverse leading-(--line-height-normal) font-body'
+                >
                   <span className='text-red-400 shrink-0 mt-0'>⚠️</span>
                   <span>{sign[language]}</span>
                 </li>
@@ -308,40 +340,42 @@ export const AftercarePage: React.FC = () => {
             </ul>
 
             <div className='bg-luxury-bg-dark/30 rounded-lg p-8 border border-red-400/30'>
-              <p className='text-(--brand-accent) font-bold mb-0 flex items-center gap-0'>
+              <p className='text-(--brand-accent) text-(length:--text-body) font-bold mb-0 flex items-center gap-0'>
                 <Phone size={20} />
                 Notfallkontakt:
               </p>
               <a
                 href='tel:+4989269313'
-                className='text-luxury-text-inverse text-2xl md:text-3xl font-bold hover:text-(--brand-accent-hover) transition-colors block transition duration-200 ease-out'
+                className='text-luxury-text-inverse text-(length:--text-h3) font-bold hover:text-(--brand-accent-hover) transition-colors duration-200 ease-out block'
               >
                 +49 (0) 89 269 313
               </a>
-              <p className='text-luxury-text-inverse/60 text-sm mt-0'>Mo-Fr: 11:30-18:30, Sa: 11:00-18:00</p>
+              <p className='text-luxury-text-inverse/60 text-(length:--text-sm) mt-0'>
+                Mo-Fr: 11:30-18:30, Sa: 11:00-18:00
+              </p>
             </div>
           </div>
         </Container>
       </Section>
 
       {/* CTA Section */}
-      <Section variant="default" spacing="normal">
-        <Container size="default">
+      <Section variant='default' spacing='normal'>
+        <Container size='default'>
           <SectionHeading
-            eyebrow="Unterstützung"
-            title="Noch Fragen?"
-            subtitle="Noch Fragen? Unser Team steht Ihnen jederzeit zur Verfügung. Kontaktieren Sie uns bei Fragen zur Nachsorge."
+            eyebrow='Unterstützung'
+            title='Noch Fragen?'
+            subtitle='Noch Fragen? Unser Team steht Ihnen jederzeit zur Verfügung. Kontaktieren Sie uns bei Fragen zur Nachsorge.'
           />
           <div className='flex flex-col md:flex-row gap-8 justify-center'>
             <a
               href='/contact'
-              className='inline-flex items-center justify-center px-8 py-8 bg-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)]/80 text-luxury-text-primary font-semibold text-lg rounded-xl transition-all duration-200 min-w-50' 
+              className='inline-flex items-center justify-center px-8 py-8 bg-(--accent-chrome) hover:bg-(--accent-chrome)/80 text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
             >
               Kontaktieren Sie uns
             </a>
             <a
               href='/booking'
-              className='inline-flex items-center justify-center gap-8 px-8 py-8 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-lg rounded-xl transition-all duration-200 min-w-50'
+              className='inline-flex items-center justify-center gap-8 px-8 py-8 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
             >
               <Calendar size={20} />
               Termin buchen

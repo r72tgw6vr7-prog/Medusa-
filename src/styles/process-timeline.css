@@ -6,7 +6,7 @@
   right: 0;
   height: var(--space-12);
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .process-timeline-section::before {
@@ -39,7 +39,7 @@
   height: 4px;
   border-radius: 9999px;
   background: rgb(var(--color-accent-silver-rgb) / 0.25);
-  box-shadow: var(--shadow-chrome-glow);
+  box-shadow: var(--shadow-chrome-sm);
   overflow: hidden;
 }
 .timeline-fill {
@@ -47,8 +47,8 @@
   inset: 0;
   transform: scaleX(0);
   transform-origin: left;
-  background: var(--color-brand-accent-dark);
-  box-shadow: var(--shadow-chrome-glow);
+  background: var(--brand-accent);
+  box-shadow: var(--shadow-chrome-sm);
 }
 .timeline-fill.is-visible {
   transform: scaleX(1);
@@ -65,4 +65,27 @@
   to {
     transform: scaleX(1);
   }
+}
+
+.process-timeline-marker {
+  border-radius: 9999px;
+  border: 1px solid var(--brand-accent);
+  background: var(--color-surface-darker);
+  box-shadow: var(--shadow-chrome-sm);
+}
+
+.process-timeline-step-icon {
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--accent-chrome-rgb), 0.6);
+  background: rgba(var(--accent-chrome-rgb), 0.1);
+  box-shadow: var(--shadow-chrome-sm);
+}
+
+.process-timeline-step-badge {
+  border-radius: 9999px;
+  background: rgba(var(--color-text-primary-rgb), 0.2);
+  border: 1px solid rgba(var(--color-text-primary-rgb), 0.3);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-chrome-sm);
 }

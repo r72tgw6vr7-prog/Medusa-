@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { MedusaInput } from '@/components/ui/input';
-import type { BookingFormData } from '../bookingConfig';
+import type { BookingFormData } from '@/components/booking/bookingConfig';
 
 interface PersonalInfoStepProps {
   t: (key: string) => string;

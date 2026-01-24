@@ -1,8 +1,8 @@
 import React from 'react';
-import Section from '../../primitives/Section';
-import Container from '../../ui/Container';
-import { Button } from '../../ui/button';
-import { SectionHeading } from '../../SectionHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
+import { Button } from '@/components/ui/button';
+import { SectionHeading } from '@/components/SectionHeading';
 
 interface ServiceCard {
   id: string;
@@ -125,7 +125,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     {/* Small label (no strike-through) */}
                     <div className='flex items-center gap-0 justify-center'>
                       <span
-                        className="font-['Playfair_Display'] text-lg"
+                        className="font-headline text-(length:--text-lg)"
                         style={{
                           color: 'var(--brand-accent)',
                           opacity: 0.9,
@@ -137,7 +137,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
 
                     {/* Main Title */}
                     <h3
-                      className="font-['Poppins'] text-2xl md:text-4xl font-bold leading-tight"
+                      className="font-headline text-(length:--text-h3) font-bold leading-tight"
                       style={{ color: 'var(--brand-white)' }}
                     >
                       {service.mainTitle}
@@ -148,7 +148,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                       {service.bullets.map((bullet, index) => (
                         <li
                           key={index}
-                          className="service-card-list-item text-luxury-text-inverse font-['Inter'] text-sm"
+                          className="service-card-list-item text-luxury-text-inverse font-body text-(length:--text-sm)"
                         >
                           {bullet}
                         </li>
@@ -158,7 +158,7 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({ services = DEFAULT_S
                     {/* Price and CTA */}
                     <div className='service-card-footer'>
                       <span
-                        className="font-['Poppins'] text-2xl font-bold text-center block"
+                        className="font-headline text-(length:--text-h4) font-bold text-center block"
                         style={{ color: 'var(--brand-white)' }}
                       >
                         {service.price}

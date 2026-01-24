@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import type { BookingResult } from '../bookingConfig';
+import type { BookingResult } from '@/components/booking/bookingConfig';
 
 interface ConfirmationStepProps {
   t: (key: string) => string;

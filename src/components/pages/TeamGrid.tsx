@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './TeamGrid.css';
-import { ArtistCard, type Artist as ArtistCardType } from '../cards/ArtistCard';
-import { ArtistBioModal } from '../molecules/ArtistBioModal';
-import { PageHeading } from '../PageHeading';
+import { ArtistCard, type Artist as ArtistCardType } from '@/components/cards/ArtistCard';
+import { ArtistBioModal } from '@/components/molecules/ArtistBioModal';
+import { PageHeading } from '@/components/PageHeading';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 
@@ -53,60 +53,63 @@ interface Artist {
 }
 
 const TeamGrid: React.FC = () => {
-  const defaultArtists: Artist[] = [
-    {
-      slug: 'aaron',
-      name: 'Aaron',
-      photo: '/assets/images/icons/placeholder.svg',
-      role: 'Piercing Artist',
-      roleIcon: 'Target',
-      specialties: ['Dermal', 'Industrial', 'Complex Piercings'],
-      experience: '10+ Jahre',
-      instagram: '@aaron_medusa',
-      bookable: true,
-      featured: false,
-      category: 'piercing',
-    },
-    {
-      slug: 'angie',
-      name: 'Angie',
-      photo: '/assets/images/icons/placeholder.svg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
-      experience: '6+ Jahre',
-      instagram: '@angie_medusa',
-      bookable: true,
-      featured: false,
-      category: 'tattoo',
-    },
-    {
-      slug: 'loui',
-      name: 'Loui',
-      photo: '/assets/images/icons/placeholder.svg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
-      experience: '8+ Jahre',
-      instagram: '@loui_medusa',
-      bookable: true,
-      featured: false,
-      category: 'tattoo',
-    },
-    {
-      slug: 'oliver',
-      name: 'Oliver',
-      photo: '/assets/images/icons/placeholder.svg',
-      role: 'Tattoo Artist',
-      roleIcon: 'Pen',
-      specialties: ['Geometric', 'Blackwork', 'Minimalist'],
-      experience: '5+ Jahre',
-      instagram: '@oli_medusa',
-      bookable: true,
-      featured: false,
-      category: 'tattoo',
-    },
-  ];
+  const defaultArtists: Artist[] = useMemo(
+    () => [
+      {
+        slug: 'aaron',
+        name: 'Aaron',
+        photo: '/assets/images/icons/placeholder.svg',
+        role: 'Piercing Artist',
+        roleIcon: 'Target',
+        specialties: ['Dermal', 'Industrial', 'Complex Piercings'],
+        experience: '10+ Jahre',
+        instagram: '@aaron_medusa',
+        bookable: true,
+        featured: false,
+        category: 'piercing',
+      },
+      {
+        slug: 'angie',
+        name: 'Angie',
+        photo: '/assets/images/icons/placeholder.svg',
+        role: 'Tattoo Artist',
+        roleIcon: 'Pen',
+        specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
+        experience: '6+ Jahre',
+        instagram: '@angie_medusa',
+        bookable: true,
+        featured: false,
+        category: 'tattoo',
+      },
+      {
+        slug: 'loui',
+        name: 'Loui',
+        photo: '/assets/images/icons/placeholder.svg',
+        role: 'Tattoo Artist',
+        roleIcon: 'Pen',
+        specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
+        experience: '8+ Jahre',
+        instagram: '@loui_medusa',
+        bookable: true,
+        featured: false,
+        category: 'tattoo',
+      },
+      {
+        slug: 'oliver',
+        name: 'Oliver',
+        photo: '/assets/images/icons/placeholder.svg',
+        role: 'Tattoo Artist',
+        roleIcon: 'Pen',
+        specialties: ['Geometric', 'Blackwork', 'Minimalist'],
+        experience: '5+ Jahre',
+        instagram: '@oli_medusa',
+        bookable: true,
+        featured: false,
+        category: 'tattoo',
+      },
+    ],
+    [],
+  );
 
   const [artists, setArtists] = useState<Artist[]>([]);
   const [loading, setLoading] = useState(true);
@@ -156,7 +159,7 @@ const TeamGrid: React.FC = () => {
     };
 
     loadTeamData();
-  }, []);
+  }, [defaultArtists]);
 
   // IntersectionObserver for scroll-reveal with staggered delays
   useEffect(() => {

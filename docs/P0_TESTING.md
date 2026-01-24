@@ -13,7 +13,7 @@ The P0 test suite validates four critical requirements:
 
 ## Prerequisites
 
-1. **Node.js 20+** and **npm** installed
+1. **Node.js 20+** and **pnpm** installed
 2. **Playwright browsers** installed
 3. **Development server** running
 
@@ -43,13 +43,13 @@ VITE_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 
 ```bash
 # Run all P0 tests
-npm run test:p0
+pnpm run test:p0
 
 # Run with visual browser (headed mode)
-npm run test:p0:headed
+pnpm run test:p0:headed
 
 # Run and open HTML report
-npm run test:p0:report
+pnpm run test:p0:report
 ```
 
 ### Advanced Usage
@@ -187,7 +187,7 @@ Key settings:
 **1. Dev server not running**
 ```bash
 # Start dev server in separate terminal
-npm run dev
+pnpm run dev
 
 # Or run tests with server auto-start
 npx playwright test tests/p0
@@ -260,16 +260,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
       
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       
       - name: Install Playwright
         run: npx playwright install --with-deps
       
       - name: Run P0 tests
-        run: npm run test:p0
+        run: pnpm run test:p0
         env:
+          # Public identifiers (safe to expose client-side)
           VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_KEY }}
           VITE_GA4_MEASUREMENT_ID: ${{ secrets.GA4_MEASUREMENT_ID }}
       

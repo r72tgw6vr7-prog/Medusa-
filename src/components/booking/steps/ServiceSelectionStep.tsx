@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { SERVICE_CONFIG, type ServiceConfig } from '../bookingConfig';
+import { SERVICE_CONFIG } from '@/components/booking/bookingConfig';
 
 interface ServiceSelectionStepProps {
   t: (key: string) => string;

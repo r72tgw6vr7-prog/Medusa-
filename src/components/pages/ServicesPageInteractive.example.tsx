@@ -5,8 +5,8 @@
 // into your existing page structure
 
 import React from 'react';
-import { ServicesPageInteractive } from '../pages/ServicesPageInteractive';
-import { AppProvider } from '../../../core/state/AppContext';
+import { ServicesPageInteractive } from '@/components/pages/ServicesPageInteractive';
+import { AppProvider } from '@/core/state/AppContext';
 
 // Example 1: Standalone Services Page
 export function ServicesPage() {

@@ -73,7 +73,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       icon: 'w-14 h-14 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mb-6',
       iconText: 'text-[var(--accent-chrome)]',
       iconStroke: 'rgb(192 192 192)',
-      title: 'text-[var(--accent-chrome)] text-lg md:text-xl font-semibold leading-tight mb-2',
+      title: 'font-headline text-(--accent-chrome) text-(length:--text-h4) font-semibold leading-tight mb-2',
       featureIcon: 'w-5 h-5 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mr-3',
       btnHighlighted: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] shadow-chrome-glow-subtle hover:shadow-chrome-glow',
       btnOutline: 'bg-transparent border border-[var(--accent-chrome)] text-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)] hover:text-brand-background',
@@ -82,7 +82,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       icon: 'w-14 h-14 bg-brand-chrome/10 rounded-full flex items-center justify-center mb-6',
       iconText: 'text-brand-chrome',
       iconStroke: 'rgb(192 192 192)',
-      title: 'text-brand-chrome text-lg md:text-xl font-semibold leading-tight mb-2',
+      title: 'font-headline text-brand-chrome text-(length:--text-h4) font-semibold leading-tight mb-2',
       featureIcon: 'w-5 h-5 bg-brand-chrome/10 rounded-full flex items-center justify-center mr-3',
       btnHighlighted: 'bg-brand-chrome text-brand-background shadow-chrome-glow',
       btnOutline: 'bg-transparent border border-brand-chrome text-brand-chrome hover:bg-brand-chrome hover:text-brand-background',
@@ -100,7 +100,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
     >
       {popular && (
         <div className='absolute -top-2 inset-x-0 mx-auto w-24 bg-[var(--accent-chrome)] rounded-full py-0 text-center z-10'>
-          <span className='text-brand-background text-sm lg:text-xs font-bold'>BELIEBT</span>
+          <span className='text-brand-background text-(length:--text-label) font-bold'>BELIEBT</span>
         </div>
       )}
 
@@ -118,23 +118,25 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             {title}
           </h3>
 
-          {subtitle && <h4 className='text-text-secondary text-lg mb-0'>{subtitle}</h4>}
+          {subtitle && (
+            <h4 className='font-body text-text-secondary text-(length:--text-lg) mb-0'>{subtitle}</h4>
+          )}
 
-          <p className='text-sm md:text-base leading-6 text-brand-chrome line-clamp-4 md:line-clamp-5'>
+          <p className='text-(length:--text-body) leading-(--line-height-normal) text-brand-chrome line-clamp-4 md:line-clamp-5'>
             {description}
           </p>
 
           {/* Price */}
           {price && (
             <div className='mb-0'>
-              <span className='text-text-primary text-2xl font-bold'>{price}</span>
+              <span className='text-text-primary text-(length:--text-h3) font-bold'>{price}</span>
             </div>
           )}
 
           {/* Duration */}
           {duration && (
             <div className='mb-8'>
-              <span className='text-text-secondary text-sm'>{duration}</span>
+              <span className='text-text-secondary text-(length:--text-sm)'>{duration}</span>
             </div>
           )}
 
@@ -163,7 +165,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                         />
                       </svg>
                     </div>
-                    <span className='text-text-secondary text-sm'>{featureText}</span>
+                    <span className='text-text-secondary text-(length:--text-sm)'>{featureText}</span>
                   </li>
                 );
               })}
@@ -181,7 +183,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                 (e.key === 'Enter' || e.key === ' ') && handleClick && handleClick()
               }
             >
-              <span className='font-medium'>{buttonLabel}</span>
+              <span className='font-medium text-(length:--text-body)'>{buttonLabel}</span>
             </button>
           )}
         </div>

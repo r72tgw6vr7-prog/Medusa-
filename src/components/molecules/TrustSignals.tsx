@@ -12,8 +12,8 @@ import './TrustSignals.css';
  * - Responsive: desktop row → mobile stack
  *
  * BRAND COMPLIANCE:
- * - Black background (#000)
- * - White text (#fff, #ccc)
+ * - Black background (deep-black)
+ * - White text (brand-white)
  * - Neon cyan glow effects
  */
 
@@ -28,47 +28,46 @@ type TrustBadge = {
 const TRUST_BADGES: TrustBadge[] = [
   {
     icon: Shield,
-    title: 'Certified Excellence',
+    title: 'Zertifizierte Qualität',
     stat: '100%',
-    description: 'EU Health Standards & Munich Tattoo Association certified',
-    ariaLabel: 'EU Health Standards Certified',
+    description: 'EU-Hygienezertifiziertes Studio & Verband anerkannt.',
+    ariaLabel: 'Zertifiziert nach EU-Hygienestandards',
   },
   {
     icon: Award,
-    title: 'Proven Legacy',
+    title: 'Bewährte Erfahrung',
     stat: '25+',
-    description: 'Years of trusted artistry excellence in Munich',
-    ariaLabel: '25 Plus Years of Excellence',
+    description: 'Über 25 Jahre preisgekrönte Tattoo-Expertise.',
+    ariaLabel: 'Über 25 Jahre Erfahrung',
   },
   {
     icon: Heart,
-    title: 'Premium Aftercare',
+    title: 'Premium Nachsorge',
     stat: '5000+',
-    description: 'Satisfied clients with comprehensive healing support',
-    ariaLabel: 'Premium Aftercare Support',
+    description: '5 000+ Kunden betreut mit persönlicher Heilungshilfe.',
+    ariaLabel: 'Premium Nachsorge und Support',
   },
   {
     icon: Star,
-    title: 'Quality Guarantee',
+    title: 'Qualitätsgarantie',
     stat: '100%',
-    description: 'Lifetime commitment to excellence and client satisfaction',
-    ariaLabel: 'Quality Guarantee',
+    description: 'Lebenslange Garantie auf Farbe & Handwerkskunst.',
+    ariaLabel: 'Qualitätsgarantie',
   },
 ];
 
-
 export function TrustSignals() {
   return (
-    <section className="py-32 bg-black">
-      <div className="max-w-7xl mx-auto px-8">
+    <section className='py-32'>
+      <div className='max-w-7xl mx-auto px-8'>
         {/* 4-Card Horizontal Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12">
+        <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12'>
           {TRUST_BADGES.map((badge, index) => {
             const Icon = badge.icon;
             return (
               <motion.div
                 key={badge.title}
-                className="cool-lines-card chrome-card group relative flex flex-col h-full p-8 transition-all duration-500"
+                className='cool-lines-card chrome-card group relative flex flex-col items-center text-center h-full p-(--space-4) md:p-8 transition-all duration-500 bg-(--card-bg) border border-(--card-border) rounded-(--card-radius)'
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{
                   opacity: 1,
@@ -80,35 +79,37 @@ export function TrustSignals() {
                   },
                 }}
                 viewport={{ once: true, margin: '-50px' }}
-                style={{ boxShadow: 'var(--card-shadow)' }}
+                style={{ boxShadow: 'var(--card-shadow-depth), var(--card-shadow-glow)' }}
                 whileHover={{
                   boxShadow:
                     'var(--card-shadow-depth), var(--card-shadow-hover-glow), var(--card-shadow-inner)',
                 }}
-                role="group"
+                role='group'
                 aria-label={badge.ariaLabel}
               >
                 {/* Icon */}
                 <motion.div
-                  className="mb-8 inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-white/10 to-white/5 border border-white/20 flex-col h-full"
+                  className='mb-(--space-4) md:mb-8 flex items-center justify-center'
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Icon className="w-8 h-8 text-white/90" />
+                  <Icon className='trust-signals__icon-glow w-8 h-8 text-white' />
                 </motion.div>
 
                 {/* Stat */}
-                <div className="text-3xl md:text-4xl font-light text-white mb-4">
+                <div className='font-headline text-(length:--text-h3) md:text-(length:--text-h2) font-light text-white mb-4 leading-(--line-height-tight)'>
                   {badge.stat}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm uppercase tracking-widest text-white/80 mb-2 group-hover:text-white/90 transition-colors duration-500">
+                <h3 className='font-body text-(length:--text-label) uppercase tracking-widest text-brand-chrome/80 font-semibold mb-2 transition-colors duration-500'>
                   {badge.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm lg:text-xs text-gray-400 leading-relaxed">{badge.description}</p>
+                <p className='font-body text-(length:--text-sm) lg:text-(length:--text-xs) text-brand-chrome/70 leading-(--line-height-normal)'>
+                  {badge.description}
+                </p>
               </motion.div>
             );
           })}

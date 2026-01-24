@@ -31,9 +31,9 @@
   font-weight: var(--font-weight-semibold);
   color: var(--brand-accent);
   margin-bottom: var(--space-2);
-  line-height: var(--line-height-heading);
+  line-height: var(--line-height-tight);
   letter-spacing: -0.02em;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-family-heading);
 }
 
 /* Description */
@@ -42,7 +42,7 @@
   color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family-primary);
 }
 
 /* Mobile adjustments */
@@ -61,11 +61,11 @@
   }
 
   .section-title {
-    font-size: var(--text-h2-mobile);
+    font-size: var(--text-h2);
   }
 
   .section-description {
-    font-size: var(--text-body-mobile);
+    font-size: var(--text-body);
   }
 }
 

@@ -2,32 +2,32 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-base lg:text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] hover:bg-[var(--accent-chrome)]/80 focus-visible:ring-[var(--accent-chrome)]',
+        default: 'bg-(--accent-chrome) text-(--deep-black) hover:bg-(--accent-chrome)/80 focus-visible:ring-(--accent-chrome)',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         // Chrome accent variants (v2.0 design system)
-        chrome: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] hover:bg-[var(--accent-chrome)]/80 focus-visible:ring-[var(--accent-chrome)]',
+        chrome: 'bg-(--accent-chrome) text-(--deep-black) hover:bg-(--accent-chrome)/80 focus-visible:ring-(--accent-chrome)',
         outlineChrome:
-          'border border-[var(--accent-chrome)] text-[var(--accent-chrome)] bg-transparent hover:bg-[var(--accent-chrome)]/10 focus-visible:ring-[var(--accent-chrome)]',
-        ghostChrome: 'text-[var(--accent-chrome)] bg-transparent hover:bg-[var(--accent-chrome)]/10',
+          'border border-(--accent-chrome) text-(--accent-chrome) bg-transparent hover:bg-(--accent-chrome)/10 focus-visible:ring-(--accent-chrome)',
+        ghostChrome: 'text-(--accent-chrome) bg-transparent hover:bg-(--accent-chrome)/10',
         // Deprecated aliases for backward compatibility (now point to chrome)
         /** @deprecated Use 'chrome' instead */
-        gold: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] hover:bg-[var(--accent-chrome)]/80',
+        gold: 'bg-(--accent-chrome) text-(--deep-black) hover:bg-(--accent-chrome)/80',
         /** @deprecated Use 'outlineChrome' instead */
         outlineGold:
-          'border border-[var(--accent-chrome)] text-[var(--accent-chrome)] bg-transparent hover:bg-[var(--accent-chrome)]/10',
+          'border border-(--accent-chrome) text-(--accent-chrome) bg-transparent hover:bg-(--accent-chrome)/10',
         /** @deprecated Use 'ghostChrome' instead */
-        ghostGold: 'text-[var(--accent-chrome)] bg-transparent hover:bg-[var(--accent-chrome)]/10',
+        ghostGold: 'text-(--accent-chrome) bg-transparent hover:bg-(--accent-chrome)/10',
       },
       size: {
         default: 'min-h-12 px-6 py-3 md:min-h-11 lg:h-10',

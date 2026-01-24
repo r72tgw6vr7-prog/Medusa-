@@ -19,29 +19,27 @@ export const PageHeading: React.FC<PageHeadingProps> = ({
   subtitle,
   level = 'hero',
 }) => {
-  // Hero (h1): text-4xl md:text-6xl lg:text-7xl (36-72px)
-  // Secondary (h3): text-2xl md:text-3xl lg:text-4xl (24-36px)
-  const headingClasses = level === 'hero'
-    ? 'font-headline text-(length:--heading-hero-fluid) font-bold tracking-tight leading-tight text-[--brand-accent]'
-    : 'font-headline text-(length:--heading-section-secondary-fluid) font-semibold tracking-normal leading-snug text-[--brand-accent]';
+  // Hero (h1): use H1 token, Secondary (h3): use H3 token
+  const headingClasses =
+    level === 'hero'
+      ? 'font-headline text-(length:--text-h1) font-bold tracking-tight leading-tight text-(--color-text-primary)'
+      : 'font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--color-text-primary)';
 
   const Tag = level === 'hero' ? 'h1' : 'h3';
 
   return (
-    <div className="text-center space-y-4">
+    <div className='text-center space-y-4'>
       {eyebrow && (
-        <p
-          className="text-sm uppercase tracking-widest font-medium text-brand-chrome"
-          style={{ marginBottom: 'var(--space-1-5)' }}
-        >
+        <p className='text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome mb-(--space-2)'>
           {eyebrow}
         </p>
       )}
-      <Tag className={headingClasses}>
-        {title}
-      </Tag>
+      <Tag className={headingClasses}>{title}</Tag>
       {subtitle && (
-        <p className="text-lg text-brand-chrome max-w-2xl mx-auto font-body leading-relaxed mt-4">
+        <p
+          className='text-(length:--text-lg) text-brand-chrome max-w-2xl mx-auto font-body font-semibold leading-(--line-height-normal) mt-4'
+          style={{ textShadow: '0 0 12px var(--chrome-glow-soft)' }}
+        >
           {subtitle}
         </p>
       )}

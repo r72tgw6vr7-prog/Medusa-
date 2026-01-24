@@ -28,7 +28,12 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
     
     // Navigate to page with map (likely contact page)
     await page.goto(TEST_DATA.routes.contact);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(500);
+    await page
+      .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
+      .first()
+      .waitFor({ state: 'attached', timeout: 5000 });
     
     await helpers.takeScreenshot('c6-01-contact-page-with-api-key', true);
     
@@ -71,10 +76,8 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
     });
     
     await page.goto(TEST_DATA.routes.contact);
-    await page.waitForLoadState('networkidle');
-    
-    // Wait a bit for any fallback logic to trigger
-    await page.waitForTimeout(1000);
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(500);
     
     await helpers.takeScreenshot('c6-03-contact-page-no-api-key', true);
     
@@ -144,8 +147,12 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
     });
     
     await page.goto(TEST_DATA.routes.contact);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1000);
+    await page
+      .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
+      .first()
+      .waitFor({ state: 'attached', timeout: 5000 });
     
     // Find external Google Maps links
     const externalLinks = page.locator('a[href*="maps.google.com"], a[href*="google.com/maps"]');
@@ -194,6 +201,10 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
       if (scenario.key === undefined) {
         // Don't set the env var at all
         await page.addInitScript(() => {
+          // Clear any persisted Playwright env mocks
+          if ((window as any).__MOCKED_ENV__) {
+            delete (window as any).__MOCKED_ENV__;
+          }
           // Clear any existing env var
           if ((window as any).import?.meta?.env) {
             delete (window as any).import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -206,12 +217,17 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
       }
       
       await page.goto(TEST_DATA.routes.contact);
-      await page.waitForLoadState('networkidle');
+      await page.waitForLoadState('domcontentloaded');
       await page.waitForTimeout(500);
+      await page
+        .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
+        .first()
+        .waitFor({ state: 'attached', timeout: 5000 });
       
       // Check if environment variable is accessible
       const envVarValue = await page.evaluate(() => {
-        return (window as any).import?.meta?.env?.VITE_GOOGLE_MAPS_API_KEY;
+        return (window as any).__MOCKED_ENV__?.VITE_GOOGLE_MAPS_API_KEY ??
+          (window as any).import?.meta?.env?.VITE_GOOGLE_MAPS_API_KEY;
       });
       
       if (scenario.key === undefined) {
@@ -240,7 +256,12 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
       
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
       await page.goto(TEST_DATA.routes.contact);
-      await page.waitForLoadState('networkidle');
+      await page.waitForLoadState('domcontentloaded');
+      await page.waitForTimeout(500);
+      await page
+        .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
+        .first()
+        .waitFor({ state: 'attached', timeout: 5000 });
       
       // Look for map container
       const mapContainer = page.locator('.google-map, .map, [class*="map"], [data-testid*="map"]').first();

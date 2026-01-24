@@ -351,23 +351,19 @@ export class ZohoCRMService {
  * Initialize ZOHO CRM service
  */
 export const initializeZohoCRM = (): ZohoCRMService | null => {
-  const env = import.meta.env;
+  const env = import.meta.env as Record<string, unknown>;
 
-  const config: ZohoConfig = {
-    clientId: env.VITE_ZOHO_CLIENT_ID || '',
-    clientSecret: env.VITE_ZOHO_CLIENT_SECRET || '',
-    refreshToken: env.VITE_ZOHO_REFRESH_TOKEN || '',
-    domain: (env.VITE_ZOHO_DOMAIN as ZohoConfig['domain']) || 'eu',
-    sandbox: env.VITE_ZOHO_SANDBOX === 'true',
-  };
-
-  // Validate configuration
-  if (!config.clientId || !config.clientSecret || !config.refreshToken) {
-    console.warn('ZOHO CRM configuration incomplete');
+  const enabled = env.VITE_ZOHO_ENABLED === 'true';
+  if (!enabled) {
     return null;
   }
 
-  return new ZohoCRMService(config);
+  // Frontend-first repo: Zoho credentials must never be handled in the browser.
+  // This integration requires a backend to proxy Zoho API calls.
+  console.warn('ZOHO CRM is disabled in frontend-only builds (requires backend proxy)');
+  return null;
+
+  // Unreachable: kept for backwards compatibility if backend proxy is added later.
 };
 
 /**

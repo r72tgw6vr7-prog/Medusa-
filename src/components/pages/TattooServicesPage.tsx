@@ -1,42 +1,18 @@
-import React, { useMemo, useState, useCallback, useRef, lazy, Suspense } from 'react';
+import React, { useMemo, useState, useCallback, useRef, useEffect } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Sparkles, Zap, Shield, Euro, ChevronRight } from 'lucide-react';
-import { useApp } from '../../../core/state/AppContext';
-import { SectionHeading } from '../SectionHeading';
-import { Card } from '../ui/Card';
-import { MainNavigation } from '../molecules/MainNavigation';
-import { Footer } from '../pages';
+import { useApp } from '@/core/state/AppContext';
+import { SectionHeading } from '@/components/SectionHeading';
+import { Card } from '@/components/ui/Card';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
-} from '../../styles/animations';
-
-// Dynamic imports for Swiper to reduce initial bundle
-const SwiperComponent = lazy(() => 
-  Promise.all([
-    import('swiper/react'),
-    import('swiper/modules'),
-    import('swiper/css'),
-    import('swiper/css/pagination')
-  ]).then(([swiperReact, swiperModules]) => ({
-    default: ({ children, ...props }: any) => {
-      const { Swiper, SwiperSlide } = swiperReact;
-      const { Pagination } = swiperModules;
-      return (
-        <Swiper modules={[Pagination]} {...props}>
-          {children}
-        </Swiper>
-      );
-    }
-  }))
-);
-
-const SwiperSlideComponent = lazy(() => 
-  import('swiper/react').then(({ SwiperSlide }) => ({ default: SwiperSlide }))
-);
+} from '@/styles/animations';
 
 const categories = [
   {
@@ -88,7 +64,8 @@ const serviceDetails = {
     {
       id: 'packet-l',
       title: 'Packet L',
-      description: 'Größere Projekte mit detaillierter Ausarbeitung. Includes aftercare guide & products.',
+      description:
+        'Größere Projekte mit detaillierter Ausarbeitung. Includes aftercare guide & products.',
       priceFrom: 600,
       priceUnit: '€+',
       duration: '4-7 hours',
@@ -114,7 +91,11 @@ const serviceDetails = {
       priceFrom: 20,
       priceUnit: '€+',
       duration: 'Up to 2 hours',
-      features: ['Einfache Motive ab €20', 'Preis nach Komplexität', 'Kleine/reguläre Designs bis 2 Std.'],
+      features: [
+        'Einfache Motive ab €20',
+        'Preis nach Komplexität',
+        'Kleine/reguläre Designs bis 2 Std.',
+      ],
       cta: 'Beratung anfragen',
     },
     {
@@ -165,20 +146,50 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
   return `ab ${priceFrom} €${suffix}`;
 };
 
-export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
-  className = '',
-}) => {
+export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ className = '' }) => {
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const { openBooking } = useApp();
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   // Intersection Observer to trigger animations when in view
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(containerRef, { amount: 0.1, once: true });
+  const observerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const currentServices = useMemo(() => serviceDetails[activeCategory], [activeCategory]);
+
+  // Artist page reveal pattern: IntersectionObserver with staggered delays
+  useEffect(() => {
+    const observers = observerRefs.current.map((ref, index) => {
+      if (!ref) return null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                setRevealedIndices((prev) => new Set(prev).add(index));
+              }, index * 200);
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+          rootMargin: '-50px',
+        },
+      );
+
+      observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, [currentServices.length]);
   const activeCategoryMeta = useMemo(
     () => categories.find((category) => category.id === activeCategory),
     [activeCategory],
@@ -203,153 +214,189 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
     };
   }, [openBooking]);
 
-  const renderServiceCard = (service: (typeof currentServices)[number]) => {
+  const renderServiceCard = (service: (typeof currentServices)[number], index: number) => {
     const isSelected = selectedPacket === service.id;
+    const isRevealed = revealedIndices.has(index);
     return (
-      <motion.div
+      <Card
         key={service.id}
-        variants={fadeInUpVariants}
-        className="
-          paket-card flex flex-col text-center 
-          cursor-pointer
-          h-full
-        "
-        onClick={() => setSelectedPacket(isSelected ? null : service.id)}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        variant={isSelected ? 'featured' : 'default'}
+        className='flex flex-col h-full'
+        asChild
       >
-        {/* Top labels */}
-        <div className="flex justify-between items-center mb-6">
-          <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
-            Paket
-          </span>
-          <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
-            {service.duration ?? 'Flexibel'}
-          </span>
-        </div>
-
-        {/* Heading */}
-        <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-[36px] text-white mb-6">
-          {service.title}
-        </h3>
-
-        {/* Description */}
-        <p className="font-normal text-sm leading-[28px] text-white/70 mb-8 flex-1">
-          {service.description}
-        </p>
-
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-8">
-          <Euro size={18} className="text-[color:var(--text-secondary)]" />
-          <span className="font-semibold text-xl leading-7 text-[color:var(--text-secondary)]">
-            {formatPrice(service.priceFrom, service.priceUnit)}
-          </span>
-        </div>
-
-        {/* List */}
-        <ul className="space-y-4 mb-8">
-          {service.features.map((feature, featureIndex) => (
-            <li key={featureIndex} className="flex items-start gap-3">
-              <ChevronRight
-                size={16}
-                className="text-[color:var(--text-secondary)] flex-shrink-0 mt-1"
-              />
-              <span className="font-normal text-base leading-[23px] text-white/80">
-                {feature}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        {/* Button */}
-        <button
-          onClick={() => handleServiceBooking(service.id)}
-          className="
-            w-full h-[50px]
-            border border-[color:var(--text-secondary)]
-            rounded-[24px]
-            font-semibold text-sm leading-5 text-white
-            hover:bg-[color:var(--text-secondary)] hover:text-black
-            transition-all duration-200
-          "
-          aria-label={`${service.cta} für ${service.title}`}
+        <motion.div
+          ref={(el) => (observerRefs.current[index] = el)}
+          variants={fadeInUpVariants}
+          className={`
+            paket-card pricing-card pricing-card--locked chrome-pulse flex flex-col text-center 
+            cursor-pointer
+            h-full
+            ${isRevealed ? 'revealed' : ''}
+          `}
+          onClick={() => setSelectedPacket(isSelected ? null : service.id)}
+          whileHover={isDesktop ? { scale: 1.02 } : undefined}
+          whileTap={{ scale: 0.98 }}
+          data-locked='pricing-card'
+          data-index={index}
+          data-selected={isSelected ? 'true' : 'false'}
+          style={
+            {
+              '--stagger': `${index * 200}ms`,
+              ...(isDesktop
+                ? {
+                    flex: '0 0 calc((100% - (3 * var(--space-2))) / 4)',
+                    maxWidth: 'calc((100% - (3 * var(--space-2))) / 4)',
+                  }
+                : null),
+            } as React.CSSProperties
+          }
         >
-          {service.cta}
-        </button>
-      </motion.div>
+          {/* Pricing card lock: do not edit structure/colors/typography */}
+          <span className={`pricing-card-index ${isRevealed ? 'revealed' : ''}`} aria-hidden='true'>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div className='pricing-card-overlay' aria-hidden='true' />
+          <div className='pricing-card-curtain' aria-hidden='true' />
+          <div className='pricing-card-content'>
+            {/* Title */}
+            <h3 className='font-semibold text-3xl leading-10 text-white mb-4'>{service.title}</h3>
+
+            {/* Description */}
+            <p className='font-normal text-sm leading-7 text-white/70 mb-8 flex-1'>
+              {service.description}
+            </p>
+
+            {/* Price */}
+            <div className='flex items-center gap-2 mb-8'>
+              <Euro size={18} className='text-[color:var(--text-secondary)]' />
+              <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
+                {formatPrice(service.priceFrom, service.priceUnit)}
+              </span>
+            </div>
+
+            {/* List */}
+            <ul className='space-y-4 mb-8'>
+              {service.features.map((feature, featureIndex) => (
+                <li key={featureIndex} className='flex items-start gap-4'>
+                  <ChevronRight
+                    size={16}
+                    className='text-[color:var(--text-secondary)] flex-shrink-0 mt-2'
+                  />
+                  <span className='font-normal text-base leading-6 text-white/80'>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Button */}
+            <button
+              onClick={() => handleServiceBooking(service.id)}
+              className='
+                w-full h-12
+                border border-[color:var(--text-secondary)]
+                rounded-3xl
+                font-semibold text-sm leading-5 text-white
+                hover:bg-[color:var(--text-secondary)] hover:text-black
+                transition-all duration-200
+              '
+              aria-label={`${service.cta} für ${service.title}`}
+            >
+              {service.cta}
+            </button>
+          </div>
+        </motion.div>
+      </Card>
     );
   };
 
   return (
-    <main className={`tattoo-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark ${className}`}>
+    <main
+      className={`tattoo-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32 ${className}`}
+    >
       <MainNavigation />
-      <Section variant="default" spacing="normal" bg="dark">
-        <Container size="default">
+      <Section variant='default' spacing='normal' bg='dark'>
+        <Container size='default'>
           <div className='flex flex-col gap-16'>
             <SectionHeading
-              eyebrow="Medusa München"
-              title="Tattoo"
-              subtitle="Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen."
+              eyebrow='Medusa München'
+              title='Tattoo'
+              subtitle='Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen.'
             />
 
             <div
-              className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center justify-items-center max-w-4xl mx-auto'
+              className='pricing-category-container grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 justify-center justify-items-center max-w-4xl mx-auto'
               aria-label='Service-Kategorien'
             >
-            {categories.map((category) => {
-              const IconComponent = category.icon;
-              const isActive = activeCategory === category.id;
+              {categories.map((category) => {
+                const IconComponent = category.icon;
+                const isActive = activeCategory === category.id;
 
-              const buttonContent = (
-                <>
-                  <div className='flex items-center justify-between mb-8'>
-                    <div
-                      className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-[var(--accent-chrome)]'
-                    >
-                      <IconComponent size={20} className='text-luxury-text-primary' />
+                const buttonContent = (
+                  <>
+                    {/* Mobile layout: icon, title, price stacked */}
+                    <div className='pricing-category-card-content md:hidden flex flex-col h-full items-center justify-center gap-2 py-2'>
+                      <div className='pricing-category-icon flex flex-col h-full items-center justify-center w-8 h-8 rounded-full bg-(--accent-chrome)'>
+                        <IconComponent size={16} className='text-luxury-text-primary' />
+                      </div>
+                      <h3 className='pricing-category-tier font-headline text-xs text-white text-center leading-tight px-2'>
+                        {category.title}
+                      </h3>
+                      <span className='pricing-category-price text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                        ab {category.priceFrom}
+                      </span>
                     </div>
-                    <span className='text-base lg:text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                      ab {category.priceFrom}
-                    </span>
-                  </div>
-                  <div className='space-y-8 flex-1'>
-                    <h3 className='font-headline text-2xl text-brand-chrome'>{category.title}</h3>
-                    <p className="text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed font-body">
-                      {category.subtitle}
-                    </p>
-                  </div>
-                </>
-              );
 
-              const buttonClassName =
-                'flex flex-col h-full';
+                    {/* Desktop layout: original design */}
+                    <div className='hidden md:flex md:flex-col md:h-full'>
+                      <div className='flex items-center justify-between mb-8'>
+                        <div className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-(--accent-chrome)'>
+                          <IconComponent size={20} className='text-luxury-text-primary' />
+                        </div>
+                        <span className='text-base lg:text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                          ab {category.priceFrom}
+                        </span>
+                      </div>
+                      <div className='space-y-8 flex-1'>
+                        <h3 className='font-headline text-2xl text-brand-chrome'>
+                          {category.title}
+                        </h3>
+                        <p className='text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed font-body'>
+                          {category.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
 
-              return (
-                <Card 
-                  key={category.id}
-                  variant={isActive ? 'featured' : 'default'}
-                  size="default"
-                  className="flex flex-col h-full"
-                  asChild
-                >
-                  <button
-                    type="button"
-                    aria-pressed={isActive}
-                    className={buttonClassName}
-                    onClick={() => handleCategoryChange(category.id as CategoryId)}
-                    aria-label={`Select ${category.title} category`}
+                const buttonClassName = 'flex flex-col h-full min-h-25 md:min-h-auto';
+
+                return (
+                  <Card
+                    key={category.id}
+                    variant={isActive ? 'featured' : 'default'}
+                    size='default'
+                    className='pricing-category-card flex flex-col h-full'
+                    asChild
                   >
-                    {buttonContent}
-                  </button>
-                </Card>
-              );
-            })}
-          </div>
+                    <button
+                      type='button'
+                      aria-pressed={isActive ? 'true' : 'false'}
+                      className={buttonClassName}
+                      onClick={() => handleCategoryChange(category.id as CategoryId)}
+                      aria-label={`Select ${category.title} category`}
+                    >
+                      {buttonContent}
+                    </button>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </Container>
 
+        <div className='chrome-divider services-section-divider' aria-hidden='true' />
+
         {/* Bottom cards section - wider container */}
-        <Container size="wide" className="mt-20 overflow-x-clip">
+        <Container size='wide'>
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeCategory}
@@ -362,50 +409,34 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({
               animate={inView ? 'animate' : 'initial'}
               exit='exit'
             >
-              <SectionHeading
-                eyebrow={activeCategoryMeta?.title}
-                title="Wählen Sie das passende Paket"
-                subtitle={activeCategoryMeta?.subtitle}
-              />
+              <div className='hidden md:block'>
+                <SectionHeading
+                  eyebrow={activeCategoryMeta?.title}
+                  title='Wählen Sie das passende Paket'
+                  subtitle={activeCategoryMeta?.subtitle}
+                />
+              </div>
 
               {isDesktop ? (
-                <div className={`paket-cards-wrapper lg:grid lg:grid-cols-4 lg:gap-4 lg:justify-center lg:justify-items-center ${
-                  (currentServices.length as number) >= 4 ? 'lg:grid-cols-4' :
-                  (currentServices.length as number) === 3 ? 'lg:grid-cols-3' :
-                  (currentServices.length as number) === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-1'
-                }`}>
-                  {currentServices.map((service) => (
-                    <React.Fragment key={service.id}>
-                      {renderServiceCard(service)}
-                    </React.Fragment>
-                  ))}
+                <div className='w-full flex justify-center'>
+                  <div className='paket-cards-wrapper flex flex-nowrap gap-4 justify-center items-stretch overflow-x-auto overflow-y-visible scrollbar-hide w-full py-8'>
+                    {currentServices.map((service, index) => renderServiceCard(service, index))}
+                  </div>
                 </div>
               ) : (
-                <div className='w-full overflow-x-clip'>
-                  <Suspense
-                    fallback={
-                      <div className="min-h-100 flex items-center justify-center text-luxury-text-inverse">
-                        Loading...
-                      </div>
-                    }
-                  >
-                    <SwiperComponent
-                      slidesPerView={1}
-                      spaceBetween={16}
-                      pagination={{
-                        clickable: true,
-                        bulletClass: 'swiper-pagination-bullet !bg-white/30',
-                        bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
-                      }}
-                      className='paket-cards-swiper'
-                    >
-                      {currentServices.map((service) => (
-                        <SwiperSlideComponent key={service.id} className='h-auto! w-full'>
-                          {renderServiceCard(service)}
-                        </SwiperSlideComponent>
+                <div className='w-full'>
+                  <div className='mobile-paket-rail max-lg:overflow-x-auto max-lg:overflow-y-visible max-lg:scrollbar-hide max-lg:snap-x max-lg:snap-mandatory max-lg:pb-6 max-lg:-mb-6'>
+                    <div className='max-lg:flex max-lg:items-start max-lg:gap-4 max-lg:px-6'>
+                      {currentServices.map((service, index) => (
+                        <div
+                          key={service.id}
+                          className='max-lg:flex-none max-lg:w-full max-lg:snap-center'
+                        >
+                          {renderServiceCard(service, index)}
+                        </div>
                       ))}
-                    </SwiperComponent>
-                  </Suspense>
+                    </div>
+                  </div>
                 </div>
               )}
             </motion.div>

@@ -1,5 +1,14 @@
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useTransition, ReactNode } from 'react';
-import { getI18nInstance, getLocale, setLocale, splitTranslationKey, NAMESPACES } from '@/i18n';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+  useTransition,
+  ReactNode,
+} from 'react';
+import { getI18nInstance, setLocale, splitTranslationKey, NAMESPACES } from '@/i18n';
 
 // Define supported languages
 export type Language = 'de' | 'en';
@@ -26,30 +35,36 @@ interface LanguageProviderProps {
  */
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const i18n = getI18nInstance();
-  const [language, setLanguageState] = useState<Language>(() => getLocale());
+  const [language, setLanguageState] = useState<Language>('de');
   const [isPending, startTransition] = useTransition();
 
-  const setLanguage = useCallback((lang: Language) => {
-    if (lang === language) return;
-    
-    // Preload all namespaces for the new language before switching
-    const preloadPromises = NAMESPACES.map(ns => 
-      i18n.loadNamespaces([ns]).catch(() => {})
-    );
-    
-    // Use startTransition to mark the language change as non-urgent
-    // This prevents the UI from flashing during the async operation
-    Promise.all(preloadPromises).then(() => {
-      startTransition(() => {
-        void setLocale(lang);
+  useEffect(() => {
+    void setLocale('de');
+  }, []);
+
+  const setLanguage = useCallback(
+    (lang: Language) => {
+      if (lang !== 'de') return;
+      if (lang === language) return;
+
+      // Preload all namespaces for the new language before switching
+      const preloadPromises = NAMESPACES.map((ns) => i18n.loadNamespaces([ns]).catch(() => {}));
+
+      // Use startTransition to mark the language change as non-urgent
+      // This prevents the UI from flashing during the async operation
+      Promise.all(preloadPromises).then(() => {
+        startTransition(() => {
+          void setLocale(lang);
+        });
       });
-    });
-  }, [language, i18n]);
+    },
+    [language, i18n],
+  );
 
   useEffect(() => {
     const handler = (_lng: string) => {
       setLanguageState((prev) => {
-        const next = getLocale();
+        const next = 'de' as const;
         return prev === next ? prev : next;
       });
     };
@@ -80,12 +95,15 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [i18n, language]);
 
   // Context value - memoize to prevent unnecessary re-renders
-  const contextValue: LanguageContextType = useMemo(() => ({
-    language,
-    setLanguage,
-    t,
-    isChangingLanguage: isPending,
-  }), [language, setLanguage, t, isPending]);
+  const contextValue: LanguageContextType = useMemo(
+    () => ({
+      language,
+      setLanguage,
+      t,
+      isChangingLanguage: isPending,
+    }),
+    [language, setLanguage, t, isPending],
+  );
 
   return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 };

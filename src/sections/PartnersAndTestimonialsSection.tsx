@@ -36,19 +36,19 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
   subtitlePartners = 'Vertrauensvolle Partnerschaften mit führenden Marken der Branche',
   titleTestimonials = 'Was Kunden sagen',
 }) => {
-  // REFINEMENT #4: Duplicate array × 3 for seamless loop
-  const scrollItems = [...partnerLogos, ...partnerLogos, ...partnerLogos];
+  // REFINEMENT #5: Duplicate array × 4 for seamless loop on all screen sizes
+  const scrollItems = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
 
   return (
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
       <Container className='py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
         <div className='text-center mb-4'>
-          <h3 className="font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-brand-accent">
+          <h3 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-brand-accent'>
             {titlePartners}
           </h3>
         </div>
-        <p className='text-center text-white/70 text-sm mb-16 font-body'>
+        <p className='text-center text-white/70 text-(length:--text-sm) mb-16 font-body'>
           {subtitlePartners}
         </p>
 

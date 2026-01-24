@@ -7,7 +7,7 @@ interface TestResult {
   service: string;
   status: 'success' | 'error' | 'warning';
   message: string;
-  details?: any;
+  details?: unknown;
 }
 
 interface TestSuite {
@@ -59,37 +59,19 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
   }
 
   // Test email service configuration
-  const emailServices = [
-    { name: 'SendGrid', key: 'VITE_SENDGRID_API_KEY' },
-    { name: 'Mailgun', key: 'VITE_MAILGUN_API_KEY' },
-    { name: 'Amazon SES', key: 'VITE_AWS_SES_ACCESS_KEY' },
-    { name: 'SMTP', key: 'VITE_SMTP_HOST' },
-  ];
-
-  const configuredEmailServices = emailServices.filter((service) => {
-    const value = import.meta.env[service.key];
-    return value && value !== 'your_key_here';
-  });
-
-  if (configuredEmailServices.length === 0) {
+  const selectedProvider = import.meta.env.VITE_EMAIL_PROVIDER;
+  if (!selectedProvider || selectedProvider === 'your_key_here') {
     results.push({
       service: 'Email Service',
       status: 'error',
-      message: 'No email service configured',
+      message: 'No email provider configured (VITE_EMAIL_PROVIDER missing)',
     });
     suite.failed++;
-  } else if (configuredEmailServices.length > 1) {
-    results.push({
-      service: 'Email Service',
-      status: 'warning',
-      message: `Multiple email services configured: ${configuredEmailServices.map((s) => s.name).join(', ')}`,
-    });
-    suite.warnings++;
   } else {
     results.push({
       service: 'Email Service',
       status: 'success',
-      message: `${configuredEmailServices[0].name} configured`,
+      message: `${selectedProvider} selected`,
     });
     suite.passed++;
   }
@@ -275,7 +257,7 @@ export async function testZohoCRM(): Promise<TestSuite> {
     }
 
     // Test contact creation (dry run)
-    const testContact = {
+    const _testContact = {
       firstName: 'Test',
       lastName: 'Contact',
       email: 'test@example.com',
@@ -375,7 +357,9 @@ export async function runAllTests(): Promise<{
     readiness: 'ready' | 'needs_setup' | 'critical_issues';
   };
 }> {
-  console.log('🧪 Running integration tests...');
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn('🧪 Running integration tests...');
+  }
 
   const suites = await Promise.all([
     testEnvironmentConfig(),
@@ -402,10 +386,12 @@ export async function runAllTests(): Promise<{
     summary.readiness = 'ready';
   }
 
-  console.log(`✅ ${summary.passed} passed`);
-  console.log(`⚠️ ${summary.warnings} warnings`);
-  console.log(`❌ ${summary.failed} failed`);
-  console.log(`🎯 Readiness: ${summary.readiness}`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(`✅ ${summary.passed} passed`);
+    console.warn(`⚠️ ${summary.warnings} warnings`);
+    console.warn(`❌ ${summary.failed} failed`);
+    console.warn(`🎯 Readiness: ${summary.readiness}`);
+  }
 
   return { suites, summary };
 }
@@ -415,7 +401,7 @@ export async function runAllTests(): Promise<{
  */
 export async function testFormSubmission(testData: {
   type: 'booking' | 'contact';
-  data: any;
+  data: unknown;
 }): Promise<TestResult> {
   try {
     const endpoint = testData.type === 'booking' ? '/api/booking' : '/api/contact';

@@ -86,12 +86,7 @@ class PerformanceMonitor {
   // Suggest recovery actions
   private suggestRecovery() {
     if (process.env.NODE_ENV === 'development') {
-      console.group('Recovery suggestions:');
-      console.log('1. Reload the page');
-      console.log('2. Check your internet connection');
-      console.log('3. Clear browser cache');
-      console.log('4. Try a different browser');
-      console.groupEnd();
+      return;
     }
   }
 

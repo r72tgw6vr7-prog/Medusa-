@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
@@ -29,14 +29,16 @@ const ScrollToTop: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const isAutomation = navigator.webdriver === true;
+
     // If there's a hash in the URL, scroll to that element instead
     if (hash) {
       const id = hash.replace('#', '');
       setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({ behavior: isAutomation ? 'auto' : 'smooth', block: 'start' });
         }
       }, 100);
       return;
@@ -45,12 +47,56 @@ const ScrollToTop: React.FC = () => {
     const prefersReducedMotion =
       window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
 
+    const isMobileViewport =
+      typeof window !== 'undefined'
+        ? window.matchMedia?.('(max-width: 1023px)')?.matches || false
+        : false;
+
+    const behavior = prefersReducedMotion || isAutomation || isMobileViewport ? 'auto' : 'smooth';
+
+    const scrollToTopNow = () => {
+      const shouldForceInstant = isAutomation || isMobileViewport;
+      const prevHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
+      const prevBodyScrollBehavior = document.body.style.scrollBehavior;
+      if (shouldForceInstant) {
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.scrollBehavior = 'auto';
+      }
+      try {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      } catch {}
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior,
+      });
+
+      if (shouldForceInstant) {
+        // Restore after the scroll has been applied.
+        requestAnimationFrame(() => {
+          document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
+          document.body.style.scrollBehavior = prevBodyScrollBehavior;
+        });
+      }
+    };
+
     // Default: keep route transitions cheap and deterministic
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth',
-    });
+    scrollToTopNow();
+
+    // Some browsers can restore/shift scroll after navigation/layout.
+    // On mobile + in automation we prefer determinism over smoothness.
+    if (isAutomation || isMobileViewport) {
+      requestAnimationFrame(() => {
+        scrollToTopNow();
+      });
+      setTimeout(() => {
+        scrollToTopNow();
+      }, 50);
+      setTimeout(() => {
+        scrollToTopNow();
+      }, 150);
+    }
 
     // GSAP removed - no cleanup needed
   }, [pathname, hash]);

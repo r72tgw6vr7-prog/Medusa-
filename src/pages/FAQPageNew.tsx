@@ -5,10 +5,10 @@
 // Features: Glassmorphic cards, gold accents, Playfair/Inter fonts, responsive grid
 
 import React, { useState } from 'react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { SectionHeading } from '../components/SectionHeading';
-import { Card } from '../components/ui/Card';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { SectionHeading } from '@/components/SectionHeading';
+import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 
@@ -97,12 +97,12 @@ export function FAQPageNew() {
   const [openSection, setOpenSection] = useState<number | null>(null);
 
   return (
-    <div className='min-h-screen text-luxury-text-inverse flex flex-col relative z-10 bg-luxury-bg-dark'>
+    <div className='min-h-screen text-luxury-text-inverse flex flex-col relative z-10 bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
 
       <main className='flex-1'>
-        <Section variant="default" spacing="normal">
-          <Container size="default">
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
             <div className='space-y-16'>
               {/* Page Header - Matches Services page exactly */}
               <SectionHeading
@@ -115,29 +115,35 @@ export function FAQPageNew() {
                 {FAQ_SECTIONS.map((section, idx) => {
                   const isOpen = openSection === idx;
                   return (
-                    <Card
-                      key={section.title}
-                      variant="default"
-                      size="default"
-                      asChild
-                    >
+                    <Card key={section.title} variant='default' size='default' asChild>
                       <div>
-                        <button
-                          className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
-                          onClick={() => setOpenSection(isOpen ? null : idx)}
-                          aria-expanded={isOpen}
-                        >
-                          <span className='font-headline text-2xl md:text-3xl text-[var(--accent-chrome)]'>
-                            {section.title}
-                          </span>
-                          <span
-                            className={`ml-4 text-[var(--accent-chrome)] transition-transform duration-300 ${
-                              isOpen ? 'rotate-90' : ''
-                            }`}
+                        {isOpen ? (
+                          <button
+                            className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-(--accent-chrome) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
+                            onClick={() => setOpenSection(null)}
+                            aria-expanded='true'
                           >
-                            ▶
-                          </span>
-                        </button>
+                            <span className='font-headline text-(length:--text-h3) text-(--color-text-primary)'>
+                              {section.title}
+                            </span>
+                            <span className='ml-4 text-(--accent-chrome) transition-transform duration-300 rotate-90'>
+                              ▶
+                            </span>
+                          </button>
+                        ) : (
+                          <button
+                            className='w-full flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-(--accent-chrome) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
+                            onClick={() => setOpenSection(idx)}
+                            aria-expanded='false'
+                          >
+                            <span className='font-headline text-(length:--text-h3) text-(--color-text-primary)'>
+                              {section.title}
+                            </span>
+                            <span className='ml-4 text-(--accent-chrome) transition-transform duration-300'>
+                              ▶
+                            </span>
+                          </button>
+                        )}
                         <div
                           className={`overflow-hidden transition-all duration-300 ${
                             isOpen ? 'max-h-screen' : 'max-h-0'
@@ -147,10 +153,10 @@ export function FAQPageNew() {
                           <div className='pt-8 space-y-8 border-t border-brand-chrome/20'>
                             {section.questions.map((q) => (
                               <div key={q.q} className='space-y-8'>
-                                <h3 className='font-headline text-xl md:text-2xl text-[var(--accent-chrome)]'>
+                                <h3 className='font-headline text-(length:--text-h4) text-(--color-text-primary)'>
                                   {q.q}
                                 </h3>
-                                <p className='font-body text-base md:text-lg text-luxury-text-inverse/85 leading-relaxed'>
+                                <p className='font-body text-(length:--text-body) text-luxury-text-inverse/85 leading-(--line-height-normal)'>
                                   {q.a}
                                 </p>
                               </div>

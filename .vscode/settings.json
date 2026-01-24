@@ -1,4 +1,29 @@
 {
+    "files.associations": {
+        "PROJECT_RULES.md": "markdown"
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true
+    },
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.formatOnSave": true,
+    "tailwindCSS.experimental.classRegex": [
+        [
+            "className=\"([^\"]*)\""
+        ],
+        [
+            "className={cn\\(([^)]*)\\)}"
+        ]
+    ],
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "css.validate": false,
     "python.experiments.optOutFrom": [
         
     ],
@@ -15,7 +40,7 @@
             "approve": true,
             "matchCommandLine": true
         },
-        "/^cd \"/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa\" && timeout 10 npm run dev 2>&1 \\|\\| true$/": {
+        "/^cd \"/Volumes/Untitled 2/Work/CascadeProjects/Websites/archive /medusa\" && timeout 10 pnpm run dev 2>&1 \\|\\| true$/": {
             "approve": true,
             "matchCommandLine": true
         },

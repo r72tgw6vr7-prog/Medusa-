@@ -1,8 +1,16 @@
-import React, { useMemo, useState, useCallback, useRef, lazy, Suspense } from 'react';
+import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import { Gem, Sparkles, Wrench, Euro, ChevronRight, ChevronDown, MessageCircle } from 'lucide-react';
+import {
+  Gem,
+  Sparkles,
+  Wrench,
+  Euro,
+  ChevronRight,
+  ChevronDown,
+  MessageCircle,
+} from 'lucide-react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useApp } from '../../../core/state/AppContext';
+import { useApp } from '@/core/state/AppContext';
 import { SectionHeading } from '../SectionHeading';
 import { Card } from '../ui/Card';
 import { MainNavigation } from '../molecules/MainNavigation';
@@ -11,30 +19,6 @@ import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
 } from '../../styles/animations';
-
-// Dynamic imports for Swiper to keep bundle small
-const SwiperComponent = lazy(() =>
-  Promise.all([
-    import('swiper/react'),
-    import('swiper/modules'),
-    import('swiper/css'),
-    import('swiper/css/pagination'),
-  ]).then(([swiperReact, swiperModules]) => {
-    const { Swiper } = swiperReact;
-    const { Pagination } = swiperModules;
-    return {
-      default: ({ children, ...props }: any) => (
-        <Swiper modules={[Pagination]} {...props}>
-          {children}
-        </Swiper>
-      ),
-    };
-  }),
-);
-
-const SwiperSlideComponent = lazy(() =>
-  import('swiper/react').then(({ SwiperSlide }) => ({ default: SwiperSlide })),
-);
 
 // ============================================
 // PREISLISTE DATA - STECHEN (Piercing Prices)
@@ -262,9 +246,7 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
   return `ab ${priceFrom} €${suffix}`;
 };
 
-export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
-  className = '',
-}) => {
+export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ className = '' }) => {
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
@@ -288,6 +270,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
       setIsAnimating(true);
       setActiveCategory(categoryId);
       setSelectedPacket(null);
+      setExpandedCard(null);
       window.setTimeout(() => setIsAnimating(false), 400);
     },
     [activeCategory, isAnimating],
@@ -308,175 +291,195 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
     const hasDetails = !!(priceList && priceList.items && priceList.items.length > 0);
     const isExpanded = expandedCard === service.id && hasDetails;
     return (
-      <motion.div
+      <Card
         key={service.id}
-        variants={fadeInUpVariants}
-        className="paket-card flex flex-col h-full min-w-[280px] max-w-[303px] cursor-pointer text-center"
-        whileHover={!isExpanded ? { scale: 1.02 } : undefined}
-        whileTap={!isExpanded ? { scale: 0.98 } : undefined}
+        variant={isSelected ? 'featured' : 'default'}
+        size='default'
+        className='bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto'
+        asChild
       >
-        <div className='flex flex-col gap-8 h-full'>
-          <div className='flex items-center justify-between'>
-            <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
-              {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
-            </span>
-            <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
-              {service.duration ?? 'Flexibel'}
-            </span>
-          </div>
+        <motion.div
+          variants={fadeInUpVariants}
+          className='paket-card flex flex-col h-auto cursor-pointer text-center'
+          onClick={() => {
+            setSelectedPacket(isSelected ? null : service.id);
+            if (!isSelected) setExpandedCard(null);
+          }}
+          whileHover={isDesktop && !isExpanded ? { scale: 1.02 } : undefined}
+          whileTap={isDesktop && !isExpanded ? { scale: 0.98 } : undefined}
+        >
+          <div className='flex flex-col gap-8'>
+            <div className='flex items-center justify-between'>
+              <span className='font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]'>
+                {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
+              </span>
+              <span className='font-normal text-sm tracking-[1.4px] uppercase text-white/60'>
+                {service.duration ?? 'Flexibel'}
+              </span>
+            </div>
 
-          <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white">
-            {service.title}
-          </h3>
+            <h3 className='font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white'>
+              {service.title}
+            </h3>
 
-          <p className="font-normal text-sm leading-7 text-white/70 flex-1">
-            {service.description}
-          </p>
+            <p className='font-normal text-sm leading-7 text-white/70'>{service.description}</p>
 
-          <div className="flex items-center gap-2">
-            <Euro size={18} className="text-[color:var(--text-secondary)]" />
-            <span className="font-semibold text-xl leading-7 text-[color:var(--text-secondary)]">
-              {formatPrice(service.priceFrom, service.priceUnit)}
-            </span>
-          </div>
+            <div className='flex items-center gap-2'>
+              <Euro size={18} className='text-[color:var(--text-secondary)]' />
+              <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
+                {formatPrice(service.priceFrom, service.priceUnit)}
+              </span>
+            </div>
 
-          {hasDetails && (
-            <>
-              <button
-                type="button"
-                onClick={e => {
-                  e.stopPropagation();
-                  setExpandedCard(isExpanded ? null : service.id);
-                }}
-                className="flex items-center justify-between w-full py-2 text-sm font-semibold text-[color:var(--text-secondary)] hover:text-[color:var(--text-secondary)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[rgba(192,192,192,0.91)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000000] rounded"
-                aria-expanded={isExpanded}
-                aria-controls={`price-details-${service.id}`}
-              >
-                <span>{isExpanded ? 'Preisliste ausblenden' : 'Alle Preise anzeigen'}</span>
-                <ChevronDown
-                  size={18}
-                  className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-                />
-              </button>
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    id={`price-details-${service.id}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    <div className="border-t border-white/10 pt-4">
-                      <div className="grid grid-cols-[1fr_auto_auto] gap-2 mb-2 text-xs font-semibold uppercase tracking-wider text-white/50">
-                        <span>Piercing</span>
-                        <span className="w-12 text-right">1</span>
-                        <span className="w-12 text-right">2</span>
+            {hasDetails && (
+              <div className='relative'>
+                <button
+                  type='button'
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onPointerUp={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpandedCard((prev) => (prev === service.id ? null : service.id));
+                  }}
+                  className='flex items-center justify-between w-full py-2 text-sm font-semibold text-(--text-secondary) hover:text-(--text-secondary) transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg) rounded'
+                  aria-expanded={isExpanded}
+                  aria-controls={`price-details-${service.id}`}
+                >
+                  <span>{isExpanded ? 'Preisliste ausblenden' : 'Alle Preise anzeigen'}</span>
+                  <ChevronDown
+                    size={18}
+                    className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      id={`price-details-${service.id}`}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      className='absolute left-0 right-0 top-full z-20 mt-2'
+                      onPointerDown={(e) => e.stopPropagation()}
+                      onPointerUp={(e) => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className='bg-(--card-bg) border border-white/10 rounded-2xl p-4 shadow-(--card-shadow)'>
+                        <div className='paket-price-grid mb-2 text-xs font-semibold uppercase tracking-wider text-white/50'>
+                          <span>Piercing</span>
+                          <span className='w-12 text-right'>1</span>
+                          <span className='w-12 text-right'>2</span>
+                        </div>
+                        <ul className='space-y-2'>
+                          {priceList.items.map((item, idx) => (
+                            <li
+                              key={idx}
+                              className='paket-price-grid text-sm text-white/80 py-2 border-b border-white/5 last:border-b-0 flex flex-col h-full'
+                            >
+                              <span className='truncate'>{item.name}</span>
+                              <span className='w-12 text-right font-semibold text-(--text-secondary)/90'>
+                                {item.price1}
+                              </span>
+                              <span className='w-12 text-right font-semibold text-(--text-secondary)/90'>
+                                {item.price2 ?? '—'}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                        {priceList.note && (
+                          <p className='mt-4 text-xs text-white/50 italic text-center'>
+                            {priceList.note}
+                          </p>
+                        )}
                       </div>
-                      <ul className="space-y-2">
-                        {priceList.items.map((item, idx) => (
-                          <li
-                            key={idx}
-                            className="grid grid-cols-[1fr_auto_auto] gap-2 text-sm text-white/80 py-2 border-b border-white/5 last:border-b-0"
-                          >
-                            <span className="truncate">{item.name}</span>
-                            <span className="w-12 text-right font-semibold text-[color:var(--text-secondary)]/90">{item.price1}</span>
-                            <span className="w-12 text-right font-semibold text-[color:var(--text-secondary)]/90">{item.price2 ?? '—'}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {priceList.note && (
-                        <p className="mt-4 text-xs text-white/50 italic text-center">
-                          {priceList.note}
-                        </p>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </>
-          )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
 
-          <ul className='space-y-4 text-sm text-white/80'>
-            {service.features.map((feature, featureIndex) => (
-              <motion.li
-                key={featureIndex}
-                className='flex items-center gap-4'
-                variants={fadeInUpVariants}
-              >
-                <ChevronRight
-                  size={16}
-                  className='text-[color:var(--text-secondary)] shrink-0 mt-2'
-                />
-                <span className="font-normal text-base leading-[23px]">{feature}</span>
-              </motion.li>
-            ))}
-          </ul>
+            <ul className='space-y-4 text-sm text-white/80'>
+              {service.features.map((feature, featureIndex) => (
+                <li key={featureIndex} className='flex items-center gap-4'>
+                  <ChevronRight
+                    size={16}
+                    className='text-[color:var(--text-secondary)] shrink-0 mt-2'
+                  />
+                  <span className='font-normal text-base leading-6'>{feature}</span>
+                </li>
+              ))}
+            </ul>
 
-          <button
-            onClick={() => handleServiceBooking(service.id)}
-            className="w-full h-12.5 border border-[color:var(--text-secondary)] rounded-3xl font-semibold text-sm leading-5 text-white hover:bg-[color:var(--text-secondary)] hover:text-black transition-all duration-200"
-            aria-label={`${service.cta} für ${service.title}`}
-          >
-            {service.cta}
-          </button>
-        </div>
-      </motion.div>
+            <button
+              onPointerDown={(e) => e.stopPropagation()}
+              onPointerUp={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleServiceBooking(service.id);
+              }}
+              className='w-full h-12 border border-[color:var(--text-secondary)] rounded-3xl font-semibold text-sm leading-5 text-white hover:bg-[color:var(--text-secondary)] hover:text-black transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg)'
+              aria-label={`${service.cta} für ${service.title}`}
+            >
+              {service.cta}
+            </button>
+          </div>
+        </motion.div>
+      </Card>
     );
   };
 
   return (
-    <main className={`piercing-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark ${className}`}>
+    <main
+      className={`piercing-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32 ${className}`}
+    >
       <MainNavigation />
       <section className='section-padding relative z-10'>
         <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-container-main flex flex-col text-center gap-4'>
+          <div className='mx-auto w-full max-w-container-main flex flex-col text-center gap-4 max-md:gap-16'>
             <SectionHeading
-              eyebrow="Medusa München"
-              title="Piercing"
-              subtitle="Professionelles Piercing mit über 5 Jahren Erfahrung und höchsten Hygienestandards."
+              eyebrow='Medusa München'
+              title='Piercing'
+              subtitle='Professionelles Piercing mit über 5 Jahren Erfahrung und höchsten Hygienestandards.'
             />
 
             {/* FREE Consultation Banner */}
-            <div className='flex items-center justify-center gap-4 p-6 rounded-2xl bg-[var(--accent-chrome)]/10 border border-[var(--accent-chrome)]/20'>
+            <div className='flex items-center justify-center gap-4 p-6 rounded-2xl bg-[var(--accent-chrome)]/10 border border-[var(--accent-chrome)]/20 max-md:hidden'>
               <MessageCircle size={24} className='text-[var(--accent-chrome)]' />
               <div className='text-center'>
                 <p className='font-headline text-lg text-brand-chrome'>Kostenlose Beratung</p>
-                <p className='text-sm text-luxury-text-inverse/70 font-body'>Allow us to help you choose the right team member and piercing</p>
+                <p className='text-sm text-luxury-text-inverse/70 font-body'>
+                  Allow us to help you choose the right team member and piercing
+                </p>
               </div>
             </div>
 
             {/* Top 3 Category Cards - Centered */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-4xl mx-auto'
-              role='tablist'
+            <div
+              className='pricing-category-container grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 justify-center justify-items-center max-w-4xl mx-auto'
               aria-label='Service-Kategorien'
             >
               {categories.map((category) => {
                 const IconComponent = category.icon;
                 const isActive = activeCategory === category.id;
 
-                return (
-                  <Card
-                    key={category.id}
-                    variant={isActive ? 'featured' : 'default'}
-                    size="default"
-                    asChild
-                  >
-                    <button
-                      id={`tab-${category.id}`}
-                      role='tab'
-                      aria-selected={isActive}
-                      aria-controls={`panel-${category.id}`}
-                      tabIndex={isActive ? 0 : -1}
-                      className="flex flex-col h-full transition-transform duration-300"
-                      onClick={() => handleCategoryChange(category.id as CategoryId)}
-                      aria-label={`Select ${category.title} category`}
-                    >
+                const buttonContent = (
+                  <>
+                    <div className='pricing-category-card-content md:hidden flex flex-col h-full items-center justify-center gap-2 py-2'>
+                      <div className='pricing-category-icon flex flex-col h-full items-center justify-center w-8 h-8 rounded-full bg-[var(--accent-chrome)]'>
+                        <IconComponent size={16} className='text-luxury-text-primary' />
+                      </div>
+                      <h3 className='pricing-category-tier font-headline text-xs text-white text-center leading-tight px-2'>
+                        {category.title}
+                      </h3>
+                      <span className='pricing-category-price text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                        ab {category.priceFrom}
+                      </span>
+                    </div>
+
+                    <div className='hidden md:flex md:flex-col md:h-full'>
                       <div className='flex items-center justify-between mb-8'>
-                        <div
-                          className='h-14 w-14 flex items-center justify-center rounded-full bg-[var(--accent-chrome)]' 
-                        >
+                        <div className='flex flex-col h-full h-14 w-14 items-center justify-center rounded-full bg-[var(--accent-chrome)]'>
                           <IconComponent size={20} className='text-luxury-text-primary' />
                         </div>
                         <span className='text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
@@ -484,11 +487,33 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
                         </span>
                       </div>
                       <div className='space-y-8 flex-1'>
-                        <h3 className='font-headline text-2xl text-brand-chrome'>{category.title}</h3>
+                        <h3 className='font-headline text-2xl text-brand-chrome'>
+                          {category.title}
+                        </h3>
                         <p className='text-sm md:text-base text-luxury-text-inverse/75 leading-relaxed font-body'>
                           {category.subtitle}
                         </p>
                       </div>
+                    </div>
+                  </>
+                );
+
+                return (
+                  <Card
+                    key={category.id}
+                    variant={isActive ? 'featured' : 'default'}
+                    size='default'
+                    className='pricing-category-card flex flex-col h-full'
+                    asChild
+                  >
+                    <button
+                      type='button'
+                      aria-pressed={isActive}
+                      className='flex flex-col h-full min-h-25 md:min-h-auto transition-transform duration-300'
+                      onClick={() => handleCategoryChange(category.id as CategoryId)}
+                      aria-label={`Select ${category.title} category`}
+                    >
+                      {buttonContent}
                     </button>
                   </Card>
                 );
@@ -497,16 +522,15 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
           </div>
         </div>
 
+        <div className='chrome-divider services-section-divider' aria-hidden='true' />
+
         {/* Bottom cards section - wider container */}
-        <div className='w-full px-6 lg:px-12 mt-20'>
+        <div className='w-full px-6 lg:px-12 md:mt-20 max-md:mt-0'>
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeCategory}
               ref={containerRef}
               className='space-y-12'
-              role='tabpanel'
-              id={`panel-${activeCategory}`}
-              aria-labelledby={`tab-${activeCategory}`}
               aria-live='polite'
               aria-label={`Showing ${activeCategoryMeta?.title} services`}
               variants={containerVariants}
@@ -514,41 +538,36 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({
               animate={inView ? 'animate' : 'initial'}
               exit='exit'
             >
-              <SectionHeading
-                eyebrow={activeCategoryMeta?.title}
-                title="Wählen Sie Ihre Option"
-                subtitle={activeCategoryMeta?.subtitle}
-              />
+              <div className='hidden md:block'>
+                <SectionHeading
+                  eyebrow={activeCategoryMeta?.title}
+                  title='Wählen Sie Ihre Option'
+                  subtitle={activeCategoryMeta?.subtitle}
+                />
+              </div>
 
               {isDesktop ? (
-  <div className='w-full flex justify-center'>
-    <div className='paket-cards-wrapper grid grid-cols-4 gap-4 justify-items-center'>
-      {currentServices.map((service) => renderServiceCard(service))}
-    </div>
-  </div>
-) : (
-  <div className='w-full overflow-x-clip'>
-    <Suspense
-      fallback={<div className='min-h-[100px] flex items-center justify-center text-luxury-text-inverse'>Loading...</div>}
-    >
-      <SwiperComponent
-        slidesPerView={1}
-        spaceBetween={16}
-        pagination={{
-          clickable: true,
-          bulletClass: 'swiper-pagination-bullet !bg-white/30',
-          bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
-        }}
-      >
-        {currentServices.map((service) => (
-          <SwiperSlideComponent key={service.id} className='h-auto w-full'>
-            {renderServiceCard(service)}
-          </SwiperSlideComponent>
-        ))}
-      </SwiperComponent>
-    </Suspense>
-  </div>
-)}
+                <div className='w-full flex justify-center'>
+                  <div className='paket-cards-wrapper flex flex-nowrap gap-4 justify-center items-start overflow-x-auto overflow-y-visible scrollbar-hide w-full py-8'>
+                    {currentServices.map((service) => renderServiceCard(service))}
+                  </div>
+                </div>
+              ) : (
+                <div className='w-full'>
+                  <div className='mobile-paket-rail max-lg:overflow-x-auto max-lg:overflow-y-visible max-lg:scrollbar-hide max-lg:snap-x max-lg:snap-mandatory max-lg:pb-6 max-lg:-mb-6'>
+                    <div className='max-lg:flex max-lg:items-start max-lg:gap-4 max-lg:px-6'>
+                      {currentServices.map((service) => (
+                        <div
+                          key={service.id}
+                          className='max-lg:flex-none max-lg:w-full max-lg:snap-center max-lg:self-start'
+                        >
+                          {renderServiceCard(service)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

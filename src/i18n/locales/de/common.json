@@ -18,7 +18,83 @@
   "footer": {
     "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
     "legal": "Impressum",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "brandTagline": "Münchens exklusivstes Tattoo-Studio für Kunst, die ein Leben lang hält.",
+    "studio": {
+      "address": "Altheimer Eck 11, 80331 München",
+      "hours": "Mo-Fr: 11:30-18:30, Sa: 11:00-18:00"
+    },
+    "headings": {
+      "quickLinks": "Quick Links",
+      "legal": "Rechtliches",
+      "newsletter": "Newsletter"
+    },
+    "links": {
+      "privacy": "Datenschutz",
+      "imprint": "Impressum",
+      "terms": "AGB",
+      "aftercare": "Nachsorge"
+    },
+    "newsletter": {
+      "description": "Exklusive Updates zu Events und Aktionen.",
+      "emailPlaceholder": "E-Mail Adresse",
+      "marketingConsent": "Ich stimme dem Erhalt von Marketing-E-Mails zu.",
+      "subscribe": "Abonnieren"
+    },
+    "location": {
+      "title": "Studio Lage & Anfahrt",
+      "items": {
+        "marienplatz": {
+          "title": "Marienplatz",
+          "subtitle": "Nur 2 Minuten vom zentralen Marienplatz entfernt"
+        },
+        "subway": {
+          "title": "U-Bahn",
+          "subtitle": "U3/U6 Marienplatz Station"
+        },
+        "suburbanRail": {
+          "title": "S-Bahn",
+          "subtitle": "S1-S8 Marienplatz Station"
+        },
+        "parking": {
+          "title": "Parken",
+          "subtitle": "Parkhaus Tal 26 oder Q-Park Marienplatz"
+        }
+      },
+      "tags": {
+        "marienplatz": "Tattoo Marienplatz",
+        "innerCity": "Tattoo Studio Innenstadt",
+        "cityCenter": "Tattoo Zentrum München",
+        "altheimerEck": "Tattoo Altheimer Eck",
+        "englishSpeaking": "English Speaking Tattoo Munich"
+      },
+      "faq": {
+        "title": "Tattoo Studio München – Ihre Fragen, unsere Antworten",
+        "cards": {
+          "locals": {
+            "title": "Für Einheimische:",
+            "body": "Unser Tattoo Studio in München Innenstadt ist von allen Stadtteilen perfekt erreichbar. Ob aus Schwabing, Haidhausen, Neuhausen oder Sendling – die Anreise mit öffentlichen Verkehrsmitteln dauert maximal 20 Minuten."
+          },
+          "tourists": {
+            "title": "Für Touristen:",
+            "body": "Als zentral gelegenes Tattoo Studio am Marienplatz sind wir die perfekte Adresse für Besucher Münchens. Kombinieren Sie Ihr Tattoo mit einem Bummel über den Viktualienmarkt oder einer Tour durch die Altstadt."
+          },
+          "hours": {
+            "title": "Öffnungszeiten:",
+            "monFriLabel": "Mo-Fr:",
+            "monFriValue": "11:30-18:30",
+            "satLabel": "Sa:",
+            "satValue": "11:00-18:00",
+            "sunLabel": "So:",
+            "sunValue": "Geschlossen"
+          }
+        }
+      }
+    },
+    "bottomBar": {
+      "rights": "Medusa Tattoo München. Alle Rechte vorbehalten.",
+      "since": "Seit 1994 im Herzen Münchens"
+    }
   },
   "meta": {
     "home": {

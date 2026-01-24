@@ -149,7 +149,7 @@ You have a **world-class, production-ready design system** with 75% completion. 
 
 **Environment Variables Needed**:
 ```
-VITE_SENDGRID_API_KEY
+SENDGRID_API_KEY
 VITE_CONTACT_EMAIL
 VITE_BOOKING_EMAIL
 ```

@@ -2,10 +2,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Card } from '../ui/Card';
+import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
-import '../../styles/testimonials.css';
+import '@/styles/testimonials.css';
 
 export interface Testimonial {
   id: number;
@@ -53,9 +53,14 @@ export default function TestimonialsCarousel({
   title = 'Was Kunden sagen',
 }: TestimonialsCarouselProps) {
   return (
-    <Section variant="default" spacing="normal" className={className} aria-label='Customer testimonials'>
-      <Container size="default">
-        <h3 className='font-headline text-2xl md:text-3xl lg:text-4xl font-semibold tracking-normal leading-snug text-(--brand-accent) text-center mb-16'>
+    <Section
+      variant='default'
+      spacing='normal'
+      className={className}
+      aria-label='Customer testimonials'
+    >
+      <Container size='default'>
+        <h3 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--brand-accent) text-center mb-16'>
           {title}
         </h3>
 
@@ -92,7 +97,7 @@ export default function TestimonialsCarousel({
         >
           {testimonialsList.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <Card variant="default" size="default" asChild>
+              <Card variant='default' size='default' asChild>
                 <div className='h-full'>
                   <div className='flex gap-0 mb-8'>
                     {[...Array(5)].map((_, i) => (
@@ -100,7 +105,9 @@ export default function TestimonialsCarousel({
                     ))}
                   </div>
 
-                  <p className='text-luxury-text-inverse text-base leading-relaxed mb-8'>"{testimonial.text}"</p>
+                  <p className='text-luxury-text-inverse text-base leading-relaxed mb-8'>
+                    "{testimonial.text}"
+                  </p>
 
                   <p className='text-brand-chrome text-sm'>
                     — {testimonial.author}, {testimonial.source}

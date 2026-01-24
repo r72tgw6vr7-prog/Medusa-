@@ -23,16 +23,15 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   features,
   ctaText,
   onCtaClick,
-  highlighted = false,
   className = '',
 }) => {
   return (
     <div 
       className={`
-        bg-[#000000]
-        border border-[rgba(192,192,192,0.91)]
-        shadow-[0px_4px_12px_rgba(0,0,0,0.4),0px_0px_20px_rgba(192,192,192,0.3),inset_0px_1px_0px_2px_rgba(192,192,192,0.1)]
-        rounded-[32px]
+        bg-(--card-bg)
+        border border-(--card-border)
+        shadow-(--card-shadow)
+        rounded-(--card-radius)
         p-8
         flex flex-col text-center
         h-full
@@ -50,16 +49,16 @@ export const PriceCard: React.FC<PriceCardProps> = ({
 
       {/* Top labels */}
       <div className="flex justify-between items-center mb-6">
-        <span className="font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]">
+        <span className="font-semibold text-sm tracking-wide uppercase text-[color:var(--text-secondary)]">
           Paket
         </span>
-        <span className="font-normal text-sm tracking-[1.4px] uppercase text-white/60">
+        <span className="font-normal text-sm tracking-wider uppercase text-white/60">
           Flexibel
         </span>
       </div>
 
       {/* Heading */}
-      <h3 className="font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white mb-6">
+      <h3 className="font-headline font-normal text-(length:--text-h3) leading-9 text-white mb-6">
         {title}
       </h3>
 
@@ -71,15 +70,15 @@ export const PriceCard: React.FC<PriceCardProps> = ({
       {/* List */}
       <ul className="space-y-4 mb-8">
         {features.map((feature, index) => (
-          <li key={index} className="flex items-start gap-3">
+          <li key={index} className="flex items-start gap-4">
             {feature.iconUrl && (
               <img 
                 src={feature.iconUrl} 
                 alt="" 
-                className="w-4 h-4 text-[color:var(--text-secondary)] shrink-0 mt-1 object-fill" 
+                className="w-4 h-4 text-[color:var(--text-secondary)] shrink-0 mt-2 object-fill" 
               />
             )}
-            <span className="font-normal text-base leading-[23px] text-white/80">
+            <span className="font-normal text-base leading-6 text-white/80">
               {feature.text}
             </span>
           </li>
@@ -90,7 +89,7 @@ export const PriceCard: React.FC<PriceCardProps> = ({
       <button
         onClick={onCtaClick}
         className="
-          w-full h-12.5
+          w-full h-12
           border border-[color:var(--text-secondary)]
           rounded-3xl
           font-semibold text-sm leading-5 text-white

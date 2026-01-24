@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getImageProps } from '../../utils/image-utils';
+import { getImageProps } from '@/utils/image-utils';
 
 interface StudioImage {
   src: string;
@@ -95,10 +95,10 @@ const StudioCarousel: React.FC = () => {
     <section ref={containerRef} className='w-full py-16 md:py-16 overflow-hidden relative z-10' aria-labelledby="studio-carousel-heading">
       {/* Section Header - Contained - Primary Section Heading */}
       <div className='max-w-276 mx-auto px-8 md:px-8 mb-8'>
-        <h2 id="studio-carousel-heading" className='font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-[var(--accent-chrome)] text-center'>
+        <h2 id="studio-carousel-heading" className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--accent-chrome) text-center'>
           Unser Studio
         </h2>
-        <p className='font-body text-lg text-brand-chrome text-center mt-4'>
+        <p className='font-body text-(length:--text-lg) text-brand-chrome text-center mt-4'>
           Ein Blick in unser professionelles, EU-zertifiziertes Tattoo-Studio im Herzen Münchens
         </p>
       </div>
@@ -106,7 +106,10 @@ const StudioCarousel: React.FC = () => {
       {/* FULL-WIDTH CAROUSEL - FIXED: 16:9 aspect ratio with max height limit */}
       <div className='relative w-full' role="region" aria-roledescription="carousel" aria-label="Studio photos carousel">
         {/* Main Image Container - Fixed aspect ratio 16:9 */}
-        <div className='relative w-full aspect-video max-h-[70vh] overflow-hidden bg-luxury-bg-dark'>
+        <div
+          className='relative w-full aspect-video overflow-hidden bg-luxury-bg-dark'
+          style={{ maxHeight: '70vh' }}
+        >
           {/* Images */}
           {STUDIO_IMAGES.map((image, index) => (
             <div

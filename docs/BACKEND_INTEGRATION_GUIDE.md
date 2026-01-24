@@ -509,7 +509,7 @@ app.use(cors({
 ### 4. Environment Variables
 ```bash
 # .env (NEVER commit this file)
-SENDGRID_API_KEY=SG.xxxxxxxxxxxxx
+SENDGRID_API_KEY=SG_EXAMPLE_KEY
 SENDGRID_FROM_EMAIL=no-reply@medusa-tattoo-muenchen.de
 CONTACT_EMAIL=info@medusa-tattoo-muenchen.de
 BOOKING_EMAIL=bookings@medusa-tattoo-muenchen.de
@@ -623,7 +623,7 @@ module.exports = async (req, res) => {
 
 ### Environment Variables (Vercel Dashboard)
 ```
-SENDGRID_API_KEY=SG.xxxxxxxxxxxxx
+SENDGRID_API_KEY=SG_EXAMPLE_KEY
 CONTACT_EMAIL=info@medusa-tattoo-muenchen.de
 BOOKING_EMAIL=bookings@medusa-tattoo-muenchen.de
 ```

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
-import { Card } from '../ui/Card';
+import { Card } from '@/components/ui/Card';
 
 interface ReviewCardProps {
   rating: number; // Out of 5
@@ -23,7 +23,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       stars.push(
         <Star
           key={i}
-          className='w-6 h-6 fill-[var(--accent-chrome)] text-[var(--accent-chrome)]' 
+          className='w-6 h-6 fill-(--accent-chrome) text-(--accent-chrome)' 
           aria-label='star'
         />,
       );
@@ -39,11 +39,11 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       asChild
     >
       <div className='flex flex-col items-start'>
-        <div className='flex mb-0.5 mx-8'>{renderStars()}</div>
+        <div className='flex mb-2 mx-8'>{renderStars()}</div>
         <div className='flex flex-col items-center self-stretch mb-8 mx-8'>
           <span className='text-luxury-text-inverse text-sm-15 w-72'>{content}</span>
         </div>
-        <div className='flex items-start ml-8 gap-px'>
+        <div className='flex items-start ml-8 gap-0'>
           <span className='text-luxury-text-inverse text-sm-15'>— {author}</span>
           {source && <span className='text-luxury-text-inverse text-sm-15 ml-0'>, {source}</span>}
         </div>

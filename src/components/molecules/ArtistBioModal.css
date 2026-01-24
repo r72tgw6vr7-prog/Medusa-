@@ -72,7 +72,7 @@
   background: transparent !important;
   border: none;
   color: var(--color-brand-accent);
-  font-size: var(--space-4);
+  font-size: var(--text-h3);
   cursor: pointer;
   width: calc(var(--space-5) + var(--space-0-5));
   height: calc(var(--space-5) + var(--space-0-5));
@@ -148,23 +148,23 @@
 
 /* Artist Name */
 .modal-artist-name {
-  font-family: 'Playfair Display', serif;
-  font-size: calc(var(--space-4) + var(--space-0-5));
-  line-height: 1.1;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-h3);
+  line-height: var(--line-height-tighter);
   color: var(--color-brand-accent);
   text-align: center;
   margin-bottom: var(--space-1);
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 /* Artist Role */
 .modal-artist-role {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(var(--space-2) + (var(--space-0-5) / 2));
+  font-family: var(--font-family-primary);
+  font-size: var(--text-body);
   color: rgb(var(--color-text-primary-rgb) / 0.8);
   text-align: center;
   margin-bottom: var(--space-2);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 /* Artist Meta (Experience + Instagram) */
@@ -178,8 +178,8 @@
 }
 
 .modal-experience {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(var(--space-2) - (var(--space-0-5) / 2));
+  font-family: var(--font-family-primary);
+  font-size: var(--text-sm);
   color: rgb(var(--color-text-primary-rgb) / 0.7);
   display: flex;
   align-items: center;
@@ -188,12 +188,12 @@
 
 .modal-experience::before {
   content: '⏱';
-  font-size: var(--space-2);
+  font-size: var(--text-body);
 }
 
 .modal-instagram {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(var(--space-2) - (var(--space-0-5) / 2));
+  font-family: var(--font-family-primary);
+  font-size: var(--text-sm);
   color: var(--color-brand-accent);
   text-decoration: none;
   transition: all 0.2s;
@@ -209,7 +209,7 @@
 
 .modal-instagram::before {
   content: '📷';
-  font-size: var(--space-2);
+  font-size: var(--text-body);
 }
 
 /* Specialties */
@@ -222,13 +222,13 @@
 }
 
 .specialty-badge {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--space-1-5);
+  font-family: var(--font-family-primary);
+  font-size: var(--text-label);
   color: var(--color-surface-dark);
   background: var(--color-brand-accent);
   padding: calc(var(--space-1-5) / 2) var(--space-1-5);
   border-radius: var(--space-2-5);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 /* Certifications */
@@ -241,11 +241,11 @@
 }
 
 .modal-section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: calc(var(--space-2) + (var(--space-0-5) / 2));
+  font-family: var(--font-family-heading);
+  font-size: var(--text-lg);
   color: var(--color-brand-accent);
   margin-bottom: var(--space-1-5);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .certification-list {
@@ -255,8 +255,8 @@
 }
 
 .certification-list li {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(var(--space-2) - (var(--space-0-5) / 2));
+  font-family: var(--font-family-primary);
+  font-size: var(--text-sm);
   color: rgb(var(--color-text-primary-rgb) / 0.8);
   padding: calc(var(--space-1-5) / 2) 0;
   display: flex;
@@ -268,14 +268,14 @@
   content: '✓';
   color: var(--color-brand-accent);
   font-weight: bold;
-  font-size: var(--space-2);
+  font-size: var(--text-body);
 }
 
 /* Biography */
 .modal-bio {
-  font-family: 'Inter', sans-serif;
-  font-size: calc(var(--space-2) - (var(--space-0-5) / 4));
-  line-height: 1.6;
+  font-family: var(--font-family-primary);
+  font-size: var(--text-body);
+  line-height: var(--line-height-normal);
   color: rgb(var(--color-text-primary-rgb) / 0.9);
   text-align: left;
   margin-bottom: var(--space-3);
@@ -296,11 +296,11 @@
 }
 
 .modal-portfolio-title {
-  font-family: 'Playfair Display', serif;
-  font-size: var(--space-2);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-body);
   color: var(--color-brand-accent);
   margin-bottom: var(--space-1-5);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .portfolio-thumbnails {
@@ -334,7 +334,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--space-3);
+  font-size: var(--text-h4);
   color: rgb(var(--color-accent-silver-rgb) / 0.5);
 }
 
@@ -346,9 +346,9 @@
 }
 
 .modal-cta-button {
-  font-family: 'Inter', sans-serif;
-  font-size: var(--space-2);
-  font-weight: 600;
+  font-family: var(--font-family-primary);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
   padding: var(--space-1-5) var(--space-4);
   border: none;
   border-radius: var(--radius-md);
@@ -413,7 +413,7 @@
   }
 
   .modal-artist-name {
-    font-size: calc(var(--space-4) - var(--space-0-5));
+    font-size: var(--text-h4);
   }
 
   .modal-artist-photo {
@@ -422,11 +422,11 @@
   }
 
   .modal-bio {
-    font-size: calc(var(--space-2) - (var(--space-0-5) / 2));
+    font-size: var(--text-body);
   }
 
   .modal-artist-role {
-    font-size: var(--space-2);
+    font-size: var(--text-body);
   }
 
   .modal-actions {
@@ -445,7 +445,7 @@
   }
 
   .modal-artist-name {
-    font-size: var(--space-3);
+    font-size: var(--text-h4);
   }
 
   .modal-artist-photo {
@@ -454,7 +454,7 @@
   }
 
   .specialty-badge {
-    font-size: calc(var(--space-1-5) - (var(--space-0-5) / 4));
+    font-size: var(--text-label);
     padding: calc(var(--space-0-5) + (var(--space-0-5) / 4)) calc(var(--space-2-5) / 2);
   }
 }

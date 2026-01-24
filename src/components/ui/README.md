@@ -9,7 +9,7 @@ A collection of reusable, accessible, and customizable UI components built with 
 This package requires the following peer dependencies:
 
 ```bash
-npm install clsx tailwind-merge @radix-ui/react-slot
+pnpm add clsx tailwind-merge @radix-ui/react-slot
 ```
 
 ### Usage

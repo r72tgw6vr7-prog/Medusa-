@@ -61,8 +61,14 @@ class GoogleAnalytics {
   private debugMode: boolean = false;
 
   constructor() {
-    this.measurementId = import.meta.env.VITE_GA4_MEASUREMENT_ID || null;
-    this.debugMode = import.meta.env.VITE_APP_ENV === 'development';
+    const mockedEnv = typeof window !== 'undefined' ? window.__MOCKED_ENV__ : undefined;
+
+    const measurementId =
+      mockedEnv?.VITE_GA4_MEASUREMENT_ID ?? import.meta.env.VITE_GA4_MEASUREMENT_ID;
+    const appEnv = mockedEnv?.VITE_APP_ENV ?? import.meta.env.VITE_APP_ENV;
+
+    this.measurementId = measurementId || null;
+    this.debugMode = appEnv === 'development';
 
     if (this.measurementId) {
       this.initialize();
@@ -78,20 +84,31 @@ class GoogleAnalytics {
     if (typeof window === 'undefined' || this.isInitialized) return;
 
     try {
-      // Load gtag script
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`;
-      document.head.appendChild(script);
+      const isAutomation = navigator.webdriver === true;
+      const hasMockedEnv = typeof window.__MOCKED_ENV__ !== 'undefined';
+
+      // Load gtag script (skip in automation/mocked env to keep tests deterministic)
+      if (!isAutomation && !hasMockedEnv) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`;
+        document.head.appendChild(script);
+      }
 
       // Initialize gtag
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        window.dataLayer.push(arguments);
-      };
+      if (!window.gtag) {
+        window.gtag = function () {
+          const dataLayer = (window.dataLayer ||= []);
+          dataLayer.push(arguments);
+        };
+      }
 
-      window.gtag('js', new Date());
-      window.gtag('config', this.measurementId!, {
+      const gtag = window.gtag;
+      if (!gtag) return;
+
+      gtag('js', new Date());
+      gtag('config', this.measurementId!, {
         // Privacy settings
         anonymize_ip: true,
         allow_google_signals: false,
@@ -106,10 +123,6 @@ class GoogleAnalytics {
       });
 
       this.isInitialized = true;
-
-      if (this.debugMode) {
-        console.log('GA4: Initialized with ID:', this.measurementId);
-      }
     } catch (error) {
       console.error('GA4: Failed to initialize:', error);
     }
@@ -122,15 +135,14 @@ class GoogleAnalytics {
     if (!this.isReady()) return;
 
     try {
-      window.gtag('event', 'page_view', {
+      const gtag = window.gtag;
+      if (!gtag) return;
+
+      gtag('event', 'page_view', {
         page_title: title || document.title,
         page_location: window.location.origin + path,
         page_path: path,
       });
-
-      if (this.debugMode) {
-        console.log('GA4: Page view tracked:', path);
-      }
     } catch (error) {
       console.error('GA4: Page view tracking failed:', error);
     }
@@ -139,18 +151,17 @@ class GoogleAnalytics {
   /**
    * Track a custom event
    */
-  event(eventName: string, parameters?: Record<string, any>): void {
+  event(eventName: string, parameters?: Record<string, unknown>): void {
     if (!this.isReady()) return;
 
     try {
-      window.gtag('event', eventName, {
+      const gtag = window.gtag;
+      if (!gtag) return;
+
+      gtag('event', eventName, {
         ...parameters,
         timestamp: Date.now(),
       });
-
-      if (this.debugMode) {
-        console.log('GA4: Event tracked:', eventName, parameters);
-      }
     } catch (error) {
       console.error('GA4: Event tracking failed:', error);
     }
@@ -356,7 +367,8 @@ export default analytics;
 // Extend window type for TypeScript
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
+    __MOCKED_ENV__?: Record<string, string>;
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }

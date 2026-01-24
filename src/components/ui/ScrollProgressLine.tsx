@@ -23,7 +23,7 @@ export const ScrollProgressLine: React.FC<ScrollProgressLineProps> = ({ classNam
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-[2px] bg-transparent z-[9999] pointer-events-none ${className}`}
+      className={`fixed top-0 left-0 w-full h-0.5 bg-transparent z-modal pointer-events-none ${className}`}
       role="progressbar"
       aria-valuenow={Math.round(progress * 100)}
       aria-valuemin={0}
@@ -31,11 +31,13 @@ export const ScrollProgressLine: React.FC<ScrollProgressLineProps> = ({ classNam
       aria-label="Page scroll progress"
     >
       <div
-        className="h-full transition-[width] duration-150 ease-out"
+        className="h-full transition duration-150 ease-out"
         style={{
           width: `${progress * 100}%`,
-          background: 'linear-gradient(90deg, transparent 0%, rgba(192, 192, 192, 0.6) 20%, rgba(192, 192, 192, 1) 100%)',
-          boxShadow: '0 0 8px rgba(192, 192, 192, 0.5), 0 0 16px rgba(192, 192, 192, 0.3)',
+          background:
+            'linear-gradient(90deg, transparent 0%, rgba(var(--accent-chrome-rgb), 0.6) 20%, rgba(var(--accent-chrome-rgb), 1) 100%)',
+          boxShadow:
+            '0 0 8px rgba(var(--accent-chrome-rgb), 0.5), 0 0 16px rgba(var(--accent-chrome-rgb), 0.3)',
         }}
       />
     </div>

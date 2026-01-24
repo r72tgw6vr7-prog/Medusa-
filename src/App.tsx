@@ -2,21 +2,19 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useLanguage } from './contexts/LanguageContext';
-import { AppProvider } from '../core/state/AppContext';
+import { AppProvider } from '@/core/state/AppContext';
 import Meta from '@/components/Meta';
 import LocaleRouteSync from '@/i18n/LocaleRouteSync';
 // Fix import path to match actual directory structure
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
-import { initScroll } from '@/lib/scroll-minimal';
+import { initScroll } from '@/lib/scroll';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import { MotionProvider } from '@/providers/MotionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
+import { HomePage } from './pages/HomePage';
 
-interface LocalizedMetaProps {
-  pageKey: string;
-  basePath: string; // German/default path, starts with '/'
-  canonicalPath: string; // Current locale's canonical path, starts with '/'
-}
+const useGSAPText = import.meta.env.VITE_GSAP_TEXT === 'true';
+initScroll(useGSAPText ? 'scroll-full' : 'scroll-minimal');
 
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
 
@@ -46,8 +44,12 @@ const LocalizedMeta: React.FC<LocalizedMetaProps> = ({ pageKey, basePath, canoni
   );
 };
 
-const homePageImport = import('./pages/HomePage');
-const HomePage = lazy(() => homePageImport.then((m) => ({ default: m.HomePage })));
+interface LocalizedMetaProps {
+  pageKey: string;
+  basePath: string; // German/default path, starts with '/'
+  canonicalPath: string; // Current locale's canonical path, starts with '/'
+}
+
 const TattooServicesPage = lazy(() =>
   import('@/components/pages/TattooServicesPage').then((m) => ({ default: m.TattooServicesPage })),
 );

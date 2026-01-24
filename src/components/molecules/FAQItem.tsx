@@ -15,29 +15,52 @@ export const FAQItem: React.FC<FAQItemProps> = ({
   onToggle,
   className = '',
 }) => {
+  const controlsId = `answer-${question.replace(/\s+/g, '-').toLowerCase()}`;
+
   return (
     <div className={`border-b border-brand-chrome/20 ${className}`}>
-      <button
-        type='button'
-        className='w-full text-left py-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent'
-        onClick={onToggle}
-        aria-expanded={isOpen ? 'true' : 'false'}
-        aria-controls={`answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
-      >
-        <div className='flex items-center justify-between'>
-          <h3 className='text-lg font-medium pr-8 text-brand-accent'>{question}</h3>
-          <span
-            className={`transform transition-transform duration-200 text-brand-chrome ${isOpen ? 'rotate-180' : ''}`}
-          >
-            ↓
-          </span>
-        </div>
-      </button>
+      {isOpen ? (
+        <button
+          type='button'
+          className='w-full text-left py-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent'
+          onClick={onToggle}
+          aria-expanded="true"
+          aria-controls={controlsId}
+        >
+          <div className='flex items-center justify-between'>
+            <h3 className='font-headline text-(length:--text-lg) font-medium pr-8 text-brand-accent'>
+              {question}
+            </h3>
+            <span className='transform transition-transform duration-200 text-brand-chrome rotate-180'>
+              ↓
+            </span>
+          </div>
+        </button>
+      ) : (
+        <button
+          type='button'
+          className='w-full text-left py-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent'
+          onClick={onToggle}
+          aria-expanded="false"
+          aria-controls={controlsId}
+        >
+          <div className='flex items-center justify-between'>
+            <h3 className='font-headline text-(length:--text-lg) font-medium pr-8 text-brand-accent'>
+              {question}
+            </h3>
+            <span className='transform transition-transform duration-200 text-brand-chrome'>
+              ↓
+            </span>
+          </div>
+        </button>
+      )}
       <div
-        id={`answer-${question.replace(/\s+/g, '-').toLowerCase()}`}
+        id={controlsId}
         className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-96' : 'max-h-0'}`}
       >
-        <div className='py-8 text-luxury-text-inverse/80'>{answer}</div>
+        <div className='py-8 text-(length:--text-body) text-luxury-text-inverse/80 leading-(--line-height-normal) font-body'>
+          {answer}
+        </div>
       </div>
     </div>
   );

@@ -1,32 +1,30 @@
-import { useTranslation as useReactI18nextTranslation } from 'react-i18next';
-import type { Namespace } from '@/i18n';
-import { getI18nInstance, getLocale, setLocale, splitTranslationKey } from '@/i18n';
-import type { TranslationFunction, TranslationParams } from '@/i18n/types';
+import { useEffect, useMemo } from 'react';
+import type { Locale, Namespace } from '@/i18n';
+import { getI18nInstance } from '@/i18n';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function useTranslation(preloadNamespaces?: Namespace | Namespace[]) {
-  const ns = preloadNamespaces
-    ? Array.isArray(preloadNamespaces)
-      ? preloadNamespaces
-      : [preloadNamespaces]
-    : undefined;
+  const { language, setLanguage, t } = useLanguage();
+  const i18n = getI18nInstance();
 
-  const { i18n, t: rawT } = useReactI18nextTranslation(ns);
+  const nsList = useMemo(() => {
+    if (!preloadNamespaces) return [];
+    return Array.isArray(preloadNamespaces) ? preloadNamespaces : [preloadNamespaces];
+  }, [preloadNamespaces]);
 
-  const t: TranslationFunction = (fullKey: string, params?: TranslationParams) => {
-    const { namespace, key } = splitTranslationKey(fullKey);
+  useEffect(() => {
+    if (nsList.length === 0) return;
+    void i18n.loadNamespaces(nsList).catch(() => {});
+  }, [i18n, language, nsList]);
 
-    // Fire-and-forget namespace load to keep bundles small
-    if (!i18n.hasResourceBundle(i18n.language, namespace)) {
-      void i18n.loadNamespaces([namespace]);
-    }
-
-    return rawT(key, { ns: namespace, ...(params || {}) });
+  const setLocale = async (locale: Locale) => {
+    setLanguage(locale);
   };
 
   return {
     t,
-    locale: getLocale(),
+    locale: language as Locale,
     setLocale,
-    i18n: getI18nInstance(),
+    i18n,
   };
 }

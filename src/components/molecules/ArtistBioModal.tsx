@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import './ArtistBioModal.css';
 
 interface Artist {
@@ -84,15 +84,12 @@ export const ArtistBioModal = ({ artist, onClose }: ArtistBioModalProps) => {
   return (
     <div
       className='artist-modal-overlay'
-      onClick={onClose}
-      onKeyDown={(e) => e.key === 'Enter' && onClose()}
-      role='button'
-      tabIndex={0}
-      aria-label={t('common.close')}
+      onMouseDown={onClose}
+      role='presentation'
     >
       <div
         className='artist-modal-content'
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
         role='dialog'
         aria-modal='true'
         aria-labelledby='modal-title'

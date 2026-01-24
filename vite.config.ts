@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
         '@/hooks': path.resolve(__dirname, './src/hooks'),
         '@/types': path.resolve(__dirname, './src/types'),
         '@/foundation': path.resolve(__dirname, './src/foundation'),
-        '@/core': path.resolve(__dirname, './core'),
+        '@/core': path.resolve(__dirname, './src/core'),
         scheduler: path.resolve(__dirname, './node_modules/scheduler/index.js'),
       },
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
@@ -57,7 +57,7 @@ export default defineConfig(({ mode }) => {
       headers: {
         // Relaxed CSP for debugging
         'Content-Security-Policy':
-          "default-src 'self' https: http: data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' https: http: blob:; style-src 'self' 'unsafe-inline' https: http:; img-src 'self' data: https: http: blob:; font-src 'self' data: https: http:; frame-src 'self' https: http:; connect-src 'self' https: http: ws: wss:; worker-src 'self' blob:; child-src 'self' blob: https: http:;",
+          "default-src 'self'; script-src 'self' 'sha256-Jr9Fl37029VhYvVWPeghsu5JL7bmhAHkrK/DZdoqmiE=' 'sha256-8ExvGeARWXqsyCqWf4dS9Uu4WFTUfye9ipfY3P9ZeTs=' 'sha256-Tpu1/HwrJ18CWBP43IPqNrlZZTSZOzwGdiKHFTtEIGw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https:; connect-src 'self' https: http: ws: wss:; worker-src 'self' blob:; child-src 'self' blob: https:; object-src 'none'; base-uri 'self'; form-action 'self'",
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'SAMEORIGIN',
         'X-XSS-Protection': '1; mode=block',
@@ -88,9 +88,10 @@ export default defineConfig(({ mode }) => {
           : [],
         output: {
           manualChunks: (id) => {
-            // Explicitly group React, ReactDOM, and Scheduler
-            if (/node_modules[\/](react|react-dom|scheduler)[\/]/.test(id)) {
-              return 'vendor-react';
+            if (id.includes('node_modules')) {
+              if (id.includes('i18next') || id.includes('react-i18next') || id.includes('i18next-browser-languagedetector')) {
+                return 'vendor-i18n';
+              }
             }
 
             // Other vendor packages

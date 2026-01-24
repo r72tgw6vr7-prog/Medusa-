@@ -27,9 +27,9 @@ git push origin main
 #### Step 3: Configure Build Settings
 ```
 Framework Preset: Vite
-Build Command: npm run build
+Build Command: pnpm run build
 Output Directory: dist
-Install Command: npm install
+Install Command: pnpm install
 ```
 
 #### Step 4: Environment Variables (if needed)
@@ -49,7 +49,7 @@ SKIP_VERIFY=false
 
 #### Step 1: Install Vercel CLI
 ```bash
-npm i -g vercel
+pnpm add -g vercel
 ```
 
 #### Step 2: Login
@@ -59,8 +59,8 @@ vercel login
 
 #### Step 3: Build Locally with Optimization
 ```bash
-npm run build:local
-# This runs: npm run optimize:gallery && vite build
+pnpm run build:local
+# This runs: pnpm run optimize:gallery && vite build
 ```
 
 #### Step 4: Deploy to Preview
@@ -90,11 +90,11 @@ Create `vercel.json` in project root (if not exists):
 ```json
 {
   "version": 2,
-  "buildCommand": "npm run build:local",
+  "buildCommand": "pnpm run build:local",
   "outputDirectory": "dist",
   "framework": "vite",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
+  "installCommand": "pnpm install",
+  "devCommand": "pnpm run dev",
   "regions": ["fra1"],
   "headers": [
     {
@@ -153,7 +153,7 @@ https://medusa-web-[your-id].vercel.app/gallery
 ### 3. Performance Check
 ```bash
 # Run Lighthouse on deployed URL
-npm run analyze
+pnpm run analyze
 # Or use: https://pagespeed.web.dev/
 ```
 
@@ -197,7 +197,7 @@ curl -I https://your-site.vercel.app/gallery/optimized/tattoo-sleeve-blackwork@4
 
 Or build images locally before deploy:
 ```bash
-npm run optimize:gallery
+pnpm run optimize:gallery
 git add public/gallery/
 git commit -m "chore: add optimized gallery images"
 git push
@@ -214,7 +214,7 @@ git push
 **Solution:**
 ```bash
 # Ensure build:local runs optimization
-npm run build:local
+pnpm run build:local
 
 # Or commit optimized images to repo
 git add public/gallery/optimized/
@@ -233,7 +233,7 @@ git push
 ls -la public/gallery/manifest.json
 
 # Regenerate if missing
-npm run optimize:gallery
+pnpm run optimize:gallery
 
 # Commit to repo
 git add public/gallery/manifest.json
@@ -258,7 +258,7 @@ cat public/gallery/manifest.json | jq '.images[] | {title, category}'
 mv custom-art.jpg portrait-custom-art.jpg
 
 # Re-optimize
-npm run optimize:gallery
+pnpm run optimize:gallery
 git add . && git commit -m "fix: correct image categories" && git push
 ```
 
@@ -303,7 +303,7 @@ quality: {
 cp new-tattoo.jpg public/gallery/originals/
 
 # 2. Re-optimize
-npm run optimize:gallery
+pnpm run optimize:gallery
 
 # 3. Commit and push
 git add public/gallery/
@@ -319,10 +319,10 @@ git push
 # ... edit src/pages/GalleryPage.tsx
 
 # 2. Test locally
-npm run dev
+pnpm run dev
 
 # 3. Build with optimization
-npm run build:local
+pnpm run build:local
 
 # 4. Commit and push
 git add .
@@ -348,7 +348,7 @@ git push
 ### Lighthouse CI (Optional)
 ```bash
 # Install Lighthouse CI
-npm install -g @lhci/cli
+pnpm add -g @lhci/cli
 
 # Run on deployed URL
 lhci autorun --collect.url=https://your-site.vercel.app/gallery
@@ -370,7 +370,7 @@ Before clicking "Deploy":
 - [x] Color contrast meets standards
 - [x] Git repository clean
 - [x] `vercel.json` configured
-- [x] Build command set to `npm run build:local`
+- [x] Build command set to `pnpm run build:local`
 
 After deploy:
 

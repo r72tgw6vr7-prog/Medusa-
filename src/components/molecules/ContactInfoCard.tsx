@@ -1,6 +1,6 @@
 import React from 'react';
-import { Icon } from '../atoms/Icon';
-import { Card } from '../ui/Card';
+import { Icon } from '@/components/atoms/Icon';
+import { Card } from '@/components/ui/Card';
 
 interface ContactInfoCardProps {
   icon: string;

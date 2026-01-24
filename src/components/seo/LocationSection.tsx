@@ -1,7 +1,7 @@
 import { MapPin, Train, ShoppingBag, Landmark } from 'lucide-react';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
-import { Card } from '../ui/Card';
+import { Card } from '@/components/ui/Card';
 
 export function LocationSection() {
   return (
@@ -15,12 +15,12 @@ export function LocationSection() {
       <Container size='default'>
         <div className='text-center mb-16'>
           <h2
-            className='font-headline text-3xl md:text-4xl text-[var(--accent-chrome)]'
+            className='font-headline text-(length:--text-h3) md:text-(length:--text-h2) text-(--color-text-primary)'
             id='location-section-title'
           >
             Tattoo Studio direkt am Marienplatz
           </h2>
-          <p className='text-base text-luxury-text-inverse/70 max-w-3xl mx-auto font-body leading-relaxed'>
+          <p className='font-body text-(length:--text-body) text-brand-chrome/80 font-semibold max-w-3xl mx-auto leading-(--line-height-normal)'>
             Im Herzen Münchens gelegen – die beste Lage für Ihr Tattoo Erlebnis. Erreichbar von überall
             in der Stadt und perfekt für Touristen und Einheimische.
           </p>
@@ -32,8 +32,8 @@ export function LocationSection() {
             <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <Landmark className='w-8 h-8 text-(--brand-accent)' />
             </div>
-            <h3 className='font-semibold text-luxury-text-inverse mb-0'>Marienplatz</h3>
-            <p className='text-luxury-text-inverse/70 text-sm'>
+            <h3 className='font-headline font-semibold text-(length:--text-body) text-luxury-text-inverse mb-0'>Marienplatz</h3>
+            <p className='font-body text-luxury-text-inverse/70 text-(length:--text-sm) leading-(--line-height-normal)'>
               Nur 2 Minuten vom zentralen Marienplatz entfernt – dem pulsierenden Herzen Münchens
             </p>
           </div>
@@ -43,8 +43,8 @@ export function LocationSection() {
             <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <ShoppingBag className='w-8 h-8 text-(--brand-accent)' />
             </div>
-            <h3 className='font-semibold text-luxury-text-inverse mb-0'>Viktualienmarkt</h3>
-            <p className='text-luxury-text-inverse/70 text-sm'>
+            <h3 className='font-headline font-semibold text-(length:--text-body) text-luxury-text-inverse mb-0'>Viktualienmarkt</h3>
+            <p className='font-body text-luxury-text-inverse/70 text-(length:--text-sm) leading-(--line-height-normal)'>
               5 Minuten vom berühmten Viktualienmarkt – perfekt für einen Besuch vor/nach dem Tattoo
             </p>
           </div>
@@ -54,8 +54,8 @@ export function LocationSection() {
             <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <Train className='w-8 h-8 text-(--brand-accent)' />
             </div>
-            <h3 className='font-semibold text-luxury-text-inverse mb-0'>ÖPNV perfekt</h3>
-            <p className='text-luxury-text-inverse/70 text-sm'>
+            <h3 className='font-headline font-semibold text-(length:--text-body) text-luxury-text-inverse mb-0'>ÖPNV perfekt</h3>
+            <p className='font-body text-luxury-text-inverse/70 text-(length:--text-sm) leading-(--line-height-normal)'>
               U-Bahn/S-Bahn Marienplatz (U1-U5, S1-S8) – Direkt vor unserer Tür
             </p>
           </div>
@@ -65,8 +65,8 @@ export function LocationSection() {
             <div className="w-16 bg-luxury-text-inverse/5 rounded-full flex flex-col items-center justify-center mx-auto mb-8 h-full min-h-16 max-h-16">
               <MapPin className='w-8 h-8 text-(--brand-accent)' />
             </div>
-            <h3 className='font-semibold text-luxury-text-inverse mb-0'>Innenstadt</h3>
-            <p className='text-luxury-text-inverse/70 text-sm'>
+            <h3 className='font-headline font-semibold text-(length:--text-body) text-luxury-text-inverse mb-0'>Innenstadt</h3>
+            <p className='font-body text-luxury-text-inverse/70 text-(length:--text-sm) leading-(--line-height-normal)'>
               Zentral in der Münchner Innenstadt – Altheimer Eck 11, 80331 München
             </p>
           </div>
@@ -75,21 +75,21 @@ export function LocationSection() {
         {/* SEO-Optimized Location Description */}
         <Card variant="default" size="default" asChild>
           <div className="mt-16">
-            <h3 className='text-xl font-semibold text-luxury-text-inverse mb-8'>
+            <h3 className='font-headline text-(length:--text-h4) font-semibold text-luxury-text-inverse mb-8'>
               Tattoo Studio Innenstadt München – Die beste Lage
             </h3>
             <div className='grid md:grid-cols-2 gap-8 text-luxury-text-inverse/70'>
               <div>
-                <h4 className='font-semibold mb-0 text-luxury-text-inverse'>Für Einheimische:</h4>
-                <p className='text-sm'>
+                <h4 className='font-headline font-semibold text-(length:--text-body) mb-0 text-luxury-text-inverse'>Für Einheimische:</h4>
+                <p className='font-body text-(length:--text-sm) leading-(--line-height-normal)'>
                   Unser Tattoo Studio in München Innenstadt ist von allen Stadtteilen perfekt erreichbar.
                   Ob aus Schwabing, Haidhausen, Neuhausen oder Sendling – die Anreise mit öffentlichen
                   Verkehrsmitteln dauert maximal 20 Minuten.
                 </p>
               </div>
               <div>
-                <h4 className='font-semibold mb-0 text-luxury-text-inverse'>Für Touristen:</h4>
-                <p className='text-sm'>
+                <h4 className='font-headline font-semibold text-(length:--text-body) mb-0 text-luxury-text-inverse'>Für Touristen:</h4>
+                <p className='font-body text-(length:--text-sm) leading-(--line-height-normal)'>
                   Als zentral gelegenes Tattoo Studio am Marienplatz sind wir die perfekte Adresse für
                   Besucher Münchens. Kombinieren Sie Ihr Tattoo mit einem Bummel über den Viktualienmarkt
                   oder einer Tour durch die Altstadt.
@@ -99,7 +99,7 @@ export function LocationSection() {
 
             {/* Keywords for SEO */}
             <div className='mt-8 pt-8 border-t border-luxury-text-inverse/10'>
-              <div className='flex flex-wrap gap-0 text-sm'>
+              <div className='flex flex-wrap gap-0 font-body text-(length:--text-sm)'>
                 <span className='bg-luxury-text-inverse/5 text-(--brand-accent) px-0 py-0 rounded-full border border-luxury-text-inverse/10'>
                   Tattoo Marienplatz
                 </span>

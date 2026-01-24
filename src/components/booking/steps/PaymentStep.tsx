@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import type { PaymentMethod } from '../bookingConfig';
+import type { PaymentMethod } from '@/components/booking/bookingConfig';
 
 interface PaymentStepProps {
   t: (key: string) => string;

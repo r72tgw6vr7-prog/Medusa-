@@ -1,8 +1,8 @@
 import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Sparkles, Zap, Shield, Heart, Euro, ChevronRight } from 'lucide-react';
-import { useApp } from '../../../core/state/AppContext';
-import { Button } from '../ui/button';
+import { useApp } from '@/core/state/AppContext';
+import { Button } from '@/components/ui/button';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 
@@ -237,7 +237,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
       <Container size="default">
         <div className='flex flex-col gap-16'>
           <div className='text-center space-y-8'>
-            <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
+            <p className='text-sm uppercase tracking-widest text-white/50 font-semibold'>
               Medusa München
             </p>
             <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
@@ -258,15 +258,15 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
               const IconComponent = category.icon;
               const isActive = activeCategory === category.id;
               const buttonClass = isActive
-                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(192,192,192,0.4)] scale-[1.02]'
-                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--accent-chrome)]/80 hover:scale-[1.02]';
+                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(var(--accent-chrome-rgb),0.4)] scale-[1.02]'
+                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--accent-chrome)]/80 hover:scale-[1.02]';
 
               return (
                 <button
                   key={category.id}
                   id={`tab-${category.id}`}
                   role='tab'
-                  aria-selected={isActive}
+                  aria-selected={isActive ? 'true' : 'false'}
                   aria-controls={`panel-${category.id}`}
                   tabIndex={isActive ? 0 : -1}
                   className={buttonClass}
@@ -280,12 +280,12 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                     >
                       <IconComponent size={20} className='text-black' />
                     </div>
-                    <span className='text-xs font-semibold uppercase tracking-[0.25em] text-white/60'>
+                    <span className='text-xs font-semibold uppercase tracking-wider text-white/60'>
                       ab {category.priceFrom}
                     </span>
                   </div>
                   <div className='space-y-8 flex-1'>
-                    <h3 className='font-headline text-2xl text-(--brand-gold)'>{category.title}</h3>
+                    <h3 className='font-headline text-2xl text-[var(--brand-gold)]'>{category.title}</h3>
                     <p className='text-sm md:text-base text-white/75 leading-relaxed font-body'>
                       {category.subtitle}
                     </p>
@@ -311,7 +311,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
               exit='exit'
             >
               <div className='text-center space-y-8'>
-                <p className='text-sm uppercase tracking-[0.25em] text-white/60'>
+                <p className='text-sm uppercase tracking-wider text-white/60'>
                   {activeCategoryMeta?.title}
                 </p>
                 <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
@@ -326,21 +326,21 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                 {currentServices.map((service, index) => {
                   const stateClass =
                     index === 1
-                      ? 'border-[var(--accent-chrome)] shadow-[0_20px_60px_rgba(192,192,192,0.3)] scale-[1.01]'
+                      ? 'border-[var(--accent-chrome)] shadow-[0_20px_60px_rgba(var(--accent-chrome-rgb),0.3)] scale-[1.01]'
                       : 'border-white/10 hover:border-[var(--accent-chrome)]/70';
 
                   return (
                     <div key={service.id} className='flex flex-col h-full'>
                       <motion.div
                         variants={fadeInUpVariants}
-                        className={`flex flex-col h-full rounded-3xl border-2 bg-[#1A1A1A] transition-all duration-300 ${stateClass}`}
+                        className={`flex flex-col h-full rounded-3xl border-2 bg-luxury-bg-dark transition-all duration-300 ${stateClass}`}
                       >
                         <div className='flex flex-col gap-8 p-8 h-full'>
                           <div className='flex items-center justify-between'>
-                            <span className='text-sm font-semibold uppercase tracking-[0.2em] text-[var(--brand-gold)]/80'>
+                            <span className='text-sm font-semibold uppercase tracking-wide text-[color:var(--brand-gold)]/80'>
                               {index === 1 ? 'Beliebt' : 'Paket'}
                             </span>
-                            <span className='text-sm font-semibold uppercase tracking-[0.2em] text-white/60'>
+                            <span className='text-sm font-semibold uppercase tracking-wide text-white/60'>
                               {service.duration ?? 'Flexibel'}
                             </span>
                           </div>
@@ -365,10 +365,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                                 className='flex items-center gap-8'
                                 variants={fadeInUpVariants}
                               >
-                                <ChevronRight
-                                  size={16}
-                                  className='text-[var(--brand-gold)] shrink-0'
-                                />
+                                <ChevronRight size={16} className='text-[var(--brand-gold)] shrink-0' />
                                 <span>{feature}</span>
                               </motion.li>
                             ))}

@@ -26,7 +26,7 @@ Medusa uses a **60-30-10 color system** with chrome accents:
 ### Prerequisites
 
 - **Node.js**: 20.x
-- **npm**: 9.x or higher
+- **pnpm**: 9.x or higher
 - **Git**: Latest version
 
 ### Installation
@@ -37,7 +37,7 @@ git clone https://github.com/your-org/medusa-tattoo-muenchen.git
 cd medusa-tattoo-muenchen
 
 # Install dependencies
-npm install
+pnpm install
 
 # Create environment file
 cp .env.example .env
@@ -45,7 +45,7 @@ cp .env.example .env
 # Add your API keys to .env (see Environment Variables section)
 
 # Start development server
-npm run dev
+pnpm run dev
 ```
 
 The site will be available at `http://localhost:5173`
@@ -57,17 +57,19 @@ The site will be available at `http://localhost:5173`
 Create a `.env` file in the root directory with the following variables:
 
 ```bash
-# Email Service (SendGrid recommended)
-VITE_SENDGRID_API_KEY=your_sendgrid_api_key_here
+# Email Service (server-side secret)
+SENDGRID_API_KEY=your_sendgrid_api_key_here
 
 # Google Maps (for Contact page)
 VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
-# reCAPTCHA (spam protection)
+# reCAPTCHA
+# Public site key (safe to expose to client)
 VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key_here
+# Secret key (server-side secret)
 RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key_here
 
-# Analytics (optional)
+# Analytics (public identifier)
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 # Production URL
@@ -79,7 +81,7 @@ VITE_SITE_URL=https://medusa-tattoo-muenchen.de
 **SendGrid** (Email):
 1. Sign up at [sendgrid.com](https://sendgrid.com)
 2. Create an API key with "Mail Send" permissions
-3. Add to `.env` as `VITE_SENDGRID_API_KEY`
+3. Add to `.env` as `SENDGRID_API_KEY`
 
 **Google Maps** (Contact Page):
 1. Go to [Google Cloud Console](https://console.cloud.google.com)
@@ -100,10 +102,10 @@ VITE_SITE_URL=https://medusa-tattoo-muenchen.de
 
 ```bash
 # Create production build
-npm run build
+pnpm run build
 
 # Preview production build locally
-npm run preview
+pnpm run preview
 ```
 
 Build output will be in `/dist` directory.
@@ -113,7 +115,7 @@ Build output will be in `/dist` directory.
 **Recommended: Vercel**
 ```bash
 # Install Vercel CLI
-npm install -g vercel
+pnpm add -g vercel
 
 # Deploy
 vercel --prod
@@ -122,14 +124,14 @@ vercel --prod
 **Alternative: Netlify**
 ```bash
 # Install Netlify CLI
-npm install -g netlify-cli
+pnpm add -g netlify-cli
 
 # Deploy
 netlify deploy --prod
 ```
 
 **Build Settings**:
-- Build command: `npm run build`
+- Build command: `pnpm run build`
 - Publish directory: `dist`
 - Node version: `20.x`
 
@@ -174,22 +176,22 @@ netlify deploy --prod
 
 ```bash
 # Development
-npm run dev              # Start dev server (Vite)
+pnpm run dev              # Start dev server (Vite)
 
 # Production
-npm run build            # Build for production
-npm run preview          # Preview production build
+pnpm run build            # Build for production
+pnpm run preview          # Preview production build
 
 # Code Quality
-npm run lint             # Run ESLint
-npm run type-check       # Run TypeScript checks
+pnpm run lint             # Run ESLint
+pnpm run typecheck        # Run TypeScript checks
 
 # Testing
-npm run test             # Run unit tests (Vitest)
-npm run test:e2e         # Run end-to-end tests (Playwright)
-npm run test:p0          # Run P0 critical behavior tests
-npm run test:p0:headed   # Run P0 tests with visible browser
-npm run test:p0:report   # Run P0 tests and open HTML report
+pnpm run test             # Run unit tests (Vitest)
+pnpm run test:e2e         # Run end-to-end tests (Playwright)
+pnpm run test:p0          # Run P0 critical behavior tests
+pnpm run test:p0:headed   # Run P0 tests with visible browser
+pnpm run test:p0:report   # Run P0 tests and open HTML report
 ```
 
 ---
@@ -245,7 +247,7 @@ This site follows **WCAG AA** standards:
 ### Testing
 ```bash
 # Install axe-core for accessibility testing
-npm install -D @axe-core/cli
+pnpm add -D @axe-core/cli
 
 # Run accessibility audit
 npx axe https://localhost:5173
@@ -263,13 +265,13 @@ npx axe https://localhost:5173
 npx playwright install
 
 # Run all P0 tests
-npm run test:p0
+pnpm run test:p0
 
 # Run with visual browser
-npm run test:p0:headed
+pnpm run test:p0:headed
 
 # Generate HTML report
-npm run test:p0:report
+pnpm run test:p0:report
 ```
 
 ### Test Coverage

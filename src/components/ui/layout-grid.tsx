@@ -61,50 +61,54 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
   }, [selected]);
 
   // Spotlight disabled for reduced motion or touch devices
-  const spotlightEnabled = !prefersReducedMotion && !isTouchDevice && isHovering;
+  const overlayEnabled = !prefersReducedMotion && !isTouchDevice;
+  const spotlightEnabled = overlayEnabled && isHovering;
 
   return (
     <div
       ref={containerRef}
-      className="w-screen h-full px-4 md:px-6 py-6 md:py-8 relative"
+      className="w-full h-full px-4 md:px-6 py-6 md:py-8 relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      role="presentation"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       style={{
         background: 'var(--bg-page)',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(400px, 100%), 1fr))',
-        gap: '1rem',
+        gap: 'var(--space-2)',
         '--spotlight-x': `${mousePos.x}px`,
         '--spotlight-y': `${mousePos.y}px`,
         '--spotlight-size': '280px',
       } as React.CSSProperties}
     >
-      {/* Spotlight overlay - subtle dim only, no dark background */}
+      {/* Default dim overlay (80%) always on; spotlight reveals on hover */}
       <div
         className={cn(
-          "void-overlay pointer-events-none absolute inset-0 z-20 transition-opacity duration-300",
-          spotlightEnabled ? "opacity-100" : "opacity-0"
+          "void-overlay pointer-events-none absolute inset-0 z-30 transition-[mask-image,opacity] duration-300",
+          overlayEnabled ? "opacity-100" : "opacity-0"
         )}
         style={{
-          background: spotlightEnabled
-            ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, rgba(0, 0, 0, 0.3) 100%)`
-            : 'transparent',
+          background: overlayEnabled ? 'rgba(var(--color-surface-darker-rgb), 0.8)' : 'transparent',
+          maskImage: spotlightEnabled
+            ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, transparent 45%, #000 65%, #000 100%)`
+            : undefined,
+          WebkitMaskImage: spotlightEnabled
+            ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, transparent 45%, #000 65%, #000 100%)`
+            : undefined,
         }}
         aria-hidden="true"
       />
       
       {cards.map((card, i) => (
-        <div key={i} className={cn("relative", card.className === "md:col-span-2" ? "md:col-span-2" : "")}>
+        <div key={i} className={cn("relative", card.className)}>
           <motion.div
             onClick={() => handleClick(card)}
             className={cn(
               "gallery-frame relative overflow-hidden cursor-pointer",
-              "aspect-square rounded-xl",
-              "border border-[var(--card-border)]",
+              "aspect-square rounded-xl w-full",
+              "border border-(--card-border)",
               "transition-all duration-300 ease-out",
-              "hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)] focus-visible:ring-offset-2",
+              "hover:-translate-y-1 hover:shadow-(--shadow-xl)",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2",
               selected?.id === card.id
                 ? "absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
@@ -166,7 +170,7 @@ const ImageComponent = ({ card }: { card: Card }) => {
 
 const SelectedCard = ({ selected }: { selected: Card }) => {
   return (
-    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
+    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-dropdown">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
@@ -178,7 +182,7 @@ const SelectedCard = ({ selected }: { selected: Card }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-8 pb-4 z-dropdown"
       >
         {selected.content}
       </motion.div>

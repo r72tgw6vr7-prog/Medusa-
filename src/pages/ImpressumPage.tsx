@@ -109,9 +109,7 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
         },
         copyright: {
           title: 'Copyright',
-          content: [
-            '© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved.',
-          ],
+          content: ['© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved.'],
         },
       },
     },
@@ -119,155 +117,159 @@ export const ImpressumPage: React.FC<ImpressumPageProps> = ({ language = 'DE' })
 
   const t = content[language];
   return (
-    <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative'>
+    <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
 
       <main className='flex-1'>
-        <Section variant="default" spacing="normal">
-          <Container size="default">
-              {/* Page Header - Matches Services page exactly */}
-              <SectionHeading
-                eyebrow='Medusa München'
-                title={t.title}
-                subtitle={t.subtitle}
-              />
+        {/* TEMP: Remove before launch */}
+        <div className='bg-red-500 text-white p-4 text-center'>
+          ⚠️ ENTWURF - Platzhalter müssen ersetzt werden
+        </div>
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            {/* Page Header - Matches Services page exactly */}
+            <SectionHeading eyebrow='Medusa München' title={t.title} subtitle={t.subtitle} />
 
-              <div className='space-y-16'>
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>{t.sections.tmg.title}</h2>
-                  <div className='space-y-0 text-brand-white/85'>
-                    {t.sections.tmg.content.map((line, index) => (
-                      <p
-                        key={index}
-                        className={
-                          line === ''
-                            ? 'pb-2'
-                            : line.includes('Stargate GmbH')
-                              ? 'font-semibold'
-                              : ''
-                        }
-                      >
-                        {line || '\u00A0'}
-                      </p>
-                    ))}
-                  </div>
-                </section>
+            <div className='space-y-16'>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  {t.sections.tmg.title}
+                </h2>
+                <div className='space-y-0 text-brand-white/85'>
+                  {t.sections.tmg.content.map((line, index) => (
+                    <p
+                      key={index}
+                      className={
+                        line === '' ? 'pb-2' : line.includes('Stargate GmbH') ? 'font-semibold' : ''
+                      }
+                    >
+                      {line || '\u00A0'}
+                    </p>
+                  ))}
+                </div>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>
-                    {t.sections.contact.title}
-                  </h2>
-                  <div className='space-y-0 text-brand-white/85'>
-                    {t.sections.contact.content.map((line, index) => (
-                      <p key={index} className={line === '' ? 'pb-2' : ''}>
-                        {line || '\u00A0'}
-                      </p>
-                    ))}
-                  </div>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  {t.sections.contact.title}
+                </h2>
+                <div className='space-y-0 text-brand-white/85'>
+                  {t.sections.contact.content.map((line, index) => (
+                    <p key={index} className={line === '' ? 'pb-2' : ''}>
+                      {line || '\u00A0'}
+                    </p>
+                  ))}
+                </div>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>
-                    {t.sections.registration.title}
-                  </h2>
-                  <div className='space-y-0 text-brand-white/85'>
-                    {t.sections.registration.content.map((line, index) => (
-                      <p
-                        key={index}
-                        className={
-                          line.includes('Amtsgericht') || line.includes('Local court')
-                            ? 'text-xs md:text-sm text-luxury-text-inverse/60'
-                            : ''
-                        }
-                      >
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  {t.sections.registration.title}
+                </h2>
+                <div className='space-y-0 text-brand-white/85'>
+                  {t.sections.registration.content.map((line, index) => (
+                    <p
+                      key={index}
+                      className={
+                        line.includes('Amtsgericht') || line.includes('Local court')
+                          ? 'font-body text-(length:--text-xs) md:text-(length:--text-sm) text-luxury-text-inverse/60'
+                          : ''
+                      }
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>
-                    {t.sections.responsible.title}
-                  </h2>
-                  <div className='space-y-0 text-brand-white/85'>
-                    {t.sections.responsible.content.map((line, index) => (
-                      <p key={index}>{line}</p>
-                    ))}
-                  </div>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  {t.sections.responsible.title}
+                </h2>
+                <div className='space-y-0 text-brand-white/85'>
+                  {t.sections.responsible.content.map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
+                </div>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>
-                    Berufshaftpflichtversicherung
-                  </h2>
-                  <div className='space-y-0 text-brand-white/85'>
-                    <p>Versicherer: [Name der Versicherungsgesellschaft]</p>
-                    <p>Geltungsbereich: Deutschland/EU</p>
-                    <p>Deckungssumme: [Betrag in EUR]</p>
-                  </div>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  Berufshaftpflichtversicherung
+                </h2>
+                <div className='space-y-0 text-brand-white/85'>
+                  <p>Versicherer: [Name der Versicherungsgesellschaft]</p>
+                  <p>Geltungsbereich: Deutschland/EU</p>
+                  <p>Deckungssumme: [Betrag in EUR]</p>
+                </div>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>Streitschlichtung</h2>
-                  <p className='text-brand-white/85'>
-                    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
-                    bereit:
-                  </p>
-                  <a
-                    href='https://ec.europa.eu/consumers/odr'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-flex text-brand-accent hover:text-brand-accent/80 underline transition-colors duration-200 ease-out'
-                  >
-                    https://ec.europa.eu/consumers/odr
-                  </a>
-                  <p className="text-xs md:text-sm text-luxury-text-inverse/60">
-                    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
-                    Verbraucherschlichtungsstelle teilzunehmen.
-                  </p>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  Streitschlichtung
+                </h2>
+                <p className='text-brand-white/85'>
+                  Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
+                  bereit:
+                </p>
+                <a
+                  href='https://ec.europa.eu/consumers/odr'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex text-brand-accent hover:text-brand-accent/80 underline transition-colors duration-200 ease-out'
+                >
+                  https://ec.europa.eu/consumers/odr
+                </a>
+                <p className='font-body text-(length:--text-xs) md:text-(length:--text-sm) text-luxury-text-inverse/60'>
+                  Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+                  Verbraucherschlichtungsstelle teilzunehmen.
+                </p>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Inhalte</h2>
-                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
-                    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
-                    Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind
-                    wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-                    gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen,
-                    die auf eine rechtswidrige Tätigkeit hinweisen.
-                  </p>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  Haftung für Inhalte
+                </h2>
+                <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 leading-(--line-height-normal)'>
+                  Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen
+                  Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir
+                  als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte
+                  fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine
+                  rechtswidrige Tätigkeit hinweisen.
+                </p>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>Haftung für Links</h2>
-                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
-                    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir
-                    keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine
-                    Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
-                    Anbieter oder Betreiber der Seiten verantwortlich.
-                  </p>
-                </section>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  Haftung für Links
+                </h2>
+                <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 leading-(--line-height-normal)'>
+                  Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir
+                  keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine
+                  Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+                  Anbieter oder Betreiber der Seiten verantwortlich.
+                </p>
+              </section>
 
-                <section className='space-y-8'>
-                  <h2 className='text-2xl font-semibold text-brand-accent'>
-                    {t.sections.copyright.title}
-                  </h2>
-                  <p className='font-semibold text-brand-white/90'>
-                    {t.sections.copyright.content[0]}
-                  </p>
-                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
-                    {language === 'DE'
-                      ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
-                      : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'}
-                  </p>
-                  <p className='text-base lg:text-sm text-luxury-text-inverse/80 leading-relaxed'>
-                    {language === 'DE'
-                      ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
-                      : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'}
-                  </p>
-                </section>
-              </div>
+              <section className='space-y-8'>
+                <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
+                  {t.sections.copyright.title}
+                </h2>
+                <p className='font-semibold text-brand-white/90'>
+                  {t.sections.copyright.content[0]}
+                </p>
+                <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 leading-(--line-height-normal)'>
+                  {language === 'DE'
+                    ? 'Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.'
+                    : 'All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.'}
+                </p>
+                <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 leading-(--line-height-normal)'>
+                  {language === 'DE'
+                    ? 'Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.'
+                    : 'Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice.'}
+                </p>
+              </section>
+            </div>
           </Container>
         </Section>
       </main>

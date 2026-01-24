@@ -34,7 +34,7 @@ A world-class, production-ready website for Medusa Tattoo München, built with R
 ### Prerequisites
 
 - **Node.js**: 18.x or higher
-- **npm**: 9.x or higher
+- **pnpm**: 9.x or higher
 - **Git**: Latest version
 
 ### Installation
@@ -45,10 +45,10 @@ git clone https://github.com/r72tgw6vr7-prog/Medusa-.git
 cd Medusa-
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 \`\`\`
 
 The site will be available at \`http://localhost:5173\`
@@ -65,18 +65,18 @@ The site will be available at \`http://localhost:5173\`
 ├── data/                   # Content data
 ├── public/                 # Static assets
 └── ...
-\`\`\`
+```
 
 ---
 
 ## 🎯 Available Scripts
 
-\`\`\`bash
-npm run dev              # Start dev server
-npm run build            # Build for production
-npm run preview          # Preview production build
-npm run lint             # Run ESLint
-\`\`\`
+```bash
+pnpm run dev              # Start dev server
+pnpm run build            # Build for production
+pnpm run preview          # Preview production build
+pnpm run lint             # Run ESLint
+```
 
 ---
 

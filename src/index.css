@@ -11,13 +11,13 @@
 @import "tailwindcss";
 
 /* Font imports - must be right after tailwindcss import */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Design system - contains all tokens, base styles and components */
 @import './styles/design-system.css';
 @import './styles/utility-classes.css';
 @import './styles/micro-interactions.css';
+@import './styles/paket-cards.css';
+@import './styles/meteors.css';
 /* Section transition animations */
 @import './styles/section-transitions.css';
 /* Safe area utilities (responsive-container now in design-system.css) */
@@ -63,7 +63,7 @@ body,
   margin: 0;
   padding: 0;
   /* FOUNDATION: Lock dark background at root level */
-  background-color: #1A1A1A;
+  background-color: var(--bg-page);
   color: var(--color-text-primary, #ffffff);
 }
 

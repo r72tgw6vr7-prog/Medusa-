@@ -18,7 +18,83 @@
   "footer": {
     "copyright": " 2025 Medusa Tattoo Munich. All rights reserved.",
     "legal": "Imprint",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "brandTagline": "Munich's premium tattoo studio for art that lasts a lifetime.",
+    "studio": {
+      "address": "Altheimer Eck 11, 80331 Munich",
+      "hours": "Mon-Fri: 11:30-18:30, Sat: 11:00-18:00"
+    },
+    "headings": {
+      "quickLinks": "Quick Links",
+      "legal": "Legal",
+      "newsletter": "Newsletter"
+    },
+    "links": {
+      "privacy": "Privacy Policy",
+      "imprint": "Imprint",
+      "terms": "Terms",
+      "aftercare": "Aftercare"
+    },
+    "newsletter": {
+      "description": "Exclusive updates about events and offers.",
+      "emailPlaceholder": "Email address",
+      "marketingConsent": "I agree to receive marketing emails.",
+      "subscribe": "Subscribe"
+    },
+    "location": {
+      "title": "Studio Location & Directions",
+      "items": {
+        "marienplatz": {
+          "title": "Marienplatz",
+          "subtitle": "Only 2 minutes from central Marienplatz"
+        },
+        "subway": {
+          "title": "Subway",
+          "subtitle": "U3/U6 Marienplatz station"
+        },
+        "suburbanRail": {
+          "title": "S-Bahn",
+          "subtitle": "S1-S8 Marienplatz station"
+        },
+        "parking": {
+          "title": "Parking",
+          "subtitle": "Tal 26 parking garage or Q-Park Marienplatz"
+        }
+      },
+      "tags": {
+        "marienplatz": "Tattoo Marienplatz",
+        "innerCity": "Tattoo studio inner city",
+        "cityCenter": "Tattoo city center Munich",
+        "altheimerEck": "Tattoo Altheimer Eck",
+        "englishSpeaking": "English speaking tattoo Munich"
+      },
+      "faq": {
+        "title": "Tattoo Studio Munich – your questions, our answers",
+        "cards": {
+          "locals": {
+            "title": "For locals:",
+            "body": "Our tattoo studio in Munich city center is easy to reach from all neighborhoods. Whether you're coming from Schwabing, Haidhausen, Neuhausen, or Sendling — public transit usually takes 20 minutes or less."
+          },
+          "tourists": {
+            "title": "For tourists:",
+            "body": "Located right by Marienplatz, we're a perfect stop for visitors to Munich. Combine your tattoo appointment with a stroll through Viktualienmarkt or a tour of the old town."
+          },
+          "hours": {
+            "title": "Opening hours:",
+            "monFriLabel": "Mon-Fri:",
+            "monFriValue": "11:30-18:30",
+            "satLabel": "Sat:",
+            "satValue": "11:00-18:00",
+            "sunLabel": "Sun:",
+            "sunValue": "Closed"
+          }
+        }
+      }
+    },
+    "bottomBar": {
+      "rights": "Medusa Tattoo Munich. All rights reserved.",
+      "since": "Since 1994 in the heart of Munich"
+    }
   },
   "meta": {
     "home": {

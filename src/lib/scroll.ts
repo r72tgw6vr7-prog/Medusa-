@@ -41,6 +41,8 @@ class ScrollController {
   private config: ScrollConfig;
   private isMobile: boolean;
   private prefersReducedMotion: boolean;
+  private textAnimationsEnabled: boolean = false;
+  private textAnimationsContext: gsap.Context | null = null;
   private initialized: boolean = false;
   private rafId: number = 0;
   private scrollTweens: gsap.core.Tween[] = [];
@@ -76,7 +78,7 @@ class ScrollController {
     this.setupDebugMode();
 
     // Initialize scroll-driven animations regardless of smooth scroll setting
-    this.initScrollAnimations();
+    void this.initScrollAnimations();
 
     // Add event listeners for resize and visibility changes
     this.addEventListeners();
@@ -134,13 +136,44 @@ class ScrollController {
   /**
    * Initialize all scroll-driven animations using GSAP ScrollTrigger
    */
-  private initScrollAnimations(): void {
+  private async initScrollAnimations(): Promise<void> {
     // Apply effects only if motion is not reduced
     if (this.prefersReducedMotion) return;
 
-    // DISABLED ALL ANIMATIONS FOR PERFORMANCE
-    // Keeping this function for future use if needed
-    return;
+    // FONT GATE - prevents font swap jank for any GSAP text animations
+    try {
+      await document.fonts?.ready;
+    } catch {
+      // ignore font readiness failures
+    }
+
+    // Default behavior preserves current site visuals: do nothing unless explicitly enabled.
+    if (!this.textAnimationsEnabled) return;
+
+    const nodes = document.querySelectorAll('[data-gsap-text]');
+    if (nodes.length === 0) return;
+
+    // Ensure we don't accumulate text triggers across SPA navigation.
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = gsap.context(() => {
+      nodes.forEach((node) => {
+        gsap.fromTo(
+          node,
+          { autoAlpha: 0, y: 20 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: node,
+              start: 'top 85%',
+              once: true,
+            },
+          },
+        );
+      });
+    }, document.documentElement);
 
     // Initialize different animation types based on config
     if (this.config.parallaxEnabled) {
@@ -315,19 +348,20 @@ class ScrollController {
 
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
-    // CRITICAL: Kill ALL ScrollTrigger instances globally to prevent memory leaks
-    // This catches any ScrollTriggers created by other components (framer-motion, etc.)
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    
-    // Clear any GSAP tweens that might be orphaned
-    gsap.killTweensOf('*');
 
-    // Refresh ScrollTrigger to clear internal state
-    ScrollTrigger.clearScrollMemory();
-    ScrollTrigger.refresh(true);
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = null;
 
+    const ctx = gsap.context(() => {
+      ScrollTrigger.refresh();
+    }, document.documentElement);
+    ctx.revert();
 
-    this.initScrollAnimations();
+    void this.initScrollAnimations();
+  }
+
+  public setTextAnimationsEnabled(enabled: boolean): void {
+    this.textAnimationsEnabled = enabled;
   }
 
   /**
@@ -459,12 +493,8 @@ class ScrollController {
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
 
-    // Kill all ScrollTrigger instances and clear memory
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    gsap.killTweensOf('*');
-    ScrollTrigger.normalizeScroll(false); // Disable normalized scroll
-    ScrollTrigger.clearScrollMemory();
-    ScrollTrigger.refresh(true);
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = null;
 
     // Remove debug overlay
     const overlay = document.querySelector('.scroll-debug-overlay');
@@ -527,8 +557,30 @@ class ScrollController {
 export const scrollController = new ScrollController();
 
 // Export initialization function for easy import and use
-export const initScroll = (): void => {
+const initScrollMinimal = (): void => {
+  scrollController.setTextAnimationsEnabled(false);
   scrollController.init();
+};
+
+const initScrollFull = (): void => {
+  scrollController.setTextAnimationsEnabled(true);
+  scrollController.init();
+};
+
+export const scrollModes = {
+  'scroll-minimal': initScrollMinimal,
+  'scroll-full': initScrollFull,
+} as const;
+
+export const initScroll = (mode: keyof typeof scrollModes | string = 'scroll-minimal'): void => {
+  const resolvedMode: keyof typeof scrollModes =
+    typeof mode === 'string' && mode in scrollModes ? (mode as keyof typeof scrollModes) : 'scroll-minimal';
+
+  document.documentElement.style.setProperty(
+    '--gsap-text-enabled',
+    resolvedMode === 'scroll-full' ? '1' : '0',
+  );
+  scrollModes[resolvedMode]();
 };
 
 // Export for direct access if needed

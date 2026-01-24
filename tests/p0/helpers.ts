@@ -15,7 +15,10 @@ export class P0TestHelpers {
    * Wait for route navigation to complete
    */
   async waitForNavigation(expectedPath: string, timeout = 5000) {
-    await this.page.waitForURL(`**${expectedPath}`, { timeout });
+    const target = expectedPath.endsWith('/') && expectedPath.length > 1
+      ? expectedPath.slice(0, -1)
+      : expectedPath;
+    await this.page.waitForURL(`**${target}*`, { timeout });
     await this.page.waitForLoadState('networkidle');
     // Additional wait for any scroll animations
     await this.page.waitForTimeout(500);

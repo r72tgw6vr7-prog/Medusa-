@@ -55,9 +55,9 @@ const SPACING_STYLES: Record<SectionSpacing, string> = {
 
 const BG_STYLES: Record<SectionBg, string> = {
   none: 'bg-transparent',
-  dark: 'bg-[#1A1A1A]',
-  darker: 'bg-[#1A1A1A]',
-  darkest: 'bg-[#1A1A1A]',
+  dark: 'bg-luxury-bg-dark',
+  darker: 'bg-luxury-bg-dark',
+  darkest: 'bg-luxury-bg-dark',
 };
 
 // ============================================

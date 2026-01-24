@@ -8,24 +8,15 @@ const outDir = path.join(process.cwd(), 'reports', 'locale-scan');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 test('contact form validation messages by language', async ({ page }) => {
-  const url = process.env.E2E_BASE || 'http://localhost:5173/contact';
+  const base = process.env.E2E_BASE || 'http://localhost:5173';
   const results: any[] = [];
 
   for (const lang of ['de', 'en']) {
     // Ensure language is set before loading the page to initialize provider correctly
     await page.context().addInitScript({ content: `localStorage.setItem('language', '${lang}'); document.documentElement.lang='${lang}';` });
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
-    // Fallback: if UI language toggle exists, click to ensure UI is in the selected language
-    try {
-      const ariaLabel = lang === 'de' ? 'Switch to German' : 'Switch to English';
-      const langButton = page.locator(`button[aria-label="${ariaLabel}"]`).first();
-      if (await langButton.count() > 0) {
-        await langButton.click();
-        await page.waitForLoadState('networkidle');
-      }
-    } catch (e) {
-      // ignore
-    }
+    const routePath = lang === 'en' ? '/en/contact' : '/contact';
+    await page.goto(`${base}${routePath}`, { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#name')).toBeVisible({ timeout: 10000 });
 
     // Capture placeholders and button text
     const namePlaceholder = await page.locator('#name').getAttribute('placeholder');
@@ -46,7 +37,6 @@ test('contact form validation messages by language', async ({ page }) => {
     expect(emailPlaceholder).toBe(expected.contact.placeholders.email);
 
     // Check that validation messages appear in correct language
-    const requiredText = expected.validation.required;
     // Find error element for name field
     const nameErrorLocator = page.locator('#name').locator('xpath=following::p[contains(@class, "text-sm")][1]');
     const nameError = (await nameErrorLocator.first().textContent().catch(() => '')) || '';

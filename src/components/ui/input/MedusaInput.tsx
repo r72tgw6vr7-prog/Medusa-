@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cn } from '../utils';
+import { cn } from '@/components/ui/utils';
 
 type InputHTMLAttributes = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
@@ -69,7 +69,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
     return (
       <div
         className={cn(
-          'flex flex-col gap-1.5', // Reduced gap from 2 to 1.5
+          'flex flex-col gap-2', // Reduced gap from 2 to 1.5
           fullWidth ? 'w-full' : 'w-auto',
           wrapperClassName,
         )}
@@ -110,12 +110,12 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
               "flex h-12 w-full rounded-lg border border-luxury-border-on-dark bg-luxury-bg-dark-elevated px-4 py-3 text-base text-luxury-text-inverse file:border-0 file:bg-transparent file:text-base file:font-medium placeholder:text-luxury-text-inverse-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-luxury-accent-chrome focus-visible:ring-offset-2 focus-visible:ring-offset-luxury-bg-dark disabled:cursor-not-allowed disabled:opacity-50",
               // Focus states from design system
               'focus:outline-none focus:border-[var(--accent-chrome)]',
-              'focus:shadow-[0_0_10px_rgba(192,192,192,0.2)]',
+              'focus:shadow-[0_0_10px_rgba(var(--accent-chrome-rgb),0.2)]',
               // Hover state
               'hover:border-[var(--accent-chrome)]/50',
 
               // Error state
-              error && 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_1px_#ef4444]',
+              error && 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_1px_var(--color-error-red)]',
 
               // Disabled state
               disabled && 'opacity-50 cursor-not-allowed',
@@ -148,7 +148,7 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
           <p
             id={`${inputId}-description`}
             className={cn(
-              'text-sm lg:text-xs mt-0.5', // Smaller text and tighter spacing
+              'text-sm lg:text-xs mt-0', // Smaller text and tighter spacing
               error ? 'text-red-400' : 'text-luxury-text-inverse/50',
             )}
           >

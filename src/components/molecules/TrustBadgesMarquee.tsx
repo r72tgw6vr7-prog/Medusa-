@@ -34,8 +34,8 @@ export default function TrustBadgesMarquee() {
     display: 'flex',
     alignItems: 'center',
     height: '100%',
-    columnGap: '64px',
-    padding: '0 64px',
+    columnGap: 'var(--space-8)',
+    padding: '0 var(--space-8)',
     willChange: 'transform' as const,
     animation: prefersReduced ? undefined : 'marqueeLeft 45s linear infinite',
   } as React.CSSProperties;
@@ -44,20 +44,20 @@ export default function TrustBadgesMarquee() {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    rowGap: '8px',
+    rowGap: 'var(--space-1)',
     minWidth: '248px', // target ~4 visible at a time on desktop (8px grid)
   } as React.CSSProperties;
 
   const iconStyle = {
-    width: '56px',
-    height: '56px',
+    width: 'var(--space-7)',
+    height: 'var(--space-7)',
   } as React.CSSProperties;
 
   const labelStyle = {
-    fontFamily: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial',
-    fontSize: '14px',
-    fontWeight: 500,
-    color: 'rgb(255 255 255)',
+    fontFamily: 'var(--font-family-primary)',
+    fontSize: 'var(--text-sm)',
+    fontWeight: 'var(--font-weight-medium)',
+    color: 'var(--color-text-primary)',
     whiteSpace: 'nowrap' as const,
   };
 
@@ -66,7 +66,7 @@ export default function TrustBadgesMarquee() {
     left: 0,
     top: 0,
     height: '100%',
-    width: '128px',
+    width: 'var(--space-16)',
     background: 'linear-gradient(to right, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
   };
 
@@ -75,7 +75,7 @@ export default function TrustBadgesMarquee() {
     right: 0,
     top: 0,
     height: '100%',
-    width: '128px',
+    width: 'var(--space-16)',
     background: 'linear-gradient(to left, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
   };
 

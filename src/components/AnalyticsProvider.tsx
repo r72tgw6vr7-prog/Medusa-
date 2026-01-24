@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from '../hooks/useAnalytics';
+import { useAnalytics, useScrollDepthTracking, useTimeOnPageTracking } from '@/hooks/useAnalytics';
 
 interface AnalyticsProviderProps {
   children: React.ReactNode;

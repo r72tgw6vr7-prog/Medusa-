@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { TrustBadge } from '../atoms/TrustBadge';
+import { TrustBadge } from '@/components/atoms/TrustBadge';
 
 interface TrustBadge {
   icon: string;
@@ -112,7 +112,7 @@ export const TrustBadgeCarousel: React.FC<TrustBadgeCarouselProps> = ({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {/* Gradient fade on left side */}
-      <div className='absolute left-0 top-0 h-full w-12 bg-linear-to-r from-[var(--deep-black)] to-transparent z-10'></div>
+      <div className='absolute left-0 top-0 h-full w-12 bg-linear-to-r from-(--deep-black) to-transparent z-10'></div>
 
       <div
         ref={scrollRef}
@@ -138,7 +138,7 @@ export const TrustBadgeCarousel: React.FC<TrustBadgeCarouselProps> = ({
       </div>
 
       {/* Gradient fade on right side */}
-      <div className='absolute right-0 top-0 h-full w-12 bg-linear-to-l from-[var(--deep-black)] to-transparent z-10'></div>
+      <div className='absolute right-0 top-0 h-full w-12 bg-linear-to-l from-(--deep-black) to-transparent z-10'></div>
     </div>
   );
 };

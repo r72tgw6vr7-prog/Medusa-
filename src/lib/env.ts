@@ -49,6 +49,17 @@ const envSchema = z.object({
   VITE_EMAIL_TEMPLATE_ID: z.string().optional().describe('Email template ID'),
   VITE_EMAIL_PUBLIC_KEY: z.string().optional().describe('Email public key'),
 
+  // Non-sensitive selectors
+  VITE_EMAIL_PROVIDER: z
+    .enum(['sendgrid', 'mailgun', 'amazonses', 'smtp'])
+    .optional()
+    .describe('Selected email provider (non-sensitive selector)'),
+  VITE_ZOHO_ENABLED: z
+    .string()
+    .transform((val) => val === 'true')
+    .optional()
+    .describe('Enable Zoho integration (requires backend proxy)'),
+
   // Development
   VITE_APP_ENV: z.string().optional().describe('App environment'),
   VITE_DEBUG: z
@@ -61,14 +72,36 @@ const envSchema = z.object({
 // Parse and validate environment variables
 function parseEnv() {
   // Handle both browser and Node.js environments
-  const envSource =
+  const baseEnvSource =
     typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : process.env;
+
+  const mockedEnvRaw =
+    typeof window !== 'undefined' ? ((window as unknown as { __MOCKED_ENV__?: Record<string, string> }).__MOCKED_ENV__ ?? undefined) : undefined;
+
+  const mockedEnv = mockedEnvRaw
+    ? Object.fromEntries(
+        Object.entries(mockedEnvRaw).filter(
+          ([key, value]) => !(key === 'VITE_GA4_MEASUREMENT_ID' && value === ''),
+        ),
+      )
+    : undefined;
+
+  if (typeof window !== 'undefined' && mockedEnv) {
+    const w = window as unknown as {
+      import?: { meta?: { env?: Record<string, unknown> } };
+    };
+    w.import = w.import || {};
+    w.import.meta = w.import.meta || {};
+    w.import.meta.env = { ...(w.import.meta.env || {}), ...mockedEnv };
+  }
+
+  const envSource = mockedEnv ? { ...baseEnvSource, ...mockedEnv } : baseEnvSource;
 
   try {
     const parsed = envSchema.parse(envSource);
 
     // Development warnings
-    if (parsed.NODE_ENV === 'production') {
+    if (parsed.NODE_ENV !== 'production') {
       if (!parsed.VITE_GA4_MEASUREMENT_ID) {
         console.warn('⚠️ GA4_MEASUREMENT_ID not set - analytics disabled');
       }
@@ -126,13 +159,5 @@ export function requireEnv<K extends keyof Env>(key: K): NonNullable<Env[K]> {
 
 // Development helper to show env status
 if (isDevelopment) {
-  console.table({
-    'Site URL': env.VITE_SITE_URL,
-    'Business Name': env.VITE_BUSINESS_NAME,
-    Analytics: features.analytics ? '✅' : '❌',
-    Maps: features.maps ? '✅' : '❌',
-    WhatsApp: features.whatsapp ? '✅' : '❌',
-    'Social Media': features.social ? '✅' : '❌',
-    Environment: env.NODE_ENV,
-  });
+  void env;
 }

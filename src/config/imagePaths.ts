@@ -46,10 +46,6 @@ export const IMAGE_PATHS = {
   // Hero section
   hero: {
     background: '/assets/images/photos/hero/medusatattooartwork.webp',
-    trustBadge1: '/assets/images/svg/Container_2.svg',
-    trustBadge2: '/assets/images/svg/Container_3.svg',
-    trustBadge3: '/assets/images/svg/Container_4.svg',
-    trustBadge4: '/assets/images/svg/Container.svg',
   },
 
   // Partners logos
@@ -77,7 +73,6 @@ export function getImagePath<T extends ImageCategory>(category: T, key: ImageKey
 
 // Validate that an image path exists (client-side check)
 export function isValidImagePath(path: string): boolean {
-  return Object.values(IMAGE_PATHS)
-    .flatMap((category) => Object.values(category))
-    .includes(path as any);
+  const allPaths = Object.values(IMAGE_PATHS).flatMap((category) => Object.values(category)) as string[];
+  return allPaths.includes(path);
 }

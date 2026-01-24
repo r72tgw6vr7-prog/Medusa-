@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, FileText, Mail } from 'lucide-react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { SectionHeading } from '../components/SectionHeading';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { SectionHeading } from '@/components/SectionHeading';
 import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
@@ -161,47 +161,47 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
   const t = content[language];
 
   return (
-    <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative'>
+    <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
 
       <main className='flex-1'>
-        <Section variant="default" spacing="normal">
-          <Container size="default">
-              {/* Page Header - Standardized */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 40 }}
-                transition={{ duration: 0.8 }}
-              >
-                <SectionHeading
-                  eyebrow='Medusa München'
-                  title={t.title}
-                  subtitle={t.subtitle}
-                />
-                <p className="text-xs md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6 text-center">{t.lastUpdated}</p>
-              </motion.div>
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            {/* Page Header - Standardized */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 40 }}
+              transition={{ duration: 0.8 }}
+            >
+              <SectionHeading eyebrow='Medusa München' title={t.title} subtitle={t.subtitle} />
+              <p className='font-body text-(length:--text-xs) md:text-(length:--text-sm) uppercase tracking-widest text-luxury-text-inverse/60 mb-6 text-center'>
+                {t.lastUpdated}
+              </p>
+            </motion.div>
 
-              {/* Introduction */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-              >
-                <Card variant="default" size="default" asChild>
-                  <div>
-                  <p className="text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed">{t.introduction}</p>
-                  </div>
-                </Card>
-              </motion.div>
+            {/* Introduction */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Card variant='default' size='default' asChild>
+                <div>
+                  <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal)'>
+                    {t.introduction}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
 
-              {/* Definitions */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-              >
-                <Card variant="default" size="default" asChild>
-                  <div>
+            {/* Definitions */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+            >
+              <Card variant='default' size='default' asChild>
+                <div>
                   <div className='flex items-center mb-8'>
                     <FileText size={24} className='text-brand-accent mr-0' />
                     <h2 className='text-headline-md font-headline text-brand-accent'>
@@ -216,22 +216,22 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                       </p>
                     ))}
                   </div>
-                  </div>
-                </Card>
-              </motion.div>
+                </div>
+              </Card>
+            </motion.div>
 
-              {/* Content Sections */}
-              {t.sections.map((section, index) => {
-                const IconComponent = section.icon;
-                return (
-                  <motion.div
-                    key={section.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-                    transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
-                  >
-                    <Card variant="default" size="default" asChild>
-                      <div>
+            {/* Content Sections */}
+            {t.sections.map((section, index) => {
+              const IconComponent = section.icon;
+              return (
+                <motion.div
+                  key={section.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
+                  transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+                >
+                  <Card variant='default' size='default' asChild>
+                    <div>
                       <div className='flex items-center mb-8'>
                         <IconComponent size={24} className='text-brand-accent mr-0' />
                         <h2 className='text-headline-md font-headline text-brand-accent'>
@@ -245,37 +245,37 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                           </p>
                         ))}
                       </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                );
-              })}
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
 
-              {/* Contact Actions */}
-              <motion.div
-                className='mt-16 text-center'
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <h3 className='text-headline-md font-headline text-brand-accent mb-8'>
-                  {language === 'DE' ? 'Kontakt aufnehmen' : 'Contact Us'}
-                </h3>
-                <div className='flex flex-wrap justify-center gap-8'>
-                  <a
-                    href='mailto:info@medusa-tattoo.de'
-                    className='bg-brand-accent text-brand-background px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:bg-brand-accent-hover hover:shadow-chrome-glow hover:scale-105 active:scale-95'
-                  >
-                    {language === 'DE' ? 'E-Mail senden' : 'Send Email'}
-                  </a>
-                  <a
-                    href='tel:089910994'
-                    className='bg-brand-background border-2 border-brand-chrome/50 hover:border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:scale-105 active:scale-95'
-                  >
-                    {language === 'DE' ? 'Anrufen' : 'Call Us'}
-                  </a>
-                </div>
-              </motion.div>
+            {/* Contact Actions */}
+            <motion.div
+              className='mt-16 text-center'
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <h3 className='text-headline-md font-headline text-brand-accent mb-8'>
+                {language === 'DE' ? 'Kontakt aufnehmen' : 'Contact Us'}
+              </h3>
+              <div className='flex flex-wrap justify-center gap-8'>
+                <a
+                  href='mailto:info@medusa-tattoo.de'
+                  className='bg-brand-accent text-brand-background px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:bg-brand-accent-hover hover:shadow-chrome-glow hover:scale-105 active:scale-95'
+                >
+                  {language === 'DE' ? 'E-Mail senden' : 'Send Email'}
+                </a>
+                <a
+                  href='tel:089910994'
+                  className='bg-brand-background border-2 border-brand-chrome/50 hover:border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:scale-105 active:scale-95'
+                >
+                  {language === 'DE' ? 'Anrufen' : 'Call Us'}
+                </a>
+              </div>
+            </motion.div>
           </Container>
         </Section>
       </main>

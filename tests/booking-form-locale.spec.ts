@@ -13,15 +13,19 @@ for (const lang of ['de', 'en'] as const) {
   test(`booking form localization check (${lang})`, async ({ page }) => {
     const expected = lang === 'de' ? de : en;
 
+    const routePath = lang === 'en' ? '/en/booking' : '/booking';
+
     // Navigate to booking page
-    await page.goto('/booking', { waitUntil: 'networkidle' });
+    await page.goto(routePath, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(300);
 
     // Set language in localStorage and reload
     await page.evaluate((l) => {
       localStorage.setItem('language', l);
       document.documentElement.lang = l;
     }, lang);
-    await page.reload({ waitUntil: 'networkidle' });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(300);
 
     // Wait for the booking modal to be visible
     await expect(page.locator('.booking-modal-mobile')).toBeVisible({ timeout: 10000 });

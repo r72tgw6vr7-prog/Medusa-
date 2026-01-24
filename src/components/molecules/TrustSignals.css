@@ -41,7 +41,7 @@
 .trust-signals__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
+  gap: var(--space-4);
   max-width: 56rem; /* max-w-4xl */
   margin-left: auto;
   margin-right: auto;
@@ -99,8 +99,8 @@
 }
 
 .trust-badge:focus-visible {
-  outline: 2px solid var(--accent-chrome);
-  outline-offset: 2px;
+  outline: calc(var(--space-0-5) / 2) solid var(--accent-chrome);
+  outline-offset: calc(var(--space-0-5) / 2);
 }
 
 @media (min-width: 1024px) {
@@ -124,8 +124,8 @@
 }
 
 .trust-badge__icon {
-  width: 2rem; /* w-8 */
-  height: 2rem; /* h-8 */
+  width: var(--space-4);
+  height: var(--space-4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,31 +135,31 @@
 
 @media (min-width: 1024px) {
   .trust-badge__icon {
-    width: 4rem; /* lg:w-16 */
-    height: 4rem; /* lg:h-16 */
+    width: var(--space-8);
+    height: var(--space-8);
   }
 }
 
 .trust-badge__icon svg {
-  width: 1rem;
-  height: 1rem;
+  width: var(--space-2);
+  height: var(--space-2);
   color: var(--deep-black);
 }
 
 @media (min-width: 1024px) {
   .trust-badge__icon svg {
-    width: 2rem;
-    height: 2rem;
+    width: var(--space-4);
+    height: var(--space-4);
   }
 }
 
 /* Title */
 .trust-badge__title {
   margin-bottom: 0;
-  font-family: "Playfair Display", serif;
-  font-size: 0.875rem; /* 14px */
-  font-weight: 700;
-  line-height: 1.1;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tighter);
   color: var(--brand-accent);
 }
 
@@ -172,9 +172,9 @@
 /* Description */
 .trust-badge__description {
   display: none;
-  font-family: "Inter", sans-serif;
-  font-size: 1.125rem; /* 18px */
-  line-height: 1.4;
+  font-family: var(--font-family-primary);
+  font-size: var(--text-lg);
+  line-height: var(--line-height-normal);
   color: var(--color-text-secondary);
 }
 
@@ -195,4 +195,8 @@
     /* Badges appear instantly without ping effect */
     opacity: 1;
   }
+}
+
+.trust-signals__icon-glow {
+  filter: drop-shadow(0 0 8px rgba(var(--color-text-primary-rgb), 0.6));
 }

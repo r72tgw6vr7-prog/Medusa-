@@ -14,29 +14,27 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   subtitle,
   level = 'primary',
 }) => {
-  // Primary: text-3xl md:text-4xl lg:text-5xl (30-48px)
-  // Secondary: text-2xl md:text-3xl lg:text-4xl (24-36px)
-  const headingClasses = level === 'primary'
-    ? 'font-headline text-[length:var(--heading-section-primary-fluid)] font-bold tracking-tight leading-tight text-[var(--accent-chrome)]'
-    : 'font-headline text-[length:var(--heading-section-secondary-fluid)] font-semibold tracking-normal leading-snug text-[var(--accent-chrome)]';
+  // Primary: uses H2 token, Secondary: uses H3 token
+  const headingClasses =
+    level === 'primary'
+      ? 'font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--color-text-primary)'
+      : 'font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--color-text-primary)';
 
   const Tag = level === 'primary' ? 'h2' : 'h3';
 
   return (
-    <div className="text-center space-y-4">
+    <div className='text-center space-y-4'>
       {eyebrow && (
-        <p
-          className="text-sm uppercase tracking-widest font-medium text-brand-chrome"
-          style={{ marginBottom: 'var(--space-1-5)' }}
-        >
+        <p className='text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome mb-(--space-2)'>
           {eyebrow}
         </p>
       )}
-      <Tag className={headingClasses}>
-        {title}
-      </Tag>
+      <Tag className={headingClasses}>{title}</Tag>
       {subtitle && (
-        <p className="text-lg text-brand-chrome max-w-2xl mx-auto font-body leading-relaxed mt-4">
+        <p
+          className='text-(length:--text-lg) text-brand-chrome max-w-2xl mx-auto font-body font-semibold leading-(--line-height-normal) mt-4'
+          style={{ textShadow: '0 0 12px var(--chrome-glow-soft)' }}
+        >
           {subtitle}
         </p>
       )}

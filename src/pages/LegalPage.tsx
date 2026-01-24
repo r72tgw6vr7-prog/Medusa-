@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { PageHeading } from '../components/PageHeading';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { PageHeading } from '@/components/PageHeading';
 import { Card } from '@/components/ui/Card';
 
 export const LegalPage: React.FC = () => {
@@ -19,7 +19,7 @@ export const LegalPage: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-luxury-bg-dark'>
+    <div className='min-h-screen bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
 
       <main>
@@ -34,14 +34,16 @@ export const LegalPage: React.FC = () => {
 
             {/* Table of Contents */}
             <Card
-              variant="default"
-              size="default"
-              className="w-full min-w-0 overflow-hidden lg:overflow-visible"
+              variant='default'
+              size='default'
+              className='w-full min-w-0 overflow-hidden lg:overflow-visible'
               asChild
             >
-              <nav className="w-full">
-                <h2 className='text-2xl font-semibold text-brand-accent mb-8'>Inhaltsverzeichnis</h2>
-                <ul className='space-y-0 text-brand-lightGray wrap-break-word lg:break-normal'>
+              <nav className='w-full'>
+                <h2 className='font-headline text-(length:--text-h3) font-semibold text-brand-accent mb-8'>
+                  Inhaltsverzeichnis
+                </h2>
+                <ul className='space-y-0 text-(length:--text-body) text-brand-lightGray wrap-break-word lg:break-normal'>
                   <li>
                     <button
                       onClick={() => scrollToSection('section-1')}
@@ -205,19 +207,22 @@ export const LegalPage: React.FC = () => {
             ].map((section) => (
               <Card
                 key={section.id}
-                variant="default"
-                size="default"
-                className="w-full min-w-0 overflow-hidden lg:overflow-visible"
+                variant='default'
+                size='default'
+                className='w-full min-w-0 overflow-hidden lg:overflow-visible'
                 asChild
               >
                 <div>
-                  <h3 className="font-headline text-xl text-luxury-text-inverse mb-4">
+                  <h3 className='font-headline text-(length:--text-h4) text-luxury-text-inverse mb-4'>
                     {section.title}
                   </h3>
-                  <div className="space-y-4">
-                    <ul className="space-y-2 ml-6 list-disc">
+                  <div className='space-y-4'>
+                    <ul className='space-y-2 ml-6 list-disc'>
                       {section.content.map((item: string, index: number) => (
-                        <li key={index} className="text-base lg:text-sm text-luxury-text-inverse/70">
+                        <li
+                          key={index}
+                          className='text-(length:--text-body) text-luxury-text-inverse/70 leading-(--line-height-normal)'
+                        >
                           {item}
                         </li>
                       ))}
@@ -226,32 +231,34 @@ export const LegalPage: React.FC = () => {
                 </div>
               </Card>
             ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <Footer />
+      <Footer />
 
-    {/* Back to Top Button */}
-    {showBackToTop && (
-      <button
-        onClick={scrollToTop}
-        className='fixed bottom-8 right-8 bg-brand-chrome text-luxury-text-primary p-8 rounded-xl shadow-lg hover:bg-accent-hover transition-all duration-200 z-50 focus:outline-none focus:ring-2 focus:ring-brand-chrome focus:ring-offset-2 focus:ring-offset-luxury-bg-dark'
-        aria-label='Zurück nach oben'
-      >
-        <p className="text-xs md:text-sm uppercase tracking-widest text-luxury-text-inverse/60 mb-6">Zurück nach oben</p>
-        <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M5 10l7-7m0 0l7 7m-7-7v18'
-          />
-        </svg>
-      </button>
-    )}
-  </div>
-);
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className='fixed bottom-8 right-8 bg-brand-chrome text-luxury-text-primary p-8 rounded-xl shadow-lg hover:bg-accent-hover transition-all duration-200 z-50 focus:outline-none focus:ring-2 focus:ring-brand-chrome focus:ring-offset-2 focus:ring-offset-luxury-bg-dark'
+          aria-label='Zurück nach oben'
+        >
+          <p className='text-(length:--text-label) uppercase tracking-widest text-luxury-text-inverse/60 mb-6'>
+            Zurück nach oben
+          </p>
+          <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M5 10l7-7m0 0l7 7m-7-7v18'
+            />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default LegalPage;

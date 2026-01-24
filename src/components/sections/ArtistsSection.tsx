@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SectionHeading } from '../SectionHeading';
-import { ArtistCard, type Artist } from '../cards/ArtistCard';
+import { SectionHeading } from '@/components/SectionHeading';
+import { ArtistCard, type Artist } from '@/components/cards/ArtistCard';
 
 interface ArtistsSectionProps {
   artists: Artist[];
@@ -14,7 +14,7 @@ interface ArtistsSectionProps {
  * - IntersectionObserver scroll-reveal at 30% threshold
  * - Staggered animation delays (index * 200ms)
  * - Alternating two-column layout
- * - Deep black background (#1a1a1c)
+ * - Deep black background (deep-black)
  * - Chrome accents throughout
  */
 export function ArtistsSection({ artists, className = '' }: ArtistsSectionProps) {
@@ -38,7 +38,7 @@ export function ArtistsSection({ artists, className = '' }: ArtistsSectionProps)
         {
           threshold: 0.3,
           rootMargin: '-50px',
-        }
+        },
       );
 
       observer.observe(ref);
@@ -51,28 +51,26 @@ export function ArtistsSection({ artists, className = '' }: ArtistsSectionProps)
   }, [artists.length]);
 
   return (
-    <section className={`min-h-screen bg-luxury-bg-dark py-32 px-6 ${className}`}>
-      <div className="max-w-7xl mx-auto">
+    <section
+      className={`min-h-screen bg-luxury-bg-dark py-32 px-6 max-md:py-12 max-md:pt-6 ${className}`}
+    >
+      <div className='max-w-7xl mx-auto'>
         {/* Section header */}
-        <div className="mb-32">
-          <SectionHeading title="Our Artists" />
+        <div className='mb-32'>
+          <SectionHeading title='Our Artists' />
         </div>
 
         {/* Artist cards with alternating layout */}
-        <div className="space-y-40">
+        <div className='space-y-40'>
           {artists.map((artist, index) => (
             <div
               key={artist.id}
               ref={(el) => {
                 observerRefs.current[index] = el;
               }}
-              className="relative"
+              className='relative'
             >
-              <ArtistCard
-                artist={artist}
-                isRevealed={revealedIndices.has(index)}
-                index={index}
-              />
+              <ArtistCard artist={artist} isRevealed={revealedIndices.has(index)} index={index} />
             </div>
           ))}
         </div>

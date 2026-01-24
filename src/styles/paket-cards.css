@@ -1,0 +1,196 @@
+/**
+ * PAKET CARDS - RESPONSIVE BEHAVIOR + LINE ACCENTS
+ * Freezes desktop layout, adds horizontal scroll on mobile/tablet
+ * Includes subtle line reveal micro-interactions
+ */
+
+/* ========================================
+   MOBILE CAROUSEL (SWIPER)
+   ======================================== */
+.paket-cards-swiper {
+  padding-bottom: var(--space-6);
+}
+
+.paket-cards-swiper .swiper-pagination {
+  bottom: 0 !important;
+}
+
+.paket-cards-swiper .swiper-pagination-bullet {
+  width: var(--space-1-5) !important;
+  height: var(--space-1-5) !important;
+  background: rgba(var(--color-text-primary-rgb), 0.3) !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.paket-cards-swiper .swiper-pagination-bullet-active {
+  background: var(--color-brand-accent) !important;
+  width: var(--space-4) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.paket-cards-swiper .swiper-slide {
+  height: auto !important;
+}
+
+/* Shared price list grid for accordion tables */
+.paket-price-grid {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* ========================================
+   DESKTOP LAYOUT (lg: 1024px+) - FROZEN
+   ======================================== */
+@media (min-width: 1024px) {
+  .paket-cards-wrapper {
+    align-items: flex-start;
+  }
+
+  .paket-card {
+    /* Lock card dimensions on desktop */
+    min-width: 280px;
+    max-width: 303px;
+  }
+}
+
+/* ========================================
+   MOBILE/TABLET (< 1024px) - HORIZONTAL SCROLL
+   ======================================== */
+@media (max-width: 1023px) {
+  .mobile-paket-rail {
+    padding-top: 26px;
+  }
+
+  .mobile-paket-rail .paket-card {
+    transform-origin: top center;
+  }
+
+  .paket-cards-wrapper {
+    display: flex;
+    gap: 1rem; /* 16px */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1.5rem; /* 24px horizontal padding */
+    margin: 0 -1.5rem; /* Negative margin to allow edge-to-edge scroll */
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .paket-cards-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .paket-cards-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .paket-cards-wrapper .paket-card {
+    /* Lock card dimensions - no squishing */
+    flex-shrink: 0;
+    width: clamp(280px, 85vw, 340px);
+    scroll-snap-align: center;
+  }
+}
+
+/* ========================================
+   COOL LINES - MICRO-INTERACTIONS
+   ======================================== */
+
+/* Top line accent - expands on hover/focus */
+.paket-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-accent, #C0C0C0) 20%,
+    var(--brand-accent, #C0C0C0) 80%,
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+/* Trigger line reveal on hover */
+.paket-card:hover::before,
+.paket-card:focus-visible::before {
+  transform: scaleX(1);
+}
+
+/* Bottom gradient divider - subtle internal accent */
+.paket-card::after {
+  content: '';
+  position: absolute;
+  bottom: 4rem; /* Position above button area */
+  left: 2rem;
+  right: 2rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(192, 192, 192, 0.15) 30%,
+    rgba(192, 192, 192, 0.15) 70%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.paket-card:hover::after,
+.paket-card:focus-visible::after {
+  opacity: 1;
+}
+
+/* Ensure card wrapper has position context for pseudo-elements */
+.paket-card {
+  position: relative;
+}
+
+/* ========================================
+   ACCESSIBILITY - REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .paket-card::before,
+  .paket-card::after {
+    transition: none;
+    animation: none;
+  }
+
+  .paket-cards-wrapper {
+    scroll-behavior: auto;
+  }
+}
+
+/* ========================================
+   SCROLL SNAP POLISH
+   ======================================== */
+@media (max-width: 1023px) {
+  /* Add subtle fade at edges to indicate scrollability */
+  .paket-cards-wrapper {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 1.5rem,
+      black calc(100% - 1.5rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 1.5rem,
+      black calc(100% - 1.5rem),
+      transparent
+    );
+  }
+}

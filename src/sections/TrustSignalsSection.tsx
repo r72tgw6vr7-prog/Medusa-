@@ -41,7 +41,7 @@ export const TrustSignalsSection: React.FC<TrustSignalsSectionProps> = ({
       <div className='flex flex-col items-center self-stretch py-24'>
         <Container>
           {/* Partners Section */}
-          <div className='flex flex-col items-center w-full mb-16 gap-0.5'>
+          <div className='flex flex-col items-center w-full mb-16 gap-0'>
             <div className='flex flex-col items-start'>
               <span className='text-brand-accent text-4xl font-bold'>{title}</span>
             </div>

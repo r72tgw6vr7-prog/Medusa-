@@ -9,7 +9,8 @@ const cardVariants = cva(
     variants: {
       variant: {
         default: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)]',
-        featured: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)] scale-[1.01]',
+        featured:
+          'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)] scale-[1.01]',
         elevated: 'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--card-shadow)]',
       },
       size: {
@@ -22,10 +23,11 @@ const cardVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
   asChild?: boolean;
 }
 
@@ -34,15 +36,11 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const shouldUseSlot = asChild && React.Children.count(children) === 1;
     const Component = shouldUseSlot ? Slot : 'div';
     return (
-      <Component
-        className={cn(cardVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      >
+      <Component className={cn(cardVariants({ variant, size, className }))} ref={ref} {...props}>
         {children}
       </Component>
     );
-  }
+  },
 );
 
 Card.displayName = 'Card';

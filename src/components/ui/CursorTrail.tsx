@@ -33,6 +33,7 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
   const particles = useRef<Particle[]>([]);
   const mousePos = useRef({ x: 0, y: 0 });
   const animationFrameId = useRef<number>(0);
+  const chromeRgb = useRef('');
   const prefersReducedMotion = useReducedMotion();
   const isTouchDevice = useRef(false);
 
@@ -69,10 +70,12 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
       const alpha = p.life / p.maxLife;
       const size = 4 * alpha;
 
+      const rgb = chromeRgb.current || '192, 192, 192';
+
       ctx.save();
       ctx.globalAlpha = alpha * 0.7;
-      ctx.fillStyle = 'rgba(192, 192, 192, 0.9)';
-      ctx.shadowColor = 'rgba(192, 192, 192, 0.6)';
+      ctx.fillStyle = `rgba(${rgb}, 0.9)`;
+      ctx.shadowColor = `rgba(${rgb}, 0.6)`;
       ctx.shadowBlur = 6;
       ctx.beginPath();
       ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
@@ -88,6 +91,12 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
   useEffect(() => {
     // Detect touch device
     isTouchDevice.current = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // Read design token for chrome rgb once
+    chromeRgb.current =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent-chrome-rgb')
+        .trim() || chromeRgb.current;
 
     // Don't enable on touch devices or if reduced motion
     if (!enabled || prefersReducedMotion || isTouchDevice.current) return;
@@ -132,7 +141,7 @@ export const CursorTrail: React.FC<CursorTrailProps> = ({
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-[9998] ${className}`}
+      className={`fixed inset-0 pointer-events-none z-toast ${className}`}
       aria-hidden="true"
     />
   );

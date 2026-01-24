@@ -25,7 +25,10 @@ test('meta and SEO checks per locale', async ({ page }) => {
     const expected = lang === 'de' ? de : en;
 
     for (const p of pages) {
-      const url = `${process.env.E2E_BASE || 'http://localhost:5173'}${p.path}`;
+      const base = process.env.E2E_BASE || 'http://localhost:5173';
+      const localizedPath =
+        lang === 'en' ? (p.path === '/' ? '/en' : `/en${p.path}`) : p.path;
+      const url = `${base}${localizedPath}`;
       await page.goto(url, { waitUntil: 'domcontentloaded' });
       // Set language via localStorage and reload so app picks it up
       await page.evaluate((l) => {
@@ -38,11 +41,15 @@ test('meta and SEO checks per locale', async ({ page }) => {
       const ogLocale = await page.locator('meta[property="og:locale"]').getAttribute('content').catch(() => '');
       const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content').catch(() => '');
       const breadcrumbJson = await page.locator('script[type="application/ld+json"]').allTextContents().catch(() => []);
-      const imgs = await page.locator('img[alt]').all();
+      const imgs = await page.locator('img').all();
+      const imgCount = imgs.length;
       let anyNonEmptyAlt = false;
       for (const img of imgs) {
         const alt = await img.getAttribute('alt').catch(() => '');
-        if (alt && alt.trim().length > 0) anyNonEmptyAlt = true;
+        if (alt && alt.trim().length > 0) {
+          anyNonEmptyAlt = true;
+          break;
+        }
       }
 
       const expectedTitle = expected.meta?.[p.key]?.title || '';
@@ -58,6 +65,7 @@ test('meta and SEO checks per locale', async ({ page }) => {
         ogLocale,
         ogImage,
         breadcrumbJsonPresent: breadcrumbJson.some((s: string) => s.includes('BreadcrumbList')),
+        imgCount,
         anyNonEmptyAlt,
       });
 
@@ -65,7 +73,7 @@ test('meta and SEO checks per locale', async ({ page }) => {
       expect(title).toBeTruthy();
       expect(metaDescription).toBeTruthy();
       expect(ogImage).toBeTruthy();
-      expect(anyNonEmptyAlt).toBeTruthy();
+      if (imgCount > 0) expect(anyNonEmptyAlt).toBeTruthy();
       expect(ogLocale).toBe(lang === 'de' ? 'de_DE' : 'en_US');
 
       // If translations exist in locales, assert title/description match

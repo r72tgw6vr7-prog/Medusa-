@@ -1,0 +1,293 @@
+/* ============================================
+ * ServiceCard.css - 6 Hover Enhancements
+ * ============================================
+ *
+ * Adapted from ArtistCard.css with identical animations.
+ *
+ * Enhancements:
+ * 1. Chrome Glow Edge - Pulsing neon border
+ * 2. Content Lift - Text shifts up + chrome underline
+ * 3. Shadow Depth - Dramatic shadow + chrome rim light
+ * 4. Neighbor Shrink - Adjacent cards scale to 0.95
+ * 5. Icon Zoom - Icon zooms 105% inside card
+ * 6. Overlay Fade - Dark overlay fades 40% → 0%
+ */
+
+/* ============================================
+ * CSS Custom Properties (Animation Constants)
+ * Inherits from design-system.css + ArtistCard tokens
+ * ============================================ */
+:root {
+  /* Animation Durations - same as ArtistCard */
+  --service-card-duration: 400ms;
+  --service-content-duration: 300ms;
+  --service-icon-duration: 600ms;
+  --service-overlay-duration: 350ms;
+  --service-glow-pulse-duration: 2s;
+
+  /* Easing Functions - same as ArtistCard */
+  --service-easing-lift: cubic-bezier(0.4, 0, 0.2, 1);
+  --service-easing-zoom: cubic-bezier(0.22, 1, 0.36, 1);
+  --service-easing-glow: ease-in-out;
+
+  /* Overlay color (animation-specific) */
+  --service-overlay-color: rgba(10, 10, 10, 0.4);
+}
+
+/* ============================================
+ * Category Indicator (Subtle Circle)
+ * ============================================ */
+.service-category-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-category-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-chrome);
+  box-shadow:
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 8px rgba(192, 192, 192, 0.4);
+  transition:
+    transform var(--service-content-duration) var(--service-easing-lift),
+    box-shadow var(--service-content-duration) var(--service-easing-lift);
+}
+
+/* Piercing services get a ring instead of filled dot */
+.service-category-dot--ring {
+  background: transparent;
+  border: 2px solid var(--accent-chrome);
+  box-shadow:
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 8px rgba(192, 192, 192, 0.3);
+}
+
+/* Hover enhancement for indicator */
+.service-card-image-container:hover .service-category-dot {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 2px rgba(10, 10, 10, 0.6),
+    0 0 12px rgba(192, 192, 192, 0.6);
+}
+
+/* ============================================
+ * Card Wrapper Base Styles
+ * ============================================ */
+.service-card-wrapper {
+  position: relative;
+}
+
+/* ============================================
+ * Image Container - Base + Hover Effects
+ * ============================================ */
+.service-card-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition:
+    transform var(--service-card-duration) ease-out,
+    box-shadow var(--service-card-duration) ease-out,
+    border-color var(--service-card-duration) ease-out;
+  will-change: transform, box-shadow;
+}
+
+/* Enhancement 1: Chrome Glow Edge (Pulsing) */
+@keyframes service-chrome-pulse {
+  0%, 100% {
+    box-shadow:
+      var(--card-shadow-depth),
+      var(--card-shadow-glow),
+      var(--card-shadow-inner);
+  }
+  50% {
+    box-shadow:
+      var(--card-shadow-depth),
+      var(--card-shadow-hover-glow),
+      var(--card-shadow-inner);
+  }
+}
+
+.service-card-image-container:hover {
+  border-color: var(--accent-chrome);
+  animation: service-chrome-pulse var(--service-glow-pulse-duration) var(--service-easing-glow) infinite;
+}
+
+/* Enhancement 3: Shadow Depth (on hover) */
+.service-card-image-container:hover {
+  box-shadow:
+    var(--card-shadow-depth),
+    var(--card-shadow-hover-glow),
+    var(--card-shadow-inner);
+}
+
+/* ============================================
+ * Icon - Zoom Effect
+ * ============================================ */
+.service-card-icon {
+  transition: transform var(--service-icon-duration) var(--service-easing-zoom);
+  will-change: transform;
+}
+
+/* Enhancement 5: Icon Zoom (105%) */
+.service-card-image-container:hover .service-card-icon {
+  transform: scale(1.05);
+}
+
+/* ============================================
+ * Overlay - Fade Effect
+ * ============================================ */
+.service-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--service-overlay-color);
+  transition: background var(--service-overlay-duration) ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Enhancement 6: Overlay Fade (40% → 0%) */
+.service-card-image-container:hover .service-card-overlay {
+  background: rgba(10, 10, 10, 0);
+}
+
+/* ============================================
+ * Content - Lift Effect
+ * ============================================ */
+.service-card-content {
+  transition: transform var(--service-content-duration) var(--service-easing-lift);
+}
+
+/* Enhancement 2: Content Lift (-8px) */
+.service-card-wrapper:hover .service-card-content {
+  transform: translateY(-8px);
+}
+
+/* ============================================
+ * Service Name - Chrome Underline on Hover
+ * ============================================ */
+.service-card-name {
+  position: relative;
+}
+
+.service-card-name::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--accent-chrome);
+  margin-top: 4px;
+  transition: width var(--service-content-duration) var(--service-easing-lift);
+}
+
+/* Enhancement 2 (part 2): Chrome underline appears */
+.service-card-wrapper:hover .service-card-name::after {
+  width: 100%;
+}
+
+/* ============================================
+ * CTA Button Hover Effect
+ * ============================================ */
+.service-card-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-out;
+}
+
+.service-card-cta:hover::before {
+  transform: translateX(100%);
+}
+
+.service-card-cta:hover svg {
+  transform: translateX(4px);
+  transition: transform 0.3s ease-out;
+}
+
+/* ============================================
+ * Enhancement 4: Neighbor Shrink
+ * Uses CSS :has() for previous sibling detection
+ * ============================================ */
+
+/* Next sibling shrinks when current card is hovered */
+.service-card-wrapper:hover + .service-card-wrapper {
+  transform: scale(0.95);
+  transition: transform var(--service-content-duration) ease-out;
+}
+
+/* Previous sibling shrinks (using :has()) */
+.service-card-wrapper:has(+ .service-card-wrapper:hover) {
+  transform: scale(0.95);
+  transition: transform var(--service-content-duration) ease-out;
+}
+
+/* Ensure non-hovered, non-adjacent cards reset properly */
+.service-card-wrapper {
+  transition: transform var(--service-content-duration) ease-out;
+}
+
+/* ============================================
+ * Reduced Motion - Accessibility
+ * ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .service-card-image-container,
+  .service-card-icon,
+  .service-card-overlay,
+  .service-card-content,
+  .service-card-name::after,
+  .service-card-wrapper,
+  .service-category-dot,
+  .service-card-cta::before {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Instant hover state without animation */
+  .service-card-image-container:hover {
+    border-color: var(--accent-chrome);
+    box-shadow:
+      var(--card-shadow-depth),
+      var(--card-shadow-hover-glow),
+      var(--card-shadow-inner);
+  }
+
+  .service-card-image-container:hover .service-card-icon {
+    transform: scale(1.05);
+  }
+
+  .service-card-image-container:hover .service-card-overlay {
+    background: rgba(10, 10, 10, 0);
+  }
+
+  .service-card-wrapper:hover .service-card-content {
+    transform: translateY(-8px);
+  }
+
+  .service-card-wrapper:hover .service-card-name::after {
+    width: 100%;
+  }
+
+  .service-card-wrapper:hover + .service-card-wrapper,
+  .service-card-wrapper:has(+ .service-card-wrapper:hover) {
+    transform: scale(0.95);
+  }
+}
