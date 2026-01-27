@@ -22,7 +22,7 @@
       img-src 'self' data: https: http: blob:;
       font-src 'self' data: https: http:;
       frame-src 'self' https: http:;
-      connect-src 'self' https: http: ws: wss:;
+      connect-src 'self' https://apps.rokt.com https://apps-demo.rokt.com https://script.google.com https://script.googleusercontent.com https://api.web3forms.com https: http: ws: wss:;
       worker-src 'self' blob:;
       child-src 'self' blob: https: http:;
       object-src 'none';
@@ -70,6 +70,11 @@
       as="image"
       href="/assets/images/photos/gallery/optimized/Biomechanic-400w.avif"
       type="image/avif"
+    ><link
+      rel="preload"
+      as="image"
+      href="/assets/images/photos/gallery/optimized/Biomechanic-400w.webp"
+      type="image/webp"
       fetchpriority="high">
     <link 
       rel="preload" 

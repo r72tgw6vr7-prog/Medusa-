@@ -9,9 +9,11 @@ interface LoadingOverlayProps {
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ t }) => {
   return (
     <div className='loading-overlay'>
-      <div className='loading-spinner'>
-        <Loader2 className='animate-spin' size={48} />
-        <p>{t('booking.loading.submitting')}</p>
+      <div className='loading-content'>
+        <div className='loading-icon-wrapper'>
+          <Loader2 size={40} className='loading-icon' />
+        </div>
+        <p className='loading-text'>{t('booking.loading.submitting')}</p>
       </div>
     </div>
   );

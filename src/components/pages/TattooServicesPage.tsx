@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { Sparkles, Zap, Shield, Euro, ChevronRight } from 'lucide-react';
 import { useApp } from '@/core/state/AppContext';
@@ -147,6 +148,7 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
 };
 
 export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ className = '' }) => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -210,9 +212,12 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
     let t: number | undefined;
     return (serviceId: string) => {
       if (t) window.clearTimeout(t);
-      t = window.setTimeout(() => openBooking({ service: serviceId }), 300) as unknown as number;
+      t = window.setTimeout(() => {
+        openBooking({ service: serviceId });
+        navigate('/booking');
+      }, 300) as unknown as number;
     };
-  }, [openBooking]);
+  }, [openBooking, navigate]);
 
   const renderServiceCard = (service: (typeof currentServices)[number], index: number) => {
     const isSelected = selectedPacket === service.id;

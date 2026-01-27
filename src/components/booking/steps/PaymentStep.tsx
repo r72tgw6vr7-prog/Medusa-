@@ -28,44 +28,35 @@ export const PaymentStep: React.FC<PaymentStepProps> = ({
       <div className='form-group'>
         <label>{t('booking.payment.methodLabel')}</label>
         <div className='payment-options'>
-          <label
-            className={`payment-option ${paymentMethod === 'cash' ? 'selected' : ''} touch-target-mobile`}
-          >
+          <label className={`payment-option ${paymentMethod === 'cash' ? 'selected' : ''}`}>
             <input
               type='radio'
               name='paymentMethod'
               value='cash'
               checked={paymentMethod === 'cash'}
               onChange={() => setPaymentMethod('cash')}
-              className='touch-target-mobile'
             />
-            {t('booking.payment.cash')}
+            <span>{t('booking.payment.cash')}</span>
           </label>
-          <label
-            className={`payment-option ${paymentMethod === 'card' ? 'selected' : ''} touch-target-mobile`}
-          >
+          <label className={`payment-option ${paymentMethod === 'card' ? 'selected' : ''}`}>
             <input
               type='radio'
               name='paymentMethod'
               value='card'
               checked={paymentMethod === 'card'}
               onChange={() => setPaymentMethod('card')}
-              className='touch-target-mobile'
             />
-            {t('booking.payment.card')}
+            <span>{t('booking.payment.card')}</span>
           </label>
-          <label
-            className={`payment-option ${paymentMethod === 'bank_transfer' ? 'selected' : ''} touch-target-mobile`}
-          >
+          <label className={`payment-option ${paymentMethod === 'bank_transfer' ? 'selected' : ''}`}>
             <input
               type='radio'
               name='paymentMethod'
               value='bank_transfer'
               checked={paymentMethod === 'bank_transfer'}
               onChange={() => setPaymentMethod('bank_transfer')}
-              className='touch-target-mobile'
             />
-            {t('booking.payment.bankTransfer')}
+            <span>{t('booking.payment.bankTransfer')}</span>
           </label>
         </div>
       </div>

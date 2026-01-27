@@ -50,7 +50,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
   return (
     <Section
-      bg="none"
+      bg='none'
       spacing='none'
       variant='default'
       className={`py-16 lg:py-24 ${className} relative z-10`}
@@ -58,7 +58,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       <Container size='default'>
         {/* Header - Primary Section (h2) */}
         <div className='mb-16'>
-          <SectionHeading eyebrow="Galerie" title={title} subtitle={subtitle} level="primary" />
+          <SectionHeading eyebrow='Galerie' title={title} subtitle={subtitle} level='primary' />
         </div>
 
         {/* Gallery Grid - Sample Preview */}
@@ -83,8 +83,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   alt={image.title}
                   width={640}
                   height={640}
-                  loading="lazy"
-                  className='w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500'
+                  loading='lazy'
+                  className='w-full h-full object-fill grayscale hover:grayscale-0 transition-all duration-500'
                   onError={(e) => {
                     if (!image.fallbackUrl) return;
                     const target = e.target as HTMLImageElement;
@@ -98,18 +98,18 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               ) : (
                 <picture>
                   <source
-                    type="image/avif"
+                    type='image/avif'
                     srcSet={[400, 640, 960]
                       .map((size) => `${encodeURI(`${image.imageUrl}-${size}w.avif`)} ${size}w`)
                       .join(', ')}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   />
                   <source
-                    type="image/webp"
+                    type='image/webp'
                     srcSet={[400, 640, 960]
                       .map((size) => `${encodeURI(`${image.imageUrl}-${size}w.webp`)} ${size}w`)
                       .join(', ')}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   />
                   <img
                     src={encodeURI(
@@ -118,8 +118,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     alt={image.title}
                     width={640}
                     height={640}
-                    loading="lazy"
-                    className='w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500'
+                    loading='lazy'
+                    className='w-full h-full object-fill grayscale hover:grayscale-0 transition-all duration-500'
                     onError={(e) => {
                       if (!image.fallbackUrl) return;
                       const target = e.target as HTMLImageElement;

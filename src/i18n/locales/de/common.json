@@ -1,11 +1,15 @@
 {
   "close": "Schließen",
+  "actions": {
+    "viewPortfolio": "Portfolio ansehen"
+  },
   "nav": {
     "home": "Startseite",
     "services": "Leistungen",
     "tattoos": "Tattoos",
     "piercings": "Piercings",
     "artists": "Künstler",
+    "about": "Über uns",
     "gallery": "Galerie",
     "pricing": "Preise",
     "booking": "Termin buchen",
@@ -22,7 +26,7 @@
     "brandTagline": "Münchens exklusivstes Tattoo-Studio für Kunst, die ein Leben lang hält.",
     "studio": {
       "address": "Altheimer Eck 11, 80331 München",
-      "hours": "Mo-Fr: 11:30-18:30, Sa: 11:00-18:00"
+      "hours": "Mo-Do: 11:30-19:00, Fr-Sa: 11:30-20:00, So: geschlossen"
     },
     "headings": {
       "quickLinks": "Quick Links",
@@ -81,10 +85,10 @@
           },
           "hours": {
             "title": "Öffnungszeiten:",
-            "monFriLabel": "Mo-Fr:",
-            "monFriValue": "11:30-18:30",
-            "satLabel": "Sa:",
-            "satValue": "11:00-18:00",
+            "monFriLabel": "Mo-Do:",
+            "monFriValue": "11:30-19:00",
+            "satLabel": "Fr-Sa:",
+            "satValue": "11:30-20:00",
             "sunLabel": "So:",
             "sunValue": "Geschlossen"
           }
@@ -108,6 +112,10 @@
     "artists": {
       "title": "Medusa Tattoo München | Künstler",
       "description": "Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Portfolios und Termine."
+    },
+    "about": {
+      "title": "Über uns | Medusa Tattoo München",
+      "description": "Über Medusa Tattoo München – Founder-geführte Piercing-Expertise, Hygiene und fortgeschrittene Implantat-Techniken."
     },
     "gallery": {
       "title": "Galerie",

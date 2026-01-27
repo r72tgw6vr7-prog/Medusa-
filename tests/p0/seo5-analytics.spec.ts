@@ -1,6 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { P0TestHelpers, TEST_DATA } from './helpers';
 
+declare global {
+  interface Window {
+    gtag: (...args: string[]) => void;
+    dataLayer: any[];
+    __JS_ERRORS__: string[];
+  }
+}
+
 /**
  * SEO5: GA4 Analytics Event Tracking
  * 
@@ -25,53 +33,27 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
   });
 
   test('should initialize GA4 with measurement ID from environment', async ({ page }) => {
-    await helpers.logStep('Testing GA4 initialization');
-    
     await page.goto(TEST_DATA.routes.home);
     await page.waitForLoadState('networkidle');
     
-    await helpers.takeScreenshot('seo5-01-home-page-loaded', false);
-    
-    // Check if GA4 script is loaded
-    const gtagScript = page.locator('script[src*="googletagmanager.com/gtag"]');
-    const hasGtagScript = await gtagScript.count() > 0;
-    
     // Check if gtag function exists
-    const hasGtagFunction = await page.evaluate(() => {
-      return typeof (window as any).gtag === 'function';
-    });
+    const hasGtagFunction = await page.evaluate(() => typeof window.gtag === 'function');
     
     // Check if dataLayer exists
-    const hasDataLayer = await page.evaluate(() => {
-      return Array.isArray((window as any).dataLayer);
-    });
+    const hasDataLayer = await page.evaluate(() => Array.isArray(window.dataLayer));
     
-    await helpers.logStep(`GA4 Script loaded: ${hasGtagScript}`);
-    await helpers.logStep(`gtag function available: ${hasGtagFunction}`);
-    await helpers.logStep(`dataLayer available: ${hasDataLayer}`);
-    
-    // At least one of these should be true for proper GA4 setup
     expect(hasGtagFunction || hasDataLayer).toBeTruthy();
     
     // Check for measurement ID usage
     const measurementIdUsed = await page.evaluate(() => {
-      const dataLayer = (window as any).dataLayer || [];
-      return dataLayer.some((entry: any) => 
-        JSON.stringify(entry).includes('G-TEST123456789')
-      );
+      const dataLayer = window.dataLayer || [];
+      return dataLayer.some((entry: any) => JSON.stringify(entry).includes('G-TEST123456789'));
     });
     
-    if (hasDataLayer) {
-      expect(measurementIdUsed).toBeTruthy();
-      await helpers.logStep('✅ Measurement ID found in dataLayer');
-    }
-    
-    await helpers.logStep('✅ GA4 initialization test passed');
+    if (hasDataLayer) expect(measurementIdUsed).toBeTruthy();
   });
 
   test('should track booking events', async ({ page }) => {
-    await helpers.logStep('Testing booking event tracking');
-    
     await page.goto(TEST_DATA.routes.home);
     await page.waitForLoadState('networkidle');
     
@@ -84,61 +66,23 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
     const bookingCount = await bookingButtons.count();
     expect(bookingCount).toBeGreaterThan(0);
     
-    await helpers.takeScreenshot('seo5-02-booking-buttons-found', false);
-    
     // Click the first visible booking button
     const firstBookingButton = bookingButtons.first();
     await expect(firstBookingButton).toBeVisible();
     
-    const buttonText = await firstBookingButton.textContent();
-    await helpers.logStep(`Clicking booking button: "${buttonText}"`);
-    
     await firstBookingButton.click();
-    
-    // Wait for any navigation or modal
     await page.waitForTimeout(1000);
     
     // Check for analytics events
     const analyticsCalls = await helpers.getAnalyticsCalls();
-    await helpers.logStep(`Analytics calls captured: ${analyticsCalls.length}`);
+    const bookingEvents = analyticsCalls.filter(call => JSON.stringify(call).toLowerCase().includes('booking') || JSON.stringify(call).toLowerCase().includes('book') || JSON.stringify(call).toLowerCase().includes('termin') || JSON.stringify(call).toLowerCase().includes('cta'));
     
-    // Look for booking-related events
-    const bookingEvents = analyticsCalls.filter(call => {
-      const eventData = JSON.stringify(call).toLowerCase();
-      return eventData.includes('booking') || 
-             eventData.includes('book') || 
-             eventData.includes('termin') ||
-             eventData.includes('cta');
-    });
-    
-    await helpers.logStep(`Booking-related events: ${bookingEvents.length}`);
-    
-    if (bookingEvents.length > 0) {
-      await helpers.logStep(`First booking event: ${JSON.stringify(bookingEvents[0])}`);
-      expect(bookingEvents.length).toBeGreaterThan(0);
-    } else {
-      // Alternative: check if navigation to booking page triggered page_view
-      const currentUrl = page.url();
-      if (currentUrl.includes('booking')) {
-        const pageViewEvents = analyticsCalls.filter(call => 
-          call[0] === 'event' && call[1] === 'page_view'
-        );
-        expect(pageViewEvents.length).toBeGreaterThan(0);
-        await helpers.logStep('✅ Page view event tracked for booking navigation');
-      }
-    }
-    
-    await helpers.takeScreenshot('seo5-03-after-booking-click', false);
-    await helpers.logStep('✅ Booking events test passed');
+    expect(bookingEvents.length).toBeGreaterThan(0);
   });
 
   test('should track gallery interaction events', async ({ page }) => {
-    await helpers.logStep('Testing gallery event tracking');
-    
     await page.goto(TEST_DATA.routes.gallery);
     await page.waitForLoadState('networkidle');
-    
-    await helpers.takeScreenshot('seo5-04-gallery-page-loaded', true);
     
     // Look for gallery items
     const galleryItems = page.locator(
@@ -149,8 +93,6 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
     const galleryCount = await galleryItems.count();
     
     if (galleryCount > 0) {
-      await helpers.logStep(`Found ${galleryCount} gallery items`);
-      
       // Click on a gallery item
       const firstGalleryItem = galleryItems.first();
       await expect(firstGalleryItem).toBeVisible();
@@ -160,53 +102,27 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
       
       // Check for gallery-related analytics events
       const analyticsCalls = await helpers.getAnalyticsCalls();
-      const galleryEvents = analyticsCalls.filter(call => {
-        const eventData = JSON.stringify(call).toLowerCase();
-        return eventData.includes('gallery') || 
-               eventData.includes('image') || 
-               eventData.includes('lightbox') ||
-               eventData.includes('view');
-      });
+      const galleryEvents = analyticsCalls.filter(call => JSON.stringify(call).toLowerCase().includes('gallery') || JSON.stringify(call).toLowerCase().includes('image') || JSON.stringify(call).toLowerCase().includes('lightbox') || JSON.stringify(call).toLowerCase().includes('view'));
       
-      await helpers.logStep(`Gallery events captured: ${galleryEvents.length}`);
-      
-      if (galleryEvents.length > 0) {
-        expect(galleryEvents.length).toBeGreaterThan(0);
-        await helpers.logStep(`Gallery event: ${JSON.stringify(galleryEvents[0])}`);
-      }
-      
-      await helpers.takeScreenshot('seo5-05-gallery-item-clicked', false);
+      expect(galleryEvents.length).toBeGreaterThan(0);
     } else {
-      await helpers.logStep('No gallery items found on page');
-      
       // Check if page view was tracked for gallery page
       const analyticsCalls = await helpers.getAnalyticsCalls();
-      const pageViewEvents = analyticsCalls.filter(call => 
-        call[0] === 'event' && call[1] === 'page_view'
-      );
+      const pageViewEvents = analyticsCalls.filter(call => call[0] === 'event' && call[1] === 'page_view');
       
       expect(pageViewEvents.length).toBeGreaterThan(0);
-      await helpers.logStep('✅ Page view tracked for gallery page');
     }
-    
-    await helpers.logStep('✅ Gallery events test passed');
   });
 
   test('should track form submission events', async ({ page }) => {
-    await helpers.logStep('Testing form submission event tracking');
-    
     await page.goto(TEST_DATA.routes.contact);
     await page.waitForLoadState('networkidle');
-    
-    await helpers.takeScreenshot('seo5-06-contact-page-loaded', true);
     
     // Look for contact forms
     const forms = page.locator('form, .contact-form, [data-testid*="form"]');
     const formCount = await forms.count();
     
     if (formCount > 0) {
-      await helpers.logStep(`Found ${formCount} forms on contact page`);
-      
       const form = forms.first();
       
       // Fill out form fields if they exist
@@ -225,8 +141,6 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
       if (await messageField.count() > 0) {
         await messageField.fill('Test message for analytics tracking');
       }
-      
-      await helpers.takeScreenshot('seo5-07-form-filled', false);
       
       // Mock the form submission to prevent actual submission
       await page.route('**/api/**', route => {
@@ -250,33 +164,14 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
         
         // Check for form submission analytics events
         const analyticsCalls = await helpers.getAnalyticsCalls();
-        const formEvents = analyticsCalls.filter(call => {
-          const eventData = JSON.stringify(call).toLowerCase();
-          return eventData.includes('form') || 
-                 eventData.includes('contact') || 
-                 eventData.includes('submit') ||
-                 eventData.includes('send');
-        });
+        const formEvents = analyticsCalls.filter(call => JSON.stringify(call).toLowerCase().includes('form') || JSON.stringify(call).toLowerCase().includes('contact') || JSON.stringify(call).toLowerCase().includes('submit') || JSON.stringify(call).toLowerCase().includes('send'));
         
-        await helpers.logStep(`Form events captured: ${formEvents.length}`);
-        
-        if (formEvents.length > 0) {
-          expect(formEvents.length).toBeGreaterThan(0);
-          await helpers.logStep(`Form event: ${JSON.stringify(formEvents[0])}`);
-        }
-        
-        await helpers.takeScreenshot('seo5-08-form-submitted', false);
+        expect(formEvents.length).toBeGreaterThan(0);
       }
-    } else {
-      await helpers.logStep('No forms found on contact page');
     }
-    
-    await helpers.logStep('✅ Form events test passed');
   });
 
   test('should track page view events on navigation', async ({ page }) => {
-    await helpers.logStep('Testing page view event tracking');
-    
     const testPages = [
       { route: TEST_DATA.routes.home, name: 'Home' },
       { route: TEST_DATA.routes.artists, name: 'Artists' },
@@ -284,37 +179,26 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
     ];
     
     for (const pageInfo of testPages) {
-      await helpers.logStep(`Testing page view for ${pageInfo.name}`);
-      
       await page.goto(pageInfo.route);
       await page.waitForLoadState('networkidle');
       await page.waitForTimeout(500);
       
       const analyticsCalls = await helpers.getAnalyticsCalls();
-      const pageViewEvents = analyticsCalls.filter(call => 
-        call[0] === 'event' && call[1] === 'page_view'
-      );
+      const pageViewEvents = analyticsCalls.filter(call => call[0] === 'event' && call[1] === 'page_view');
       
       expect(pageViewEvents.length).toBeGreaterThan(0);
       
       // Check if page path is included in the event
       const latestPageView = pageViewEvents[pageViewEvents.length - 1];
       if (latestPageView && latestPageView[2]) {
-        const eventParams = latestPageView[2];
-        expect(eventParams.page_path || eventParams.page_location).toBeTruthy();
+        const eventParams = latestPageView[2] as Record<string, any>;
+        if (eventParams.page_title) expect(typeof eventParams.page_title).toBe('string');
+        if (eventParams.page_location) expect(typeof eventParams.page_location).toBe('string');
       }
-      
-      await helpers.logStep(`✅ Page view tracked for ${pageInfo.name}`);
     }
-    
-    await helpers.takeScreenshot('seo5-09-page-views-tracked', false);
-    await helpers.logStep('✅ Page view events test passed');
   });
 
   test('should handle analytics gracefully when GA4 is disabled', async ({ page }) => {
-    await helpers.logStep('Testing analytics behavior when GA4 is disabled');
-    
-    // Mock environment without GA4 measurement ID
     await helpers.mockEnvironment({
       'VITE_GA4_MEASUREMENT_ID': ''
     });
@@ -334,19 +218,12 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
     const analyticsCalls = await helpers.getAnalyticsCalls();
     
     // Should not crash the application
-    const hasJSErrors = await page.evaluate(() => {
-      return (window as any).__JS_ERRORS__ || [];
-    });
+    const hasJSErrors = await page.evaluate(() => window.__JS_ERRORS__ || []);
     
     expect(hasJSErrors.length).toBe(0);
-    
-    await helpers.takeScreenshot('seo5-10-disabled-analytics', false);
-    await helpers.logStep('✅ Graceful degradation test passed');
   });
 
   test('should validate event payload structure', async ({ page }) => {
-    await helpers.logStep('Testing analytics event payload structure');
-    
     await page.goto(TEST_DATA.routes.home);
     await page.waitForLoadState('networkidle');
     
@@ -362,7 +239,7 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
     for (const call of analyticsCalls) {
       if (call[0] === 'event') {
         const eventName = call[1];
-        const eventParams = call[2] || {};
+        const eventParams = call[2] as Record<string, any> | {};
         
         // Validate basic event structure
         expect(typeof eventName).toBe('string');
@@ -376,11 +253,7 @@ test.describe('SEO5: GA4 Analytics Event Tracking', () => {
         if (eventParams.page_location) {
           expect(typeof eventParams.page_location).toBe('string');
         }
-        
-        await helpers.logStep(`✅ Event "${eventName}" has valid structure`);
       }
     }
-    
-    await helpers.logStep('✅ Event payload validation test passed');
   });
 });

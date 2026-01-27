@@ -1,11 +1,17 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { SERVICE_CONFIG } from '@/components/booking/bookingConfig';
+import {
+  SERVICE_CONFIG,
+  SPECIFIC_PIERCING_SERVICES,
+  SPECIFIC_TATTOO_SERVICES,
+} from '@/components/booking/bookingConfig';
 
 interface ServiceSelectionStepProps {
   t: (key: string) => string;
   selectedService: string | null;
   setSelectedService: (service: string) => void;
+  specificService: string | null;
+  setSpecificService: (service: string | null) => void;
   projectDetails: string;
   setProjectDetails: (details: string) => void;
   canProceed: boolean;
@@ -53,11 +59,21 @@ export const ServiceSelectionStep: React.FC<ServiceSelectionStepProps> = ({
   t,
   selectedService,
   setSelectedService,
+  specificService,
+  setSpecificService,
   projectDetails,
   setProjectDetails,
   canProceed,
   onNext,
 }) => {
+  // Get specific services based on selected service type
+  const specificServices =
+    selectedService === 'piercing'
+      ? SPECIFIC_PIERCING_SERVICES
+      : selectedService === 'tattoo'
+        ? SPECIFIC_TATTOO_SERVICES
+        : [];
+
   return (
     <div className='step-container'>
       <h3>{t('booking.modal.serviceQuestion') || 'Was möchtest du buchen?'}</h3>
@@ -66,11 +82,20 @@ export const ServiceSelectionStep: React.FC<ServiceSelectionStepProps> = ({
           <button
             key={service.id}
             className={`service-card ${selectedService === service.id ? 'selected' : ''}`}
-            onClick={() => setSelectedService(service.id)}
+            onClick={() => {
+              setSelectedService(service.id);
+              // Clear specific service when changing main service type
+              if (selectedService !== service.id) {
+                setSpecificService(null);
+              }
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 setSelectedService(service.id);
+                if (selectedService !== service.id) {
+                  setSpecificService(null);
+                }
               }
             }}
             type='button'
@@ -94,6 +119,29 @@ export const ServiceSelectionStep: React.FC<ServiceSelectionStepProps> = ({
           </button>
         ))}
       </div>
+
+      {/* Specific service dropdown - shown when a service type is selected */}
+      {selectedService && specificServices.length > 0 && (
+        <div className='form-group'>
+          <label htmlFor='specificService'>
+            {selectedService === 'piercing' ? 'Welches Piercing?' : 'Welche Art Tattoo?'}
+          </label>
+          <select
+            id='specificService'
+            name='specificService'
+            value={specificService || ''}
+            onChange={(e) => setSpecificService(e.target.value || null)}
+            className='specific-service-select'
+          >
+            <option value=''>— Bitte wählen (optional) —</option>
+            {specificServices.map((service) => (
+              <option key={service.id} value={service.id}>
+                {service.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div className='form-group'>
         <label htmlFor='projectDetails'>

@@ -180,9 +180,12 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
 
   return (
-    <motion.div
+    <div
       className='absolute inset-0 z-20 flex items-center justify-center px-(--space-2) pointer-events-none max-md:items-start max-md:justify-start'
-      style={{ opacity, transform: 'translateY(var(--hero-header-shift))' }}
+      style={{
+        opacity: (opacity as MotionValue<number>).get?.() ?? opacity,
+        transform: 'translateY(var(--hero-header-shift))',
+      }}
     >
       {!isMobileViewport ? (
         <div
@@ -207,15 +210,26 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
           </p>
 
           <div className='pt-(--space-2)'>
-            <a
-              href='/booking'
-              className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
-              style={{
-                minHeight: 'var(--touch-target-min)',
-              }}
-            >
-              Lass uns darüber reden
-            </a>
+            <div className='flex items-center justify-center gap-4'>
+              <a
+                href='/booking'
+                className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-(--accent-chrome) text-luxury-text-primary font-medium rounded-lg transition-all duration-300 hover:bg-(--accent-chrome)/80 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent-chrome) text-(length:--text-body)'
+                style={{
+                  minHeight: 'var(--touch-target-min)',
+                }}
+              >
+                Termin buchen
+              </a>
+              <a
+                href='/contact'
+                className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
+                style={{
+                  minHeight: 'var(--touch-target-min)',
+                }}
+              >
+                Lass uns darüber reden
+              </a>
+            </div>
           </div>
         </div>
       ) : (
@@ -239,20 +253,31 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
             </p>
 
             <div className='pt-(--space-2)'>
-              <a
-                href='/booking'
-                className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
-                style={{
-                  minHeight: 'var(--touch-target-min)',
-                }}
-              >
-                Lass uns darüber reden
-              </a>
+              <div className='flex items-center justify-center gap-4'>
+                <a
+                  href='/booking'
+                  className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-(--accent-chrome) text-luxury-text-primary font-medium rounded-lg transition-all duration-300 hover:bg-(--accent-chrome)/80 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent-chrome) text-(length:--text-body)'
+                  style={{
+                    minHeight: 'var(--touch-target-min)',
+                  }}
+                >
+                  Termin buchen
+                </a>
+                <a
+                  href='/contact'
+                  className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
+                  style={{
+                    minHeight: 'var(--touch-target-min)',
+                  }}
+                >
+                  Lass uns darüber reden
+                </a>
+              </div>
             </div>
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -431,7 +456,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className={`group/product aspect-square w-full relative rounded-lg overflow-hidden ${revealClass} max-md:w-[100px] max-md:flex-none`}
+      className={`group/product aspect-square w-full relative rounded-lg overflow-hidden ${revealClass} max-md:w-25 max-md:flex-none`}
       data-revealed={isRevealed}
       data-aligned={isAligned}
     >
@@ -443,7 +468,7 @@ export const ProductCard = ({
             src={encodeURI(`${product.thumbnail}-400w.webp`)}
             height='600'
             width='600'
-            className='max-w-full object-cover object-top-left absolute h-full w-full inset-0'
+            className='max-w-full object-fill object-top-left absolute h-full w-full inset-0'
             alt={product.title}
             loading={isHeroLcpCandidate ? 'eager' : 'lazy'}
             fetchPriority={isHeroLcpCandidate ? 'high' : 'low'}

@@ -351,7 +351,7 @@ export const AftercarePage: React.FC = () => {
                 +49 (0) 89 269 313
               </a>
               <p className='text-luxury-text-inverse/60 text-(length:--text-sm) mt-0'>
-                Mo-Fr: 11:30-18:30, Sa: 11:00-18:00
+                Mo-Do: 11:30-19:00, Fr-Sa: 11:30-20:00, So: Geschlossen
               </p>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import {
   Gem,
@@ -8,6 +9,7 @@ import {
   ChevronRight,
   ChevronDown,
   MessageCircle,
+  MessageSquare,
 } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useApp } from '@/core/state/AppContext';
@@ -50,6 +52,12 @@ const PREISLISTE_STECHEN: Record<string, RegionPriceList> = {
       { name: 'Transverse Lobe', price1: '60,-' },
       { name: 'Surface Tragus', price1: '90,-' },
     ],
+  },
+  ohrlochzauberer: {
+    items: [
+      { name: 'Kinderohrlochstechen (mit Zauberer-Erlebnis)', price1: '45,-', price2: '80,-' },
+    ],
+    note: 'Speziell für Kinder – mit Aaron als Ohrlochzauberer',
   },
   mund: {
     items: [
@@ -166,6 +174,22 @@ const serviceDetails = {
       features: ['Titan-Schmuck inklusive', 'Private Atmosphäre', 'mind. 18 Jahre'],
       cta: 'Beratung anfragen',
     },
+    {
+      id: 'ohrlochzauberer',
+      title: 'Ohrlochzauberer',
+      description:
+        'Kinderfreundliches Ohrlochstechen mit Aaron. Er tritt wie ein Zauberer auf, um Kindern die Angst zu nehmen und das Erlebnis magisch zu gestalten.',
+      priceFrom: 45,
+      priceUnit: '€ - 80€',
+      duration: '20-30 Min',
+      features: [
+        'Speziell für Kinder',
+        'Magisches Erlebnis',
+        'Titan-Schmuck inklusive',
+        'Elternberatung',
+      ],
+      cta: 'Aaron anfragen',
+    },
   ],
   jewelry: [
     {
@@ -247,6 +271,7 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
 };
 
 export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ className = '' }) => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
@@ -281,9 +306,12 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
     let t: number | undefined;
     return (serviceId: string) => {
       if (t) window.clearTimeout(t);
-      t = window.setTimeout(() => openBooking({ service: serviceId }), 300) as unknown as number;
+      t = window.setTimeout(() => {
+        openBooking({ service: serviceId });
+        navigate('/booking');
+      }, 300) as unknown as number;
     };
-  }, [openBooking]);
+  }, [openBooking, navigate]);
 
   const renderServiceCard = (service: (typeof currentServices)[number]) => {
     const isSelected = selectedPacket === service.id;
@@ -295,12 +323,12 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
         key={service.id}
         variant={isSelected ? 'featured' : 'default'}
         size='default'
-        className='bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto'
+        className='bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto!'
         asChild
       >
         <motion.div
           variants={fadeInUpVariants}
-          className='paket-card flex flex-col h-auto cursor-pointer text-center'
+          className='paket-card flex flex-col h-auto self-start cursor-pointer text-center'
           onClick={() => {
             setSelectedPacket(isSelected ? null : service.id);
             if (!isSelected) setExpandedCard(null);
@@ -310,23 +338,25 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
         >
           <div className='flex flex-col gap-8'>
             <div className='flex items-center justify-between'>
-              <span className='font-semibold text-sm tracking-[0.7px] uppercase text-[color:var(--text-secondary)]'>
+              <span className='font-semibold text-(length:--text-sm) tracking-wide uppercase text-(--text-secondary)'>
                 {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
               </span>
-              <span className='font-normal text-sm tracking-[1.4px] uppercase text-white/60'>
+              <span className='font-normal text-(length:--text-sm) tracking-wider uppercase text-white/60'>
                 {service.duration ?? 'Flexibel'}
               </span>
             </div>
 
-            <h3 className='font-headline font-normal text-[length:var(--text-h3)] leading-9 text-white'>
+            <h3 className='font-headline font-normal text-(length:--text-h3) leading-(--line-height-headline) text-white wrap-break-word'>
               {service.title}
             </h3>
 
-            <p className='font-normal text-sm leading-7 text-white/70'>{service.description}</p>
+            <p className='font-normal text-(length:--text-sm) leading-(--line-height-body) text-white/70'>
+              {service.description}
+            </p>
 
             <div className='flex items-center gap-2'>
-              <Euro size={18} className='text-[color:var(--text-secondary)]' />
-              <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
+              <Euro size={18} className='text-(--text-secondary)' />
+              <span className='font-semibold text-(length:--text-xl) leading-(--line-height-body) text-(--text-secondary)'>
                 {formatPrice(service.priceFrom, service.priceUnit)}
               </span>
             </div>
@@ -341,7 +371,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                     e.stopPropagation();
                     setExpandedCard((prev) => (prev === service.id ? null : service.id));
                   }}
-                  className='flex items-center justify-between w-full py-2 text-sm font-semibold text-(--text-secondary) hover:text-(--text-secondary) transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg) rounded'
+                  className='flex items-center justify-between w-full py-2 text-(length:--text-sm) font-semibold text-(--text-secondary) hover:text-(--text-secondary) transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg) rounded'
                   aria-expanded={isExpanded}
                   aria-controls={`price-details-${service.id}`}
                 >
@@ -356,17 +386,17 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                   {isExpanded && (
                     <motion.div
                       id={`price-details-${service.id}`}
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className='absolute left-0 right-0 top-full z-20 mt-2'
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className='mt-4 overflow-hidden'
                       onPointerDown={(e) => e.stopPropagation()}
                       onPointerUp={(e) => e.stopPropagation()}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className='bg-(--card-bg) border border-white/10 rounded-2xl p-4 shadow-(--card-shadow)'>
-                        <div className='paket-price-grid mb-2 text-xs font-semibold uppercase tracking-wider text-white/50'>
+                        <div className='paket-price-grid mb-2 text-(length:--text-xs) font-semibold uppercase tracking-wider text-white/50'>
                           <span>Piercing</span>
                           <span className='w-12 text-right'>1</span>
                           <span className='w-12 text-right'>2</span>
@@ -375,7 +405,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                           {priceList.items.map((item, idx) => (
                             <li
                               key={idx}
-                              className='paket-price-grid text-sm text-white/80 py-2 border-b border-white/5 last:border-b-0 flex flex-col h-full'
+                              className='paket-price-grid text-(length:--text-sm) text-white/80 py-2 border-b border-white/5 last:border-b-0 flex flex-col h-full'
                             >
                               <span className='truncate'>{item.name}</span>
                               <span className='w-12 text-right font-semibold text-(--text-secondary)/90'>
@@ -388,7 +418,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                           ))}
                         </ul>
                         {priceList.note && (
-                          <p className='mt-4 text-xs text-white/50 italic text-center'>
+                          <p className='mt-4 text-(length:--text-xs) text-white/50 italic text-center'>
                             {priceList.note}
                           </p>
                         )}
@@ -399,14 +429,13 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
               </div>
             )}
 
-            <ul className='space-y-4 text-sm text-white/80'>
+            <ul className='space-y-4 text-(length:--text-sm) text-white/80'>
               {service.features.map((feature, featureIndex) => (
                 <li key={featureIndex} className='flex items-center gap-4'>
-                  <ChevronRight
-                    size={16}
-                    className='text-[color:var(--text-secondary)] shrink-0 mt-2'
-                  />
-                  <span className='font-normal text-base leading-6'>{feature}</span>
+                  <ChevronRight size={16} className='text-(--text-secondary) shrink-0 mt-2' />
+                  <span className='font-normal text-(length:--text-base) leading-(--line-height-body)'>
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -418,7 +447,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 e.stopPropagation();
                 handleServiceBooking(service.id);
               }}
-              className='w-full h-12 border border-[color:var(--text-secondary)] rounded-3xl font-semibold text-sm leading-5 text-white hover:bg-[color:var(--text-secondary)] hover:text-black transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg)'
+              className='w-full h-12 border border-(--text-secondary) rounded-3xl font-semibold text-(length:--text-sm) leading-(--line-height-body) text-white hover:bg-(--text-secondary) hover:text-black transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg)'
               aria-label={`${service.cta} für ${service.title}`}
             >
               {service.cta}
@@ -444,14 +473,28 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
             />
 
             {/* FREE Consultation Banner */}
-            <div className='flex items-center justify-center gap-4 p-6 rounded-2xl bg-[var(--accent-chrome)]/10 border border-[var(--accent-chrome)]/20 max-md:hidden'>
-              <MessageCircle size={24} className='text-[var(--accent-chrome)]' />
-              <div className='text-center'>
-                <p className='font-headline text-lg text-brand-chrome'>Kostenlose Beratung</p>
-                <p className='text-sm text-luxury-text-inverse/70 font-body'>
-                  Allow us to help you choose the right team member and piercing
-                </p>
+            <div className='flex flex-col sm:flex-row items-center justify-center gap-6 p-6 rounded-2xl bg-(--accent-chrome)/10 border border-(--accent-chrome)/20 max-md:hidden'>
+              <div className='flex items-center gap-4'>
+                <MessageCircle size={24} className='text-(--accent-chrome)' />
+                <div className='text-center'>
+                  <p className='font-headline text-(length:--text-lg) text-brand-chrome'>
+                    Kostenlose Beratung
+                  </p>
+                  <p className='text-(length:--text-sm) text-luxury-text-inverse/70 font-body'>
+                    Allow us to help you choose the right team member and piercing
+                  </p>
+                </div>
               </div>
+              <a
+                href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo%2C%20ich%20interessiere%20mich%20für%20eine%20kostenlose%20Beratung.'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                aria-label='WhatsApp Beratung starten'
+              >
+                <MessageSquare size={20} />
+                WhatsApp
+              </a>
             </div>
 
             {/* Top 3 Category Cards - Centered */}
@@ -466,31 +509,31 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 const buttonContent = (
                   <>
                     <div className='pricing-category-card-content md:hidden flex flex-col h-full items-center justify-center gap-2 py-2'>
-                      <div className='pricing-category-icon flex flex-col h-full items-center justify-center w-8 h-8 rounded-full bg-[var(--accent-chrome)]'>
+                      <div className='pricing-category-icon flex flex-col h-full max-h-8 items-center justify-center w-8 rounded-full bg-(--accent-chrome)'>
                         <IconComponent size={16} className='text-luxury-text-primary' />
                       </div>
-                      <h3 className='pricing-category-tier font-headline text-xs text-white text-center leading-tight px-2'>
+                      <h3 className='pricing-category-tier font-headline text-(length:--text-xs) text-white text-center leading-tight px-2'>
                         {category.title}
                       </h3>
-                      <span className='pricing-category-price text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                      <span className='pricing-category-price text-(length:--text-xs) font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
                         ab {category.priceFrom}
                       </span>
                     </div>
 
                     <div className='hidden md:flex md:flex-col md:h-full'>
                       <div className='flex items-center justify-between mb-8'>
-                        <div className='flex flex-col h-full h-14 w-14 items-center justify-center rounded-full bg-[var(--accent-chrome)]'>
+                        <div className='flex flex-col h-full max-h-14 w-14 items-center justify-center rounded-full bg-(--accent-chrome)'>
                           <IconComponent size={20} className='text-luxury-text-primary' />
                         </div>
-                        <span className='text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
+                        <span className='text-(length:--text-xs) font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
                           ab {category.priceFrom}
                         </span>
                       </div>
                       <div className='space-y-8 flex-1'>
-                        <h3 className='font-headline text-2xl text-brand-chrome'>
+                        <h3 className='font-headline text-(length:--text-2xl) text-brand-chrome'>
                           {category.title}
                         </h3>
-                        <p className='text-sm md:text-base text-luxury-text-inverse/75 leading-relaxed font-body'>
+                        <p className='text-(length:--text-sm) md:text-(length:--text-base) text-luxury-text-inverse/75 leading-relaxed font-body'>
                           {category.subtitle}
                         </p>
                       </div>
@@ -548,7 +591,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
 
               {isDesktop ? (
                 <div className='w-full flex justify-center'>
-                  <div className='paket-cards-wrapper flex flex-nowrap gap-4 justify-center items-start overflow-x-auto overflow-y-visible scrollbar-hide w-full py-8'>
+                  <div className='paket-cards-wrapper flex flex-wrap gap-4 justify-center items-start w-full py-8 max-w-7xl mx-auto'>
                     {currentServices.map((service) => renderServiceCard(service))}
                   </div>
                 </div>

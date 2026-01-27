@@ -97,7 +97,6 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
           checked={formData.gdprConsent}
           onChange={handleInputChange}
           required
-          className='touch-target-mobile'
         />
         <label htmlFor='gdpr-consent' className='touch-target-mobile touch-target-mobile-inline'>
           {t('booking.gdpr.consent')}

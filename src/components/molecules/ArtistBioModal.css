@@ -167,7 +167,7 @@
   font-weight: var(--font-weight-medium);
 }
 
-/* Artist Meta (Experience + Instagram) */
+/* Artist Meta (Experience only - Instagram removed) */
 .modal-artist-meta {
   display: flex;
   align-items: center;
@@ -175,41 +175,6 @@
   gap: var(--space-2);
   margin-bottom: var(--space-2);
   flex-wrap: wrap;
-}
-
-.modal-experience {
-  font-family: var(--font-family-primary);
-  font-size: var(--text-sm);
-  color: rgb(var(--color-text-primary-rgb) / 0.7);
-  display: flex;
-  align-items: center;
-  gap: calc(var(--space-1-5) / 2);
-}
-
-.modal-experience::before {
-  content: '⏱';
-  font-size: var(--text-body);
-}
-
-.modal-instagram {
-  font-family: var(--font-family-primary);
-  font-size: var(--text-sm);
-  color: var(--color-brand-accent);
-  text-decoration: none;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: calc(var(--space-1-5) / 2);
-}
-
-.modal-instagram:hover {
-  color: var(--color-text-primary);
-  text-shadow: 0 0 calc(var(--space-2-5) / 2) rgba(var(--color-accent-silver-rgb), 0.4);
-}
-
-.modal-instagram::before {
-  content: '📷';
-  font-size: var(--text-body);
 }
 
 /* Specialties */

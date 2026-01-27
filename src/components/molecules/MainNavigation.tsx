@@ -14,23 +14,28 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   {
     to: '/gallery',
-    i18nKey: 'common.nav.gallery',
+    i18nKey: 'nav.gallery',
     isActive: (path) => path.startsWith('/gallery'),
   },
   {
     to: '/artists',
-    i18nKey: 'common.nav.artists',
+    i18nKey: 'nav.artists',
     isActive: (path) => path.startsWith('/artists'),
   },
-  { to: '/faq', i18nKey: 'common.nav.faq', isActive: (path) => path.startsWith('/faq') },
+  {
+    to: '/about',
+    i18nKey: 'nav.about',
+    isActive: (path) => path.startsWith('/about') || path.startsWith('/en/about'),
+  },
+  { to: '/faq', i18nKey: 'nav.faq', isActive: (path) => path.startsWith('/faq') },
   {
     to: '/contact',
-    i18nKey: 'common.nav.contact',
+    i18nKey: 'nav.contact',
     isActive: (path) => path.startsWith('/contact'),
   },
   {
     to: '/booking',
-    i18nKey: 'common.nav.booking',
+    i18nKey: 'nav.booking',
     isActive: (path) => path.startsWith('/booking'),
   },
 ];
@@ -47,9 +52,21 @@ export function MainNavigation() {
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
   const { language, t } = useLanguage();
+  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
   const isAutomation = typeof navigator !== 'undefined' && navigator.webdriver === true;
   const isAutomationMobile =
     isAutomation && typeof window !== 'undefined' ? window.innerWidth < 1024 : false;
+
+  const localizeNavPath = useCallback(
+    (to: string) => {
+      if (to === '/about') {
+        return isEnglishPath ? '/en/about' : '/about';
+      }
+
+      return to;
+    },
+    [isEnglishPath],
+  );
 
   useEffect(() => {
     const heroHeightRef = { current: window.innerHeight };
@@ -244,7 +261,7 @@ export function MainNavigation() {
             {NAV_ITEMS.filter(({ to }) => to !== '/booking').map(({ to, i18nKey }) => (
               <Link
                 key={`e2e-${to}`}
-                to={to}
+                to={localizeNavPath(to)}
                 tabIndex={-1}
                 aria-hidden='true'
                 style={{ display: 'block', width: 8, height: 8, margin: 0, overflow: 'hidden' }}
@@ -287,7 +304,7 @@ export function MainNavigation() {
                     aria-haspopup='true'
                     aria-expanded='false'
                   >
-                    {t('common.nav.services')}
+                    {t('nav.services')}
                   </Link>
                   <div className='nav-dropdown__menu' role='menu'>
                     {SERVICES_ITEMS.map((item) => (
@@ -308,7 +325,7 @@ export function MainNavigation() {
                   return (
                     <li key={to}>
                       <Link
-                        to={to}
+                        to={localizeNavPath(to)}
                         className={`nav-link font-body text-(length:--text-body) lg:text-(length:--text-sm) font-medium text-luxury-text-inverse hover:text-(--accent-chrome) transition-colors duration-200 ${
                           to === '/booking'
                             ? 'nav-cta rounded-md px-4 py-2 text-(--accent-chrome) hover:bg-(--accent-chrome)/20'
@@ -336,7 +353,7 @@ export function MainNavigation() {
                 aria-controls='mobile-menu-overlay'
                 aria-expanded='true'
                 aria-haspopup='true'
-                aria-label={t('common.nav.closeMenu')}
+                aria-label={t('nav.closeMenu')}
                 onClick={() => setMenuOpen((value) => !value)}
                 data-testid='mobile-menu'
                 className='mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/70 is-open'
@@ -346,7 +363,7 @@ export function MainNavigation() {
                   <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
                   <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
                 </span>
-                <span className='sr-only'>{t('common.nav.closeMenu')}</span>
+                <span className='sr-only'>{t('nav.closeMenu')}</span>
               </button>
             ) : (
               <button
@@ -355,7 +372,7 @@ export function MainNavigation() {
                 aria-controls='mobile-menu-overlay'
                 aria-expanded='false'
                 aria-haspopup='true'
-                aria-label={t('common.nav.openMenu')}
+                aria-label={t('nav.openMenu')}
                 onClick={() => setMenuOpen((value) => !value)}
                 data-testid='mobile-menu'
                 className='mobile-menu-button focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/70'
@@ -365,7 +382,7 @@ export function MainNavigation() {
                   <span className='mobile-menu-button__line mobile-menu-button__line--middle' />
                   <span className='mobile-menu-button__line mobile-menu-button__line--bottom' />
                 </span>
-                <span className='sr-only'>{t('common.nav.openMenu')}</span>
+                <span className='sr-only'>{t('nav.openMenu')}</span>
               </button>
             )}
           </div>
@@ -398,10 +415,14 @@ export function MainNavigation() {
                           ? (item as NavItem).isActive(location.pathname)
                           : location.pathname.startsWith(item.to);
 
+                        const localizedTo = isNavItem
+                          ? localizeNavPath((item as NavItem).to)
+                          : item.to;
+
                         return (
                           <Link
                             key={`mobile-${item.to}`}
-                            to={item.to}
+                            to={localizedTo}
                             onClick={closeMenu}
                             data-testid={`mobile-nav-${item.to.replace(/^\//, '').replace(/\//g, '-')}`}
                             className={`mobile-nav-link ${active ? 'text-brand-accent' : 'text-luxury-text-inverse hover:text-brand-accent'}`}
@@ -422,13 +443,13 @@ export function MainNavigation() {
                     onClick={closeMenu}
                     data-testid='mobile-nav-booking'
                     className='mobile-menu-cta-button'
-                    aria-label={t('common.nav.booking')}
+                    aria-label={t('nav.booking')}
                     tabIndex={menuOpen ? 0 : -1}
                   >
                     <span className='mobile-menu-cta-button__icon' aria-hidden='true'>
                       ✦
                     </span>
-                    <span className='mobile-menu-cta-button__text'>{t('common.nav.booking')}</span>
+                    <span className='mobile-menu-cta-button__text'>{t('nav.booking')}</span>
                   </Link>
                 </div>
               </div>

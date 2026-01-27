@@ -7,6 +7,7 @@ interface ConfirmationStepProps {
   t: (key: string) => string;
   language: string;
   bookingResult: BookingResult;
+  messageOverride?: string;
   onClose?: () => void;
 }
 
@@ -14,13 +15,14 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
   t,
   language,
   bookingResult,
+  messageOverride,
   onClose,
 }) => {
   return (
     <div className='confirmation-screen'>
       <CheckCircle2 size={64} className='success-icon' />
       <h3>{t('booking.confirmation.title')}</h3>
-      <p>{t('booking.confirmation.subtitle')}</p>
+      <p>{messageOverride ?? t('booking.confirmation.subtitle')}</p>
 
       <div className='booking-details'>
         <div className='detail-row'>
@@ -41,7 +43,7 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-              }
+              },
             )}
           </span>
         </div>

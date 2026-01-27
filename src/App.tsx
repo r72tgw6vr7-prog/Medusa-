@@ -54,11 +54,19 @@ const TattooServicesPage = lazy(() =>
   import('@/components/pages/TattooServicesPage').then((m) => ({ default: m.TattooServicesPage })),
 );
 const PiercingServicesPage = lazy(() =>
-  import('@/components/pages/PiercingServicesPage').then((m) => ({ default: m.PiercingServicesPage })),
+  import('@/components/pages/PiercingServicesPage').then((m) => ({
+    default: m.PiercingServicesPage,
+  })),
 );
-const ArtistsPage = lazy(() => import('./pages/ArtistsPage').then((m) => ({ default: m.ArtistsPage })));
-const GalleryPage = lazy(() => import('./pages/GalleryPage').then((m) => ({ default: m.GalleryPage })));
-const BookingPage = lazy(() => import('./pages/BookingPage').then((m) => ({ default: m.BookingPage })));
+const ArtistsPage = lazy(() =>
+  import('./pages/ArtistsPage').then((m) => ({ default: m.ArtistsPage })),
+);
+const GalleryPage = lazy(() =>
+  import('./pages/GalleryPage').then((m) => ({ default: m.GalleryPage })),
+);
+const BookingPage = lazy(() =>
+  import('./pages/BookingPage').then((m) => ({ default: m.BookingPage })),
+);
 const AftercarePage = lazy(() =>
   import('./pages/AftercarePage').then((m) => ({ default: m.AftercarePage })),
 );
@@ -71,8 +79,16 @@ const DatenschutzPage = lazy(() =>
 );
 const AGBPage = lazy(() => import('./pages/AGBPage'));
 const FAQPage = lazy(() => import('./pages/FAQPageNew').then((m) => ({ default: m.FAQPageNew })));
-const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
+const ContactPage = lazy(() =>
+  import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })),
+);
+const AboutPage = lazy(() => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
+);
+const ArtistProfilePage = lazy(() =>
+  import('./pages/ArtistProfilePage').then((m) => ({ default: m.ArtistProfilePage })),
+);
 
 function App() {
   // Texture background is now handled in main.tsx
@@ -81,7 +97,13 @@ function App() {
     <SimpleMedusaProvider>
       <AppProvider initialLanguage='DE'>
         <LanguageProvider>
-          <MotionProvider config={{ scrollProgressEnabled: true, parallaxEnabled: true, cursorTrailEnabled: false }}>
+          <MotionProvider
+            config={{
+              scrollProgressEnabled: true,
+              parallaxEnabled: true,
+              cursorTrailEnabled: false,
+            }}
+          >
             <LocaleRouteSync />
             <ScrollToTop />
             <AnalyticsProvider>
@@ -91,16 +113,12 @@ function App() {
                 {/* Content above texture */}
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
-                      {/* Main Routes */}
-                      <Route
-                        path='/'
-                        element={
-                          <>
-                          <LocalizedMeta
-                            pageKey='home'
-                            basePath='/'
-                            canonicalPath='/'
-                          />
+                    {/* Main Routes */}
+                    <Route
+                      path='/'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='home' basePath='/' canonicalPath='/' />
                           <HomePage />
                         </>
                       }
@@ -146,6 +164,16 @@ function App() {
                       }
                     />
                     <Route
+                      path='/about'
+                      element={
+                        <>
+                          <LocalizedMeta pageKey='about' basePath='/about' canonicalPath='/about' />
+                          <AboutPage />
+                        </>
+                      }
+                    />
+                    <Route path='/artists/:slug' element={<ArtistProfilePage />} />
+                    <Route
                       path='/gallery'
                       element={
                         <>
@@ -171,7 +199,7 @@ function App() {
                         </>
                       }
                     />
-                    
+
                     {/* 301 Redirect from old pricing page to services */}
                     <Route path='/pricing' element={<Navigate to='/services' replace />} />
                     <Route path='/preise' element={<Navigate to='/services' replace />} />
@@ -190,18 +218,14 @@ function App() {
                         </>
                       }
                     />
-                                        <Route path='/legal' element={<LegalPage />} />
+                    <Route path='/legal' element={<LegalPage />} />
                     <Route path='/impressum' element={<ImpressumPage />} />
                     <Route path='/datenschutz' element={<DatenschutzPage />} />
                     <Route
                       path='/faq'
                       element={
                         <>
-                          <LocalizedMeta
-                            pageKey='faq'
-                            basePath='/faq'
-                            canonicalPath='/faq'
-                          />
+                          <LocalizedMeta pageKey='faq' basePath='/faq' canonicalPath='/faq' />
                           <FAQPage />
                         </>
                       }
@@ -230,12 +254,19 @@ function App() {
                         </>
                       }
                     />
-                    <Route path='/en/services' element={<Navigate to='/en/services/tattoos' replace />} />
+                    <Route
+                      path='/en/services'
+                      element={<Navigate to='/en/services/tattoos' replace />}
+                    />
                     <Route
                       path='/en/services/tattoos'
                       element={
                         <>
-                          <LocalizedMeta pageKey='services' basePath='/services/tattoos' canonicalPath='/en/services/tattoos' />
+                          <LocalizedMeta
+                            pageKey='services'
+                            basePath='/services/tattoos'
+                            canonicalPath='/en/services/tattoos'
+                          />
                           <TattooServicesPage />
                         </>
                       }
@@ -244,7 +275,11 @@ function App() {
                       path='/en/services/piercings'
                       element={
                         <>
-                          <LocalizedMeta pageKey='services' basePath='/services/piercings' canonicalPath='/en/services/piercings' />
+                          <LocalizedMeta
+                            pageKey='services'
+                            basePath='/services/piercings'
+                            canonicalPath='/en/services/piercings'
+                          />
                           <PiercingServicesPage />
                         </>
                       }
@@ -253,16 +288,38 @@ function App() {
                       path='/en/artists'
                       element={
                         <>
-                          <LocalizedMeta pageKey='artists' basePath='/artists' canonicalPath='/en/artists' />
+                          <LocalizedMeta
+                            pageKey='artists'
+                            basePath='/artists'
+                            canonicalPath='/en/artists'
+                          />
                           <ArtistsPage />
                         </>
                       }
                     />
                     <Route
+                      path='/en/about'
+                      element={
+                        <>
+                          <LocalizedMeta
+                            pageKey='about'
+                            basePath='/about'
+                            canonicalPath='/en/about'
+                          />
+                          <AboutPage />
+                        </>
+                      }
+                    />
+                    <Route path='/en/artists/:slug' element={<ArtistProfilePage />} />
+                    <Route
                       path='/en/gallery'
                       element={
                         <>
-                          <LocalizedMeta pageKey='gallery' basePath='/gallery' canonicalPath='/en/gallery' />
+                          <LocalizedMeta
+                            pageKey='gallery'
+                            basePath='/gallery'
+                            canonicalPath='/en/gallery'
+                          />
                           <GalleryPage />
                         </>
                       }
@@ -271,7 +328,11 @@ function App() {
                       path='/en/booking'
                       element={
                         <>
-                          <LocalizedMeta pageKey='booking' basePath='/booking' canonicalPath='/en/booking' />
+                          <LocalizedMeta
+                            pageKey='booking'
+                            basePath='/booking'
+                            canonicalPath='/en/booking'
+                          />
                           <BookingPage />
                         </>
                       }
@@ -289,7 +350,11 @@ function App() {
                       path='/en/contact'
                       element={
                         <>
-                          <LocalizedMeta pageKey='contact' basePath='/contact' canonicalPath='/en/contact' />
+                          <LocalizedMeta
+                            pageKey='contact'
+                            basePath='/contact'
+                            canonicalPath='/en/contact'
+                          />
                           <ContactPage />
                         </>
                       }
@@ -301,11 +366,11 @@ function App() {
 
                     {/* 404 Route */}
                     <Route path='*' element={<NotFoundPage />} />
-                </Routes>
-              </Suspense>
-            </div>{' '}
-            {/* End content wrapper */}
-          </AnalyticsProvider>
+                  </Routes>
+                </Suspense>
+              </div>{' '}
+              {/* End content wrapper */}
+            </AnalyticsProvider>
           </MotionProvider>
         </LanguageProvider>
       </AppProvider>

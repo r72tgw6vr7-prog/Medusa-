@@ -1,11 +1,15 @@
 {
   "close": "Close",
+  "actions": {
+    "viewPortfolio": "View portfolio"
+  },
   "nav": {
     "home": "Home",
     "services": "Services",
     "tattoos": "Tattoos",
     "piercings": "Piercings",
     "artists": "Artists",
+    "about": "About",
     "gallery": "Gallery",
     "pricing": "Pricing",
     "booking": "Book Appointment",
@@ -22,7 +26,7 @@
     "brandTagline": "Munich's premium tattoo studio for art that lasts a lifetime.",
     "studio": {
       "address": "Altheimer Eck 11, 80331 Munich",
-      "hours": "Mon-Fri: 11:30-18:30, Sat: 11:00-18:00"
+      "hours": "Mon-Thu: 11:30-19:00, Fri-Sat: 11:30-20:00, Sun: Closed"
     },
     "headings": {
       "quickLinks": "Quick Links",
@@ -81,10 +85,10 @@
           },
           "hours": {
             "title": "Opening hours:",
-            "monFriLabel": "Mon-Fri:",
-            "monFriValue": "11:30-18:30",
-            "satLabel": "Sat:",
-            "satValue": "11:00-18:00",
+            "monFriLabel": "Mon-Thu:",
+            "monFriValue": "11:30-19:00",
+            "satLabel": "Fri-Sat:",
+            "satValue": "11:30-20:00",
             "sunLabel": "Sun:",
             "sunValue": "Closed"
           }
@@ -108,6 +112,10 @@
     "artists": {
       "title": "Medusa Tattoo Munich | Artists",
       "description": "Meet our team of specialized tattoo artists. Portfolios and booking information."
+    },
+    "about": {
+      "title": "About | Medusa Tattoo Munich",
+      "description": "About Medusa Tattoo Munich — founder-led piercing expertise, strict hygiene standards, and advanced implant techniques."
     },
     "gallery": {
       "title": "Gallery",

@@ -25,7 +25,6 @@ interface TeamMember {
       }
     | string;
   experience: string;
-  instagram: string;
   certifications?: string[];
 }
 
@@ -42,7 +41,6 @@ interface Artist {
   roleIcon: string;
   specialties: string[];
   experience: string;
-  instagram: string;
   bookable: boolean;
   featured: boolean;
   category: 'tattoo' | 'piercing';
@@ -63,7 +61,6 @@ const TeamGrid: React.FC = () => {
         roleIcon: 'Target',
         specialties: ['Dermal', 'Industrial', 'Complex Piercings'],
         experience: '10+ Jahre',
-        instagram: '@aaron_medusa',
         bookable: true,
         featured: false,
         category: 'piercing',
@@ -76,7 +73,6 @@ const TeamGrid: React.FC = () => {
         roleIcon: 'Pen',
         specialties: ['Traditional', 'Neo-Traditional', 'Japanese'],
         experience: '6+ Jahre',
-        instagram: '@angie_medusa',
         bookable: true,
         featured: false,
         category: 'tattoo',
@@ -89,20 +85,6 @@ const TeamGrid: React.FC = () => {
         roleIcon: 'Pen',
         specialties: ['Black & Gray', 'Realism', 'Watercolor', 'Portrait'],
         experience: '8+ Jahre',
-        instagram: '@loui_medusa',
-        bookable: true,
-        featured: false,
-        category: 'tattoo',
-      },
-      {
-        slug: 'oliver',
-        name: 'Oliver',
-        photo: '/assets/images/icons/placeholder.svg',
-        role: 'Tattoo Artist',
-        roleIcon: 'Pen',
-        specialties: ['Geometric', 'Blackwork', 'Minimalist'],
-        experience: '5+ Jahre',
-        instagram: '@oli_medusa',
         bookable: true,
         featured: false,
         category: 'tattoo',
@@ -125,26 +107,30 @@ const TeamGrid: React.FC = () => {
         const response = await fetch('/team.json');
         const teamData: TeamData = await response.json();
 
-        const artistsData: Artist[] = teamData.team.map((member: TeamMember) => ({
-          slug: member.slug,
-          name: member.name,
-          fullName: member.fullName,
-          photo: member.photo,
-          role: member.role,
-          roleIcon:
-            member.category === 'tattoo'
-              ? 'Pen'
-              : member.category === 'piercing'
-                ? 'Target'
-                : 'User',
-          specialties: member.specialties,
-          experience: member.experience,
-          instagram: member.instagram,
-          bookable: member.bookable,
-          featured: member.featured,
-          category: member.category,
-          bio: typeof member.bio === 'string' ? undefined : member.bio,
-        }));
+        const artistsData: Artist[] = teamData.team
+          .filter(
+            (member) =>
+              member.slug !== 'sascha' && member.slug !== 'sasha' && member.slug !== 'oliver',
+          )
+          .map((member: TeamMember) => ({
+            slug: member.slug,
+            name: member.name,
+            fullName: member.fullName,
+            photo: member.photo,
+            role: member.role,
+            roleIcon:
+              member.category === 'tattoo'
+                ? 'Pen'
+                : member.category === 'piercing'
+                  ? 'Target'
+                  : 'User',
+            specialties: member.specialties,
+            experience: member.experience,
+            bookable: member.bookable,
+            featured: member.featured,
+            category: member.category,
+            bio: typeof member.bio === 'string' ? undefined : member.bio,
+          }));
 
         // Sort alphabetically by first name (name field)
         artistsData.sort((a, b) => a.name.localeCompare(b.name));
@@ -179,7 +165,7 @@ const TeamGrid: React.FC = () => {
         {
           threshold: 0.3,
           rootMargin: '-50px',
-        }
+        },
       );
 
       observer.observe(ref);
@@ -210,32 +196,32 @@ const TeamGrid: React.FC = () => {
 
   return (
     <Section
-      variant="default"
-      spacing="normal"
-      bg="dark"
-      className="min-h-screen"
+      variant='default'
+      spacing='normal'
+      bg='dark'
+      className='min-h-screen'
       style={{ marginTop: 'var(--first-section-offset)' }}
     >
-      <Container size="default">
+      <Container size='default'>
         {/* Section header - exact template structure */}
-        <div className="mb-32">
+        <div className='mb-32'>
           <PageHeading
-            eyebrow="Medusa München"
-            title="Our Artists"
-            subtitle="Treffen Sie unser erfahrenes Team von Tätowierern und Piercern"
+            eyebrow='Medusa München'
+            title='Our Artists'
+            subtitle='Treffen Sie unser erfahrenes Team von Tätowierern und Piercern'
           />
         </div>
 
         {/* Artist cards with alternating layout */}
-        <div className="space-y-40">
+        <div className='space-y-40'>
           {loading ? (
-            <div className="text-center py-8">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40"></div>
-              <p className="mt-4 text-luxury-text-inverse/50">Loading team members...</p>
+            <div className='text-center py-8'>
+              <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40'></div>
+              <p className='mt-4 text-luxury-text-inverse/50'>Loading team members...</p>
             </div>
           ) : artists.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-luxury-text-inverse/50">No team members found.</p>
+            <div className='text-center py-8'>
+              <p className='text-luxury-text-inverse/50'>No team members found.</p>
             </div>
           ) : (
             artists.map((artist, index) => (
@@ -244,7 +230,7 @@ const TeamGrid: React.FC = () => {
                 ref={(el) => {
                   observerRefs.current[index] = el;
                 }}
-                className="relative"
+                className='relative'
               >
                 <ArtistCard
                   artist={toArtistCardFormat(artist, index)}

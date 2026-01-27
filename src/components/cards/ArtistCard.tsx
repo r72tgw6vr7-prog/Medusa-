@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
 import './ArtistCard.css';
 
 /**
@@ -33,11 +35,18 @@ interface ArtistCardProps {
  * - 6 hover enhancements: Chrome Glow, Content Lift, Shadow Depth, Image Zoom, Overlay Fade, Neighbor Shrink
  */
 export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
+  const location = useLocation();
+  const { t } = useLanguage();
   const isEven = index % 2 === 0;
   const categoryLabel = artist.category === 'piercing' ? 'PIERCING' : 'TATTOO';
   const isEli =
     artist.id === 'eli' || artist.id === 'eli-luquez' || artist.name.toLowerCase().includes('eli');
   const mobileFaceY = isEli ? '40%' : 'calc(40% - 50px)';
+
+  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
+  const artistSlug = artist.id;
+  const portfolioHref = isEnglishPath ? `/en/artists/${artistSlug}` : `/artists/${artistSlug}`;
+  const portfolioLabel = t('common.actions.viewPortfolio');
 
   return (
     <div
@@ -146,6 +155,15 @@ export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
               {artist.description}
             </p>
           )}
+
+          <div className='mt-8'>
+            <Link
+              to={portfolioHref}
+              className='inline-flex items-center justify-center px-8 py-6 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-(length:--text-body) rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2'
+            >
+              {portfolioLabel}
+            </Link>
+          </div>
         </div>
 
         {/* Side chrome accent line */}

@@ -25,6 +25,13 @@ export const routes: Partial<
       EN: 'Artists',
     },
   },
+  about: {
+    path: '/about',
+    title: {
+      DE: 'Über uns',
+      EN: 'About',
+    },
+  },
   gallery: {
     path: '/gallery',
     title: {

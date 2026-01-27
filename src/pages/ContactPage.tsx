@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Shield, Award, MessageCircle, Check, Mail } from 'lucide-react';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { contactSubmit } from '@/services/contactService';
 import '@/components/booking/BookingModalMobile.css';
 
 interface ContactFormData {
@@ -69,10 +70,17 @@ export const ContactPage: React.FC = () => {
     }
   };
 
-  const onSubmit = async (_data: ContactFormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     try {
       setSubmitError(null);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      await contactSubmit({
+        name: data.name,
+        email: data.email,
+        serviceId: data.reason,
+        message: data.message,
+      });
+
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);

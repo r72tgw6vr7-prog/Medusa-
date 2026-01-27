@@ -11,13 +11,13 @@ import {
   Mail,
   Instagram,
   Facebook,
-  Star,
   ChevronDown,
   Landmark,
   Train,
   Car,
+  MessageSquare,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Container from '@/components/ui/Container';
 
@@ -39,22 +39,30 @@ const quickLinks = [
   { i18nKey: 'common.nav.home', href: '/' },
   { i18nKey: 'common.nav.services', href: '/services' },
   { i18nKey: 'common.nav.artists', href: '/artists' },
+  { i18nKey: 'common.nav.about', href: '/about' },
   { i18nKey: 'common.nav.gallery', href: '/gallery' },
   { i18nKey: 'common.nav.faq', href: '/faq' },
   { i18nKey: 'common.nav.contact', href: '/contact' },
 ];
 
 const socialLinks = {
-  instagram: { href: 'https://instagram.com/medusa_tattoo_munich', label: 'Instagram' },
-  facebook: { href: 'https://facebook.com/medusa.tattoo.munich', label: 'Facebook' },
-  google: { href: 'https://g.page/r/medusa-tattoo-munich/review', label: 'Google Reviews' },
+  instagram: {
+    href: 'https://www.instagram.com/medusa.art.suite/?hl=de',
+    label: 'Medusa Instagram',
+  },
+  facebook: {
+    href: 'https://www.facebook.com/MedusaTattooPiercingMuenchen/?locale=de_DE',
+    label: 'Medusa Facebook',
+  },
 };
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [agreeMarketing, setAgreeMarketing] = useState(false);
   const [isLocationAccordionOpen, setIsLocationAccordionOpen] = useState(false);
+  const location = useLocation();
   const { t } = useLanguage();
+  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,10 +90,11 @@ const Footer: React.FC = () => {
         {/* Main Footer Content */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 max-md:grid-cols-2 max-md:gap-8'>
           {/* Brand + Contact */}
-          <div className='lg:col-span-1 max-md:col-span-2 max-md:text-center'>
+          <div className='lg:col-span-1 max-md:col-span-2 text-center'>
             <h2 className='font-headline text-3xl font-bold text-white mb-4'>MEDUSA</h2>
-            <p className='font-body text-base text-white/80 mb-6 leading-relaxed max-md:mx-auto max-md:max-w-md'>
-              {t('common.footer.brandTagline')}
+            <p className='font-body text-base text-white/80 mb-6 leading-relaxed max-w-md mx-auto'>
+              30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen
+              sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.
             </p>
 
             <div className='space-y-4 max-md:flex max-md:flex-col max-md:items-center'>
@@ -95,11 +104,33 @@ const Footer: React.FC = () => {
                   {t('common.footer.studio.address')}
                 </span>
               </div>
-              <div className='flex items-center gap-4 max-md:justify-center'>
-                <Clock size={18} className='text-white/60 shrink-0' />
-                <span className='font-body text-base text-white max-md:text-center'>
-                  {t('common.footer.studio.hours')}
-                </span>
+              <div className='flex items-start gap-4 max-md:justify-center'>
+                <Clock size={18} className='text-white/60 shrink-0 mt-2' />
+                <div className='flex flex-col gap-2 max-md:text-center'>
+                  <span className='font-body text-sm font-medium text-white/90'>
+                    Öffnungszeiten
+                  </span>
+                  <div className='flex flex-col gap-0.5'>
+                    <div className='flex items-center justify-between gap-4'>
+                      <span className='font-body text-sm text-white/70'>Mo - Fr:</span>
+                      <span className='font-body text-sm text-(--accent-chrome) font-medium'>
+                        11:00 - 19:00
+                      </span>
+                    </div>
+                    <div className='flex items-center justify-between gap-4'>
+                      <span className='font-body text-sm text-white/70'>Sa:</span>
+                      <span className='font-body text-sm text-(--accent-chrome) font-medium'>
+                        10:00 - 16:00
+                      </span>
+                    </div>
+                    <div className='flex items-center justify-between gap-4'>
+                      <span className='font-body text-sm text-white/70'>So:</span>
+                      <span className='font-body text-sm text-red-400 font-medium'>
+                        Geschlossen
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className='flex items-center gap-4 max-md:justify-center'>
                 <Phone size={18} className='text-white/60 shrink-0' />
@@ -119,6 +150,17 @@ const Footer: React.FC = () => {
                   {studioInfo.email.text}
                 </a>
               </div>
+              <div className='flex items-center gap-4 max-md:justify-center'>
+                <MessageSquare size={18} className='text-green-400 shrink-0' />
+                <a
+                  href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-body text-base text-green-400 hover:text-green-300 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline max-md:text-center'
+                >
+                  WhatsApp: +49 176 80196286
+                </a>
+              </div>
             </div>
           </div>
 
@@ -131,7 +173,9 @@ const Footer: React.FC = () => {
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    to={link.href}
+                    to={
+                      link.href === '/about' ? (isEnglishPath ? '/en/about' : '/about') : link.href
+                    }
                     className='font-body text-base text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline'
                   >
                     {t(link.i18nKey)}
@@ -209,7 +253,7 @@ const Footer: React.FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={socialLinks.instagram.label}
-                className='text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                className='text-white/80 hover:text-pink-400 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
               >
                 <Instagram size={24} />
               </a>
@@ -218,18 +262,9 @@ const Footer: React.FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
                 aria-label={socialLinks.facebook.label}
-                className='text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                className='text-white/80 hover:text-blue-400 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
               >
                 <Facebook size={24} />
-              </a>
-              <a
-                href={socialLinks.google.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label={socialLinks.google.label}
-                className='text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
-              >
-                <Star size={24} />
               </a>
             </div>
           </div>

@@ -1,6 +1,19 @@
 import React, { useMemo, useState, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import { Sparkles, Zap, Shield, Heart, Euro, ChevronRight } from 'lucide-react';
+import {
+  Gem,
+  Sparkles,
+  Wrench,
+  Euro,
+  ChevronRight,
+  ChevronDown,
+  MessageCircle,
+  MessageSquare,
+  Zap,
+  Shield,
+  Heart,
+} from 'lucide-react';
 import { useApp } from '@/core/state/AppContext';
 import { Button } from '@/components/ui/button';
 import Section from '@/components/primitives/Section';
@@ -199,6 +212,7 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
 export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = ({
   className = '',
 }) => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [isAnimating, setIsAnimating] = useState(false);
   const { openBooking } = useApp();
@@ -228,13 +242,16 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
     let t: number | undefined;
     return (serviceId: string) => {
       if (t) window.clearTimeout(t);
-      t = window.setTimeout(() => openBooking({ service: serviceId }), 300) as unknown as number;
+      t = window.setTimeout(() => {
+        openBooking({ service: serviceId });
+        navigate('/booking');
+      }, 300) as unknown as number;
     };
-  }, [openBooking]);
+  }, [openBooking, navigate]);
 
   return (
-    <Section variant="default" spacing="normal" className={className}>
-      <Container size="default">
+    <Section variant='default' spacing='normal' className={className}>
+      <Container size='default'>
         <div className='flex flex-col gap-16'>
           <div className='text-center space-y-8'>
             <p className='text-sm uppercase tracking-widest text-white/50 font-semibold'>
@@ -285,7 +302,9 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                     </span>
                   </div>
                   <div className='space-y-8 flex-1'>
-                    <h3 className='font-headline text-2xl text-[var(--brand-gold)]'>{category.title}</h3>
+                    <h3 className='font-headline text-2xl text-[var(--brand-gold)]'>
+                      {category.title}
+                    </h3>
                     <p className='text-sm md:text-base text-white/75 leading-relaxed font-body'>
                       {category.subtitle}
                     </p>
@@ -365,7 +384,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                                 className='flex items-center gap-8'
                                 variants={fadeInUpVariants}
                               >
-                                <ChevronRight size={16} className='text-[var(--brand-gold)] shrink-0' />
+                                <ChevronRight size={16} className='text-(--brand-gold) shrink-0' />
                                 <span>{feature}</span>
                               </motion.li>
                             ))}
@@ -374,11 +393,25 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                           <Button
                             onClick={() => handleServiceBooking(service.id)}
                             variant={index === 1 ? 'gold' : 'outlineGold'}
-                            className={`w-full flex flex-col h-full items-center justify-center rounded-xl px-8 py-8 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]`}
+                            className={`w-full flex flex-col h-full items-center justify-center rounded-xl px-8 py-8 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-(--deep-black)`}
                             aria-label={`${service.cta} für ${service.title}`}
                           >
                             {service.cta}
                           </Button>
+
+                          {/* WhatsApp CTA for free consulting */}
+                          {service.priceFrom === 0 && (
+                            <a
+                              href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo%2C%20ich%20interessiere%20mich%20für%20eine%20kostenlose%20Beratung.'
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className="inline-flex items-center justify-center gap-4 w-full px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] flex-col h-full"
+                              aria-label='WhatsApp Beratung starten'
+                            >
+                              <MessageSquare size={20} />
+                              WhatsApp Beratung
+                            </a>
+                          )}
                         </div>
                       </motion.div>
                     </div>

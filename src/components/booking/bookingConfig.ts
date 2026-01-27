@@ -18,6 +18,35 @@ export type BookingFormData = {
   gdprConsent: boolean;
 };
 
+// Specific service options for the dropdown
+export const SPECIFIC_PIERCING_SERVICES = [
+  { id: 'ohr', label: 'Ohr-Piercing' },
+  { id: 'mund', label: 'Mund-Piercing' },
+  { id: 'gesicht', label: 'Gesicht-Piercing' },
+  { id: 'koerper', label: 'Körper-Piercing' },
+  { id: 'intim', label: 'Intim-Piercing' },
+  { id: 'ohrlochzauberer', label: 'Ohrlochzauberer (Kinder)' },
+] as const;
+
+export const SPECIFIC_TATTOO_SERVICES = [
+  { id: 'small', label: 'Klein (bis 5cm)' },
+  { id: 'medium', label: 'Mittel (5-15cm)' },
+  { id: 'large', label: 'Groß (15cm+)' },
+  { id: 'coverup', label: 'Cover-Up' },
+  { id: 'custom', label: 'Custom Design' },
+] as const;
+
+// Map specific service IDs to human-readable labels
+export const getSpecificServiceLabel = (serviceId: string): string => {
+  const piercing = SPECIFIC_PIERCING_SERVICES.find(s => s.id === serviceId);
+  if (piercing) return piercing.label;
+
+  const tattoo = SPECIFIC_TATTOO_SERVICES.find(s => s.id === serviceId);
+  if (tattoo) return tattoo.label;
+
+  return serviceId;
+};
+
 export type PaymentMethod = 'cash' | 'card' | 'bank_transfer' | null;
 
 export type BookingResult = {

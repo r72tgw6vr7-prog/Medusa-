@@ -12,7 +12,6 @@ interface Artist {
   photoAlt?: string;
   specialties: string[];
   experience: string;
-  instagram: string;
   bio?: {
     de: string;
     en: string;
@@ -82,11 +81,7 @@ export const ArtistBioModal = ({ artist, onClose }: ArtistBioModalProps) => {
   const isGerman = lang === 'de';
 
   return (
-    <div
-      className='artist-modal-overlay'
-      onMouseDown={onClose}
-      role='presentation'
-    >
+    <div className='artist-modal-overlay' onMouseDown={onClose} role='presentation'>
       <div
         className='artist-modal-content'
         onMouseDown={(e) => e.stopPropagation()}
@@ -122,16 +117,6 @@ export const ArtistBioModal = ({ artist, onClose }: ArtistBioModalProps) => {
 
           <div className='modal-artist-meta'>
             <span className='modal-experience'>{artist.experience}</span>
-            {artist.instagram && (
-              <a
-                href={`https://instagram.com/${artist.instagram.replace('@', '')}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='modal-instagram'
-              >
-                {artist.instagram}
-              </a>
-            )}
           </div>
 
           <div className='modal-specialties'>

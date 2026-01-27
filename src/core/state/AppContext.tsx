@@ -11,7 +11,7 @@ import { ROUTE_MAPPING } from '../constants/routes';
 interface AppContextType {
   state: AppState;
   dispatch: React.Dispatch<AppAction>;
-  
+
   // Convenience methods
   navigateTo: (page: PageType) => void;
   openBooking: (options?: { artist?: string; service?: string }) => void;
@@ -34,7 +34,7 @@ interface AppProviderProps {
 export function AppProvider({ children, initialLanguage = 'DE' }: AppProviderProps) {
   const [state, dispatch] = useReducer(appReducer, {
     ...initialAppState,
-    language: initialLanguage
+    language: initialLanguage,
   });
 
   // Navigation with route mapping support
@@ -44,7 +44,8 @@ export function AppProvider({ children, initialLanguage = 'DE' }: AppProviderPro
     dispatch({ type: 'SET_PAGE', payload: mappedPage as PageType });
   };
 
-  // Booking flow management
+  // Booking flow management - sets preselected artist/service in state
+  // Note: Actual navigation to /booking is handled by the calling component using React Router
   const openBooking = (options?: { artist?: string; service?: string }) => {
     dispatch({ type: 'OPEN_BOOKING', payload: options });
   };
@@ -93,14 +94,10 @@ export function AppProvider({ children, initialLanguage = 'DE' }: AppProviderPro
     setError,
     setLoading,
     toggleMobileMenu,
-    closeMobileMenu
+    closeMobileMenu,
   };
 
-  return (
-    <AppContext.Provider value={contextValue}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 }
 
 // Custom hook for using app context

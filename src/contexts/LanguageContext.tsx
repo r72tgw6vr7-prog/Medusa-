@@ -8,7 +8,13 @@ import React, {
   useTransition,
   ReactNode,
 } from 'react';
-import { getI18nInstance, setLocale, splitTranslationKey, NAMESPACES } from '@/i18n';
+import {
+  getI18nInstance,
+  setLocale,
+  splitTranslationKey,
+  NAMESPACES,
+  normalizeLocale,
+} from '@/i18n';
 
 // Define supported languages
 export type Language = 'de' | 'en';
@@ -39,12 +45,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    void setLocale('de');
+    const initialFromPath =
+      typeof window !== 'undefined' && window.location.pathname.startsWith('/en') ? 'en' : 'de';
+    void setLocale(normalizeLocale(initialFromPath));
   }, []);
 
   const setLanguage = useCallback(
     (lang: Language) => {
-      if (lang !== 'de') return;
       if (lang === language) return;
 
       // Preload all namespaces for the new language before switching
@@ -64,7 +71,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     const handler = (_lng: string) => {
       setLanguageState((prev) => {
-        const next = 'de' as const;
+        const next = normalizeLocale(i18n.language) as Language;
         return prev === next ? prev : next;
       });
     };

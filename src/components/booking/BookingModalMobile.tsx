@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { submitBooking, validateBookingData } from '@/services/bookingService';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useApp } from '@/core/state/AppContext';
 import { Meteors } from '@/components/ui/meteors';
 import {
   SERVICE_CONFIG,
@@ -23,23 +24,68 @@ import './BookingModalMobile.css';
 
 export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   const { t, language } = useLanguage();
+  const { state, closeBooking } = useApp();
   const [step, setStep] = useState<BookingStep>('details');
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [specificService, setSpecificService] = useState<string | null>(null); // The specific service (e.g., "ohr", "ohrlochzauberer")
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
   const [projectDetails, setProjectDetails] = useState('');
   const [formData, setFormData] = useState<BookingFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [bookingResult, setBookingResult] = useState<BookingResult | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  // Map service IDs to booking system service types
+  const mapServiceToBookingType = useCallback((serviceId: string): string => {
+    // Specific piercing services map to 'piercing'
+    const piercingServices = ['ohr', 'mund', 'gesicht', 'koerper', 'intim', 'ohrlochzauberer'];
+    if (piercingServices.includes(serviceId)) {
+      return 'piercing';
+    }
+
+    // Tattoo services (any ID containing 'tattoo') map to 'tattoo'
+    if (serviceId.includes('tattoo')) {
+      return 'tattoo';
+    }
+
+    // Piercing services (any ID containing 'piercing') map to 'piercing'
+    if (serviceId.includes('piercing')) {
+      return 'piercing';
+    }
+
+    // Services pages use generic service IDs that should map to 'tattoo' or 'piercing' based on context
+    // For now, default to 'tattoo' for unknown services
+    return 'tattoo';
+  }, []);
+
+  // Initialize state based on preselected service - keep first step but pre-select service
+  useEffect(() => {
+    if (state.preselectedService) {
+      const bookingServiceType = mapServiceToBookingType(state.preselectedService);
+      setSelectedService(bookingServiceType);
+      // Store the specific service (e.g., "ohr", "ohrlochzauberer") for the email
+      setSpecificService(state.preselectedService);
+      // Stay on first step ('details') so user can see their selection and modify if needed
+    }
+  }, [state.preselectedService, mapServiceToBookingType]);
 
   const canProceedStep1 = selectedService !== null;
   const canProceedStep2 =
-    formData.name.trim() !== '' &&
-    formData.email.trim() !== '' &&
-    formData.phone.trim() !== '' &&
-    formData.date.trim() !== '' &&
-    formData.gdprConsent;
+    formData.name.trim() !== '' && formData.email.trim() !== '' && formData.date.trim() !== '';
   const canProceedStep3 = paymentMethod !== null;
+
+  const resetForm = useCallback(() => {
+    setStep('details');
+    setSelectedService(null);
+    setSpecificService(null);
+    setPaymentMethod(null);
+    setProjectDetails('');
+    setFormData(INITIAL_FORM_DATA);
+    setSubmissionError(null);
+    setBookingResult(null);
+    setSuccessMessage(null);
+  }, []);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -52,6 +98,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
 
       const bookingData = {
         serviceId: selectedService,
+        specificService: specificService || undefined, // Include in email
         paymentMethod,
         projectDetails,
         ...formData,
@@ -66,6 +113,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
       try {
         setIsSubmitting(true);
         setSubmissionError(null);
+        setSuccessMessage(null);
 
         const serviceConfig = SERVICE_CONFIG.find((s) => s.id === selectedService);
         const response = await submitBooking(bookingData);
@@ -76,17 +124,34 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
           date: formData.date,
         });
 
+        setSuccessMessage(
+          'Vielen Dank! Ihre Terminanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.',
+        );
+
         setStep('confirmation');
+
+        // Reset state for the next booking request (while keeping confirmation visible)
+        setSelectedService(null);
+        setSpecificService(null);
+        setPaymentMethod(null);
+        setProjectDetails('');
+        setFormData(INITIAL_FORM_DATA);
       } catch (error) {
         console.error('Booking failed:', error);
-        setSubmissionError(t('booking.toasts.errorBody'));
+        setSubmissionError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
         setStep('error');
       } finally {
         setIsSubmitting(false);
       }
     },
-    [selectedService, paymentMethod, projectDetails, formData, t],
+    [selectedService, specificService, paymentMethod, projectDetails, formData, t],
   );
+
+  const handleClose = useCallback(() => {
+    resetForm();
+    closeBooking();
+    onClose?.();
+  }, [onClose, resetForm, closeBooking]);
 
   return (
     <div className='booking-modal-mobile'>
@@ -109,7 +174,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
           {onClose && (
             <button
               className='close-button touch-target-mobile'
-              onClick={onClose}
+              onClick={handleClose}
               aria-label={t('booking.modal.close') || 'Close'}
             >
               <X size={24} />
@@ -118,6 +183,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         </div>
 
         <div className='booking-progress' aria-label='Buchung Fortschritt'>
+          {/* Always show 3-step progress */}
           <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
             1/3
           </span>
@@ -137,6 +203,8 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
               t={t}
               selectedService={selectedService}
               setSelectedService={setSelectedService}
+              specificService={specificService}
+              setSpecificService={setSpecificService}
               projectDetails={projectDetails}
               setProjectDetails={setProjectDetails}
               canProceed={canProceedStep1}
@@ -185,7 +253,8 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
             t={t}
             language={language}
             bookingResult={bookingResult}
-            onClose={onClose}
+            messageOverride={successMessage ?? undefined}
+            onClose={handleClose}
           />
         )}
       </div>

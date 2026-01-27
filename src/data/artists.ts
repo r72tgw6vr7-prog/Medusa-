@@ -17,7 +17,6 @@ export interface Artist {
   };
   experience: string;
   languages: string[];
-  instagram: string;
   email?: string;
   phone?: string;
   profileImage: string;
@@ -37,14 +36,13 @@ export const ARTISTS: Artist[] = [
     name: 'Aaron',
     displayName: 'Aaron',
     role: 'Salon Director & Piercing Specialist',
-    specialties: ['Custom Designs', 'Special Piercings', 'Consultation'],
+    specialties: ['Custom Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
     bio: {
-      de: 'Aaron ist Salon Director und spezialisiert auf besondere Piercings sowie individuelle Custom Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden.',
-      en: 'Aaron is the salon director and specializes in special piercings and custom designs. He supports clients through consultation to find the right solutions and placements.',
+      de: 'Aaron ist Salon Director und spezialisiert auf besondere Piercings sowie individuelle Custom Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden. Seine Spezialität ist der "Ohrlochzauberer" – ein kinderfreundlicher Ansatz für Ohrlochstechen, bei dem er wie ein Zauberer auftritt, um Kindern die Angst zu nehmen und das Erlebnis zu etwas Besonderem zu machen.',
+      en: 'Aaron is the salon director and specializes in special piercings and custom designs. He supports clients through consultation to find the right solutions and placements. His specialty is the "Ohrlochzauberer" (Ear Piercing Wizard) – a kid-friendly approach to ear piercing where he acts like a magician to ease children\'s fears and make the experience something special.',
     },
     experience: '',
     languages: ['Deutsch', 'English'],
-    instagram: '@aaron_tattoo_munich',
     profileImage: '/images/artists/aaron.webp',
     coverImage: '/images/artists/aaron.webp',
     portfolioImages: [
@@ -70,7 +68,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '',
     languages: ['Deutsch', 'English', 'Español'],
-    instagram: '@angie_realism_tattoo',
     profileImage: '/images/artists/angie.webp',
     coverImage: '/images/artists/angie.webp',
     portfolioImages: [
@@ -96,7 +93,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '',
     languages: ['English', 'Hungarian'],
-    instagram: '@debi_watercolor_art',
     profileImage: '/images/artists/debi.webp',
     coverImage: '/images/artists/debi.webp',
     portfolioImages: [
@@ -122,7 +118,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '12+ Jahre',
     languages: ['Deutsch', 'English', 'Português'],
-    instagram: '@eli_geometric_tattoo',
     profileImage: '/images/artists/luz.webp',
     coverImage: '/images/artists/luz.webp',
     portfolioImages: [
@@ -148,7 +143,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '25+ Jahre',
     languages: ['Deutsch', 'English', 'Français'],
-    instagram: '@loui_lettering_tattoo',
     profileImage: '/images/artists/loui.webp',
     coverImage: '/images/artists/loui.webp',
     portfolioImages: [
@@ -174,7 +168,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '5+ Jahre',
     languages: ['Deutsch', 'English'],
-    instagram: '@oli_newschool_tattoo',
     profileImage: '/images/artists/oliver.webp',
     coverImage: '/images/artists/oliver.webp',
     portfolioImages: [
@@ -200,7 +193,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '8+ Jahre',
     languages: ['Deutsch', 'English', 'Русский'],
-    instagram: '@sasha_fineline_tattoo',
     profileImage: '/images/artists/sascha.webp',
     coverImage: '/images/artists/sascha.webp',
     portfolioImages: [
@@ -226,7 +218,6 @@ export const ARTISTS: Artist[] = [
     },
     experience: '',
     languages: ['Deutsch', 'English'],
-    instagram: '@vive_coverup_tattoo',
     profileImage: '/images/artists/vivi.webp',
     coverImage: '/images/artists/vivi.webp',
     portfolioImages: [
