@@ -12,12 +12,6 @@ const partnerLogos = [
     alt: 'I AM ROBOT NFC Chip Implants Logo',
   },
   {
-    id: 'nannybag',
-    name: 'nannybag',
-    src: '/assets/images/photos/partners/nannybag-logo.svg',
-    alt: 'nannybag Logo',
-  },
-  {
     id: 'bqla',
     name: 'BQLA',
     src: '/assets/images/photos/partners/bqla-logo.svg',

@@ -10,5 +10,4 @@ export const PARTNERS = [
     alt: 'I AM ROBOT NFC Chip Implants Logo',
     title: 'I AM ROBOT',
   },
-  { src: '/images/partners/nannybag-logo.svg', alt: 'nannybag Logo', title: 'nannybag' },
 ] as const;

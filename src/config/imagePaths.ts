@@ -50,7 +50,6 @@ export const IMAGE_PATHS = {
 
   // Partners logos
   partners: {
-    nannybag: '/assets/images/photos/partners/nannybag-logo.svg',
     iamrobot: '/assets/images/photos/partners/iamrobot-logo.svg',
     partner3: '/assets/images/photos/partners/partner3-logo.svg',
     bqla: '/assets/images/photos/partners/bqla-logo.svg',
