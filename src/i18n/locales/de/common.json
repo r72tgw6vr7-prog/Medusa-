@@ -17,7 +17,26 @@
     "faq": "FAQ",
     "contact": "Kontakt",
     "openMenu": "Navigationsmenü öffnen",
-    "closeMenu": "Menü schließen"
+    "closeMenu": "Menü schließen",
+    "mainNavigationLabel": "Hauptnavigation",
+    "mobileNavigationLabel": "Mobile Navigation",
+    "mobileMenuTitle": "Hauptmenü",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToEnglish": "Zu Englisch wechseln"
+  },
+  "about": {
+    "eyebrow": "Medusa München",
+    "title": "Über Medusa",
+    "subtitle": "Wo präzises Piercing auf kompromisslose Hygiene und Kunstfertigkeit trifft. Unser Studio verbindet jahrzehntelange Expertise mit einem ruhigen, beratungsorientierten Ansatz.",
+    "scroll": "Scroll",
+    "oliver": {
+      "discipline": "Gründer & Piercing-Experte",
+      "description": "Oliver führt Medusa mit Fokus auf präzises Piercing, sichere Platzierung und eine ruhige, beratungsorientierte Herangehensweise."
+    },
+    "sascha": {
+      "discipline": "Front Desk & Studio Support",
+      "description": "Dein erster Kontakt bei Medusa. Sascha hilft bei Terminfragen, Anliegen und sorgt dafür, dass im Studio alles reibungslos läuft."
+    }
   },
   "footer": {
     "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
@@ -135,9 +154,110 @@
       "title": "Kontakt | Medusa Tattoo München",
       "description": "Kontakt – Adresse, Telefon, E-Mail und Öffnungszeiten."
     },
+    "aftercare": {
+      "title": "Nachsorge Anleitung | Medusa Tattoo München",
+      "description": "Professioneller Nachsorge-Guide für Tattoos und Piercings mit Heilungsphasen und Warnzeichen."
+    },
+    "legal": {
+      "title": "Allgemeine Geschäftsbedingungen | Medusa Tattoo München",
+      "description": "Allgemeine Geschäftsbedingungen für Tattoo- und Piercing-Leistungen in München."
+    },
+    "impressum": {
+      "title": "Impressum | Medusa Tattoo München",
+      "description": "Rechtliche Angaben und Unternehmensinformationen für Medusa Tattoo & Piercing Studio."
+    },
+    "datenschutz": {
+      "title": "Datenschutzerklärung | Medusa Tattoo München",
+      "description": "Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."
+    },
     "agb": {
       "title": "AGB | Medusa Tattoo München",
       "description": "Allgemeine Geschäftsbedingungen für Leistungen und Buchungen."
+    }
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Antworten zu Terminen, Preisen, Hygiene und Nachsorge.",
+    "sections": {
+      "booking": {
+        "title": "Terminbuchung",
+        "questions": {
+          "howToBook": {
+            "question": "Wie buche ich einen Termin?",
+            "answer": "Nutzen Sie unser Online-Formular oder rufen Sie uns an. Wir bestätigen Ihre Anfrage in der Regel innerhalb von 24 Stunden."
+          },
+          "reschedule": {
+            "question": "Kann ich meinen Termin verschieben?",
+            "answer": "Ja. Bitte informieren Sie uns mindestens 48 Stunden vor dem Termin, damit wir eine neue Zeit für Sie finden können."
+          },
+          "deposit": {
+            "question": "Ist eine Anzahlung erforderlich?",
+            "answer": "Bei größeren Projekten kann eine Anzahlung notwendig sein. Details erhalten Sie im Beratungsgespräch."
+          }
+        }
+      },
+      "pricing": {
+        "title": "Preise & Zahlung",
+        "questions": {
+          "pricing": {
+            "question": "Wie setzen sich die Preise zusammen?",
+            "answer": "Der Preis richtet sich nach Größe, Platzierung, Aufwand und Stil. Vor dem Termin erhalten Sie eine klare Einschätzung."
+          },
+          "paymentMethods": {
+            "question": "Welche Zahlungsmethoden akzeptieren Sie?",
+            "answer": "Wir akzeptieren Barzahlung, Kartenzahlung und Überweisung."
+          }
+        }
+      },
+      "hygiene": {
+        "title": "Hygiene & Sicherheit",
+        "questions": {
+          "hygiene": {
+            "question": "Welche Hygienestandards gelten bei Medusa?",
+            "answer": "Wir arbeiten mit sterilen Einwegmaterialien, zertifizierten Desinfektionsverfahren und dokumentierten Hygieneroutinen."
+          },
+          "inkSafety": {
+            "question": "Sind die Farben und Materialien sicher?",
+            "answer": "Wir verwenden geprüfte Pigmente und implantatgeeigneten Schmuck. Allergien und Sensibilitäten klären wir vorab."
+          }
+        }
+      },
+      "artists": {
+        "title": "Künstler & Stilrichtungen",
+        "questions": {
+          "chooseArtist": {
+            "question": "Wie finde ich den passenden Künstler?",
+            "answer": "Teilen Sie uns Ihre Wünsche und Referenzen mit. Wir empfehlen den Künstler, dessen Portfolio am besten zu Ihrem Stil passt."
+          },
+          "styles": {
+            "question": "Welche Stilrichtungen bietet Ihr Studio?",
+            "answer": "Wir arbeiten unter anderem in Realismus, Fineline, Blackwork, Neo-Traditional, Japanese und individuellen Konzepten."
+          }
+        }
+      },
+      "aftercare": {
+        "title": "Nachsorge",
+        "questions": {
+          "care": {
+            "question": "Wie pflege ich mein Tattoo oder Piercing?",
+            "answer": "Sie erhalten eine schriftliche Nachsorgeanleitung. Wir erklären Ihnen die Schritte und beantworten alle Fragen vor Ort."
+          },
+          "problems": {
+            "question": "Was mache ich bei Problemen?",
+            "answer": "Kontaktieren Sie uns sofort. Wir geben Ihnen eine Empfehlung oder vereinbaren einen Kontrolltermin."
+          }
+        }
+      },
+      "location": {
+        "title": "Anfahrt & Lage",
+        "questions": {
+          "directions": {
+            "question": "Wie finde ich das Studio?",
+            "answer": "Sie finden uns am Altheimer Eck 11, nur wenige Schritte vom Marienplatz entfernt. U-Bahn und S-Bahn sind in unmittelbarer Nähe."
+          }
+        }
+      }
     }
   },
   "slider": {

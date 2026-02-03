@@ -20,45 +20,53 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
 }) => {
   return (
     <div className='confirmation-screen'>
-      <CheckCircle2 size={64} className='success-icon' />
-      <h3>{t('booking.confirmation.title')}</h3>
-      <p>{messageOverride ?? t('booking.confirmation.subtitle')}</p>
+      <div className='confirmation-card'>
+        <div className='confirmation-icon'>
+          <CheckCircle2 size={32} className='success-icon' />
+        </div>
+        <div className='confirmation-copy'>
+          <h3 className='confirmation-title'>{t('booking.confirmation.title')}</h3>
+          <p className='confirmation-subtitle'>
+            {messageOverride ?? t('booking.confirmation.subtitle')}
+          </p>
+        </div>
 
-      <div className='booking-details'>
-        <div className='detail-row'>
-          <span className='detail-label'>{t('booking.confirmation.bookingNumber')}</span>
-          <span className='detail-value'>{bookingResult.bookingNumber}</span>
+        <div className='booking-details'>
+          <div className='detail-row'>
+            <span className='detail-label'>{t('booking.confirmation.bookingNumber')}</span>
+            <span className='detail-value'>{bookingResult.bookingNumber}</span>
+          </div>
+          <div className='detail-row'>
+            <span className='detail-label'>{t('booking.confirmation.service')}</span>
+            <span className='detail-value'>{bookingResult.serviceName}</span>
+          </div>
+          <div className='detail-row'>
+            <span className='detail-label'>{t('booking.confirmation.date')}</span>
+            <span className='detail-value'>
+              {new Date(bookingResult.date).toLocaleDateString(
+                language === 'de' ? 'de-DE' : 'en-US',
+                {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                },
+              )}
+            </span>
+          </div>
         </div>
-        <div className='detail-row'>
-          <span className='detail-label'>{t('booking.confirmation.service')}</span>
-          <span className='detail-value'>{bookingResult.serviceName}</span>
-        </div>
-        <div className='detail-row'>
-          <span className='detail-label'>{t('booking.confirmation.date')}</span>
-          <span className='detail-value'>
-            {new Date(bookingResult.date).toLocaleDateString(
-              language === 'de' ? 'de-DE' : 'en-US',
-              {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              },
-            )}
-          </span>
-        </div>
+
+        <p className='confirmation-note'>{t('booking.confirmation.emailNote')}</p>
+
+        <Button
+          variant='chrome'
+          onClick={onClose}
+          className='confirmation-action w-full'
+          aria-label={t('booking.confirmation.closeButton')}
+        >
+          {t('booking.confirmation.closeButton')}
+        </Button>
       </div>
-
-      <p className='confirmation-note'>{t('booking.confirmation.emailNote')}</p>
-
-      <Button
-        variant='chrome'
-        onClick={onClose}
-        className='w-full'
-        aria-label={t('booking.confirmation.closeButton')}
-      >
-        {t('booking.confirmation.closeButton')}
-      </Button>
     </div>
   );
 };

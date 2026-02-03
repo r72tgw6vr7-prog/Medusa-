@@ -6,6 +6,8 @@ import ErrorBoundary from '@/components/layout/ErrorBoundary';
 import { LazySection } from '@/components/LazySection';
 import { GALLERY_IMAGES } from '@/content/gallery-images';
 import { useSectionTransition } from '@/hooks/useSectionTransition';
+import { LocationSection } from '@/components/LocationSection';
+import { GoogleMapSection } from '@/components/GoogleMapSection';
 
 const BladeAccordionLazy = lazy(() =>
   import('@/components/ui/BladeAccordion').then((m) => ({ default: m.BladeAccordion })),
@@ -13,6 +15,12 @@ const BladeAccordionLazy = lazy(() =>
 
 const ServicesCurtainSectionLazy = lazy(() =>
   import('@/sections/ServicesCurtainSection').then((m) => ({ default: m.ServicesCurtainSection })),
+);
+
+const SocialContactsCarouselSectionLazy = lazy(() =>
+  import('@/sections/SocialContactsCarouselSection').then((m) => ({
+    default: m.SocialContactsCarouselSection,
+  })),
 );
 
 const StudioCarouselLazy = lazy(() => import('@/components/organisms/StudioCarousel'));
@@ -136,6 +144,17 @@ export function HomePage() {
             </ErrorBoundary>
           </LazySection>
 
+          {/* 2.75. Social Media Carousel - Deferred */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={null}>
+                  <SocialContactsCarouselSectionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
           {/* 3. Studio Carousel - Lazy load */}
           <LazySection>
             <ErrorBoundary>
@@ -223,6 +242,20 @@ export function HomePage() {
               </SectionTransitionWrapper>
             </ErrorBoundary>
           </LazySection>
+
+          {/* Location Section - Above Footer */}
+          <ErrorBoundary>
+            <SectionTransitionWrapper>
+              <LocationSection />
+            </SectionTransitionWrapper>
+          </ErrorBoundary>
+
+          {/* Google Map Section */}
+          <ErrorBoundary>
+            <SectionTransitionWrapper>
+              <GoogleMapSection />
+            </SectionTransitionWrapper>
+          </ErrorBoundary>
 
           {/* Footer - Always load */}
           <ErrorBoundary>

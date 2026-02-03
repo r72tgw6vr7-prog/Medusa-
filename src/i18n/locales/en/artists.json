@@ -4,10 +4,6 @@
     "sectionAriaLabel": "Our Artists",
     "loading": "Loading artists...",
     "viewProfile": "View profile",
-    "defaultDiscipline": "Tattoo Artist",
-    "instructions": {
-      "mobile": "Tap to expand",
-      "desktop": "Hover to expand"
-    }
+    "defaultDiscipline": "Tattoo Artist"
   }
 }

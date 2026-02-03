@@ -457,9 +457,13 @@
 .confirmation-screen {
   position: absolute;
   inset: 0;
-  background: var(--card-bg);
+  background: radial-gradient(
+    circle at top,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0.6) 55%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--space-6);
@@ -468,68 +472,108 @@
   overflow: visible;
 }
 
+.confirmation-card {
+  width: min(480px, 100%);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: calc(var(--card-radius) + var(--space-1));
+  padding: var(--space-6) var(--space-5);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.confirmation-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--accent-chrome-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-chrome-rgb), 0.5);
+  box-shadow: 0 12px 32px rgba(var(--accent-chrome-rgb), 0.3);
+}
+
 .success-icon {
-  color: var(--color-success-green);
-  margin-bottom: var(--space-3);
+  color: var(--accent-chrome);
 }
 
-.confirmation-screen h3 {
+.confirmation-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.confirmation-title {
   font-size: var(--text-h3);
-  margin: 0 0 var(--space-2);
+  margin: 0;
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
-.confirmation-screen p {
-  color: rgba(var(--accent-chrome-rgb), 0.7);
-  margin-bottom: var(--space-3);
-  max-width: 100%;
+.confirmation-subtitle {
+  margin: 0;
+  color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
   font-size: var(--text-body);
 }
 
 .booking-details {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--card-radius);
-  padding: var(--space-4);
   width: 100%;
-  max-width: 320px;
-  margin-bottom: var(--space-3);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: var(--space-4);
+  max-width: 360px;
   text-align: left;
-  box-shadow: var(--card-shadow-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .detail-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--space-2);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: baseline;
   padding-bottom: var(--space-2);
-  border-bottom: calc(var(--space-0-5) / 4) solid var(--card-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .detail-row:last-child {
   border-bottom: none;
-  margin-bottom: 0;
   padding-bottom: 0;
 }
 
 .detail-label {
-  color: rgba(var(--accent-chrome-rgb), 0.6);
+  color: rgba(var(--accent-chrome-rgb), 0.7);
   font-size: var(--text-body-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .detail-value {
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   text-align: right;
-  max-width: 60%;
 }
 
 .confirmation-note {
+  margin: 0;
   font-size: var(--text-body-small);
-  color: rgba(var(--accent-chrome-rgb), 0.6);
-  margin-bottom: var(--space-3);
-  max-width: var(--space-48);
+  color: var(--color-text-secondary);
+  max-width: var(--space-56);
+}
+
+.confirmation-action {
+  margin-top: var(--space-2);
 }
 
 /* Responsive Adjustments */
@@ -544,20 +588,19 @@
   }
 
   .confirmation-screen {
-    padding: var(--space-2);
+    padding: var(--space-4);
   }
 
   .booking-details {
-    padding: var(--space-2);
+    padding: var(--space-3);
   }
 
   .detail-row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: var(--space-1);
   }
 
   .detail-value {
-    max-width: 100%;
     text-align: left;
   }
 }

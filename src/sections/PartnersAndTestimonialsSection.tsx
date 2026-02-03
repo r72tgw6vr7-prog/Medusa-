@@ -1,9 +1,9 @@
 import React from 'react';
 import Container from '../components/ui/Container';
+import InfiniteLogoCarousel from '@/components/organisms/InfiniteLogoCarousel';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
-import './PartnersAndTestimonialsSection.css';
 
-// PARTNER LOGOS - REFINEMENT #4: Only 4 real partners - FIXED WITH CORRECT PATHS
+// PARTNER LOGOS - Updated list with latest partners
 const partnerLogos = [
   {
     id: 'iamrobot',
@@ -12,10 +12,40 @@ const partnerLogos = [
     alt: 'I AM ROBOT NFC Chip Implants Logo',
   },
   {
-    id: 'bqla',
-    name: 'BQLA',
-    src: '/assets/images/photos/partners/bqla-logo.svg',
-    alt: 'BQLA Partner Logo',
+    id: 'partner-1',
+    name: 'Partner 1',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.34.53%201.svg',
+    alt: 'Partner Logo 1',
+  },
+  {
+    id: 'partner-2',
+    name: 'Partner 2',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.35.16%201.svg',
+    alt: 'Partner Logo 2',
+  },
+  {
+    id: 'partner-3',
+    name: 'Partner 3',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.36.16%201.svg',
+    alt: 'Partner Logo 3',
+  },
+  {
+    id: 'upgraded-humans',
+    name: 'Upgraded Humans',
+    src: '/assets/images/icons/Simplification.svg',
+    alt: 'Upgraded Humans Partner Logo',
+  },
+  {
+    id: 'wepiercing',
+    name: 'Wepiercing',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.50.07%201_layerstyle.svg',
+    alt: 'Wepiercing Partner Logo',
+  },
+  {
+    id: 'tutto-tattoo',
+    name: 'Tutto Tattoo',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.49.30%201_layerstyle.svg',
+    alt: 'Tutto Tattoo Partner Logo',
   },
 ];
 
@@ -30,9 +60,6 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
   subtitlePartners = 'Vertrauensvolle Partnerschaften mit führenden Marken der Branche',
   titleTestimonials = 'Was Kunden sagen',
 }) => {
-  // REFINEMENT #5: Duplicate array × 4 for seamless loop on all screen sizes
-  const scrollItems = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos];
-
   return (
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
       <Container className='py-16 md:py-24 lg:py-24'>
@@ -47,29 +74,7 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
         </p>
 
         {/* Partner Logos Carousel - Restored with gold styling */}
-        <div className='partners-carousel-wrapper'>
-          <div
-            className='partners-carousel-container'
-            role='region'
-            aria-label='Partners and Press carousel'
-          >
-            <div className='partners-carousel-track' aria-hidden='true'>
-              {scrollItems.map((logo, idx) => (
-                <div key={`${logo.id}-${idx}`} className='partners-logo' title={logo.name}>
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      console.error('Failed to load logo:', logo.src);
-                      target.style.display = 'none';
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <InfiniteLogoCarousel items={partnerLogos} ariaLabel='Partners and Press carousel' />
       </Container>
 
       {/* TESTIMONIALS */}

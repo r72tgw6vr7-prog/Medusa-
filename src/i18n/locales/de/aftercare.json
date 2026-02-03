@@ -1,0 +1,211 @@
+{
+  "pageHeading": {
+    "eyebrow": "Medusa München",
+    "title": "Tattoo Nachsorge",
+    "subtitle": "Ihr Leitfaden für perfekte Heilung und langanhaltende Schönheit",
+    "healingDuration": "Heilungsdauer: 2-4 Wochen oberflächlich, 3-6 Monate vollständig"
+  },
+  "timeline": {
+    "eyebrow": "Prozess",
+    "title": "Heilungsphasen",
+    "showLess": "Weniger anzeigen",
+    "showDetails": "Details anzeigen",
+    "instructionsLabel": "Anweisungen:"
+  },
+  "phases": {
+    "day-0": {
+      "day": "Tag 0",
+      "title": "Unmittelbar nach dem Tattoo",
+      "description": "Die ersten Stunden sind entscheidend. Ihr Tattoo ist eine offene Wunde und muss entsprechend behandelt werden.",
+      "duration": "0-4 Stunden",
+      "instructions": {
+        "keepWrap": "Folie für 2-4 Stunden drauf lassen",
+        "noTouch": "Nicht berühren oder kratzen",
+        "looseClothing": "Lockere, saubere Kleidung tragen",
+        "noSports": "Keine sportlichen Aktivitäten",
+        "drinkWater": "Viel Wasser trinken"
+      },
+      "warnings": {
+        "dontRemoveWrap": "Folie nicht vorzeitig entfernen",
+        "avoidSun": "Nicht in der Sonne aufhalten",
+        "noAlcohol": "Kein Alkohol trinken"
+      }
+    },
+    "day-1-3": {
+      "day": "Tag 1-3",
+      "title": "Reinigungsphase",
+      "description": "Jetzt beginnt die wichtige Reinigungsphase. Regelmäßige, sanfte Pflege ist entscheidend für optimale Heilung.",
+      "duration": "1-3 Tage",
+      "instructions": {
+        "removeWrap": "Folie vorsichtig entfernen und Tattoo mit lauwarmem Wasser abspülen",
+        "washWithSoap": "3-4x täglich mit pH-neutraler Seife waschen",
+        "patDry": "Mit sauberem Handtuch trocken tupfen (nicht reiben)",
+        "applyOintment": "Dünne Schicht Heilsalbe auftragen",
+        "noMoreWrap": "Keine Folie mehr verwenden (Haut muss atmen)",
+        "breathableClothing": "Lockere, atmungsaktive Kleidung tragen"
+      },
+      "warnings": {
+        "noBath": "Nicht in der Badewanne baden",
+        "noSwimming": "Nicht schwimmen gehen",
+        "avoidSun": "Nicht direkt in die Sonne",
+        "noScratch": "Nicht kratzen bei Juckreiz"
+      }
+    },
+    "day-4-7": {
+      "day": "Tag 4-7",
+      "title": "Aktive Heilungsphase",
+      "description": "Ihr Tattoo beginnt zu schuppen und kann jucken. Das ist völlig normal und zeigt, dass die Heilung fortschreitet.",
+      "duration": "4-7 Tage",
+      "instructions": {
+        "keepWashing": "Weiterhin 2-3x täglich waschen",
+        "applyLotion": "Dünn mit Heilsalbe oder Lotion eincremen",
+        "tapInsteadScratch": "Bei Juckreiz: sanft klopfen statt kratzen",
+        "dontPeelSkin": "Schuppende Haut nicht abziehen",
+        "keepHydrated": "Viel Feuchtigkeit (trinken & eincremen)",
+        "avoidTightClothing": "Vermeiden Sie enge Kleidung über dem Tattoo"
+      },
+      "warnings": {
+        "dontScratch": "NICHT kratzen oder reiben",
+        "dontRemoveFlakes": "Schuppende Haut nicht entfernen",
+        "noScrubs": "Keine Peelings oder Scrubs",
+        "noBathSwimming": "Weiterhin kein Bad/Schwimmen"
+      }
+    },
+    "day-8-14": {
+      "day": "Tag 8-14",
+      "title": "Stabilisierungsphase",
+      "description": "Die oberste Hautschicht ist fast verheilt. Das Tattoo sieht noch etwas matt aus, aber die Farben kommen zurück.",
+      "duration": "8-14 Tage",
+      "instructions": {
+        "moisturizeTwice": "Weiterhin 2x täglich eincremen",
+        "useBodyLotion": "Normale, parfümfreie Bodylotion verwenden",
+        "lightExercise": "Leichte sportliche Aktivitäten möglich",
+        "sunProtection": "Sonnenschutz (LSF 50+) bei Sonnenexposition",
+        "drinkWater": "Viel Wasser trinken für Hautgesundheit"
+      },
+      "warnings": {
+        "noSolarium": "Noch kein Solarium",
+        "noLongSwims": "Noch keine ausgedehnten Schwimmeinheiten",
+        "avoidDirectSun": "Vorsicht mit direkter Sonneneinstrahlung"
+      }
+    },
+    "week-3-4": {
+      "day": "Woche 3-4",
+      "title": "Finale Heilung",
+      "description": "Ihr Tattoo ist oberflächlich verheilt, aber die tieferen Hautschichten heilen noch. Farben werden lebendiger.",
+      "duration": "3-4 Wochen",
+      "instructions": {
+        "dailyMoisturize": "Weiterhin täglich mit Feuchtigkeit versorgen",
+        "alwaysSunProtection": "IMMER Sonnenschutz verwenden (LSF 50+)",
+        "normalActivities": "Normale Aktivitäten wieder möglich",
+        "bathingAllowed": "Baden und Schwimmen wieder erlaubt",
+        "contactStudio": "Bei Bedenken: Studio kontaktieren"
+      },
+      "warnings": {
+        "uvProtectionAlways": "UV-Schutz lebenslang wichtig",
+        "noHarshChemicals": "Keine aggressiven Chemikalien",
+        "reportRedness": "Bei Rötung/Schwellung sofort melden"
+      }
+    },
+    "longterm": {
+      "day": "Langzeitpflege",
+      "title": "Langzeitpflege",
+      "description": "Vollständige Heilung dauert 3-6 Monate. Richtige Pflege erhält Ihr Tattoo lebendig und schön.",
+      "duration": "Lebenslang",
+      "instructions": {
+        "dailyLotion": "Täglich Bodylotion oder Tattoo-Pflegecreme verwenden",
+        "alwaysSPF": "Immer Sonnenschutz auftragen (LSF 50+)",
+        "keepHydrated": "Haut hydratisiert halten",
+        "healthyDiet": "Gesunde Ernährung für Hautgesundheit",
+        "touchUp": "Touch-up nach 6-12 Monaten bei Bedarf"
+      },
+      "warnings": {
+        "sunBiggestEnemy": "Sonne ist der größte Feind von Tattoos",
+        "noUvColorsFade": "Ohne UV-Schutz verblassen Farben schnell",
+        "weightChanges": "Extreme Gewichtsschwankungen können Tattoo verzerren"
+      }
+    }
+  },
+  "dosDonts": {
+    "eyebrow": "Anleitung",
+    "title": "Do's & Don'ts",
+    "dosTitle": "Was Sie TUN sollten",
+    "dontsTitle": "Was Sie NICHT tun sollten",
+    "importantLabel": "WICHTIG"
+  },
+  "tips": {
+    "do-1": "Regelmäßig mit pH-neutraler Seife waschen",
+    "do-2": "Dünn mit Heilsalbe eincremen (3-4x täglich)",
+    "do-3": "Haut atmen lassen (lockere Kleidung)",
+    "do-4": "Viel Wasser trinken für Hautgesundheit",
+    "do-5": "Saubere, gewaschene Hände vor Berührung",
+    "do-6": "Sonnenschutz (LSF 50+) nach Heilung",
+    "do-7": "Bei Juckreiz sanft klopfen",
+    "do-8": "Studio bei Problemen kontaktieren",
+    "dont-1": "NICHT kratzen oder reiben",
+    "dont-2": "NICHT baden, schwimmen oder Sauna (2 Wochen)",
+    "dont-3": "NICHT direkte Sonneneinstrahlung",
+    "dont-4": "NICHT Folie nach Tag 1 verwenden",
+    "dont-5": "NICHT zu viel Creme (Haut muss atmen)",
+    "dont-6": "NICHT Schorf oder Schuppen abziehen",
+    "dont-7": "NICHT Alkohol in ersten 24 Stunden",
+    "dont-8": "NICHT Haustiere auf Tattoo lassen",
+    "dont-9": "NICHT enge/scheuernde Kleidung tragen",
+    "dont-10": "NICHT Parfüm oder parfümierte Produkte"
+  },
+  "products": {
+    "eyebrow": "Produkte",
+    "title": "Empfohlene Produkte",
+    "recommendedLabel": "Empfohlen",
+    "learnMore": "Mehr erfahren",
+    "items": {
+      "bepanthen": {
+        "name": "Bepanthen Wund- und Heilsalbe",
+        "description": "Die klassische Wahl für Tattoo-Heilung. Fördert natürliche Heilung und hält die Haut geschmeidig."
+      },
+      "ph-neutral-soap": {
+        "name": "pH-neutrale Seife",
+        "description": "Sanfte, parfümfreie Seife für die tägliche Reinigung. Sebamed oder ähnliche Marken."
+      },
+      "tattoo-balm": {
+        "name": "Spezielle Tattoo-Pflegecreme",
+        "description": "Premium Tattoo-Balsam mit natürlichen Inhaltsstoffen. Fördert Heilung und erhält Farbbrillanz."
+      },
+      "sun-protection": {
+        "name": "Sonnenschutz LSF 50+",
+        "description": "Hochdosierter Sonnenschutz speziell für Tattoos. Verhindert Verblassen und Hautschäden."
+      },
+      "body-lotion": {
+        "name": "Parfümfreie Bodylotion",
+        "description": "Für die Langzeitpflege nach vollständiger Heilung. Hält die Haut hydratisiert und das Tattoo lebendig."
+      }
+    }
+  },
+  "productCategories": {
+    "cleaning": "Reinigung",
+    "healing": "Heilung",
+    "protection": "Schutz"
+  },
+  "warningSigns": {
+    "title": "Warnzeichen",
+    "description": "Kontaktieren Sie sofort einen Arzt oder unser Studio, wenn Sie diese Symptome bemerken:",
+    "emergencyLabel": "Notfallkontakt:",
+    "hours": "Mo-Do: 11:30-19:00, Fr-Sa: 11:30-20:00, So: Geschlossen",
+    "signs": {
+      "pain": "Starke, zunehmende Schmerzen nach 2-3 Tagen",
+      "redness": "Übermäßige Rötung oder Schwellung",
+      "fever": "Fieber oder Schüttelfrost",
+      "discharge": "Übelriechender Ausfluss oder Eiter",
+      "redStreaks": "Rote Streifen von der Tätowierung weg",
+      "allergicReaction": "Allergische Reaktion (starker Juckreiz, Ausschlag)",
+      "blistering": "Ungewöhnliche Blasenbildung"
+    }
+  },
+  "cta": {
+    "eyebrow": "Unterstützung",
+    "title": "Noch Fragen?",
+    "subtitle": "Noch Fragen? Unser Team steht Ihnen jederzeit zur Verfügung. Kontaktieren Sie uns bei Fragen zur Nachsorge.",
+    "contact": "Kontaktieren Sie uns",
+    "booking": "Termin buchen"
+  }
+}

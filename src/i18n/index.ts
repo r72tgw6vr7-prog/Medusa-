@@ -7,7 +7,7 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'de';
 
 export const I18N_STORAGE_KEY = 'language';
-export const I18N_CACHE_VERSION = '4';
+export const I18N_CACHE_VERSION = '6';
 
 export const NAMESPACES = [
   'common',
@@ -17,6 +17,7 @@ export const NAMESPACES = [
   'services',
   'artists',
   'gallery',
+  'aftercare',
   'errors',
   'validation',
 ] as const;
@@ -34,6 +35,7 @@ const namespaceLoaders: NamespaceLoaders = {
     services: () => import('./locales/de/services.json'),
     artists: () => import('./locales/de/artists.json'),
     gallery: () => import('./locales/de/gallery.json'),
+    aftercare: () => import('./locales/de/aftercare.json'),
     errors: () => import('./locales/de/errors.json'),
     validation: () => import('./locales/de/validation.json'),
   },
@@ -45,6 +47,7 @@ const namespaceLoaders: NamespaceLoaders = {
     services: () => import('./locales/en/services.json'),
     artists: () => import('./locales/en/artists.json'),
     gallery: () => import('./locales/en/gallery.json'),
+    aftercare: () => import('./locales/en/aftercare.json'),
     errors: () => import('./locales/en/errors.json'),
     validation: () => import('./locales/en/validation.json'),
   },

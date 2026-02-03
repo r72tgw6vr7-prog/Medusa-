@@ -54,6 +54,10 @@
     min-width: 280px;
     max-width: 303px;
   }
+
+  .piercing-photo-grid {
+    --piercing-photo-size: 200px;
+  }
 }
 
 /* ========================================
@@ -192,5 +196,89 @@
       black calc(100% - 1.5rem),
       transparent
     );
+  }
+}
+
+/* ========================================
+   PIERCING SERVICES - OVERLAY + PHOTO GRID
+   ======================================== */
+.piercing-service-card {
+  position: relative;
+  overflow: visible;
+  box-shadow:
+    var(--card-shadow-depth),
+    0 0 32px rgba(var(--accent-chrome-rgb), 0.3),
+    inset 0 1px 0 rgba(192, 192, 192, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.piercing-service-card.paket-card--collapsed {
+  height: var(--piercing-card-collapsed-height, 520px);
+}
+
+.piercing-service-card.paket-card--expanded {
+  height: auto;
+  min-height: var(--piercing-card-collapsed-height, 520px);
+  z-index: 40;
+  box-shadow:
+    var(--card-shadow-depth),
+    0 0 40px rgba(var(--accent-chrome-rgb), 0.45),
+    inset 0 1px 0 rgba(192, 192, 192, 0.12);
+}
+
+.piercing-backdrop {
+  position: fixed;
+  top: var(--header-height, 80px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--color-surface-darker-rgb), 0.45);
+  -webkit-backdrop-filter: blur(var(--piercing-backdrop-blur, 8px));
+  backdrop-filter: blur(var(--piercing-backdrop-blur, 8px));
+  z-index: 20;
+  pointer-events: none;
+}
+
+.piercing-photo-grid {
+  --piercing-photo-size: 150px;
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--space-8));
+  align-self: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--piercing-photo-size)));
+  gap: var(--space-2);
+  width: max-content;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.piercing-photo-grid__item {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--color-accent-silver-rgb), 0.35);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(var(--accent-chrome-rgb), 0.3);
+}
+
+@media (max-width: 1023px) {
+  .piercing-photo-grid {
+    top: auto;
+    bottom: var(--space-6);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(90vw, 320px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 640px) {
+  .piercing-photo-grid {
+    width: min(92vw, 280px);
   }
 }

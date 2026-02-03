@@ -328,7 +328,7 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
             />
 
             <div
-              className='pricing-category-container grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 justify-center justify-items-center max-w-4xl mx-auto'
+              className='premium-pricing-category-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-center justify-items-stretch max-w-5xl mx-auto'
               aria-label='Service-Kategorien'
             >
               {categories.map((category) => {
@@ -337,55 +337,31 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
 
                 const buttonContent = (
                   <>
-                    {/* Mobile layout: icon, title, price stacked */}
-                    <div className='pricing-category-card-content md:hidden flex flex-col h-full items-center justify-center gap-2 py-2'>
-                      <div className='pricing-category-icon flex flex-col h-full items-center justify-center w-8 h-8 rounded-full bg-(--accent-chrome)'>
-                        <IconComponent size={16} className='text-luxury-text-primary' />
-                      </div>
-                      <h3 className='pricing-category-tier font-headline text-xs text-white text-center leading-tight px-2'>
-                        {category.title}
-                      </h3>
-                      <span className='pricing-category-price text-xs font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                        ab {category.priceFrom}
-                      </span>
+                    <div className='premium-pricing-card__icon'>
+                      <IconComponent size={20} className='text-luxury-text-primary' />
                     </div>
-
-                    {/* Desktop layout: original design */}
-                    <div className='hidden md:flex md:flex-col md:h-full'>
-                      <div className='flex items-center justify-between mb-8'>
-                        <div className='flex flex-col h-full min-h-14 min-w-14 items-center justify-center rounded-full bg-(--accent-chrome)'>
-                          <IconComponent size={20} className='text-luxury-text-primary' />
-                        </div>
-                        <span className='text-base lg:text-sm font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                          ab {category.priceFrom}
-                        </span>
+                    <div className='premium-pricing-card__body'>
+                      <div className='premium-pricing-card__header'>
+                        <h3 className='premium-pricing-card__title'>{category.title}</h3>
+                        <span className='premium-pricing-card__price'>ab {category.priceFrom}</span>
                       </div>
-                      <div className='space-y-8 flex-1'>
-                        <h3 className='font-headline text-2xl text-brand-chrome'>
-                          {category.title}
-                        </h3>
-                        <p className='text-base lg:text-sm text-luxury-text-inverse/80 mb-8 leading-relaxed font-body'>
-                          {category.subtitle}
-                        </p>
-                      </div>
+                      <p className='premium-pricing-card__subtitle'>{category.subtitle}</p>
                     </div>
                   </>
                 );
-
-                const buttonClassName = 'flex flex-col h-full min-h-25 md:min-h-auto';
 
                 return (
                   <Card
                     key={category.id}
                     variant={isActive ? 'featured' : 'default'}
                     size='default'
-                    className='pricing-category-card flex flex-col h-full'
+                    className='premium-pricing-card'
                     asChild
                   >
                     <button
                       type='button'
                       aria-pressed={isActive ? 'true' : 'false'}
-                      className={buttonClassName}
+                      className='premium-pricing-card__button flex flex-col h-full'
                       onClick={() => handleCategoryChange(category.id as CategoryId)}
                       aria-label={`Select ${category.title} category`}
                     >

@@ -66,6 +66,17 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
     setSelected(null);
   }, [selected]);
 
+  useEffect(() => {
+    if (!selected) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleOutsideClick();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selected, handleOutsideClick]);
+
   // Spotlight disabled for reduced motion or touch devices
   const overlayEnabled = !prefersReducedMotion && !isTouchDevice;
   const spotlightEnabled = overlayEnabled && isHovering;
@@ -117,11 +128,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
               'transition-all duration-300 ease-out',
               'hover:-translate-y-1 hover:shadow-(--shadow-xl)',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2',
-              selected?.id === card.id
-                ? 'absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col'
-                : lastSelected?.id === card.id
-                  ? 'z-40'
-                  : '',
+              lastSelected?.id === card.id ? 'z-40' : '',
             )}
             style={{
               boxShadow: 'var(--surface-card-shadow)',
@@ -133,7 +140,6 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
             aria-label={`View ${card.title}`}
             onKeyDown={(e) => e.key === 'Enter' && handleClick(card)}
           >
-            {selected?.id === card.id && <SelectedCard selected={selected} />}
             <div className='relative block h-full w-full'>
               <ImageComponent card={card} />
             </div>
@@ -144,11 +150,46 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
         {selected && (
           <motion.div
             onClick={handleOutsideClick}
-            className='absolute h-full w-full left-0 top-0 bg-luxury-bg-dark opacity-0 z-30 flex flex-col'
+            className='fixed inset-0 z-modal flex items-center justify-center bg-black/80 p-4'
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          />
+            role='dialog'
+            aria-modal='true'
+            aria-label={selected.title}
+          >
+            <motion.div
+              layoutId={`card-${selected.id}`}
+              className='relative w-full max-w-5xl overflow-hidden rounded-2xl border border-(--card-border) bg-luxury-bg-dark shadow-(--shadow-xl)'
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type='button'
+                onClick={handleOutsideClick}
+                className='absolute right-4 top-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition-colors duration-200 hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-chrome)'
+                style={{ width: '44px', height: '44px' }}
+                aria-label='Close'
+              >
+                ×
+              </button>
+              <div className='relative w-full' style={{ aspectRatio: '16 / 9' }}>
+                <motion.img
+                  layoutId={`image-${selected.id}-image`}
+                  src={selected.thumbnail}
+                  onError={(e) => {
+                    if (selected.fallbackSrc && e.currentTarget.src !== selected.fallbackSrc) {
+                      e.currentTarget.src = selected.fallbackSrc;
+                    }
+                  }}
+                  alt={selected.title}
+                  className='absolute inset-0 h-full w-full object-cover'
+                />
+              </div>
+              <div className='p-6 md:p-8'>
+                <SelectedCard selected={selected} />
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
@@ -178,19 +219,14 @@ const ImageComponent = ({ card }: { card: Card }) => {
 
 const SelectedCard = ({ selected }: { selected: Card }) => {
   return (
-    <div className='bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-dropdown'>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        className='absolute inset-0 h-full w-full bg-luxury-bg-dark z-10'
-      />
+    <div className='bg-transparent w-full flex flex-col justify-end rounded-lg relative z-dropdown'>
       <motion.div
         layoutId={`content-${selected.id}`}
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className='relative px-8 pb-4 z-dropdown'
+        className='relative z-dropdown'
       >
         {selected.content}
       </motion.div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 import { MainNavigation } from '@/components/molecules/MainNavigation';
@@ -10,11 +9,7 @@ import { ArtistCard, type Artist as ArtistCardType } from '@/components/cards/Ar
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function AboutPage() {
-  const location = useLocation();
-  const { language } = useLanguage();
-
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
-  const isEnglish = language === 'en' || isEnglishPath;
+  const { t } = useLanguage();
 
   const prefersReducedMotion = useReducedMotion();
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -84,30 +79,26 @@ export function AboutPage() {
     () => ({
       id: 'oliver',
       name: 'Oliver',
-      discipline: isEnglish ? 'Founder & Piercing Expert' : 'Founder & Piercing-Experte',
-      description: isEnglish
-        ? 'Oliver leads Medusa with a focus on precision piercing, safe placement, and a calm, consultation-first approach.'
-        : 'Oliver führt Medusa mit Fokus auf präzises Piercing, sichere Platzierung und eine ruhige, beratungsorientierte Herangehensweise.',
+      discipline: t('about.oliver.discipline'),
+      description: t('about.oliver.description'),
       image_url: '/images/artists/oliver.webp',
       display_order: 0,
       category: 'piercing',
     }),
-    [isEnglish],
+    [t],
   );
 
   const saschaCard = useMemo<ArtistCardType>(
     () => ({
       id: 'sascha',
       name: 'Sascha',
-      discipline: isEnglish ? 'Front Desk & Studio Support' : 'Front Desk & Studio Support',
-      description: isEnglish
-        ? 'Your first point of contact at Medusa. Sascha helps with scheduling, questions, and making sure everything runs smoothly in the studio.'
-        : 'Dein erster Kontakt bei Medusa. Sascha hilft bei Terminfragen, Anliegen und sorgt dafür, dass im Studio alles reibungslos läuft.',
+      discipline: t('about.sascha.discipline'),
+      description: t('about.sascha.description'),
       image_url: '/images/artists/sascha.webp',
       display_order: 1,
       category: 'tattoo',
     }),
-    [isEnglish],
+    [t],
   );
 
   return (
@@ -223,7 +214,7 @@ export function AboutPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                      Medusa München
+                      {t('about.eyebrow')}
                     </motion.p>
 
                     <motion.h1
@@ -234,7 +225,7 @@ export function AboutPage() {
                       transition={{ duration: 0.8, delay: 0.4 }}
                     >
                       <span className='block text-6xl md:text-7xl lg:text-8xl font-bold'>
-                        {isEnglish ? 'About Medusa' : 'Über Medusa'}
+                        {t('about.title')}
                       </span>
                     </motion.h1>
 
@@ -244,9 +235,7 @@ export function AboutPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.6 }}
                     >
-                      {isEnglish
-                        ? 'Where precision piercing meets uncompromising hygiene and artistry. Our studio combines decades of expertise with a calm, consultation-first approach.'
-                        : 'Wo präzises Piercing auf kompromisslose Hygiene und Kunstfertigkeit trifft. Unser Studio verbindet jahrzehntelange Expertise mit einem ruhigen, beratungsorientierten Ansatz.'}
+                      {t('about.subtitle')}
                     </motion.p>
 
                     <motion.div
@@ -269,7 +258,7 @@ export function AboutPage() {
                 }}
               >
                 <div className='flex flex-col items-center gap-8 text-(--accent-chrome)/60'>
-                  <span className='text-xs uppercase tracking-widest'>Scroll</span>
+                  <span className='text-xs uppercase tracking-widest'>{t('about.scroll')}</span>
                   <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

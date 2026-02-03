@@ -17,7 +17,26 @@
     "faq": "FAQ",
     "contact": "Contact",
     "openMenu": "Open navigation menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "mainNavigationLabel": "Main navigation",
+    "mobileNavigationLabel": "Mobile navigation",
+    "mobileMenuTitle": "Main menu",
+    "switchToGerman": "Switch to German",
+    "switchToEnglish": "Switch to English"
+  },
+  "about": {
+    "eyebrow": "Medusa Munich",
+    "title": "About Medusa",
+    "subtitle": "Where precision piercing meets uncompromising hygiene and artistry. Our studio combines decades of expertise with a calm, consultation-first approach.",
+    "scroll": "Scroll",
+    "oliver": {
+      "discipline": "Founder & Piercing Expert",
+      "description": "Oliver leads Medusa with a focus on precision piercing, safe placement, and a calm, consultation-first approach."
+    },
+    "sascha": {
+      "discipline": "Front Desk & Studio Support",
+      "description": "Your first point of contact at Medusa. Sascha helps with scheduling, questions, and making sure everything runs smoothly in the studio."
+    }
   },
   "footer": {
     "copyright": " 2025 Medusa Tattoo Munich. All rights reserved.",
@@ -135,9 +154,110 @@
       "title": "Contact | Medusa Tattoo Munich",
       "description": "Contact us — address, phone, email and opening hours."
     },
+    "aftercare": {
+      "title": "Aftercare Instructions | Medusa Tattoo Munich",
+      "description": "Professional aftercare guide for tattoos and piercings with healing phases and warning signs."
+    },
+    "legal": {
+      "title": "Terms & Conditions | Medusa Tattoo Munich",
+      "description": "General terms and conditions for tattoo and piercing services at Medusa Munich."
+    },
+    "impressum": {
+      "title": "Imprint | Medusa Tattoo Munich",
+      "description": "Legal notice and company information for Medusa Tattoo & Piercing Studio."
+    },
+    "datenschutz": {
+      "title": "Privacy Policy | Medusa Tattoo Munich",
+      "description": "Details on how we process personal data in accordance with GDPR."
+    },
     "agb": {
       "title": "Terms & Conditions | Medusa Tattoo Munich",
       "description": "General terms and conditions for services and bookings."
+    }
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers about appointments, pricing, hygiene and aftercare.",
+    "sections": {
+      "booking": {
+        "title": "Booking",
+        "questions": {
+          "howToBook": {
+            "question": "How do I book an appointment?",
+            "answer": "Use our online form or call us directly. We typically confirm requests within 24 hours."
+          },
+          "reschedule": {
+            "question": "Can I reschedule my appointment?",
+            "answer": "Yes. Please let us know at least 48 hours in advance so we can arrange a new time."
+          },
+          "deposit": {
+            "question": "Is a deposit required?",
+            "answer": "For larger projects we may require a deposit. We will confirm the details during your consultation."
+          }
+        }
+      },
+      "pricing": {
+        "title": "Pricing & Payment",
+        "questions": {
+          "pricing": {
+            "question": "How are prices calculated?",
+            "answer": "Pricing depends on size, placement, complexity and style. You will receive a clear estimate before booking."
+          },
+          "paymentMethods": {
+            "question": "Which payment methods do you accept?",
+            "answer": "We accept cash, card payments and bank transfer."
+          }
+        }
+      },
+      "hygiene": {
+        "title": "Hygiene & Safety",
+        "questions": {
+          "hygiene": {
+            "question": "What hygiene standards do you follow?",
+            "answer": "We use sterile single-use materials, certified disinfection procedures and documented hygiene routines."
+          },
+          "inkSafety": {
+            "question": "Are inks and materials safe?",
+            "answer": "We use tested pigments and implant-grade jewellery. We discuss allergies and sensitivities beforehand."
+          }
+        }
+      },
+      "artists": {
+        "title": "Artists & Styles",
+        "questions": {
+          "chooseArtist": {
+            "question": "How do I choose the right artist?",
+            "answer": "Share your ideas and references and we will recommend the artist whose portfolio best matches your style."
+          },
+          "styles": {
+            "question": "Which styles do you offer?",
+            "answer": "We work in realism, fineline, blackwork, neo-traditional, Japanese, and custom concepts."
+          }
+        }
+      },
+      "aftercare": {
+        "title": "Aftercare",
+        "questions": {
+          "care": {
+            "question": "How do I care for my tattoo or piercing?",
+            "answer": "You receive a detailed aftercare guide. We explain each step and answer your questions on site."
+          },
+          "problems": {
+            "question": "What should I do if I have an issue?",
+            "answer": "Contact us immediately. We will advise you or arrange a follow-up appointment."
+          }
+        }
+      },
+      "location": {
+        "title": "Location & Directions",
+        "questions": {
+          "directions": {
+            "question": "How do I find the studio?",
+            "answer": "We are at Altheimer Eck 11, just steps from Marienplatz. U-Bahn and S-Bahn connections are nearby."
+          }
+        }
+      }
     }
   },
   "slider": {

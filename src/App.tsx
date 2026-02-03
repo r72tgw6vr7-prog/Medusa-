@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { useLanguage } from './contexts/LanguageContext';
 import { AppProvider } from '@/core/state/AppContext';
 import Meta from '@/components/Meta';
+import LocalizedMeta from '@/components/LocalizedMeta';
 import LocaleRouteSync from '@/i18n/LocaleRouteSync';
 // Fix import path to match actual directory structure
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
@@ -15,40 +15,6 @@ import { HomePage } from './pages/HomePage';
 
 const useGSAPText = import.meta.env.VITE_GSAP_TEXT === 'true';
 initScroll(useGSAPText ? 'scroll-full' : 'scroll-minimal');
-
-const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
-
-const toEnglishPath = (basePath: string) => {
-  if (basePath === '/') return '/en';
-  return `/en${basePath}`;
-};
-
-const LocalizedMeta: React.FC<LocalizedMetaProps> = ({ pageKey, basePath, canonicalPath }) => {
-  const { language, t } = useLanguage();
-
-  const title = t(`common.meta.${pageKey}.title`);
-  const description = t(`common.meta.${pageKey}.description`);
-
-  return (
-    <Meta
-      title={title}
-      description={description}
-      canonicalPath={canonicalPath}
-      hreflang={{
-        de: `${SITE_URL}${basePath}`,
-        en: `${SITE_URL}${toEnglishPath(basePath)}`,
-      }}
-      locale={language === 'en' ? 'en_US' : 'de_DE'}
-      alternateLocale={language === 'en' ? ['de_DE'] : ['en_US']}
-    />
-  );
-};
-
-interface LocalizedMetaProps {
-  pageKey: string;
-  basePath: string; // German/default path, starts with '/'
-  canonicalPath: string; // Current locale's canonical path, starts with '/'
-}
 
 const TattooServicesPage = lazy(() =>
   import('@/components/pages/TattooServicesPage').then((m) => ({ default: m.TattooServicesPage })),

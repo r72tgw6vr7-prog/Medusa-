@@ -39,7 +39,8 @@ export function ArtistProfilePage() {
 
   const title = `Medusa Tattoo München | ${artist.displayName}`;
   const descriptionSource = language === 'en' ? artist.bio.en : artist.bio.de;
-  const description = descriptionSource.length > 160 ? `${descriptionSource.slice(0, 157)}...` : descriptionSource;
+  const description =
+    descriptionSource.length > 160 ? `${descriptionSource.slice(0, 157)}...` : descriptionSource;
 
   return (
     <>

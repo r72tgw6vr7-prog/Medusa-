@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface LanguageToggleProps {
-  onLanguageChange?: (language: 'DE' | 'EN') => void;
+  language?: 'de' | 'en';
+  onLanguageChange?: (language: 'de' | 'en') => void;
+  germanAriaLabel?: string;
+  englishAriaLabel?: string;
 }
 
-export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange }) => {
-  const [isGerman, setIsGerman] = useState(true);
+export const LanguageToggle: React.FC<LanguageToggleProps> = ({
+  language = 'de',
+  onLanguageChange,
+  germanAriaLabel = 'Switch to German',
+  englishAriaLabel = 'Switch to English',
+}) => {
+  const isGerman = language === 'de';
 
   const handleGermanClick = () => {
-    setIsGerman(true);
-    onLanguageChange?.('DE');
+    onLanguageChange?.('de');
   };
 
   const handleEnglishClick = () => {
-    setIsGerman(false);
-    onLanguageChange?.('EN');
+    onLanguageChange?.('en');
   };
 
   return (
@@ -50,7 +56,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
       {/* DE Button */}
       <button
         onClick={handleGermanClick}
-        className="rounded-full"
+        className='rounded-full'
         style={{
           position: 'relative',
           zIndex: 10,
@@ -68,7 +74,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           cursor: 'pointer',
           transition: 'color 200ms ease-in-out',
         }}
-        aria-label='Switch to German'
+        aria-label={germanAriaLabel}
       >
         DE
       </button>
@@ -93,7 +99,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ onLanguageChange
           cursor: 'pointer',
           transition: 'color 200ms ease-in-out',
         }}
-        aria-label='Switch to English'
+        aria-label={englishAriaLabel}
       >
         EN
       </button>

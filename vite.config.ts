@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       headers: {
         'Content-Security-Policy':
-          "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apps.rokt.com; connect-src 'self' https://apps.rokt.com https://apps-demo.rokt.com https://script.google.com https://script.googleusercontent.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://apps.rokt.com; img-src 'self' data: blob: https://*; frame-src 'self'; base-uri 'self'; form-action 'self'",
+          "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apps.rokt.com; connect-src 'self' https://apps.rokt.com https://apps-demo.rokt.com https://script.google.com https://script.googleusercontent.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://apps.rokt.com; img-src 'self' data: blob: https://*; frame-src 'self' https://*.google.com https://www.google.com/maps/ https://maps.google.com; base-uri 'self'; form-action 'self'",
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'X-XSS-Protection': '1; mode=block',
@@ -57,7 +57,7 @@ export default defineConfig(({ mode }) => {
       headers: {
         // Relaxed CSP for debugging
         'Content-Security-Policy':
-          "default-src 'self'; script-src 'self' 'sha256-Jr9Fl37029VhYvVWPeghsu5JL7bmhAHkrK/DZdoqmiE=' 'sha256-8ExvGeARWXqsyCqWf4dS9Uu4WFTUfye9ipfY3P9ZeTs=' 'sha256-Tpu1/HwrJ18CWBP43IPqNrlZZTSZOzwGdiKHFTtEIGw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https:; connect-src 'self' https: http: ws: wss:; worker-src 'self' blob:; child-src 'self' blob: https:; object-src 'none'; base-uri 'self'; form-action 'self'",
+          "default-src 'self'; script-src 'self' 'sha256-Jr9Fl37029VhYvVWPeghsu5JL7bmhAHkrK/DZdoqmiE=' 'sha256-8ExvGeARWXqsyCqWf4dS9Uu4WFTUfye9ipfY3P9ZeTs=' 'sha256-Tpu1/HwrJ18CWBP43IPqNrlZZTSZOzwGdiKHFTtEIGw='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://*.google.com https://www.google.com/maps/ https://maps.google.com; connect-src 'self' https: http: ws: wss:; worker-src 'self' blob:; child-src 'self' blob: https:; object-src 'none'; base-uri 'self'; form-action 'self'",
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'SAMEORIGIN',
         'X-XSS-Protection': '1; mode=block',

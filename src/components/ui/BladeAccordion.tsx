@@ -21,6 +21,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 interface BladeArtist {
   id: string;
   name: string;
+  shortName: string;
   discipline: string;
   imageUrl: string;
   specialty: string;
@@ -43,14 +44,20 @@ const mapArtistsToBlades = (artists: Artist[], defaultDiscipline: string): Blade
     })
     .slice(0, 6);
 
-  return sortedArtists.map((artist) => ({
-    id: artist.id,
-    name: artist.displayName || artist.name,
-    discipline: artist.specialties[0] || defaultDiscipline,
-    imageUrl: artist.profileImage,
-    specialty: artist.role,
-    slug: artist.slug,
-  }));
+  return sortedArtists.map((artist) => {
+    const fullName = artist.displayName || artist.name;
+    const shortName = fullName.trim().split(/\s+/)[0] || fullName;
+
+    return {
+      id: artist.id,
+      name: fullName,
+      shortName,
+      discipline: artist.specialties[0] || defaultDiscipline,
+      imageUrl: artist.profileImage,
+      specialty: artist.role,
+      slug: artist.slug,
+    };
+  });
 };
 
 // Hook for reduced motion preference
@@ -306,11 +313,11 @@ const Blade: React.FC<BladeProps> = ({
               <div
                 className='text-luxury-text-inverse font-headline text-(length:--text-sm) leading-(--line-height-tight) uppercase whitespace-nowrap'
                 style={{
-                  writingMode: 'vertical-rl',
-                  textOrientation: 'mixed',
+                  writingMode: 'vertical-lr',
+                  textOrientation: 'upright',
                 }}
               >
-                {artist.name}
+                {artist.shortName}
               </div>
             </div>
           </motion.div>
@@ -481,15 +488,6 @@ export const BladeAccordion: React.FC<{ className?: string }> = ({ className = '
           ))}
         </motion.div>
       )}
-
-      {/* Footer instruction */}
-      <div className='border-t border-luxury-text-inverse/5 px-8 py-4'>
-        <p className='text-luxury-text-inverse/30 font-body text-(length:--text-sm) lg:text-(length:--text-xs) tracking-widest uppercase text-center'>
-          {isMobile
-            ? t('artists.bladeAccordion.instructions.mobile')
-            : t('artists.bladeAccordion.instructions.desktop')}
-        </p>
-      </div>
     </section>
   );
 };

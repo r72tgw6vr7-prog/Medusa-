@@ -48,18 +48,19 @@
     "submitting": "Ihre Buchung wird übermittelt..."
   },
   "error": {
-    "title": "Etwas ist schiefgelaufen",
+    "title": "Fehler",
     "retry": "Erneut versuchen",
     "retryLoading": "Versuche erneut zu senden...",
-    "completeAllSteps": "Bitte vervollständigen Sie alle Schritte"
+    "completeAllSteps": "Bitte vervollständigen Sie alle Schritte",
+    "submitFailed": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch."
   },
   "confirmation": {
-    "title": "Termin bestätigt!",
-    "subtitle": "Ihre Terminbuchung wurde erfolgreich übermittelt.",
+    "title": "Vielen Dank!",
+    "subtitle": "Ihre Buchungsanfrage wurde gesendet.",
     "bookingNumber": "Buchungsnummer:",
     "service": "Service:",
     "date": "Datum:",
-    "emailNote": "Wir haben eine Bestätigungs-E-Mail mit allen Details gesendet. Bitte überprüfen Sie Ihr Postfach und den Spam-Ordner.",
+    "emailNote": "Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
     "closeButton": "Schließen"
   },
   "gdpr": {

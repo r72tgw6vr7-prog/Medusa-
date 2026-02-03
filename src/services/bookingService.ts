@@ -141,17 +141,26 @@ Medusa Tattoo Team
       body: formData,
     });
     const result = await response.json();
-    console.log('✅ Booking sent:', result);
+    console.log('✅ Booking response:', {
+      ok: response.ok,
+      status: response.status,
+      result,
+    });
+
+    if (!response.ok || !result.success) {
+      throw new Error(result?.message || 'Submission failed');
+    }
+
+    return {
+      id: uuidv4(),
+      status: 'pending',
+      bookingNumber: `BK-${Math.floor(10000 + Math.random() * 90000)}`,
+      createdAt: new Date().toISOString(),
+    };
   } catch (error) {
     console.error('❌ Error:', error);
+    throw error;
   }
-
-  return {
-    id: uuidv4(),
-    status: 'pending',
-    bookingNumber: `BK-${Math.floor(10000 + Math.random() * 90000)}`,
-    createdAt: new Date().toISOString(),
-  };
 };
 
 export const validateBookingData = (data: Partial<BookingRequest>): string | null => {

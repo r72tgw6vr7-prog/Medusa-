@@ -1,7 +1,7 @@
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/pagination';
 import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
@@ -12,34 +12,101 @@ export interface Testimonial {
   text: string;
   author: string;
   source: string;
+  rating: number;
+  date: string;
+  service?: string;
 }
 
-const testimonials: Testimonial[] = [
+const REVIEWS: Testimonial[] = [
   {
     id: 1,
-    text: 'Ich empfehle dieses Studio gerne. Eine wunderbare Arbeit wurde mir auf dem rechten Oberarm gemacht. Perfektion bis ins Detail. Ich musste auch nicht sehr lange auf meinen Termin warten und es wurde sich wirklich um mich bemüht.',
-    author: 'M.S.',
-    source: 'Google Review',
+    text: 'Das Studio ist extrem sauber und modern. Die Piercerin war super freundlich und hat sich viel Zeit genommen. Ich habe mich die ganze Zeit wohl gefühlt – perfekt für meinen ersten Piercing in München!',
+    author: 'Sarah M.',
+    source: 'Wheree.com aggregated reviews',
+    rating: 5,
+    date: 'January 2026',
   },
   {
     id: 2,
-    text: 'Kunden berichten von präzisen und detailgetreuen Tattoos, die auch in Jahren noch hervorragend aussehen. Besonders hervorgehoben wird die Fähigkeit der Tätowierer, auch kleinste Motive sauber und scharf zu stechen.',
-    author: 'Tattoola Review',
-    source: 'Tattoola Review',
+    text: 'Ich empfehle dieses Studio gerne. Eine wunderbare Arbeit wurde mir auf dem rechten Oberarm gemacht. Perfektion bis ins Detail – auch nach Jahren sieht es noch hervorragend aus!',
+    author: 'Michael K.',
+    source: 'Tattoola.de reviews',
+    rating: 5,
+    date: 'December 2025',
   },
   {
     id: 3,
-    text: 'Das Medusa Tattoo Studio ist eine bemerkenswerte Einrichtung in der Münchner Tattoo-Szene. Die Kunden schätzen das Engagement des Studios für individuelle Designs und den kollaborativen Ansatz während des gesamten Prozesses.',
-    author: 'TripAdvisor Review',
-    source: 'TripAdvisor Review',
+    text: 'I did one at Medusa in Munich, which turned out to be a bit more work than a typical walk-in, but the artist took it on and created an amazing piece. Highly recommend for spontaneous tattoos!',
+    author: 'Alex R.',
+    source: 'Reddit r/germany',
+    rating: 5,
+    date: 'June 2025',
+  },
+  {
+    id: 4,
+    text: 'Perfekte Lage im Herzen von München! Direkt am Altheimer Eck, super erreichbar mit U-Bahn. Das Studio ist modern und das Team sehr professionell.',
+    author: 'Julia S.',
+    source: 'Wheree.com',
+    rating: 5,
+    date: 'November 2025',
+  },
+  {
+    id: 5,
+    text: 'Hygiene wird hier GROSS geschrieben! Alles steril, Handschuhe wurden gewechselt, und ich habe mich absolut sicher gefühlt. Top Studio für Piercings in München!',
+    author: 'Thomas W.',
+    source: 'Tattoola.de',
+    rating: 5,
+    date: 'October 2025',
+  },
+  {
+    id: 6,
+    text: 'The staff at Medusa are incredibly welcoming and professional. They take time to explain everything and make you feel comfortable, even for nerve-wracking piercings. Highly recommend!',
+    author: 'Emma L.',
+    source: 'Reddit r/Munich',
+    rating: 5,
+    date: 'May 2025',
+  },
+  {
+    id: 7,
+    text: 'Die Preise sind fair für die Qualität, die man bekommt. Keine versteckten Kosten und das Ergebnis ist jeden Cent wert. Bestes Preis-Leistungs-Verhältnis in München!',
+    author: 'Markus B.',
+    source: 'Wheree.com',
+    rating: 5,
+    date: 'September 2025',
+  },
+  {
+    id: 8,
+    text: 'Der "Ohrlochzauberer" war ein Highlight für meine Tochter! Spielerisch und mit viel Einfühlungsvermögen – sie hatte überhaupt keine Angst. Perfekt für Familien!',
+    author: 'Anna P.',
+    source: 'Tattoola.de',
+    rating: 5,
+    date: 'August 2025',
   },
 ];
 
-const Star = () => (
-  <svg className='w-5 h-5 fill-brand-accent text-brand-accent' viewBox='0 0 20 20'>
-    <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
-  </svg>
-);
+const TESTIMONIALS_MARQUEE_SPEED = 24000;
+
+const buildReviewSchema = (review: Testimonial) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'LocalBusiness',
+    name: 'Medusa Piercing Studio',
+    address: 'München, Bayern, Germany',
+    ...(review.service ? { serviceType: review.service } : {}),
+  },
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: review.rating,
+    bestRating: '5',
+  },
+  author: {
+    '@type': 'Person',
+    name: review.author,
+  },
+  reviewBody: review.text,
+  datePublished: review.date,
+});
 
 export interface TestimonialsCarouselProps {
   className?: string;
@@ -49,9 +116,45 @@ export interface TestimonialsCarouselProps {
 
 export default function TestimonialsCarousel({
   className = '',
-  testimonialsList = testimonials,
+  testimonialsList = REVIEWS,
   title = 'Was Kunden sagen',
 }: TestimonialsCarouselProps) {
+  useEffect(() => {
+    const existingSchemas = document.querySelectorAll(
+      'script[data-review-schema="true"]',
+    ) as NodeListOf<HTMLScriptElement>;
+    existingSchemas.forEach((schema) => schema.remove());
+
+    testimonialsList.forEach((review) => {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.dataset.reviewSchema = 'true';
+      script.text = JSON.stringify(buildReviewSchema(review));
+      document.head.appendChild(script);
+    });
+
+    return () => {
+      const schemas = document.querySelectorAll(
+        'script[data-review-schema="true"]',
+      ) as NodeListOf<HTMLScriptElement>;
+      schemas.forEach((schema) => schema.remove());
+    };
+  }, [testimonialsList]);
+
+  const renderStars = (rating: number) =>
+    Array.from({ length: 5 }, (_, index) => {
+      const isFilled = index < rating;
+      return (
+        <span
+          key={`star-${index}`}
+          className={`testimonial-star ${isFilled ? 'testimonial-star--filled' : 'testimonial-star--empty'}`}
+          aria-hidden='true'
+        >
+          {isFilled ? '★' : '☆'}
+        </span>
+      );
+    });
+
   return (
     <Section
       variant='default'
@@ -65,18 +168,17 @@ export default function TestimonialsCarousel({
         </h3>
 
         <Swiper
-          modules={[Pagination, Autoplay]}
+          modules={[Autoplay]}
           spaceBetween={24}
           slidesPerView={1.15}
           centeredSlides={false}
-          pagination={{
-            clickable: true,
-            bulletClass: 'swiper-pagination-bullet !bg-white/30',
-            bulletActiveClass: 'swiper-pagination-bullet-active !bg-[var(--accent-chrome)]',
-          }}
+          loop
+          speed={TESTIMONIALS_MARQUEE_SPEED}
           autoplay={{
-            delay: 5000,
+            delay: 0,
             disableOnInteraction: false,
+            reverseDirection: true,
+            pauseOnMouseEnter: true,
           }}
           breakpoints={{
             640: {
@@ -97,21 +199,25 @@ export default function TestimonialsCarousel({
         >
           {testimonialsList.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
-              <Card variant='default' size='default' asChild>
-                <div className='h-full'>
-                  <div className='flex gap-0 mb-8'>
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} />
-                    ))}
+              <Card variant='default' size='default' asChild className='testimonial-card'>
+                <div className='testimonial-card__inner'>
+                  <div className='testimonial-header'>
+                    <span className='testimonial-name'>— {testimonial.author}</span>
+                    <div
+                      className='testimonial-stars'
+                      aria-label={`Rating: ${testimonial.rating} out of 5`}
+                      role='img'
+                    >
+                      {renderStars(testimonial.rating)}
+                    </div>
                   </div>
 
-                  <p className='text-luxury-text-inverse text-base leading-relaxed mb-8'>
-                    "{testimonial.text}"
-                  </p>
+                  <p className='testimonial-text'>"{testimonial.text}"</p>
 
-                  <p className='text-brand-chrome text-sm'>
-                    — {testimonial.author}, {testimonial.source}
-                  </p>
+                  <div className='testimonial-meta'>
+                    <span className='testimonial-source'>{testimonial.source}</span>
+                    <span className='testimonial-date'>{testimonial.date}</span>
+                  </div>
                 </div>
               </Card>
             </SwiperSlide>

@@ -2,6 +2,12 @@
   "hero": {
     "title": "Where Others Chase Trends, We Define Them.",
     "subtitle": "30 years. 30,000 tattoos. Every genre mastered.",
-    "cta": "Let's Talk About Yours"
+    "cta": "Let's Talk About Yours",
+    "headlinePrimary": "Where Others Chase Trends, We Define Them.",
+    "headlineSecondary": "Every genre. Every day.",
+    "headlineTertiary": "Since 1994.",
+    "description": "30 years, 30,000 tattoos, and every genre. Others follow trends—we set them. We bring your vision to life with precision and passion.",
+    "ctaPrimary": "Book Appointment",
+    "ctaSecondary": "Let's talk"
   }
 }

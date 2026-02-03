@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ===========================================
 // ANIMATION CONSTANTS (tattoo gun mechanical vibe)
@@ -13,6 +14,16 @@ const ANIMATION = {
   TEXT_DELAY: 0.2, // 200ms - delay before text fade starts
   TEXT_FADE: 0.3, // 300ms - text fade-in duration
   STAGGER_OFFSET: 0.1, // 100ms - stagger between frames
+
+  // Scroll animation timing
+  FRAME_LANDING_TIME: 0.2, // 20% scroll progress when frames finish landing
+  HERO_FADE_DURATION: 0.05, // Hero fade occurs over exactly 5% of scroll progress (maps to 2 seconds)
+  HERO_FADE_START: 0.15, // Start fading hero at 15% scroll progress (exactly 2 seconds before landing)
+  HERO_FADE_COMPLETE: 0.2, // Complete fade at 20% (frames landing point)
+
+  // Frame sizing and positioning
+  FRAME_SIZE_DESKTOP: 400, // Frame size in pixels for desktop (≥1024px)
+  FRAME_OFFSET_Y: -50, // Pull frames up by 50px on landing
 
   // Spring config for elastic overshoot (tattoo gun vibe)
   SNAP_SPRING: {
@@ -84,10 +95,23 @@ export const HeroParallax = ({
   const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.2, 1]), springConfig);
   const rotateZ = useSpring(useTransform(scrollYProgress, [0, 0.2], [20, 0]), springConfig);
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], isMobileViewport ? [-130, 620] : [-130, 920]),
+    useTransform(
+      scrollYProgress,
+      [0, ANIMATION.FRAME_LANDING_TIME],
+      isMobileViewport ? [-130, 620] : [-130, 920 + ANIMATION.FRAME_OFFSET_Y], // Pull frames up by 50px on landing (desktop only)
+    ),
     springConfig,
   );
-  const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const heroOpacityMobile = useTransform(scrollY, [0, 600], [1, 0]);
+  // Hero fade must complete in EXACTLY the last 2 seconds before frames land
+  // Linear easing ensures smooth, consistent opacity transition
+  const heroOpacityDesktop = useTransform(
+    scrollYProgress,
+    [ANIMATION.HERO_FADE_START, ANIMATION.HERO_FADE_COMPLETE],
+    [1, 0],
+    { ease: (x) => x }, // Linear easing function for exact 2-second timing
+  );
+  const heroOpacity = isMobileViewport ? heroOpacityMobile : heroOpacityDesktop;
 
   return (
     <motion.div
@@ -97,6 +121,7 @@ export const HeroParallax = ({
           height: 'var(--hero-height)',
           perspective: '1000px',
           transformStyle: 'preserve-3d',
+          position: 'relative',
           // Unified background: canonical dark value
           background: prefersReducedMotion ? 'var(--deep-black)' : undefined,
           '--hero-height': '180vh',
@@ -106,7 +131,7 @@ export const HeroParallax = ({
           '--hero-text-force-height': 'calc(100% - var(--hero-text-force-offset))',
         } as React.CSSProperties
       }
-      className='hero-section pb-ma-md antialiased relative flex flex-col self-auto overflow-x-clip [--hero-mobile-extra-offset:0px] max-md:[--hero-height:160vh] max-sm:[--hero-height:150vh] max-md:[--hero-header-shift:0px] max-sm:[--hero-text-force-offset:90px] max-md:[--hero-scroll-lift:calc(-1 * (var(--space-12) + var(--space-0-5) + 50px))] max-sm:[--hero-scroll-lift:calc(-1 * (var(--space-10) + 50px))] max-md:min-[430px]:[--hero-text-force-offset:110px] max-md:min-[430px]:[--hero-scroll-lift:-160px] max-sm:[--hero-mobile-extra-offset:200px] max-md:pb-6'
+      className='hero-section pb-ma-md antialiased relative flex flex-col self-auto overflow-x-clip [--hero-mobile-extra-offset:0px] lg:mb-16 max-md:[--hero-height:160vh] max-sm:[--hero-height:150vh] max-md:[--hero-header-shift:0px] max-sm:[--hero-text-force-offset:90px] max-md:[--hero-scroll-lift:calc(-1 * (var(--space-12) + var(--space-0-5) + 50px))] max-sm:[--hero-scroll-lift:calc(-1 * (var(--space-10) + 50px))] max-md:min-[430px]:[--hero-text-force-offset:110px] max-md:min-[430px]:[--hero-scroll-lift:-160px] max-sm:[--hero-mobile-extra-offset:200px] max-md:pb-6'
     >
       {/* Background shift layer - animated with scroll */}
       {!prefersReducedMotion && (
@@ -178,35 +203,39 @@ export const HeroParallax = ({
 export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) => {
   const isMobileViewport =
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
+  const { t } = useLanguage();
+  const headlinePrimary = t('home.hero.headlinePrimary');
+  const headlineSecondary = t('home.hero.headlineSecondary');
+  const headlineTertiary = t('home.hero.headlineTertiary');
+  const description = t('home.hero.description');
+  const ctaPrimary = t('home.hero.ctaPrimary');
+  const ctaSecondary = t('home.hero.ctaSecondary');
 
   return (
-    <div
+    <motion.div
       className='absolute inset-0 z-20 flex items-center justify-center px-(--space-2) pointer-events-none max-md:items-start max-md:justify-start'
       style={{
-        opacity: (opacity as MotionValue<number>).get?.() ?? opacity,
+        opacity: opacity,
         transform: 'translateY(var(--hero-header-shift))',
       }}
     >
       {!isMobileViewport ? (
         <div
           className='max-w-7xl w-full flex flex-col items-center text-center gap-(--space-6) pointer-events-auto max-md:hidden'
-          style={{ transform: 'translateY(-500px)' }}
+          style={{ transform: 'translateY(-530px)' }}
         >
           {/* Heading - design system typography */}
-          <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-accent'>
-            <span className='text-(length:--text-h1) font-bold'>
-              Wo andere Perfektion anstreben, spielen wir damit.
-            </span>{' '}
-            <span className='text-(length:--text-h2) font-normal opacity-90'>
-              Jedes Genre. Jeden Tag.
-            </span>{' '}
-            <span className='text-(length:--text-h3) font-light opacity-70'>Seit 1994.</span>
+          <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-white'>
+            <span className='text-(length:--text-h1) font-bold'>{headlinePrimary}</span>
+            <br />
+            <span className='text-(length:--text-h2) font-normal'>{headlineSecondary}</span>
+            <br />
+            <span className='text-(length:--text-h3) font-light'>{headlineTertiary}</span>
           </h1>
 
           {/* Subtext - design system typography */}
           <p className='max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
-            30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen
-            sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.
+            {description}
           </p>
 
           <div className='pt-(--space-2)'>
@@ -218,7 +247,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
                   minHeight: 'var(--touch-target-min)',
                 }}
               >
-                Termin buchen
+                {ctaPrimary}
               </a>
               <a
                 href='/contact'
@@ -227,7 +256,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
                   minHeight: 'var(--touch-target-min)',
                 }}
               >
-                Lass uns darüber reden
+                {ctaSecondary}
               </a>
             </div>
           </div>
@@ -236,20 +265,17 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
         <div className='hidden max-md:flex absolute top-0 left-0 right-0 flex-col items-center justify-start pointer-events-none max-md:h-(--hero-text-force-height)'>
           <div className='w-full flex flex-col items-center text-center gap-(--space-6) px-(--space-2) pointer-events-auto max-md:pt-(--hero-text-force-offset)!'>
             {/* Heading - design system typography */}
-            <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-accent'>
-              <span className='text-(length:--text-h1) font-bold'>
-                Wo andere Perfektion anstreben, spielen wir damit.
-              </span>{' '}
-              <span className='text-(length:--text-h2) font-normal opacity-90'>
-                Jedes Genre. Jeden Tag.
-              </span>{' '}
-              <span className='text-(length:--text-h3) font-light opacity-70'>Seit 1994.</span>
+            <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-white'>
+              <span className='text-(length:--text-h1) font-bold'>{headlinePrimary}</span>
+              <br />
+              <span className='text-(length:--text-h2) font-normal'>{headlineSecondary}</span>
+              <br />
+              <span className='text-(length:--text-h3) font-light'>{headlineTertiary}</span>
             </h1>
 
             {/* Subtext - design system typography */}
             <p className='max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
-              30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen
-              sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.
+              {description}
             </p>
 
             <div className='pt-(--space-2)'>
@@ -261,7 +287,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
                     minHeight: 'var(--touch-target-min)',
                   }}
                 >
-                  Termin buchen
+                  {ctaPrimary}
                 </a>
                 <a
                   href='/contact'
@@ -270,14 +296,14 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
                     minHeight: 'var(--touch-target-min)',
                   }}
                 >
-                  Lass uns darüber reden
+                  {ctaSecondary}
                 </a>
               </div>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
@@ -298,6 +324,9 @@ export const ProductCard = ({
   index?: number;
   rowIndex?: number;
 }) => {
+  // Check if on mobile viewport
+  const isMobileViewport =
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
   const cardRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -422,6 +451,14 @@ export const ProductCard = ({
             'filter 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms ease-out',
         };
 
+  // Desktop-specific styles
+  const desktopFrameStyles = !isMobileViewport
+    ? {
+        maxWidth: `${ANIMATION.FRAME_SIZE_DESKTOP}px`,
+        maxHeight: `${ANIMATION.FRAME_SIZE_DESKTOP}px`,
+      }
+    : {};
+
   // Framer Motion variants for stagger+snap with elastic overshoot
   const snapVariants = {
     hidden: {
@@ -440,7 +477,9 @@ export const ProductCard = ({
       style={{
         x: translate,
         ...frameStyles,
+        ...desktopFrameStyles,
       }}
+      className={`group/product aspect-square w-full relative rounded-lg overflow-hidden ${revealClass} max-md:w-25 max-md:flex-none`}
       initial={prefersReducedMotion ? 'visible' : 'hidden'}
       animate={isAligned ? 'visible' : 'hidden'}
       variants={snapVariants}
@@ -452,11 +491,7 @@ export const ProductCard = ({
               delay: staggerDelay,
             }
       }
-      whileHover={{
-        y: -20,
-      }}
       key={product.title}
-      className={`group/product aspect-square w-full relative rounded-lg overflow-hidden ${revealClass} max-md:w-25 max-md:flex-none`}
       data-revealed={isRevealed}
       data-aligned={isAligned}
     >
@@ -471,7 +506,6 @@ export const ProductCard = ({
             className='max-w-full object-fill object-top-left absolute h-full w-full inset-0'
             alt={product.title}
             loading={isHeroLcpCandidate ? 'eager' : 'lazy'}
-            fetchPriority={isHeroLcpCandidate ? 'high' : 'low'}
             decoding='async'
             onError={(e) => {
               if (!product.fallbackSrc) return;

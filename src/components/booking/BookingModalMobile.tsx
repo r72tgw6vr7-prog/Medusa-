@@ -124,9 +124,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
           date: formData.date,
         });
 
-        setSuccessMessage(
-          'Vielen Dank! Ihre Terminanfrage wurde gesendet. Wir melden uns in Kürze bei Ihnen.',
-        );
+        setSuccessMessage(t('booking.confirmation.subtitle'));
 
         setStep('confirmation');
 
@@ -138,7 +136,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         setFormData(INITIAL_FORM_DATA);
       } catch (error) {
         console.error('Booking failed:', error);
-        setSubmissionError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+        setSubmissionError(t('booking.error.submitFailed'));
         setStep('error');
       } finally {
         setIsSubmitting(false);

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useKeyboardNav } from '@/hooks/useKeyboardNav';
+import { LanguageToggle } from './LanguageToggle';
 import './MainNavigation.css';
 
 type NavItem = {
@@ -51,6 +52,7 @@ export function MainNavigation() {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const { language, t } = useLanguage();
   const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
   const isAutomation = typeof navigator !== 'undefined' && navigator.webdriver === true;
@@ -59,13 +61,36 @@ export function MainNavigation() {
 
   const localizeNavPath = useCallback(
     (to: string) => {
-      if (to === '/about') {
-        return isEnglishPath ? '/en/about' : '/about';
+      if (isEnglishPath) {
+        if (to === '/') return '/en';
+        return to.startsWith('/en') ? to : `/en${to}`;
       }
 
-      return to;
+      return to.startsWith('/en/') ? to.slice(3) : to === '/en' ? '/' : to;
     },
     [isEnglishPath],
+  );
+
+  const handleLanguageChange = useCallback(
+    (nextLanguage: 'de' | 'en') => {
+      const currentPath = location.pathname;
+      const nextPath =
+        nextLanguage === 'en'
+          ? currentPath === '/'
+            ? '/en'
+            : currentPath.startsWith('/en')
+              ? currentPath
+              : `/en${currentPath}`
+          : currentPath === '/en'
+            ? '/'
+            : currentPath.startsWith('/en/')
+              ? currentPath.slice(3)
+              : currentPath;
+
+      const nextUrl = `${nextPath}${location.search}${location.hash}`;
+      navigate(nextUrl);
+    },
+    [location.hash, location.pathname, location.search, navigate],
   );
 
   useEffect(() => {
@@ -238,7 +263,7 @@ export function MainNavigation() {
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <nav
         id='main-navigation'
-        aria-label='Main navigation'
+        aria-label={t('nav.mainNavigationLabel')}
         className={`navigation fixed top-0 left-0 right-0 z-1000 w-full px-4 md:px-8 transition-all duration-300 ease-out ${
           scrolled ? 'scrolled' : ''
         } ${menuOpen ? 'menu-open' : ''}`}
@@ -272,7 +297,7 @@ export function MainNavigation() {
             {SERVICES_ITEMS.map((item) => (
               <Link
                 key={`e2e-${item.to}`}
-                to={item.to}
+                to={localizeNavPath(item.to)}
                 tabIndex={-1}
                 aria-hidden='true'
                 style={{ display: 'block', width: 8, height: 8, margin: 0, overflow: 'hidden' }}
@@ -284,7 +309,7 @@ export function MainNavigation() {
         )}
         <div className='container-wide mx-auto flex h-20 items-center justify-between gap-8 px-4 md:px-6 lg:px-8'>
           <Link
-            to='/'
+            to={localizeNavPath('/')}
             className='nav-logo font-headline text-(length:--text-h4) sm:text-(length:--text-h3) leading-none tracking-tight text-(--brand-accent) font-bold'
           >
             MEDUSA
@@ -295,7 +320,7 @@ export function MainNavigation() {
               <ul className='flex w-full items-center justify-center gap-16'>
                 <li className='nav-dropdown'>
                   <Link
-                    to='/services/tattoos'
+                    to={localizeNavPath('/services/tattoos')}
                     className={`nav-link nav-dropdown__trigger font-body text-(length:--text-body) md:text-(length:--text-lg) font-medium transition-all duration-300 ${
                       location.pathname.startsWith('/services')
                         ? 'text-brand-accent'
@@ -310,7 +335,7 @@ export function MainNavigation() {
                     {SERVICES_ITEMS.map((item) => (
                       <Link
                         key={item.to}
-                        to={item.to}
+                        to={localizeNavPath(item.to)}
                         className='nav-dropdown__item'
                         role='menuitem'
                       >
@@ -345,7 +370,24 @@ export function MainNavigation() {
             </div>
           )}
 
-          <div className='flex items-center lg:hidden'>
+          {!isAutomationMobile && (
+            <div className='hidden items-center lg:flex'>
+              <LanguageToggle
+                language={language}
+                onLanguageChange={handleLanguageChange}
+                germanAriaLabel={t('nav.switchToGerman')}
+                englishAriaLabel={t('nav.switchToEnglish')}
+              />
+            </div>
+          )}
+
+          <div className='flex items-center gap-4 lg:hidden'>
+            <LanguageToggle
+              language={language}
+              onLanguageChange={handleLanguageChange}
+              germanAriaLabel={t('nav.switchToGerman')}
+              englishAriaLabel={t('nav.switchToEnglish')}
+            />
             {menuOpen ? (
               <button
                 ref={openButtonRef}
@@ -404,9 +446,12 @@ export function MainNavigation() {
             >
               <div className='mobile-menu-overlay__panel'>
                 <h2 id='mobile-menu-title' className='sr-only'>
-                  Main Menu
+                  {t('nav.mobileMenuTitle')}
                 </h2>
-                <nav className='mobile-menu-overlay__links' aria-label='Mobile navigation'>
+                <nav
+                  className='mobile-menu-overlay__links'
+                  aria-label={t('nav.mobileNavigationLabel')}
+                >
                   <div className='mobile-nav-grid grid grid-cols-2 gap-4'>
                     {[...SERVICES_ITEMS, ...NAV_ITEMS.filter(({ to }) => to !== '/booking')].map(
                       (item) => {
@@ -417,7 +462,7 @@ export function MainNavigation() {
 
                         const localizedTo = isNavItem
                           ? localizeNavPath((item as NavItem).to)
-                          : item.to;
+                          : localizeNavPath(item.to);
 
                         return (
                           <Link
@@ -439,7 +484,7 @@ export function MainNavigation() {
 
                 <div className='mobile-menu-overlay__cta-wrapper'>
                   <Link
-                    to='/booking'
+                    to={localizeNavPath('/booking')}
                     onClick={closeMenu}
                     data-testid='mobile-nav-booking'
                     className='mobile-menu-cta-button'

@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
 import {
   Gem,
   Sparkles,
@@ -10,6 +10,7 @@ import {
   ChevronDown,
   MessageCircle,
   MessageSquare,
+  Info,
 } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useApp } from '@/core/state/AppContext';
@@ -17,10 +18,13 @@ import { SectionHeading } from '../SectionHeading';
 import { Card } from '../ui/Card';
 import { MainNavigation } from '../molecules/MainNavigation';
 import { Footer } from '../pages';
+import { PiercingPhotoModal } from '../molecules/PiercingPhotoModal';
+import { piercingPhotoMap, type PiercingPhotoCategory } from '@/constants/piercingPhotos';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
 } from '../../styles/animations';
+import '../../styles/pricing-table-mobile.css';
 
 // ============================================
 // PREISLISTE DATA - STECHEN (Piercing Prices)
@@ -177,17 +181,11 @@ const serviceDetails = {
     {
       id: 'ohrlochzauberer',
       title: 'Ohrlochzauberer',
-      description:
-        'Kinderfreundliches Ohrlochstechen mit Aaron. Er tritt wie ein Zauberer auf, um Kindern die Angst zu nehmen und das Erlebnis magisch zu gestalten.',
+      description: 'Kinderfreundliches Ohrlochstechen mit Aaron als Ohrlochzauberer.',
       priceFrom: 45,
       priceUnit: '€ - 80€',
       duration: '20-30 Min',
-      features: [
-        'Speziell für Kinder',
-        'Magisches Erlebnis',
-        'Titan-Schmuck inklusive',
-        'Elternberatung',
-      ],
+      features: ['Speziell für Kinder', 'Magisches Erlebnis', 'Titan-Schmuck inklusive'],
       cta: 'Aaron anfragen',
     },
   ],
@@ -270,14 +268,25 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
   return `ab ${priceFrom} €${suffix}`;
 };
 
+const CARD_HEIGHT_COLLAPSED = '520px';
+const BACKDROP_BLUR = '8px';
+const OVERLAY_EASE = [0.4, 0, 0.2, 1] as const;
+
 export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ className = '' }) => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const [isAnimating, setIsAnimating] = useState(false);
   const { openBooking } = useApp();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Modal state for piercing photos
+  const [photoModalOpen, setPhotoModalOpen] = useState(false);
+  const [selectedPhotoTitle, setSelectedPhotoTitle] = useState('');
+  const [selectedPhotos, setSelectedPhotos] = useState<string[]>([]);
 
   // Intersection Observer to trigger animations when in view
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -288,6 +297,14 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
     () => categories.find((category) => category.id === activeCategory),
     [activeCategory],
   );
+
+  const activePhotos = useMemo(() => {
+    if (!expandedCard) return [];
+    if (expandedCard in piercingPhotoMap) {
+      return piercingPhotoMap[expandedCard as PiercingPhotoCategory];
+    }
+    return [];
+  }, [expandedCard]);
 
   const handleCategoryChange = useCallback(
     (categoryId: CategoryId) => {
@@ -323,7 +340,9 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
         key={service.id}
         variant={isSelected ? 'featured' : 'default'}
         size='default'
-        className='bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto!'
+        className={`bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto! piercing-service-card ${
+          isExpanded ? 'paket-card--expanded' : 'paket-card--collapsed'
+        }`}
         asChild
       >
         <motion.div
@@ -407,7 +426,25 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                               key={idx}
                               className='paket-price-grid text-(length:--text-sm) text-white/80 py-2 border-b border-white/5 last:border-b-0 flex flex-col h-full'
                             >
-                              <span className='truncate'>{item.name}</span>
+                              <span className='piercing-name-cell whitespace-normal leading-snug'>
+                                {item.name}
+                                {isMobile && (
+                                  <button
+                                    className='piercing-info-button'
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleOpenPhotoModal(
+                                        item.name,
+                                        service.id as PiercingPhotoCategory,
+                                      );
+                                    }}
+                                    aria-label={`${item.name} Beispielfotos anzeigen`}
+                                    type='button'
+                                  >
+                                    <Info size={16} className='piercing-info-icon' />
+                                  </button>
+                                )}
+                              </span>
                               <span className='w-12 text-right font-semibold text-(--text-secondary)/90'>
                                 {item.price1}
                               </span>
@@ -452,15 +489,65 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
             >
               {service.cta}
             </button>
+            <AnimatePresence>
+              {isExpanded && activePhotos.length > 0 && !isMobile && (
+                <motion.div
+                  className='piercing-photo-grid'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: OVERLAY_EASE }}
+                  aria-hidden='true'
+                >
+                  {activePhotos.slice(0, 4).map((photo, idx) => (
+                    <motion.img
+                      key={`${expandedCard}-photo-${idx}`}
+                      src={photo}
+                      alt={`${expandedCard} piercing example ${idx + 1}`}
+                      className='piercing-photo-grid__item'
+                      initial={
+                        prefersReducedMotion
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 0, scale: 0.96 }
+                      }
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 }}
+                      transition={{
+                        duration: prefersReducedMotion ? 0 : 0.35,
+                        delay: prefersReducedMotion ? 0 : idx * 0.05,
+                        ease: OVERLAY_EASE,
+                      }}
+                      loading='lazy'
+                      decoding='async'
+                    />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </Card>
     );
   };
 
+  // Handle opening the piercing photo modal
+  const handleOpenPhotoModal = (piercingName: string, photoCategory: PiercingPhotoCategory) => {
+    // Convert readonly array to regular array with spread operator to fix TypeScript error
+    const photos = [...(piercingPhotoMap[photoCategory] || [])];
+    setSelectedPhotoTitle(piercingName);
+    setSelectedPhotos(photos);
+    setPhotoModalOpen(true);
+  };
+
+  // Handle closing the modal
+  const handleClosePhotoModal = () => {
+    setPhotoModalOpen(false);
+  };
+
   return (
     <main
       className={`piercing-services-page w-full min-h-screen relative z-10 bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32 ${className}`}
+      style={{ '--piercing-card-collapsed-height': CARD_HEIGHT_COLLAPSED } as React.CSSProperties}
     >
       <MainNavigation />
       <section className='section-padding relative z-10'>
@@ -489,7 +576,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo%2C%20ich%20interessiere%20mich%20für%20eine%20kostenlose%20Beratung.'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
+                className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-(--brand-accent) hover:bg-(--brand-accent-hover) text-black font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
                 aria-label='WhatsApp Beratung starten'
               >
                 <MessageSquare size={20} />
@@ -499,7 +586,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
 
             {/* Top 3 Category Cards - Centered */}
             <div
-              className='pricing-category-container grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 justify-center justify-items-center max-w-4xl mx-auto'
+              className='premium-pricing-category-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-center justify-items-stretch max-w-5xl mx-auto'
               aria-label='Service-Kategorien'
             >
               {categories.map((category) => {
@@ -508,35 +595,15 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
 
                 const buttonContent = (
                   <>
-                    <div className='pricing-category-card-content md:hidden flex flex-col h-full items-center justify-center gap-2 py-2'>
-                      <div className='pricing-category-icon flex flex-col h-full max-h-8 items-center justify-center w-8 rounded-full bg-(--accent-chrome)'>
-                        <IconComponent size={16} className='text-luxury-text-primary' />
-                      </div>
-                      <h3 className='pricing-category-tier font-headline text-(length:--text-xs) text-white text-center leading-tight px-2'>
-                        {category.title}
-                      </h3>
-                      <span className='pricing-category-price text-(length:--text-xs) font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                        ab {category.priceFrom}
-                      </span>
+                    <div className='premium-pricing-card__icon'>
+                      <IconComponent size={20} className='text-luxury-text-primary' />
                     </div>
-
-                    <div className='hidden md:flex md:flex-col md:h-full'>
-                      <div className='flex items-center justify-between mb-8'>
-                        <div className='flex flex-col h-full max-h-14 w-14 items-center justify-center rounded-full bg-(--accent-chrome)'>
-                          <IconComponent size={20} className='text-luxury-text-primary' />
-                        </div>
-                        <span className='text-(length:--text-xs) font-semibold uppercase tracking-wider text-luxury-text-inverse/60'>
-                          ab {category.priceFrom}
-                        </span>
+                    <div className='premium-pricing-card__body'>
+                      <div className='premium-pricing-card__header'>
+                        <h3 className='premium-pricing-card__title'>{category.title}</h3>
+                        <span className='premium-pricing-card__price'>ab {category.priceFrom}</span>
                       </div>
-                      <div className='space-y-8 flex-1'>
-                        <h3 className='font-headline text-(length:--text-2xl) text-brand-chrome'>
-                          {category.title}
-                        </h3>
-                        <p className='text-(length:--text-sm) md:text-(length:--text-base) text-luxury-text-inverse/75 leading-relaxed font-body'>
-                          {category.subtitle}
-                        </p>
-                      </div>
+                      <p className='premium-pricing-card__subtitle'>{category.subtitle}</p>
                     </div>
                   </>
                 );
@@ -546,13 +613,13 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                     key={category.id}
                     variant={isActive ? 'featured' : 'default'}
                     size='default'
-                    className='pricing-category-card flex flex-col h-full'
+                    className='premium-pricing-card'
                     asChild
                   >
                     <button
                       type='button'
                       aria-pressed={isActive}
-                      className='flex flex-col h-full min-h-25 md:min-h-auto transition-transform duration-300'
+                      className='premium-pricing-card__button'
                       onClick={() => handleCategoryChange(category.id as CategoryId)}
                       aria-label={`Select ${category.title} category`}
                     >
@@ -589,6 +656,19 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 />
               </div>
 
+              <AnimatePresence>
+                {expandedCard && (
+                  <motion.div
+                    className='piercing-backdrop'
+                    style={{ '--piercing-backdrop-blur': BACKDROP_BLUR } as React.CSSProperties}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: OVERLAY_EASE }}
+                    aria-hidden='true'
+                  />
+                )}
+              </AnimatePresence>
               {isDesktop ? (
                 <div className='w-full flex justify-center'>
                   <div className='paket-cards-wrapper flex flex-wrap gap-4 justify-center items-start w-full py-8 max-w-7xl mx-auto'>
@@ -616,6 +696,14 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
         </div>
       </section>
       <Footer />
+
+      {/* Photo Modal */}
+      <PiercingPhotoModal
+        isOpen={photoModalOpen}
+        onClose={handleClosePhotoModal}
+        title={selectedPhotoTitle}
+        photos={selectedPhotos}
+      />
     </main>
   );
 };

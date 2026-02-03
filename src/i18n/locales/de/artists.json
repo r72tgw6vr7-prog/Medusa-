@@ -4,10 +4,6 @@
     "sectionAriaLabel": "Unsere Künstler",
     "loading": "Künstler werden geladen...",
     "viewProfile": "Profil ansehen",
-    "defaultDiscipline": "Tattoo Artist",
-    "instructions": {
-      "mobile": "Tippen zum Erweitern",
-      "desktop": "Hover zum Erweitern"
-    }
+    "defaultDiscipline": "Tattoo Artist"
   }
 }

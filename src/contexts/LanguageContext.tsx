@@ -23,7 +23,7 @@ export type Language = 'de' | 'en';
 export interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, options?: Record<string, unknown>) => string;
   isChangingLanguage: boolean;
 }
 
@@ -41,7 +41,9 @@ interface LanguageProviderProps {
  */
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const i18n = getI18nInstance();
-  const [language, setLanguageState] = useState<Language>('de');
+  const [language, setLanguageState] = useState<Language>(
+    normalizeLocale(i18n.language) as Language,
+  );
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -88,7 +90,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
    * Now depends on language state to re-render when language changes
    */
   const t = useMemo(() => {
-    return (fullKey: string): string => {
+    return (fullKey: string, options?: Record<string, unknown>): string => {
       const { namespace, key } = splitTranslationKey(fullKey);
 
       // Check if namespace is loaded for CURRENT language (not just any language)
@@ -97,7 +99,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         void i18n.loadNamespaces([namespace]);
       }
 
-      return i18n.t(key, { ns: namespace });
+      return i18n.t(key, { ns: namespace, ...options });
     };
   }, [i18n, language]);
 

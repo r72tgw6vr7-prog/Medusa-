@@ -51,15 +51,16 @@
     "title": "Something went wrong",
     "retry": "Try again",
     "retryLoading": "Trying to resend...",
-    "completeAllSteps": "Please complete all steps"
+    "completeAllSteps": "Please complete all steps",
+    "submitFailed": "Your request could not be sent. Please try again or contact us by telephone."
   },
   "confirmation": {
-    "title": "Appointment confirmed!",
-    "subtitle": "Your appointment request has been successfully submitted.",
+    "title": "Thank you!",
+    "subtitle": "Your booking request has been sent successfully.",
     "bookingNumber": "Booking Number:",
     "service": "Service:",
     "date": "Date:",
-    "emailNote": "We have sent a confirmation email with all details. Please check your inbox and spam folder.",
+    "emailNote": "We will contact you within 24 hours.",
     "closeButton": "Close"
   },
   "gdpr": {
