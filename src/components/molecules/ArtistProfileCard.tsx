@@ -12,6 +12,11 @@ export function ArtistProfileCard({ artist }: ArtistProfileCardProps) {
   const { language } = useLanguage();
 
   const bio = language === 'en' ? artist.bio.en : artist.bio.de;
+  const roleLabel =
+    (language === 'en' ? artist.roleLocalized?.en : artist.roleLocalized?.de) ?? artist.role;
+  const specialties =
+    (language === 'en' ? artist.specialtiesLocalized?.en : artist.specialtiesLocalized?.de) ??
+    artist.specialties;
 
   return (
     <div className='flex flex-col lg:flex-row gap-12 items-start mb-24'>
@@ -40,7 +45,7 @@ export function ArtistProfileCard({ artist }: ArtistProfileCardProps) {
 
           <div className='flex flex-wrap items-center gap-4'>
             <span className='inline-flex items-center justify-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.65)] backdrop-blur-lg border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-full text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome'>
-              {artist.role}
+              {roleLabel}
             </span>
             {artist.experience ? (
               <span className='inline-flex items-center justify-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.45)] backdrop-blur-md border border-[rgba(var(--color-accent-silver-rgb),0.10)] rounded-full text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome'>
@@ -62,7 +67,7 @@ export function ArtistProfileCard({ artist }: ArtistProfileCardProps) {
               {language === 'en' ? 'Specialties' : 'Schwerpunkte'}
             </h3>
             <div className='flex flex-wrap gap-4'>
-              {artist.specialties.map((specialty) => (
+              {specialties.map((specialty) => (
                 <span
                   key={specialty}
                   className='inline-flex items-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.55)] backdrop-blur-md border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-xl text-(length:--text-sm) text-luxury-text-inverse/80 font-body'

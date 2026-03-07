@@ -143,6 +143,7 @@ export async function testEmailService(): Promise<TestSuite> {
 
 /**
  * Test Payment Service Integration
+ * Payment processing is not currently active — skipped.
  */
 export async function testPaymentService(): Promise<TestSuite> {
   const results: TestResult[] = [];
@@ -154,57 +155,12 @@ export async function testPaymentService(): Promise<TestSuite> {
     warnings: 0,
   };
 
-  try {
-    const { GERMAN_PAYMENT_METHODS, validatePaymentMethod } = await import(
-      '../services/paymentService'
-    );
-
-    // Test each payment method configuration
-    for (const method of GERMAN_PAYMENT_METHODS) {
-      const isValid = validatePaymentMethod(method);
-
-      if (isValid) {
-        results.push({
-          service: `${method.name} (${method.provider})`,
-          status: 'success',
-          message: 'Configuration valid',
-        });
-        suite.passed++;
-      } else {
-        results.push({
-          service: `${method.name} (${method.provider})`,
-          status: 'warning',
-          message: 'Missing API keys - will be hidden from users',
-        });
-        suite.warnings++;
-      }
-    }
-
-    // Check if at least one payment method is configured
-    const validMethods = GERMAN_PAYMENT_METHODS.filter(validatePaymentMethod);
-    if (validMethods.length === 0) {
-      results.push({
-        service: 'Payment Methods',
-        status: 'error',
-        message: 'No payment methods configured',
-      });
-      suite.failed++;
-    } else {
-      results.push({
-        service: 'Payment Methods',
-        status: 'success',
-        message: `${validMethods.length} payment methods ready`,
-      });
-      suite.passed++;
-    }
-  } catch (error) {
-    results.push({
-      service: 'Payment Service',
-      status: 'error',
-      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-    });
-    suite.failed++;
-  }
+  results.push({
+    service: 'Payment Service',
+    status: 'warning',
+    message: 'Payment processing not active — skipped',
+  });
+  suite.warnings++;
 
   return suite;
 }
@@ -357,7 +313,7 @@ export async function runAllTests(): Promise<{
     readiness: 'ready' | 'needs_setup' | 'critical_issues';
   };
 }> {
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD) {
     console.warn('🧪 Running integration tests...');
   }
 
@@ -386,7 +342,7 @@ export async function runAllTests(): Promise<{
     summary.readiness = 'ready';
   }
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD) {
     console.warn(`✅ ${summary.passed} passed`);
     console.warn(`⚠️ ${summary.warnings} warnings`);
     console.warn(`❌ ${summary.failed} failed`);

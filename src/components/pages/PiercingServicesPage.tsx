@@ -1,3 +1,4 @@
+import { useLanguage } from '@/contexts/LanguageContext';
 import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
@@ -102,160 +103,7 @@ const PREISLISTE_STECHEN: Record<string, RegionPriceList> = {
   },
 };
 
-const categories = [
-  {
-    id: 'stechen',
-    title: 'Stechen',
-    subtitle: 'Professionelles Piercing mit Titan-Schmuck',
-    icon: Sparkles,
-    priceFrom: '35€',
-  },
-  {
-    id: 'jewelry',
-    title: 'Jewelry',
-    subtitle: 'Titan-Schmuck in Silber, Gold & Rosé',
-    icon: Gem,
-    priceFrom: 'Inklusive',
-  },
-  {
-    id: 'extras',
-    title: 'Extra Services',
-    subtitle: 'Wechseln, Entfernen & Pflege',
-    icon: Wrench,
-    priceFrom: '5€',
-  },
-] as const;
-
-const serviceDetails = {
-  stechen: [
-    {
-      id: 'ohr',
-      title: 'Ohr | Ear',
-      description: 'Lobe, Helix, Tragus, Conch, Rook, Daith, Industrial und mehr.',
-      priceFrom: 35,
-      priceUnit: '€ - 110€',
-      duration: '15-30 Min',
-      features: ['Titan-Schmuck inklusive', 'Sterile Einwegmaterialien', 'Nachsorgeberatung'],
-      cta: 'Jetzt buchen',
-    },
-    {
-      id: 'mund',
-      title: 'Mund | Mouth',
-      description: 'Lippe, Grübchen, Dahlia, Lippenband, Zunge, Snake Eye.',
-      priceFrom: 70,
-      priceUnit: '€ - 150€',
-      duration: '15-30 Min',
-      features: ['Titan-Schmuck inklusive', 'Mundspülung inklusive', 'Pflegehinweise'],
-      cta: 'Jetzt buchen',
-    },
-    {
-      id: 'gesicht',
-      title: 'Gesicht | Face',
-      description: 'Augenbraue, Bridge, Nase, Septum, Anti Eyebrow, Dermal Anchor.',
-      priceFrom: 60,
-      priceUnit: '€ - 150€',
-      duration: '15-30 Min',
-      features: ['Titan-Schmuck inklusive', 'Sterile Umgebung', 'Follow-up möglich'],
-      cta: 'Jetzt buchen',
-    },
-    {
-      id: 'koerper',
-      title: 'Körper | Body',
-      description: 'Brustwarze, Bauchnabel, Surface, Dermal Anchor, Skindiver.',
-      priceFrom: 80,
-      priceUnit: '€ - 160€',
-      duration: '20-45 Min',
-      features: ['Titan-Schmuck inklusive', 'Anatomie-Check', 'Premium Nachsorge'],
-      cta: 'Jetzt buchen',
-    },
-    {
-      id: 'intim',
-      title: 'Intim | Intimate',
-      description: 'Professionelle Intim-Piercings. Mindestalter 18 Jahre.',
-      priceFrom: 90,
-      priceUnit: '€ - 170€',
-      duration: '30-45 Min',
-      features: ['Titan-Schmuck inklusive', 'Private Atmosphäre', 'mind. 18 Jahre'],
-      cta: 'Beratung anfragen',
-    },
-    {
-      id: 'ohrlochzauberer',
-      title: 'Ohrlochzauberer',
-      description: 'Kinderfreundliches Ohrlochstechen mit Aaron als Ohrlochzauberer.',
-      priceFrom: 45,
-      priceUnit: '€ - 80€',
-      duration: '20-30 Min',
-      features: ['Speziell für Kinder', 'Magisches Erlebnis', 'Titan-Schmuck inklusive'],
-      cta: 'Aaron anfragen',
-    },
-  ],
-  jewelry: [
-    {
-      id: 'titanium',
-      title: 'Titanium Schmuck',
-      description: 'Hochwertiger Titan-Schmuck in Silber - bei jedem Piercing inklusive.',
-      priceFrom: 0,
-      priceUnit: 'Inklusive',
-      duration: null,
-      features: ['Hypoallergen', 'Implant-Grade Titan', 'Silber Finish'],
-      cta: 'Mehr erfahren',
-    },
-    {
-      id: 'upgrades',
-      title: 'Upgrades',
-      description: 'Veredeln Sie Ihren Schmuck mit Gold, Rosé oder Glitzer.',
-      priceFrom: 5,
-      priceUnit: '€+',
-      duration: null,
-      features: ['Titan Gold: +€5', 'Titan Rosé: +€5', 'Glitzer: +€5'],
-      cta: 'Upgrade wählen',
-    },
-  ],
-  extras: [
-    {
-      id: 'entfernen',
-      title: 'Entfernen',
-      description: 'Professionelles Entfernen von Piercings und Implantaten.',
-      priceFrom: 5,
-      priceUnit: '€ - 25€',
-      duration: '5-15 Min',
-      features: ['Standard: €5', 'Dermal/Skindiver: €10', 'Implantat: €25'],
-      cta: 'Termin buchen',
-    },
-    {
-      id: 'service',
-      title: 'Service',
-      description: 'Einsetzen, Wechseln, Kürzen und Pflege bei Problemen.',
-      priceFrom: 5,
-      priceUnit: '€ - 15€',
-      duration: '5-20 Min',
-      features: ['Einsetzen: €5-10', 'Wechseln: €5-10', 'Kürzen: €5-10'],
-      cta: 'Termin buchen',
-    },
-    {
-      id: 'probleme',
-      title: 'Probleme & Pflege',
-      description: 'Hilfe bei eingewachsenen Piercings und Wildfleisch.',
-      priceFrom: 5,
-      priceUnit: '€ - 15€',
-      duration: '10-20 Min',
-      features: ['Eingewachsen: €5-15', 'Wildfleisch: €5-15', 'Beratung inklusive'],
-      cta: 'Hilfe anfragen',
-    },
-    {
-      id: 'implantat',
-      title: 'Implantat',
-      description: 'Professionelles Einsetzen und Entfernen von Implantaten.',
-      priceFrom: 25,
-      priceUnit: '€ - 50€',
-      duration: '20-45 Min',
-      features: ['Einsetzen: €50', 'Entfernen: €25', 'Beratung vorab'],
-      cta: 'Beratung anfragen',
-    },
-  ],
-} as const;
-
-type CategoryId = keyof typeof serviceDetails;
+type CategoryId = 'stechen' | 'jewelry' | 'extras';
 
 interface PiercingServicesPageProps {
   className?: string;
@@ -273,6 +121,7 @@ const BACKDROP_BLUR = '8px';
 const OVERLAY_EASE = [0.4, 0, 0.2, 1] as const;
 
 export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ className = '' }) => {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
@@ -283,6 +132,191 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
   const { openBooking } = useApp();
   const prefersReducedMotion = useReducedMotion();
 
+  const categories = useMemo(
+    () => [
+      {
+        id: 'stechen',
+        title: t('services.piercingServicesPage.categories.stechen.title'),
+        subtitle: t('services.piercingServicesPage.categories.stechen.subtitle'),
+        icon: Sparkles,
+        priceFrom: t('services.piercingServicesPage.categories.stechen.priceFrom'),
+      },
+      {
+        id: 'jewelry',
+        title: t('services.piercingServicesPage.categories.jewelry.title'),
+        subtitle: t('services.piercingServicesPage.categories.jewelry.subtitle'),
+        icon: Gem,
+        priceFrom: t('services.piercingServicesPage.categories.jewelry.priceFrom'),
+      },
+      {
+        id: 'extras',
+        title: t('services.piercingServicesPage.categories.extras.title'),
+        subtitle: t('services.piercingServicesPage.categories.extras.subtitle'),
+        icon: Wrench,
+        priceFrom: t('services.piercingServicesPage.categories.extras.priceFrom'),
+      },
+    ],
+    [t],
+  );
+
+  const serviceDetails = useMemo(
+    () => ({
+      stechen: [
+        {
+          id: 'ohr',
+          title: t('services.piercingServicesPage.services.stechen.ohr.title'),
+          description: t('services.piercingServicesPage.services.stechen.ohr.description'),
+          priceFrom: 35,
+          priceUnit: t('services.piercingServicesPage.services.stechen.ohr.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.ohr.duration'),
+          features: t('services.piercingServicesPage.services.stechen.ohr.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.ohr.cta'),
+        },
+        {
+          id: 'mund',
+          title: t('services.piercingServicesPage.services.stechen.mund.title'),
+          description: t('services.piercingServicesPage.services.stechen.mund.description'),
+          priceFrom: 70,
+          priceUnit: t('services.piercingServicesPage.services.stechen.mund.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.mund.duration'),
+          features: t('services.piercingServicesPage.services.stechen.mund.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.mund.cta'),
+        },
+        {
+          id: 'gesicht',
+          title: t('services.piercingServicesPage.services.stechen.gesicht.title'),
+          description: t('services.piercingServicesPage.services.stechen.gesicht.description'),
+          priceFrom: 60,
+          priceUnit: t('services.piercingServicesPage.services.stechen.gesicht.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.gesicht.duration'),
+          features: t('services.piercingServicesPage.services.stechen.gesicht.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.gesicht.cta'),
+        },
+        {
+          id: 'koerper',
+          title: t('services.piercingServicesPage.services.stechen.koerper.title'),
+          description: t('services.piercingServicesPage.services.stechen.koerper.description'),
+          priceFrom: 80,
+          priceUnit: t('services.piercingServicesPage.services.stechen.koerper.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.koerper.duration'),
+          features: t('services.piercingServicesPage.services.stechen.koerper.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.koerper.cta'),
+        },
+        {
+          id: 'intim',
+          title: t('services.piercingServicesPage.services.stechen.intim.title'),
+          description: t('services.piercingServicesPage.services.stechen.intim.description'),
+          priceFrom: 90,
+          priceUnit: t('services.piercingServicesPage.services.stechen.intim.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.intim.duration'),
+          features: t('services.piercingServicesPage.services.stechen.intim.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.intim.cta'),
+        },
+        {
+          id: 'ohrlochzauberer',
+          title: t('services.piercingServicesPage.services.stechen.ohrlochzauberer.title'),
+          description: t(
+            'services.piercingServicesPage.services.stechen.ohrlochzauberer.description',
+          ),
+          priceFrom: 45,
+          priceUnit: t('services.piercingServicesPage.services.stechen.ohrlochzauberer.priceUnit'),
+          duration: t('services.piercingServicesPage.services.stechen.ohrlochzauberer.duration'),
+          features: t('services.piercingServicesPage.services.stechen.ohrlochzauberer.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.stechen.ohrlochzauberer.cta'),
+        },
+      ],
+      jewelry: [
+        {
+          id: 'titanium',
+          title: t('services.piercingServicesPage.services.jewelry.titanium.title'),
+          description: t('services.piercingServicesPage.services.jewelry.titanium.description'),
+          priceFrom: 0,
+          priceUnit: t('services.piercingServicesPage.services.jewelry.titanium.priceUnit'),
+          duration: '',
+          features: t('services.piercingServicesPage.services.jewelry.titanium.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.jewelry.titanium.cta'),
+        },
+        {
+          id: 'upgrades',
+          title: t('services.piercingServicesPage.services.jewelry.upgrades.title'),
+          description: t('services.piercingServicesPage.services.jewelry.upgrades.description'),
+          priceFrom: 5,
+          priceUnit: t('services.piercingServicesPage.services.jewelry.upgrades.priceUnit'),
+          duration: '',
+          features: t('services.piercingServicesPage.services.jewelry.upgrades.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.jewelry.upgrades.cta'),
+        },
+      ],
+      extras: [
+        {
+          id: 'entfernen',
+          title: t('services.piercingServicesPage.services.extras.entfernen.title'),
+          description: t('services.piercingServicesPage.services.extras.entfernen.description'),
+          priceFrom: 5,
+          priceUnit: t('services.piercingServicesPage.services.extras.entfernen.priceUnit'),
+          duration: t('services.piercingServicesPage.services.extras.entfernen.duration'),
+          features: t('services.piercingServicesPage.services.extras.entfernen.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.extras.entfernen.cta'),
+        },
+        {
+          id: 'service',
+          title: t('services.piercingServicesPage.services.extras.service.title'),
+          description: t('services.piercingServicesPage.services.extras.service.description'),
+          priceFrom: 5,
+          priceUnit: t('services.piercingServicesPage.services.extras.service.priceUnit'),
+          duration: t('services.piercingServicesPage.services.extras.service.duration'),
+          features: t('services.piercingServicesPage.services.extras.service.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.extras.service.cta'),
+        },
+        {
+          id: 'probleme',
+          title: t('services.piercingServicesPage.services.extras.probleme.title'),
+          description: t('services.piercingServicesPage.services.extras.probleme.description'),
+          priceFrom: 5,
+          priceUnit: t('services.piercingServicesPage.services.extras.probleme.priceUnit'),
+          duration: t('services.piercingServicesPage.services.extras.probleme.duration'),
+          features: t('services.piercingServicesPage.services.extras.probleme.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.extras.probleme.cta'),
+        },
+        {
+          id: 'implantat',
+          title: t('services.piercingServicesPage.services.extras.implantat.title'),
+          description: t('services.piercingServicesPage.services.extras.implantat.description'),
+          priceFrom: 25,
+          priceUnit: t('services.piercingServicesPage.services.extras.implantat.priceUnit'),
+          duration: t('services.piercingServicesPage.services.extras.implantat.duration'),
+          features: t('services.piercingServicesPage.services.extras.implantat.features')
+            .split('\n')
+            .filter(Boolean),
+          cta: t('services.piercingServicesPage.services.extras.implantat.cta'),
+        },
+      ],
+    }),
+    [t],
+  );
+
   // Modal state for piercing photos
   const [photoModalOpen, setPhotoModalOpen] = useState(false);
   const [selectedPhotoTitle, setSelectedPhotoTitle] = useState('');
@@ -292,10 +326,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(containerRef, { amount: 0.1, once: true });
 
-  const currentServices = useMemo(() => serviceDetails[activeCategory], [activeCategory]);
+  const currentServices = useMemo(() => serviceDetails[activeCategory], [activeCategory, serviceDetails]);
   const activeCategoryMeta = useMemo(
     () => categories.find((category) => category.id === activeCategory),
-    [activeCategory],
+    [activeCategory, categories],
   );
 
   const activePhotos = useMemo(() => {
@@ -358,10 +392,12 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
           <div className='flex flex-col gap-8'>
             <div className='flex items-center justify-between'>
               <span className='font-semibold text-(length:--text-sm) tracking-wide uppercase text-(--text-secondary)'>
-                {activeCategory === 'stechen' ? 'Bereich' : 'Option'}
+                {activeCategory === 'stechen'
+                  ? t('services.piercingServicesPage.labels.area')
+                  : t('services.piercingServicesPage.labels.option')}
               </span>
               <span className='font-normal text-(length:--text-sm) tracking-wider uppercase text-white/60'>
-                {service.duration ?? 'Flexibel'}
+                {service.duration || t('services.piercingServicesPage.labels.flexible')}
               </span>
             </div>
 
@@ -394,7 +430,11 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                   aria-expanded={isExpanded}
                   aria-controls={`price-details-${service.id}`}
                 >
-                  <span>{isExpanded ? 'Preisliste ausblenden' : 'Alle Preise anzeigen'}</span>
+                  <span>
+                    {isExpanded
+                      ? t('services.piercingServicesPage.labels.hidePriceList')
+                      : t('services.piercingServicesPage.labels.showAllPrices')}
+                  </span>
                   <ChevronDown
                     size={18}
                     className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
@@ -416,7 +456,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                     >
                       <div className='bg-(--card-bg) border border-white/10 rounded-2xl p-4 shadow-(--card-shadow)'>
                         <div className='paket-price-grid mb-2 text-(length:--text-xs) font-semibold uppercase tracking-wider text-white/50'>
-                          <span>Piercing</span>
+                          <span>{t('services.piercingServicesPage.labels.priceGridName')}</span>
                           <span className='w-12 text-right'>1</span>
                           <span className='w-12 text-right'>2</span>
                         </div>
@@ -438,7 +478,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                                         service.id as PiercingPhotoCategory,
                                       );
                                     }}
-                                    aria-label={`${item.name} Beispielfotos anzeigen`}
+                                    aria-label={t(
+                                      'services.piercingServicesPage.labels.examplePhotosAria',
+                                      { name: item.name },
+                                    )}
                                     type='button'
                                   >
                                     <Info size={16} className='piercing-info-icon' />
@@ -467,7 +510,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
             )}
 
             <ul className='space-y-4 text-(length:--text-sm) text-white/80'>
-              {service.features.map((feature, featureIndex) => (
+              {service.features.map((feature: string, featureIndex: number) => (
                 <li key={featureIndex} className='flex items-center gap-4'>
                   <ChevronRight size={16} className='text-(--text-secondary) shrink-0 mt-2' />
                   <span className='font-normal text-(length:--text-base) leading-(--line-height-body)'>
@@ -485,7 +528,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 handleServiceBooking(service.id);
               }}
               className='w-full h-12 border border-(--text-secondary) rounded-3xl font-semibold text-(length:--text-sm) leading-(--line-height-body) text-white hover:bg-(--text-secondary) hover:text-black transition-all duration-200 focus-visible:ring-2 focus-visible:ring-(--accent-chrome) focus-visible:ring-offset-2 focus-visible:ring-offset-(--card-bg)'
-              aria-label={`${service.cta} für ${service.title}`}
+              aria-label={t('services.piercingServicesPage.labels.bookServiceAria', {
+                cta: service.cta,
+                title: service.title,
+              })}
             >
               {service.cta}
             </button>
@@ -503,7 +549,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                     <motion.img
                       key={`${expandedCard}-photo-${idx}`}
                       src={photo}
-                      alt={`${expandedCard} piercing example ${idx + 1}`}
+                      alt={t('services.piercingServicesPage.labels.photoAlt', {
+                        category: expandedCard,
+                        index: idx + 1,
+                      })}
                       className='piercing-photo-grid__item'
                       initial={
                         prefersReducedMotion
@@ -553,10 +602,11 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
       <section className='section-padding relative z-10'>
         <div className='responsive-container safe-area-padding'>
           <div className='mx-auto w-full max-w-container-main flex flex-col text-center gap-4 max-md:gap-16'>
+            <h1 className='sr-only'>{t('services.piercingServicesPage.heading.title')}</h1>
             <SectionHeading
-              eyebrow='Medusa München'
-              title='Piercing'
-              subtitle='Professionelles Piercing mit über 5 Jahren Erfahrung und höchsten Hygienestandards.'
+              eyebrow={t('services.piercingServicesPage.heading.eyebrow')}
+              title={t('services.piercingServicesPage.heading.title')}
+              subtitle={t('services.piercingServicesPage.heading.subtitle')}
             />
 
             {/* FREE Consultation Banner */}
@@ -565,10 +615,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 <MessageCircle size={24} className='text-(--accent-chrome)' />
                 <div className='text-center'>
                   <p className='font-headline text-(length:--text-lg) text-brand-chrome'>
-                    Kostenlose Beratung
+                    {t('services.piercingServicesPage.consultation.title')}
                   </p>
                   <p className='text-(length:--text-sm) text-luxury-text-inverse/70 font-body'>
-                    Allow us to help you choose the right team member and piercing
+                    {t('services.piercingServicesPage.consultation.subtitle')}
                   </p>
                 </div>
               </div>
@@ -577,7 +627,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 target='_blank'
                 rel='noopener noreferrer'
                 className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-(--brand-accent) hover:bg-(--brand-accent-hover) text-black font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
-                aria-label='WhatsApp Beratung starten'
+                aria-label={t('services.piercingServicesPage.consultation.whatsAppAria')}
               >
                 <MessageSquare size={20} />
                 WhatsApp
@@ -618,10 +668,12 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                   >
                     <button
                       type='button'
-                      aria-pressed={isActive}
+                      aria-pressed={isActive ? 'true' : 'false'}
                       className='premium-pricing-card__button'
                       onClick={() => handleCategoryChange(category.id as CategoryId)}
-                      aria-label={`Select ${category.title} category`}
+                      aria-label={t('services.piercingServicesPage.labels.selectCategoryAria', {
+                        category: category.title,
+                      })}
                     >
                       {buttonContent}
                     </button>
@@ -642,7 +694,9 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
               ref={containerRef}
               className='space-y-12'
               aria-live='polite'
-              aria-label={`Showing ${activeCategoryMeta?.title} services`}
+              aria-label={t('services.piercingServicesPage.labels.showingServicesAria', {
+                category: activeCategoryMeta?.title,
+              })}
               variants={containerVariants}
               initial='initial'
               animate={inView ? 'animate' : 'initial'}
@@ -651,7 +705,7 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
               <div className='hidden md:block'>
                 <SectionHeading
                   eyebrow={activeCategoryMeta?.title}
-                  title='Wählen Sie Ihre Option'
+                  title={t('services.piercingServicesPage.labels.chooseOption')}
                   subtitle={activeCategoryMeta?.subtitle}
                 />
               </div>

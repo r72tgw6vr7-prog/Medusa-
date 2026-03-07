@@ -3,6 +3,7 @@ import type { PageType } from '@/types/page-types';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CookieConsentBannerProps {
   onNavigate: (page: PageType) => void;
@@ -15,6 +16,7 @@ export interface CookiePreferences {
 }
 
 export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavigate }) => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -82,16 +84,16 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
         <div className='max-w-container-main mx-auto'>
           <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-8'>
             <div className='flex-1'>
-              <h2 className='text-xl font-headline text-(--accent-chrome) mb-0'>Cookie-Einstellungen</h2>
+              <h2 className='text-xl font-headline text-(--accent-chrome) mb-0'>
+                {t('common.cookies.title')}
+              </h2>
               <p className='text-brand-white text-sm mb-8 md:mb-0'>
-                Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu
-                bieten. Essentielle Cookies sind für die Grundfunktionen erforderlich. Optional
-                können Sie Analyse- und Marketing-Cookies zulassen.{' '}
+                {t('common.cookies.body')}{' '}
                 <button
                   onClick={() => onNavigate('datenschutz')}
                   className='text-(--accent-chrome) hover:text-(--accent-chrome)/80 underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline'
                 >
-                  Mehr erfahren
+                  {t('common.cookies.learnMore')}
                 </button>
               </p>
             </div>
@@ -100,19 +102,19 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
                 onClick={() => setShowPreferences(true)}
                 className='px-8 py-0 border border-(--accent-chrome) text-(--accent-chrome) hover:bg-(--accent-chrome)/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Anpassen
+                {t('common.cookies.customize')}
               </button>
               <button
                 onClick={handleRejectAll}
                 className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Ablehnen
+                {t('common.cookies.rejectAll')}
               </button>
               <button
                 onClick={handleAcceptAll}
                 className='px-8 py-0 bg-(--accent-chrome) text-(--deep-black) hover:bg-(--accent-chrome)/80 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Alle akzeptieren
+                {t('common.cookies.acceptAll')}
               </button>
             </div>
           </div>
@@ -126,12 +128,12 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
           <Dialog.Content className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-brand-background border border-brand-chrome/20 rounded-xl p-8 z-50 max-h-screen overflow-y-auto'>
             <div className='flex items-center justify-between mb-8'>
               <Dialog.Title className='text-2xl font-headline text-brand-accent'>
-                Cookie-Einstellungen
+                {t('common.cookies.dialogTitle')}
               </Dialog.Title>
               <Dialog.Close asChild>
                 <button
                   className='text-brand-chrome hover:text-brand-white transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
-                  aria-label='Schließen'
+                  aria-label={t('common.cookies.closeAria')}
                 >
                   <X size={24} />
                 </button>
@@ -140,30 +142,33 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
 
             <div className='space-y-8'>
               {/* Essential Cookies */}
-              <Card variant="default" size="default" asChild>
+              <Card variant='default' size='default' asChild>
                 <div>
                   <div className='flex items-center justify-between mb-0'>
-                    <h3 className='text-lg font-headline text-brand-accent'>Essentielle Cookies</h3>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.essential.title')}
+                    </h3>
                     <input
                       type='checkbox'
                       checked={preferences.essential}
                       disabled
-                      aria-label='Essentielle Cookies (erforderlich)'
+                      aria-label={t('common.cookies.essential.aria')}
                       className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
                     />
                   </div>
                   <p className='text-sm text-brand-chrome'>
-                    Diese Cookies sind für die Grundfunktionen der Website erforderlich und können
-                    nicht deaktiviert werden.
+                    {t('common.cookies.essential.description')}
                   </p>
                 </div>
               </Card>
 
               {/* Analytics Cookies */}
-              <Card variant="default" size="default" asChild>
+              <Card variant='default' size='default' asChild>
                 <div>
                   <div className='flex items-center justify-between mb-0'>
-                    <h3 className='text-lg font-headline text-brand-accent'>Analyse-Cookies</h3>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.analytics.title')}
+                    </h3>
                     <input
                       type='checkbox'
                       checked={preferences.analytics}
@@ -171,20 +176,22 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
                         setPreferences({ ...preferences, analytics: e.target.checked })
                       }
                       className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
-                      aria-label='Analyse-Cookies aktivieren'
+                      aria-label={t('common.cookies.analytics.aria')}
                     />
                   </div>
                   <p className='text-sm text-brand-chrome'>
-                    Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen.
+                    {t('common.cookies.analytics.description')}
                   </p>
                 </div>
               </Card>
 
               {/* Marketing Cookies */}
-              <Card variant="default" size="default" asChild>
+              <Card variant='default' size='default' asChild>
                 <div>
                   <div className='flex items-center justify-between mb-0'>
-                    <h3 className='text-lg font-headline text-brand-accent'>Marketing-Cookies</h3>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.marketing.title')}
+                    </h3>
                     <input
                       type='checkbox'
                       checked={preferences.marketing}
@@ -192,11 +199,11 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
                         setPreferences({ ...preferences, marketing: e.target.checked })
                       }
                       className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
-                      aria-label='Marketing-Cookies aktivieren'
+                      aria-label={t('common.cookies.marketing.aria')}
                     />
                   </div>
                   <p className='text-sm text-brand-chrome'>
-                    Diese Cookies werden verwendet, um Werbung relevanter zu gestalten.
+                    {t('common.cookies.marketing.description')}
                   </p>
                 </div>
               </Card>
@@ -205,14 +212,14 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
             <div className='flex justify-end gap-0 mt-8'>
               <Dialog.Close asChild>
                 <button className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition-colors duration-200 ease-out touch-target-mobile'>
-                  Abbrechen
+                  {t('common.cookies.cancel')}
                 </button>
               </Dialog.Close>
               <button
                 onClick={handleSavePreferences}
-                className="px-4 py-2 text-base lg:text-sm font-medium bg-luxury-accent-chrome text-luxury-text-primary rounded hover:bg-luxury-accent-chrome-hover transition-colors duration-200 ease-out touch-target-mobile"
+                className='px-4 py-2 text-base lg:text-sm font-medium bg-luxury-accent-chrome text-luxury-text-primary rounded hover:bg-luxury-accent-chrome-hover transition-colors duration-200 ease-out touch-target-mobile'
               >
-                Einstellungen speichern
+                {t('common.cookies.save')}
               </button>
             </div>
           </Dialog.Content>

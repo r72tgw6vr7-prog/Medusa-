@@ -19,7 +19,7 @@ import ArtistContactCTA from '@/components/molecules/ArtistContactCTA';
 export function ArtistProfilePage() {
   const { slug } = useParams<{ slug: string }>();
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const artist = useMemo(() => {
     if (!slug) return undefined;
@@ -83,7 +83,7 @@ export function ArtistProfilePage() {
                   className='inline-flex items-center gap-4 text-brand-accent hover:text-brand-accent-hover font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2'
                 >
                   <span aria-hidden='true'>←</span>
-                  <span>Back to All Artists</span>
+                  <span>{t('artists.profile.backToAll')}</span>
                 </Link>
               </div>
 

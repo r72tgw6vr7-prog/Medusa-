@@ -10,7 +10,15 @@ export interface Artist {
   name: string;
   displayName: string;
   role: string;
+  roleLocalized?: {
+    de: string;
+    en: string;
+  };
   specialties: string[];
+  specialtiesLocalized?: {
+    de: string[];
+    en: string[];
+  };
   bio: {
     de: string;
     en: string;
@@ -36,7 +44,15 @@ export const ARTISTS: Artist[] = [
     name: 'Aaron',
     displayName: 'Aaron',
     role: 'Salon Director & Piercing Specialist',
+    roleLocalized: {
+      de: 'Salonleitung & Piercing-Spezialist',
+      en: 'Salon Director & Piercing Specialist',
+    },
     specialties: ['Custom Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
+    specialtiesLocalized: {
+      de: ['Individuelle Designs', 'Spezialpiercings', 'Beratung', 'Ohrlochzauberer'],
+      en: ['Custom Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
+    },
     bio: {
       de: 'Aaron ist Salon Director und spezialisiert auf besondere Piercings sowie individuelle Custom Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden. Seine Spezialität ist der "Ohrlochzauberer" – ein kinderfreundlicher Ansatz für Ohrlochstechen, bei dem er wie ein Zauberer auftritt, um Kindern die Angst zu nehmen und das Erlebnis zu etwas Besonderem zu machen.',
       en: 'Aaron is the salon director and specializes in special piercings and custom designs. He supports clients through consultation to find the right solutions and placements. His specialty is the "Ohrlochzauberer" (Ear Piercing Wizard) – a kid-friendly approach to ear piercing where he acts like a magician to ease children\'s fears and make the experience something special.',
@@ -61,7 +77,15 @@ export const ARTISTS: Artist[] = [
     name: 'Angie',
     displayName: 'Angie Rodriguez',
     role: 'Piercing Specialist & Social Media Manager',
+    roleLocalized: {
+      de: 'Piercing-Spezialistin & Social Media Managerin',
+      en: 'Piercing Specialist & Social Media Manager',
+    },
     specialties: ['Hygiene Standards', 'Team Training', 'Piercing Procedures'],
+    specialtiesLocalized: {
+      de: ['Hygienestandards', 'Team-Schulungen', 'Piercing-Prozesse'],
+      en: ['Hygiene Standards', 'Team Training', 'Piercing Procedures'],
+    },
     bio: {
       de: 'Angie ist Piercing-Spezialistin und Social Media Managerin. Sie ist eine zentrale Ansprechpartnerin für Hygiene‑Standards, Best Practices und interne Abläufe und unterstützt das Team mit Wissen, Organisation und Trainings.',
       en: 'Angie is a piercing specialist and social media manager. She is a key point of contact for hygiene standards, best practices, and internal procedures, supporting the team with organization and training.',
@@ -86,7 +110,15 @@ export const ARTISTS: Artist[] = [
     name: 'Debi',
     displayName: 'Debi',
     role: 'Tattoo Artist',
+    roleLocalized: {
+      de: 'Tattoo-Künstler',
+      en: 'Tattoo Artist',
+    },
     specialties: ['Linework', 'All-round styles'],
+    specialtiesLocalized: {
+      de: ['Linework', 'Vielseitige Stilrichtungen'],
+      en: ['Linework', 'All-round styles'],
+    },
     bio: {
       de: 'Debi hatte ein eigenes Studio in Ungarn und arbeitet mit einem starken Fokus auf präzises Linework. Als Allrounder setzt er Projekte in verschiedenen Stilrichtungen professionell um. Beratung und saubere Ausführung stehen dabei im Mittelpunkt.',
       en: 'Debi previously ran his own studio in Hungary and is known for precise linework. As an all‑round artist, he works confidently across multiple styles. Clear consultation and clean execution are central to his work.',
@@ -111,7 +143,15 @@ export const ARTISTS: Artist[] = [
     name: 'Eli Luquez',
     displayName: 'Eli Luquez',
     role: 'Studio Manager',
+    roleLocalized: {
+      de: 'Studio-Manager',
+      en: 'Studio Manager',
+    },
     specialties: ['Geometric', 'Dotwork', 'Mandala', 'Ornamental'],
+    specialtiesLocalized: {
+      de: ['Geometrie', 'Dotwork', 'Mandala', 'Ornamental'],
+      en: ['Geometric', 'Dotwork', 'Mandala', 'Ornamental'],
+    },
     bio: {
       de: 'Eli ist unser Head Artist und Studio Manager mit über 12 Jahren Erfahrung. Er ist spezialisiert auf geometrische und ornamentale Designs mit präziser Symmetrie und komplexen Mustern. Seine Arbeit verbindet mathematische Präzision mit künstlerischer Vision und schafft hypnotisierende, Sacred Geometry Kunstwerke. Er arbeitet seit 2022 bei Medusa Tattoo München.',
       en: 'Eli is our head artist and studio manager with over 12 years of experience. He specializes in geometric and ornamental designs with precise symmetry and intricate patterns. His work combines mathematical precision with artistic vision, creating mesmerizing sacred geometry artwork. He has been working at Medusa Tattoo München since 2022.',
@@ -136,7 +176,15 @@ export const ARTISTS: Artist[] = [
     name: 'Loui',
     displayName: 'Loui',
     role: 'Artist',
+    roleLocalized: {
+      de: 'Tattoo-Künstler',
+      en: 'Artist',
+    },
     specialties: ['Craftsmanship'],
+    specialtiesLocalized: {
+      de: ['Handwerk & Präzision'],
+      en: ['Craftsmanship'],
+    },
     bio: {
       de: 'Loui bringt rund 25 Jahre Erfahrung mit und ist handwerklich stark geprägt durch seine Ausbildung als Kirchenmaler. Diese Präzision und Gestaltungssicherheit fließen in seine Arbeiten ein.',
       en: 'Loui brings around 25 years of experience and a strong craft background, trained as a church painter. That precision and sense of composition shape his work.',
@@ -161,7 +209,15 @@ export const ARTISTS: Artist[] = [
     name: 'Oli',
     displayName: 'Oli',
     role: 'Tattoo Artist & Color Specialist',
+    roleLocalized: {
+      de: 'Tattoo-Künstler & Farbspezialist',
+      en: 'Tattoo Artist & Colour Specialist',
+    },
     specialties: ['New School', 'Cartoon', 'Pop Art', 'Vibrant Color'],
+    specialtiesLocalized: {
+      de: ['New School', 'Cartoon', 'Pop Art', 'Kräftige Farben'],
+      en: ['New School', 'Cartoon', 'Pop Art', 'Vibrant Colour'],
+    },
     bio: {
       de: 'Oli bringt lebendige Energie mit seinem New School und Pop Art Stil. Er ist bekannt für seine kräftigen Farben, übertriebenen Formen und spielerischen Designs. Seine Arbeit ist perfekt für diejenigen, die ein lustiges, ausdrucksstarkes Tattoo suchen, das auffällt.',
       en: 'Oli brings vibrant energy with his new school and pop art style. He is known for his bold colors, exaggerated shapes, and playful designs. His work is perfect for those wanting a fun, expressive tattoo that stands out.',
@@ -186,7 +242,15 @@ export const ARTISTS: Artist[] = [
     name: 'Sasha',
     displayName: 'Sasha',
     role: 'Tattoo Artist & Fine Line Specialist',
+    roleLocalized: {
+      de: 'Tattoo-Künstlerin & Fine-Line-Spezialistin',
+      en: 'Tattoo Artist & Fine Line Specialist',
+    },
     specialties: ['Fine Line', 'Micro Tattoo', 'Delicate', 'Botanical'],
+    specialtiesLocalized: {
+      de: ['Fine Line', 'Micro Tattoos', 'Zart & präzise', 'Botanisch'],
+      en: ['Fine Line', 'Micro Tattoos', 'Delicate', 'Botanical'],
+    },
     bio: {
       de: 'Sasha ist spezialisiert auf feine Linien und zarte Micro-Tattoos. Ihre Arbeit ist bekannt für ihre Präzision und Eleganz, perfekt für subtile und anspruchsvolle Designs. Sie kreiert wunderschöne botanische und minimalistische Kunstwerke, die zeitlos sind.',
       en: 'Sasha specializes in fine line and delicate micro tattoos. Her work is known for its precision and elegance, perfect for subtle and sophisticated designs. She creates beautiful botanical and minimalist artwork that is timeless.',
@@ -211,7 +275,15 @@ export const ARTISTS: Artist[] = [
     name: 'Vive',
     displayName: 'Vive',
     role: 'Piercer & Stylist',
+    roleLocalized: {
+      de: 'Piercerin & Stylistin',
+      en: 'Piercer & Stylist',
+    },
     specialties: ['Snake Eye Piercing', 'Style Consultation', 'Jewelry Assortment'],
+    specialtiesLocalized: {
+      de: ['Snake-Eye-Piercing', 'Style-Beratung', 'Schmuck-Sortiment'],
+      en: ['Snake Eye Piercing', 'Style Consultation', 'Jewellery Assortment'],
+    },
     bio: {
       de: 'Vivi ist Piercerin und Stylistin und berät Kund:innen auch rund um Stil und Kombinationen. Sie ist besonders stark bei Snake‑Eye‑Piercings und verantwortet die Auswahl und das Sortiment an Schmuck im Studio.',
       en: 'Vivi is a piercer and stylist, supporting clients with style and combination consultations. She is especially strong with snake‑eye piercings and is responsible for the studio’s jewelry selection and assortment.',

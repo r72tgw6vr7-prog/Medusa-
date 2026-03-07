@@ -5,6 +5,7 @@ import { ArtistBioModal } from '@/components/molecules/ArtistBioModal';
 import { PageHeading } from '@/components/PageHeading';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TeamMember {
   id: string;
@@ -12,10 +13,22 @@ interface TeamMember {
   name: string;
   fullName?: string;
   role: string;
+  roleLocalized?: {
+    de: string;
+    en: string;
+  };
   category: 'tattoo' | 'piercing';
   photo: string;
   photoAlt?: string;
+  photoAltLocalized?: {
+    de: string;
+    en: string;
+  };
   specialties: string[];
+  specialtiesLocalized?: {
+    de: string[];
+    en: string[];
+  };
   bookable: boolean;
   featured: boolean;
   bio:
@@ -51,6 +64,8 @@ interface Artist {
 }
 
 const TeamGrid: React.FC = () => {
+  const { language, t } = useLanguage();
+  const lang = language === 'en' ? 'en' : 'de';
   const defaultArtists: Artist[] = useMemo(
     () => [
       {
@@ -117,14 +132,14 @@ const TeamGrid: React.FC = () => {
             name: member.name,
             fullName: member.fullName,
             photo: member.photo,
-            role: member.role,
+            role: member.roleLocalized?.[lang] ?? member.role,
             roleIcon:
               member.category === 'tattoo'
                 ? 'Pen'
                 : member.category === 'piercing'
                   ? 'Target'
                   : 'User',
-            specialties: member.specialties,
+            specialties: member.specialtiesLocalized?.[lang] ?? member.specialties,
             experience: member.experience,
             bookable: member.bookable,
             featured: member.featured,
@@ -145,7 +160,7 @@ const TeamGrid: React.FC = () => {
     };
 
     loadTeamData();
-  }, [defaultArtists]);
+  }, [defaultArtists, lang]);
 
   // IntersectionObserver for scroll-reveal with staggered delays
   useEffect(() => {
@@ -179,9 +194,11 @@ const TeamGrid: React.FC = () => {
 
   // Convert Artist to ArtistCard format
   const toArtistCardFormat = (artist: Artist, index: number): ArtistCardType => {
-    const description = artist.bio?.en
-      ? artist.bio.en.split('\n')[0]
-      : `Specializing in ${artist.specialties.join(', ')}. ${artist.experience} of professional experience.`;
+    const description = artist.bio?.[lang]
+      ? artist.bio[lang].split('\n')[0]
+      : lang === 'de'
+        ? `Schwerpunkte: ${artist.specialties.join(', ')}. Erfahrung: ${artist.experience}.`
+        : `Specialties: ${artist.specialties.join(', ')}. Experience: ${artist.experience}.`;
 
     return {
       id: artist.slug || String(index),
@@ -207,8 +224,8 @@ const TeamGrid: React.FC = () => {
         <div className='mb-32'>
           <PageHeading
             eyebrow='Medusa München'
-            title='Our Artists'
-            subtitle='Treffen Sie unser erfahrenes Team von Tätowierern und Piercern'
+            title={t('artists.teamGrid.title')}
+            subtitle={t('artists.teamGrid.subtitle')}
           />
         </div>
 
@@ -217,11 +234,11 @@ const TeamGrid: React.FC = () => {
           {loading ? (
             <div className='text-center py-8'>
               <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-luxury-text-inverse/40'></div>
-              <p className='mt-4 text-luxury-text-inverse/50'>Loading team members...</p>
+              <p className='mt-4 text-luxury-text-inverse/50'>{t('artists.teamGrid.loading')}</p>
             </div>
           ) : artists.length === 0 ? (
             <div className='text-center py-8'>
-              <p className='text-luxury-text-inverse/50'>No team members found.</p>
+              <p className='text-luxury-text-inverse/50'>{t('artists.teamGrid.empty')}</p>
             </div>
           ) : (
             artists.map((artist, index) => (

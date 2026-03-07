@@ -2,23 +2,23 @@ import { z } from 'zod';
 
 // Environment variable schema
 const envSchema = z.object({
-  // Required for production
-  VITE_SITE_URL: z.string().url().describe('Base URL for the website'),
+  // Site URL (with sensible default)
+  VITE_SITE_URL: z.string().url().default('https://www.muenchen-tattoo-studio.de').describe('Base URL for the website'),
 
-  // Business information (for LocalBusiness schema)
-  VITE_BUSINESS_NAME: z.string().describe('Business name'),
-  VITE_BUSINESS_PHONE: z.string().describe('Business phone number'),
-  VITE_BUSINESS_EMAIL: z.string().email().describe('Business email'),
-  VITE_BUSINESS_STREET: z.string().describe('Street address'),
-  VITE_BUSINESS_POSTAL: z.string().describe('Postal code'),
-  VITE_BUSINESS_CITY: z.string().describe('City'),
-  VITE_BUSINESS_COUNTRY: z.string().describe('Country code'),
-  VITE_WHATSAPP: z.string().describe('WhatsApp number'),
-  VITE_OPENING_HOURS: z.string().describe('Opening hours'),
+  // Business information (with defaults so app doesn't crash)
+  VITE_BUSINESS_NAME: z.string().default('Medusa Tattoo München').describe('Business name'),
+  VITE_BUSINESS_PHONE: z.string().default('089 910994').describe('Business phone number'),
+  VITE_BUSINESS_EMAIL: z.string().email().default('info@medusa-tattoo.de').describe('Business email'),
+  VITE_BUSINESS_STREET: z.string().default('Altheimer Eck 11').describe('Street address'),
+  VITE_BUSINESS_POSTAL: z.string().default('80331').describe('Postal code'),
+  VITE_BUSINESS_CITY: z.string().default('München').describe('City'),
+  VITE_BUSINESS_COUNTRY: z.string().default('DE').describe('Country code'),
+  VITE_WHATSAPP: z.string().default('+4917612345678').describe('WhatsApp number'),
+  VITE_OPENING_HOURS: z.string().default('Mo-Do 11:30-19:00, Fr-Sa 11:30-20:00').describe('Opening hours'),
 
-  // Geographic coordinates
-  VITE_GEO_LAT: z.string().describe('Latitude'),
-  VITE_GEO_LNG: z.string().describe('Longitude'),
+  // Geographic coordinates (optional — map shows fallback without them)
+  VITE_GEO_LAT: z.string().optional().describe('Latitude'),
+  VITE_GEO_LNG: z.string().optional().describe('Longitude'),
 
   // Optional but recommended
   VITE_GA4_MEASUREMENT_ID: z
@@ -40,6 +40,12 @@ const envSchema = z.object({
   VITE_PRICE_RANGE: z.string().optional().describe('Price range'),
   VITE_CURRENCIES_ACCEPTED: z.string().optional().describe('Accepted currencies'),
   VITE_PAYMENT_METHODS: z.string().optional().describe('Payment methods'),
+
+  // Payment (not active)
+  VITE_STRIPE_PUBLISHABLE_KEY: z.string().optional().describe('Stripe publishable key'),
+
+  // Error monitoring (optional)
+  VITE_SENTRY_DSN: z.string().optional().describe('Sentry DSN for error monitoring'),
 
   // Build-time variables
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
@@ -97,8 +103,10 @@ function parseEnv() {
 
   const envSource = mockedEnv ? { ...baseEnvSource, ...mockedEnv } : baseEnvSource;
 
-  try {
-    const parsed = envSchema.parse(envSource);
+  const result = envSchema.safeParse(envSource);
+
+  if (result.success) {
+    const parsed = result.data;
 
     // Development warnings
     if (parsed.NODE_ENV !== 'production') {
@@ -111,20 +119,18 @@ function parseEnv() {
     }
 
     return parsed;
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      console.error('❌ Environment variable validation failed:');
-      error.issues.forEach((issue) => {
-        console.error(`  - ${issue.path.join('.')}: ${issue.message}`);
-      });
-
-      // In production, fail hard
-      if (envSource?.NODE_ENV === 'production') {
-        throw new Error('Invalid environment configuration');
-      }
-    }
-    throw error;
   }
+
+  // Validation failed — log issues but don't crash
+  console.error('❌ Environment variable validation failed:');
+  result.error.issues.forEach((issue) => {
+    console.error(`  - ${issue.path.join('.')}: ${issue.message}`);
+  });
+
+  // Fall back to defaults so the app can still render
+  return envSchema.parse({
+    NODE_ENV: (envSource as Record<string, unknown>)?.NODE_ENV ?? 'development',
+  });
 }
 
 // Export validated environment

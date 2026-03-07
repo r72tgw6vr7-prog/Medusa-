@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface NewsletterFormProps {
   onSubmit: (email: string) => Promise<void>;
@@ -6,6 +7,7 @@ interface NewsletterFormProps {
 }
 
 export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, className = '' }) => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,12 +22,12 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
     setError(null);
 
     if (!email) {
-      setError('Bitte geben Sie Ihre E-Mail-Adresse ein');
+      setError(t('common.newsletterForm.errorRequired'));
       return;
     }
 
     if (!validateEmail(email)) {
-      setError('Bitte geben Sie eine gültige E-Mail-Adresse ein');
+      setError(t('common.newsletterForm.errorInvalid'));
       return;
     }
 
@@ -35,8 +37,8 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
       await onSubmit(email);
       setIsSuccess(true);
       setEmail('');
-    } catch (_err) {
-      setError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+    } catch {
+      setError(t('common.newsletterForm.errorGeneric'));
     } finally {
       setIsSubmitting(false);
     }
@@ -46,7 +48,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
     <form onSubmit={handleSubmit} className={`space-y-4 ${className}`}>
       <div>
         <label htmlFor='newsletter-email' className='sr-only'>
-          E-Mail Adresse
+          {t('common.newsletterForm.emailLabel')}
         </label>
         <div className='relative'>
           <input
@@ -54,13 +56,13 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='Ihre E-Mail-Adresse'
+            placeholder={t('common.newsletterForm.emailPlaceholder')}
             className={`w-full px-4 py-3 rounded-lg bg-white/10 border
               ${error ? 'border-red-500' : 'border-brand-chrome/30'}
               text-luxury-text-inverse placeholder-luxury-text-inverse/50 focus:outline-none focus:ring-2 focus:ring-brand-accent`}
             required
             disabled={isSubmitting}
-            aria-invalid={!!error}
+            aria-invalid={error ? 'true' : 'false'}
             aria-describedby={error ? 'newsletter-error' : undefined}
           />
           {error && (
@@ -70,7 +72,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
           )}
           {isSuccess && (
             <p className='mt-0 text-sm text-green-500' role='status'>
-              Danke für Ihre Anmeldung!
+              {t('common.newsletterForm.success')}
             </p>
           )}
         </div>
@@ -87,10 +89,10 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({ onSubmit, classN
           } transition-colors disabled:opacity-50`}
       >
         {isSubmitting
-          ? 'Wird angemeldet...'
+          ? t('common.newsletterForm.submitting')
           : isSuccess
-            ? 'Erfolgreich angemeldet'
-            : 'Newsletter abonnieren'}
+            ? t('common.newsletterForm.subscribed')
+            : t('common.newsletterForm.subscribe')}
       </button>
     </form>
   );

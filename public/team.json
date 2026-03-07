@@ -5,10 +5,22 @@
       "slug": "aaron",
       "name": "Aaron",
       "role": "Salon Director & Piercing Specialist",
+      "roleLocalized": {
+        "de": "Salonleitung & Piercing-Spezialist",
+        "en": "Salon Director & Piercing Specialist"
+      },
       "category": "piercing",
       "photo": "/images/artists/aaron.webp",
       "photoAlt": "Aaron, Senior Piercing Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Aaron, Piercing-Spezialist bei Medusa München",
+        "en": "Aaron, Senior Piercing Artist at Medusa München"
+      },
       "specialties": ["Custom Designs", "Special Piercings", "Consultation"],
+      "specialtiesLocalized": {
+        "de": ["Individuelle Designs", "Spezialpiercings", "Beratung"],
+        "en": ["Custom Designs", "Special Piercings", "Consultation"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {
@@ -24,10 +36,22 @@
       "slug": "angie",
       "name": "Angie",
       "role": "Piercing Specialist & Social Media Manager",
+      "roleLocalized": {
+        "de": "Piercing-Spezialistin & Social Media Managerin",
+        "en": "Piercing Specialist & Social Media Manager"
+      },
       "category": "tattoo",
       "photo": "/images/artists/angie.webp",
       "photoAlt": "Angie, Traditional Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Angie, Piercing-Spezialistin bei Medusa München",
+        "en": "Angie, Traditional Tattoo Artist at Medusa München"
+      },
       "specialties": ["Hygiene Standards", "Team Training", "Piercing Procedures"],
+      "specialtiesLocalized": {
+        "de": ["Hygienestandards", "Team-Schulungen", "Piercing-Prozesse"],
+        "en": ["Hygiene Standards", "Team Training", "Piercing Procedures"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {
@@ -44,10 +68,22 @@
       "name": "Debi",
       "fullName": "Gabor 'Debi' Debreczeni",
       "role": "Tattoo Artist",
+      "roleLocalized": {
+        "de": "Tattoo-Künstler",
+        "en": "Tattoo Artist"
+      },
       "category": "tattoo",
       "photo": "/images/artists/debi.webp",
       "photoAlt": "Debi, Master Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Debi, Tattoo-Künstler bei Medusa München",
+        "en": "Debi, Master Tattoo Artist at Medusa München"
+      },
       "specialties": ["Linework", "All-round styles"],
+      "specialtiesLocalized": {
+        "de": ["Linework", "Vielseitige Stilrichtungen"],
+        "en": ["Linework", "All-round styles"]
+      },
       "bookable": true,
       "featured": true,
       "bio": {
@@ -64,10 +100,22 @@
       "name": "Loui",
       "fullName": "Gegő 'Loui' Lajos",
       "role": "Artist",
+      "roleLocalized": {
+        "de": "Tattoo-Künstler",
+        "en": "Artist"
+      },
       "category": "tattoo",
       "photo": "/images/artists/loui.webp",
       "photoAlt": "Loui, Senior Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Loui, Tattoo-Künstler bei Medusa München",
+        "en": "Loui, Senior Tattoo Artist at Medusa München"
+      },
       "specialties": ["Craftsmanship"],
+      "specialtiesLocalized": {
+        "de": ["Handwerk & Präzision"],
+        "en": ["Craftsmanship"]
+      },
       "bookable": true,
       "featured": true,
       "bio": {
@@ -84,10 +132,22 @@
       "name": "Eli Luquez",
       "fullName": "Eli Luquez",
       "role": "Studio Manager",
+      "roleLocalized": {
+        "de": "Studio-Manager",
+        "en": "Studio Manager"
+      },
       "category": "tattoo",
       "photo": "/images/artists/luz.webp",
       "photoAlt": "Luz (Ell Luquez), Realism Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Eli Luquez, Head Artist & Studio-Manager bei Medusa München",
+        "en": "Luz (Ell Luquez), Realism Tattoo Artist at Medusa München"
+      },
       "specialties": ["Black & Gray Realism", "Color Realism", "Digital Design", "Airbrush"],
+      "specialtiesLocalized": {
+        "de": ["Black & Grey Realism", "Color Realism", "Digitales Design", "Airbrush"],
+        "en": ["Black & Gray Realism", "Color Realism", "Digital Design", "Airbrush"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {
@@ -103,15 +163,27 @@
       "slug": "oliver",
       "name": "Oliver",
       "role": "Tattoo Artist",
+      "roleLocalized": {
+        "de": "Tattoo-Künstler",
+        "en": "Tattoo Artist"
+      },
       "category": "tattoo",
       "photo": "/images/artists/oliver.webp",
       "photoAlt": "Oliver, Geometric Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Oliver, Tattoo-Künstler bei Medusa München",
+        "en": "Oliver, Geometric Tattoo Artist at Medusa München"
+      },
       "specialties": ["Geometric", "Blackwork", "Minimalist"],
+      "specialtiesLocalized": {
+        "de": ["Geometrie", "Blackwork", "Minimalismus"],
+        "en": ["Geometric", "Blackwork", "Minimalist"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
-        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+        "de": "Oliver arbeitet im Bereich Geometrie, Blackwork und minimalistischer Kompositionen. Sein Fokus liegt auf klaren Linien, sauberer Symmetrie und einer ruhigen, strukturierten Beratung, damit Motiv und Platzierung optimal zur Anatomie passen.\n\nEr entwickelt Designs gemeinsam mit Ihnen – von der ersten Idee bis zur finalen Umsetzung – und achtet dabei besonders auf Kontrast, Lesbarkeit und Langlebigkeit. Wer präzise, reduzierte Tattoos mit moderner Ästhetik sucht, ist bei Oliver in besten Händen.",
+        "en": "Oliver focuses on geometric work, blackwork, and minimalist composition. He is known for crisp linework, balanced symmetry, and a calm, structured consultation, ensuring that design and placement suit the body naturally.\n\nFrom the first sketch to the final session, he works closely with you and pays close attention to contrast, clarity, and longevity. If you are looking for precise, understated tattoos with a contemporary finish, Oliver is an excellent choice."
       },
       "experience": "5+ Jahre",
       "instagram": "@oli_medusa",
@@ -122,15 +194,27 @@
       "slug": "sascha",
       "name": "Sascha",
       "role": "Tattoo Artist",
+      "roleLocalized": {
+        "de": "Tattoo-Künstler",
+        "en": "Tattoo Artist"
+      },
       "category": "tattoo",
       "photo": "/images/artists/sascha.webp",
       "photoAlt": "Sascha, Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Sascha, Tattoo-Künstler bei Medusa München",
+        "en": "Sascha, Tattoo Artist at Medusa München"
+      },
       "specialties": ["Custom Design", "Color Work", "Illustrative"],
+      "specialtiesLocalized": {
+        "de": ["Individuelle Designs", "Farb-Tattoos", "Illustrativ"],
+        "en": ["Custom Design", "Color Work", "Illustrative"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "[REPLACE WITH GERMAN BIO - 2-3 paragraphs]",
-        "en": "[REPLACE WITH ENGLISH BIO - 2-3 paragraphs]"
+        "de": "Sascha verbindet illustrative Elemente mit starker Farb- und Formensprache. In der Beratung legt er Wert auf eine klare Motividee, eine passende Farbpalette und eine saubere Umsetzung – damit Ihr Tattoo auch nach Jahren noch wirkt.\n\nOb individuelle Entwürfe oder die Weiterentwicklung Ihrer Referenzen: Sascha arbeitet detailorientiert und nimmt sich Zeit für Komposition, Lesbarkeit und harmonische Übergänge.",
+        "en": "Sascha combines illustrative elements with a confident use of colour and form. During consultation, he focuses on a clear concept, a considered palette, and crisp execution—so your tattoo continues to read beautifully over time.\n\nWhether it is a bespoke design or a refined take on your references, Sascha works with great attention to detail, taking time to balance composition, legibility, and smooth transitions."
       },
       "experience": "7+ Jahre",
       "instagram": "@sascha_medusa",
@@ -141,10 +225,22 @@
       "slug": "vivi",
       "name": "Vivi",
       "role": "Piercer & Stylist",
+      "roleLocalized": {
+        "de": "Piercerin & Stylistin",
+        "en": "Piercer & Stylist"
+      },
       "category": "tattoo",
       "photo": "/images/artists/vivi.webp",
       "photoAlt": "Vivi, Tattoo Artist at Medusa München",
+      "photoAltLocalized": {
+        "de": "Vivi, Piercerin & Stylistin bei Medusa München",
+        "en": "Vivi, Tattoo Artist at Medusa München"
+      },
       "specialties": ["Snake Eye Piercing", "Style Consultation", "Jewelry Assortment"],
+      "specialtiesLocalized": {
+        "de": ["Snake-Eye-Piercing", "Style-Beratung", "Schmuck-Sortiment"],
+        "en": ["Snake Eye Piercing", "Style Consultation", "Jewelry Assortment"]
+      },
       "bookable": true,
       "featured": false,
       "bio": {

@@ -43,6 +43,24 @@ export function GalleryPage() {
                 title={t('gallery.title')}
                 subtitle={t('gallery.subtitle')}
               />
+              <div className='mt-8 space-y-6 text-center'>
+                <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body leading-(--line-height-normal) max-w-3xl mx-auto'>
+                  {t('gallery.intro')}
+                </p>
+                <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body leading-(--line-height-normal) max-w-3xl mx-auto'>
+                  {t('gallery.styles')}
+                </p>
+                <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body leading-(--line-height-normal) max-w-3xl mx-auto'>
+                  {t('gallery.ctaText')}{' '}
+                  <a
+                    href='/artists'
+                    className='text-brand-accent hover:text-brand-accent-hover underline transition-colors duration-200 ease-out'
+                  >
+                    {t('gallery.ctaLink')}
+                  </a>
+                  .
+                </p>
+              </div>
             </Container>
           </Section>
 

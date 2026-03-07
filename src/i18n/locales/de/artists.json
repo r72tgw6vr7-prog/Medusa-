@@ -5,5 +5,14 @@
     "loading": "Künstler werden geladen...",
     "viewProfile": "Profil ansehen",
     "defaultDiscipline": "Tattoo Artist"
+  },
+  "teamGrid": {
+    "title": "Unsere Künstler",
+    "subtitle": "Lernen Sie unser erfahrenes Team aus Tattoo-Artists und Piercer:innen kennen.",
+    "loading": "Team wird geladen...",
+    "empty": "Keine Teammitglieder gefunden."
+  },
+  "profile": {
+    "backToAll": "Zurück zu allen Künstlern"
   }
 }

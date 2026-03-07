@@ -85,6 +85,8 @@
   --gap: var(--space-6);
   --item-width: 120px;
   --marquee-duration: 20s;
+  --unique-set-width: calc(var(--item-count) * var(--item-width) + (var(--item-count) - 1) * var(--gap));
+  width: min(100%, calc(var(--unique-set-width) - (2 * var(--gap))));
   height: 80px;
 }
 .social-carousel .partners-logo {

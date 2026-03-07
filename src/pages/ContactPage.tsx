@@ -81,7 +81,7 @@ export const ContactPage: React.FC = () => {
         reset();
       }, 3000);
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error('Form submission error:', error);
       }
       setSubmitError(t('contact.errors.submitFailed'));
@@ -215,7 +215,7 @@ export const ContactPage: React.FC = () => {
                       />
                       {errors.name && (
                         <p className='text-(length:--text-sm) text-red-400 mt-2'>
-                          Bitte geben Sie Ihren Namen ein
+                          {t('contact.errors.nameRequired')}
                         </p>
                       )}
                     </div>
@@ -241,7 +241,7 @@ export const ContactPage: React.FC = () => {
                       />
                       {errors.email && (
                         <p className='text-(length:--text-sm) text-red-400 mt-2'>
-                          Bitte geben Sie eine gültige E-Mail ein
+                          {t('contact.errors.emailInvalid')}
                         </p>
                       )}
                     </div>
@@ -264,7 +264,7 @@ export const ContactPage: React.FC = () => {
                       />
                       {errors.message && (
                         <p className='text-(length:--text-sm) text-red-400 mt-2'>
-                          Bitte geben Sie eine Nachricht ein (min. 10 Zeichen)
+                          {t('contact.errors.messageRequired')}
                         </p>
                       )}
                     </div>

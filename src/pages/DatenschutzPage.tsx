@@ -173,6 +173,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
         <main className='flex-1'>
           <Section variant='default' spacing='normal'>
             <Container size='default'>
+              <h1 className='sr-only'>{t.title}</h1>
               {/* Page Header - Standardized */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}

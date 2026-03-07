@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/Card';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 import '@/styles/testimonials.css';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export interface Testimonial {
   id: number;
@@ -117,8 +118,10 @@ export interface TestimonialsCarouselProps {
 export default function TestimonialsCarousel({
   className = '',
   testimonialsList = REVIEWS,
-  title = 'Was Kunden sagen',
+  title,
 }: TestimonialsCarouselProps) {
+  const { t } = useLanguage();
+  const resolvedTitle = title ?? t('common.testimonials.title');
   useEffect(() => {
     const existingSchemas = document.querySelectorAll(
       'script[data-review-schema="true"]',
@@ -160,11 +163,11 @@ export default function TestimonialsCarousel({
       variant='default'
       spacing='normal'
       className={className}
-      aria-label='Customer testimonials'
+      aria-label={t('common.testimonials.sectionAria')}
     >
       <Container size='default'>
         <h3 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--brand-accent) text-center mb-16'>
-          {title}
+          {resolvedTitle}
         </h3>
 
         <Swiper
@@ -195,7 +198,7 @@ export default function TestimonialsCarousel({
             },
           }}
           className='testimonials-swiper'
-          aria-label='Customer testimonials carousel'
+          aria-label={t('common.testimonials.carouselAria')}
         >
           {testimonialsList.map((testimonial) => (
             <SwiperSlide key={testimonial.id}>
@@ -205,7 +208,9 @@ export default function TestimonialsCarousel({
                     <span className='testimonial-name'>— {testimonial.author}</span>
                     <div
                       className='testimonial-stars'
-                      aria-label={`Rating: ${testimonial.rating} out of 5`}
+                      aria-label={t('common.testimonials.ratingAria', {
+                        rating: testimonial.rating,
+                      })}
                       role='img'
                     >
                       {renderStars(testimonial.rating)}

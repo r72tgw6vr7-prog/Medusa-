@@ -10,6 +10,7 @@ import { Footer } from '@/components/pages';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
@@ -18,24 +19,15 @@ import {
 const categories = [
   {
     id: 'tattoo',
-    title: 'Tattoo Artistry',
-    subtitle: 'Von Basic bis Exklusiv für jeden Geschmack',
     icon: Sparkles,
-    priceFrom: '80€',
   },
   {
     id: 'piercing',
-    title: 'Custom Design',
-    subtitle: 'Individuelle Entwürfe nach Ihren Wünschen',
     icon: Zap,
-    priceFrom: '20€',
   },
   {
     id: 'products',
-    title: 'Ink Solutions',
-    subtitle: 'Professionelle Lösungen für Ihre Tattoo-Projekte',
     icon: Shield,
-    priceFrom: 'TBD',
   },
 ] as const;
 
@@ -43,93 +35,40 @@ const serviceDetails = {
   tattoo: [
     {
       id: 'packet-s',
-      title: 'Packet S',
-      description:
-        'Small tattoos - symbols, letters, souvenirs. For customers with concrete ideas.',
       priceFrom: 80,
-      priceUnit: '€ - 150€',
-      duration: '30 minutes',
-      features: ['Persönliche Beratung', 'Kleine Motive', 'Schnelle Umsetzung'],
-      cta: 'Jetzt buchen',
     },
     {
       id: 'packet-m',
-      title: 'Packet M',
-      description: 'Personalized projects, unique designs. Includes aftercare guide & products.',
       priceFrom: 160,
-      priceUnit: '€ - 480€',
-      duration: '1-3 hours',
-      features: ['Einzigartiges Design', 'Aftercare Guide', 'Premium Produkte'],
-      cta: 'Jetzt buchen',
     },
     {
       id: 'packet-l',
-      title: 'Packet L',
-      description:
-        'Größere Projekte mit detaillierter Ausarbeitung. Includes aftercare guide & products.',
       priceFrom: 600,
-      priceUnit: '€+',
-      duration: '4-7 hours',
-      features: ['Detailarbeit', 'Aftercare Guide', 'Premium Produkte'],
-      cta: 'Jetzt buchen',
     },
     {
       id: 'day-session',
-      title: 'Complete Day Session',
-      description: 'Ganztägige Session für umfangreiche Projekte und Sleeves.',
       priceFrom: 0,
-      priceUnit: 'Auf Anfrage',
-      duration: 'Ganztägig',
-      features: ['Individuelle Planung', 'VIP Betreuung', 'Flexible Gestaltung'],
-      cta: "Let's Talk",
     },
   ],
   piercing: [
     {
       id: 'dynamic-pricing',
-      title: 'Dynamic Pricing',
-      description: '€20 for simple motifs, symbols, letters. Price increases based on complexity.',
       priceFrom: 20,
-      priceUnit: '€+',
-      duration: 'Up to 2 hours',
-      features: [
-        'Einfache Motive ab €20',
-        'Preis nach Komplexität',
-        'Kleine/reguläre Designs bis 2 Std.',
-      ],
-      cta: 'Beratung anfragen',
     },
     {
       id: 'free-design',
-      title: 'Design Service',
-      description: 'Get your tattoo at Medusa → Design is FREE. Individuelle Entwürfe inklusive.',
       priceFrom: 0,
-      priceUnit: 'GRATIS bei Tattoo',
-      duration: 'Nach Vereinbarung',
-      features: ['Design kostenlos bei Tattoo', 'Individuelle Entwürfe', 'Unbegrenzte Revisionen'],
-      cta: 'Jetzt anfragen',
     },
     {
       id: 'design-only',
-      title: 'Design Only',
-      description: 'Nur Design ohne Tattoo. Preise nach Komplexität und Größe.',
       priceFrom: 20,
-      priceUnit: '€+',
-      duration: 'Nach Aufwand',
-      features: ['Digitale Vorlage', 'Alle Stilrichtungen', 'Schnelle Lieferung'],
-      cta: 'Anfragen',
     },
   ],
   products: [
     {
       id: 'ink-solutions-info',
-      title: 'Ink Solutions',
-      description: 'Weitere Informationen folgen in Kürze.',
       priceFrom: 0,
-      priceUnit: 'TBD',
       duration: null,
-      features: ['Coming Soon', 'Weitere Details folgen', 'Kontaktieren Sie uns'],
-      cta: 'Anfragen',
     },
   ],
 } as const;
@@ -140,15 +79,9 @@ interface TattooServicesPageProps {
   className?: string;
 }
 
-const formatPrice = (priceFrom: number, priceUnit: string) => {
-  if (priceFrom <= 0) return priceUnit;
-  const unitWithoutEuro = priceUnit.replace(/€/g, '').trim();
-  const suffix = unitWithoutEuro.length > 0 ? ` ${unitWithoutEuro}` : '';
-  return `ab ${priceFrom} €${suffix}`;
-};
-
 export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ className = '' }) => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -197,6 +130,35 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
     [activeCategory],
   );
 
+  const categoryTitle = useCallback(
+    (categoryId: CategoryId) => t(`services.tattooServicesPage.categories.${categoryId}.title`),
+    [t],
+  );
+
+  const categorySubtitle = useCallback(
+    (categoryId: CategoryId) => t(`services.tattooServicesPage.categories.${categoryId}.subtitle`),
+    [t],
+  );
+
+  const categoryPriceFrom = useCallback(
+    (categoryId: CategoryId) => t(`services.tattooServicesPage.categories.${categoryId}.priceFrom`),
+    [t],
+  );
+
+  const serviceKey = useCallback(
+    (categoryId: CategoryId, serviceId: string) =>
+      `services.tattooServicesPage.services.${categoryId}.${serviceId}`,
+    [],
+  );
+
+  const formatPriceI18n = useCallback(
+    (priceFrom: number, priceUnit: string) => {
+      if (priceFrom <= 0) return priceUnit;
+      return `${t('services.pricing.fromShort')} ${priceFrom} €${priceUnit}`;
+    },
+    [t],
+  );
+
   const handleCategoryChange = useCallback(
     (categoryId: CategoryId) => {
       if (categoryId === activeCategory || isAnimating) return;
@@ -222,6 +184,13 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
   const renderServiceCard = (service: (typeof currentServices)[number], index: number) => {
     const isSelected = selectedPacket === service.id;
     const isRevealed = revealedIndices.has(index);
+    const baseKey = serviceKey(activeCategory, service.id);
+    const title = t(`${baseKey}.title`);
+    const description = t(`${baseKey}.description`);
+    const priceUnit = t(`${baseKey}.priceUnit`);
+    const features = t(`${baseKey}.features`).split('\n');
+    const cta = t(`${baseKey}.cta`);
+
     return (
       <Card
         key={service.id}
@@ -264,24 +233,22 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
           <div className='pricing-card-curtain' aria-hidden='true' />
           <div className='pricing-card-content'>
             {/* Title */}
-            <h3 className='font-semibold text-3xl leading-10 text-white mb-4'>{service.title}</h3>
+            <h3 className='font-semibold text-3xl leading-10 text-white mb-4'>{title}</h3>
 
             {/* Description */}
-            <p className='font-normal text-sm leading-7 text-white/70 mb-8 flex-1'>
-              {service.description}
-            </p>
+            <p className='font-normal text-sm leading-7 text-white/70 mb-8 flex-1'>{description}</p>
 
             {/* Price */}
             <div className='flex items-center gap-2 mb-8'>
               <Euro size={18} className='text-[color:var(--text-secondary)]' />
               <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
-                {formatPrice(service.priceFrom, service.priceUnit)}
+                {formatPriceI18n(service.priceFrom, priceUnit)}
               </span>
             </div>
 
             {/* List */}
             <ul className='space-y-4 mb-8'>
-              {service.features.map((feature, featureIndex) => (
+              {features.map((feature, featureIndex) => (
                 <li key={featureIndex} className='flex items-start gap-4'>
                   <ChevronRight
                     size={16}
@@ -303,9 +270,9 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
                 hover:bg-[color:var(--text-secondary)] hover:text-black
                 transition-all duration-200
               '
-              aria-label={`${service.cta} für ${service.title}`}
+              aria-label={t('services.tattooServicesPage.labels.bookServiceAria', { cta, title })}
             >
-              {service.cta}
+              {cta}
             </button>
           </div>
         </motion.div>
@@ -321,19 +288,23 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
       <Section variant='default' spacing='normal' bg='dark'>
         <Container size='default'>
           <div className='flex flex-col gap-16'>
+            <h1 className='sr-only'>{t('services.tattooServicesPage.heading.title')}</h1>
             <SectionHeading
-              eyebrow='Medusa München'
-              title='Tattoo'
-              subtitle='Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen.'
+              eyebrow={t('services.tattooServicesPage.heading.eyebrow')}
+              title={t('services.tattooServicesPage.heading.title')}
+              subtitle={t('services.tattooServicesPage.heading.subtitle')}
             />
 
             <div
               className='premium-pricing-category-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-center justify-items-stretch max-w-5xl mx-auto'
-              aria-label='Service-Kategorien'
+              aria-label={t('services.tattooServicesPage.labels.serviceCategoriesAria')}
             >
               {categories.map((category) => {
                 const IconComponent = category.icon;
                 const isActive = activeCategory === category.id;
+                const title = categoryTitle(category.id);
+                const subtitle = categorySubtitle(category.id);
+                const priceFrom = categoryPriceFrom(category.id);
 
                 const buttonContent = (
                   <>
@@ -342,10 +313,12 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
                     </div>
                     <div className='premium-pricing-card__body'>
                       <div className='premium-pricing-card__header'>
-                        <h3 className='premium-pricing-card__title'>{category.title}</h3>
-                        <span className='premium-pricing-card__price'>ab {category.priceFrom}</span>
+                        <h3 className='premium-pricing-card__title'>{title}</h3>
+                        <span className='premium-pricing-card__price'>
+                          {t('services.pricing.fromShort')} {priceFrom}
+                        </span>
                       </div>
-                      <p className='premium-pricing-card__subtitle'>{category.subtitle}</p>
+                      <p className='premium-pricing-card__subtitle'>{subtitle}</p>
                     </div>
                   </>
                 );
@@ -363,7 +336,9 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
                       aria-pressed={isActive ? 'true' : 'false'}
                       className='premium-pricing-card__button flex flex-col h-full'
                       onClick={() => handleCategoryChange(category.id as CategoryId)}
-                      aria-label={`Select ${category.title} category`}
+                      aria-label={t('services.tattooServicesPage.labels.selectCategoryAria', {
+                        category: title,
+                      })}
                     >
                       {buttonContent}
                     </button>
@@ -384,7 +359,9 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
               ref={containerRef}
               className='space-y-12'
               aria-live='polite'
-              aria-label={`Showing ${activeCategoryMeta?.title} services`}
+              aria-label={t('services.tattooServicesPage.labels.showingServicesAria', {
+                category: activeCategoryMeta ? categoryTitle(activeCategoryMeta.id) : '',
+              })}
               variants={containerVariants}
               initial='initial'
               animate={inView ? 'animate' : 'initial'}
@@ -392,9 +369,11 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
             >
               <div className='hidden md:block'>
                 <SectionHeading
-                  eyebrow={activeCategoryMeta?.title}
-                  title='Wählen Sie das passende Paket'
-                  subtitle={activeCategoryMeta?.subtitle}
+                  eyebrow={activeCategoryMeta ? categoryTitle(activeCategoryMeta.id) : undefined}
+                  title={t('services.tattooServicesPage.labels.choosePackage')}
+                  subtitle={
+                    activeCategoryMeta ? categorySubtitle(activeCategoryMeta.id) : undefined
+                  }
                 />
               </div>
 

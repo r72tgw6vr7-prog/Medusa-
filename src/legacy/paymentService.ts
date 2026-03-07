@@ -135,7 +135,7 @@ export const processPayment = async (request: PaymentRequest): Promise<PaymentRe
  * Stripe Payment Processing (Cards, SEPA)
  */
 async function processStripePayment(request: PaymentRequest): Promise<PaymentResponse> {
-  const stripeKey = process.env.VITE_STRIPE_PUBLISHABLE_KEY;
+  const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
   if (!stripeKey) {
     throw new Error('Stripe configuration missing');

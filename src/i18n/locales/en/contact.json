@@ -44,7 +44,10 @@
     "send": "→ Send"
   },
   "errors": {
-    "submitFailed": "An error occurred. Please try again."
+    "submitFailed": "An error occurred. Please try again.",
+    "nameRequired": "Please enter your name",
+    "emailInvalid": "Please enter a valid email address",
+    "messageRequired": "Please enter a message (min. 10 characters)"
   },
   "trustBadges": {
     "euCertified": {

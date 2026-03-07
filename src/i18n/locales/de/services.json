@@ -1,1 +1,260 @@
-{}
+{
+  "pricing": {
+    "fromShort": "ab",
+    "fromPriceRange": "ab {{price}} €{{unit}}"
+  },
+  "tattooServicesPage": {
+    "heading": {
+      "eyebrow": "Medusa München",
+      "title": "Tattoo",
+      "subtitle": "Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen."
+    },
+    "categories": {
+      "tattoo": {
+        "title": "Tattoo-Kunst",
+        "subtitle": "Von Basic bis Exklusiv für jeden Geschmack",
+        "priceFrom": "80€"
+      },
+      "piercing": {
+        "title": "Individuelles Design",
+        "subtitle": "Individuelle Entwürfe nach Ihren Wünschen",
+        "priceFrom": "20€"
+      },
+      "products": {
+        "title": "Ink Solutions",
+        "subtitle": "Professionelle Lösungen für Ihre Tattoo-Projekte",
+        "priceFrom": "TBD"
+      }
+    },
+    "labels": {
+      "serviceCategoriesAria": "Service-Kategorien",
+      "choosePackage": "Wählen Sie das passende Paket",
+      "selectCategoryAria": "Kategorie {{category}} auswählen",
+      "showingServicesAria": "Services der Kategorie {{category}}",
+      "bookServiceAria": "{{cta}} für {{title}}"
+    },
+    "services": {
+      "tattoo": {
+        "packet-s": {
+          "title": "Paket S",
+          "description": "Kleine Tattoos – Symbole, Buchstaben, Erinnerungsstücke. Für Kund:innen mit einer konkreten Idee.",
+          "duration": "30 Minuten",
+          "priceUnit": "–€150",
+          "features": "Persönliche Beratung\nKleine Motive\nSchnelle Umsetzung",
+          "cta": "Jetzt buchen"
+        },
+        "packet-m": {
+          "title": "Paket M",
+          "description": "Individuelle Projekte und einzigartige Designs. Inklusive Aftercare-Guide & Pflegeprodukte.",
+          "duration": "1-3 Stunden",
+          "priceUnit": "–€480",
+          "features": "Einzigartiges Design\nAftercare-Guide\nPremium Produkte",
+          "cta": "Jetzt buchen"
+        },
+        "packet-l": {
+          "title": "Paket L",
+          "description": "Größere Projekte mit detaillierter Ausarbeitung. Inklusive Aftercare-Guide & Pflegeprodukte.",
+          "duration": "4-7 Stunden",
+          "priceUnit": "+",
+          "features": "Detailarbeit\nAftercare-Guide\nPremium Produkte",
+          "cta": "Jetzt buchen"
+        },
+        "day-session": {
+          "title": "Komplette Day Session",
+          "description": "Ganztägige Session für umfangreiche Projekte und Sleeves.",
+          "duration": "Ganztägig",
+          "priceUnit": "Auf Anfrage",
+          "features": "Individuelle Planung\nVIP Betreuung\nFlexible Gestaltung",
+          "cta": "Lassen Sie uns sprechen"
+        }
+      },
+      "piercing": {
+        "dynamic-pricing": {
+          "title": "Dynamische Preise",
+          "description": "Ab 20 € für einfache Motive, Symbole oder Schriftzüge. Der Preis steigt mit Komplexität und Größe.",
+          "duration": "Bis zu 2 Stunden",
+          "priceUnit": "+",
+          "features": "Einfache Motive ab 20 €\nPreis nach Komplexität\nKleine/reguläre Designs bis 2 Std.",
+          "cta": "Beratung anfragen"
+        },
+        "free-design": {
+          "title": "Design Service",
+          "description": "Tattoo bei Medusa → das Design ist kostenlos. Individuelle Entwürfe inklusive.",
+          "duration": "Nach Vereinbarung",
+          "priceUnit": "GRATIS bei Tattoo",
+          "features": "Design kostenlos bei Tattoo\nIndividuelle Entwürfe\nUnbegrenzte Revisionen",
+          "cta": "Jetzt anfragen"
+        },
+        "design-only": {
+          "title": "Nur Design",
+          "description": "Design ohne Tattoo. Preise nach Komplexität und Größe.",
+          "duration": "Nach Aufwand",
+          "priceUnit": "+",
+          "features": "Digitale Vorlage\nAlle Stilrichtungen\nSchnelle Lieferung",
+          "cta": "Anfragen"
+        }
+      },
+      "products": {
+        "ink-solutions-info": {
+          "title": "Ink Solutions",
+          "description": "Weitere Informationen folgen in Kürze.",
+          "duration": "",
+          "priceUnit": "TBD",
+          "features": "Coming Soon\nWeitere Details folgen\nKontaktieren Sie uns",
+          "cta": "Anfragen"
+        }
+      }
+    }
+  }
+  ,
+  "piercingServicesPage": {
+    "heading": {
+      "eyebrow": "Medusa München",
+      "title": "Piercing",
+      "subtitle": "Professionelles Piercing mit über 5 Jahren Erfahrung und höchsten Hygienestandards."
+    },
+    "consultation": {
+      "title": "Kostenlose Beratung",
+      "subtitle": "Wir helfen Ihnen, das passende Piercing und die richtige Platzierung zu finden.",
+      "whatsAppAria": "WhatsApp Beratung starten"
+    },
+    "categories": {
+      "stechen": {
+        "title": "Stechen",
+        "subtitle": "Professionelles Piercing mit Titan-Schmuck",
+        "priceFrom": "35€"
+      },
+      "jewelry": {
+        "title": "Schmuck",
+        "subtitle": "Titan-Schmuck in Silber, Gold & Rosé",
+        "priceFrom": "Inklusive"
+      },
+      "extras": {
+        "title": "Extra Services",
+        "subtitle": "Wechseln, Entfernen & Pflege",
+        "priceFrom": "5€"
+      }
+    },
+    "labels": {
+      "serviceCategoriesAria": "Service-Kategorien",
+      "selectCategoryAria": "Kategorie {{category}} auswählen",
+      "showingServicesAria": "Services der Kategorie {{category}}",
+      "chooseOption": "Wählen Sie Ihre Option",
+      "area": "Bereich",
+      "option": "Option",
+      "flexible": "Flexibel",
+      "hidePriceList": "Preisliste ausblenden",
+      "showAllPrices": "Alle Preise anzeigen",
+      "priceGridName": "Piercing",
+      "priceGridFirst": "1",
+      "priceGridSecond": "2",
+      "examplePhotosAria": "{{name}} Beispielfotos anzeigen",
+      "photoAlt": "Beispielfoto {{category}} {{index}}",
+      "bookServiceAria": "{{cta}} für {{title}}"
+    },
+    "services": {
+      "stechen": {
+        "ohr": {
+          "title": "Ohr",
+          "description": "Lobe, Helix, Tragus, Conch, Rook, Daith, Industrial und mehr.",
+          "duration": "15-30 Min",
+          "priceUnit": "–110€",
+          "features": "Titan-Schmuck inklusive\nSterile Einwegmaterialien\nNachsorgeberatung",
+          "cta": "Jetzt buchen"
+        },
+        "mund": {
+          "title": "Mund",
+          "description": "Lippe, Grübchen, Dahlia, Lippenband, Zunge, Snake Eye.",
+          "duration": "15-30 Min",
+          "priceUnit": "–150€",
+          "features": "Titan-Schmuck inklusive\nMundspülung inklusive\nPflegehinweise",
+          "cta": "Jetzt buchen"
+        },
+        "gesicht": {
+          "title": "Gesicht",
+          "description": "Augenbraue, Bridge, Nase, Septum, Anti Eyebrow, Dermal Anchor.",
+          "duration": "15-30 Min",
+          "priceUnit": "–150€",
+          "features": "Titan-Schmuck inklusive\nSterile Umgebung\nFollow-up möglich",
+          "cta": "Jetzt buchen"
+        },
+        "koerper": {
+          "title": "Körper",
+          "description": "Brustwarze, Bauchnabel, Surface, Dermal Anchor, Skindiver.",
+          "duration": "20-45 Min",
+          "priceUnit": "–160€",
+          "features": "Titan-Schmuck inklusive\nAnatomie-Check\nPremium Nachsorge",
+          "cta": "Jetzt buchen"
+        },
+        "intim": {
+          "title": "Intim",
+          "description": "Professionelle Intim-Piercings. Mindestalter 18 Jahre.",
+          "duration": "30-45 Min",
+          "priceUnit": "–170€",
+          "features": "Titan-Schmuck inklusive\nPrivate Atmosphäre\nMindestalter 18 Jahre",
+          "cta": "Beratung anfragen"
+        },
+        "ohrlochzauberer": {
+          "title": "Ohrlochzauberer",
+          "description": "Kinderfreundliches Ohrlochstechen mit Aaron als Ohrlochzauberer.",
+          "duration": "20-30 Min",
+          "priceUnit": "–80€",
+          "features": "Speziell für Kinder\nMagisches Erlebnis\nTitan-Schmuck inklusive",
+          "cta": "Aaron anfragen"
+        }
+      },
+      "jewelry": {
+        "titanium": {
+          "title": "Titan Schmuck",
+          "description": "Hochwertiger Titan-Schmuck in Silber – bei jedem Piercing inklusive.",
+          "duration": "",
+          "priceUnit": "Inklusive",
+          "features": "Hypoallergen\nImplant-Grade Titan\nSilber-Finish",
+          "cta": "Mehr erfahren"
+        },
+        "upgrades": {
+          "title": "Upgrades",
+          "description": "Veredeln Sie Ihren Schmuck mit Gold, Rosé oder Glitzer.",
+          "duration": "",
+          "priceUnit": "€+",
+          "features": "Titan Gold: +€5\nTitan Rosé: +€5\nGlitzer: +€5",
+          "cta": "Upgrade wählen"
+        }
+      },
+      "extras": {
+        "entfernen": {
+          "title": "Entfernen",
+          "description": "Professionelles Entfernen von Piercings und Implantaten.",
+          "duration": "5-15 Min",
+          "priceUnit": "–25€",
+          "features": "Standard: €5\nDermal/Skindiver: €10\nImplantat: €25",
+          "cta": "Termin buchen"
+        },
+        "service": {
+          "title": "Service",
+          "description": "Einsetzen, Wechseln, Kürzen und Pflege bei Problemen.",
+          "duration": "5-20 Min",
+          "priceUnit": "–15€",
+          "features": "Einsetzen: €5-10\nWechseln: €5-10\nKürzen: €5-10",
+          "cta": "Termin buchen"
+        },
+        "probleme": {
+          "title": "Probleme & Pflege",
+          "description": "Hilfe bei eingewachsenen Piercings und Wildfleisch.",
+          "duration": "10-20 Min",
+          "priceUnit": "–15€",
+          "features": "Eingewachsen: €5-15\nWildfleisch: €5-15\nBeratung inklusive",
+          "cta": "Hilfe anfragen"
+        },
+        "implantat": {
+          "title": "Implantat",
+          "description": "Professionelles Einsetzen und Entfernen von Implantaten.",
+          "duration": "20-45 Min",
+          "priceUnit": "–50€",
+          "features": "Einsetzen: €50\nEntfernen: €25\nBeratung vorab",
+          "cta": "Beratung anfragen"
+        }
+      }
+    }
+  }
+}

@@ -24,6 +24,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [spotlightSize, setSpotlightSize] = useState('280px');
 
   // Detect reduced motion preference and touch device
   useEffect(() => {
@@ -36,6 +37,16 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
     setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
     return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  useEffect(() => {
+    const updateSpotlightSize = () => {
+      setSpotlightSize(window.matchMedia('(min-width: 1024px)').matches ? '440px' : '280px');
+    };
+
+    updateSpotlightSize();
+    window.addEventListener('resize', updateSpotlightSize);
+    return () => window.removeEventListener('resize', updateSpotlightSize);
   }, []);
 
   // Track mouse position for spotlight effect
@@ -95,7 +106,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
           gap: 'var(--space-2)',
           '--spotlight-x': `${mousePos.x}px`,
           '--spotlight-y': `${mousePos.y}px`,
-          '--spotlight-size': '280px',
+          '--spotlight-size': spotlightSize,
         } as React.CSSProperties
       }
     >
@@ -150,7 +161,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
         {selected && (
           <motion.div
             onClick={handleOutsideClick}
-            className='fixed inset-0 z-modal flex items-center justify-center bg-black/80 p-4'
+            className='fixed inset-0 z-modal flex flex-col h-full items-center justify-center bg-black/80 p-4'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -160,13 +171,13 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
           >
             <motion.div
               layoutId={`card-${selected.id}`}
-              className='relative w-full max-w-5xl overflow-hidden rounded-2xl border border-(--card-border) bg-luxury-bg-dark shadow-(--shadow-xl)'
+              className='relative w-full max-w-5xl overflow-hidden rounded-2xl border border-(--card-border) bg-luxury-bg-dark shadow-(--shadow-xl) flex flex-col h-full'
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 type='button'
                 onClick={handleOutsideClick}
-                className='absolute right-4 top-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition-colors duration-200 hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-chrome)'
+                className='absolute right-4 top-4 flex flex-col h-full items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition-colors duration-200 hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent-chrome)'
                 style={{ width: '44px', height: '44px' }}
                 aria-label='Close'
               >

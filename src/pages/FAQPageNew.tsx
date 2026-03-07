@@ -109,6 +109,7 @@ export function FAQPageNew() {
         <Section variant='default' spacing='normal'>
           <Container size='default'>
             <div className='space-y-16'>
+              <h1 className='sr-only'>{t('common.faqPage.title')}</h1>
               {/* Page Header - Matches Services page exactly */}
               <SectionHeading
                 eyebrow={t('faqPage.eyebrow')}

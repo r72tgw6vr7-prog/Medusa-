@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../components/ui/Container';
 import InfiniteLogoCarousel from '@/components/organisms/InfiniteLogoCarousel';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // PARTNER LOGOS - Updated list with latest partners
 const partnerLogos = [
@@ -56,29 +57,34 @@ export interface PartnersAndTestimonialsSectionProps {
 }
 
 export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSectionProps> = ({
-  titlePartners = 'Unsere Partner & Presse',
-  subtitlePartners = 'Vertrauensvolle Partnerschaften mit führenden Marken der Branche',
-  titleTestimonials = 'Was Kunden sagen',
+  titlePartners,
+  subtitlePartners,
+  titleTestimonials,
 }) => {
+  const { t } = useLanguage();
+  const resolvedTitlePartners = titlePartners ?? t('common.partners.title');
+  const resolvedSubtitlePartners = subtitlePartners ?? t('common.partners.subtitle');
+  const resolvedTitleTestimonials = titleTestimonials ?? t('common.testimonials.title');
+
   return (
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
       <Container className='py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
         <div className='text-center mb-4'>
           <h3 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-brand-accent'>
-            {titlePartners}
+            {resolvedTitlePartners}
           </h3>
         </div>
         <p className='text-center text-white/70 text-(length:--text-sm) mb-16 font-body'>
-          {subtitlePartners}
+          {resolvedSubtitlePartners}
         </p>
 
         {/* Partner Logos Carousel - Restored with gold styling */}
-        <InfiniteLogoCarousel items={partnerLogos} ariaLabel='Partners and Press carousel' />
+        <InfiniteLogoCarousel items={partnerLogos} ariaLabel={t('common.partners.carouselAria')} />
       </Container>
 
       {/* TESTIMONIALS */}
-      <TestimonialsCarousel title={titleTestimonials} />
+      <TestimonialsCarousel title={resolvedTitleTestimonials} />
     </section>
   );
 };

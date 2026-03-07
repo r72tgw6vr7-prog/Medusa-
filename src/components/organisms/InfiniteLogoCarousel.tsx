@@ -26,7 +26,14 @@ export const InfiniteLogoCarousel: React.FC<InfiniteLogoCarouselProps> = ({
 
   return (
     <div className={`partners-carousel-wrapper ${className}`.trim()}>
-      <div className='partners-carousel-container' role='region' aria-label={ariaLabel}>
+      <div
+        className='partners-carousel-container'
+        role='region'
+        aria-label={ariaLabel}
+        style={
+          { '--item-count': items.length } as React.CSSProperties & Record<'--item-count', number>
+        }
+      >
         <div className='partners-carousel-track' aria-hidden='true'>
           {scrollItems.map((item, idx) => {
             const content = item.src ? (

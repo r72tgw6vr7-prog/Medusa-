@@ -3,6 +3,226 @@
   "actions": {
     "viewPortfolio": "View portfolio"
   },
+  "cookies": {
+    "title": "Cookie preferences",
+    "body": "We use cookies to provide you with the best possible experience on our website. Essential cookies are required for core functionality. Optionally, you may allow analytics and marketing cookies.",
+    "learnMore": "Learn more",
+    "customize": "Customise",
+    "rejectAll": "Reject",
+    "acceptAll": "Accept all",
+    "dialogTitle": "Cookie preferences",
+    "closeAria": "Close",
+    "cancel": "Cancel",
+    "save": "Save preferences",
+    "essential": {
+      "title": "Essential cookies",
+      "aria": "Essential cookies (required)",
+      "description": "These cookies are required for core site functionality and cannot be disabled."
+    },
+    "analytics": {
+      "title": "Analytics cookies",
+      "aria": "Enable analytics cookies",
+      "description": "These cookies help us understand how visitors use our website."
+    },
+    "marketing": {
+      "title": "Marketing cookies",
+      "aria": "Enable marketing cookies",
+      "description": "These cookies are used to make advertising more relevant."
+    }
+  },
+  "newsletterForm": {
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Your email address",
+    "errorRequired": "Please enter your email address",
+    "errorInvalid": "Please enter a valid email address",
+    "errorGeneric": "Something went wrong. Please try again later.",
+    "success": "Thank you for subscribing!",
+    "submitting": "Subscribing...",
+    "subscribed": "Successfully subscribed",
+    "subscribe": "Subscribe to newsletter"
+  },
+  "partners": {
+    "title": "Our partners & press",
+    "subtitle": "Trusted partnerships with leading brands in the industry",
+    "carouselAria": "Partners and press carousel"
+  },
+  "testimonials": {
+    "title": "What clients say",
+    "sectionAria": "Customer testimonials",
+    "carouselAria": "Customer testimonials carousel",
+    "ratingAria": "Rating: {{rating}} out of 5"
+  },
+  "agbPage": {
+    "subtitle": "Terms and conditions for studio services",
+    "intro": "These terms govern appointments, services, payment, and aftercare at Medusa Tattoo & Piercing Studio. By booking, you confirm that you have read the guidance on health, care, and age verification. If you have questions, we will clarify the details before your appointment.",
+    "status": "Last updated: February 2026",
+    "sections": {
+      "payment": {
+        "title": "§ 4 Pricing, deposits & payment",
+        "body": "Prices depend on size, style, placement, and effort. For larger projects we may require a deposit, which will be credited toward the final price. Payments can be made in cash, by card, or by bank transfer upon agreement."
+      },
+      "cancellation": {
+        "title": "§ 5 Rescheduling & no-shows",
+        "body": "Appointments are binding. Please notify us early if you need to reschedule so we can release the slot. For late cancellations or no-shows, we reserve the right to charge a cancellation fee."
+      },
+      "design": {
+        "title": "§ 6 Design approval & changes",
+        "body": "Designs are created individually and reviewed before your appointment. Minor adjustments are part of the consultation; extensive changes may require additional time or costs. Design rights remain with the studio until full payment is completed."
+      },
+      "health": {
+        "title": "§ 7 Health, disclosure & age verification",
+        "body": "Clients confirm that no medical reasons prevent the treatment and that relevant conditions or allergies have been disclosed in advance. We do not treat minors; a valid photo ID must be shown upon request."
+      },
+      "dispute": {
+        "title": "§ 8 Dispute resolution & jurisdiction",
+        "body": "German law applies. The place of jurisdiction is Munich where legally permissible. We are not obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+      }
+    }
+  },
+  "legalPage": {
+    "eyebrow": "Medusa Munich",
+    "title": "Terms & Conditions",
+    "subtitle": "MEDUSA TATTOO MUNICH",
+    "tocTitle": "Table of Contents",
+    "backToTop": "Back to top",
+    "sections": {
+      "scope": { "title": "§ 1 Scope of Application", "id": "section-1" },
+      "services": { "title": "§ 2 Services", "id": "section-2" },
+      "appointments": { "title": "§ 3 Appointments & Cancellation", "id": "section-3" },
+      "pricing": { "title": "§ 4 Prices & Payment", "id": "section-4" },
+      "health": { "title": "§ 5 Health & Eligibility", "id": "section-5" },
+      "aftercare": { "title": "§ 6 Aftercare & Liability", "id": "section-6" },
+      "copyright": { "title": "§ 7 Copyright", "id": "section-7" },
+      "privacy": { "title": "§ 8 Data Protection", "id": "section-8" },
+      "final": { "title": "§ 9 Final Provisions", "id": "section-9" }
+    },
+    "content": {
+      "scope": [
+        "(1) These General Terms and Conditions (GTC) apply to all services offered by MEDUSA TATTOO MUNICH, Altheimer Eck 11, 80331 Munich, hereinafter referred to as the \"Provider\".",
+        "(2) The GTC apply to contracts for tattoo and piercing services between the Provider and the customer (consumer or business).",
+        "(3) Deviating conditions of the customer are not recognised unless the Provider expressly agrees to their validity in writing."
+      ],
+      "services": [
+        "(1) The Provider offers tattoo and piercing services.",
+        "(2) The services include consultation, tattooing and piercing, as well as aftercare advice.",
+        "(3) All services are carried out in accordance with current hygienic standards and legal regulations."
+      ],
+      "appointments": [
+        "(1) Appointments can be made online via the website or by telephone.",
+        "(2) No costs are incurred if cancelled up to 24 hours before the appointment.",
+        "(3) In the event of short-term cancellation (less than 24 hours) or no-show, a cancellation fee of 50% of the agreed price will be charged."
+      ],
+      "pricing": [
+        "(1) Prices are based on effort, size and complexity of the service.",
+        "(2) Payments can be made in cash, by debit card or credit card.",
+        "(3) A deposit may be required for larger projects."
+      ],
+      "health": [
+        "(1) The customer warrants that they are medically fit for the service.",
+        "(2) If there are doubts about suitability, the Provider may refuse the service.",
+        "(3) The customer is obliged to disclose any pre-existing conditions and medications."
+      ],
+      "aftercare": [
+        "(1) The Provider provides aftercare instructions.",
+        "(2) The Provider assumes no liability for consequences of improper aftercare.",
+        "(3) Liability is limited to intent and gross negligence."
+      ],
+      "copyright": [
+        "(1) Designs by the Provider are protected by copyright.",
+        "(2) Commercial use of tattoo designs requires written consent.",
+        "(3) Customer designs remain the property of the customer."
+      ],
+      "privacy": [
+        "(1) The processing of personal data is carried out in accordance with GDPR.",
+        "(2) Details can be found in the separate privacy policy.",
+        "(3) The customer has the right to information, rectification and erasure of their data."
+      ],
+      "final": [
+        "(1) German law applies.",
+        "(2) The place of jurisdiction is Munich.",
+        "(3) Amendments and supplements to these GTC require written form. This also applies to the amendment of this written form clause.",
+        "(4) Oral ancillary agreements do not exist."
+      ]
+    }
+  },
+  "impressumPage": {
+    "eyebrow": "Medusa Munich",
+    "title": "Legal Notice",
+    "subtitle": "Medusa Tattoo & Piercing Studio - Legal Information",
+    "draftWarning": "⚠️ DRAFT - Placeholders must be replaced",
+    "sections": {
+      "tmg": {
+        "title": "Information according to § 5 TMG",
+        "company": "Stargate GmbH",
+        "tradeName": "Trading name: Medusa Tattoo & Piercing Studio",
+        "studioAddressLabel": "Studio address:",
+        "studioAddress": "Altheimer Eck 11, 80331 Munich",
+        "registeredOfficeLabel": "Registered office:",
+        "registeredAddress": "Proviantstraße 5a, 85049 Ingolstadt"
+      },
+      "contact": {
+        "title": "Contact",
+        "phoneMunichLabel": "Phone Munich:",
+        "phoneMunich": "+49 89 910994",
+        "phoneIngolstadtLabel": "Phone Ingolstadt:",
+        "phoneIngolstadt": "+49 841 910994",
+        "emailLabel": "Email:",
+        "email": "info@medusa-tattoo.de",
+        "websiteLabel": "Website:",
+        "website": "www.muenchen-tattoo-studio.de",
+        "contactPersonLabel": "Contact person:",
+        "contactPerson": "Oliver Loichinger"
+      },
+      "registration": {
+        "title": "Commercial Register and VAT ID",
+        "regNumberLabel": "Commercial register number:",
+        "regNumber": "12052245",
+        "vatLabel": "VAT identification number:",
+        "vatNumber": "DE 206 350 700",
+        "responsibleLabel": "Responsible person:",
+        "responsible": "Oliver Loichinger",
+        "court": "Local court Ingolstadt"
+      },
+      "contentResponsibility": {
+        "title": "Responsible for content according to § 55 para. 2 RStV",
+        "person": "Oliver Loichinger",
+        "company": "Stargate GmbH",
+        "address": "Altheimer Eck 11, 80331 Munich"
+      },
+      "copyright": {
+        "title": "Copyright",
+        "text": "© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. All rights reserved."
+      },
+      "professionalInsurance": {
+        "title": "Professional Liability Insurance",
+        "insurerLabel": "Insurer:",
+        "insurerPlaceholder": "Available on request",
+        "coverageAreaLabel": "Coverage area:",
+        "coverageArea": "Germany/EU",
+        "coverageAmountLabel": "Coverage amount:",
+        "coverageAmountPlaceholder": "Available on request"
+      },
+      "disputeResolution": {
+        "title": "Dispute Resolution",
+        "intro": "The European Commission provides a platform for online dispute resolution (ODR):",
+        "link": "https://ec.europa.eu/consumers/odr",
+        "notice": "We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+      },
+      "contentLiability": {
+        "title": "Liability for Content",
+        "text": "As a service provider, we are responsible for our own content on these pages in accordance with § 7 para. 1 TMG under general law. According to §§ 8 to 10 TMG, however, we are not obliged as a service provider to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity."
+      },
+      "linkLiability": {
+        "title": "Liability for Links",
+        "text": "Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the contents of the linked pages."
+      },
+      "copyrightNotice": {
+        "title": "Copyright",
+        "paragraph1": "All images, texts and graphic designs used on this website are protected by copyright. Reproduction, editing, distribution and any kind of use outside the limits of copyright law require the written consent of the respective author or creator.",
+        "paragraph2": "Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice."
+      }
+    }
+  },
   "nav": {
     "home": "Home",
     "services": "Services",

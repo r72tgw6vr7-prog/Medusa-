@@ -5,6 +5,7 @@ import { Artist } from '@/data/artists';
 import { PageHeading } from '@/components/PageHeading';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ArtistHeroProps {
   artist: Artist;
@@ -12,7 +13,10 @@ interface ArtistHeroProps {
 
 export function ArtistHero({ artist }: ArtistHeroProps) {
   const location = useLocation();
+  const { language } = useLanguage();
   const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
+  const roleLabel =
+    (language === 'en' ? artist.roleLocalized?.en : artist.roleLocalized?.de) ?? artist.role;
 
   const backgroundImage = artist.coverImage || artist.profileImage;
 
@@ -38,7 +42,7 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
             <div className='max-w-4xl mx-auto text-center'>
               <div className='inline-flex items-center gap-4 px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.65)] backdrop-blur-xl border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-full mb-12'>
                 <span className='text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome'>
-                  {artist.role}
+                  {roleLabel}
                 </span>
               </div>
 

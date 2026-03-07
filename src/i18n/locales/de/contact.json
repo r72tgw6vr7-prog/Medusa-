@@ -44,7 +44,10 @@
     "send": "→ Senden"
   },
   "errors": {
-    "submitFailed": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    "submitFailed": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "nameRequired": "Bitte geben Sie Ihren Namen ein",
+    "emailInvalid": "Bitte geben Sie eine gültige E-Mail ein",
+    "messageRequired": "Bitte geben Sie eine Nachricht ein (min. 10 Zeichen)"
   },
   "trustBadges": {
     "euCertified": {
