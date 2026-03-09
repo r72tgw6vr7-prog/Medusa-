@@ -113,7 +113,7 @@ export function LocationSection() {
                   Tattoo Altheimer Eck
                 </span>
                 <span className='bg-luxury-text-inverse/5 text-(--brand-accent) px-0 py-0 rounded-full border border-luxury-text-inverse/10'>
-                  English Speaking Tattoo Munich
+                  Englischsprachiges Tattoo-Studio München
                 </span>
               </div>
             </div>

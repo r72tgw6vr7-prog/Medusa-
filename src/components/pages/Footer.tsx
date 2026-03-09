@@ -5,9 +5,10 @@
 
 import React, { useState } from 'react';
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook, MessageSquare } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Container from '@/components/ui/Container';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 // Data structures
 const studioInfo = {
@@ -47,9 +48,7 @@ const socialLinks = {
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [agreeMarketing, setAgreeMarketing] = useState(false);
-  const location = useLocation();
-  const { t } = useLanguage();
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
+  const { language, t } = useLanguage();
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,9 +74,8 @@ const Footer: React.FC = () => {
           {/* Brand + Contact */}
           <div className='lg:col-span-1 max-md:col-span-2 text-center'>
             <h2 className='font-headline text-3xl font-bold text-white mb-4'>MEDUSA</h2>
-            <p className='font-body text-base text-white/80 mb-6 leading-relaxed max-w-md mx-auto'>
-              30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen
-              sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.
+            <p className='reading-measure font-body text-base text-white/74 mb-6 leading-relaxed max-w-md mx-auto'>
+              {t('common.footer.brandDescription')}
             </p>
 
             <div className='space-y-4 max-md:flex max-md:flex-col max-md:items-center'>
@@ -87,29 +85,35 @@ const Footer: React.FC = () => {
                   {t('common.footer.studio.address')}
                 </span>
               </div>
-              <div className='flex items-start gap-4 max-md:justify-center'>
+              <div className='flex items-start gap-4 max-md:justify-center rounded-[24px] border border-white/8 bg-white/3 px-4 py-4'>
                 <Clock size={18} className='text-white/60 shrink-0 mt-2' />
                 <div className='flex flex-col gap-2 max-md:text-center'>
                   <span className='font-body text-sm font-medium text-white/90'>
-                    Öffnungszeiten
+                    {t('common.footer.hoursCard.heading')}
                   </span>
-                  <div className='flex flex-col gap-0.5'>
-                    <div className='flex items-center justify-between gap-4'>
-                      <span className='font-body text-sm text-white/70'>Mo - Fr:</span>
+                  <div className='grid grid-cols-[auto_auto] gap-x-4 gap-y-1'>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.weekdaysLabel')}
+                      </span>
                       <span className='font-body text-sm text-(--accent-chrome) font-medium'>
-                        11:00 - 19:00
+                        {t('common.footer.hoursCard.weekdaysValue')}
                       </span>
                     </div>
-                    <div className='flex items-center justify-between gap-4'>
-                      <span className='font-body text-sm text-white/70'>Sa:</span>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.weekendLabel')}
+                      </span>
                       <span className='font-body text-sm text-(--accent-chrome) font-medium'>
-                        10:00 - 16:00
+                        {t('common.footer.hoursCard.weekendValue')}
                       </span>
                     </div>
-                    <div className='flex items-center justify-between gap-4'>
-                      <span className='font-body text-sm text-white/70'>So:</span>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.sundayLabel')}
+                      </span>
                       <span className='font-body text-sm text-red-400 font-medium'>
-                        Geschlossen
+                        {t('common.footer.hoursCard.sundayValue')}
                       </span>
                     </div>
                   </div>
@@ -119,7 +123,7 @@ const Footer: React.FC = () => {
                 <Phone size={18} className='text-white/60 shrink-0' />
                 <a
                   href={studioInfo.phone.href}
-                  className='font-body text-base text-white hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline max-md:text-center'
+                  className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline max-md:text-center'
                 >
                   {studioInfo.phone.text}
                 </a>
@@ -128,7 +132,7 @@ const Footer: React.FC = () => {
                 <Mail size={18} className='text-white/60 shrink-0' />
                 <a
                   href={studioInfo.email.href}
-                  className='font-body text-base text-white hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline max-md:text-center'
+                  className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline max-md:text-center'
                 >
                   {studioInfo.email.text}
                 </a>
@@ -139,7 +143,7 @@ const Footer: React.FC = () => {
                   href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='font-body text-base text-green-400 hover:text-green-300 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline max-md:text-center'
+                  className='premium-link font-body text-base text-green-400 touch-target-mobile touch-target-mobile-inline max-md:text-center'
                 >
                   WhatsApp: +49 176 80196286
                 </a>
@@ -156,10 +160,8 @@ const Footer: React.FC = () => {
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    to={
-                      link.href === '/about' ? (isEnglishPath ? '/en/about' : '/about') : link.href
-                    }
-                    className='font-body text-base text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline'
+                    to={localizePath(link.href, language)}
+                    className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline'
                   >
                     {t(link.i18nKey)}
                   </Link>
@@ -177,8 +179,8 @@ const Footer: React.FC = () => {
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    to={link.href}
-                    className='font-body text-base text-white/80 hover:text-(--accent-chrome) transition-colors duration-300 touch-target-mobile touch-target-mobile-inline'
+                    to={localizePath(link.href, language)}
+                    className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline'
                   >
                     {t(link.i18nKey)}
                   </Link>
@@ -189,66 +191,67 @@ const Footer: React.FC = () => {
 
           {/* Newsletter + Social */}
           <div className='max-md:col-span-2'>
-            <h3 className='font-headline text-lg font-semibold text-white mb-4'>
-              {t('common.footer.headings.newsletter')}
-            </h3>
-            <p className='font-body text-base text-white/80 mb-4'>
-              {t('common.footer.newsletter.description')}
-            </p>
+            <div className='rounded-(--card-radius) border border-white/8 bg-white/3 p-6 shadow-[var(--premium-elevation)]'>
+              <h3 className='font-headline text-lg font-semibold text-white mb-4'>
+                {t('common.footer.headings.newsletter')}
+              </h3>
+              <p className='font-body text-base text-white/72 mb-6 reading-measure'>
+                {t('common.footer.newsletter.description')}
+              </p>
 
-            <form onSubmit={handleNewsletterSubmit} className='space-y-4'>
-              <input
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t('common.footer.newsletter.emailPlaceholder')}
-                className='flex flex-col h-full w-full px-4 py-4 bg-(--card-bg) border border-(--card-border) rounded-lg text-white placeholder-white/50 focus:border-(--accent-chrome) focus:outline-none transition-colors duration-300 touch-target-mobile'
-                required
-              />
-              <div className='flex items-start gap-2'>
-                <input
-                  id='footer-consent'
-                  type='checkbox'
-                  checked={agreeMarketing}
-                  onChange={(e) => setAgreeMarketing(e.target.checked)}
-                  className='flex flex-col h-full mt-2 w-4 min-h-4 rounded border-white/30 bg-white/10 focus:ring-(--accent-chrome) touch-target-mobile'
-                />
-                <label
-                  htmlFor='footer-consent'
-                  className='font-body text-sm text-white/70 cursor-pointer touch-target-mobile touch-target-mobile-inline'
+              <div className='flex items-center gap-4 mb-6'>
+                <a
+                  href={socialLinks.instagram.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={socialLinks.instagram.label}
+                  className='premium-interactive inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
                 >
-                  {t('common.footer.newsletter.marketingConsent')}
-                </label>
+                  <Instagram size={22} />
+                </a>
+                <a
+                  href={socialLinks.facebook.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={socialLinks.facebook.label}
+                  className='premium-interactive inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                >
+                  <Facebook size={22} />
+                </a>
               </div>
-              <button
-                type='submit'
-                disabled={!email || !agreeMarketing}
-                className='flex flex-col h-full w-full bg-(--accent-chrome) text-(--deep-black) font-body font-semibold py-4 px-6 rounded-lg hover:bg-(--accent-chrome)/80 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 touch-target-mobile'
-              >
-                {t('common.footer.newsletter.subscribe')}
-              </button>
-            </form>
 
-            {/* Social Icons */}
-            <div className='flex items-center gap-4 mt-6'>
-              <a
-                href={socialLinks.instagram.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label={socialLinks.instagram.label}
-                className='text-white/80 hover:text-pink-400 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
-              >
-                <Instagram size={24} />
-              </a>
-              <a
-                href={socialLinks.facebook.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label={socialLinks.facebook.label}
-                className='text-white/80 hover:text-blue-400 transition-colors duration-300 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
-              >
-                <Facebook size={24} />
-              </a>
+              <form onSubmit={handleNewsletterSubmit} className='space-y-4 opacity-70'>
+                <input
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('common.footer.newsletter.emailPlaceholder')}
+                  className='premium-field-control touch-target-mobile'
+                  required
+                />
+                <div className='flex items-start gap-2'>
+                  <input
+                    id='footer-consent'
+                    type='checkbox'
+                    checked={agreeMarketing}
+                    onChange={(e) => setAgreeMarketing(e.target.checked)}
+                    className='flex flex-col h-full mt-2 w-4 min-h-4 rounded border-white/30 bg-white/10 focus:ring-(--accent-chrome) touch-target-mobile'
+                  />
+                  <label
+                    htmlFor='footer-consent'
+                    className='font-body text-sm text-white/70 cursor-pointer touch-target-mobile touch-target-mobile-inline'
+                  >
+                    {t('common.footer.newsletter.marketingConsent')}
+                  </label>
+                </div>
+                <button
+                  type='submit'
+                  disabled={!email || !agreeMarketing}
+                  className='w-full rounded-full border border-white/10 bg-white/8 px-6 py-4 font-body font-semibold text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50 touch-target-mobile'
+                >
+                  {t('common.footer.newsletter.subscribe')}
+                </button>
+              </form>
             </div>
           </div>
         </div>

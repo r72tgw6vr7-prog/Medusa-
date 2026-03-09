@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 import './ServiceCard.css';
 
 /**
@@ -31,6 +33,7 @@ interface ServiceCardProps {
  * - 6 hover enhancements: Chrome Glow, Content Lift, Shadow Depth, Icon Zoom, Overlay Fade, Neighbor Shrink
  */
 export function ServiceCard({ service, isRevealed, index }: ServiceCardProps) {
+  const { language } = useLanguage();
   const isEven = index % 2 === 0;
   const backgroundImage =
     service.icon === 'tattoo'
@@ -144,11 +147,11 @@ export function ServiceCard({ service, isRevealed, index }: ServiceCardProps) {
 
           {/* CTA Button */}
           <Link
-            to={service.link}
+            to={localizePath(service.link, language)}
             className='service-card-cta inline-flex items-center gap-4 px-6 py-4 border border-white/20 hover:border-white/40 transition-all duration-300'
           >
             <span className='text-luxury-text-inverse text-sm tracking-wider uppercase font-light'>
-              Mehr erfahren
+              {language === 'en' ? 'Learn more' : 'Mehr erfahren'}
             </span>
             <svg
               className='w-4 h-4 text-luxury-text-inverse/60'

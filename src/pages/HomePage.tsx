@@ -4,10 +4,12 @@ import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { Footer } from '@/components/pages';
 import ErrorBoundary from '@/components/layout/ErrorBoundary';
 import { LazySection } from '@/components/LazySection';
-import { GALLERY_IMAGES } from '@/content/gallery-images';
+import { getLocalizedGalleryImages } from '@/content/gallery-images';
 import { useSectionTransition } from '@/hooks/useSectionTransition';
 import { LocationSection } from '@/components/LocationSection';
 import { GoogleMapSection } from '@/components/GoogleMapSection';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 const BladeAccordionLazy = lazy(() =>
   import('@/components/ui/BladeAccordion').then((m) => ({ default: m.BladeAccordion })),
@@ -50,28 +52,6 @@ const PreFooterBookingCTALazy = lazy(() =>
   import('@/components/PreFooterBookingCTA').then((m) => ({ default: m.PreFooterBookingCTA })),
 );
 
-// Hero parallax product data - using actual gallery images with optimized sources
-const heroProducts = GALLERY_IMAGES.slice(0, 15).map((img, index) => ({
-  title: img.title,
-  link: '/gallery',
-  thumbnail: img.optimizedSrc, // Use optimized images for better performance
-  fallbackSrc: img.src, // Original as fallback
-  width: img.width,
-  height: img.height,
-  priority: index < 3, // First 3 images are priority (above the fold)
-}));
-
-// Gallery preview data - using actual gallery images with optimized sources
-const sampleGalleryImages = GALLERY_IMAGES.slice(0, 8).map((img) => ({
-  id: img.id,
-  imageUrl: img.optimizedSrc, // Use optimized images for better performance
-  fallbackUrl: img.src, // Original as fallback
-  title: img.title,
-  artist: 'Medusa Tattoo',
-  year: '2024',
-  category: img.category,
-}));
-
 const SectionTransitionWrapper = ({
   children,
   className = '',
@@ -92,6 +72,32 @@ const SectionTransitionWrapper = ({
 };
 
 export function HomePage() {
+  const { language } = useLanguage();
+  const localizedGalleryImages = getLocalizedGalleryImages(language);
+  const heroProducts = localizedGalleryImages.slice(0, 15).map((img, index) => ({
+    title: img.title,
+    link: localizePath('/gallery', language),
+    thumbnail: img.optimizedSrc,
+    fallbackSrc: img.src,
+    width: img.width,
+    height: img.height,
+    priority: index < 3,
+  }));
+  const sampleGalleryImages = localizedGalleryImages.slice(0, 8).map((img) => ({
+    id: img.id,
+    imageUrl: img.optimizedSrc,
+    fallbackUrl: img.src,
+    title: img.title,
+    artist: 'Medusa Tattoo',
+    year: '2024',
+    category: img.category,
+  }));
+  const galleryTitle = language === 'en' ? 'Our work' : 'Unsere Kunstwerke';
+  const gallerySubtitle =
+    language === 'en'
+      ? 'Discover a selection of our best work.'
+      : 'Entdecken Sie eine Auswahl unserer besten Arbeiten.';
+
   return (
     <ErrorBoundary>
       {/* Skip to main content link for keyboard navigation */}
@@ -177,13 +183,6 @@ export function HomePage() {
             </ErrorBoundary>
           </LazySection>
 
-          {/* 8. FAQ Section - Lazy load */}
-          <LazySection>
-            <ErrorBoundary>
-              <SectionTransitionWrapper>{null}</SectionTransitionWrapper>
-            </ErrorBoundary>
-          </LazySection>
-
           {/* 5. Trust Signals - Lazy load */}
           <LazySection>
             <ErrorBoundary>
@@ -212,8 +211,8 @@ export function HomePage() {
               <SectionTransitionWrapper>
                 <Suspense fallback={null}>
                   <GallerySectionLazy
-                    title='Unsere Kunstwerke'
-                    subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
+                    title={galleryTitle}
+                    subtitle={gallerySubtitle}
                     images={sampleGalleryImages}
                   />
                 </Suspense>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import './ArtistCard.css';
 
@@ -35,7 +35,6 @@ interface ArtistCardProps {
  * - 6 hover enhancements: Chrome Glow, Content Lift, Shadow Depth, Image Zoom, Overlay Fade, Neighbor Shrink
  */
 export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
-  const location = useLocation();
   const { t } = useLanguage();
   const isEven = index % 2 === 0;
   const categoryLabel = artist.category === 'piercing' ? 'PIERCING' : 'TATTOO';
@@ -43,9 +42,8 @@ export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
     artist.id === 'eli' || artist.id === 'eli-luquez' || artist.name.toLowerCase().includes('eli');
   const mobileFaceY = isEli ? '40%' : 'calc(40% - 50px)';
 
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
   const artistSlug = artist.id;
-  const portfolioHref = isEnglishPath ? `/en/artists/${artistSlug}` : `/artists/${artistSlug}`;
+  const portfolioHref = `/artists/${artistSlug}`;
   const portfolioLabel = t('common.actions.viewPortfolio');
 
   return (

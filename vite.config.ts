@@ -43,16 +43,18 @@ export default defineConfig(({ mode }) => {
     plugins,
     base: '/',
     server: {
+      host: true,
       port: 5173,
       headers: {
         'Content-Security-Policy':
-          "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apps.rokt.com; connect-src 'self' https://apps.rokt.com https://apps-demo.rokt.com https://script.google.com https://script.googleusercontent.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://apps.rokt.com; img-src 'self' data: blob: https://*; frame-src 'self' https://*.google.com https://www.google.com/maps/ https://maps.google.com; base-uri 'self'; form-action 'self'",
+          "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apps.rokt.com; connect-src 'self' https://apps.rokt.com https://apps-demo.rokt.com https://script.google.com https://script.googleusercontent.com https://api.web3forms.com ws: wss:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://apps.rokt.com; img-src 'self' data: blob: https://*; frame-src 'self' https://*.google.com https://www.google.com/maps/ https://maps.google.com; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'",
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'X-XSS-Protection': '1; mode=block',
       },
     },
     preview: {
+      host: true,
       port: 4173,
       headers: {
         // Relaxed CSP for debugging
@@ -89,7 +91,11 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              if (id.includes('i18next') || id.includes('react-i18next') || id.includes('i18next-browser-languagedetector')) {
+              if (
+                id.includes('i18next') ||
+                id.includes('react-i18next') ||
+                id.includes('i18next-browser-languagedetector')
+              ) {
                 return 'vendor-i18n';
               }
             }

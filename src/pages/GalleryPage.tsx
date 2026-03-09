@@ -7,15 +7,17 @@ import React from 'react';
 import { Footer } from '@/components/pages';
 import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { LayoutGridDemo } from '@/components/layout-grid-demo';
-import { GALLERY_IMAGES } from '@/content/gallery-images';
+import { getLocalizedGalleryImages } from '@/content/gallery-images';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageHeading } from '@/components/PageHeading';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { localizePath } from '@/i18n/utils/localizePath';
 import './GalleryPage.css';
 
 export function GalleryPage() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const localizedGalleryImages = getLocalizedGalleryImages(language);
 
   return (
     <>
@@ -39,7 +41,7 @@ export function GalleryPage() {
           <Section variant='default' spacing='normal' bg='dark'>
             <Container size='wide'>
               <PageHeading
-                eyebrow='Medusa München'
+                eyebrow={language === 'en' ? 'Medusa Munich' : 'Medusa München'}
                 title={t('gallery.title')}
                 subtitle={t('gallery.subtitle')}
               />
@@ -53,7 +55,7 @@ export function GalleryPage() {
                 <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body leading-(--line-height-normal) max-w-3xl mx-auto'>
                   {t('gallery.ctaText')}{' '}
                   <a
-                    href='/artists'
+                    href={localizePath('/artists', language)}
                     className='text-brand-accent hover:text-brand-accent-hover underline transition-colors duration-200 ease-out'
                   >
                     {t('gallery.ctaLink')}
@@ -66,7 +68,7 @@ export function GalleryPage() {
 
           {/* Gallery Grid Section - Full Viewport Width */}
           <Section variant='default' spacing='normal' bg='dark'>
-            <LayoutGridDemo images={GALLERY_IMAGES} />
+            <LayoutGridDemo images={localizedGalleryImages} />
           </Section>
         </main>
 

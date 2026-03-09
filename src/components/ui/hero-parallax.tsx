@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, type MotionValue } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 // ===========================================
 // ANIMATION CONSTANTS (tattoo gun mechanical vibe)
@@ -203,13 +205,14 @@ export const HeroParallax = ({
 export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) => {
   const isMobileViewport =
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const headlinePrimary = t('home.hero.headlinePrimary');
   const headlineSecondary = t('home.hero.headlineSecondary');
   const headlineTertiary = t('home.hero.headlineTertiary');
   const description = t('home.hero.description');
   const ctaPrimary = t('home.hero.ctaPrimary');
   const ctaSecondary = t('home.hero.ctaSecondary');
+  const eyebrow = language === 'en' ? 'Medusa Munich' : 'Medusa München';
 
   return (
     <motion.div
@@ -224,6 +227,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
           className='max-w-7xl w-full flex flex-col items-center text-center gap-(--space-6) pointer-events-auto max-md:hidden'
           style={{ transform: 'translateY(-530px)' }}
         >
+          <p className='premium-eyebrow'>{eyebrow}</p>
           {/* Heading - design system typography */}
           <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-white'>
             <span className='text-(length:--text-h1) font-bold'>{headlinePrimary}</span>
@@ -234,36 +238,35 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
           </h1>
 
           {/* Subtext - design system typography */}
-          <p className='max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
+          <p className='reading-measure max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
             {description}
           </p>
 
+          <div
+            className='premium-divider premium-divider--short premium-divider--center'
+            aria-hidden='true'
+          />
+
           <div className='pt-(--space-2)'>
             <div className='flex items-center justify-center gap-4'>
-              <a
-                href='/booking'
-                className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-(--accent-chrome) text-luxury-text-primary font-medium rounded-lg transition-all duration-300 hover:bg-(--accent-chrome)/80 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent-chrome) text-(length:--text-body)'
-                style={{
-                  minHeight: 'var(--touch-target-min)',
-                }}
-              >
-                {ctaPrimary}
-              </a>
-              <a
-                href='/contact'
-                className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
-                style={{
-                  minHeight: 'var(--touch-target-min)',
-                }}
-              >
-                {ctaSecondary}
-              </a>
+              <Button asChild variant='chrome' size='lg'>
+                <a href={localizePath('/booking', language)}>{ctaPrimary}</a>
+              </Button>
+              <Button asChild variant='outlineChrome' size='lg'>
+                <a href={localizePath('/contact', language)}>{ctaSecondary}</a>
+              </Button>
             </div>
+          </div>
+
+          <div className='flex flex-col items-center gap-3 pt-6 text-white/50' aria-hidden='true'>
+            <span className='h-2 w-2 rounded-full bg-white/65 shadow-[0_0_12px_rgba(255,255,255,0.45)]' />
+            <span className='h-12 w-px bg-linear-to-b from-white/55 via-white/20 to-transparent' />
           </div>
         </div>
       ) : (
         <div className='hidden max-md:flex absolute top-0 left-0 right-0 flex-col items-center justify-start pointer-events-none max-md:h-(--hero-text-force-height)'>
           <div className='w-full flex flex-col items-center text-center gap-(--space-6) px-(--space-2) pointer-events-auto max-md:pt-(--hero-text-force-offset)!'>
+            <p className='premium-eyebrow'>{eyebrow}</p>
             {/* Heading - design system typography */}
             <h1 className='hero-text-glow font-headline tracking-tight leading-tight text-brand-white'>
               <span className='text-(length:--text-h1) font-bold'>{headlinePrimary}</span>
@@ -274,30 +277,18 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
             </h1>
 
             {/* Subtext - design system typography */}
-            <p className='max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
+            <p className='reading-measure max-w-2xl text-luxury-text-inverse-muted text-(length:--text-lg) leading-(--line-height-normal) font-body font-normal'>
               {description}
             </p>
 
             <div className='pt-(--space-2)'>
-              <div className='flex items-center justify-center gap-4'>
-                <a
-                  href='/booking'
-                  className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-(--accent-chrome) text-luxury-text-primary font-medium rounded-lg transition-all duration-300 hover:bg-(--accent-chrome)/80 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--accent-chrome) text-(length:--text-body)'
-                  style={{
-                    minHeight: 'var(--touch-target-min)',
-                  }}
-                >
-                  {ctaPrimary}
-                </a>
-                <a
-                  href='/contact'
-                  className='inline-flex items-center justify-center px-(--space-4) py-(--space-2) bg-white text-deep-black font-medium rounded-lg transition-all duration-300 hover:bg-white/90 hover:shadow-chrome-glow touch-feedback focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-accent-chrome text-(length:--text-body)'
-                  style={{
-                    minHeight: 'var(--touch-target-min)',
-                  }}
-                >
-                  {ctaSecondary}
-                </a>
+              <div className='flex w-full max-w-sm flex-col items-stretch justify-center gap-3'>
+                <Button asChild variant='chrome' size='lg' className='w-full'>
+                  <a href={localizePath('/booking', language)}>{ctaPrimary}</a>
+                </Button>
+                <Button asChild variant='outlineChrome' size='lg' className='w-full'>
+                  <a href={localizePath('/contact', language)}>{ctaSecondary}</a>
+                </Button>
               </div>
             </div>
           </div>

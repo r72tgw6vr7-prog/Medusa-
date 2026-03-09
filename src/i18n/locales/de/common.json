@@ -263,14 +263,24 @@
     "legal": "Impressum",
     "privacy": "Datenschutz",
     "brandTagline": "Münchens exklusivstes Tattoo-Studio für Kunst, die ein Leben lang hält.",
+    "brandDescription": "30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.",
     "studio": {
       "address": "Altheimer Eck 11, 80331 München",
       "hours": "Mo-Do: 11:30-19:00, Fr-Sa: 11:30-20:00, So: geschlossen"
     },
+    "hoursCard": {
+      "heading": "Öffnungszeiten",
+      "weekdaysLabel": "Mo - Do:",
+      "weekdaysValue": "11:30 - 19:00",
+      "weekendLabel": "Fr - Sa:",
+      "weekendValue": "11:30 - 20:00",
+      "sundayLabel": "So:",
+      "sundayValue": "Geschlossen"
+    },
     "headings": {
-      "quickLinks": "Quick Links",
+      "quickLinks": "Schnellzugriff",
       "legal": "Rechtliches",
-      "newsletter": "Newsletter"
+      "newsletter": "Aktuelles"
     },
     "links": {
       "privacy": "Datenschutz",
@@ -309,7 +319,7 @@
         "innerCity": "Tattoo Studio Innenstadt",
         "cityCenter": "Tattoo Zentrum München",
         "altheimerEck": "Tattoo Altheimer Eck",
-        "englishSpeaking": "English Speaking Tattoo Munich"
+        "englishSpeaking": "Englischsprachiges Tattoo-Studio München"
       },
       "faq": {
         "title": "Tattoo Studio München – Ihre Fragen, unsere Antworten",
@@ -478,6 +488,31 @@
           }
         }
       }
+    }
+  },
+  "sharedSections": {
+    "gallerySection": {
+      "eyebrow": "Galerie",
+      "viewGallery": "Zur Galerie"
+    },
+    "studioCarousel": {
+      "title": "Unser Studio",
+      "subtitle": "Ein Blick in unser professionelles, EU-zertifiziertes Tattoo-Studio im Herzen Münchens",
+      "regionLabel": "Studio-Fotokarussell",
+      "previous": "Vorheriges Bild",
+      "next": "Nächstes Bild",
+      "slide": "Bild",
+      "of": "von"
+    },
+    "preFooterBookingCta": {
+      "title": "Bereit für Ihr Meisterwerk?",
+      "subtitle": "Lassen Sie uns gemeinsam Ihre Vision in ein unvergessliches Kunstwerk verwandeln",
+      "cardTitle": "Buchen Sie Ihren Termin",
+      "ctaDefault": "Jetzt Termin sichern →",
+      "ctaSelected": "Termin jetzt anfragen →"
+    },
+    "bookingSection": {
+      "cta": "Termin buchen"
     }
   },
   "slider": {

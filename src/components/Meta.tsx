@@ -51,6 +51,25 @@ function upsertAlternateLink(hreflang: string, href: string) {
   link.setAttribute('href', href);
 }
 
+function clearAlternateLinks() {
+  document.head
+    .querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]')
+    .forEach((link) => link.remove());
+}
+
+function replaceAlternateLocales(locales: string[] = []) {
+  document.head
+    .querySelectorAll<HTMLMetaElement>('meta[property="og:locale:alternate"]')
+    .forEach((tag) => tag.remove());
+
+  locales.forEach((locale) => {
+    const tag = document.createElement('meta');
+    tag.setAttribute('property', 'og:locale:alternate');
+    tag.setAttribute('content', locale);
+    document.head.appendChild(tag);
+  });
+}
+
 export default function Meta({
   title,
   description,
@@ -87,6 +106,7 @@ export default function Meta({
     upsertLink('canonical', url);
 
     // Hreflang alternate links
+    clearAlternateLinks();
     if (hreflang) {
       Object.entries(hreflang).forEach(([lang, href]) => {
         upsertAlternateLink(lang, href);
@@ -105,11 +125,7 @@ export default function Meta({
     upsertMetaTag('property', 'og:locale', locale || 'de_DE');
 
     // Alternate locales
-    if (alternateLocale) {
-      alternateLocale.forEach((locale) => {
-        upsertMetaTag('property', 'og:locale:alternate', locale);
-      });
-    }
+    replaceAlternateLocales(alternateLocale);
 
     // Twitter
     upsertMetaTag('name', 'twitter:card', twitterCard);

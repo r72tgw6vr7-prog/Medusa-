@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import styles from './PreFooterBookingCTA.module.css';
 import { Card } from './ui/Card';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 interface PreFooterBookingCTAProps {
   readonly selectedArtist?: string;
@@ -16,6 +18,7 @@ interface PreFooterBookingCTAProps {
 
 export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFooterBookingCTAProps) {
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
 
   return (
     <section
@@ -38,10 +41,10 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
         {/* Heading */}
         <div className='text-center mb-16 md:mb-16'>
           <h2 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-(--brand-accent) mb-8 md:mb-8'>
-            Bereit für Ihr Meisterwerk?
+            {t('common.sharedSections.preFooterBookingCta.title')}
           </h2>
           <p className='font-body text-(length:--text-lg) md:text-(length:--text-h4) text-luxury-text-inverse opacity-90 max-w-175 mx-auto leading-(--line-height-normal)'>
-            Lassen Sie uns gemeinsam Ihre Vision in ein unvergessliches Kunstwerk verwandeln
+            {t('common.sharedSections.preFooterBookingCta.subtitle')}
           </p>
         </div>
 
@@ -49,7 +52,7 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
         <Card variant='featured' size='default' className={`${styles['breathing-glow']} relative`}>
           <div className='p-8 md:p-8 lg:p-16'>
             <h3 className='font-headline text-(length:--text-h4) md:text-(length:--text-h3) font-semibold text-(--brand-accent) text-center mb-8'>
-              Buchen Sie Ihren Termin
+              {t('common.sharedSections.preFooterBookingCta.cardTitle')}
             </h3>
 
             <div className='space-y-8'>
@@ -57,11 +60,11 @@ export function PreFooterBookingCTA({ selectedArtist, selectedService }: PreFoot
                 type='button'
                 variant='chrome'
                 className='cool-lines-cta w-full h-14 text-(length:--text-lg) rounded-xl hover:shadow-chrome-glow transition duration-200 ease-out'
-                onClick={() => navigate('/booking')}
+                onClick={() => navigate(localizePath('/booking', language))}
               >
                 {selectedService || selectedArtist
-                  ? 'Termin jetzt anfragen →'
-                  : 'Jetzt Termin sichern →'}
+                  ? t('common.sharedSections.preFooterBookingCta.ctaSelected')
+                  : t('common.sharedSections.preFooterBookingCta.ctaDefault')}
               </Button>
             </div>
           </div>

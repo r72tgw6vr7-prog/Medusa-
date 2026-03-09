@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '@/core/state/AppContext';
 import Meta from '@/components/Meta';
@@ -55,6 +55,18 @@ const NotFoundPage = lazy(() =>
 const ArtistProfilePage = lazy(() =>
   import('./pages/ArtistProfilePage').then((m) => ({ default: m.ArtistProfilePage })),
 );
+
+function EnglishRouteRedirect() {
+  const location = useLocation();
+  const pathname =
+    location.pathname === '/en'
+      ? '/'
+      : location.pathname.startsWith('/en/')
+        ? location.pathname.slice(3)
+        : '/';
+
+  return <Navigate to={`${pathname}${location.search}${location.hash}`} replace />;
+}
 
 function App() {
   // Texture background is now handled in main.tsx
@@ -210,125 +222,8 @@ function App() {
                       }
                     />
 
-                    {/* English Routes (path prefix) */}
-                    <Route
-                      path='/en'
-                      element={
-                        <>
-                          <LocalizedMeta pageKey='home' basePath='/' canonicalPath='/en' />
-                          <HomePage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/services'
-                      element={<Navigate to='/en/services/tattoos' replace />}
-                    />
-                    <Route
-                      path='/en/services/tattoos'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='services'
-                            basePath='/services/tattoos'
-                            canonicalPath='/en/services/tattoos'
-                          />
-                          <TattooServicesPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/services/piercings'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='services'
-                            basePath='/services/piercings'
-                            canonicalPath='/en/services/piercings'
-                          />
-                          <PiercingServicesPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/artists'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='artists'
-                            basePath='/artists'
-                            canonicalPath='/en/artists'
-                          />
-                          <ArtistsPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/about'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='about'
-                            basePath='/about'
-                            canonicalPath='/en/about'
-                          />
-                          <AboutPage />
-                        </>
-                      }
-                    />
-                    <Route path='/en/artists/:slug' element={<ArtistProfilePage />} />
-                    <Route
-                      path='/en/gallery'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='gallery'
-                            basePath='/gallery'
-                            canonicalPath='/en/gallery'
-                          />
-                          <GalleryPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/booking'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='booking'
-                            basePath='/booking'
-                            canonicalPath='/en/booking'
-                          />
-                          <BookingPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/faq'
-                      element={
-                        <>
-                          <LocalizedMeta pageKey='faq' basePath='/faq' canonicalPath='/en/faq' />
-                          <FAQPage />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/en/contact'
-                      element={
-                        <>
-                          <LocalizedMeta
-                            pageKey='contact'
-                            basePath='/contact'
-                            canonicalPath='/en/contact'
-                          />
-                          <ContactPage />
-                        </>
-                      }
-                    />
-
-                    {/* Legacy English mapping */}
-                    <Route path='/en/pricing' element={<Navigate to='/en/services' replace />} />
-                    <Route path='/en/preise' element={<Navigate to='/en/services' replace />} />
+                    <Route path='/en' element={<EnglishRouteRedirect />} />
+                    <Route path='/en/*' element={<EnglishRouteRedirect />} />
 
                     {/* 404 Route */}
                     <Route path='*' element={<NotFoundPage />} />

@@ -20,6 +20,14 @@ if [[ -n "$DEPTH_HITS" ]]; then
   exit 1
 fi
 
+echo "== Hygiene: no markdown files in public/ =="
+# Vite copies public/ into dist verbatim, so markdown here ships as raw text.
+PUBLIC_MARKDOWN="$(find public/ -type f -name '*.md' | head -1 || true)"
+if [[ -n "$PUBLIC_MARKDOWN" ]]; then
+  echo "Public markdown leak detected: $PUBLIC_MARKDOWN" >&2
+  exit 1
+fi
+
 echo "== Hygiene: eslint (0 warnings) =="
 # Use repo's flat ESLint config
 HYGIENE=1 npx --yes eslint --max-warnings 0 "src/**/*.{ts,tsx}" --config eslint.config.js || exit 1

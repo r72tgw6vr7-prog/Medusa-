@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useKeyboardNav } from '@/hooks/useKeyboardNav';
-import { LanguageToggle } from './LanguageToggle';
 import './MainNavigation.css';
 
 type NavItem = {
@@ -26,7 +25,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     to: '/about',
     i18nKey: 'nav.about',
-    isActive: (path) => path.startsWith('/about') || path.startsWith('/en/about'),
+    isActive: (path) => path.startsWith('/about'),
   },
   { to: '/faq', i18nKey: 'nav.faq', isActive: (path) => path.startsWith('/faq') },
   {
@@ -52,45 +51,16 @@ export function MainNavigation() {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
-  const navigate = useNavigate();
   const { language, t } = useLanguage();
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
   const isAutomation = typeof navigator !== 'undefined' && navigator.webdriver === true;
   const isAutomationMobile =
     isAutomation && typeof window !== 'undefined' ? window.innerWidth < 1024 : false;
 
   const localizeNavPath = useCallback(
     (to: string) => {
-      if (isEnglishPath) {
-        if (to === '/') return '/en';
-        return to.startsWith('/en') ? to : `/en${to}`;
-      }
-
       return to.startsWith('/en/') ? to.slice(3) : to === '/en' ? '/' : to;
     },
-    [isEnglishPath],
-  );
-
-  const handleLanguageChange = useCallback(
-    (nextLanguage: 'de' | 'en') => {
-      const currentPath = location.pathname;
-      const nextPath =
-        nextLanguage === 'en'
-          ? currentPath === '/'
-            ? '/en'
-            : currentPath.startsWith('/en')
-              ? currentPath
-              : `/en${currentPath}`
-          : currentPath === '/en'
-            ? '/'
-            : currentPath.startsWith('/en/')
-              ? currentPath.slice(3)
-              : currentPath;
-
-      const nextUrl = `${nextPath}${location.search}${location.hash}`;
-      navigate(nextUrl);
-    },
-    [location.hash, location.pathname, location.search, navigate],
+    [],
   );
 
   useEffect(() => {
@@ -269,44 +239,6 @@ export function MainNavigation() {
         } ${menuOpen ? 'menu-open' : ''}`}
         onKeyDown={handleNavKeyDown}
       >
-        {isAutomationMobile && !menuOpen && (
-          <div
-            className='opacity-0'
-            style={{
-              position: 'fixed',
-              top: 120,
-              left: 8,
-              zIndex: 10003,
-              opacity: 0.001,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 12,
-            }}
-          >
-            {NAV_ITEMS.filter(({ to }) => to !== '/booking').map(({ to, i18nKey }) => (
-              <Link
-                key={`e2e-${to}`}
-                to={localizeNavPath(to)}
-                tabIndex={-1}
-                aria-hidden='true'
-                style={{ display: 'block', width: 8, height: 8, margin: 0, overflow: 'hidden' }}
-              >
-                {t(i18nKey)}
-              </Link>
-            ))}
-            {SERVICES_ITEMS.map((item) => (
-              <Link
-                key={`e2e-${item.to}`}
-                to={localizeNavPath(item.to)}
-                tabIndex={-1}
-                aria-hidden='true'
-                style={{ display: 'block', width: 8, height: 8, margin: 0, overflow: 'hidden' }}
-              >
-                {t(item.i18nKey)}
-              </Link>
-            ))}
-          </div>
-        )}
         <div className='container-wide mx-auto flex h-20 items-center justify-between gap-8 px-4 md:px-6 lg:px-8'>
           <Link
             to={localizeNavPath('/')}
@@ -321,13 +253,12 @@ export function MainNavigation() {
                 <li className='nav-dropdown'>
                   <Link
                     to={localizeNavPath('/services/tattoos')}
-                    className={`nav-link nav-dropdown__trigger font-body text-(length:--text-body) md:text-(length:--text-lg) font-medium transition-all duration-300 ${
-                      location.pathname.startsWith('/services')
-                        ? 'text-brand-accent'
-                        : 'text-luxury-text-inverse hover:text-brand-accent'
+                    className={`nav-link nav-link--primary nav-dropdown__trigger font-body text-(length:--text-body) md:text-(length:--text-lg) font-medium transition-all duration-300 ${
+                      location.pathname.startsWith('/services') ? 'nav-link--active' : ''
                     }`}
                     aria-haspopup='true'
                     aria-expanded='false'
+                    aria-current={location.pathname.startsWith('/services') ? 'page' : undefined}
                   >
                     {t('nav.services')}
                   </Link>
@@ -351,12 +282,12 @@ export function MainNavigation() {
                     <li key={to}>
                       <Link
                         to={localizeNavPath(to)}
-                        className={`nav-link font-body text-(length:--text-body) lg:text-(length:--text-sm) font-medium text-luxury-text-inverse hover:text-(--accent-chrome) transition-colors duration-200 ${
+                        className={`nav-link font-body text-(length:--text-body) lg:text-(length:--text-sm) font-medium transition-colors duration-200 ${
                           to === '/booking'
-                            ? 'nav-cta rounded-md px-4 py-2 text-(--accent-chrome) hover:bg-(--accent-chrome)/20'
+                            ? 'nav-link--cta nav-cta px-4 py-2'
                             : active
-                              ? 'text-(--accent-chrome)'
-                              : 'text-luxury-text-inverse hover:text-(--accent-chrome)'
+                              ? 'nav-link--primary nav-link--active'
+                              : 'nav-link--primary'
                         }`}
                         aria-current={active ? 'page' : undefined}
                         tabIndex={0}
@@ -370,24 +301,7 @@ export function MainNavigation() {
             </div>
           )}
 
-          {!isAutomationMobile && (
-            <div className='hidden items-center lg:flex'>
-              <LanguageToggle
-                language={language}
-                onLanguageChange={handleLanguageChange}
-                germanAriaLabel={t('nav.switchToGerman')}
-                englishAriaLabel={t('nav.switchToEnglish')}
-              />
-            </div>
-          )}
-
           <div className='flex items-center gap-4 lg:hidden'>
-            <LanguageToggle
-              language={language}
-              onLanguageChange={handleLanguageChange}
-              germanAriaLabel={t('nav.switchToGerman')}
-              englishAriaLabel={t('nav.switchToEnglish')}
-            />
             {menuOpen ? (
               <button
                 ref={openButtonRef}
@@ -470,7 +384,8 @@ export function MainNavigation() {
                             to={localizedTo}
                             onClick={closeMenu}
                             data-testid={`mobile-nav-${item.to.replace(/^\//, '').replace(/\//g, '-')}`}
-                            className={`mobile-nav-link ${active ? 'text-brand-accent' : 'text-luxury-text-inverse hover:text-brand-accent'}`}
+                            className='mobile-nav-link'
+                            data-active={active ? 'true' : 'false'}
                             aria-current={active ? 'page' : undefined}
                             tabIndex={menuOpen ? 0 : -1}
                           >

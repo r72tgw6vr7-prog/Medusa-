@@ -1,5 +1,6 @@
 import { Shield, Award, Heart, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 import './TrustSignals.css';
 
 /**
@@ -25,49 +26,84 @@ type TrustBadge = {
   ariaLabel: string;
 };
 
-const TRUST_BADGES: TrustBadge[] = [
-  {
-    icon: Shield,
-    title: 'Zertifizierte Qualität',
-    stat: '100%',
-    description: 'EU-Hygienezertifiziertes Studio & Verband anerkannt.',
-    ariaLabel: 'Zertifiziert nach EU-Hygienestandards',
-  },
-  {
-    icon: Award,
-    title: 'Bewährte Erfahrung',
-    stat: '25+',
-    description: 'Über 25 Jahre preisgekrönte Tattoo-Expertise.',
-    ariaLabel: 'Über 25 Jahre Erfahrung',
-  },
-  {
-    icon: Heart,
-    title: 'Premium Nachsorge',
-    stat: '5000+',
-    description: '5 000+ Kunden betreut mit persönlicher Heilungshilfe.',
-    ariaLabel: 'Premium Nachsorge und Support',
-  },
-  {
-    icon: Star,
-    title: 'Qualitätsgarantie',
-    stat: '100%',
-    description: 'Lebenslange Garantie auf Farbe & Handwerkskunst.',
-    ariaLabel: 'Qualitätsgarantie',
-  },
-];
+const TRUST_BADGES: Record<'de' | 'en', TrustBadge[]> = {
+  de: [
+    {
+      icon: Shield,
+      title: 'Zertifizierte Qualität',
+      stat: '100%',
+      description: 'EU-hygienezertifiziertes Studio und anerkannte Branchenstandards.',
+      ariaLabel: 'Zertifiziert nach EU-Hygienestandards',
+    },
+    {
+      icon: Award,
+      title: 'Bewährte Erfahrung',
+      stat: '25+',
+      description: 'Über 25 Jahre preisgekrönte Tattoo-Expertise.',
+      ariaLabel: 'Über 25 Jahre Erfahrung',
+    },
+    {
+      icon: Heart,
+      title: 'Premium Nachsorge',
+      stat: '5000+',
+      description: 'Mehr als 5.000 Kundinnen und Kunden mit persönlicher Heilungshilfe begleitet.',
+      ariaLabel: 'Premium Nachsorge und Support',
+    },
+    {
+      icon: Star,
+      title: 'Qualitätsgarantie',
+      stat: '100%',
+      description: 'Lebenslange Garantie auf Farbe und Handwerkskunst.',
+      ariaLabel: 'Qualitätsgarantie',
+    },
+  ],
+  en: [
+    {
+      icon: Shield,
+      title: 'Certified Quality',
+      stat: '100%',
+      description: 'EU hygiene-certified studio with recognised professional standards.',
+      ariaLabel: 'Certified to EU hygiene standards',
+    },
+    {
+      icon: Award,
+      title: 'Proven Experience',
+      stat: '25+',
+      description: 'More than 25 years of award-winning tattoo expertise.',
+      ariaLabel: 'More than 25 years of experience',
+    },
+    {
+      icon: Heart,
+      title: 'Premium Aftercare',
+      stat: '5000+',
+      description: 'Over 5,000 clients supported with personal healing guidance.',
+      ariaLabel: 'Premium aftercare and support',
+    },
+    {
+      icon: Star,
+      title: 'Quality Guarantee',
+      stat: '100%',
+      description: 'Lifetime commitment to colour integrity and craftsmanship.',
+      ariaLabel: 'Quality guarantee',
+    },
+  ],
+};
 
 export function TrustSignals() {
+  const { language } = useLanguage();
+  const badges = TRUST_BADGES[language];
+
   return (
     <section className='py-32'>
       <div className='max-w-7xl mx-auto px-8'>
         {/* 4-Card Horizontal Grid */}
         <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12'>
-          {TRUST_BADGES.map((badge, index) => {
+          {badges.map((badge, index) => {
             const Icon = badge.icon;
             return (
               <motion.div
                 key={badge.title}
-                className='cool-lines-card chrome-card group relative flex flex-col items-center text-center h-full p-(--space-4) md:p-8 transition-all duration-500 bg-(--card-bg) border border-(--card-border) rounded-(--card-radius)'
+                className='cool-lines-card chrome-card premium-interactive group relative flex h-full flex-col items-center rounded-(--card-radius) border border-(--card-border) bg-(--card-bg) p-(--space-4) text-center md:p-8'
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{
                   opacity: 1,
@@ -79,10 +115,12 @@ export function TrustSignals() {
                   },
                 }}
                 viewport={{ once: true, margin: '-50px' }}
-                style={{ boxShadow: 'var(--card-shadow-depth), var(--card-shadow-glow)' }}
+                style={{
+                  boxShadow: 'var(--premium-elevation), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
+                }}
                 whileHover={{
                   boxShadow:
-                    'var(--card-shadow-depth), var(--card-shadow-hover-glow), var(--card-shadow-inner)',
+                    'var(--premium-elevation-hover), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
                 }}
                 role='group'
                 aria-label={badge.ariaLabel}

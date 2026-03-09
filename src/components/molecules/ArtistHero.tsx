@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { Artist } from '@/data/artists';
 import { PageHeading } from '@/components/PageHeading';
@@ -12,11 +11,7 @@ interface ArtistHeroProps {
 }
 
 export function ArtistHero({ artist }: ArtistHeroProps) {
-  const location = useLocation();
-  const { language } = useLanguage();
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
-  const roleLabel =
-    (language === 'en' ? artist.roleLocalized?.en : artist.roleLocalized?.de) ?? artist.role;
+  const roleLabel = artist.roleLocalized?.de ?? artist.role;
 
   const backgroundImage = artist.coverImage || artist.profileImage;
 
@@ -54,7 +49,7 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
               />
 
               <p className='mt-12 text-(length:--text-lg) text-luxury-text-inverse/70 max-w-2xl mx-auto font-body leading-(--line-height-normal)'>
-                {artist.bio[isEnglishPath ? 'en' : 'de']}
+                {artist.bio.de}
               </p>
 
               <div className='mt-16 flex flex-col sm:flex-row items-center justify-center gap-8'>
@@ -62,7 +57,7 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
                   href='#portfolio'
                   className='inline-flex items-center justify-center px-8 py-6 bg-(--accent-chrome) hover:bg-(--accent-chrome)/80 text-luxury-text-primary font-semibold text-(length:--text-body) rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2'
                 >
-                  {isEnglishPath ? 'View Portfolio' : 'Portfolio ansehen'}
+                  Portfolio ansehen
                 </a>
               </div>
             </div>

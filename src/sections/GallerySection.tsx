@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 import { SectionHeading } from '@/components/SectionHeading';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 interface GalleryImage {
   id: string;
   imageUrl: string;
@@ -37,6 +39,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
   showCTA = true,
 }) => {
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
 
   const isFileUrl = (src: string) => /\.(avif|webp|png|jpe?g)$/i.test(src);
 
@@ -58,7 +61,12 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       <Container size='default'>
         {/* Header - Primary Section (h2) */}
         <div className='mb-16'>
-          <SectionHeading eyebrow='Galerie' title={title} subtitle={subtitle} level='primary' />
+          <SectionHeading
+            eyebrow={t('common.sharedSections.gallerySection.eyebrow')}
+            title={title}
+            subtitle={subtitle}
+            level='primary'
+          />
         </div>
 
         {/* Gallery Grid - Sample Preview */}
@@ -75,7 +83,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 ease: 'easeOut',
               }}
               className='group relative aspect-square rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-full'
-              onClick={() => onImageClick?.(image) || navigate('/gallery')}
+              onClick={() => {
+                if (onImageClick) {
+                  onImageClick(image);
+                  return;
+                }
+
+                navigate(localizePath('/gallery', language));
+              }}
             >
               {isFileUrl(image.imageUrl) ? (
                 <img
@@ -84,7 +99,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   width={640}
                   height={640}
                   loading='lazy'
-                  className='w-full h-full object-fill grayscale hover:grayscale-0 transition-all duration-500'
+                  className='w-full h-full object-fill saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
                   onError={(e) => {
                     if (!image.fallbackUrl) return;
                     const target = e.target as HTMLImageElement;
@@ -119,7 +134,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     width={640}
                     height={640}
                     loading='lazy'
-                    className='w-full h-full object-fill grayscale hover:grayscale-0 transition-all duration-500'
+                    className='w-full h-full object-fill saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
                     onError={(e) => {
                       if (!image.fallbackUrl) return;
                       const target = e.target as HTMLImageElement;
@@ -161,10 +176,10 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             className='flex justify-center mt-16'
           >
             <button
-              onClick={() => navigate('/gallery')}
+              onClick={() => navigate(localizePath('/gallery', language))}
               className='inline-flex items-center justify-center gap-8 px-8 py-8 bg-(--brand-accent) text-(--deep-black) font-semibold text-lg hover:bg-(--brand-accent-hover) transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-(--brand-accent) focus:ring-offset-2 focus:ring-offset-(--deep-black)'
             >
-              Zur Galerie
+              {t('common.sharedSections.gallerySection.viewGallery')}
               <ArrowRight className='w-5 h-5' />
             </button>
           </motion.div>

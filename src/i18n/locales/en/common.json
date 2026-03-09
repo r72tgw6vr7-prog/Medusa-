@@ -263,9 +263,19 @@
     "legal": "Imprint",
     "privacy": "Privacy Policy",
     "brandTagline": "Munich's premium tattoo studio for art that lasts a lifetime.",
+    "brandDescription": "30 YEARS, 30,000 TATTOOS, AND NEARLY EVERY GENRE. Others follow trends. We create them. We bring your vision to life with precision and passion.",
     "studio": {
       "address": "Altheimer Eck 11, 80331 Munich",
       "hours": "Mon-Thu: 11:30-19:00, Fri-Sat: 11:30-20:00, Sun: Closed"
+    },
+    "hoursCard": {
+      "heading": "Opening hours",
+      "weekdaysLabel": "Mon - Thu:",
+      "weekdaysValue": "11:30 - 19:00",
+      "weekendLabel": "Fri - Sat:",
+      "weekendValue": "11:30 - 20:00",
+      "sundayLabel": "Sun:",
+      "sundayValue": "Closed"
     },
     "headings": {
       "quickLinks": "Quick Links",
@@ -305,11 +315,11 @@
         }
       },
       "tags": {
-        "marienplatz": "Tattoo Marienplatz",
-        "innerCity": "Tattoo studio inner city",
-        "cityCenter": "Tattoo city center Munich",
-        "altheimerEck": "Tattoo Altheimer Eck",
-        "englishSpeaking": "English speaking tattoo Munich"
+        "marienplatz": "Tattoo studio near Marienplatz",
+        "innerCity": "Tattoo studio in the inner city",
+        "cityCenter": "Tattoo studio in Munich city centre",
+        "altheimerEck": "Tattoo studio at Altheimer Eck",
+        "englishSpeaking": "English-speaking tattoo studio in Munich"
       },
       "faq": {
         "title": "Tattoo Studio Munich – your questions, our answers",
@@ -478,6 +488,31 @@
           }
         }
       }
+    }
+  },
+  "sharedSections": {
+    "gallerySection": {
+      "eyebrow": "Gallery",
+      "viewGallery": "View gallery"
+    },
+    "studioCarousel": {
+      "title": "Our studio",
+      "subtitle": "A look inside our professional, EU-certified tattoo studio in the heart of Munich",
+      "regionLabel": "Studio photo carousel",
+      "previous": "Previous image",
+      "next": "Next image",
+      "slide": "Slide",
+      "of": "of"
+    },
+    "preFooterBookingCta": {
+      "title": "Ready for your masterpiece?",
+      "subtitle": "Let's turn your vision into a piece that feels unmistakably yours",
+      "cardTitle": "Book your appointment",
+      "ctaDefault": "Secure your appointment now →",
+      "ctaSelected": "Request this appointment now →"
+    },
+    "bookingSection": {
+      "cta": "Book appointment"
     }
   },
   "slider": {

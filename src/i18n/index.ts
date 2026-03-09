@@ -7,7 +7,7 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'de';
 
 export const I18N_STORAGE_KEY = 'language';
-export const I18N_CACHE_VERSION = '6';
+export const I18N_CACHE_VERSION = '11';
 
 export const NAMESPACES = [
   'common',
@@ -53,14 +53,8 @@ const namespaceLoaders: NamespaceLoaders = {
   },
 };
 
-function isLocale(value: string): value is Locale {
-  return (SUPPORTED_LOCALES as readonly string[]).includes(value);
-}
-
-export function normalizeLocale(input: string | null | undefined): Locale {
-  if (!input) return DEFAULT_LOCALE;
-  const base = input.toLowerCase().split('-')[0];
-  return isLocale(base) ? base : DEFAULT_LOCALE;
+export function normalizeLocale(_input: string | null | undefined): Locale {
+  return DEFAULT_LOCALE;
 }
 
 function getCacheKey(locale: Locale, namespace: Namespace) {
@@ -131,7 +125,7 @@ export async function initI18n() {
       .use(LanguageDetector)
       .use(initReactI18next)
       .init({
-        supportedLngs: [...SUPPORTED_LOCALES],
+        supportedLngs: [DEFAULT_LOCALE],
         fallbackLng: DEFAULT_LOCALE,
         ns: [...NAMESPACES],
         defaultNS: 'common',
@@ -181,8 +175,8 @@ export function getLocale(): Locale {
   return normalizeLocale(i18next.language);
 }
 
-export async function setLocale(locale: Locale) {
-  await i18next.changeLanguage(locale);
+export async function setLocale(_locale: Locale) {
+  await i18next.changeLanguage(DEFAULT_LOCALE);
 }
 
 export function getI18nInstance() {

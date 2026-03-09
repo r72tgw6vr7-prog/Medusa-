@@ -4,11 +4,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
 
-const toEnglishPath = (basePath: string) => {
-  if (basePath === '/') return '/en';
-  return `/en${basePath}`;
-};
-
 type LocalizedMetaProps =
   | {
       pageKey: string;
@@ -23,7 +18,7 @@ type LocalizedMetaProps =
     };
 
 const LocalizedMeta = (props: LocalizedMetaProps) => {
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
   const location = useLocation();
 
   const title =
@@ -37,7 +32,6 @@ const LocalizedMeta = (props: LocalizedMetaProps) => {
   const hreflang = props.basePath
     ? {
         de: `${SITE_URL}${props.basePath}`,
-        en: `${SITE_URL}${toEnglishPath(props.basePath)}`,
       }
     : undefined;
 
@@ -47,8 +41,7 @@ const LocalizedMeta = (props: LocalizedMetaProps) => {
       description={description}
       canonicalPath={canonicalPath}
       hreflang={hreflang}
-      locale={language === 'en' ? 'en_US' : 'de_DE'}
-      alternateLocale={language === 'en' ? ['de_DE'] : ['en_US']}
+      locale='de_DE'
     />
   );
 };

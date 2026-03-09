@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Meta from '@/components/Meta';
 import Section from '@/components/primitives/Section';
@@ -18,16 +18,14 @@ import ArtistContactCTA from '@/components/molecules/ArtistContactCTA';
 
 export function ArtistProfilePage() {
   const { slug } = useParams<{ slug: string }>();
-  const location = useLocation();
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   const artist = useMemo(() => {
     if (!slug) return undefined;
     return getArtistBySlug(slug);
   }, [slug]);
 
-  const isEnglishPath = location.pathname === '/en' || location.pathname.startsWith('/en/');
-  const backHref = isEnglishPath ? '/en/artists' : '/artists';
+  const backHref = '/artists';
 
   if (!artist) {
     return <NotFoundPage />;
@@ -35,10 +33,9 @@ export function ArtistProfilePage() {
 
   const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
   const dePath = `/artists/${artist.slug}`;
-  const enPath = `/en/artists/${artist.slug}`;
 
   const title = `Medusa Tattoo München | ${artist.displayName}`;
-  const descriptionSource = language === 'en' ? artist.bio.en : artist.bio.de;
+  const descriptionSource = artist.bio.de;
   const description =
     descriptionSource.length > 160 ? `${descriptionSource.slice(0, 157)}...` : descriptionSource;
 
@@ -47,14 +44,12 @@ export function ArtistProfilePage() {
       <Meta
         title={title}
         description={description}
-        canonicalPath={location.pathname}
+        canonicalPath={dePath}
         ogImage={artist.coverImage || artist.profileImage}
         hreflang={{
           de: `${SITE_URL}${dePath}`,
-          en: `${SITE_URL}${enPath}`,
         }}
-        locale={language === 'en' ? 'en_US' : 'de_DE'}
-        alternateLocale={language === 'en' ? ['de_DE'] : ['en_US']}
+        locale='de_DE'
       />
 
       {/* Skip to main content link */}
