@@ -68,7 +68,7 @@
   },
   "services": {
     "tattoo": {
-      "title": "Tattoo Artistry",
+      "title": "Tattoo",
       "price": "ab €150/Std",
       "features": {
         "custom": "Individuelle Designs",

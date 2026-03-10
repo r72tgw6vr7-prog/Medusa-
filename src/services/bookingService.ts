@@ -45,7 +45,7 @@ const formatDateToGerman = (value: string): string => {
 
 const mapServiceLabel = (serviceId: string): string => {
   if (serviceId === 'piercing') return 'Piercing';
-  return 'Tattoo Artistry';
+  return 'Tattoo';
 };
 
 // Map specific service IDs to human-readable German labels
@@ -65,7 +65,7 @@ const mapSpecificServiceLabel = (specificService?: string): string => {
     'medium': 'Mittel (5-15cm)',
     'large': 'Groß (15cm+)',
     'coverup': 'Cover-Up',
-    'custom': 'Custom Design',
+    'custom': 'Individuelles Design',
   };
 
   return labels[specificService] || specificService;
@@ -79,8 +79,13 @@ const mapPaymentLabel = (paymentMethod?: BookingRequest['paymentMethod']): strin
 };
 
 export const submitBooking = async (data: BookingRequest): Promise<BookingResponse> => {
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY;
+  if (!web3FormsKey) {
+    throw new Error('Das Buchungsformular ist derzeit nicht konfiguriert.');
+  }
+
   const formData = new FormData();
-  formData.append('access_key', 'f1b55e90-ca0c-4b1d-b2e4-1d1c9b35a252');
+  formData.append('access_key', web3FormsKey);
   formData.append('name', data.name);
   formData.append('email', data.email);
   formData.append('phone', data.phone);
@@ -97,39 +102,39 @@ export const submitBooking = async (data: BookingRequest): Promise<BookingRespon
   // MAGIC EMAIL with 1-click calendar buttons
   formData.append(
     'subject',
-    `🆕 New Booking: ${data.name} - ${serviceDisplay} - ${formatDateToGerman(data.date)}`,
+    `🆕 Neue Buchung: ${data.name} - ${serviceDisplay} - ${formatDateToGerman(data.date)}`,
   );
   formData.append(
     'message',
     `
-🎯 NEW BOOKING REQUEST - MEDUSA TATTOO
+🎯 NEUE BUCHUNGSANFRAGE - MEDUSA TATTOO
 
 👤 Name: ${data.name}
-📧 Email: ${data.email}
-📞 Phone: ${data.phone}
-✨ Service: ${serviceDisplay}
-📅 Date: ${formatDateToGerman(data.date)}
-💳 Payment: ${mapPaymentLabel(data.paymentMethod) || 'Not specified'}
-📝 Details: ${data.projectDetails || 'None'}
+📧 E-Mail: ${data.email}
+📞 Telefon: ${data.phone}
+✨ Leistung: ${serviceDisplay}
+📅 Datum: ${formatDateToGerman(data.date)}
+💳 Zahlung: ${mapPaymentLabel(data.paymentMethod) || 'Nicht angegeben'}
+📝 Details: ${data.projectDetails || 'Keine'}
 
 ━━━━━━━━━━━━━━━━━━━
-🔥 QUICK ADD TO CALENDAR (ONE CLICK):
+🔥 SCHNELL ZUM KALENDER (EIN KLICK):
 ━━━━━━━━━━━━━━━━━━━
 
-👩 Angie: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👩 Angie: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
-👩 Vivi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👩 Vivi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
-👩 Debi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👩 Debi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
-👨 Loui: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👨 Loui: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
-👩 Luz: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👩 Luz: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
-👨 Aaron: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Phone: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nEmail: ' + data.email)}
+👨 Aaron: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
 
 ━━━━━━━━━━━━━━━━━━━
-REPLY TO CLIENT: ${data.email}?subject=✅%20Your%20Medusa%20Tattoo%20booking%20confirmed!
+AN KUNDEN ANTWORTEN: ${data.email}?subject=✅%20Ihre%20Medusa%20Tattoo%20Buchung%20ist%20best%C3%A4tigt!
 
 Medusa Tattoo Team
   `,
@@ -148,7 +153,7 @@ Medusa Tattoo Team
     });
 
     if (!response.ok || !result.success) {
-      throw new Error(result?.message || 'Submission failed');
+      throw new Error(result?.message || 'Übermittlung fehlgeschlagen');
     }
 
     return {
@@ -164,11 +169,11 @@ Medusa Tattoo Team
 };
 
 export const validateBookingData = (data: Partial<BookingRequest>): string | null => {
-  if (!data.serviceId) return 'Please select a service';
-  if (!data.paymentMethod) return 'Please select a payment method';
-  if (!data.name?.trim()) return 'Name is required';
-  if (!data.email?.trim()) return 'Email is required';
-  if (!/\S+@\S+\.\S+/.test(data.email)) return 'Please enter a valid email';
-  if (!data.date) return 'Please select a date';
+  if (!data.serviceId) return 'Bitte wählen Sie eine Leistung aus';
+  if (!data.paymentMethod) return 'Bitte wählen Sie eine Zahlungsart aus';
+  if (!data.name?.trim()) return 'Name ist erforderlich';
+  if (!data.email?.trim()) return 'E-Mail ist erforderlich';
+  if (!/\S+@\S+\.\S+/.test(data.email)) return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+  if (!data.date) return 'Bitte wählen Sie ein Datum aus';
   return null;
 };

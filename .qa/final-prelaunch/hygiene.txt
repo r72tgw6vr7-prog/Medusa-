@@ -1,0 +1,424 @@
+
+> medusa-tattoo@1.0.0 hygiene /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> bash scripts/hygiene-check.sh
+
+== Hygiene: circular deps (madge) ==
+npm warn Unknown env config "store-dir". This will stop working in the next major version of npm.
+- Finding files
+Processed 247 files (1.5s) (2 warnings)
+
+✔ No circular dependency found!
+
+== Hygiene: dead exports (ts-prune) ==
+npm warn Unknown env config "store-dir". This will stop working in the next major version of npm.
+src/routes.tsx:4 - routes
+src/components/LocalizedMeta.tsx:49 - LocalizedMetaProps (used in module)
+src/components/LocationSection.tsx:185 - default
+src/components/PageHeading.tsx:47 - default
+src/components/SectionHeading.tsx:42 - default
+src/config/imagePaths.ts:69 - getImagePath
+src/config/imagePaths.ts:74 - isValidImagePath
+src/config/imagePaths.ts:66 - ImageCategory (used in module)
+src/config/imagePaths.ts:67 - ImageKey (used in module)
+src/config/site.ts:1 - siteConfig
+src/constants/piercingPhotos.ts:1 - earPiercingPhotos (used in module)
+src/constants/piercingPhotos.ts:8 - mouthPiercingPhotos (used in module)
+src/constants/piercingPhotos.ts:15 - facePiercingPhotos (used in module)
+src/constants/routes.ts:13 - ROUTE_PATHS (used in module)
+src/constants/routes.ts:23 - NAV_ITEMS
+src/constants/routes.ts:32 - routes (used in module)
+src/constants/routes.ts:68 - getRoutePath
+src/constants/routes.ts:80 - isActiveRoute
+src/content/gallery-images.ts:12 - GalleryImage (used in module)
+src/content/gallery-images.ts:36 - GALLERY_IMAGES (used in module)
+src/content/gallery-images.ts:262 - getHeroImages
+src/content/gallery-images.ts:266 - getGalleryPreviewImages
+src/content/gallery-images.ts:270 - getImageById
+src/content/gallery-images.ts:291 - generateSrcSet (used in module)
+src/content/gallery-images.ts:303 - getImageSources
+src/content/gallery-images.ts:316 - default
+src/contexts/LanguageContext.tsx:22 - LanguageContextType (used in module)
+src/contexts/LanguageContext.tsx:30 - LanguageContext (used in module)
+src/data/aftercare.ts:7 - AftercarePhase (used in module)
+src/data/aftercare.ts:18 - AftercareTip (used in module)
+src/data/aftercare.ts:26 - AftercareProduct (used in module)
+src/data/aftercare.ts:36 - AftercareWarningSigns (used in module)
+src/data/aftercare.ts:363 - getDosAndDonts
+src/data/aftercare.ts:370 - getCriticalTips
+src/data/aftercare.ts:374 - getPhaseByDay
+src/data/aftercare.ts:383 - getRecommendedProducts
+src/data/aftercare.ts:387 - default
+src/data/artists.ts:312 - getArtistById
+src/data/artists.ts:316 - getFeaturedArtists
+src/data/artists.ts:320 - getAvailableArtists
+src/data/artists.ts:324 - getArtistsBySpecialty
+src/data/artists.ts:330 - default
+src/data/gallery.ts:7 - GalleryImage (used in module)
+src/data/gallery.ts:30 - GALLERY_IMAGES (used in module)
+src/data/gallery.ts:401 - getImageById
+src/data/gallery.ts:405 - getImagesByArtist
+src/data/gallery.ts:409 - getImagesByCategory
+src/data/gallery.ts:413 - getImagesByStyle
+src/data/gallery.ts:419 - getFeaturedImages
+src/data/gallery.ts:423 - getImagesByYear
+src/data/gallery.ts:427 - searchImages
+src/data/gallery.ts:439 - default
+src/data/imageData.ts:2 - portfolioImages (used in module)
+src/data/imageData.ts:77 - PortfolioImage
+src/data/imageData.ts:78 - ImageCategory (used in module)
+src/data/imageData.ts:80 - getFeaturedPortfolio
+src/data/imageData.ts:82 - getPortfolioByCategory
+src/data/imageData.ts:85 - getAllPortfolio
+src/data/imageData.ts:87 - getPortfolioById
+src/data/imageData.ts:89 - getPortfolioByArtist
+src/data/kids-services.ts:6 - KIDS_SERVICES (used in module)
+src/data/kids-services.ts:38 - default
+src/data/partners.ts:1 - PARTNERS
+src/data/piercing-services.ts:7 - PIERCING_SERVICES (used in module)
+src/data/piercing-services.ts:70 - default
+src/data/serviceCategories.ts:7 - ServiceCategory (used in module)
+src/data/serviceCategories.ts:20 - SERVICE_CATEGORIES (used in module)
+src/data/serviceCategories.ts:79 - default
+src/data/services.ts:7 - Service (used in module)
+src/data/services.ts:49 - SERVICES (used in module)
+src/data/services.ts:466 - getServiceBySlug
+src/data/services.ts:470 - getServiceById
+src/data/services.ts:474 - getServicesByCategory
+src/data/services.ts:478 - getRecommendedServices
+src/data/services.ts:482 - getPopularServices
+src/data/services.ts:486 - default
+src/data/tattoo-services.ts:7 - TATTOO_PACKAGES (used in module)
+src/data/tattoo-services.ts:70 - default
+src/foundation/SimpleMedusaProvider.tsx:12 - MedusaDesignSystemContextType (used in module)
+src/foundation/SimpleMedusaProvider.tsx:53 - useMedusaDesignSystem
+src/foundation/SimpleMedusaProvider.tsx:61 - default
+src/hooks/useKeyboardNav.ts:223 - useFocusManagement
+src/hooks/useKeyboardNav.ts:284 - useListNavigation
+src/hooks/useMediaQuery.ts:75 - Breakpoint (used in module)
+src/hooks/useMediaQuery.ts:81 - useBreakpoint (used in module)
+src/hooks/useMediaQuery.ts:97 - useResponsive
+src/hooks/useSectionTransition.ts:78 - default
+src/hooks/useTranslation.ts:6 - useTranslation
+src/i18n/index.ts:56 - normalizeLocale (used in module)
+src/i18n/index.ts:119 - initI18n
+src/i18n/index.ts:174 - getLocale
+src/i18n/index.ts:178 - setLocale
+src/i18n/index.ts:182 - getI18nInstance
+src/i18n/index.ts:186 - splitTranslationKey
+src/i18n/index.ts:5 - SUPPORTED_LOCALES (used in module)
+src/i18n/index.ts:6 - Locale (used in module)
+src/i18n/index.ts:7 - DEFAULT_LOCALE (used in module)
+src/i18n/index.ts:9 - I18N_STORAGE_KEY (used in module)
+src/i18n/index.ts:10 - I18N_CACHE_VERSION (used in module)
+src/i18n/index.ts:12 - NAMESPACES (used in module)
+src/i18n/index.ts:25 - Namespace (used in module)
+src/i18n/types.ts:3 - TranslationParamValue (used in module)
+src/i18n/types.ts:5 - TranslationParams (used in module)
+src/i18n/types.ts:7 - TranslationKeys (used in module)
+src/i18n/types.ts:9 - TranslationFunction
+src/legacy/paymentService.ts:6 - PaymentMethod (used in module)
+src/legacy/paymentService.ts:20 - PaymentRequest (used in module)
+src/legacy/paymentService.ts:31 - PaymentResponse (used in module)
+src/legacy/paymentService.ts:41 - GERMAN_PAYMENT_METHODS (used in module)
+src/legacy/paymentService.ts:107 - processPayment
+src/legacy/paymentService.ts:304 - calculatePaymentCost
+src/legacy/paymentService.ts:323 - getRecommendedPaymentMethod
+src/legacy/paymentService.ts:341 - validatePaymentMethod
+src/lib/csrf.ts:1 - getCsrfToken
+src/lib/csrf.ts:7 - validateCsrfToken
+src/lib/env.ts:158 - requireEnv
+src/lib/env.ts:137 - env (used in module)
+src/lib/env.ts:140 - Env (used in module)
+src/lib/env.ts:143 - isDevelopment (used in module)
+src/lib/env.ts:144 - isProduction
+src/lib/env.ts:145 - isDebug (used in module)
+src/lib/env.ts:148 - features
+src/lib/gdpr-compliance.ts:29 - blockTrackersUntilConsent
+src/lib/gdpr-compliance.ts:54 - saveConsentChoice
+src/lib/gdpr-compliance.ts:88 - withdrawConsent
+src/lib/gdpr-compliance.ts:124 - getConsentStatus (used in module)
+src/lib/gdpr-compliance.ts:145 - auditLog (used in module)
+src/lib/scroll-minimal.ts:184 - scrollController (used in module)
+src/lib/scroll-minimal.ts:186 - initScroll
+src/lib/scroll-minimal.ts:190 - default
+src/lib/scroll.ts:570 - scrollModes (used in module)
+src/lib/scroll.ts:587 - default
+src/lib/scrollEnhance.ts:45 - default
+src/lib/scrollEnhance.ts:48 - scrollTo (used in module)
+src/lib/scrollEnhance.ts:52 - toggleScrollDebug (used in module)
+src/providers/MotionProvider.tsx:29 - useMotionConfig
+src/providers/MotionProvider.tsx:74 - default
+src/schemas/bookingSchema.ts:5 - createBookingSchema (used in module)
+src/schemas/bookingSchema.ts:72 - BookingFormData
+src/sections/index.ts:19 - BeforeAfterSection
+src/sections/index.ts:16 - ServicesCurtainSection
+src/sections/index.ts:13 - BookingSection
+src/sections/index.ts:3 - ContactInfo
+src/sections/index.ts:10 - SocialLink
+src/sections/index.ts:16 - ContactFormData
+src/sections/index.ts:35 - ContactSection
+src/sections/index.ts:32 - GallerySection
+src/sections/index.ts:36 - ServicesSection
+src/sections/index.ts:31 - TrustSignalsSection
+src/sections/TrustBadges.tsx:3 - TrustBadgeItem (used in module)
+src/sections/TrustBadges.tsx:10 - TRUST_BADGES
+src/services/bookingService.ts:6 - BookingRequest (used in module)
+src/services/bookingService.ts:20 - BookingResponse (used in module)
+src/services/contactService.ts:1 - ContactRequest (used in module)
+src/services/integrationTesting.ts:24 - testEnvironmentConfig (used in module)
+src/services/integrationTesting.ts:85 - testEmailService (used in module)
+src/services/integrationTesting.ts:148 - testPaymentService (used in module)
+src/services/integrationTesting.ts:171 - testZohoCRM (used in module)
+src/services/integrationTesting.ts:248 - testAPIEndpoints (used in module)
+src/services/integrationTesting.ts:306 - runAllTests
+src/services/integrationTesting.ts:358 - testFormSubmission
+src/styles/animations.ts:9 - easings (used in module)
+src/styles/animations.ts:23 - durations (used in module)
+src/styles/animations.ts:32 - fadeInVariants (used in module)
+src/styles/animations.ts:43 - fadeInUpVariants (used in module)
+src/styles/animations.ts:55 - fadeInDownVariants (used in module)
+src/styles/animations.ts:67 - scaleInVariants (used in module)
+src/styles/animations.ts:79 - slideInLeftVariants (used in module)
+src/styles/animations.ts:91 - slideInRightVariants (used in module)
+src/styles/animations.ts:104 - staggerChildren (used in module)
+src/styles/animations.ts:132 - prefersReducedMotion (used in module)
+src/styles/animations.ts:138 - getAccessibleAnimation (used in module)
+src/styles/animations.ts:151 - default
+src/styles/glassmorphism.ts:4 - createGlassmorphism (used in module)
+src/styles/glassmorphism.ts:19 - glassmorphism (used in module)
+src/styles/glassmorphism.ts:71 - goldenGlow (used in module)
+src/styles/glassmorphism.ts:97 - buttonStyles (used in module)
+src/styles/glassmorphism.ts:137 - default
+src/types/artist.ts:1 - PortfolioImage (used in module)
+src/types/artist.ts:10 - SocialMedia (used in module)
+src/types/artist.ts:16 - Availability (used in module)
+src/types/artist.ts:47 - ArtistCardProps
+src/types/artist.ts:53 - ArtistGridProps
+src/types/artist.ts:61 - ArtistDetailProps
+src/types/artist.ts:69 - ArtistFilter (used in module)
+src/types/artist.ts:78 - ArtistFilterProps
+src/types/artist.ts:85 - ArtistBookingProps
+src/types/artist.ts:92 - ArtistSocialProofProps
+src/types/booking.ts:1 - Service (used in module)
+src/types/booking.ts:9 - Artist (used in module)
+src/types/booking.ts:17 - TimeSlot
+src/types/booking.ts:23 - PersonalInfo (used in module)
+src/types/booking.ts:31 - BookingFormData
+src/types/booking.ts:39 - ValidationErrors
+src/types/component-types.ts:4 - ContainerProps
+src/types/component-types.ts:9 - NavigationProps
+src/types/component-types.ts:14 - Artist (used in module)
+src/types/component-types.ts:23 - ArtistDetailHeroProps
+src/types/component-types.ts:27 - ArtistPortfolioProps
+src/types/component-types.ts:32 - StickyBookingBarProps
+src/types/component-types.ts:37 - HomePageProps
+src/types/components.ts:1 - GalleryPageProps
+src/types/components.ts:6 - ArtistsPageProps
+src/types/components.ts:10 - AfterCarePageProps
+src/types/components.ts:14 - FooterProps
+src/types/container.ts:1 - ContainerType (used in module)
+src/types/container.ts:3 - ContainerQuery (used in module)
+src/types/container.ts:14 - ContainerProps
+src/types/container.ts:21 - ContainerStyleProps
+src/types/core.ts:1 - PageType
+src/types/core.ts:14 - BreadcrumbData (used in module)
+src/types/core.ts:20 - RouteConfig (used in module)
+src/types/core.ts:28 - ReactNode
+src/types/design-tokens.d.ts:9 - ColorTokens (used in module)
+src/types/design-tokens.d.ts:35 - SpacingTokens (used in module)
+src/types/design-tokens.d.ts:46 - FontTokens (used in module)
+src/types/design-tokens.d.ts:52 - BrandColorTokens (used in module)
+src/types/design-tokens.d.ts:71 - TypographyTokens (used in module)
+src/types/design-tokens.d.ts:93 - SpacingScaleTokens (used in module)
+src/types/design-tokens.d.ts:109 - EffectsTokens (used in module)
+src/types/design-tokens.d.ts:121 - ZIndexTokens (used in module)
+src/types/design-tokens.d.ts:131 - AnimationTokens (used in module)
+src/types/design-tokens.d.ts:145 - BorderRadiusTokens (used in module)
+src/types/design-tokens.d.ts:156 - BrandTokens (used in module)
+src/types/design-tokens.d.ts:167 - GlassmorphismToken (used in module)
+src/types/design-tokens.d.ts:173 - AccessibilityTokens (used in module)
+src/types/design-tokens.d.ts:191 - DesignSystemTokens
+src/types/design-tokens.d.ts:202 - DesignTokens
+src/types/footer.ts:16 - FooterProps
+src/types/route-types.ts:19 - Language
+src/types/routes.ts:10 - RouteProps (used in module)
+src/types/routes.ts:24 - BreadcrumbItem
+src/types/routes.ts:30 - NavigationItem (used in module)
+src/types/routes.ts:38 - RouteParams (used in module)
+src/types/routes.ts:42 - QueryParams (used in module)
+src/types/routes.ts:46 - RouteMatch
+src/types/routes.ts:54 - LocationState (used in module)
+src/types/routes.ts:60 - RouterHistory
+src/utils/error-reporting.ts:1 - initErrorMonitoring
+src/utils/gallery-manifest-loader.ts:50 - loadGalleryManifest
+src/utils/gallery-manifest-loader.ts:68 - getSrcSet
+src/utils/gallery-manifest-loader.ts:78 - getOptimalImageUrl
+src/utils/gallery-manifest-loader.ts:8 - GalleryImageVariant (used in module)
+src/utils/gallery-manifest-loader.ts:16 - GalleryManifestImage (used in module)
+src/utils/gallery-manifest-loader.ts:35 - GalleryManifest (used in module)
+src/utils/gallery-utils.ts:1 - GalleryImage
+src/utils/gallery-utils.ts:19 - generateSrcSet
+src/utils/gallery-utils.ts:35 - getStats
+src/utils/glassmorphism.ts:114 - getBlurClassForVariant (used in module)
+src/utils/glassmorphism.ts:23 - createGlassmorphismEffect (used in module)
+src/utils/glassmorphism.ts:45 - getGlassmorphismClasses (used in module)
+src/utils/glassmorphism.ts:138 - getGlassmorphismStyles (used in module)
+src/utils/glassmorphism.ts:203 - chromeGlowEffect (used in module)
+src/utils/glassmorphism.ts:219 - default
+src/utils/image-validator.ts:12 - validateImage
+src/utils/image-validator.ts:25 - getImageWithFallback (used in module)
+src/utils/image-validator.ts:47 - useImageLoader
+src/utils/image-validator.ts:87 - preloadImages
+src/utils/image-validator.ts:108 - getOptimizedImageProps
+src/utils/imageUtils.ts:5 - getImageAlt
+src/utils/imageUtils.ts:37 - getArtistImageAlt
+src/utils/imageUtils.ts:48 - getPortfolioImageAlt
+src/utils/imageUtils.ts:62 - handleImageError
+src/utils/imageUtils.ts:76 - safeImageSrc
+src/utils/imageUtils.ts:84 - isPlaceholderImage
+src/utils/imageUtils.ts:95 - getImageProps
+src/utils/performance.ts:3 - initPerformanceMonitoring
+src/utils/performance.ts:21 - initFpsMonitoring
+src/components/atoms/TrustBadge.tsx:22 - default
+src/components/booking/bookingConfig.ts:3 - ServiceConfig (used in module)
+src/components/booking/bookingConfig.ts:40 - getSpecificServiceLabel
+src/components/cards/ArtistCard.tsx:192 - default
+src/components/cards/ServiceCard.tsx:197 - default
+src/components/molecules/ArtistContactCTA.tsx:12 - ArtistContactCTA (used in module)
+src/components/molecules/ArtistHero.tsx:13 - ArtistHero (used in module)
+src/components/molecules/ArtistPortfolioGallery.tsx:13 - ArtistPortfolioGallery (used in module)
+src/components/molecules/ArtistProfileCard.tsx:12 - ArtistProfileCard (used in module)
+src/components/molecules/index.ts:56 - ServiceCards
+src/components/molecules/index.ts:14 - BeforeAfterCard
+src/components/molecules/index.ts:13 - ContactInfoCard
+src/components/molecules/index.ts:11 - FAQItem
+src/components/molecules/index.ts:9 - NewsletterForm
+src/components/molecules/index.ts:19 - PriceCard
+src/components/molecules/index.ts:13 - ReviewCard
+src/components/molecules/index.ts:4 - ServiceFeature
+src/components/molecules/index.ts:35 - ServiceCard
+src/components/molecules/index.ts:12 - CookiePreferences
+src/components/molecules/index.ts:18 - CookieConsentBanner
+src/components/molecules/index.ts:9 - FocusTrap
+src/components/molecules/index.ts:21 - GDPRCompliance
+src/components/molecules/index.ts:16 - ProcessStepCard
+src/components/molecules/index.ts:7 - TrustBadgesBar
+src/components/molecules/index.ts:92 - TrustSignals
+src/components/molecules/index.ts:48 - MainNavigation
+src/components/molecules/index.ts:16 - TrustBadgeCarousel
+src/components/molecules/index.ts:14 - StatsBar
+src/components/molecules/index.ts:10 - LanguageToggle
+src/components/molecules/PiercingPhotoModal.tsx:125 - default
+src/components/organisms/InfiniteLogoCarousel.tsx:14 - InfiniteLogoCarouselProps (used in module)
+src/components/organisms/InfiniteLogoCarousel.tsx:20 - InfiniteLogoCarousel (used in module)
+src/components/organisms/TestimonialsCarousel.tsx:12 - Testimonial (used in module)
+src/components/organisms/TestimonialsCarousel.tsx:140 - TestimonialsCarouselProps (used in module)
+src/components/pages/index.ts:1 - Footer
+src/components/pages/index.ts:2 - TeamGrid
+src/components/pages/index.ts:214 - ServicesPageInteractive
+src/components/pages/ServicesPageInteractive.example.tsx:12 - ServicesPage (used in module)
+src/components/pages/ServicesPageInteractive.example.tsx:28 - HomePage
+src/components/pages/ServicesPageInteractive.example.tsx:48 - App
+src/components/pages/ServicesPageInteractive.example.tsx:62 - CustomServicesSection
+src/components/pages/ServicesPageInteractive.example.tsx:74 - default
+src/components/primitives/Section.tsx:67 - Section (used in module)
+src/components/sections/ArtistsSection.tsx:20 - ArtistsSection (used in module)
+src/components/sections/ArtistsSection.tsx:82 - default
+src/components/seo/LocationSection.tsx:6 - LocationSection
+src/components/ui/BackgroundParallax.tsx:46 - default
+src/components/ui/button.tsx:54 - ButtonProps (used in module)
+src/components/ui/button.tsx:166 - buttonVariants (used in module)
+src/components/ui/Card.tsx:31 - CardProps (used in module)
+src/components/ui/Card.tsx:60 - cardVariants (used in module)
+src/components/ui/Container.tsx:3 - ContainerSize (used in module)
+src/components/ui/Container.tsx:5 - ContainerProps (used in module)
+src/components/ui/CursorTrail.tsx:150 - default
+src/components/ui/hero-parallax.tsx:205 - Header (used in module)
+src/components/ui/hero-parallax.tsx:301 - ProductCard (used in module)
+src/components/ui/LuxuryButton.tsx:15 - LuxuryButton (used in module)
+src/components/ui/ScrollProgressLine.tsx:47 - default
+src/components/ui/utils.ts:19 - getVariantClasses
+src/components/ui/utils.ts:33 - getSizeClasses
+src/components/ui/utils.ts:47 - asChild (used in module)
+src/core/constants/routes.ts:8 - ROUTE_CONFIG (used in module)
+src/core/constants/routes.ts:89 - getNavigationRoutes
+src/core/constants/routes.ts:100 - getLegalRoutes
+src/core/constants/routes.ts:110 - default
+src/core/state/AppContext.tsx:112 - default
+src/core/types/routes.ts:38 - NavItem (used in module)
+src/core/types/routes.ts:57 - default
+src/i18n/generated/translationKeys.ts:1 - translationKeys (used in module)
+src/i18n/utils/formatters.ts:3 - formatDate
+src/i18n/utils/formatters.ts:11 - formatTime
+src/i18n/utils/formatters.ts:18 - formatDateTime
+src/i18n/utils/formatters.ts:28 - formatCurrency
+src/i18n/utils/formatters.ts:35 - formatPhone
+src/i18n/utils/pluralization.ts:5 - getPluralCategory
+src/i18n/utils/pluralization.ts:3 - PluralCategory (used in module)
+src/lib/animations/index.ts:16 - TRANSITION_DURATIONS
+src/lib/animations/index.ts:24 - TRANSITION_EASINGS
+src/lib/animations/index.ts:33 - TRANSITIONS
+src/lib/animations/index.ts:109 - combineTransitions
+src/lib/animations/index.ts:123 - TRANSITION_PRESETS
+src/lib/animations/index.ts:189 - createTransitionVars
+src/lib/animations/index.ts:212 - createTransitionStyle
+src/lib/animations/index.ts:224 - respectMotionPreferences
+src/lib/animations/index.ts:229 - TransitionDuration
+src/lib/animations/index.ts:230 - TransitionEasing
+src/lib/animations/index.ts:231 - TransitionPreset
+src/lib/animations/index.ts:34 - fadeIn
+src/lib/animations/index.ts:42 - fadeInUp
+src/lib/animations/index.ts:51 - fadeInDown
+src/lib/animations/index.ts:61 - slideInLeft
+src/lib/animations/index.ts:70 - slideInRight
+src/lib/animations/index.ts:79 - slideInBottom
+src/lib/animations/index.ts:89 - scaleIn
+src/lib/animations/index.ts:98 - scaleInFast
+src/lib/animations/index.ts:111 - staggerContainer
+src/lib/animations/index.ts:122 - staggerItem
+src/lib/animations/index.ts:131 - staggerItemLeft
+src/lib/animations/index.ts:140 - staggerItemRight
+src/lib/animations/index.ts:150 - goldGlow
+src/lib/animations/index.ts:169 - pageTransition
+src/lib/animations/index.ts:189 - heroImage
+src/lib/animations/index.ts:201 - heroText
+src/lib/animations/index.ts:215 - galleryItem
+src/lib/animations/index.ts:23 - useScrollAnimation
+src/lib/animations/index.ts:35 - useAnimateOnScroll
+src/lib/animations/index.ts:50 - useDelayedAnimation
+src/lib/animations/index.ts:68 - useResponsiveAnimation
+src/lib/animations/index.ts:98 - useStaggeredAnimation
+src/lib/forms/types.ts:3 - FormFieldProps
+src/lib/forms/types.ts:22 - FormErrorProps
+src/lib/forms/types.ts:31 - FormMethods
+src/lib/forms/types.ts:33 - FieldValues (used in module)
+src/lib/forms/types.ts:33 - FieldError (used in module)
+src/lib/forms/utils.ts:8 - getErrorMessage
+src/lib/forms/utils.ts:32 - createFormResolver
+src/lib/forms/utils.ts:40 - formatFieldName
+src/lib/forms/utils.ts:51 - hasError
+src/lib/forms/utils.ts:58 - isSubmitting (used in module)
+src/lib/forms/utils.ts:65 - resetForm
+src/lib/forms/utils.ts:79 - setFormErrors
+src/lib/forms/validators.ts:101 - createFormSchema
+src/lib/forms/validators.ts:6 - VALIDATION_MESSAGES (used in module)
+src/lib/forms/validators.ts:25 - validators
+src/lib/forms/validators.ts:108 - InferFormSchema
+src/sections/ProcessTimeline/index.ts:1 - ProcessTimeline
+src/components/atoms/Icon/Icon.tsx:17 - Icon (used in module)
+src/components/atoms/Icon/index.ts:3 - Icon (used in module)
+src/components/atoms/Icon/index.ts:4 - default
+src/components/booking/steps/index.ts:1 - ServiceSelectionStep
+src/components/booking/steps/index.ts:2 - PersonalInfoStep
+src/components/booking/steps/index.ts:3 - PaymentStep
+src/components/booking/steps/index.ts:4 - ConfirmationStep
+src/components/booking/steps/index.ts:5 - LoadingOverlay
+src/components/booking/steps/index.ts:5 - ErrorState
+src/components/ui/input/index.ts:1 - MedusaInput
+src/components/ui/input/index.ts:2 - MedusaInputProps
+src/components/ui/input/MedusaInput.tsx:40 - MedusaInput (used in module)
+== Hygiene: folder depth (max 4 levels under src/) ==
+== Hygiene: no markdown files in public/ ==
+== Hygiene: eslint (0 warnings) ==
+npm warn Unknown env config "store-dir". This will stop working in the next major version of npm.
+Hygiene: PASSED

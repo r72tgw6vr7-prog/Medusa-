@@ -1,0 +1,127 @@
+
+> medusa-tattoo@1.0.0 lint /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> eslint "**/*.{ts,tsx}" --config eslint.config.js
+
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/components/molecules/ArtistHero.tsx
+  7:10  warning  'useLanguage' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/components/pages/Footer.tsx
+  88:20  warning  Arbitrary value 'rounded-[24px]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility         medusa/enforce-no-arbitrary-values
+  94:24  warning  Arbitrary value 'grid-cols-[auto_auto]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/components/pages/ServicesPageInteractive.tsx
+   5:3  warning  'Gem' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   7:3  warning  'Wrench' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  10:3  warning  'ChevronDown' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  11:3  warning  'MessageCircle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/components/ui/BladeAccordion.tsx
+  180:21  warning  Arbitrary value 'tracking-[0.2em]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/components/ui/hero-parallax.tsx
+  262:19  warning  Arbitrary value 'shadow-[0_0_12px_rgba(255,255,255,0.45)]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/hooks/useKeyboardNav.ts
+    7:3   warning  'KeyboardEventHandler' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  181:56  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  182:56  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  185:61  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  186:61  warning  Unexpected any. Specify a different type                                                @typescript-eslint/no-explicit-any
+  227:55  warning  'event' is defined but never used. Allowed unused args must match /^_/u                 @typescript-eslint/no-unused-vars
+  231:54  warning  'event' is defined but never used. Allowed unused args must match /^_/u                 @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/legacy/paymentService.ts
+  28:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/lib/forms/validators.ts
+  101:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/lib/gdpr-compliance.ts
+  176:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  177:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/lib/scrollEnhance.ts
+  48:74  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  58:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  59:14  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/sections/GallerySection.tsx
+  102:19  warning  Arbitrary value 'saturate-[0.85]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+  102:19  warning  Arbitrary value 'contrast-[1.05]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+  137:21  warning  Arbitrary value 'saturate-[0.85]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+  137:21  warning  Arbitrary value 'contrast-[1.05]' is forbidden. Use design-system.css variables (var(--...)) or a semantic utility  medusa/enforce-no-arbitrary-values
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/services/bookingService.ts
+  149:5  warning  Unexpected console statement  no-console
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/services/zohoCRMService.ts
+   22:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   37:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   40:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  125:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:74  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  192:72  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  201:74  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  227:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  228:23  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  257:68  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  269:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  306:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  307:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  329:27  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  345:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  372:55  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  391:52  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/styles/animations.ts
+  139:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/src/types/core.ts
+  22:59  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/templates/ComponentTemplate.tsx
+  10:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/error-pages.spec.ts
+  15:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/form-locale.spec.ts
+  12:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/locale-scan.spec.ts
+   3:16   warning  'expect' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  15:42   warning  Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  25:44   warning  'browser' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  35:100  warning  'e' is defined but never used                                              @typescript-eslint/no-unused-vars
+  50:100  warning  'e' is defined but never used                                              @typescript-eslint/no-unused-vars
+  77:3    warning  Unexpected console statement                                               no-console
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/meta-locale.spec.ts
+  23:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  35:96  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/p0/r2-scroll.spec.ts
+  127:11  warning  'bottomPosition' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  159:11  warning  'homeBottomPosition' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/p0/seo5-analytics.spec.ts
+    7:16  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+   50:37  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  194:65  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  218:11  warning  'analyticsCalls' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  242:55  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/p0/t4-fonts.spec.ts
+  2:36  warning  'EXPECTED_FONT_WEIGHTS' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa/tests/responsive-audit.spec.ts
+   44:12  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   88:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  414:5   warning  Unexpected console statement              no-console
+  415:5   warning  Unexpected console statement              no-console
+  416:5   warning  Unexpected console statement              no-console
+  417:5   warning  Unexpected console statement              no-console
+
+✖ 72 problems (0 errors, 72 warnings)
+

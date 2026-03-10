@@ -18,6 +18,8 @@ import { useApp } from '@/core/state/AppContext';
 import { Button } from '@/components/ui/button';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 const categories = [
   {
@@ -213,6 +215,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
   className = '',
 }) => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [isAnimating, setIsAnimating] = useState(false);
   const { openBooking } = useApp();
@@ -244,10 +247,10 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
       if (t) window.clearTimeout(t);
       t = window.setTimeout(() => {
         openBooking({ service: serviceId });
-        navigate('/booking');
+        navigate(localizePath('/booking', language));
       }, 300) as unknown as number;
     };
-  }, [openBooking, navigate]);
+  }, [language, openBooking, navigate]);
 
   return (
     <Section variant='default' spacing='normal' className={className}>
@@ -257,7 +260,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
             <p className='text-sm uppercase tracking-widest text-white/50 font-semibold'>
               Medusa München
             </p>
-            <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--brand-gold)]'>
+            <h1 className='font-headline text-5xl md:text-6xl lg:text-7xl text-[var(--accent-chrome)]'>
               Unsere Services
             </h1>
             <p className='text-lg text-[color:var(--text-secondary)] max-w-2xl mx-auto font-body leading-relaxed'>
@@ -293,7 +296,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                   <div className='flex items-center justify-between mb-8'>
                     <div
                       className='h-14 w-14 flex items-center justify-center'
-                      style={{ borderRadius: '9999px', backgroundColor: 'var(--brand-gold)' }}
+                      style={{ borderRadius: '9999px', backgroundColor: 'var(--accent-chrome)' }}
                     >
                       <IconComponent size={20} className='text-black' />
                     </div>
@@ -302,7 +305,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                     </span>
                   </div>
                   <div className='space-y-8 flex-1'>
-                    <h3 className='font-headline text-2xl text-[var(--brand-gold)]'>
+                    <h3 className='font-headline text-2xl text-[var(--accent-chrome)]'>
                       {category.title}
                     </h3>
                     <p className='text-sm md:text-base text-white/75 leading-relaxed font-body'>
@@ -333,7 +336,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                 <p className='text-sm uppercase tracking-wider text-white/60'>
                   {activeCategoryMeta?.title}
                 </p>
-                <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
+                <h2 className='font-headline text-3xl md:text-4xl text-[var(--accent-chrome)]'>
                   Wählen Sie das passende Paket
                 </h2>
                 <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed'>
@@ -356,7 +359,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                       >
                         <div className='flex flex-col gap-8 p-8 h-full'>
                           <div className='flex items-center justify-between'>
-                            <span className='text-sm font-semibold uppercase tracking-wide text-[color:var(--brand-gold)]/80'>
+                            <span className='text-sm font-semibold uppercase tracking-wide text-[rgba(var(--accent-chrome-rgb),0.8)]'>
                               {index === 1 ? 'Beliebt' : 'Paket'}
                             </span>
                             <span className='text-sm font-semibold uppercase tracking-wide text-white/60'>
@@ -372,7 +375,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                             {service.description}
                           </p>
 
-                          <div className='flex items-center gap-8 text-[var(--brand-gold)] font-semibold text-xl'>
+                          <div className='flex items-center gap-8 text-[var(--accent-chrome)] font-semibold text-xl'>
                             <Euro size={18} />
                             <span>{formatPrice(service.priceFrom, service.priceUnit)}</span>
                           </div>
@@ -384,7 +387,10 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                                 className='flex items-center gap-8'
                                 variants={fadeInUpVariants}
                               >
-                                <ChevronRight size={16} className='text-(--brand-gold) shrink-0' />
+                                <ChevronRight
+                                  size={16}
+                                  className='text-[var(--accent-chrome)] shrink-0'
+                                />
                                 <span>{feature}</span>
                               </motion.li>
                             ))}
@@ -392,8 +398,8 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
 
                           <Button
                             onClick={() => handleServiceBooking(service.id)}
-                            variant={index === 1 ? 'gold' : 'outlineGold'}
-                            className={`w-full flex flex-col h-full items-center justify-center rounded-xl px-8 py-8 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--brand-gold)] focus:ring-offset-2 focus:ring-offset-(--deep-black)`}
+                            variant={index === 1 ? 'chrome' : 'outlineChrome'}
+                            className='w-full flex flex-col h-full items-center justify-center rounded-xl px-8 py-8 text-lg font-semibold transition-all duration-200 focus:ring-2 focus:ring-[var(--accent-chrome)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)]'
                             aria-label={`${service.cta} für ${service.title}`}
                           >
                             {service.cta}
@@ -405,7 +411,7 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
                               href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo%2C%20ich%20interessiere%20mich%20für%20eine%20kostenlose%20Beratung.'
                               target='_blank'
                               rel='noopener noreferrer'
-                              className="inline-flex items-center justify-center gap-4 w-full px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] flex-col h-full"
+                              className='inline-flex items-center justify-center gap-4 w-full px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold text-base rounded-xl transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] flex-col h-full'
                               aria-label='WhatsApp Beratung starten'
                             >
                               <MessageSquare size={20} />

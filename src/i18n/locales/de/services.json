@@ -7,12 +7,12 @@
     "heading": {
       "eyebrow": "Medusa München",
       "title": "Tattoo",
-      "subtitle": "Wählen Sie aus unseren Signature-Angeboten und entdecken Sie Premium-Optionen, die perfekt zu Ihrem Projekt passen."
+      "subtitle": "Wählen Sie aus unseren ausgewählten Angeboten und entdecken Sie hochwertige Optionen, die perfekt zu Ihrem Projekt passen."
     },
     "categories": {
       "tattoo": {
         "title": "Tattoo-Kunst",
-        "subtitle": "Von Basic bis Exklusiv für jeden Geschmack",
+        "subtitle": "Von Basis bis Exklusiv für jeden Geschmack",
         "priceFrom": "80€"
       },
       "piercing": {
@@ -21,16 +21,16 @@
         "priceFrom": "20€"
       },
       "products": {
-        "title": "Ink Solutions",
+        "title": "Tinte & Lösungen",
         "subtitle": "Professionelle Lösungen für Ihre Tattoo-Projekte",
-        "priceFrom": "TBD"
+        "priceFrom": "Auf Anfrage"
       }
     },
     "labels": {
-      "serviceCategoriesAria": "Service-Kategorien",
+      "serviceCategoriesAria": "Leistungskategorien",
       "choosePackage": "Wählen Sie das passende Paket",
       "selectCategoryAria": "Kategorie {{category}} auswählen",
-      "showingServicesAria": "Services der Kategorie {{category}}",
+      "showingServicesAria": "Leistungen der Kategorie {{category}}",
       "bookServiceAria": "{{cta}} für {{title}}"
     },
     "services": {
@@ -45,26 +45,26 @@
         },
         "packet-m": {
           "title": "Paket M",
-          "description": "Individuelle Projekte und einzigartige Designs. Inklusive Aftercare-Guide & Pflegeprodukte.",
+          "description": "Individuelle Projekte und einzigartige Designs. Inklusive Nachsorgeanleitung und Pflegeprodukte.",
           "duration": "1-3 Stunden",
           "priceUnit": "–€480",
-          "features": "Einzigartiges Design\nAftercare-Guide\nPremium Produkte",
+          "features": "Einzigartiges Design\nNachsorgeanleitung\nHochwertige Produkte",
           "cta": "Jetzt buchen"
         },
         "packet-l": {
           "title": "Paket L",
-          "description": "Größere Projekte mit detaillierter Ausarbeitung. Inklusive Aftercare-Guide & Pflegeprodukte.",
+          "description": "Größere Projekte mit detaillierter Ausarbeitung. Inklusive Nachsorgeanleitung und Pflegeprodukte.",
           "duration": "4-7 Stunden",
           "priceUnit": "+",
-          "features": "Detailarbeit\nAftercare-Guide\nPremium Produkte",
+          "features": "Detailarbeit\nNachsorgeanleitung\nHochwertige Produkte",
           "cta": "Jetzt buchen"
         },
         "day-session": {
-          "title": "Komplette Day Session",
-          "description": "Ganztägige Session für umfangreiche Projekte und Sleeves.",
+          "title": "Ganztagessitzung",
+          "description": "Ganztägige Sitzung für umfangreiche Projekte und Ganzarmprojekte.",
           "duration": "Ganztägig",
           "priceUnit": "Auf Anfrage",
-          "features": "Individuelle Planung\nVIP Betreuung\nFlexible Gestaltung",
+          "features": "Individuelle Planung\nPersönliche Betreuung\nFlexible Gestaltung",
           "cta": "Lassen Sie uns sprechen"
         }
       },
@@ -78,7 +78,7 @@
           "cta": "Beratung anfragen"
         },
         "free-design": {
-          "title": "Design Service",
+          "title": "Designservice",
           "description": "Tattoo bei Medusa → das Design ist kostenlos. Individuelle Entwürfe inklusive.",
           "duration": "Nach Vereinbarung",
           "priceUnit": "GRATIS bei Tattoo",
@@ -96,11 +96,11 @@
       },
       "products": {
         "ink-solutions-info": {
-          "title": "Ink Solutions",
+          "title": "Tinte & Lösungen",
           "description": "Weitere Informationen folgen in Kürze.",
           "duration": "",
-          "priceUnit": "TBD",
-          "features": "Coming Soon\nWeitere Details folgen\nKontaktieren Sie uns",
+          "priceUnit": "Auf Anfrage",
+          "features": "Demnächst verfügbar\nWeitere Details folgen\nKontaktieren Sie uns",
           "cta": "Anfragen"
         }
       }
@@ -130,15 +130,15 @@
         "priceFrom": "Inklusive"
       },
       "extras": {
-        "title": "Extra Services",
+        "title": "Zusatzleistungen",
         "subtitle": "Wechseln, Entfernen & Pflege",
         "priceFrom": "5€"
       }
     },
     "labels": {
-      "serviceCategoriesAria": "Service-Kategorien",
+      "serviceCategoriesAria": "Leistungskategorien",
       "selectCategoryAria": "Kategorie {{category}} auswählen",
-      "showingServicesAria": "Services der Kategorie {{category}}",
+      "showingServicesAria": "Leistungen der Kategorie {{category}}",
       "chooseOption": "Wählen Sie Ihre Option",
       "area": "Bereich",
       "option": "Option",
@@ -164,7 +164,7 @@
         },
         "mund": {
           "title": "Mund",
-          "description": "Lippe, Grübchen, Dahlia, Lippenband, Zunge, Snake Eye.",
+          "description": "Lippe, Grübchen, Dahlia, Lippenband, Zunge, Zungenspitzenpiercing.",
           "duration": "15-30 Min",
           "priceUnit": "–150€",
           "features": "Titan-Schmuck inklusive\nMundspülung inklusive\nPflegehinweise",
@@ -172,18 +172,18 @@
         },
         "gesicht": {
           "title": "Gesicht",
-          "description": "Augenbraue, Bridge, Nase, Septum, Anti Eyebrow, Dermal Anchor.",
+          "description": "Augenbraue, Bridge, Nase, Septum, Anti-Augenbrauenpiercing, Dermalanker.",
           "duration": "15-30 Min",
           "priceUnit": "–150€",
-          "features": "Titan-Schmuck inklusive\nSterile Umgebung\nFollow-up möglich",
+          "features": "Titan-Schmuck inklusive\nSterile Umgebung\nNachsorge möglich",
           "cta": "Jetzt buchen"
         },
         "koerper": {
           "title": "Körper",
-          "description": "Brustwarze, Bauchnabel, Surface, Dermal Anchor, Skindiver.",
+          "description": "Brustwarze, Bauchnabel, Oberflächenpiercing, Dermalanker, Mikrodermal.",
           "duration": "20-45 Min",
           "priceUnit": "–160€",
-          "features": "Titan-Schmuck inklusive\nAnatomie-Check\nPremium Nachsorge",
+          "features": "Titan-Schmuck inklusive\nAnatomieprüfung\nUmfassende Nachsorge",
           "cta": "Jetzt buchen"
         },
         "intim": {
@@ -209,11 +209,11 @@
           "description": "Hochwertiger Titan-Schmuck in Silber – bei jedem Piercing inklusive.",
           "duration": "",
           "priceUnit": "Inklusive",
-          "features": "Hypoallergen\nImplant-Grade Titan\nSilber-Finish",
+          "features": "Hypoallergen\nImplantatgeeigneter Titan\nSilberoptik",
           "cta": "Mehr erfahren"
         },
         "upgrades": {
-          "title": "Upgrades",
+          "title": "Aufwertungen",
           "description": "Veredeln Sie Ihren Schmuck mit Gold, Rosé oder Glitzer.",
           "duration": "",
           "priceUnit": "€+",
@@ -227,7 +227,7 @@
           "description": "Professionelles Entfernen von Piercings und Implantaten.",
           "duration": "5-15 Min",
           "priceUnit": "–25€",
-          "features": "Standard: €5\nDermal/Skindiver: €10\nImplantat: €25",
+          "features": "Standard: €5\nDermalanker / Mikrodermal: €10\nImplantat: €25",
           "cta": "Termin buchen"
         },
         "service": {

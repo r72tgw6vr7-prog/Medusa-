@@ -3,6 +3,7 @@ import React from 'react';
 import { Artist } from '@/data/artists';
 import { Card } from '@/components/ui/Card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 interface ArtistProfileCardProps {
   artist: Artist;
@@ -81,7 +82,7 @@ export function ArtistProfileCard({ artist }: ArtistProfileCardProps) {
 
         <div className='pt-12 border-t border-[rgba(var(--color-accent-silver-rgb),0.2)]'>
           <a
-            href='/booking'
+            href={localizePath('/booking', language)}
             className='inline-flex items-center justify-center px-8 py-6 bg-(--accent-chrome) hover:bg-(--accent-chrome)/80 text-luxury-text-primary font-semibold text-(length:--text-body) rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2'
           >
             {language === 'en' ? 'Book Appointment' : 'Termin buchen'}

@@ -23,7 +23,7 @@ export const AGBPage: React.FC = () => {
               subtitle={t('common.agbPage.subtitle')}
             />
 
-            <section className='space-y-8 text-luxury-text-inverse/70'>
+            <section className='reading-measure space-y-8 text-luxury-text-inverse/70'>
               <p>{t('common.agbPage.intro')}</p>
 
               <h2 className='font-headline text-(length:--text-h4) text-(--color-text-primary)'>

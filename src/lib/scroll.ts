@@ -13,8 +13,14 @@ declare global {
   }
 }
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// Lazy registration — only register when actually needed
+let scrollTriggerRegistered = false;
+function ensureScrollTrigger() {
+  if (!scrollTriggerRegistered) {
+    gsap.registerPlugin(ScrollTrigger);
+    scrollTriggerRegistered = true;
+  }
+}
 
 // Configuration
 interface ScrollConfig {
@@ -78,6 +84,10 @@ class ScrollController {
     this.setupDebugMode();
 
     // Initialize scroll-driven animations regardless of smooth scroll setting
+    // Only register ScrollTrigger if any feature needs it
+    if (this.config.parallaxEnabled || this.config.sectionElevationEnabled || this.config.revealOnScrollEnabled || this.textAnimationsEnabled) {
+      ensureScrollTrigger();
+    }
     void this.initScrollAnimations();
 
     // Add event listeners for resize and visibility changes
@@ -124,8 +134,9 @@ class ScrollController {
     this.rafId = requestAnimationFrame(raf);
 
     // Keep ScrollTrigger in sync with Lenis
+    ensureScrollTrigger();
     this.lenis.on('scroll', ScrollTrigger.update);
-    
+
     // Configure ScrollTrigger defaults - MINIMAL refreshing
     ScrollTrigger.config({
       ignoreMobileResize: true,

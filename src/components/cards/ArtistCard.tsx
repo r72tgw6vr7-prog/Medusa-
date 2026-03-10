@@ -74,7 +74,7 @@ export function ArtistCard({ artist, isRevealed, index }: ArtistCardProps) {
           {artist.image_url && (
             <img
               src={artist.image_url}
-              alt={artist.name}
+              alt={`${artist.name} – ${artist.discipline} bei Medusa Tattoo München`}
               className='artist-card-image w-full h-full object-cover grayscale max-md:object-[center_var(--artist-face-y)]'
               style={{ '--artist-face-y': mobileFaceY } as React.CSSProperties}
               loading='lazy'

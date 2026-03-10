@@ -258,7 +258,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
             </div>
           </div>
 
-          <div className='flex flex-col items-center gap-3 pt-6 text-white/50' aria-hidden='true'>
+          <div className='flex flex-col items-center gap-4 pt-6 text-white/50' aria-hidden='true'>
             <span className='h-2 w-2 rounded-full bg-white/65 shadow-[0_0_12px_rgba(255,255,255,0.45)]' />
             <span className='h-12 w-px bg-linear-to-b from-white/55 via-white/20 to-transparent' />
           </div>
@@ -282,7 +282,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
             </p>
 
             <div className='pt-(--space-2)'>
-              <div className='flex w-full max-w-sm flex-col items-stretch justify-center gap-3'>
+              <div className='flex w-full max-w-sm flex-col items-stretch justify-center gap-4'>
                 <Button asChild variant='chrome' size='lg' className='w-full'>
                   <a href={localizePath('/booking', language)}>{ctaPrimary}</a>
                 </Button>

@@ -10,8 +10,8 @@ interface LanguageToggleProps {
 export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   language = 'de',
   onLanguageChange,
-  germanAriaLabel = 'Switch to German',
-  englishAriaLabel = 'Switch to English',
+  germanAriaLabel = 'Zu Deutsch wechseln',
+  englishAriaLabel = 'Zu Englisch wechseln',
 }) => {
   const isGerman = language === 'de';
 
@@ -24,57 +24,18 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
   };
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        width: '140px',
-        height: '48px',
-        backgroundColor: 'rgba(var(--color-text-primary-rgb), 0.1)',
-        border: '1px solid rgba(var(--color-text-primary-rgb), 0.15)',
-        borderRadius: '9999px',
-        padding: '4px',
-      }}
-    >
-      {/* Gold sliding pill */}
+    <div className='language-toggle' role='group' aria-label='Sprachauswahl'>
       <div
-        style={{
-          position: 'absolute',
-          top: '4px',
-          left: '4px',
-          width: '66px',
-          height: '40px',
-          backgroundColor: 'var(--brand-accent)',
-          borderRadius: '9999px',
-          transform: isGerman ? 'translateX(0px)' : 'translateX(66px)',
-          transition: 'transform 300ms ease-in-out',
-          zIndex: 0,
-        }}
+        className={`language-toggle__indicator ${isGerman ? '' : 'language-toggle__indicator--en'}`}
       />
 
       {/* DE Button */}
       <button
         onClick={handleGermanClick}
-        className='rounded-full'
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          width: '66px',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: isGerman ? 'var(--deep-black)' : 'var(--color-text-primary)',
-          fontWeight: 600,
-          fontSize: '16px',
-          lineHeight: '1',
-          border: 'none',
-          background: 'transparent',
-          cursor: 'pointer',
-          transition: 'color 200ms ease-in-out',
-        }}
+        type='button'
+        className={`language-toggle__button ${isGerman ? 'language-toggle__button--active' : 'language-toggle__button--inactive'}`}
         aria-label={germanAriaLabel}
+        aria-pressed={isGerman}
       >
         DE
       </button>
@@ -82,24 +43,10 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
       {/* EN Button */}
       <button
         onClick={handleEnglishClick}
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          width: '66px',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: isGerman ? 'var(--color-text-primary)' : 'var(--deep-black)',
-          fontWeight: 600,
-          fontSize: '16px',
-          lineHeight: '1',
-          border: 'none',
-          background: 'transparent',
-          cursor: 'pointer',
-          transition: 'color 200ms ease-in-out',
-        }}
+        type='button'
+        className={`language-toggle__button ${isGerman ? 'language-toggle__button--inactive' : 'language-toggle__button--active'}`}
         aria-label={englishAriaLabel}
+        aria-pressed={!isGerman}
       >
         EN
       </button>

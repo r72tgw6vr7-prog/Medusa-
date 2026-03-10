@@ -1,24 +1,34 @@
-import { useEffect } from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { PageType } from '@/types/page-types';
+import { CookieConsentBanner } from './CookieConsentBanner';
 
-// Add type declaration for Vite's import.meta.env
-interface ImportMetaEnv {
-  DEV: boolean;
-  PROD: boolean;
-  MODE: string;
-}
+const pageRouteMap: Record<PageType, string> = {
+  home: '/',
+  services: '/services',
+  artists: '/artists',
+  gallery: '/gallery',
+  booking: '/booking',
+  contact: '/contact',
+  aftercare: '/aftercare',
+  legal: '/legal',
+  faq: '/faq',
+  'design-system-demo': '/design-system-demo',
+  impressum: '/impressum',
+  datenschutz: '/datenschutz',
+};
 
 export const GDPRCompliance: React.FC = () => {
-  useEffect(() => {
-    // Disable third-party tracking if consent is not given
-    const hasConsent = localStorage.getItem('cookieConsent') === 'true';
+  const navigate = useNavigate();
 
-    if (!hasConsent && import.meta.env.DEV) {
-      // Placeholder: Add code to disable tracking
-      console.log('Third-party tracking disabled due to GDPR compliance');
-    }
-  }, []);
+  const handleNavigate = useCallback(
+    (page: PageType) => {
+      navigate(pageRouteMap[page] ?? '/');
+    },
+    [navigate],
+  );
 
-  // This component doesn't render anything visible
-  // It only handles GDPR compliance logic
-  return null;
+  return <CookieConsentBanner onNavigate={handleNavigate} />;
 };
+
+export default GDPRCompliance;

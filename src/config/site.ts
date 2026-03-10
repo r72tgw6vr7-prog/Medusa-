@@ -6,8 +6,8 @@ export const siteConfig = {
     phone: '+49 (0) 89 269 313',
     email: 'info@medusa-tattoo.de',
     hours: {
-      weekdays: '12:00 - 20:00',
-      saturday: '12:00 - 20:00',
+      monThu: '11:30 - 19:00',
+      friSat: '11:30 - 20:00',
       sunday: 'Closed',
     },
   },

@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { PageLoader } from '@/components/ui/SectionLoader';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppProvider } from '@/core/state/AppContext';
 import Meta from '@/components/Meta';
@@ -9,6 +10,7 @@ import LocaleRouteSync from '@/i18n/LocaleRouteSync';
 import { SimpleMedusaProvider } from './foundation/SimpleMedusaProvider';
 import { initScroll } from '@/lib/scroll';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
+import { GDPRCompliance } from '@/components/molecules/GDPRCompliance';
 import { MotionProvider } from '@/providers/MotionProvider';
 import ScrollToTop from '@/components/ScrollToTop';
 import { HomePage } from './pages/HomePage';
@@ -84,12 +86,13 @@ function App() {
           >
             <LocaleRouteSync />
             <ScrollToTop />
+            <GDPRCompliance />
             <AnalyticsProvider>
               {/* All page content (texture moved to main.tsx) */}
               <div className='relative z-10' data-scroll-root>
                 {' '}
                 {/* Content above texture */}
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<PageLoader />}>
                   <Routes>
                     {/* Main Routes */}
                     <Route

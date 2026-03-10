@@ -1,0 +1,4 @@
+
+> medusa-tattoo@1.0.0 typecheck /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> tsc --noEmit
+

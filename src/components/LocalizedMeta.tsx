@@ -32,6 +32,7 @@ const LocalizedMeta = (props: LocalizedMetaProps) => {
   const hreflang = props.basePath
     ? {
         de: `${SITE_URL}${props.basePath}`,
+        'x-default': `${SITE_URL}${props.basePath}`,
       }
     : undefined;
 

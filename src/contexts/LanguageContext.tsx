@@ -13,6 +13,7 @@ import {
   setLocale,
   splitTranslationKey,
   NAMESPACES,
+  normalizeLocale,
 } from '@/i18n';
 
 // Define supported languages
@@ -44,31 +45,27 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    void setLocale('de');
-  }, []);
+    void setLocale(normalizeLocale(i18n.language));
+  }, [i18n]);
 
   const setLanguage = useCallback(
-    (_lang: Language) => {
-      if (language === 'de' && i18n.language === 'de') return;
-      // Preload all namespaces for the new language before switching
-      const preloadPromises = NAMESPACES.map((ns) => i18n.loadNamespaces([ns]).catch(() => {}));
+    (lang: Language) => {
+      const nextLanguage = normalizeLocale(lang);
+      if (language === nextLanguage && i18n.language === nextLanguage) return;
 
-      // Use startTransition to mark the language change as non-urgent
-      // This prevents the UI from flashing during the async operation
-      Promise.all(preloadPromises).then(() => {
-        startTransition(() => {
-          void setLocale('de');
-        });
+      startTransition(() => {
+        void setLocale(nextLanguage);
       });
     },
     [language, i18n],
   );
 
   useEffect(() => {
-    const handler = () => {
-      setLanguageState('de');
+    const handler = (lng: string) => {
+      setLanguageState(normalizeLocale(lng));
     };
 
+    setLanguageState(normalizeLocale(i18n.language));
     i18n.on('languageChanged', handler);
     return () => {
       i18n.off('languageChanged', handler);

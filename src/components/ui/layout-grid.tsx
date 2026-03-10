@@ -8,6 +8,7 @@ export type Card = {
   title: string;
   thumbnail: string;
   fallbackSrc?: string;
+  objectPosition?: string;
   className?: string;
   content: React.ReactNode;
 };
@@ -208,23 +209,29 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
 }
 
 const ImageComponent = ({ card }: { card: Card }) => {
-  const [imageSrc, setImageSrc] = useState(card.thumbnail);
-
-  const handleError = () => {
-    if (card.fallbackSrc && imageSrc !== card.fallbackSrc) {
-      setImageSrc(card.fallbackSrc);
-    }
-  };
+  const optimizedBase = encodeURI(card.thumbnail);
+  const fallbackSrc = encodeURI(card.fallbackSrc || card.thumbnail);
 
   return (
-    <motion.img
+    <motion.div
       layoutId={`image-${card.id}-image`}
-      src={imageSrc}
-      onError={handleError}
-      alt={card.title}
-      className='object-fill object-top absolute inset-0 h-full w-full transition duration-200'
-      loading='lazy'
-    />
+      className='absolute inset-0 h-full w-full transition duration-200'
+    >
+      <picture>
+        <source type='image/avif' srcSet={`${optimizedBase}-400w.avif`} />
+        <source type='image/webp' srcSet={`${optimizedBase}-400w.webp`} />
+        <img
+          src={fallbackSrc}
+          alt={card.title}
+          className='absolute inset-0 h-full w-full transition duration-200'
+          loading='lazy'
+          style={{
+            objectFit: 'cover',
+            objectPosition: card.objectPosition ?? 'center center',
+          }}
+        />
+      </picture>
+    </motion.div>
   );
 };
 

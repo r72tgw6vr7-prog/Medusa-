@@ -6,7 +6,7 @@
       "name": "Aaron",
       "role": "Salon Director & Piercing Specialist",
       "roleLocalized": {
-        "de": "Salonleitung & Piercing-Spezialist",
+        "de": "Salonleiter & Piercing-Spezialist",
         "en": "Salon Director & Piercing Specialist"
       },
       "category": "piercing",
@@ -24,7 +24,7 @@
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "Aaron ist Salon Director und spezialisiert auf besondere Piercings sowie individuelle Custom Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden.",
+        "de": "Aaron ist Salonleiter und spezialisiert auf besondere Piercings sowie individuelle Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden.",
         "en": "Aaron is the salon director and specializes in special piercings and custom designs. He supports clients through consultation to find the right solutions and placements."
       },
       "experience": "10+ Jahre",
@@ -37,7 +37,7 @@
       "name": "Angie",
       "role": "Piercing Specialist & Social Media Manager",
       "roleLocalized": {
-        "de": "Piercing-Spezialistin & Social Media Managerin",
+        "de": "Piercing-Spezialistin & Medienmanagerin",
         "en": "Piercing Specialist & Social Media Manager"
       },
       "category": "tattoo",
@@ -55,7 +55,7 @@
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "Angie ist Piercing-Spezialistin und Social Media Managerin. Sie ist eine zentrale Ansprechpartnerin für Hygiene‑Standards, Best Practices und interne Abläufe und unterstützt das Team mit Wissen, Organisation und Trainings.",
+        "de": "Angie ist Piercing-Spezialistin und Medienmanagerin. Sie ist eine zentrale Ansprechpartnerin für Hygienestandards, bewährte Abläufe und interne Prozesse und unterstützt das Team mit Wissen, Organisation und Schulungen.",
         "en": "Angie is a piercing specialist and social media manager. She is a key point of contact for hygiene standards, best practices, and internal procedures, supporting the team with organization and training."
       },
       "experience": "6+ Jahre",
@@ -81,13 +81,13 @@
       },
       "specialties": ["Linework", "All-round styles"],
       "specialtiesLocalized": {
-        "de": ["Linework", "Vielseitige Stilrichtungen"],
+        "de": ["Linienarbeit", "Vielseitige Stilrichtungen"],
         "en": ["Linework", "All-round styles"]
       },
       "bookable": true,
       "featured": true,
       "bio": {
-        "de": "Debi hatte ein eigenes Studio in Ungarn und arbeitet mit einem starken Fokus auf präzises Linework. Als Allrounder setzt er Projekte in verschiedenen Stilrichtungen professionell um. Beratung und saubere Ausführung stehen dabei im Mittelpunkt.",
+        "de": "Debi hatte ein eigenes Studio in Ungarn und arbeitet mit einem starken Fokus auf präzise Linienarbeit. Als Allrounder setzt er Projekte in verschiedenen Stilrichtungen professionell um. Beratung und saubere Ausführung stehen dabei im Mittelpunkt.",
         "en": "Debi previously ran his own studio in Hungary and is known for precise linework. As an all‑round artist, he works confidently across multiple styles. Clear consultation and clean execution are central to his work."
       },
       "experience": "25+ Jahre",
@@ -133,14 +133,14 @@
       "fullName": "Eli Luquez",
       "role": "Studio Manager",
       "roleLocalized": {
-        "de": "Studio-Manager",
+        "de": "Studioleiter",
         "en": "Studio Manager"
       },
       "category": "tattoo",
       "photo": "/images/artists/luz.webp",
       "photoAlt": "Luz (Ell Luquez), Realism Tattoo Artist at Medusa München",
       "photoAltLocalized": {
-        "de": "Eli Luquez, Head Artist & Studio-Manager bei Medusa München",
+        "de": "Eli Luquez, Chefkünstler & Studioleiter bei Medusa München",
         "en": "Luz (Ell Luquez), Realism Tattoo Artist at Medusa München"
       },
       "specialties": ["Black & Gray Realism", "Color Realism", "Digital Design", "Airbrush"],
@@ -151,7 +151,7 @@
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "Eli ist unser Head Artist und Studio Manager mit über 12 Jahren Erfahrung. Er ist spezialisiert auf geometrische und ornamentale Designs mit präziser Symmetrie und komplexen Mustern. Seine Arbeit verbindet mathematische Präzision mit künstlerischer Vision und schafft hypnotisierende, Sacred Geometry Kunstwerke. Er arbeitet seit 2022 bei Medusa Tattoo München.",
+        "de": "Eli ist unser Chefkünstler und Studioleiter mit über 12 Jahren Erfahrung. Er ist spezialisiert auf geometrische und ornamentale Designs mit präziser Symmetrie und komplexen Mustern. Seine Arbeit verbindet mathematische Präzision mit künstlerischer Vision und schafft hypnotisierende Kunstwerke der heiligen Geometrie. Er arbeitet seit 2022 bei Medusa Tattoo München.",
         "en": "Eli is our head artist and studio manager with over 12 years of experience. He specializes in geometric and ornamental designs with precise symmetry and intricate patterns. His work combines mathematical precision with artistic vision, creating mesmerizing sacred geometry artwork. He has been working at Medusa Tattoo München since 2022."
       },
       "experience": "20+ Jahre",
@@ -238,13 +238,13 @@
       },
       "specialties": ["Snake Eye Piercing", "Style Consultation", "Jewelry Assortment"],
       "specialtiesLocalized": {
-        "de": ["Snake-Eye-Piercing", "Style-Beratung", "Schmuck-Sortiment"],
+        "de": ["Zungenspitzenpiercing", "Stilberatung", "Schmucksortiment"],
         "en": ["Snake Eye Piercing", "Style Consultation", "Jewelry Assortment"]
       },
       "bookable": true,
       "featured": false,
       "bio": {
-        "de": "Vivi ist Piercerin und Stylistin und berät Kund:innen auch rund um Stil und Kombinationen. Sie ist besonders stark bei Snake‑Eye‑Piercings und verantwortet die Auswahl und das Sortiment an Schmuck im Studio.",
+        "de": "Vivi ist Piercerin und Stylistin und berät Kund:innen auch rund um Stil und Kombinationen. Sie ist besonders stark bei Zungenspitzenpiercings und verantwortet die Auswahl und das Sortiment an Schmuck im Studio.",
         "en": "Vivi is a piercer and stylist, supporting clients with style and combination consultations. She is especially strong with snake‑eye piercings and is responsible for the studio’s jewelry selection and assortment."
       },
       "experience": "5+ Jahre",

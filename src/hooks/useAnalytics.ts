@@ -1,6 +1,26 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import analytics from '../utils/analytics';
+
+type AnalyticsModule = typeof import('../utils/analytics');
+type AnalyticsInstance = AnalyticsModule['default'];
+
+let analyticsPromise: Promise<AnalyticsInstance> | null = null;
+
+const loadAnalytics = (): Promise<AnalyticsInstance> => {
+  if (!analyticsPromise) {
+    analyticsPromise = import('../utils/analytics').then((module) => module.default);
+  }
+
+  return analyticsPromise;
+};
+
+const withAnalytics = (enabled: boolean, callback: (analytics: AnalyticsInstance) => void) => {
+  if (!enabled) return;
+
+  void loadAnalytics().then((analytics) => {
+    callback(analytics);
+  });
+};
 
 /**
  * Custom hook for Google Analytics integration
@@ -10,40 +30,148 @@ import analytics from '../utils/analytics';
  * - Easy access to analytics functions
  * - TypeScript support
  */
-export const useAnalytics = () => {
+export const useAnalytics = (enabled: boolean = true) => {
   const location = useLocation();
 
   // Track page views automatically on route changes
   useEffect(() => {
+    if (!enabled) return;
+
     // Get page title from document or route
     const pageTitle = document.title;
 
     // Track the page view
-    analytics.pageView(location.pathname + location.search, pageTitle);
-  }, [location]);
+    withAnalytics(enabled, (analytics) => {
+      analytics.pageView(location.pathname + location.search, pageTitle);
+    });
+  }, [enabled, location]);
 
   // Return analytics methods for manual tracking
   return {
     // Page tracking
-    pageView: analytics.pageView.bind(analytics),
-    event: analytics.event.bind(analytics),
+    pageView: (path: string, title?: string) => {
+      withAnalytics(enabled, (analytics) => {
+        analytics.pageView(path, title);
+      });
+    },
+    event: (eventName: string, parameters?: Record<string, unknown>) => {
+      withAnalytics(enabled, (analytics) => {
+        analytics.event(eventName, parameters);
+      });
+    },
 
     // Specific tracking methods
-    trackBooking: analytics.trackBooking,
-    trackGallery: analytics.trackGallery,
-    trackForm: analytics.trackForm,
-    trackEngagement: analytics.trackEngagement,
+    trackBooking: {
+      started: (service?: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackBooking.started(service);
+        });
+      },
+      completed: (service: string, artist: string, value?: number) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackBooking.completed(service, artist, value);
+        });
+      },
+      abandoned: (step: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackBooking.abandoned(step);
+        });
+      },
+      serviceSelected: (service: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackBooking.serviceSelected(service);
+        });
+      },
+      artistSelected: (artist: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackBooking.artistSelected(artist);
+        });
+      },
+    },
+    trackGallery: {
+      view: (filterType?: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackGallery.view(filterType);
+        });
+      },
+      imageClicked: (imageId: string, artist: string, style: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackGallery.imageClicked(imageId, artist, style);
+        });
+      },
+      filterApplied: (filterType: string, filterValue: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackGallery.filterApplied(filterType, filterValue);
+        });
+      },
+      lightboxOpened: (imageId: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackGallery.lightboxOpened(imageId);
+        });
+      },
+    },
+    trackForm: {
+      submitted: (formType: string, success: boolean = true) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackForm.submitted(formType, success);
+        });
+      },
+      newsletter: (email: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackForm.newsletter(email);
+        });
+      },
+      error: (formType: string, errorMessage: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackForm.error(formType, errorMessage);
+        });
+      },
+    },
+    trackEngagement: {
+      scrollDepth: (percentage: number) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.scrollDepth(percentage);
+        });
+      },
+      externalLink: (url: string, linkText?: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.externalLink(url, linkText);
+        });
+      },
+      phone: () => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.phone();
+        });
+      },
+      email: () => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.email();
+        });
+      },
+      social: (platform: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.social(platform);
+        });
+      },
+      cta: (ctaText: string, location: string) => {
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.cta(ctaText, location);
+        });
+      },
+    },
 
     // Debug info
-    getDebugInfo: analytics.getDebugInfo.bind(analytics),
+    getDebugInfo: () => ({ enabled }),
   };
 };
 
 /**
  * Hook for tracking scroll depth
  */
-export const useScrollDepthTracking = () => {
+export const useScrollDepthTracking = (enabled: boolean = true) => {
   useEffect(() => {
+    if (!enabled) return;
+
     let maxScrollPercentage = 0;
 
     let rafId = 0;
@@ -55,7 +183,9 @@ export const useScrollDepthTracking = () => {
 
       if (scrollPercentage > maxScrollPercentage) {
         maxScrollPercentage = scrollPercentage;
-        analytics.trackEngagement.scrollDepth(scrollPercentage);
+        withAnalytics(enabled, (analytics) => {
+          analytics.trackEngagement.scrollDepth(scrollPercentage);
+        });
       }
     };
 
@@ -76,26 +206,30 @@ export const useScrollDepthTracking = () => {
         window.cancelAnimationFrame(rafId);
       }
     };
-  }, []);
+  }, [enabled]);
 };
 
 /**
  * Hook for tracking time on page
  */
-export const useTimeOnPageTracking = () => {
+export const useTimeOnPageTracking = (enabled: boolean = true) => {
   useEffect(() => {
+    if (!enabled) return;
+
     const startTime = Date.now();
 
     return () => {
       const timeSpent = Date.now() - startTime;
       // Track if user spent more than 30 seconds on page
       if (timeSpent > 30000) {
-        analytics.event('time_on_page', {
-          content_group1: 'engagement',
-          time_spent_seconds: Math.round(timeSpent / 1000),
-          page_path: window.location.pathname,
+        withAnalytics(enabled, (analytics) => {
+          analytics.event('time_on_page', {
+            content_group1: 'engagement',
+            time_spent_seconds: Math.round(timeSpent / 1000),
+            page_path: window.location.pathname,
+          });
         });
       }
     };
-  }, []);
+  }, [enabled]);
 };

@@ -109,6 +109,33 @@ export const ContactPage: React.FC = () => {
     },
   ];
 
+  const trustBadges = [
+    {
+      id: 'eu-certified',
+      icon: Shield,
+      title: t('contact.trustBadges.euCertified.title'),
+      subtitle: t('contact.trustBadges.euCertified.subtitle'),
+    },
+    {
+      id: 'award',
+      icon: Award,
+      title: t('contact.trustBadges.award2024.title'),
+      subtitle: t('contact.trustBadges.award2024.subtitle'),
+    },
+    {
+      id: 'sterile',
+      icon: Check,
+      title: t('contact.trustBadges.sterileEquipment.title'),
+      subtitle: t('contact.trustBadges.sterileEquipment.subtitle'),
+    },
+    {
+      id: 'experience',
+      icon: MessageCircle,
+      title: t('contact.trustBadges.experience.title'),
+      subtitle: t('contact.trustBadges.experience.subtitle'),
+    },
+  ];
+
   return (
     <div className='min-h-screen relative z-10 bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32'>
       <MainNavigation />
@@ -126,6 +153,29 @@ export const ContactPage: React.FC = () => {
               title={t('contact.title')}
               subtitle={t('contact.subtitle')}
             />
+
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+              {trustBadges.map((badge) => {
+                const Icon = badge.icon;
+                return (
+                  <div
+                    key={badge.id}
+                    className='premium-choice-card flex flex-col h-full min-h-0 items-start gap-4 p-4'
+                    data-selected='false'
+                  >
+                    <span className='inline-flex flex flex-col h-full h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-(--accent-chrome)'>
+                      <Icon size={18} />
+                    </span>
+                      <div className='space-y-2'>
+                      <p className='text-(length:--text-sm) font-semibold text-white'>
+                        {badge.title}
+                      </p>
+                      <p className='text-(length:--text-xs) text-white/60'>{badge.subtitle}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </Container>
         </Section>
 
@@ -139,10 +189,7 @@ export const ContactPage: React.FC = () => {
 
               <div className='modal-body'>
                 {isSubmitted ? (
-                  <div
-                    className='flex flex-col items-center justify-center gap-4 rounded-(--card-radius) border border-(--card-border) bg-(--card-bg) text-center p-8'
-                    style={{ boxShadow: 'var(--card-shadow-depth), var(--card-shadow-glow)' }}
-                  >
+                  <div className='premium-feedback-panel premium-feedback-panel--success flex-col items-center justify-center gap-4 text-center p-8'>
                     <div className='w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center'>
                       <Check className='text-green-400' size={24} />
                     </div>
@@ -163,7 +210,7 @@ export const ContactPage: React.FC = () => {
                       <label className='text-(length:--text-sm) text-white/80 font-medium'>
                         {t('contact.reasons.label')}
                       </label>
-                      <div className='grid grid-cols-3 gap-4'>
+                      <div className='grid grid-cols-1 gap-4 sm:grid-cols-3'>
                         {reasonCards.map((card) => {
                           const Icon = card.icon;
                           const isSelected = selectedReason === card.id;
@@ -171,19 +218,13 @@ export const ContactPage: React.FC = () => {
                             <button
                               key={card.id}
                               type='button'
-                              className={`flex flex-col h-full items-center gap-2 p-4 rounded-(--card-radius) border transition-all duration-200 ${
-                                isSelected
-                                  ? 'border-white bg-white/10'
-                                  : 'border-(--card-border) bg-(--card-bg) hover:border-white/40'
-                              }`}
-                              style={{
-                                boxShadow: isSelected
-                                  ? 'var(--card-shadow-hover-glow)'
-                                  : 'var(--card-shadow-glow)',
-                              }}
+                              className='premium-choice-card items-center text-center'
+                              data-selected={isSelected ? 'true' : 'false'}
                               onClick={() => setValue('reason', card.id, { shouldDirty: true })}
                             >
-                              <Icon className='text-white' size={20} />
+                              <span className='inline-flex flex flex-col h-full h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white'>
+                                <Icon size={20} />
+                              </span>
                               <span className='text-(length:--text-sm) font-medium text-white'>
                                 {t(card.titleKey)}
                               </span>
@@ -198,7 +239,10 @@ export const ContactPage: React.FC = () => {
                     </div>
 
                     {/* Name Input */}
-                    <div className='form-group'>
+                    <div
+                      className='premium-form-field'
+                      data-field-state={errors.name ? 'error' : 'default'}
+                    >
                       <label htmlFor='name'>
                         {t('contact.labels.name')}
                         <span className='text-red-400' aria-hidden='true'>
@@ -211,17 +255,20 @@ export const ContactPage: React.FC = () => {
                         id='name'
                         placeholder={t('contact.placeholders.name')}
                         {...register('name', { required: true, minLength: 2 })}
-                        className={errors.name ? 'border-red-500' : ''}
+                        className='premium-field-control'
                       />
                       {errors.name && (
-                        <p className='text-(length:--text-sm) text-red-400 mt-2'>
+                        <p className='premium-field-hint premium-field-hint--error'>
                           {t('contact.errors.nameRequired')}
                         </p>
                       )}
                     </div>
 
                     {/* Email Input */}
-                    <div className='form-group'>
+                    <div
+                      className='premium-form-field'
+                      data-field-state={errors.email ? 'error' : 'default'}
+                    >
                       <label htmlFor='email'>
                         {t('contact.labels.email')}
                         <span className='text-red-400' aria-hidden='true'>
@@ -237,17 +284,20 @@ export const ContactPage: React.FC = () => {
                           required: true,
                           pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         })}
-                        className={errors.email ? 'border-red-500' : ''}
+                        className='premium-field-control'
                       />
                       {errors.email && (
-                        <p className='text-(length:--text-sm) text-red-400 mt-2'>
+                        <p className='premium-field-hint premium-field-hint--error'>
                           {t('contact.errors.emailInvalid')}
                         </p>
                       )}
                     </div>
 
                     {/* Message Textarea */}
-                    <div className='form-group'>
+                    <div
+                      className='premium-form-field'
+                      data-field-state={errors.message ? 'error' : 'default'}
+                    >
                       <label htmlFor='message'>
                         {t('contact.labels.message')}
                         <span className='text-red-400' aria-hidden='true'>
@@ -260,28 +310,28 @@ export const ContactPage: React.FC = () => {
                         rows={4}
                         placeholder={t('contact.placeholders.message')}
                         {...register('message', { required: true, minLength: 10 })}
-                        className={errors.message ? 'border-red-500' : ''}
+                        className='premium-field-control min-h-36 resize-y'
                       />
                       {errors.message && (
-                        <p className='text-(length:--text-sm) text-red-400 mt-2'>
+                        <p className='premium-field-hint premium-field-hint--error'>
                           {t('contact.errors.messageRequired')}
                         </p>
                       )}
                     </div>
 
                     {/* Privacy Consent */}
-                    <div className='flex items-start gap-4'>
+                    <div className='premium-feedback-panel items-start gap-4 bg-white/2'>
                       <input
                         type='checkbox'
                         id='privacy'
                         required
-                        className='mt-2 w-4 h-4 rounded border-white/20 bg-white/5 accent-white'
+                        className='mt-2 h-4 w-4 rounded border-white/20 bg-white/5 accent-white'
                       />
                       <label htmlFor='privacy' className='text-(length:--text-sm) text-white/70'>
                         {t('contact.privacyConsent.prefix')}{' '}
                         <a
                           href='/datenschutz'
-                          className='underline hover:text-white transition-colors duration-200'
+                          className='premium-link h-auto min-h-0 underline-offset-4'
                         >
                           {t('contact.privacyConsent.linkText')}
                         </a>{' '}
@@ -291,8 +341,8 @@ export const ContactPage: React.FC = () => {
 
                     {/* Error Message */}
                     {submitError && (
-                      <div className='bg-red-500/10 border border-red-500/60 text-red-300 rounded-lg px-4 py-4'>
-                        <p className='text-(length:--text-sm)'>{submitError}</p>
+                      <div className='premium-feedback-panel premium-feedback-panel--error'>
+                        <p className='text-(length:--text-sm) text-red-100'>{submitError}</p>
                       </div>
                     )}
 
@@ -302,6 +352,7 @@ export const ContactPage: React.FC = () => {
                       variant='chrome'
                       className='w-full'
                       disabled={isSubmitting}
+                      loading={isSubmitting}
                     >
                       {isSubmitting ? t('contact.submit.sending') : t('contact.submit.send')}
                     </Button>
@@ -321,16 +372,16 @@ export const ContactPage: React.FC = () => {
             >
               {t('contact.sections.otherWays')}
             </p>
-            <div className='grid grid-cols-2 gap-4'>
+            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               {/* Email Card */}
               <button
                 type='button'
                 onClick={handleCopyEmail}
-                className='flex flex-col h-full items-center gap-4 p-6 rounded-(--card-radius) border border-(--card-border) bg-(--card-bg) hover:border-white/40 transition-all duration-200 cursor-pointer'
-                style={{ boxShadow: 'var(--card-shadow-glow)' }}
+                className='premium-choice-card items-center text-center cursor-pointer'
+                data-selected={copied ? 'true' : 'false'}
               >
                 <div
-                  className='rounded-full border border-(--card-border) flex flex-col h-full items-center justify-center'
+                  className='rounded-full border border-(--card-border) flex flex-col h-full h-12 w-12 items-center justify-center'
                   style={{ width: 'var(--space-5)', height: 'var(--space-5)' }}
                 >
                   {copied ? (
@@ -339,7 +390,7 @@ export const ContactPage: React.FC = () => {
                     <Mail className='text-white' size={18} />
                   )}
                 </div>
-                <div className='text-center flex flex-col h-full'>
+                <div className='text-center flex flex-col h-full' aria-live='polite'>
                   <p className='text-(length:--text-sm) font-medium text-white'>E-Mail</p>
                   <p className='text-(length:--text-xs) text-brand-chrome/80 font-semibold'>
                     {copied ? t('contact.actions.copied') : t('contact.actions.clickToCopy')}
@@ -352,11 +403,11 @@ export const ContactPage: React.FC = () => {
                 href={`https://wa.me/${studioInfo.contact.whatsapp.replace(/\+/g, '')}`}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex flex-col h-full items-center gap-4 p-6 rounded-(--card-radius) border border-(--card-border) bg-(--card-bg) hover:border-white/40 transition-all duration-200'
-                style={{ boxShadow: 'var(--card-shadow-glow)' }}
+                className='premium-choice-card items-center text-center'
+                data-selected='false'
               >
                 <div
-                  className='rounded-full border border-(--card-border) flex flex-col h-full items-center justify-center'
+                  className='rounded-full border border-(--card-border) flex flex-col h-full h-12 w-12 items-center justify-center'
                   style={{ width: 'var(--space-5)', height: 'var(--space-5)' }}
                 >
                   <MessageCircle className='text-white' size={18} />

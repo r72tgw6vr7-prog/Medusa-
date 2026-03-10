@@ -1,0 +1,66 @@
+
+> medusa-tattoo@1.0.0 i18n:validate-all /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> pnpm run i18n:check && pnpm run i18n:scan-usage
+
+
+> medusa-tattoo@1.0.0 i18n:check /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> node scripts/i18n-validate.mjs
+
+🔍 i18n Translation Validator
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 Validating namespace: common
+   ✅ 295 keys validated successfully
+
+📋 Validating namespace: home
+   ✅ 9 keys validated successfully
+
+📋 Validating namespace: booking
+   ✅ 61 keys validated successfully
+
+📋 Validating namespace: contact
+   ✅ 44 keys validated successfully
+
+📋 Validating namespace: services
+   ✅ 169 keys validated successfully
+
+📋 Validating namespace: artists
+   ✅ 10 keys validated successfully
+
+📋 Validating namespace: gallery
+   ✅ 13 keys validated successfully
+
+📋 Validating namespace: errors
+   ✅ 3 keys validated successfully
+
+📋 Validating namespace: validation
+   ✅ 4 keys validated successfully
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 Validation Summary:
+
+✅ All translation keys are consistent across DE and EN
+
+> medusa-tattoo@1.0.0 i18n:scan-usage /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> node scripts/i18n-scan-usage.mjs
+
+🔍 Scanning translation key usage...
+
+📚 Loaded 1489 DE keys and 1489 EN keys
+
+📂 Scanning 200 source files...
+
+🔑 Found 504 translation key usages
+
+✅ All translation keys used in code exist in both DE and EN
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 Summary:
+   Total keys used: 504
+   Missing in DE: 0
+   Missing in EN: 0
+
+✅ Validation PASSED
+

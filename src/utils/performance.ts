@@ -1,20 +1,33 @@
 import rafQueue from '@/utils/rafQueue';
 
 export async function initPerformanceMonitoring(): Promise<void> {
-  if (!import.meta.env.DEV) return;
-
-  const logger = globalThis['console'] as Console;
-
   try {
-    const { onCLS, onFID, onLCP, onFCP, onTTFB } = await import('web-vitals');
+    const { onCLS, onINP, onLCP, onFCP, onTTFB } = await import('web-vitals');
 
-    onCLS(logger.log);
-    onFID(logger.log);
-    onLCP(logger.log);
-    onFCP(logger.log);
-    onTTFB(logger.log);
+    const reportVital = (metric: { name: string; value: number; delta: number; id: string }) => {
+      // Log in dev for debugging
+      if (import.meta.env.DEV) {
+        (globalThis['console'] as Console).log(metric);
+      }
+      // Send to GA4 in production
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', metric.name, {
+          value: Math.round(metric.name === 'CLS' ? metric.delta * 1000 : metric.delta),
+          event_label: metric.id,
+          non_interaction: true,
+        });
+      }
+    };
+
+    onCLS(reportVital);
+    onINP(reportVital);
+    onLCP(reportVital);
+    onFCP(reportVital);
+    onTTFB(reportVital);
   } catch (error) {
-    logger.warn('[perf] web-vitals not available:', error);
+    if (import.meta.env.DEV) {
+      (globalThis['console'] as Console).warn('[perf] web-vitals not available:', error);
+    }
   }
 }
 

@@ -27,7 +27,7 @@
   "meta": {
     "home": {
       "title": "Medusa Tattoo München – Premium Tattoo & Piercing Studio am Marienplatz",
-      "description": "Premium Tattoo- und Piercing-Studio in München. Beratung, transparente Preise, höchste Hygiene und erfahrene Artists."
+      "description": "Premium Tattoo- und Piercing-Studio in München. Beratung, transparente Preise, höchste Hygiene und erfahrene Künstler."
     },
     "services": {
       "title": "Medusa Tattoo München | Leistungen",
@@ -172,7 +172,7 @@
     },
     "services": {
       "tattoo": {
-        "title": "Tattoo Artistry",
+        "title": "Tattoo",
         "price": "ab €150/Std",
         "features": {
           "custom": "Individuelle Designs",

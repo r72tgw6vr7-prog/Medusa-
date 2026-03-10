@@ -109,7 +109,7 @@ export const ServicesCurtainSection: React.FC<{ className?: string }> = ({
 
       {/* Services Grid - 2 cards only */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="space-y-16 lg:space-y-24">
+        <div className="space-y-10 lg:space-y-14">
           {services.map((service, index) => (
             <div
               key={service.id}

@@ -14,14 +14,9 @@
 }
 
 .testimonial-card {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
+  position: relative;
+  border: 1px solid rgba(var(--accent-chrome-rgb), 0.12);
+  box-shadow: var(--premium-elevation);
 }
 
 .testimonial-card__inner {
@@ -39,9 +34,19 @@
 }
 
 .testimonial-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--text-body);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-text-primary);
+}
+
+.testimonial-name::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent-chrome-rgb), 0.65), transparent);
 }
 
 .testimonial-stars {
@@ -64,25 +69,42 @@
 }
 
 .testimonial-text {
+  position: relative;
+  padding-left: var(--space-4);
   font-size: var(--text-body);
   line-height: var(--line-height-normal);
-  color: var(--text-secondary);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  color: rgba(255, 255, 255, 0.74);
+  min-height: calc(var(--line-height-normal) * 3em);
+}
+
+.testimonial-text::before {
+  content: '"';
+  position: absolute;
+  top: -6px;
+  left: 0;
+  font-family: var(--font-family-heading);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: rgba(var(--accent-chrome-rgb), 0.72);
 }
 
 .testimonial-meta {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(var(--accent-chrome-rgb), 0.08);
   font-size: var(--text-sm);
-  color: var(--text-tertiary);
+  color: rgba(255, 255, 255, 0.54);
 }
 
 .testimonial-source {
-  color: var(--text-secondary);
+  color: rgba(var(--accent-chrome-rgb), 0.72);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .testimonial-date {
@@ -93,9 +115,4 @@
   .testimonial-card {
     transition: none;
   }
-
-  .testimonial-card:hover {
-    transform: none;
-  }
 }
-

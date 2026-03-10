@@ -23,12 +23,12 @@
   --artist-image-duration: 600ms;
   --artist-overlay-duration: 350ms;
   --artist-glow-pulse-duration: 2s;
-  
+
   /* Easing Functions */
   --artist-easing-lift: cubic-bezier(0.4, 0, 0.2, 1);
   --artist-easing-zoom: cubic-bezier(0.22, 1, 0.36, 1);
   --artist-easing-glow: ease-in-out;
-  
+
   /* Overlay color (animation-specific) */
   --artist-overlay-color: rgba(10, 10, 10, 0.4);
 }
@@ -54,19 +54,19 @@
   height: 8px;
   border-radius: 50%;
   background: var(--artist-chrome);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px rgba(10, 10, 10, 0.6),
     0 0 8px rgba(192, 192, 192, 0.4);
-  transition: 
+  transition:
     transform var(--artist-content-duration) var(--artist-easing-lift),
     box-shadow var(--artist-content-duration) var(--artist-easing-lift);
 }
 
 /* Piercing artists get a ring instead of filled dot */
-.artist-card-wrapper[data-category="piercing"] .artist-category-dot {
+.artist-card-wrapper[data-category='piercing'] .artist-category-dot {
   background: transparent;
   border: 2px solid var(--artist-chrome);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px rgba(10, 10, 10, 0.6),
     0 0 8px rgba(192, 192, 192, 0.3);
 }
@@ -74,7 +74,7 @@
 /* Hover enhancement for indicator */
 .artist-card-image-container:hover .artist-category-dot {
   transform: scale(1.25);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px rgba(10, 10, 10, 0.6),
     0 0 12px rgba(192, 192, 192, 0.6);
 }
@@ -84,6 +84,11 @@
  * ============================================ */
 .artist-card-wrapper {
   position: relative;
+  transition: transform var(--artist-content-duration) ease-out;
+}
+
+.artist-card-wrapper:hover {
+  transform: translateY(-4px);
 }
 
 /* ============================================
@@ -96,7 +101,7 @@
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
-  transition: 
+  transition:
     transform var(--artist-card-duration) ease-out,
     box-shadow var(--artist-card-duration) ease-out,
     border-color var(--artist-card-duration) ease-out;
@@ -105,17 +110,12 @@
 
 /* Enhancement 1: Chrome Glow Edge (Pulsing) */
 @keyframes chrome-pulse {
-  0%, 100% { 
-    box-shadow: 
-      var(--card-shadow-depth),
-      var(--card-shadow-glow),
-      var(--card-shadow-inner);
+  0%,
+  100% {
+    box-shadow: var(--card-shadow-depth), var(--card-shadow-glow), var(--card-shadow-inner);
   }
-  50% { 
-    box-shadow: 
-      var(--card-shadow-depth),
-      var(--card-shadow-hover-glow),
-      var(--card-shadow-inner);
+  50% {
+    box-shadow: var(--card-shadow-depth), var(--card-shadow-hover-glow), var(--card-shadow-inner);
   }
 }
 
@@ -126,10 +126,7 @@
 
 /* Enhancement 3: Shadow Depth (on hover) */
 .artist-card-image-container:hover {
-  box-shadow: 
-    var(--card-shadow-depth),
-    var(--card-shadow-hover-glow),
-    var(--card-shadow-inner);
+  box-shadow: var(--card-shadow-depth), var(--card-shadow-hover-glow), var(--card-shadow-inner);
 }
 
 /* ============================================
@@ -213,11 +210,6 @@
   transition: transform var(--artist-content-duration) ease-out;
 }
 
-/* Ensure non-hovered, non-adjacent cards reset properly */
-.artist-card-wrapper {
-  transition: transform var(--artist-content-duration) ease-out;
-}
-
 /* ============================================
  * Reduced Motion - Accessibility
  * ============================================ */
@@ -232,31 +224,31 @@
     transition: none !important;
     animation: none !important;
   }
-  
+
   /* Instant hover state without animation */
   .artist-card-image-container:hover {
     border-color: var(--artist-chrome);
-    box-shadow: 
+    box-shadow:
       0 20px 60px var(--artist-shadow-dark),
       0 0 20px var(--artist-chrome-glow);
   }
-  
+
   .artist-card-image-container:hover .artist-card-image {
     transform: scale(1.05);
   }
-  
+
   .artist-card-image-container:hover .artist-card-overlay {
     background: rgba(10, 10, 10, 0);
   }
-  
+
   .artist-card-wrapper:hover .artist-card-content {
     transform: translateY(-8px);
   }
-  
+
   .artist-card-wrapper:hover .artist-card-name::after {
     width: 100%;
   }
-  
+
   .artist-card-wrapper:hover + .artist-card-wrapper,
   .artist-card-wrapper:has(+ .artist-card-wrapper:hover) {
     transform: scale(0.95);

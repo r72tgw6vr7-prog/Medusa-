@@ -11,6 +11,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Section from '@/components/primitives/Section';
 import Container from '@/components/ui/Container';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 import {
   servicesFadeInUpVariants as fadeInUpVariants,
   servicesContainerVariants as containerVariants,
@@ -81,7 +82,7 @@ interface TattooServicesPageProps {
 
 export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ className = '' }) => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('tattoo');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -176,10 +177,10 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
       if (t) window.clearTimeout(t);
       t = window.setTimeout(() => {
         openBooking({ service: serviceId });
-        navigate('/booking');
+        navigate(localizePath('/booking', language));
       }, 300) as unknown as number;
     };
-  }, [openBooking, navigate]);
+  }, [language, openBooking, navigate]);
 
   const renderServiceCard = (service: (typeof currentServices)[number], index: number) => {
     const isSelected = selectedPacket === service.id;

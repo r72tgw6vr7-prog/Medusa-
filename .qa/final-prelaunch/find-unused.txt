@@ -1,0 +1,76 @@
+
+> medusa-tattoo@1.0.0 find:unused /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> knip --include files
+
+public/error-logger.js                                    
+src/components/organisms/ServicesPage.tsx                 
+src/components/pages/ServicesPageInteractive.example.tsx  
+src/components/sections/ArtistsSection.tsx                
+src/components/seo/LocationSection.tsx                    
+src/components/ui/LuxuryButton.tsx                        
+src/config/imagePaths.ts                                  
+src/config/site.ts                                        
+src/constants/routes.ts                                   
+src/data/gallery.ts                                       
+src/data/imageData.ts                                     
+src/data/kids-services.ts                                 
+src/data/partners.ts                                      
+src/data/piercing-services.ts                             
+src/data/serviceCategories.ts                             
+src/data/services.ts                                      
+src/data/tattoo-services.ts                               
+src/hooks/useTranslation.ts                               
+src/i18n/generated/translationKeys.ts                     
+src/i18n/types.ts                                         
+src/i18n/utils/formatters.ts                              
+src/i18n/utils/pluralization.ts                           
+src/legacy/paymentService.ts                              
+src/lib/animations/hooks.ts                               
+src/lib/animations/index.ts                               
+src/lib/animations/keyframes.css                          
+src/lib/animations/micro-transitions.ts                   
+src/lib/animations/variants.ts                            
+src/lib/csrf.ts                                           
+src/lib/env.ts                                            
+src/lib/forms/types.ts                                    
+src/lib/forms/utils.ts                                    
+src/lib/forms/validators.ts                               
+src/lib/gdpr-compliance.ts                                
+src/lib/scroll-minimal.ts                                 
+src/lib/scrollEnhance.ts                                  
+src/routes.tsx                                            
+src/schemas/bookingSchema.ts                              
+src/sections/BeforeAfterSection.tsx                       
+src/sections/BookingSection.tsx                           
+src/sections/ContactSection.tsx                           
+src/sections/index.ts                                     
+src/sections/ProcessTimeline/index.ts                     
+src/sections/ServicesSection.tsx                          
+src/sections/TrustBadges.tsx                              
+src/sections/TrustSignalsSection.tsx                      
+src/styles/glassmorphism.ts                               
+src/styles/scroll-enhance.css                             
+src/types/booking.ts                                      
+src/types/component-types.ts                              
+src/types/components.ts                                   
+src/types/container.ts                                    
+src/types/core.ts                                         
+src/types/footer.ts                                       
+src/types/route-types.ts                                  
+src/types/routes.ts                                       
+src/types/services.ts                                     
+src/utils/gallery-manifest-loader.ts                      
+src/utils/gallery-utils.ts                                
+src/utils/glassmorphism.ts                                
+src/utils/image-validator.ts                              
+src/utils/imageUtils.ts                                   
+src/utils/performance.ts                                  
+src/utils/rafQueue.ts                                     
+templates/ComponentTemplate.tsx                           
+types/playwright.d.ts                                     
+utils/connectionMonitor.ts                                
+utils/performanceMonitor.ts                               
+Configuration hints (2)
+. (root)                       Create knip.json configuration file, and add entry and/or refine project files (68 unuse…
+src/index.tsx     …ckage.json  Package entry file not found                                                             
+ ELIFECYCLE  Command failed with exit code 1.

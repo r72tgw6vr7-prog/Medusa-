@@ -35,6 +35,9 @@ export const TRANSITIONS = {
   hover: {
     scale: 'transition-transform duration-200 ease-smooth hover:scale-105',
     scaleSubtle: 'transition-transform duration-200 ease-smooth hover:scale-102',
+    accentGlow: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-subtle',
+    accentGlowMedium: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-medium',
+    accentGlowStrong: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-strong',
     goldGlow: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-subtle',
     goldGlowMedium: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-medium',
     goldGlowStrong: 'transition-shadow duration-300 ease-smooth hover:shadow-chrome-strong',
@@ -47,10 +50,13 @@ export const TRANSITIONS = {
 
   // Focus effects
   focus: {
+    accentRing:
+      'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 transition-shadow duration-200',
     goldRing:
       'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 transition-shadow duration-200',
     chromeRing:
       'focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-2 transition-shadow duration-200',
+    accentGlow: 'focus-visible:shadow-chrome-subtle transition-shadow duration-200 ease-smooth',
     goldGlow: 'focus-visible:shadow-chrome-subtle transition-shadow duration-200 ease-smooth',
     chromeGlow: 'focus-visible:shadow-chrome-subtle transition-shadow duration-200 ease-smooth',
   },
@@ -64,15 +70,24 @@ export const TRANSITIONS = {
 
   // Color transitions
   color: {
+    accentToChrome:
+      'transition-colors duration-300 ease-smooth text-brand-accent hover:text-brand-chrome',
     goldToChrome:
       'transition-colors duration-300 ease-smooth text-brand-accent hover:text-brand-chrome',
+    chromeToAccent:
+      'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-accent',
     chromeToGold:
       'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-accent',
+    accentToChromeBackground:
+      'transition-colors duration-300 ease-smooth bg-brand-accent hover:bg-brand-chrome',
     goldToChromeBackground:
       'transition-colors duration-300 ease-smooth bg-brand-accent hover:bg-brand-chrome',
     chromeToDark:
       'transition-colors duration-300 ease-smooth text-brand-chrome hover:text-brand-dark',
-    darkToGold: 'transition-colors duration-300 ease-smooth text-brand-dark hover:text-brand-accent',
+    darkToAccent:
+      'transition-colors duration-300 ease-smooth text-brand-dark hover:text-brand-accent',
+    darkToGold:
+      'transition-colors duration-300 ease-smooth text-brand-dark hover:text-brand-accent',
     bgDarkToLight: 'transition-colors duration-300 ease-smooth bg-brand-dark hover:bg-brand-light',
   },
 
@@ -110,13 +125,13 @@ export const TRANSITION_PRESETS = {
   button: combineTransitions(
     TRANSITIONS.hover.scaleSubtle,
     TRANSITIONS.active.scale,
-    TRANSITIONS.focus.goldRing,
+    TRANSITIONS.focus.chromeRing,
   ),
 
   buttonGold: combineTransitions(
     TRANSITIONS.hover.scaleSubtle,
     TRANSITIONS.active.scale,
-    TRANSITIONS.focus.goldRing,
+    TRANSITIONS.focus.chromeRing,
     TRANSITIONS.hover.chromeGlow,
   ),
 
@@ -143,11 +158,11 @@ export const TRANSITION_PRESETS = {
   ),
 
   // Link transitions
-  link: combineTransitions(TRANSITIONS.color.chromeToGold, TRANSITIONS.hover.brightness),
+  link: combineTransitions(TRANSITIONS.color.chromeToAccent, TRANSITIONS.hover.brightness),
 
-  linkGold: combineTransitions(TRANSITIONS.color.darkToGold, TRANSITIONS.hover.brightness),
+  linkGold: combineTransitions(TRANSITIONS.color.darkToAccent, TRANSITIONS.hover.brightness),
 
-  linkChrome: combineTransitions(TRANSITIONS.color.goldToChrome, TRANSITIONS.hover.brightness),
+  linkChrome: combineTransitions(TRANSITIONS.color.accentToChrome, TRANSITIONS.hover.brightness),
 
   // Image transitions
   image: combineTransitions(TRANSITIONS.hover.brightness, TRANSITIONS.hover.scaleSubtle),
@@ -164,7 +179,7 @@ export const TRANSITION_PRESETS = {
   iconSpin: combineTransitions(TRANSITIONS.other.spin, TRANSITIONS.hover.brightness),
 
   // Form element transitions
-  formElement: combineTransitions(TRANSITIONS.focus.goldRing, TRANSITIONS.hover.brightnessSubtle),
+  formElement: combineTransitions(TRANSITIONS.focus.chromeRing, TRANSITIONS.hover.brightnessSubtle),
 } as const;
 
 /**

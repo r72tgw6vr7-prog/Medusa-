@@ -1,25 +1,48 @@
 node_modules
 .git
+.vercel
+.claude
+.github
+.husky
+.qa
+.snapshots
+.vscode
+.vite
+.windsurf
+.env
+.env.*
+
 coverage
+dist
 docs
+reports
+tests
+__mocks__
+templates
+
 *.log
 *.md
-repomix-output.xml
-FIGMA EXPORT
 *.pdf
+.DS_Store
+build.log
+eslint-report.json
+repomix-output.xml
+
+FIGMA EXPORT
 00-cover-guidelines
 02-pages-complete
 03-pages-in-progress
 guidelines
 handoff
-templates
-.vite
-dist/stats.html
 src/components-backup-2025-10-24-pre-enforcement
-# Exclude videos and archive
+
+# Raw source dumps and archived media should never be deployed
+public/assets/drive-download-*
+public/images/_ARCHIVE
+dist/images/_ARCHIVE
+
+# Exclude videos from deploy payloads
 **/*.MOV
 **/*.mov
 **/*.mp4
 **/*.MP4
-public/images/_ARCHIVE
-dist/images/_ARCHIVE

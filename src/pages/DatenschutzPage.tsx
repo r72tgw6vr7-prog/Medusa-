@@ -194,7 +194,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
               >
                 <Card variant='default' size='default' asChild>
                   <div>
-                    <p className='font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal)'>
+                    <p className='reading-measure font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal)'>
                       {t.introduction}
                     </p>
                   </div>
@@ -215,7 +215,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                         {t.definitions.title}
                       </h2>
                     </div>
-                    <div className='space-y-0'>
+                    <div className='reading-measure space-y-0'>
                       {t.definitions.items.map((definition, index) => (
                         <p key={index} className='text-body-small font-body text-brand-white'>
                           <strong className='text-brand-accent'>{definition.split(':')[0]}:</strong>
@@ -245,7 +245,7 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                             {section.title}
                           </h2>
                         </div>
-                        <div className='space-y-0'>
+                        <div className='reading-measure space-y-0'>
                           {section.content.map((paragraph, pIndex) => (
                             <p key={pIndex} className='text-body-small font-body text-brand-white'>
                               {paragraph || <br />}

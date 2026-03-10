@@ -28,18 +28,15 @@ export const PageHeading: React.FC<PageHeadingProps> = ({
   const Tag = level === 'hero' ? 'h1' : 'h3';
 
   return (
-    <div className='text-center space-y-4'>
-      {eyebrow && (
-        <p className='text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome mb-(--space-2)'>
-          {eyebrow}
-        </p>
-      )}
+    <div className='premium-section-intro'>
+      {eyebrow && <p className='premium-eyebrow'>{eyebrow}</p>}
       <Tag className={headingClasses}>{title}</Tag>
+      <div
+        className='premium-divider premium-divider--short premium-divider--center'
+        aria-hidden='true'
+      />
       {subtitle && (
-        <p
-          className='text-(length:--text-lg) text-brand-chrome max-w-2xl mx-auto font-body font-semibold leading-(--line-height-normal) mt-4'
-          style={{ textShadow: '0 0 12px var(--chrome-glow-soft)' }}
-        >
+        <p className='premium-subtitle reading-measure mx-auto font-body font-semibold'>
           {subtitle}
         </p>
       )}

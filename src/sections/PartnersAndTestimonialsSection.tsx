@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../components/ui/Container';
 import InfiniteLogoCarousel from '@/components/organisms/InfiniteLogoCarousel';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
+import { SectionHeading } from '@/components/SectionHeading';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // PARTNER LOGOS - Updated list with latest partners
@@ -70,16 +71,13 @@ export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSec
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
       <Container className='py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
-        <div className='text-center mb-4'>
-          <h3 className='font-headline text-(length:--text-h2) font-bold tracking-tight leading-tight text-brand-accent'>
-            {resolvedTitlePartners}
-          </h3>
-        </div>
-        <p className='text-center text-white/70 text-(length:--text-sm) mb-16 font-body'>
-          {resolvedSubtitlePartners}
-        </p>
+        <SectionHeading
+          title={resolvedTitlePartners}
+          subtitle={resolvedSubtitlePartners}
+          level='secondary'
+        />
 
-        {/* Partner Logos Carousel - Restored with gold styling */}
+        {/* Partner Logos Carousel */}
         <InfiniteLogoCarousel items={partnerLogos} ariaLabel={t('common.partners.carouselAria')} />
       </Container>
 

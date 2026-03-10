@@ -28,14 +28,16 @@ export const ImpressumPage: React.FC = () => {
                 subtitle={t('common.impressumPage.subtitle')}
               />
 
-              <div className='space-y-16'>
+              <div className='reading-measure space-y-16'>
                 {/* TMG Section */}
                 <section className='space-y-8'>
                   <h2 className='font-headline text-(length:--text-h4) font-semibold text-brand-accent'>
                     {t('common.impressumPage.sections.tmg.title')}
                   </h2>
                   <div className='space-y-0 text-brand-white/85'>
-                    <p className='font-semibold'>{t('common.impressumPage.sections.tmg.company')}</p>
+                    <p className='font-semibold'>
+                      {t('common.impressumPage.sections.tmg.company')}
+                    </p>
                     <p>{t('common.impressumPage.sections.tmg.tradeName')}</p>
                     <p className='pb-2'>&nbsp;</p>
                     <p>{t('common.impressumPage.sections.tmg.studioAddressLabel')}</p>
@@ -133,7 +135,9 @@ export const ImpressumPage: React.FC = () => {
                     </p>
                     <p>
                       {t('common.impressumPage.sections.professionalInsurance.coverageAmountLabel')}{' '}
-                      {t('common.impressumPage.sections.professionalInsurance.coverageAmountPlaceholder')}
+                      {t(
+                        'common.impressumPage.sections.professionalInsurance.coverageAmountPlaceholder',
+                      )}
                     </p>
                   </div>
                 </section>

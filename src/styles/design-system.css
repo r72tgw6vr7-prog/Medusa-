@@ -42,6 +42,30 @@
   --chrome-glow-subtle: rgba(192, 192, 192, 0.1);
   --chrome-glow-soft: var(--chrome-glow);
   --chrome-glow-border: var(--chrome-glow-bright);
+  --surface-atmosphere:
+    radial-gradient(circle at top, rgba(192, 192, 192, 0.08), transparent 34%),
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.03), transparent 28%),
+    linear-gradient(180deg, rgba(17, 17, 18, 0.94) 0%, rgba(10, 10, 10, 1) 28%);
+  --surface-vignette: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.26) 72%,
+    rgba(0, 0, 0, 0.46) 100%
+  );
+  --premium-hairline: rgba(255, 255, 255, 0.08);
+  --premium-hairline-strong: rgba(192, 192, 192, 0.22);
+  --premium-surface-toplight: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 22%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --premium-elevation:
+    0 18px 48px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --premium-elevation-hover:
+    0 28px 70px rgba(0, 0, 0, 0.42), 0 0 28px rgba(192, 192, 192, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
   /* Brand accent tokens (chrome-based) */
   --brand-accent: #c0c0c0;
@@ -52,7 +76,7 @@
   /* Base colors */
   --brand-white: #ffffff;
   --base-white: #ffffff;
-  --deep-black: #1A1A1A;
+  --deep-black: #1a1a1a;
 
   /* === CARD SYSTEM (FROM PRICING PAGE - SOURCE OF TRUTH) === */
   --card-bg: #000000;
@@ -87,10 +111,10 @@
   --brand-gold-hover: rgba(192, 192, 192, 0.9);
   --color-brand-gold-rgb: 192, 192, 192;
   --shadow-gold-glow: 0 0 15px rgba(192, 192, 192, 0.3);
-  --color-surface-dark: #1A1A1A;
-  --color-surface-darker: #1A1A1A;
+  --color-surface-dark: #1a1a1a;
+  --color-surface-darker: #1a1a1a;
   --color-surface-darker-rgb: 26, 26, 26;
-  --color-surface-medium: #1A1A1A;
+  --color-surface-medium: #1a1a1a;
   --color-surface-light: #3a3a3a;
   --color-text-primary: #ffffff;
   --color-text-primary-rgb: 255, 255, 255;
@@ -115,14 +139,14 @@
   /* Container Max-Widths */
   --container-full: 100vw;
   --container-wide: 1600px;
-  --container-max-width: 1440px;      /* default */
-  --container-narrow: 1024px;         /* updated from 960px */
+  --container-max-width: 1440px; /* default */
+  --container-narrow: 1024px; /* updated from 960px */
   --container-form: 800px;
 
   /* Container Padding (Responsive) */
-  --container-padding-sm: 24px;       /* mobile */
-  --container-padding-md: 32px;       /* tablet */
-  --container-padding-lg: 48px;       /* desktop */
+  --container-padding-sm: 24px; /* mobile */
+  --container-padding-md: 32px; /* tablet */
+  --container-padding-lg: 48px; /* desktop */
 
   /* === FOCUS & INTERACTION === */
   --focus-ring: 0 0 0 3px rgba(192, 192, 192, 0.4);
@@ -169,10 +193,10 @@
   --font-weight-bold: 700;
 
   /* Font sizes - INCREASED for desktop */
-  --text-h1: clamp(32px, 6vw, 56px);   /* Was 28-48, now 32-56 */
-  --text-h2: clamp(28px, 5vw, 48px);   /* Was 24-40, now 28-48 */
+  --text-h1: clamp(32px, 6vw, 56px); /* Was 28-48, now 32-56 */
+  --text-h2: clamp(28px, 5vw, 48px); /* Was 24-40, now 28-48 */
   --text-h2-desktop: 48px;
-  --text-h3: clamp(24px, 4vw, 36px);   /* Was 20-32, now 24-36 */
+  --text-h3: clamp(24px, 4vw, 36px); /* Was 20-32, now 24-36 */
   --text-h4: clamp(20px, 3.5vw, 28px);
   --text-lg: 18px;
   --text-body: 16px;
@@ -262,15 +286,15 @@
   /* Use these names going forward. */
 
   /* Background colors - UNIFIED */
-  --bg-page: #1A1A1A;                              /* Canonical page background */
-  --bg-surface: #1A1A1A;                           /* Unified surface background */
-  --bg-elevated: #1A1A1A;                          /* Unified elevated background */
+  --bg-page: #1a1a1a; /* Canonical page background */
+  --bg-surface: #1a1a1a; /* Unified surface background */
+  --bg-elevated: #1a1a1a; /* Unified elevated background */
 
   /* Primary accent is chrome - all gold references map to chrome */
-  --accent-gold: var(--accent-chrome);             /* Maps to chrome for compatibility */
+  --accent-gold: var(--accent-chrome); /* Maps to chrome for compatibility */
   --accent-gold-hover: rgba(192, 192, 192, 0.9);
-  --glow-gold: var(--shadow-gold-glow);            /* Now uses chrome */
-  --glow-chrome: var(--artist-chrome-glow);        /* rgba(192, 192, 192, 0.25) */
+  --glow-gold: var(--shadow-gold-glow); /* Now uses chrome */
+  --glow-chrome: var(--artist-chrome-glow); /* rgba(192, 192, 192, 0.25) */
 
   /* Text colors using chrome for secondary */
   --text-primary: #ffffff;
@@ -386,6 +410,8 @@
     font-weight: 400; /* Base text weight for T4 tests */
     line-height: var(--line-height-normal);
     background-color: var(--color-surface-dark);
+    background-image: var(--surface-atmosphere), var(--surface-vignette);
+    background-attachment: fixed;
     color: var(--color-text-primary);
   }
 
@@ -518,19 +544,19 @@
 
   .gallery-frame {
     aspect-ratio: 3 / 4;
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
   }
 
   :where(.grid.grid-cols-2.md\:grid-cols-3.lg\:grid-cols-4.gap-8) > :where(.aspect-square) {
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     aspect-ratio: 3 / 4;
   }
 
   .portfolio-card-image-container {
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
     aspect-ratio: 3 / 4;
   }
 
@@ -567,7 +593,12 @@
     display: block;
     width: 100%;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(var(--accent-chrome-rgb), 0.4), transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(var(--accent-chrome-rgb), 0.4),
+      transparent
+    );
     box-shadow: 0 0 12px var(--chrome-glow-soft);
     transition: box-shadow 200ms ease;
   }
@@ -630,8 +661,8 @@
   @media (max-width: 768px) {
     button,
     .btn,
-    a[role="button"],
-    [role="button"] {
+    a[role='button'],
+    [role='button'] {
       min-height: 44px;
       min-width: 44px;
     }
@@ -639,7 +670,7 @@
     /* Ensure interactive elements have adequate spacing on mobile */
     button:not(:last-child),
     .btn:not(:last-child),
-    a[role="button"]:not(:last-child) {
+    a[role='button']:not(:last-child) {
       margin-right: 8px;
     }
   }

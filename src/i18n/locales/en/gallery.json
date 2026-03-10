@@ -7,10 +7,14 @@
   "ctaLink": "Meet the artists",
   "noResults": "No artworks found",
   "filters": {
+    "artistLabel": "Artist",
+    "styleLabel": "Style",
     "allWorks": "All Works",
     "allArtists": "All Artists",
     "allStyles": "All Styles",
     "allYears": "All Years",
+    "resultsCount": "{{count}} works shown",
+    "emptyState": "No works match the selected filter.",
     "reset": "Reset filters",
     "more": "Show more"
   }

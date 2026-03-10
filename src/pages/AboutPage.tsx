@@ -274,14 +274,14 @@ export function AboutPage() {
           <Container size='default'>
             <div
               ref={oliverRef}
-              className='[&_.max-w-xl]:max-w-none [&_.artist-card-content_.mt-8]:hidden'
+              className='[&_.max-w-xl]:max-w-3xl [&_.artist-card-content_.mt-8]:hidden'
             >
               <ArtistCard artist={oliverCard} isRevealed={isOliverRevealed} index={0} />
             </div>
 
             <div
               ref={saschaRef}
-              className='mt-ma-xl [&_.max-w-xl]:max-w-none [&_.artist-card-content_.mt-8]:hidden'
+              className='mt-ma-xl [&_.max-w-xl]:max-w-3xl [&_.artist-card-content_.mt-8]:hidden'
             >
               <ArtistCard artist={saschaCard} isRevealed={isSaschaRevealed} index={1} />
             </div>

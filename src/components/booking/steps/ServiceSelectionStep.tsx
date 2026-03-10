@@ -82,6 +82,7 @@ export const ServiceSelectionStep: React.FC<ServiceSelectionStepProps> = ({
           <button
             key={service.id}
             className={`service-card ${selectedService === service.id ? 'selected' : ''}`}
+            aria-pressed={selectedService === service.id}
             onClick={() => {
               setSelectedService(service.id);
               // Clear specific service when changing main service type

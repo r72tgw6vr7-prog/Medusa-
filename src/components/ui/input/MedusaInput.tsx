@@ -32,7 +32,7 @@ export interface MedusaInputProps extends InputHTMLAttributes {
  * - Consistent styling across all screen sizes
  * - Proper touch targets (44px minimum height on mobile)
  * - Accessibility features
- * - Focus states with gold outline
+ * - Chrome focus states
  * - Error states
  * - Icon support
  * - Helper text and error message display
@@ -79,13 +79,13 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              'text-base lg:text-sm font-medium text-luxury-text-inverse/90', // Adjusted size and opacity
+              'text-base lg:text-sm font-medium text-luxury-text-inverse/90',
               hideLabel && 'sr-only',
             )}
           >
             {label}
             {required && (
-              <span className='text-[var(--brand-gold)] ml-0' aria-hidden='true'>
+              <span className='ml-0 text-(--accent-chrome)' aria-hidden='true'>
                 *
               </span>
             )}
@@ -107,23 +107,14 @@ export const MedusaInput = forwardRef<HTMLInputElement, MedusaInputProps>(
             ref={ref}
             id={inputId}
             className={cn(
-              "flex h-12 w-full rounded-lg border border-luxury-border-on-dark bg-luxury-bg-dark-elevated px-4 py-3 text-base text-luxury-text-inverse file:border-0 file:bg-transparent file:text-base file:font-medium placeholder:text-luxury-text-inverse-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-luxury-accent-chrome focus-visible:ring-offset-2 focus-visible:ring-offset-luxury-bg-dark disabled:cursor-not-allowed disabled:opacity-50",
-              // Focus states from design system
-              'focus:outline-none focus:border-[var(--accent-chrome)]',
-              'focus:shadow-[0_0_10px_rgba(var(--accent-chrome-rgb),0.2)]',
-              // Hover state
-              'hover:border-[var(--accent-chrome)]/50',
-
-              // Error state
-              error && 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_1px_var(--color-error-red)]',
-
-              // Disabled state
-              disabled && 'opacity-50 cursor-not-allowed',
-
-              // Icon padding
+              'flex h-12 w-full rounded-[24px] border border-white/10 bg-white/4 px-4 py-3 text-base text-luxury-text-inverse shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] file:border-0 file:bg-transparent file:text-base file:font-medium placeholder:text-luxury-text-inverse-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-chrome-rgb),0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-luxury-bg-dark disabled:cursor-not-allowed disabled:opacity-50',
+              'focus:outline-none focus:border-[rgba(var(--accent-chrome-rgb),0.7)] focus:shadow-[0_0_0_1px_rgba(var(--accent-chrome-rgb),0.38),0_12px_28px_rgba(0,0,0,0.24)]',
+              'hover:border-[rgba(var(--accent-chrome-rgb),0.28)]',
+              error &&
+                'border-red-500 focus:border-red-400 focus:shadow-[0_0_0_1px_rgba(248,113,113,0.28),0_12px_28px_rgba(0,0,0,0.24)]',
+              disabled && 'cursor-not-allowed opacity-50',
               leftIcon && 'pl-12 md:pl-14',
               rightIcon && 'pr-12 md:pr-14',
-
               className,
             )}
             aria-invalid={error ? 'true' : 'false'}

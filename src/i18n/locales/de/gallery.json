@@ -1,16 +1,20 @@
 {
   "title": "Galerie",
   "subtitle": "Eine Sammlung meisterhafter Kunstwerke unserer talentierten Künstler. Entdecken Sie die Vielfalt unseres Studios.",
-  "intro": "Unsere Galerie zeigt aktuelle Arbeiten aus Tattoo und Piercing – von feinen Fineline-Details bis zu großflächigen Projekten. Jedes Motiv entsteht in enger Abstimmung mit unseren Artists und berücksichtigt Stil, Anatomie und Persönlichkeit. Die Auswahl umfasst Studio-Sessions und abgeschlossene Arbeiten, damit Sie Linienführung, Schattierung und Farbwirkung realistisch einschätzen können.",
-  "styles": "Sie finden hier eine breite Auswahl an Stilrichtungen wie Realismus, Blackwork, Dotwork, Traditional, Japanese, Neo-Traditional und individuellen Custom Designs. Nutzen Sie die Filter, um nach Stil oder Künstler zu stöbern, und vergleichen Sie Kontrast, Detailtiefe und Gesamtwirkung. So erkennen Sie leichter, welche Ästhetik zu Ihrem Projekt passt.",
+  "intro": "Unsere Galerie zeigt aktuelle Arbeiten aus Tattoo und Piercing – von feinen Fineline-Details bis zu großflächigen Projekten. Jedes Motiv entsteht in enger Abstimmung mit unseren Künstlern und berücksichtigt Stil, Anatomie und Persönlichkeit. Die Auswahl umfasst Studio-Sessions und abgeschlossene Arbeiten, damit Sie Linienführung, Schattierung und Farbwirkung realistisch einschätzen können.",
+  "styles": "Sie finden hier eine breite Auswahl an Stilrichtungen wie Realismus, Blackwork, Dotwork, Traditional, Japanese, Neo-Traditional und individuellen Designs. Nutzen Sie die Filter, um nach Stil oder Künstler zu stöbern, und vergleichen Sie Kontrast, Detailtiefe und Gesamtwirkung. So erkennen Sie leichter, welche Ästhetik zu Ihrem Projekt passt.",
   "ctaText": "Wenn Sie bereits eine Idee haben oder Beratung zu Stil und Platzierung wünschen, sehen Sie sich die Profile unseres Teams an und starten Sie mit einer kurzen Anfrage",
   "ctaLink": "Zu den Künstlern",
   "noResults": "Keine Kunstwerke gefunden",
   "filters": {
+    "artistLabel": "Künstler",
+    "styleLabel": "Stil",
     "allWorks": "Alle Arbeiten",
     "allArtists": "Alle Künstler",
     "allStyles": "Alle Stile",
     "allYears": "Alle Jahre",
+    "resultsCount": "{{count}} Arbeiten sichtbar",
+    "emptyState": "Für diese Auswahl sind aktuell keine Arbeiten sichtbar.",
     "reset": "Filter zurücksetzen",
     "more": "Mehr anzeigen"
   }

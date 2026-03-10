@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from './primitives/Section';
 import Container from './ui/Container';
-import { PageHeading } from './PageHeading';
+import { SectionHeading } from './SectionHeading';
 import './PricingSection.css';
 
 export const PricingSection: React.FC = () => {
@@ -14,15 +14,12 @@ export const PricingSection: React.FC = () => {
       id='pricing-section'
     >
       <Container size='wide'>
-        {/* Section Header - Secondary Section (h3) */}
-        <div className='mb-16'>
-          <PageHeading
-            eyebrow="PREISE"
-            title="Services mit transparenten Preisen"
-            subtitle="Keine versteckten Kosten – Ehrliche Beratung seit 1998"
-            level="secondary"
-          />
-        </div>
+        <SectionHeading
+          eyebrow='Preise'
+          title='Services mit transparenten Preisen'
+          subtitle='Keine versteckten Kosten – ehrliche Beratung seit 1998'
+          level='secondary'
+        />
       </Container>
     </Section>
   );

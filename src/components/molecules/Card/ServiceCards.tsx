@@ -26,7 +26,7 @@ const DEFAULT_SERVICES: ServiceCard[] = [
     id: 'tattoo',
     backgroundImage: '/assets/images/photos/backgrounds/tattoo-card-bg.webp',
     icon: 'crown',
-    struckTitle: 'Tattoo Artistry',
+    struckTitle: 'Tattoo',
     mainTitle: 'Permanent Kunst',
     bullets: [
       'Individuelle Designs',

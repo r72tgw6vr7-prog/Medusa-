@@ -90,35 +90,36 @@ export default defineConfig(({ mode }) => {
           : [],
         output: {
           manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              if (
-                id.includes('i18next') ||
-                id.includes('react-i18next') ||
-                id.includes('i18next-browser-languagedetector')
-              ) {
-                return 'vendor-i18n';
-              }
+            if (!id.includes('node_modules')) {
+              if (id.includes('/components/ui/')) return 'ui';
+              if (id.includes('/components/primitives/')) return 'primitives';
+              return undefined;
             }
-
-            // Other vendor packages
-            if (id.includes('node_modules')) {
-              if (id.includes('@radix-ui')) {
-                return 'vendor-radix';
-              }
-              if (id.includes('framer-motion')) {
-                return 'vendor-framer';
-              }
-              if (id.includes('lucide-react')) {
-                return 'vendor-icons';
-              }
-              return 'vendor';
+            // React core — smallest possible critical chunk
+            if (
+              id.includes('/react-dom/') ||
+              id.includes('/react/') ||
+              id.includes('/react-router') ||
+              id.includes('/scheduler/')
+            ) {
+              return 'vendor-react';
             }
-            if (id.includes('/components/ui/')) {
-              return 'ui';
+            // i18n bundle — loaded async, never blocks paint
+            if (
+              id.includes('i18next') ||
+              id.includes('react-i18next') ||
+              id.includes('i18next-browser-languagedetector')
+            ) {
+              return 'vendor-i18n';
             }
-            if (id.includes('/components/primitives/')) {
-              return 'primitives';
-            }
+            // Animation — lazy, never blocks FCP
+            if (id.includes('framer-motion')) return 'vendor-framer';
+            // UI primitives
+            if (id.includes('@radix-ui')) return 'vendor-radix';
+            // Icons — tree-shaken but still sizeable
+            if (id.includes('lucide-react')) return 'vendor-icons';
+            // Everything else
+            return 'vendor';
           },
         },
       },

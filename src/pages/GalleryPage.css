@@ -23,14 +23,32 @@
   border-color: var(--brand-accent);
 }
 
-/* Image styling - full brightness, subtle scale on hover */
+/* Image styling — subtle desaturation for cohesive portfolio look */
 .gallery-frame img {
-  transition: transform 0.3s ease-out;
+  filter: saturate(0.85) contrast(1.05);
+  transition: filter 0.4s ease-out, transform 0.3s ease-out;
 }
 
 .gallery-frame:hover img,
 .gallery-frame:focus-visible img {
+  filter: saturate(1) contrast(1);
   transform: scale(1.02);
+}
+
+/* Subtle film grain overlay on gallery grid */
+.gallery-grid {
+  position: relative;
+}
+
+.gallery-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 1;
 }
 
 /* Reduced motion: disable animations */
@@ -38,16 +56,16 @@
   .void-overlay {
     display: none !important;
   }
-  
+
   .gallery-frame,
   .gallery-frame img {
     transition: none !important;
   }
-  
+
   .gallery-frame:hover {
     transform: none !important;
   }
-  
+
   .gallery-frame:hover img {
     transform: none !important;
   }

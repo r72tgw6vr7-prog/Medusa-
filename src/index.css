@@ -8,7 +8,7 @@
  
 */
 /* Tailwind v4 directives - MUST be first */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Font imports - must be right after tailwindcss import */
 
@@ -75,7 +75,21 @@ html {
   overflow-y: auto;
 }
 
+::selection {
+  background: #e5e7eb;
+  color: #0a0a0a;
+}
+
+::-moz-selection {
+  background: #e5e7eb;
+  color: #0a0a0a;
+}
+
 body {
   overflow-y: visible;
   overflow-x: clip;
+}
+
+.reading-measure {
+  max-width: 72ch;
 }

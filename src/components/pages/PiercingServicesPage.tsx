@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 import React, { useMemo, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
@@ -121,7 +122,7 @@ const BACKDROP_BLUR = '8px';
 const OVERLAY_EASE = [0.4, 0, 0.2, 1] as const;
 
 export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ className = '' }) => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('stechen');
   const [selectedPacket, setSelectedPacket] = useState<string | null>(null);
@@ -326,7 +327,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inView = useInView(containerRef, { amount: 0.1, once: true });
 
-  const currentServices = useMemo(() => serviceDetails[activeCategory], [activeCategory, serviceDetails]);
+  const currentServices = useMemo(
+    () => serviceDetails[activeCategory],
+    [activeCategory, serviceDetails],
+  );
   const activeCategoryMeta = useMemo(
     () => categories.find((category) => category.id === activeCategory),
     [activeCategory, categories],
@@ -359,10 +363,10 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
       if (t) window.clearTimeout(t);
       t = window.setTimeout(() => {
         openBooking({ service: serviceId });
-        navigate('/booking');
+        navigate(localizePath('/booking', language));
       }, 300) as unknown as number;
     };
-  }, [openBooking, navigate]);
+  }, [language, openBooking, navigate]);
 
   const renderServiceCard = (service: (typeof currentServices)[number]) => {
     const isSelected = selectedPacket === service.id;

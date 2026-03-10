@@ -70,7 +70,7 @@
   },
   "contact": {
     "phone": "+49 89 123456789",
-    "email": "info@medusa-tattoo-muenchen.de", 
+    "email": "info@medusa-tattoo-muenchen.de",
     "whatsapp": "+49 89 123456789",
     "website": "https://medusa-tattoo-muenchen.de",
     "socialMedia": {
@@ -79,21 +79,21 @@
     }
   },
   "businessHours": {
-    "monday": "10:00 - 19:00",
-    "tuesday": "10:00 - 19:00", 
-    "wednesday": "10:00 - 19:00",
-    "thursday": "10:00 - 19:00",
-    "friday": "10:00 - 20:00",
-    "saturday": "10:00 - 18:00",
+    "monday": "11:30 - 19:00",
+    "tuesday": "11:30 - 19:00",
+    "wednesday": "11:30 - 19:00",
+    "thursday": "11:30 - 19:00",
+    "friday": "11:30 - 20:00",
+    "saturday": "11:30 - 20:00",
     "sunday": "Geschlossen"
   },
   "businessHoursEn": {
-    "monday": "10:00 AM - 7:00 PM",
-    "tuesday": "10:00 AM - 7:00 PM",
-    "wednesday": "10:00 AM - 7:00 PM", 
-    "thursday": "10:00 AM - 7:00 PM",
-    "friday": "10:00 AM - 8:00 PM",
-    "saturday": "10:00 AM - 6:00 PM",
+    "monday": "11:30 AM - 7:00 PM",
+    "tuesday": "11:30 AM - 7:00 PM",
+    "wednesday": "11:30 AM - 7:00 PM",
+    "thursday": "11:30 AM - 7:00 PM",
+    "friday": "11:30 AM - 8:00 PM",
+    "saturday": "11:30 AM - 8:00 PM",
     "sunday": "Closed"
   }
 }

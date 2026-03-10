@@ -33,7 +33,7 @@ export const SPECIFIC_TATTOO_SERVICES = [
   { id: 'medium', label: 'Mittel (5-15cm)' },
   { id: 'large', label: 'Groß (15cm+)' },
   { id: 'coverup', label: 'Cover-Up' },
-  { id: 'custom', label: 'Custom Design' },
+  { id: 'custom', label: 'Individuelles Design' },
 ] as const;
 
 // Map specific service IDs to human-readable labels

@@ -43,18 +43,18 @@ export const ARTISTS: Artist[] = [
     slug: 'aaron',
     name: 'Aaron',
     displayName: 'Aaron',
-    role: 'Salon Director & Piercing Specialist',
+    role: 'Salonleiter & Piercing-Spezialist',
     roleLocalized: {
-      de: 'Salonleitung & Piercing-Spezialist',
-      en: 'Salon Director & Piercing Specialist',
+      de: 'Salonleiter & Piercing-Spezialist',
+      en: 'Salonleiter & Piercing Specialist',
     },
-    specialties: ['Custom Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
+    specialties: ['Individuelle Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
     specialtiesLocalized: {
       de: ['Individuelle Designs', 'Spezialpiercings', 'Beratung', 'Ohrlochzauberer'],
-      en: ['Custom Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
+      en: ['Individuelle Designs', 'Special Piercings', 'Consultation', 'Ohrlochzauberer'],
     },
     bio: {
-      de: 'Aaron ist Salon Director und spezialisiert auf besondere Piercings sowie individuelle Custom Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden. Seine Spezialität ist der "Ohrlochzauberer" – ein kinderfreundlicher Ansatz für Ohrlochstechen, bei dem er wie ein Zauberer auftritt, um Kindern die Angst zu nehmen und das Erlebnis zu etwas Besonderem zu machen.',
+      de: 'Aaron ist Salonleiter und spezialisiert auf besondere Piercings sowie individuelle Designs. Er begleitet Kund:innen in der Beratung und hilft dabei, passende Lösungen und Platzierungen zu finden. Seine Spezialität ist der "Ohrlochzauberer" – ein kinderfreundlicher Ansatz für Ohrlochstechen, bei dem er wie ein Zauberer auftritt, um Kindern die Angst zu nehmen und das Erlebnis zu etwas Besonderem zu machen.',
       en: 'Aaron is the salon director and specializes in special piercings and custom designs. He supports clients through consultation to find the right solutions and placements. His specialty is the "Ohrlochzauberer" (Ear Piercing Wizard) – a kid-friendly approach to ear piercing where he acts like a magician to ease children\'s fears and make the experience something special.',
     },
     experience: '',
@@ -78,7 +78,7 @@ export const ARTISTS: Artist[] = [
     displayName: 'Angie Rodriguez',
     role: 'Piercing Specialist & Social Media Manager',
     roleLocalized: {
-      de: 'Piercing-Spezialistin & Social Media Managerin',
+      de: 'Piercing-Spezialistin & Medienmanagerin',
       en: 'Piercing Specialist & Social Media Manager',
     },
     specialties: ['Hygiene Standards', 'Team Training', 'Piercing Procedures'],
@@ -87,7 +87,7 @@ export const ARTISTS: Artist[] = [
       en: ['Hygiene Standards', 'Team Training', 'Piercing Procedures'],
     },
     bio: {
-      de: 'Angie ist Piercing-Spezialistin und Social Media Managerin. Sie ist eine zentrale Ansprechpartnerin für Hygiene‑Standards, Best Practices und interne Abläufe und unterstützt das Team mit Wissen, Organisation und Trainings.',
+      de: 'Angie ist Piercing-Spezialistin und Medienmanagerin. Sie ist eine zentrale Ansprechpartnerin für Hygienestandards, bewährte Abläufe und interne Prozesse und unterstützt das Team mit Wissen, Organisation und Trainings.',
       en: 'Angie is a piercing specialist and social media manager. She is a key point of contact for hygiene standards, best practices, and internal procedures, supporting the team with organization and training.',
     },
     experience: '',
@@ -120,7 +120,7 @@ export const ARTISTS: Artist[] = [
       en: ['Linework', 'All-round styles'],
     },
     bio: {
-      de: 'Debi hatte ein eigenes Studio in Ungarn und arbeitet mit einem starken Fokus auf präzises Linework. Als Allrounder setzt er Projekte in verschiedenen Stilrichtungen professionell um. Beratung und saubere Ausführung stehen dabei im Mittelpunkt.',
+      de: 'Debi hatte ein eigenes Studio in Ungarn und arbeitet mit einem starken Fokus auf präzise Linienarbeit. Als Allrounder setzt er Projekte in verschiedenen Stilrichtungen professionell um. Beratung und saubere Ausführung stehen dabei im Mittelpunkt.',
       en: 'Debi previously ran his own studio in Hungary and is known for precise linework. As an all‑round artist, he works confidently across multiple styles. Clear consultation and clean execution are central to his work.',
     },
     experience: '',
@@ -142,9 +142,9 @@ export const ARTISTS: Artist[] = [
     slug: 'eli-luquez',
     name: 'Eli Luquez',
     displayName: 'Eli Luquez',
-    role: 'Studio Manager',
+    role: 'Studioleiter',
     roleLocalized: {
-      de: 'Studio-Manager',
+      de: 'Studioleiter',
       en: 'Studio Manager',
     },
     specialties: ['Geometric', 'Dotwork', 'Mandala', 'Ornamental'],
@@ -153,7 +153,7 @@ export const ARTISTS: Artist[] = [
       en: ['Geometric', 'Dotwork', 'Mandala', 'Ornamental'],
     },
     bio: {
-      de: 'Eli ist unser Head Artist und Studio Manager mit über 12 Jahren Erfahrung. Er ist spezialisiert auf geometrische und ornamentale Designs mit präziser Symmetrie und komplexen Mustern. Seine Arbeit verbindet mathematische Präzision mit künstlerischer Vision und schafft hypnotisierende, Sacred Geometry Kunstwerke. Er arbeitet seit 2022 bei Medusa Tattoo München.',
+      de: 'Eli ist unser Chefkünstler und Studioleiter mit über 12 Jahren Erfahrung. Er ist spezialisiert auf geometrische und ornamentale Designs mit präziser Symmetrie und komplexen Mustern. Seine Arbeit verbindet mathematische Präzision mit künstlerischer Vision und schafft hypnotisierende Kunstwerke der heiligen Geometrie. Er arbeitet seit 2022 bei Medusa Tattoo München.',
       en: 'Eli is our head artist and studio manager with over 12 years of experience. He specializes in geometric and ornamental designs with precise symmetry and intricate patterns. His work combines mathematical precision with artistic vision, creating mesmerizing sacred geometry artwork. He has been working at Medusa Tattoo München since 2022.',
     },
     experience: '12+ Jahre',

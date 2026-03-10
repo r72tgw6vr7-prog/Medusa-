@@ -25,7 +25,7 @@ export const LocationSection: React.FC = () => {
         longitude: '11.5750',
       },
       telephone: '+49 (0) 89 269 313',
-      openingHours: 'Mo-Fr 11:00-19:00, Sa 10:00-16:00',
+      openingHours: 'Mo-Th 11:30-19:00, Fr-Sa 11:30-20:00',
     };
 
     const script = document.createElement('script');
@@ -55,9 +55,9 @@ export const LocationSection: React.FC = () => {
         <div>
           <div className='flex items-center gap-4 py-4'>
             <MapPin size={20} className='text-white/60 shrink-0' />
-            <h3 className='font-headline text-xl font-semibold text-white'>
+            <h2 className='font-headline text-xl font-semibold text-white'>
               {t('common.footer.location.title')}
-            </h3>
+            </h2>
           </div>
 
           <div className='pt-8 pb-8 space-y-12'>

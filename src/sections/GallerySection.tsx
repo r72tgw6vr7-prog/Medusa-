@@ -16,6 +16,7 @@ interface GalleryImage {
   year: string;
   featured?: boolean;
   category: string;
+  objectPosition?: string;
 }
 
 interface GallerySectionProps {
@@ -99,7 +100,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   width={640}
                   height={640}
                   loading='lazy'
-                  className='w-full h-full object-fill saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
+                  className='absolute inset-0 h-full w-full saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: image.objectPosition ?? 'center center',
+                  }}
                   onError={(e) => {
                     if (!image.fallbackUrl) return;
                     const target = e.target as HTMLImageElement;
@@ -111,7 +116,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   }}
                 />
               ) : (
-                <picture>
+                <picture className='absolute inset-0 block h-full w-full'>
                   <source
                     type='image/avif'
                     srcSet={[400, 640, 960]
@@ -134,7 +139,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     width={640}
                     height={640}
                     loading='lazy'
-                    className='w-full h-full object-fill saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
+                    className='absolute inset-0 h-full w-full saturate-[0.85] contrast-[1.05] hover:saturate-100 hover:contrast-100 transition-all duration-500'
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: image.objectPosition ?? 'center center',
+                    }}
                     onError={(e) => {
                       if (!image.fallbackUrl) return;
                       const target = e.target as HTMLImageElement;

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useKeyboardNav } from '@/hooks/useKeyboardNav';
+import { LanguageToggle } from './LanguageToggle';
 import './MainNavigation.css';
 
 type NavItem = {
@@ -51,7 +52,7 @@ export function MainNavigation() {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const openButtonRef = useRef<HTMLButtonElement | null>(null);
   const location = useLocation();
-  const { language, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const isAutomation = typeof navigator !== 'undefined' && navigator.webdriver === true;
   const isAutomationMobile =
     isAutomation && typeof window !== 'undefined' ? window.innerWidth < 1024 : false;
@@ -301,7 +302,12 @@ export function MainNavigation() {
             </div>
           )}
 
+          <div className='hidden items-center gap-4 lg:flex'>
+            <LanguageToggle language={language} onLanguageChange={setLanguage} />
+          </div>
+
           <div className='flex items-center gap-4 lg:hidden'>
+            <LanguageToggle language={language} onLanguageChange={setLanguage} />
             {menuOpen ? (
               <button
                 ref={openButtonRef}

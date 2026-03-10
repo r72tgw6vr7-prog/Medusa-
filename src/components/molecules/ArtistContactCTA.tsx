@@ -3,6 +3,7 @@ import React from 'react';
 import { Artist } from '@/data/artists';
 import { Card } from '@/components/ui/Card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 interface ArtistContactCTAProps {
   artist: Artist;
@@ -11,7 +12,7 @@ interface ArtistContactCTAProps {
 export function ArtistContactCTA({ artist }: ArtistContactCTAProps) {
   const { language } = useLanguage();
 
-  const bookingHref = artist.bookingUrl || '/booking';
+  const bookingHref = localizePath(artist.bookingUrl || '/booking', language);
 
   return (
     <div className='mt-24'>
@@ -35,7 +36,7 @@ export function ArtistContactCTA({ artist }: ArtistContactCTAProps) {
           </a>
 
           <a
-            href='/contact'
+            href={localizePath('/contact', language)}
             className='inline-flex items-center justify-center gap-4 px-8 py-6 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-(length:--text-body) rounded-xl transition-all duration-200 min-w-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2'
           >
             {language === 'en' ? 'Email Studio' : 'Studio mailen'}

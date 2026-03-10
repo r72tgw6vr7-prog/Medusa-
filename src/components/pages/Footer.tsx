@@ -1,9 +1,9 @@
 // ============================================
 // COMPONENT: Footer
 // ============================================
-// PURPOSE: Clean, flat footer with studio info, links, social, newsletter, and SEO location content
+// PURPOSE: Clean, flat footer with studio info, links, social, and SEO location content
 
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -46,17 +46,7 @@ const socialLinks = {
 };
 
 const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [agreeMarketing, setAgreeMarketing] = useState(false);
   const { language, t } = useLanguage();
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && agreeMarketing) {
-      setEmail('');
-      setAgreeMarketing(false);
-    }
-  };
 
   return (
     <footer
@@ -85,13 +75,13 @@ const Footer: React.FC = () => {
                   {t('common.footer.studio.address')}
                 </span>
               </div>
-              <div className='flex items-start gap-4 max-md:justify-center rounded-[24px] border border-white/8 bg-white/3 px-4 py-4'>
+              <div className='flex flex-col h-full items-start gap-4 max-md:justify-center rounded-[24px] border border-white/8 bg-white/3 px-4 py-4'>
                 <Clock size={18} className='text-white/60 shrink-0 mt-2' />
                 <div className='flex flex-col gap-2 max-md:text-center'>
                   <span className='font-body text-sm font-medium text-white/90'>
                     {t('common.footer.hoursCard.heading')}
                   </span>
-                  <div className='grid grid-cols-[auto_auto] gap-x-4 gap-y-1'>
+                  <div className='grid grid-cols-[auto_auto] gap-x-4 gap-y-2'>
                     <div className='contents'>
                       <span className='font-body text-sm text-white/70'>
                         {t('common.footer.hoursCard.weekdaysLabel')}
@@ -191,7 +181,7 @@ const Footer: React.FC = () => {
 
           {/* Newsletter + Social */}
           <div className='max-md:col-span-2'>
-            <div className='rounded-(--card-radius) border border-white/8 bg-white/3 p-6 shadow-[var(--premium-elevation)]'>
+            <div className='flex flex-col h-full rounded-(--card-radius) border border-white/8 bg-white/3 p-6 shadow-[var(--premium-elevation)]'>
               <h3 className='font-headline text-lg font-semibold text-white mb-4'>
                 {t('common.footer.headings.newsletter')}
               </h3>
@@ -205,7 +195,7 @@ const Footer: React.FC = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={socialLinks.instagram.label}
-                  className='premium-interactive inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                  className='premium-interactive flex flex-col h-full min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
                 >
                   <Instagram size={22} />
                 </a>
@@ -214,44 +204,11 @@ const Footer: React.FC = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={socialLinks.facebook.label}
-                  className='premium-interactive inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                  className='premium-interactive flex flex-col h-full min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
                 >
                   <Facebook size={22} />
                 </a>
               </div>
-
-              <form onSubmit={handleNewsletterSubmit} className='space-y-4 opacity-70'>
-                <input
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t('common.footer.newsletter.emailPlaceholder')}
-                  className='premium-field-control touch-target-mobile'
-                  required
-                />
-                <div className='flex items-start gap-2'>
-                  <input
-                    id='footer-consent'
-                    type='checkbox'
-                    checked={agreeMarketing}
-                    onChange={(e) => setAgreeMarketing(e.target.checked)}
-                    className='flex flex-col h-full mt-2 w-4 min-h-4 rounded border-white/30 bg-white/10 focus:ring-(--accent-chrome) touch-target-mobile'
-                  />
-                  <label
-                    htmlFor='footer-consent'
-                    className='font-body text-sm text-white/70 cursor-pointer touch-target-mobile touch-target-mobile-inline'
-                  >
-                    {t('common.footer.newsletter.marketingConsent')}
-                  </label>
-                </div>
-                <button
-                  type='submit'
-                  disabled={!email || !agreeMarketing}
-                  className='w-full rounded-full border border-white/10 bg-white/8 px-6 py-4 font-body font-semibold text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50 touch-target-mobile'
-                >
-                  {t('common.footer.newsletter.subscribe')}
-                </button>
-              </form>
             </div>
           </div>
         </div>

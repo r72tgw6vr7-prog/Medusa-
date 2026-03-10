@@ -32,10 +32,11 @@ import {
   WARNING_SIGNS,
 } from '@/data/aftercare';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 export const AftercarePage: React.FC = () => {
   const [activePhase, setActivePhase] = useState<string | null>(null);
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   // Phase icons mapping
   const phaseIcons = [
@@ -380,13 +381,13 @@ export const AftercarePage: React.FC = () => {
             />
             <div className='flex flex-col md:flex-row gap-8 justify-center'>
               <a
-                href='/contact'
+                href={localizePath('/contact', language)}
                 className='inline-flex items-center justify-center px-8 py-8 bg-(--accent-chrome) hover:bg-(--accent-chrome)/80 text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
               >
                 {t('aftercare.cta.contact')}
               </a>
               <a
-                href='/booking'
+                href={localizePath('/booking', language)}
                 className='inline-flex items-center justify-center gap-8 px-8 py-8 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
               >
                 <Calendar size={20} />

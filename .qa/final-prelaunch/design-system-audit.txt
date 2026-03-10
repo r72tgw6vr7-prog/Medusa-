@@ -1,0 +1,131 @@
+
+> medusa-tattoo@1.0.0 design-system:audit /Volumes/harddisk/Work/CascadeProjects/Websites/CLIENT WORK/✅ PRODUCTION-READY/Medusa/Medusa
+> rg -i '#[0-9a-f]{6}|rgba?' --type ts --type js -g 'src/**/*.{ts,tsx,js,jsx}' -g 'components/**/*.{ts,tsx,js,jsx}' --glob '!*.config.*' --glob '!globals.css'
+
+src/services/emailService.ts:          body { font-family: Arial, sans-serif; background-color: rgb(34 34 34); color: rgb(255 255 255); margin: 0; padding: 20px; }
+src/services/emailService.ts:          .container { max-width: 600px; margin: 0 auto; background: rgb(34 34 34); border: 1px solid rgb(192 192 192); border-radius: 8px; }
+src/services/emailService.ts:          .header { background: linear-gradient(135deg, rgb(192 192 192), rgb(168 168 168)); color: rgb(34 34 34); padding: 20px; text-align: center; }
+src/services/emailService.ts:          .field { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgb(192 192 192); }
+src/services/emailService.ts:          .label { font-weight: 600; color: rgb(192 192 192); margin-bottom: 4px; }
+src/services/emailService.ts:          .value { color: rgb(255 255 255); }
+src/pages/AftercarePage.tsx:                        className='mt-8 space-y-8 border-t border-[rgba(var(--color-accent-silver-rgb),0.2)] pt-8'
+src/pages/AboutPage.tsx:                        'radial-gradient(ellipse at center, transparent 0%, rgba(26, 26, 26, 0.7) 70%)',
+src/sections/ServicesSection.tsx:                className='flex flex-col items-center  w-card py-8 rounded-(--radius-lg) border border-solid border-[rgba(var(--accent-chrome-rgb),0.2)]'
+src/sections/ProcessTimeline/ProcessTimeline.tsx:          ? `linear-gradient(180deg, rgba(var(--color-surface-darker-rgb), 0.7) 0%, rgba(var(--color-surface-darker-rgb), 0.82) 100%), url(${BACKGROUND_IMAGE})`
+src/sections/ProcessTimeline/ProcessTimeline.tsx:          : 'linear-gradient(180deg, rgba(var(--color-surface-darker-rgb), 0.7) 0%, rgba(var(--color-surface-darker-rgb), 0.82) 100%)',
+src/sections/ProcessTimeline/ProcessTimeline.tsx:            "linear-gradient(180deg, rgba(42, 42, 44, 0.3) 0%, rgba(26, 26, 26, 0.6) 100%), url('/assets/images/photos/backgrounds/process-timeline-bg.webp')",
+src/sections/ProcessTimeline/ProcessTimeline.tsx:            "linear-gradient(180deg, rgba(var(--color-surface-darker-rgb), 0.25) 0%, rgba(var(--color-surface-darker-rgb), 0.55) 100%), url('/assets/images/photos/backgrounds/process-timeline-bg.webp')",
+src/styles/glassmorphism.ts:  backgroundColor: string = 'rgba(var(--color-surface-darker-rgb), 0.7)',
+src/styles/glassmorphism.ts:  borderColor: string = 'rgba(var(--color-accent-silver-rgb), 0.1)',
+src/styles/glassmorphism.ts:      'rgba(var(--color-surface-darker-rgb), 0.45)',
+src/styles/glassmorphism.ts:      'rgba(var(--brand-accent-rgb), 0.10)',
+src/styles/glassmorphism.ts:      'rgba(var(--color-surface-darker-rgb), 0.70)',
+src/styles/glassmorphism.ts:      'rgba(var(--brand-accent-rgb), 0.15)',
+src/styles/glassmorphism.ts:    ...createGlassmorphism('rgba(var(--color-surface-darker-rgb), 0.4)', '5px', 'transparent', '0px'),
+src/styles/glassmorphism.ts:      'rgba(var(--color-surface-darker-rgb), 0.6)',
+src/styles/glassmorphism.ts:      'rgba(var(--brand-accent-rgb), 0.15)',
+src/styles/glassmorphism.ts:      background: 'rgba(var(--color-surface-darker-rgb), 0.8)',
+src/styles/glassmorphism.ts:      borderColor: 'rgba(var(--brand-accent-rgb), 0.20)',
+src/styles/glassmorphism.ts:      'rgba(var(--color-surface-darker-rgb), 0.90)',
+src/styles/glassmorphism.ts:      'rgba(var(--brand-accent-rgb), 0.20)',
+src/styles/glassmorphism.ts:      backgroundColor: 'rgba(var(--color-accent-silver-rgb), 0.1)',
+src/styles/glassmorphism.ts:      backgroundColor: 'rgba(var(--color-accent-silver-rgb), 0.2)',
+src/utils/glassmorphism.ts: * @param backgroundColor - RGB background color (default: rgb(var(--color-surface-darker-rgb) / 0.7))
+src/utils/glassmorphism.ts: * @param borderColor - RGB border color (default: rgb(var(--color-accent-silver-rgb) / 0.1))
+src/utils/glassmorphism.ts:  backgroundColor: string = 'rgb(var(--color-surface-darker-rgb) / 0.7)',
+src/utils/glassmorphism.ts:  borderColor: string = 'rgb(var(--color-accent-silver-rgb) / 0.1)',
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.45)]'; // Default non-scrolled state
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.65)]'; // Scrolled state
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.6)]';
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.7)]';
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.85)]';
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.9)]';
+src/utils/glassmorphism.ts:      return 'bg-[rgba(var(--color-surface-darker-rgb),0.7)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.1)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.2)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.2)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.25)]';
+src/utils/glassmorphism.ts:      return 'border border-[rgba(var(--color-accent-silver-rgb),0.15)]';
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.45)',
+src/utils/glassmorphism.ts:        borderBottom: '1px solid rgba(var(--color-accent-silver-rgb), 0.1)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.65)',
+src/utils/glassmorphism.ts:        borderBottom: '1px solid rgba(var(--color-accent-silver-rgb), 0.15)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
+src/utils/glassmorphism.ts:        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.2)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
+src/utils/glassmorphism.ts:        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.15)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.85)',
+src/utils/glassmorphism.ts:        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.2)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.9)',
+src/utils/glassmorphism.ts:        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.25)',
+src/utils/glassmorphism.ts:        background: 'rgba(var(--color-surface-darker-rgb), 0.7)',
+src/utils/glassmorphism.ts:        border: '1px solid rgba(var(--color-accent-silver-rgb), 0.1)',
+src/utils/glassmorphism.ts:    boxShadow: '0 0 10px rgba(var(--color-accent-silver-rgb), 0.2)',
+src/utils/glassmorphism.ts:    boxShadow: '0 0 20px rgba(var(--color-accent-silver-rgb), 0.3)',
+src/utils/glassmorphism.ts:    boxShadow: '0 0 30px rgba(var(--color-accent-silver-rgb), 0.4)',
+src/components/cards/ServiceCard.tsx:              'linear-gradient(90deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.55) 100%)',
+src/components/ui/button.tsx:  'relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-transparent text-base lg:text-sm font-medium tracking-[0.01em] transition-[transform,box-shadow,background-color,border-color,color,opacity] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-chrome-rgb),0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-page)] disabled:pointer-events-none disabled:opacity-50 active:translate-y-px',
+src/components/ui/button.tsx:          'bg-(--accent-chrome) text-(--deep-black) shadow-[0_14px_38px_rgba(var(--accent-chrome-rgb),0.16)] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_44px_rgba(var(--accent-chrome-rgb),0.22)]',
+src/components/ui/button.tsx:          'bg-red-600/90 text-white shadow-[0_14px_34px_rgba(127,29,29,0.24)] hover:-translate-y-0.5 hover:bg-red-500',
+src/components/ui/button.tsx:          'border-white/14 bg-white/4 text-white hover:-translate-y-0.5 hover:border-white/26 hover:bg-white/8 hover:shadow-[0_18px_38px_rgba(0,0,0,0.26)]',
+src/components/ui/button.tsx:          'border-white/14 bg-white/6 text-white hover:-translate-y-0.5 hover:border-white/26 hover:bg-white/10 hover:shadow-[0_18px_38px_rgba(0,0,0,0.26)]',
+src/components/ui/button.tsx:          'bg-(--accent-chrome) text-(--deep-black) shadow-[0_14px_38px_rgba(var(--accent-chrome-rgb),0.16)] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_44px_rgba(var(--accent-chrome-rgb),0.22)]',
+src/components/ui/button.tsx:          'border-[rgba(var(--accent-chrome-rgb),0.42)] bg-[rgba(255,255,255,0.03)] text-(--accent-chrome) shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:-translate-y-0.5 hover:border-[rgba(var(--accent-chrome-rgb),0.72)] hover:bg-[rgba(var(--accent-chrome-rgb),0.08)] hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)]',
+src/components/ui/button.tsx:          'text-(--accent-chrome) bg-transparent shadow-none hover:bg-[rgba(var(--accent-chrome-rgb),0.08)] hover:text-white',
+src/components/ui/button.tsx:        gold: 'bg-(--accent-chrome) text-(--deep-black) shadow-[0_14px_38px_rgba(var(--accent-chrome-rgb),0.16)] hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_44px_rgba(var(--accent-chrome-rgb),0.22)]',
+src/components/ui/button.tsx:          'border-[rgba(var(--accent-chrome-rgb),0.42)] bg-[rgba(255,255,255,0.03)] text-(--accent-chrome) shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] hover:-translate-y-0.5 hover:border-[rgba(var(--accent-chrome-rgb),0.72)] hover:bg-[rgba(var(--accent-chrome-rgb),0.08)] hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)]',
+src/components/ui/button.tsx:          'text-(--accent-chrome) bg-transparent shadow-none hover:bg-[rgba(var(--accent-chrome-rgb),0.08)] hover:text-white',
+src/components/ui/button.tsx:        ? 'border-emerald-400/50 bg-emerald-500/12 text-white shadow-[0_14px_34px_rgba(22,163,74,0.18)]'
+src/components/ui/button.tsx:          ? 'border-red-400/50 bg-red-500/12 text-white shadow-[0_14px_34px_rgba(220,38,38,0.16)]'
+src/components/molecules/TrustSignals.tsx:                  boxShadow: 'var(--premium-elevation), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
+src/components/molecules/TrustSignals.tsx:                    'var(--premium-elevation-hover), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+src/components/ui/meteors.tsx:              'animate-meteor-effect absolute h-0.5 w-0.5 rotate-45 rounded-full bg-brand-chrome shadow-[0_0_0_1px_rgba(var(--color-accent-silver-rgb),0.12)]',
+src/lib/animations/variants.ts:    boxShadow: '0 0 0 rgba(var(--brand-accent-rgb), 0)',
+src/lib/animations/variants.ts:    boxShadow: '0 0 15px rgba(var(--brand-accent-rgb), 0.5)',
+src/lib/animations/variants.ts:    boxShadow: '0 10px 25px rgba(var(--color-surface-darker-rgb), 0.15)',
+src/components/Meta.tsx:    upsertMetaTag('name', 'theme-color', 'rgb(192 192 192)'); // Chrome theme
+src/components/molecules/TrustBadgesMarquee.tsx:    background: 'rgb(var(--color-text-primary-rgb) / 0.08)',
+src/components/molecules/TrustBadgesMarquee.tsx:    borderTop: '1px solid rgb(var(--color-text-primary-rgb) / 0.18)',
+src/components/molecules/TrustBadgesMarquee.tsx:    boxShadow: 'inset 0 1px 0 rgb(var(--color-text-primary-rgb) / 0.06), 0 8px 32px rgb(0 0 0 / 0.37)',
+src/components/molecules/TrustBadgesMarquee.tsx:    background: 'linear-gradient(to right, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
+src/components/molecules/TrustBadgesMarquee.tsx:    background: 'linear-gradient(to left, rgb(var(--color-text-primary-rgb) / 0.16), rgb(var(--color-text-primary-rgb) / 0))',
+src/components/GoogleMapSection.tsx:    <section className='google-map-section w-full relative' style={{ background: '#0a0a0a' }}>
+src/components/ui/CursorTrail.tsx:  const chromeRgb = useRef('');
+src/components/ui/CursorTrail.tsx:      const rgb = chromeRgb.current || '192, 192, 192';
+src/components/ui/CursorTrail.tsx:      ctx.fillStyle = `rgba(${rgb}, 0.9)`;
+src/components/ui/CursorTrail.tsx:      ctx.shadowColor = `rgba(${rgb}, 0.6)`;
+src/components/ui/CursorTrail.tsx:    // Read design token for chrome rgb once
+src/components/ui/CursorTrail.tsx:    chromeRgb.current =
+src/components/ui/CursorTrail.tsx:        .getPropertyValue('--accent-chrome-rgb')
+src/components/ui/CursorTrail.tsx:        .trim() || chromeRgb.current;
+src/components/molecules/ServiceCard.tsx:      iconStroke: 'rgb(192 192 192)',
+src/components/molecules/ServiceCard.tsx:      iconStroke: 'rgb(192 192 192)',
+src/components/ui/input/MedusaInput.tsx:              'flex h-12 w-full rounded-[24px] border border-white/10 bg-white/4 px-4 py-3 text-base text-luxury-text-inverse shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] file:border-0 file:bg-transparent file:text-base file:font-medium placeholder:text-luxury-text-inverse-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(var(--accent-chrome-rgb),0.55)] focus-visible:ring-offset-2 focus-visible:ring-offset-luxury-bg-dark disabled:cursor-not-allowed disabled:opacity-50',
+src/components/ui/input/MedusaInput.tsx:              'focus:outline-none focus:border-[rgba(var(--accent-chrome-rgb),0.7)] focus:shadow-[0_0_0_1px_rgba(var(--accent-chrome-rgb),0.38),0_12px_28px_rgba(0,0,0,0.24)]',
+src/components/ui/input/MedusaInput.tsx:              'hover:border-[rgba(var(--accent-chrome-rgb),0.28)]',
+src/components/ui/input/MedusaInput.tsx:                'border-red-500 focus:border-red-400 focus:shadow-[0_0_0_1px_rgba(248,113,113,0.28),0_12px_28px_rgba(0,0,0,0.24)]',
+src/components/PreFooterBookingCTA.tsx:      <div className='absolute inset-0 bg-[rgba(var(--color-surface-darker-rgb),0.85)] z-0' />
+src/components/PreFooterBookingCTA.tsx:      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[rgba(var(--brand-accent-rgb),0.05)] to-transparent z-0 opacity-50' />
+src/components/ui/layout-grid.tsx:          background: overlayEnabled ? 'rgba(var(--color-surface-darker-rgb), 0.8)' : 'transparent',
+src/components/ui/ScrollProgressLine.tsx:            'linear-gradient(90deg, transparent 0%, rgba(var(--accent-chrome-rgb), 0.6) 20%, rgba(var(--accent-chrome-rgb), 1) 100%)',
+src/components/ui/ScrollProgressLine.tsx:            '0 0 8px rgba(var(--accent-chrome-rgb), 0.5), 0 0 16px rgba(var(--accent-chrome-rgb), 0.3)',
+src/components/ui/hero-parallax.tsx:            <span className='h-2 w-2 rounded-full bg-white/65 shadow-[0_0_12px_rgba(255,255,255,0.45)]' />
+src/components/ui/hero-parallax.tsx:        boxShadow: '0 0 20px rgba(var(--accent-chrome-rgb), 0.3)',
+src/components/ui/hero-parallax.tsx:          boxShadow: '0 0 20px rgba(var(--accent-chrome-rgb), 0.3)',
+src/components/ui/hero-parallax.tsx:          border: '1px solid rgba(var(--accent-chrome-rgb), 0.2)',
+src/components/pages/ServicesPageInteractive.tsx:                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(var(--accent-chrome-rgb),0.4)] scale-[1.02]'
+src/components/pages/ServicesPageInteractive.tsx:                      ? 'border-[var(--accent-chrome)] shadow-[0_20px_60px_rgba(var(--accent-chrome-rgb),0.3)] scale-[1.01]'
+src/components/pages/ServicesPageInteractive.tsx:                            <span className='text-sm font-semibold uppercase tracking-wide text-[rgba(var(--accent-chrome-rgb),0.8)]'>
+src/components/ui/Card.tsx:  'flex h-full flex-col rounded-[32px] border border-[var(--card-border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0))] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-chrome)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--card-bg)]',
+src/components/ui/Card.tsx:          'bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0))] shadow-[var(--card-shadow)]',
+src/components/ui/Card.tsx:          'bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0))] shadow-[var(--premium-elevation-hover)] scale-[1.01]',
+src/components/ui/Card.tsx:          'bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0))] shadow-[var(--premium-elevation)]',
+src/components/molecules/ArtistHero.tsx:              <div className='inline-flex items-center gap-4 px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.65)] backdrop-blur-xl border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-full mb-12'>
+src/components/molecules/ArtistProfileCard.tsx:            <span className='inline-flex items-center justify-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.65)] backdrop-blur-lg border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-full text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome'>
+src/components/molecules/ArtistProfileCard.tsx:              <span className='inline-flex items-center justify-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.45)] backdrop-blur-md border border-[rgba(var(--color-accent-silver-rgb),0.10)] rounded-full text-(length:--text-sm) uppercase tracking-widest font-medium text-brand-chrome'>
+src/components/molecules/ArtistProfileCard.tsx:                  className='inline-flex items-center px-6 py-4 bg-[rgba(var(--color-surface-darker-rgb),0.55)] backdrop-blur-md border border-[rgba(var(--color-accent-silver-rgb),0.15)] rounded-xl text-(length:--text-sm) text-luxury-text-inverse/80 font-body'
+src/components/molecules/ArtistProfileCard.tsx:        <div className='pt-12 border-t border-[rgba(var(--color-accent-silver-rgb),0.2)]'>
+src/components/molecules/Card/ServiceCards.tsx:                          ? 'rgba(var(--brand-accent-rgb), 0.15)'
+src/components/molecules/Card/ServiceCards.tsx:                          : 'rgba(var(--color-accent-silver-rgb), 0.15)',

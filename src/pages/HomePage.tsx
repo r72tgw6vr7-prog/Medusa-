@@ -4,6 +4,7 @@ import { MainNavigation } from '@/components/molecules/MainNavigation';
 import { Footer } from '@/components/pages';
 import ErrorBoundary from '@/components/layout/ErrorBoundary';
 import { LazySection } from '@/components/LazySection';
+import { SectionLoader } from '@/components/ui/SectionLoader';
 import { getLocalizedGalleryImages } from '@/content/gallery-images';
 import { useSectionTransition } from '@/hooks/useSectionTransition';
 import { LocationSection } from '@/components/LocationSection';
@@ -91,6 +92,7 @@ export function HomePage() {
     artist: 'Medusa Tattoo',
     year: '2024',
     category: img.category,
+    objectPosition: img.objectPosition,
   }));
   const galleryTitle = language === 'en' ? 'Our work' : 'Unsere Kunstwerke';
   const gallerySubtitle =
@@ -102,8 +104,8 @@ export function HomePage() {
     <ErrorBoundary>
       {/* Skip to main content link for keyboard navigation */}
       {typeof navigator === 'undefined' ||
-      (navigator.webdriver !== true &&
-        (typeof window === 'undefined' || typeof window.__MOCKED_ENV__ === 'undefined')) ? (
+        (navigator.webdriver !== true &&
+          (typeof window === 'undefined' || typeof window.__MOCKED_ENV__ === 'undefined')) ? (
         <a
           href='#main-content'
           data-testid='skip-to-content'
@@ -132,7 +134,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <BladeAccordionLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -143,7 +145,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <ServicesCurtainSectionLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -154,7 +156,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <SocialContactsCarouselSectionLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -165,7 +167,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <StudioCarouselLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -176,7 +178,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <PricingSectionLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -187,7 +189,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <TrustSignalsLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -198,7 +200,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <ProcessTimelineLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -209,7 +211,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <GallerySectionLazy
                     title={galleryTitle}
                     subtitle={gallerySubtitle}
@@ -224,7 +226,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <PartnersAndTestimonialsSectionLazy />
                 </Suspense>
               </SectionTransitionWrapper>
@@ -235,7 +237,7 @@ export function HomePage() {
           <LazySection>
             <ErrorBoundary>
               <SectionTransitionWrapper>
-                <Suspense fallback={null}>
+                <Suspense fallback={<SectionLoader />}>
                   <PreFooterBookingCTALazy />
                 </Suspense>
               </SectionTransitionWrapper>

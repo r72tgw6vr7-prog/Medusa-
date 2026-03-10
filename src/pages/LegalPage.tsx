@@ -26,50 +26,68 @@ export const LegalPage: React.FC = () => {
       {
         id: t('common.legalPage.sections.scope.id'),
         title: t('common.legalPage.sections.scope.title'),
-        content: t('common.legalPage.content.scope', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.scope', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.services.id'),
         title: t('common.legalPage.sections.services.title'),
-        content: t('common.legalPage.content.services', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.services', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.appointments.id'),
         title: t('common.legalPage.sections.appointments.title'),
-        content: t('common.legalPage.content.appointments', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.appointments', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.pricing.id'),
         title: t('common.legalPage.sections.pricing.title'),
-        content: t('common.legalPage.content.pricing', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.pricing', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.health.id'),
         title: t('common.legalPage.sections.health.title'),
-        content: t('common.legalPage.content.health', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.health', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.aftercare.id'),
         title: t('common.legalPage.sections.aftercare.title'),
-        content: t('common.legalPage.content.aftercare', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.aftercare', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.copyright.id'),
         title: t('common.legalPage.sections.copyright.title'),
-        content: t('common.legalPage.content.copyright', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.copyright', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.privacy.id'),
         title: t('common.legalPage.sections.privacy.title'),
-        content: t('common.legalPage.content.privacy', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.privacy', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
       {
         id: t('common.legalPage.sections.final.id'),
         title: t('common.legalPage.sections.final.title'),
-        content: t('common.legalPage.content.final', { returnObjects: true }) as unknown as string[],
+        content: t('common.legalPage.content.final', {
+          returnObjects: true,
+        }) as unknown as string[],
       },
     ],
-    [t]
+    [t],
   );
 
   const tocItems = useMemo(
@@ -84,7 +102,7 @@ export const LegalPage: React.FC = () => {
       { id: 'section-8', label: t('common.legalPage.sections.privacy.title') },
       { id: 'section-9', label: t('common.legalPage.sections.final.title') },
     ],
-    [t]
+    [t],
   );
 
   return (
@@ -142,7 +160,7 @@ export const LegalPage: React.FC = () => {
                     <h3 className='font-headline text-(length:--text-h4) text-luxury-text-inverse mb-4'>
                       {section.title}
                     </h3>
-                    <div className='space-y-4'>
+                    <div className='reading-measure space-y-4'>
                       <ul className='space-y-2 ml-6 list-disc'>
                         {section.content.map((item: string, index: number) => (
                           <li
