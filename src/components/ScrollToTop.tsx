@@ -58,13 +58,20 @@ const ScrollToTop: React.FC = () => {
       const shouldForceInstant = isAutomation || isMobileViewport;
       const prevHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
       const prevBodyScrollBehavior = document.body.style.scrollBehavior;
+      const scrollRoot = document.querySelector('[data-scroll-root]') as HTMLElement | null;
       if (shouldForceInstant) {
         document.documentElement.style.scrollBehavior = 'auto';
         document.body.style.scrollBehavior = 'auto';
+        if (scrollRoot) {
+          scrollRoot.style.scrollBehavior = 'auto';
+        }
       }
       try {
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
+        if (scrollRoot) {
+          scrollRoot.scrollTop = 0;
+        }
       } catch {}
       window.scrollTo({
         top: 0,
@@ -77,6 +84,9 @@ const ScrollToTop: React.FC = () => {
         requestAnimationFrame(() => {
           document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
           document.body.style.scrollBehavior = prevBodyScrollBehavior;
+          if (scrollRoot) {
+            scrollRoot.style.scrollBehavior = '';
+          }
         });
       }
     };
@@ -96,6 +106,12 @@ const ScrollToTop: React.FC = () => {
       setTimeout(() => {
         scrollToTopNow();
       }, 150);
+      setTimeout(() => {
+        scrollToTopNow();
+      }, 350);
+      setTimeout(() => {
+        scrollToTopNow();
+      }, 600);
     }
 
     // GSAP removed - no cleanup needed

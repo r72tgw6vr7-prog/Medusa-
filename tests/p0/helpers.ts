@@ -12,6 +12,13 @@ export class P0TestHelpers {
   constructor(private page: Page) {}
 
   /**
+   * Emit a readable step marker in the test output.
+   */
+  async logStep(message: string) {
+    console.log(`[P0] ${message}`);
+  }
+
+  /**
    * Wait for route navigation to complete
    */
   async waitForNavigation(expectedPath: string, timeout = 5000) {
@@ -19,9 +26,8 @@ export class P0TestHelpers {
       ? expectedPath.slice(0, -1)
       : expectedPath;
     await this.page.waitForURL(`**${target}*`, { timeout });
-    await this.page.waitForLoadState('networkidle');
-    // Additional wait for any scroll animations
-    await this.page.waitForTimeout(500);
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(200);
   }
 
   /**
@@ -30,7 +36,12 @@ export class P0TestHelpers {
   async getScrollPosition(): Promise<{ x: number; y: number }> {
     return await this.page.evaluate(() => ({
       x: window.scrollX,
-      y: window.scrollY
+      y: Math.max(
+        window.scrollY,
+        document.documentElement.scrollTop,
+        document.body.scrollTop,
+        (document.querySelector('[data-scroll-root]') as HTMLElement | null)?.scrollTop || 0,
+      ),
     }));
   }
 
@@ -39,6 +50,12 @@ export class P0TestHelpers {
    */
   async scrollTo(x: number, y: number) {
     await this.page.evaluate(({ x, y }) => {
+      const scrollRoot = document.querySelector('[data-scroll-root]') as HTMLElement | null;
+      if (scrollRoot) {
+        scrollRoot.scrollTo(x, y);
+      }
+      document.documentElement.scrollTop = y;
+      document.body.scrollTop = y;
       window.scrollTo(x, y);
     }, { x, y });
     await this.page.waitForTimeout(100); // Allow scroll to settle
@@ -49,9 +66,21 @@ export class P0TestHelpers {
    */
   async scrollToBottom() {
     await this.page.evaluate(() => {
-      window.scrollTo(0, document.body.scrollHeight);
+      const scrollRoot = document.querySelector('[data-scroll-root]') as HTMLElement | null;
+      const maxScroll = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        scrollRoot?.scrollHeight || 0,
+      );
+
+      if (scrollRoot) {
+        scrollRoot.scrollTop = maxScroll;
+      }
+      document.documentElement.scrollTop = maxScroll;
+      document.body.scrollTop = maxScroll;
+      window.scrollTo(0, maxScroll);
     });
-    await this.page.waitForTimeout(300); // Allow scroll animation
+    await this.page.waitForTimeout(100);
   }
 
   /**
@@ -94,11 +123,22 @@ export class P0TestHelpers {
    */
   async setupAnalyticsMock() {
     await this.page.addInitScript(() => {
-      // Mock dataLayer and gtag
-      (window as { dataLayer: string[] }).dataLayer = [] as string[];
-      (window as { gtag: (...args: string[]) => void }).gtag = function(...args: string[]) {
-        (window as { dataLayer: string[] }).dataLayer.push(...args);
-        (window as { __ANALYTICS_CALLS__: string[] }).__ANALYTICS_CALLS__.push(...args);
+      const analyticsWindow = window as Window & {
+        __ANALYTICS_CALLS__?: unknown[][];
+        __JS_ERRORS__?: string[];
+      };
+
+      analyticsWindow.dataLayer = [];
+      analyticsWindow.__ANALYTICS_CALLS__ = [];
+      analyticsWindow.__JS_ERRORS__ = [];
+
+      window.addEventListener('error', (event) => {
+        analyticsWindow.__JS_ERRORS__?.push(String(event.message || 'Unknown JS error'));
+      });
+
+      analyticsWindow.gtag = (...args: unknown[]) => {
+        analyticsWindow.dataLayer?.push(args);
+        analyticsWindow.__ANALYTICS_CALLS__?.push(args);
       };
     });
   }
@@ -106,22 +146,22 @@ export class P0TestHelpers {
   /**
    * Get captured analytics calls
    */
-  async getAnalyticsCalls(): Promise<string[]> {
+  async getAnalyticsCalls(): Promise<unknown[][]> {
     return await this.page.evaluate(() => {
-      return (window as { __ANALYTICS_CALLS__: string[] }).__ANALYTICS_CALLS__;
+      return (window as Window & { __ANALYTICS_CALLS__?: unknown[][] }).__ANALYTICS_CALLS__ || [];
     });
   }
 
   /**
    * Wait for analytics event with specific parameters
    */
-  async waitForAnalyticsEvent(eventName: string, timeout = 5000): Promise<string[]> {
+  async waitForAnalyticsEvent(eventName: string, timeout = 5000): Promise<unknown[]> {
     const startTime = Date.now();
     
     while (Date.now() - startTime < timeout) {
       const calls = await this.getAnalyticsCalls();
-      const event = calls.find(call => 
-        call[0] === 'event' && call[1] === eventName
+      const event = calls.find(
+        (call) => Array.isArray(call) && call[0] === 'event' && call[1] === eventName,
       );
       
       if (event) {
@@ -219,8 +259,9 @@ export const TEST_DATA = {
 declare global {
   interface Window {
     __MOCKED_ENV__?: Record<string, string>;
-    dataLayer: string[];
-    gtag: (...args: string[]) => void;
-    __ANALYTICS_CALLS__: string[];
+    dataLayer?: unknown[][];
+    gtag?: (...args: unknown[]) => void;
+    __ANALYTICS_CALLS__?: unknown[][];
+    __JS_ERRORS__?: string[];
   }
 }

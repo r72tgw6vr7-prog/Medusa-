@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, ExternalLink } from 'lucide-react';
+import { env } from '@/lib/env';
 
 interface Props {
   width?: string;
@@ -15,12 +16,12 @@ const GoogleMap: React.FC<Props> = ({
   title = 'Medusa Studio Location Map',
 }) => {
   const [mapError, setMapError] = React.useState(false);
-  const [showFallback, setShowFallback] = React.useState(false);
+  const [showFallback, setShowFallback] = React.useState(!env.VITE_GOOGLE_MAPS_API_KEY);
 
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
+  const apiKey = env.VITE_GOOGLE_MAPS_API_KEY;
   const mapUrl = apiKey
     ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Medusa+Tattoo+München,+Altheimer+Eck+11,+80331+München&zoom=15&maptype=roadmap`
-    : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2662.5!2d11.571546!3d48.137433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e758cb4aa17f1%3A0x86e7767363488348!2sMedusa%20Tattoo%20M%C3%BCnchen!5e0!3m2!1sen!2sde!4v1699112345678`;
+    : null;
 
   const handleMapError = () => {
     console.error('Map failed to load');
@@ -31,6 +32,7 @@ const GoogleMap: React.FC<Props> = ({
   if (showFallback) {
     return (
       <div
+        data-testid='map-fallback'
         className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'
         style={{ minHeight: height }}
       >
@@ -42,6 +44,7 @@ const GoogleMap: React.FC<Props> = ({
             href='https://maps.google.com/?q=Medusa+Tattoo+München+Altheimer+Eck+11+80331+München'
             target='_blank'
             rel='noopener noreferrer'
+            data-testid='map-fallback-link'
             className='inline-flex items-center gap-0 bg-[var(--brand-gold)] text-black px-8 py-0 rounded-lg hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
           >
             <ExternalLink size={16} />
@@ -51,6 +54,7 @@ const GoogleMap: React.FC<Props> = ({
             href='https://www.google.com/maps/dir//Medusa+Tattoo+München,+Altheimer+Eck+11,+80331+München'
             target='_blank'
             rel='noopener noreferrer'
+            data-testid='map-fallback-link'
             className='inline-flex items-center gap-0 border border-[var(--brand-gold)] text-[var(--brand-gold)] px-8 py-0 rounded-lg hover:bg-[var(--brand-gold)]/10 transition-colors font-medium transition duration-200 ease-out'
           >
             Route planen
@@ -62,10 +66,10 @@ const GoogleMap: React.FC<Props> = ({
   }
 
   return (
-    <div style={{ width, height }} className={`relative ${className}`}>
+    <div data-testid='map-embed' style={{ width, height }} className={`relative ${className}`}>
       <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '300px' }}>
         <iframe
-          src={mapUrl}
+          src={mapUrl || undefined}
           style={{
             border: 0,
             position: 'absolute',

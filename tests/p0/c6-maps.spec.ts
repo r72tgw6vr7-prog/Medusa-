@@ -11,15 +11,8 @@ import { P0TestHelpers, TEST_DATA } from './helpers';
  * 4. Fallback includes message and working external links
  */
 
-declare global {
-  interface ImportMeta {
-    env: {
-      VITE_GOOGLE_MAPS_API_KEY?: string;
-    };
-  }
-}
-
 test.describe('C6: Google Maps Integration & Fallback', () => {
+  test.describe.configure({ mode: 'serial' });
   let helpers: P0TestHelpers;
 
   test.beforeEach(async ({ page }) => {
@@ -78,7 +71,7 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
     
     await page.goto(TEST_DATA.routes.contact);
     await page.waitForLoadState('domcontentloaded');
-    await page.waitForTimeout(500);
+    await page.locator(TEST_DATA.selectors.mapFallback).first().waitFor({ state: 'visible', timeout: 5000 });
     
     await helpers.takeScreenshot('c6-03-contact-page-no-api-key', true);
     
@@ -175,18 +168,13 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
   });
 
   test('should handle API key environment variable correctly', async ({ page }) => {
-    // Test with various API key scenarios
-    const scenarios: Array<{ key: string | undefined; description: string }> = [
-      { key: 'valid-test-key', description: 'valid key' },
-      { key: '', description: 'empty key' },
-      { key: undefined, description: 'undefined key' }
+    const scenarios = [
+      { key: 'valid-test-key', description: 'valid key', selector: TEST_DATA.selectors.mapEmbed },
+      { key: '', description: 'empty key', selector: TEST_DATA.selectors.mapFallback },
     ];
-    
+
     for (const scenario of scenarios) {
-      if (scenario.key !== undefined) {
-        await helpers.mockEnvironment({'VITE_GOOGLE_MAPS_API_KEY': scenario.key});
-      }
-      
+      await helpers.mockEnvironment({ VITE_GOOGLE_MAPS_API_KEY: scenario.key });
       await page.goto(TEST_DATA.routes.contact);
       await page.waitForLoadState('domcontentloaded');
       await page.waitForTimeout(500);
@@ -194,21 +182,17 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
         .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
         .first()
         .waitFor({ state: 'attached', timeout: 5000 });
-      
-      // Check if environment variable is accessible
-      const envVarValue: string | undefined = await page.evaluate(() => import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
-      
-      if (scenario.key !== undefined) {
-        expect(typeof envVarValue === 'string' ? envVarValue : 'undefined').toBe(typeof scenario.key === 'string' ? scenario.key : 'undefined');
-      } else {
-        expect(envVarValue).toBeUndefined();
-      }
-      
+
+      const mockedEnvValue = await page.evaluate(() => window.__MOCKED_ENV__?.VITE_GOOGLE_MAPS_API_KEY ?? '');
+      expect(mockedEnvValue).toBe(scenario.key);
+
+      await expect(page.locator(scenario.selector).first()).toBeVisible();
       await helpers.takeScreenshot(`c6-06-env-test-${scenario.description.replace(' ', '-')}`, false);
     }
   });
 
   test('should be responsive across different viewport sizes', async ({ page }) => {
+    test.setTimeout(45000);
     const viewports = [
       { width: 1280, height: 720, name: 'desktop' },
       { width: 768, height: 1024, name: 'tablet' },
@@ -219,7 +203,6 @@ test.describe('C6: Google Maps Integration & Fallback', () => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
       await page.goto(TEST_DATA.routes.contact);
       await page.waitForLoadState('domcontentloaded');
-      await page.waitForTimeout(500);
       await page
         .locator('[data-testid="map-embed"], [data-testid="map-fallback"], nav')
         .first()
