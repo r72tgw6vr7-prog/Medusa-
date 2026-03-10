@@ -23,40 +23,82 @@ export const PriceCard: React.FC<PriceCardProps> = ({
   features,
   ctaText,
   onCtaClick,
-  highlighted = false,
   className = '',
 }) => {
-  const baseClasses =
-    'flex flex-col items-center bg-[#0A0A0AB0] w-[400px] pt-[41px] pb-[55px] rounded-2xl border border-solid border-[var(--brand-gold)]';
-  const highlightedClasses = highlighted ? 'bg-[#0A0A0ACC] border-2' : '';
-  const shadowClasses = highlighted ? 'shadow-[0px_0px_20px_var(--brand-gold)26]' : '';
-
   return (
-    <div className={`${baseClasses} ${highlightedClasses} ${shadowClasses} ${className}`}>
-      <img src={iconUrl} alt={title} className='w-12 h-12 mb-8 rounded-2xl object-fill' />
-      <span className='text-[var(--brand-gold)] text-[31px] font-bold text-center mb-8'>
+    <div 
+      className={`
+        bg-(--card-bg)
+        border border-(--card-border)
+        shadow-(--card-shadow)
+        rounded-(--card-radius)
+        p-8
+        flex flex-col text-center
+        h-full
+        ${className}
+      `}
+    >
+      {/* Icon */}
+      {iconUrl && (
+        <img 
+          src={iconUrl} 
+          alt={title} 
+          className='w-12 h-12 mb-8 rounded-2xl object-fill' 
+        />
+      )}
+
+      {/* Top labels */}
+      <div className="flex justify-between items-center mb-6">
+        <span className="font-semibold text-sm tracking-wide uppercase text-[color:var(--text-secondary)]">
+          Paket
+        </span>
+        <span className="font-normal text-sm tracking-wider uppercase text-white/60">
+          Flexibel
+        </span>
+      </div>
+
+      {/* Heading */}
+      <h3 className="font-headline font-normal text-(length:--text-h3) leading-9 text-white mb-6">
         {title}
-      </span>
-      <span className='text-white text-base text-center mb-8'>{description}</span>
-      <div className='flex flex-col items-start self-stretch mb-16 mx-8 gap-0'>
+      </h3>
+
+      {/* Description */}
+      <p className="font-normal text-sm leading-7 text-white/70 mb-8 flex-1">
+        {description}
+      </p>
+
+      {/* List */}
+      <ul className="space-y-4 mb-8">
         {features.map((feature, index) => (
-          <div key={index} className='flex items-center'>
-            <img src={feature.iconUrl} alt='' className='w-4 h-4 mr-0 object-fill' />
-            <div className='flex flex-col items-center'>
-              <span className='text-white text-[15px]'>{feature.text}</span>
-            </div>
-          </div>
+          <li key={index} className="flex items-start gap-4">
+            {feature.iconUrl && (
+              <img 
+                src={feature.iconUrl} 
+                alt="" 
+                className="w-4 h-4 text-[color:var(--text-secondary)] shrink-0 mt-2 object-fill" 
+              />
+            )}
+            <span className="font-normal text-base leading-6 text-white/80">
+              {feature.text}
+            </span>
+          </li>
         ))}
-      </div>
-      <div
-        className='flex flex-col items-start cursor-pointer'
-        role='button'
-        tabIndex={0}
+      </ul>
+
+      {/* Button */}
+      <button
         onClick={onCtaClick}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onCtaClick && onCtaClick()}
+        className="
+          w-full h-12
+          border border-[color:var(--text-secondary)]
+          rounded-3xl
+          font-semibold text-sm leading-5 text-white
+          hover:bg-[color:var(--text-secondary)] hover:text-black
+          transition-all duration-200
+        "
       >
-        <span className='text-white text-base'>{ctaText}</span>
-      </div>
+        {ctaText}
+      </button>
     </div>
   );
 };

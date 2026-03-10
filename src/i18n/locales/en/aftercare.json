@@ -1,0 +1,211 @@
+{
+  "pageHeading": {
+    "eyebrow": "Medusa Munich",
+    "title": "Tattoo Aftercare",
+    "subtitle": "Your guide to perfect healing and lasting beauty",
+    "healingDuration": "Healing time: 2-4 weeks on the surface, 3-6 months fully"
+  },
+  "timeline": {
+    "eyebrow": "Process",
+    "title": "Healing Phases",
+    "showLess": "Show less",
+    "showDetails": "Show details",
+    "instructionsLabel": "Instructions:"
+  },
+  "phases": {
+    "day-0": {
+      "day": "Day 0",
+      "title": "Immediately After Tattoo",
+      "description": "The first hours are crucial. Your tattoo is an open wound and must be treated accordingly.",
+      "duration": "0-4 hours",
+      "instructions": {
+        "keepWrap": "Keep wrap on for 2-4 hours",
+        "noTouch": "Do not touch or scratch",
+        "looseClothing": "Wear loose, clean clothing",
+        "noSports": "No sports activities",
+        "drinkWater": "Drink lots of water"
+      },
+      "warnings": {
+        "dontRemoveWrap": "Do not remove wrap early",
+        "avoidSun": "Avoid direct sunlight",
+        "noAlcohol": "Do not drink alcohol"
+      }
+    },
+    "day-1-3": {
+      "day": "Day 1-3",
+      "title": "Cleaning Phase",
+      "description": "Now begins the important cleaning phase. Regular, gentle care is crucial for optimal healing.",
+      "duration": "1-3 days",
+      "instructions": {
+        "removeWrap": "Carefully remove wrap and rinse tattoo with lukewarm water",
+        "washWithSoap": "Wash 3-4x daily with pH-neutral soap",
+        "patDry": "Pat dry with clean towel (do not rub)",
+        "applyOintment": "Apply a thin layer of healing ointment",
+        "noMoreWrap": "Do not use wrap anymore (skin needs air)",
+        "breathableClothing": "Wear loose, breathable clothing"
+      },
+      "warnings": {
+        "noBath": "No baths",
+        "noSwimming": "No swimming",
+        "avoidSun": "No direct sunlight",
+        "noScratch": "Do not scratch if itchy"
+      }
+    },
+    "day-4-7": {
+      "day": "Day 4-7",
+      "title": "Active Healing Phase",
+      "description": "Your tattoo starts to peel and may itch. This is completely normal and shows that healing is progressing.",
+      "duration": "4-7 days",
+      "instructions": {
+        "keepWashing": "Keep washing 2-3x daily",
+        "applyLotion": "Apply thin layer of healing ointment or lotion",
+        "tapInsteadScratch": "If itchy: tap gently instead of scratching",
+        "dontPeelSkin": "Do not peel flaking skin",
+        "keepHydrated": "Stay hydrated (drink & moisturize)",
+        "avoidTightClothing": "Avoid tight clothing over the tattoo"
+      },
+      "warnings": {
+        "dontScratch": "DO NOT scratch or rub",
+        "dontRemoveFlakes": "Do not remove peeling skin",
+        "noScrubs": "No scrubs or exfoliants",
+        "noBathSwimming": "No baths/swimming yet"
+      }
+    },
+    "day-8-14": {
+      "day": "Day 8-14",
+      "title": "Stabilization Phase",
+      "description": "The top layer of skin is almost healed. The tattoo still looks a bit dull, but the colors will return.",
+      "duration": "8-14 days",
+      "instructions": {
+        "moisturizeTwice": "Moisturize twice daily",
+        "useBodyLotion": "Use regular fragrance-free body lotion",
+        "lightExercise": "Light exercise is possible",
+        "sunProtection": "Sun protection (SPF 50+) when exposed",
+        "drinkWater": "Drink lots of water for skin health"
+      },
+      "warnings": {
+        "noSolarium": "No tanning beds yet",
+        "noLongSwims": "No long swimming sessions yet",
+        "avoidDirectSun": "Be careful with direct sunlight"
+      }
+    },
+    "week-3-4": {
+      "day": "Week 3-4",
+      "title": "Final Healing",
+      "description": "Your tattoo is superficially healed, but the deeper skin layers are still healing. Colors become more vibrant.",
+      "duration": "3-4 weeks",
+      "instructions": {
+        "dailyMoisturize": "Continue daily moisturizing",
+        "alwaysSunProtection": "ALWAYS use sun protection (SPF 50+)",
+        "normalActivities": "Normal activities possible again",
+        "bathingAllowed": "Bathing and swimming allowed again",
+        "contactStudio": "Contact studio if you have concerns"
+      },
+      "warnings": {
+        "uvProtectionAlways": "UV protection is lifelong",
+        "noHarshChemicals": "No harsh chemicals",
+        "reportRedness": "Report redness/swelling immediately"
+      }
+    },
+    "longterm": {
+      "day": "Long-term Care",
+      "title": "Long-term Care",
+      "description": "Complete healing takes 3-6 months. Proper care keeps your tattoo vibrant and beautiful.",
+      "duration": "Lifelong",
+      "instructions": {
+        "dailyLotion": "Use body lotion or tattoo care cream daily",
+        "alwaysSPF": "Always apply sun protection (SPF 50+)",
+        "keepHydrated": "Keep skin hydrated",
+        "healthyDiet": "Healthy diet for skin health",
+        "touchUp": "Touch-up after 6-12 months if needed"
+      },
+      "warnings": {
+        "sunBiggestEnemy": "Sun is the biggest enemy of tattoos",
+        "noUvColorsFade": "Without UV protection, colors fade quickly",
+        "weightChanges": "Extreme weight changes can distort the tattoo"
+      }
+    }
+  },
+  "dosDonts": {
+    "eyebrow": "Guidance",
+    "title": "Do's & Don'ts",
+    "dosTitle": "What you SHOULD do",
+    "dontsTitle": "What you should NOT do",
+    "importantLabel": "IMPORTANT"
+  },
+  "tips": {
+    "do-1": "Wash regularly with pH-neutral soap",
+    "do-2": "Apply thin layer of healing ointment (3-4x daily)",
+    "do-3": "Let skin breathe (loose clothing)",
+    "do-4": "Drink lots of water for skin health",
+    "do-5": "Clean, washed hands before touching",
+    "do-6": "Sun protection (SPF 50+) after healing",
+    "do-7": "Gently tap if itchy",
+    "do-8": "Contact studio if problems arise",
+    "dont-1": "DO NOT scratch or rub",
+    "dont-2": "DO NOT bathe, swim, or sauna (2 weeks)",
+    "dont-3": "DO NOT expose to direct sunlight",
+    "dont-4": "DO NOT use plastic wrap after day 1",
+    "dont-5": "DO NOT over-moisturize (skin needs air)",
+    "dont-6": "DO NOT pick scabs or peeling skin",
+    "dont-7": "DO NOT drink alcohol first 24 hours",
+    "dont-8": "DO NOT let pets touch tattoo",
+    "dont-9": "DO NOT wear tight/abrasive clothing",
+    "dont-10": "DO NOT use perfume or fragranced products"
+  },
+  "products": {
+    "eyebrow": "Products",
+    "title": "Recommended Products",
+    "recommendedLabel": "Recommended",
+    "learnMore": "Learn more",
+    "items": {
+      "bepanthen": {
+        "name": "Bepanthen healing ointment",
+        "description": "The classic choice for tattoo healing. Promotes natural healing and keeps skin supple."
+      },
+      "ph-neutral-soap": {
+        "name": "pH-neutral soap",
+        "description": "Gentle, fragrance-free soap for daily cleaning. Sebamed or similar brands."
+      },
+      "tattoo-balm": {
+        "name": "Special tattoo care balm",
+        "description": "Premium tattoo balm with natural ingredients. Promotes healing and maintains color vibrancy."
+      },
+      "sun-protection": {
+        "name": "Sun protection SPF 50+",
+        "description": "High-SPF sun protection specifically for tattoos. Prevents fading and skin damage."
+      },
+      "body-lotion": {
+        "name": "Fragrance-free body lotion",
+        "description": "For long-term care after complete healing. Keeps skin hydrated and tattoo vibrant."
+      }
+    }
+  },
+  "productCategories": {
+    "cleaning": "Cleaning",
+    "healing": "Healing",
+    "protection": "Protection"
+  },
+  "warningSigns": {
+    "title": "Warning Signs",
+    "description": "Contact a doctor or our studio immediately if you notice these symptoms:",
+    "emergencyLabel": "Emergency contact:",
+    "hours": "Mon-Thu: 11:30-19:00, Fri-Sat: 11:30-20:00, Sun: Closed",
+    "signs": {
+      "pain": "Severe, increasing pain after 2-3 days",
+      "redness": "Excessive redness or swelling",
+      "fever": "Fever or chills",
+      "discharge": "Foul-smelling discharge or pus",
+      "redStreaks": "Red streaks extending from tattoo",
+      "allergicReaction": "Allergic reaction (severe itching, rash)",
+      "blistering": "Unusual blistering"
+    }
+  },
+  "cta": {
+    "eyebrow": "Support",
+    "title": "Still have questions?",
+    "subtitle": "Still have questions? Our team is here for you anytime. Contact us with any aftercare questions.",
+    "contact": "Contact us",
+    "booking": "Book appointment"
+  }
+}

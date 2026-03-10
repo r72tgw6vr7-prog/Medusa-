@@ -1,13 +1,19 @@
 import { v4 as uuidv4 } from 'uuid';
 
+const _BOOKING_API_URL =
+  'https://script.google.com/macros/s/AKfycbxV1TCVR-lZK4HjHA5aTQxkhUPVkDb76TUX95SV_AgSs-pIJlpcCscy20DbGvno_cjoiw/exec';
+
 export interface BookingRequest {
   serviceId: string;
-  artistId: string;
+  specificService?: string; // The specific service selected (e.g., "ohr", "ohrlochzauberer")
+  artistId?: string;
   name: string;
   email: string;
   phone: string;
   date: string;
   message?: string;
+  projectDetails?: string;
+  paymentMethod?: 'cash' | 'card' | 'bank_transfer';
   gdprConsent: boolean;
 }
 
@@ -18,32 +24,156 @@ export interface BookingResponse {
   createdAt: string;
 }
 
-// Simulated API call - replace with actual API implementation
-export const submitBooking = async (_data: BookingRequest): Promise<BookingResponse> => {
-  // In a real app, this would be a fetch/axios call to your backend
-  // console.log('Submitting booking:', _data);
+const formatDateToGerman = (value: string): string => {
+  if (!value) return '';
 
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  if (/^\d{2}\.\d{2}\.\d{4}$/.test(value)) return value;
 
-  // Simulate successful response
-  return {
-    id: uuidv4(),
-    status: 'pending',
-    bookingNumber: `BK-${Math.floor(10000 + Math.random() * 90000)}`,
-    createdAt: new Date().toISOString(),
-  };
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    const [yyyy, mm, dd] = value.split('-');
+    return `${dd}.${mm}.${yyyy}`;
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+
+  const dd = String(parsed.getDate()).padStart(2, '0');
+  const mm = String(parsed.getMonth() + 1).padStart(2, '0');
+  const yyyy = String(parsed.getFullYear());
+  return `${dd}.${mm}.${yyyy}`;
 };
 
-// Validate booking form data
+const mapServiceLabel = (serviceId: string): string => {
+  if (serviceId === 'piercing') return 'Piercing';
+  return 'Tattoo';
+};
+
+// Map specific service IDs to human-readable German labels
+const mapSpecificServiceLabel = (specificService?: string): string => {
+  if (!specificService) return '';
+
+  const labels: Record<string, string> = {
+    // Piercing services
+    'ohr': 'Ohr-Piercing',
+    'mund': 'Mund-Piercing',
+    'gesicht': 'Gesicht-Piercing',
+    'koerper': 'Körper-Piercing',
+    'intim': 'Intim-Piercing',
+    'ohrlochzauberer': 'Ohrlochzauberer (Kinder)',
+    // Tattoo services
+    'small': 'Klein (bis 5cm)',
+    'medium': 'Mittel (5-15cm)',
+    'large': 'Groß (15cm+)',
+    'coverup': 'Cover-Up',
+    'custom': 'Individuelles Design',
+  };
+
+  return labels[specificService] || specificService;
+};
+
+const mapPaymentLabel = (paymentMethod?: BookingRequest['paymentMethod']): string => {
+  if (paymentMethod === 'cash') return 'Bar';
+  if (paymentMethod === 'card') return 'Karte';
+  if (paymentMethod === 'bank_transfer') return 'Überweisung';
+  return '';
+};
+
+export const submitBooking = async (data: BookingRequest): Promise<BookingResponse> => {
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY;
+  if (!web3FormsKey) {
+    throw new Error('Das Buchungsformular ist derzeit nicht konfiguriert.');
+  }
+
+  const formData = new FormData();
+  formData.append('access_key', web3FormsKey);
+  formData.append('name', data.name);
+  formData.append('email', data.email);
+  formData.append('phone', data.phone);
+  const specificLabel = mapSpecificServiceLabel(data.specificService);
+  const serviceDisplay = specificLabel
+    ? `${mapServiceLabel(data.serviceId)} → ${specificLabel}`
+    : mapServiceLabel(data.serviceId);
+
+  formData.append('service', serviceDisplay);
+  formData.append('date', formatDateToGerman(data.date));
+  formData.append('details', data.projectDetails || '');
+  formData.append('payment', mapPaymentLabel(data.paymentMethod));
+
+  // MAGIC EMAIL with 1-click calendar buttons
+  formData.append(
+    'subject',
+    `🆕 Neue Buchung: ${data.name} - ${serviceDisplay} - ${formatDateToGerman(data.date)}`,
+  );
+  formData.append(
+    'message',
+    `
+🎯 NEUE BUCHUNGSANFRAGE - MEDUSA TATTOO
+
+👤 Name: ${data.name}
+📧 E-Mail: ${data.email}
+📞 Telefon: ${data.phone}
+✨ Leistung: ${serviceDisplay}
+📅 Datum: ${formatDateToGerman(data.date)}
+💳 Zahlung: ${mapPaymentLabel(data.paymentMethod) || 'Nicht angegeben'}
+📝 Details: ${data.projectDetails || 'Keine'}
+
+━━━━━━━━━━━━━━━━━━━
+🔥 SCHNELL ZUM KALENDER (EIN KLICK):
+━━━━━━━━━━━━━━━━━━━
+
+👩 Angie: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+👩 Vivi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+👩 Debi: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+👨 Loui: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+👩 Luz: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+👨 Aaron: https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.name + ' - ' + mapServiceLabel(data.serviceId))}&dates=20260215T1400/20260215T1600&details=${encodeURIComponent('Telefon: ' + data.phone + '\\nDetails: ' + data.projectDetails + '\\nE-Mail: ' + data.email)}
+
+━━━━━━━━━━━━━━━━━━━
+AN KUNDEN ANTWORTEN: ${data.email}?subject=✅%20Ihre%20Medusa%20Tattoo%20Buchung%20ist%20best%C3%A4tigt!
+
+Medusa Tattoo Team
+  `,
+  );
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData,
+    });
+    const result = await response.json();
+    console.log('✅ Booking response:', {
+      ok: response.ok,
+      status: response.status,
+      result,
+    });
+
+    if (!response.ok || !result.success) {
+      throw new Error(result?.message || 'Übermittlung fehlgeschlagen');
+    }
+
+    return {
+      id: uuidv4(),
+      status: 'pending',
+      bookingNumber: `BK-${Math.floor(10000 + Math.random() * 90000)}`,
+      createdAt: new Date().toISOString(),
+    };
+  } catch (error) {
+    console.error('❌ Error:', error);
+    throw error;
+  }
+};
+
 export const validateBookingData = (data: Partial<BookingRequest>): string | null => {
-  if (!data.serviceId) return 'Please select a service';
-  if (!data.artistId) return 'Please select an artist';
-  if (!data.name?.trim()) return 'Name is required';
-  if (!data.email?.trim()) return 'Email is required';
-  if (!/\S+@\S+\.\S+/.test(data.email)) return 'Please enter a valid email';
-  if (!data.phone?.trim()) return 'Phone number is required';
-  if (!data.date) return 'Please select a date';
-  if (!data.gdprConsent) return 'You must accept the privacy policy';
+  if (!data.serviceId) return 'Bitte wählen Sie eine Leistung aus';
+  if (!data.paymentMethod) return 'Bitte wählen Sie eine Zahlungsart aus';
+  if (!data.name?.trim()) return 'Name ist erforderlich';
+  if (!data.email?.trim()) return 'E-Mail ist erforderlich';
+  if (!/\S+@\S+\.\S+/.test(data.email)) return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+  if (!data.date) return 'Bitte wählen Sie ein Datum aus';
   return null;
 };

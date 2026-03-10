@@ -1,0 +1,523 @@
+{
+  "close": "Schließen",
+  "actions": {
+    "viewPortfolio": "Portfolio ansehen"
+  },
+  "cookies": {
+    "title": "Cookie-Einstellungen",
+    "body": "Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Essentielle Cookies sind für die Grundfunktionen erforderlich. Optional können Sie Analyse- und Marketing-Cookies zulassen.",
+    "learnMore": "Mehr erfahren",
+    "customize": "Anpassen",
+    "rejectAll": "Ablehnen",
+    "acceptAll": "Alle akzeptieren",
+    "dialogTitle": "Cookie-Einstellungen",
+    "closeAria": "Schließen",
+    "cancel": "Abbrechen",
+    "save": "Einstellungen speichern",
+    "essential": {
+      "title": "Essentielle Cookies",
+      "aria": "Essentielle Cookies (erforderlich)",
+      "description": "Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden."
+    },
+    "analytics": {
+      "title": "Analyse-Cookies",
+      "aria": "Analyse-Cookies aktivieren",
+      "description": "Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen."
+    },
+    "marketing": {
+      "title": "Marketing-Cookies",
+      "aria": "Marketing-Cookies aktivieren",
+      "description": "Diese Cookies werden verwendet, um Werbung relevanter zu gestalten."
+    }
+  },
+  "newsletterForm": {
+    "emailLabel": "E-Mail Adresse",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "errorRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein",
+    "errorInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "errorGeneric": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+    "success": "Danke für Ihre Anmeldung!",
+    "submitting": "Wird angemeldet...",
+    "subscribed": "Erfolgreich angemeldet",
+    "subscribe": "Newsletter abonnieren"
+  },
+  "partners": {
+    "title": "Unsere Partner & Presse",
+    "subtitle": "Vertrauensvolle Partnerschaften mit führenden Marken der Branche",
+    "carouselAria": "Partner und Presse Karussell"
+  },
+  "testimonials": {
+    "title": "Was Kunden sagen",
+    "sectionAria": "Kundenbewertungen",
+    "carouselAria": "Karussell mit Kundenbewertungen",
+    "ratingAria": "Bewertung: {{rating}} von 5"
+  },
+  "agbPage": {
+    "subtitle": "Allgemeine Geschäftsbedingungen für Studioleistungen",
+    "intro": "Diese Bedingungen regeln Terminvereinbarung, Leistungen, Zahlung und Nachsorge im Medusa Tattoo & Piercing Studio. Mit der Buchung bestätigen Sie, dass Sie die Hinweise zu Gesundheit, Pflege und Altersnachweis gelesen haben. Bei Fragen klären wir die Inhalte vor dem Termin persönlich.",
+    "status": "Stand: Februar 2026",
+    "sections": {
+      "payment": {
+        "title": "§ 4 Preise, Anzahlungen & Zahlung",
+        "body": "Die Preise richten sich nach Größe, Stil, Platzierung und Aufwand. Für größere Projekte kann eine Anzahlung erforderlich sein; diese wird auf den Endpreis angerechnet. Zahlungen sind bar, mit Karte oder nach Absprache per Überweisung möglich."
+      },
+      "cancellation": {
+        "title": "§ 5 Terminänderungen & Ausfall",
+        "body": "Vereinbarte Termine sind verbindlich. Bitte informieren Sie uns frühzeitig, wenn Sie verschieben müssen, damit wir den Slot neu vergeben können. Bei kurzfristiger Absage oder Nichterscheinen behalten wir uns vor, eine Ausfallpauschale zu berechnen."
+      },
+      "design": {
+        "title": "§ 6 Designfreigabe & Änderungen",
+        "body": "Entwürfe werden individuell erstellt und vor dem Termin besprochen. Kleinere Anpassungen sind im Rahmen der Beratung möglich; umfangreiche Änderungen können zusätzliche Zeit oder Kosten verursachen. Designrechte verbleiben bis zur vollständigen Bezahlung beim Studio."
+      },
+      "health": {
+        "title": "§ 7 Gesundheit, Aufklärung & Altersnachweis",
+        "body": "Kund:innen bestätigen, dass keine gesundheitlichen Gründe gegen die Behandlung sprechen und relevante Vorerkrankungen oder Allergien vorab mitgeteilt wurden. Minderjährige werden nicht behandelt; ein gültiger Lichtbildausweis ist auf Anfrage vorzulegen."
+      },
+      "dispute": {
+        "title": "§ 8 Streitbeilegung & Gerichtsstand",
+        "body": "Es gilt deutsches Recht. Gerichtsstand ist München, sofern gesetzlich zulässig. Wir sind nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+      }
+    }
+  },
+  "legalPage": {
+    "eyebrow": "Medusa München",
+    "title": "Allgemeine Geschäftsbedingungen",
+    "subtitle": "MEDUSA TATTOO MÜNCHEN",
+    "tocTitle": "Inhaltsverzeichnis",
+    "backToTop": "Zurück nach oben",
+    "sections": {
+      "scope": { "title": "§ 1 Geltungsbereich", "id": "section-1" },
+      "services": { "title": "§ 2 Leistungen", "id": "section-2" },
+      "appointments": { "title": "§ 3 Termine und Stornierung", "id": "section-3" },
+      "pricing": { "title": "§ 4 Preise und Zahlung", "id": "section-4" },
+      "health": { "title": "§ 5 Gesundheit und Eignung", "id": "section-5" },
+      "aftercare": { "title": "§ 6 Nachsorge und Haftung", "id": "section-6" },
+      "copyright": { "title": "§ 7 Urheberrecht", "id": "section-7" },
+      "privacy": { "title": "§ 8 Datenschutz", "id": "section-8" },
+      "final": { "title": "§ 9 Schlussbestimmungen", "id": "section-9" }
+    },
+    "content": {
+      "scope": [
+        "(1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Dienstleistungen, die von MEDUSA TATTOO MÜNCHEN, Altheimer Eck 11, 80331 München, nachfolgend \"Anbieter\" genannt, angeboten werden.",
+        "(2) Die AGB gelten für Verträge über Tattoo- und Piercing-Dienstleistungen zwischen dem Anbieter und dem Kunden (Verbraucher oder Unternehmer).",
+        "(3) Abweichende Bedingungen des Kunden werden nicht anerkannt, es sei denn, der Anbieter stimmt ihrer Geltung ausdrücklich schriftlich zu."
+      ],
+      "services": [
+        "(1) Der Anbieter bietet Tattoo- und Piercing-Dienstleistungen an.",
+        "(2) Die Leistungen umfassen die Beratung, das Stechen von Tattoos und Piercings sowie die Nachsorgeberatung.",
+        "(3) Alle Dienstleistungen werden nach den aktuellen hygienischen Standards und gesetzlichen Vorschriften durchgeführt."
+      ],
+      "appointments": [
+        "(1) Termine können online über die Website oder telefonisch vereinbart werden.",
+        "(2) Bei Stornierung bis 24 Stunden vor dem Termin fallen keine Kosten an.",
+        "(3) Bei kurzfristiger Absage (weniger als 24 Stunden) oder Nichterscheinen wird eine Ausfallgebühr in Höhe von 50% des vereinbarten Preises fällig."
+      ],
+      "pricing": [
+        "(1) Die Preise richten sich nach Aufwand, Größe und Komplexität der Leistung.",
+        "(2) Zahlungen sind bar, per EC-Karte oder Kreditkarte möglich.",
+        "(3) Bei größeren Arbeiten kann eine Anzahlung verlangt werden."
+      ],
+      "health": [
+        "(1) Der Kunde versichert, dass er gesundheitlich geeignet für die Leistung ist.",
+        "(2) Bei Zweifeln an der Eignung kann der Anbieter die Leistung verweigern.",
+        "(3) Der Kunde ist verpflichtet, Vorerkrankungen und Medikamente mitzuteilen."
+      ],
+      "aftercare": [
+        "(1) Der Anbieter stellt Nachsorgehinweise zur Verfügung.",
+        "(2) Für Folgen unsachgemäßer Nachsorge übernimmt der Anbieter keine Haftung.",
+        "(3) Die Haftung ist auf Vorsatz und grobe Fahrlässigkeit beschränkt."
+      ],
+      "copyright": [
+        "(1) Designs des Anbieters sind urheberrechtlich geschützt.",
+        "(2) Die kommerzielle Nutzung von Tattoo-Designs bedarf der schriftlichen Zustimmung.",
+        "(3) Kunden-Designs bleiben Eigentum des Kunden."
+      ],
+      "privacy": [
+        "(1) Die Verarbeitung personenbezogener Daten erfolgt gemäß DSGVO.",
+        "(2) Details sind in der separaten Datenschutzerklärung zu finden.",
+        "(3) Der Kunde hat das Recht auf Auskunft, Berichtigung und Löschung seiner Daten."
+      ],
+      "final": [
+        "(1) Es gilt deutsches Recht.",
+        "(2) Gerichtsstand ist München.",
+        "(3) Änderungen und Ergänzungen dieser AGB bedürfen der Schriftform. Dies gilt auch für die Änderung dieser Schriftformklausel.",
+        "(4) Mündliche Nebenabreden bestehen nicht."
+      ]
+    }
+  },
+  "impressumPage": {
+    "eyebrow": "Medusa München",
+    "title": "Impressum",
+    "subtitle": "Medusa Tattoo & Piercing Studio - Rechtliche Angaben",
+    "draftWarning": "⚠️ ENTWURF - Platzhalter müssen ersetzt werden",
+    "sections": {
+      "tmg": {
+        "title": "Angaben gemäß § 5 TMG",
+        "company": "Stargate GmbH",
+        "tradeName": "Handelsname: Medusa Tattoo & Piercing Studio",
+        "studioAddressLabel": "Studio-Adresse:",
+        "studioAddress": "Altheimer Eck 11, 80331 München",
+        "registeredOfficeLabel": "Eingetragener Firmensitz:",
+        "registeredAddress": "Proviantstraße 5a, 85049 Ingolstadt"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "phoneMunichLabel": "Telefon München:",
+        "phoneMunich": "089 910994",
+        "phoneIngolstadtLabel": "Telefon Ingolstadt:",
+        "phoneIngolstadt": "0841 910994",
+        "emailLabel": "E-Mail:",
+        "email": "info@medusa-tattoo.de",
+        "websiteLabel": "Website:",
+        "website": "www.muenchen-tattoo-studio.de",
+        "contactPersonLabel": "Ansprechpartner:",
+        "contactPerson": "Oliver Loichinger"
+      },
+      "registration": {
+        "title": "Handelsregister und Umsatzsteuer-ID",
+        "regNumberLabel": "Handelsregisternummer:",
+        "regNumber": "12052245",
+        "vatLabel": "Umsatzsteuer-Identifikationsnummer:",
+        "vatNumber": "DE 206 350 700",
+        "responsibleLabel": "Verantwortliche Person:",
+        "responsible": "Oliver Loichinger",
+        "court": "Amtsgericht Ingolstadt"
+      },
+      "contentResponsibility": {
+        "title": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV",
+        "person": "Oliver Loichinger",
+        "company": "Stargate GmbH",
+        "address": "Altheimer Eck 11, 80331 München"
+      },
+      "copyright": {
+        "title": "Urheberrecht",
+        "text": "© 2025 Stargate GmbH - Medusa Tattoo & Piercing Studio. Alle Rechte vorbehalten."
+      },
+      "professionalInsurance": {
+        "title": "Berufshaftpflichtversicherung",
+        "insurerLabel": "Versicherer:",
+        "insurerPlaceholder": "Auf Anfrage",
+        "coverageAreaLabel": "Geltungsbereich:",
+        "coverageArea": "Deutschland/EU",
+        "coverageAmountLabel": "Deckungssumme:",
+        "coverageAmountPlaceholder": "Auf Anfrage"
+      },
+      "disputeResolution": {
+        "title": "Streitschlichtung",
+        "intro": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:",
+        "link": "https://ec.europa.eu/consumers/odr",
+        "notice": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+      },
+      "contentLiability": {
+        "title": "Haftung für Inhalte",
+        "text": "Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen."
+      },
+      "linkLiability": {
+        "title": "Haftung für Links",
+        "text": "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich."
+      },
+      "copyrightNotice": {
+        "title": "Urheberrecht",
+        "paragraph1": "Alle auf dieser Website verwendeten Bilder, Texte und grafischen Gestaltungen sind urheberrechtlich geschützt. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.",
+        "paragraph2": "Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis."
+      }
+    }
+  },
+  "nav": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "tattoos": "Tattoos",
+    "piercings": "Piercings",
+    "artists": "Künstler",
+    "about": "Über uns",
+    "gallery": "Galerie",
+    "pricing": "Preise",
+    "booking": "Termin buchen",
+    "bookingShort": "Termin",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "openMenu": "Navigationsmenü öffnen",
+    "closeMenu": "Menü schließen",
+    "mainNavigationLabel": "Hauptnavigation",
+    "mobileNavigationLabel": "Mobile Navigation",
+    "mobileMenuTitle": "Hauptmenü",
+    "switchToGerman": "Zu Deutsch wechseln",
+    "switchToEnglish": "Zu Englisch wechseln"
+  },
+  "about": {
+    "eyebrow": "Medusa München",
+    "title": "Über Medusa",
+    "subtitle": "Wo präzises Piercing auf kompromisslose Hygiene und Kunstfertigkeit trifft. Unser Studio verbindet jahrzehntelange Expertise mit einem ruhigen, beratungsorientierten Ansatz.",
+    "scroll": "Scroll",
+    "oliver": {
+      "discipline": "Gründer & Piercing-Experte",
+      "description": "Oliver führt Medusa mit Fokus auf präzises Piercing, sichere Platzierung und eine ruhige, beratungsorientierte Herangehensweise."
+    },
+    "sascha": {
+      "discipline": "Front Desk & Studio Support",
+      "description": "Dein erster Kontakt bei Medusa. Sascha hilft bei Terminfragen, Anliegen und sorgt dafür, dass im Studio alles reibungslos läuft."
+    }
+  },
+  "footer": {
+    "copyright": " 2025 Medusa Tattoo München. Alle Rechte vorbehalten.",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "brandTagline": "Münchens exklusivstes Tattoo-Studio für Kunst, die ein Leben lang hält.",
+    "brandDescription": "30 JAHRE, 30.000 TATTOOS UND FAST JEDES GENRE. Andere folgen Trends – wir erschaffen sie. Wir bringen Ihre Vision mit Präzision und Leidenschaft zum Leben.",
+    "studio": {
+      "address": "Altheimer Eck 11, 80331 München",
+      "hours": "Mo-Do: 11:30-19:00, Fr-Sa: 11:30-20:00, So: geschlossen"
+    },
+    "hoursCard": {
+      "heading": "Öffnungszeiten",
+      "weekdaysLabel": "Mo - Do:",
+      "weekdaysValue": "11:30 - 19:00",
+      "weekendLabel": "Fr - Sa:",
+      "weekendValue": "11:30 - 20:00",
+      "sundayLabel": "So:",
+      "sundayValue": "Geschlossen"
+    },
+    "headings": {
+      "quickLinks": "Schnellzugriff",
+      "legal": "Rechtliches",
+      "newsletter": "Aktuelles"
+    },
+    "links": {
+      "privacy": "Datenschutz",
+      "imprint": "Impressum",
+      "terms": "AGB",
+      "aftercare": "Nachsorge"
+    },
+    "newsletter": {
+      "description": "Exklusive Updates zu Events und Aktionen.",
+      "emailPlaceholder": "E-Mail Adresse",
+      "marketingConsent": "Ich stimme dem Erhalt von Marketing-E-Mails zu.",
+      "subscribe": "Abonnieren"
+    },
+    "location": {
+      "title": "Studio Lage & Anfahrt",
+      "items": {
+        "marienplatz": {
+          "title": "Marienplatz",
+          "subtitle": "Nur 2 Minuten vom zentralen Marienplatz entfernt"
+        },
+        "subway": {
+          "title": "U-Bahn",
+          "subtitle": "U3/U6 Marienplatz Station"
+        },
+        "suburbanRail": {
+          "title": "S-Bahn",
+          "subtitle": "S1-S8 Marienplatz Station"
+        },
+        "parking": {
+          "title": "Parken",
+          "subtitle": "Parkhaus Tal 26 oder Q-Park Marienplatz"
+        }
+      },
+      "tags": {
+        "marienplatz": "Tattoo Marienplatz",
+        "innerCity": "Tattoo Studio Innenstadt",
+        "cityCenter": "Tattoo Zentrum München",
+        "altheimerEck": "Tattoo Altheimer Eck",
+        "englishSpeaking": "Englischsprachiges Tattoo-Studio München"
+      },
+      "faq": {
+        "title": "Tattoo Studio München – Ihre Fragen, unsere Antworten",
+        "cards": {
+          "locals": {
+            "title": "Für Einheimische:",
+            "body": "Unser Tattoo Studio in München Innenstadt ist von allen Stadtteilen perfekt erreichbar. Ob aus Schwabing, Haidhausen, Neuhausen oder Sendling – die Anreise mit öffentlichen Verkehrsmitteln dauert maximal 20 Minuten."
+          },
+          "tourists": {
+            "title": "Für Touristen:",
+            "body": "Als zentral gelegenes Tattoo Studio am Marienplatz sind wir die perfekte Adresse für Besucher Münchens. Kombinieren Sie Ihr Tattoo mit einem Bummel über den Viktualienmarkt oder einer Tour durch die Altstadt."
+          },
+          "hours": {
+            "title": "Öffnungszeiten:",
+            "monFriLabel": "Mo-Do:",
+            "monFriValue": "11:30-19:00",
+            "satLabel": "Fr-Sa:",
+            "satValue": "11:30-20:00",
+            "sunLabel": "So:",
+            "sunValue": "Geschlossen"
+          }
+        }
+      }
+    },
+    "bottomBar": {
+      "rights": "Medusa Tattoo München. Alle Rechte vorbehalten.",
+      "since": "Seit 1994 im Herzen Münchens"
+    }
+  },
+  "meta": {
+    "home": {
+      "title": "Medusa Tattoo München – Premium Tattoo & Piercing Studio am Marienplatz",
+      "description": "Premium Tattoo- und Piercing-Studio in München. Beratung, transparente Preise, höchste Hygiene und erfahrene Artists."
+    },
+    "services": {
+      "title": "Medusa Tattoo München | Leistungen",
+      "description": "Tattoo- und Piercing-Leistungen – transparente Preise, Beratung und höchste Hygienestandards."
+    },
+    "artists": {
+      "title": "Medusa Tattoo München | Künstler",
+      "description": "Lernen Sie unser Team aus spezialisierten Tattoo-Künstlern kennen. Portfolios und Termine."
+    },
+    "about": {
+      "title": "Über uns | Medusa Tattoo München",
+      "description": "Über Medusa Tattoo München – Founder-geführte Piercing-Expertise, Hygiene und fortgeschrittene Implantat-Techniken."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Eine Auswahl unserer Arbeiten – entdecken Sie Stile und Inspiration."
+    },
+    "booking": {
+      "title": "Termin vereinbaren",
+      "description": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing.",
+      "h1": "Termin Buchen",
+      "subtitle": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing."
+    },
+    "faq": {
+      "title": "FAQ | Medusa Tattoo München",
+      "description": "Antworten zu Termin, Pflege, Preisen und Hygiene."
+    },
+    "contact": {
+      "title": "Kontakt | Medusa Tattoo München",
+      "description": "Kontakt – Adresse, Telefon, E-Mail und Öffnungszeiten."
+    },
+    "aftercare": {
+      "title": "Nachsorge Anleitung | Medusa Tattoo München",
+      "description": "Professioneller Nachsorge-Guide für Tattoos und Piercings mit Heilungsphasen und Warnzeichen."
+    },
+    "legal": {
+      "title": "Allgemeine Geschäftsbedingungen | Medusa Tattoo München",
+      "description": "Allgemeine Geschäftsbedingungen für Tattoo- und Piercing-Leistungen in München."
+    },
+    "impressum": {
+      "title": "Impressum | Medusa Tattoo München",
+      "description": "Rechtliche Angaben und Unternehmensinformationen für Medusa Tattoo & Piercing Studio."
+    },
+    "datenschutz": {
+      "title": "Datenschutzerklärung | Medusa Tattoo München",
+      "description": "Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."
+    },
+    "agb": {
+      "title": "AGB | Medusa Tattoo München",
+      "description": "Allgemeine Geschäftsbedingungen für Leistungen und Buchungen."
+    }
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Antworten zu Terminen, Preisen, Hygiene und Nachsorge.",
+    "sections": {
+      "booking": {
+        "title": "Terminbuchung",
+        "questions": {
+          "howToBook": {
+            "question": "Wie buche ich einen Termin?",
+            "answer": "Nutzen Sie unser Online-Formular oder rufen Sie uns an. Wir bestätigen Ihre Anfrage in der Regel innerhalb von 24 Stunden."
+          },
+          "reschedule": {
+            "question": "Kann ich meinen Termin verschieben?",
+            "answer": "Ja. Bitte informieren Sie uns mindestens 48 Stunden vor dem Termin, damit wir eine neue Zeit für Sie finden können."
+          },
+          "deposit": {
+            "question": "Ist eine Anzahlung erforderlich?",
+            "answer": "Bei größeren Projekten kann eine Anzahlung notwendig sein. Details erhalten Sie im Beratungsgespräch."
+          }
+        }
+      },
+      "pricing": {
+        "title": "Preise & Zahlung",
+        "questions": {
+          "pricing": {
+            "question": "Wie setzen sich die Preise zusammen?",
+            "answer": "Der Preis richtet sich nach Größe, Platzierung, Aufwand und Stil. Vor dem Termin erhalten Sie eine klare Einschätzung."
+          },
+          "paymentMethods": {
+            "question": "Welche Zahlungsmethoden akzeptieren Sie?",
+            "answer": "Wir akzeptieren Barzahlung, Kartenzahlung und Überweisung."
+          }
+        }
+      },
+      "hygiene": {
+        "title": "Hygiene & Sicherheit",
+        "questions": {
+          "hygiene": {
+            "question": "Welche Hygienestandards gelten bei Medusa?",
+            "answer": "Wir arbeiten mit sterilen Einwegmaterialien, zertifizierten Desinfektionsverfahren und dokumentierten Hygieneroutinen."
+          },
+          "inkSafety": {
+            "question": "Sind die Farben und Materialien sicher?",
+            "answer": "Wir verwenden geprüfte Pigmente und implantatgeeigneten Schmuck. Allergien und Sensibilitäten klären wir vorab."
+          }
+        }
+      },
+      "artists": {
+        "title": "Künstler & Stilrichtungen",
+        "questions": {
+          "chooseArtist": {
+            "question": "Wie finde ich den passenden Künstler?",
+            "answer": "Teilen Sie uns Ihre Wünsche und Referenzen mit. Wir empfehlen den Künstler, dessen Portfolio am besten zu Ihrem Stil passt."
+          },
+          "styles": {
+            "question": "Welche Stilrichtungen bietet Ihr Studio?",
+            "answer": "Wir arbeiten unter anderem in Realismus, Fineline, Blackwork, Neo-Traditional, Japanese und individuellen Konzepten."
+          }
+        }
+      },
+      "aftercare": {
+        "title": "Nachsorge",
+        "questions": {
+          "care": {
+            "question": "Wie pflege ich mein Tattoo oder Piercing?",
+            "answer": "Sie erhalten eine schriftliche Nachsorgeanleitung. Wir erklären Ihnen die Schritte und beantworten alle Fragen vor Ort."
+          },
+          "problems": {
+            "question": "Was mache ich bei Problemen?",
+            "answer": "Kontaktieren Sie uns sofort. Wir geben Ihnen eine Empfehlung oder vereinbaren einen Kontrolltermin."
+          }
+        }
+      },
+      "location": {
+        "title": "Anfahrt & Lage",
+        "questions": {
+          "directions": {
+            "question": "Wie finde ich das Studio?",
+            "answer": "Sie finden uns am Altheimer Eck 11, nur wenige Schritte vom Marienplatz entfernt. U-Bahn und S-Bahn sind in unmittelbarer Nähe."
+          }
+        }
+      }
+    }
+  },
+  "sharedSections": {
+    "gallerySection": {
+      "eyebrow": "Galerie",
+      "viewGallery": "Zur Galerie"
+    },
+    "studioCarousel": {
+      "title": "Unser Studio",
+      "subtitle": "Ein Blick in unser professionelles, EU-zertifiziertes Tattoo-Studio im Herzen Münchens",
+      "regionLabel": "Studio-Fotokarussell",
+      "previous": "Vorheriges Bild",
+      "next": "Nächstes Bild",
+      "slide": "Bild",
+      "of": "von"
+    },
+    "preFooterBookingCta": {
+      "title": "Bereit für Ihr Meisterwerk?",
+      "subtitle": "Lassen Sie uns gemeinsam Ihre Vision in ein unvergessliches Kunstwerk verwandeln",
+      "cardTitle": "Buchen Sie Ihren Termin",
+      "ctaDefault": "Jetzt Termin sichern →",
+      "ctaSelected": "Termin jetzt anfragen →"
+    },
+    "bookingSection": {
+      "cta": "Termin buchen"
+    }
+  },
+  "slider": {
+    "heading": "Vorher & Nachher",
+    "before": "Vorher",
+    "after": "Nachher"
+  }
+}

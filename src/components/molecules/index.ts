@@ -1,6 +1,4 @@
-export * from './Card/ArtistCard';
 export * from './Card/ServiceCards';
-export * from './Card/Card';
 export * from './BeforeAfterCard';
 export * from './ContactInfoCard';
 export * from './FAQItem';
@@ -8,7 +6,6 @@ export * from './NewsletterForm';
 export * from './PriceCard';
 export * from './ReviewCard';
 export * from './ServiceCard';
-export * from './BookingCallToAction';
 export * from './CookieConsentBanner';
 export * from './FocusTrap';
 export * from './GDPRCompliance';

@@ -150,11 +150,11 @@ export const staggerItemRight: Variants = {
 export const goldGlow: Variants = {
   hidden: {
     opacity: 0,
-    boxShadow: '0 0 0 rgba(197, 175, 135, 0)',
+    boxShadow: '0 0 0 rgba(var(--brand-accent-rgb), 0)',
   },
   visible: {
     opacity: 1,
-    boxShadow: '0 0 15px rgba(197, 175, 135, 0.5)',
+    boxShadow: '0 0 15px rgba(var(--brand-accent-rgb), 0.5)',
     transition: {
       opacity: { ...defaultTransition },
       boxShadow: {
@@ -221,7 +221,7 @@ export const galleryItem: Variants = {
   },
   hover: {
     scale: 1.03,
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+    boxShadow: '0 10px 25px rgba(var(--color-surface-darker-rgb), 0.15)',
     transition: {
       duration: TRANSITION_DURATIONS.fast / 1000,
       ease: EASINGS.easeOut,

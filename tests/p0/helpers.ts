@@ -15,7 +15,10 @@ export class P0TestHelpers {
    * Wait for route navigation to complete
    */
   async waitForNavigation(expectedPath: string, timeout = 5000) {
-    await this.page.waitForURL(`**${expectedPath}`, { timeout });
+    const target = expectedPath.endsWith('/') && expectedPath.length > 1
+      ? expectedPath.slice(0, -1)
+      : expectedPath;
+    await this.page.waitForURL(`**${target}*`, { timeout });
     await this.page.waitForLoadState('networkidle');
     // Additional wait for any scroll animations
     await this.page.waitForTimeout(500);
@@ -81,20 +84,8 @@ export class P0TestHelpers {
    * Mock environment variables by intercepting requests
    */
   async mockEnvironment(envVars: Record<string, string>) {
-    await this.page.addInitScript((vars) => {
-      // Mock import.meta.env
-      Object.assign(window, {
-        __MOCKED_ENV__: vars
-      });
-      
-      // Override import.meta.env access
-      const originalImportMeta = (window as any).import?.meta?.env || {};
-      if ((window as any).import) {
-        (window as any).import.meta = {
-          ...((window as any).import.meta || {}),
-          env: { ...originalImportMeta, ...vars }
-        };
-      }
+    await this.page.addInitScript((vars: Record<string, string>) => {
+      Object.assign(window, { __MOCKED_ENV__: vars });
     }, envVars);
   }
 
@@ -104,19 +95,10 @@ export class P0TestHelpers {
   async setupAnalyticsMock() {
     await this.page.addInitScript(() => {
       // Mock dataLayer and gtag
-      (window as any).dataLayer = [];
-      (window as any).gtag = function(...args: any[]) {
-        (window as any).dataLayer.push(args);
-      };
-      
-      // Store original analytics calls
-      (window as any).__ANALYTICS_CALLS__ = [];
-      
-      // Mock the analytics utility if it exists
-      const originalGtag = (window as any).gtag;
-      (window as any).gtag = function(...args: any[]) {
-        (window as any).__ANALYTICS_CALLS__.push(args);
-        return originalGtag.apply(this, args);
+      (window as { dataLayer: string[] }).dataLayer = [] as string[];
+      (window as { gtag: (...args: string[]) => void }).gtag = function(...args: string[]) {
+        (window as { dataLayer: string[] }).dataLayer.push(...args);
+        (window as { __ANALYTICS_CALLS__: string[] }).__ANALYTICS_CALLS__.push(...args);
       };
     });
   }
@@ -124,16 +106,16 @@ export class P0TestHelpers {
   /**
    * Get captured analytics calls
    */
-  async getAnalyticsCalls(): Promise<any[]> {
+  async getAnalyticsCalls(): Promise<string[]> {
     return await this.page.evaluate(() => {
-      return (window as any).__ANALYTICS_CALLS__ || [];
+      return (window as { __ANALYTICS_CALLS__: string[] }).__ANALYTICS_CALLS__;
     });
   }
 
   /**
    * Wait for analytics event with specific parameters
    */
-  async waitForAnalyticsEvent(eventName: string, timeout = 5000): Promise<any> {
+  async waitForAnalyticsEvent(eventName: string, timeout = 5000): Promise<string[]> {
     const startTime = Date.now();
     
     while (Date.now() - startTime < timeout) {
@@ -182,13 +164,6 @@ export class P0TestHelpers {
         rect.right <= window.innerWidth
       );
     }, selector);
-  }
-
-  /**
-   * Log test step for debugging
-   */
-  async logStep(step: string) {
-    console.log(`🔍 ${step}`);
   }
 }
 
@@ -240,3 +215,12 @@ export const TEST_DATA = {
     contactSubmit: '[data-testid="contact-submit"], [type="submit"]'
   }
 } as const;
+
+declare global {
+  interface Window {
+    __MOCKED_ENV__?: Record<string, string>;
+    dataLayer: string[];
+    gtag: (...args: string[]) => void;
+    __ANALYTICS_CALLS__: string[];
+  }
+}

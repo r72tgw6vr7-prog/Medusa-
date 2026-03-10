@@ -25,7 +25,7 @@ export interface EmailRequest {
     | 'booking-notification'
     | 'contact-notification'
     | 'payment-confirmation';
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   language?: 'DE' | 'EN';
 }
 
@@ -128,47 +128,30 @@ export const sendEmail = async (request: EmailRequest): Promise<EmailResponse> =
  * Detect configured email provider
  */
 function detectEmailProvider(): EmailProvider {
-  const env = import.meta.env;
+  const selectedProviderRaw = (import.meta.env as Record<string, unknown>)
+    .VITE_EMAIL_PROVIDER;
 
-  if (env.VITE_SENDGRID_API_KEY) {
-    return {
-      name: 'sendgrid',
-      apiKey: env.VITE_SENDGRID_API_KEY,
-    };
-  }
+  const selectedProvider =
+    selectedProviderRaw === 'sendgrid' ||
+    selectedProviderRaw === 'mailgun' ||
+    selectedProviderRaw === 'amazonses' ||
+    selectedProviderRaw === 'smtp'
+      ? selectedProviderRaw
+      : undefined;
 
-  if (env.VITE_MAILGUN_API_KEY && env.VITE_MAILGUN_DOMAIN) {
-    return {
-      name: 'mailgun',
-      apiKey: env.VITE_MAILGUN_API_KEY,
-      domain: env.VITE_MAILGUN_DOMAIN,
-    };
-  }
-
-  if (env.VITE_AWS_SES_ACCESS_KEY) {
-    return {
-      name: 'amazonses',
-      apiKey: env.VITE_AWS_SES_ACCESS_KEY,
-    };
-  }
-
-  if (env.VITE_SMTP_HOST) {
-    return {
-      name: 'smtp',
-      endpoint: env.VITE_SMTP_HOST,
-    };
-  }
-
-  throw new Error('No email provider configured');
+  return {
+    name: selectedProvider || 'sendgrid',
+  };
 }
 
 /**
  * Process template with data substitution
  */
-function processTemplate(template: EmailTemplate, data: Record<string, any>): EmailTemplate {
+function processTemplate(template: EmailTemplate, data: Record<string, unknown>): EmailTemplate {
   const processString = (str: string): string => {
     return str.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-      return data[key] !== undefined ? String(data[key]) : match;
+      const value = (data as Record<string, unknown>)[key];
+      return value !== undefined ? String(value) : match;
     });
   };
 
@@ -185,13 +168,12 @@ function processTemplate(template: EmailTemplate, data: Record<string, any>): Em
 async function sendViaSendGrid(
   request: EmailRequest,
   template: EmailTemplate,
-  provider: EmailProvider,
+  _provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/sendgrid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${provider.apiKey}`,
     },
     body: JSON.stringify({
       personalizations: [
@@ -225,7 +207,7 @@ async function sendViaSendGrid(
 async function sendViaMailgun(
   request: EmailRequest,
   template: EmailTemplate,
-  provider: EmailProvider,
+  _provider: EmailProvider,
 ): Promise<EmailResponse> {
   const formData = new FormData();
   formData.append('from', request.from);
@@ -236,9 +218,6 @@ async function sendViaMailgun(
 
   const response = await fetch(`/api/email/mailgun`, {
     method: 'POST',
-    headers: {
-      Authorization: `Basic ${btoa(`api:${provider.apiKey}`)}`,
-    },
     body: formData,
   });
 
@@ -260,7 +239,7 @@ async function sendViaMailgun(
 async function sendViaAmazonSES(
   request: EmailRequest,
   template: EmailTemplate,
-  provider: EmailProvider,
+  _provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/amazonses', {
     method: 'POST',
@@ -309,7 +288,7 @@ async function sendViaAmazonSES(
 async function sendViaSMTP(
   request: EmailRequest,
   template: EmailTemplate,
-  provider: EmailProvider,
+  _provider: EmailProvider,
 ): Promise<EmailResponse> {
   const response = await fetch('/api/email/smtp', {
     method: 'POST',
@@ -344,13 +323,13 @@ function generateBookingConfirmationHTML(language: 'DE' | 'EN'): string {
         <meta charset="utf-8">
         <title>${language === 'DE' ? 'Buchungsbestätigung' : 'Booking Confirmation'}</title>
         <style>
-          body { font-family: Arial, sans-serif; background-color: #222; color: #fff; margin: 0; padding: 20px; }
-          .container { max-width: 600px; margin: 0 auto; background: #222; border: 1px solid #D4AF37; border-radius: 8px; }
-          .header { background: linear-gradient(135deg, #D4AF37, #B8941F); color: #222; padding: 20px; text-align: center; }
+          body { font-family: Arial, sans-serif; background-color: rgb(34 34 34); color: rgb(255 255 255); margin: 0; padding: 20px; }
+          .container { max-width: 600px; margin: 0 auto; background: rgb(34 34 34); border: 1px solid rgb(192 192 192); border-radius: 8px; }
+          .header { background: linear-gradient(135deg, rgb(192 192 192), rgb(168 168 168)); color: rgb(34 34 34); padding: 20px; text-align: center; }
           .content { padding: 20px; }
-          .field { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #C0C0C0; }
-          .label { font-weight: 600; color: #D4AF37; margin-bottom: 4px; }
-          .value { color: #fff; }
+          .field { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgb(192 192 192); }
+          .label { font-weight: 600; color: rgb(192 192 192); margin-bottom: 4px; }
+          .value { color: rgb(255 255 255); }
         </style>
       </head>
       <body>

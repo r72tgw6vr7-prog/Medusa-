@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, FileText, Mail } from 'lucide-react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { SectionHeading } from '@/components/SectionHeading';
+import { Card } from '@/components/ui/Card';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
+import LocalizedMeta from '@/components/LocalizedMeta';
 
 interface DatenschutzPageProps {
   language?: 'DE' | 'EN';
@@ -63,15 +67,15 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
             'Kontaktdaten:',
             'Telefon München: 089 910994',
             'Telefon Ingolstadt: 0841 910994',
-            'E-Mail (Allgemein): Medusa@in-tattoo.de',
-            'E-Mail (Datenschutz): oliver@in-tattoo.de',
+            'E-Mail (Allgemein): info@medusa-tattoo.de',
+            'E-Mail (Datenschutz): info@medusa-tattoo.de',
             '',
             'Handelsregisternummer: 12052245',
             'Umsatzsteuer-ID: DE 206 350 700',
             'Verantwortliche Person: Oliver Loichinger',
             '',
             'Datenschutzbeauftragte/r:',
-            'E-Mail: stargate@in-tattoo.de',
+            'E-Mail: info@medusa-tattoo.de',
           ],
         },
         {
@@ -86,8 +90,8 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
             'Ansprechpartner: Oliver Loichinger',
             'Adresse: Altheimer Eck 11, 80331 München',
             'Telefon: 089 910994',
-            'E-Mail (Datenschutz): stargate@in-tattoo.de',
-            'E-Mail (Allgemein): oliver@in-tattoo.de',
+            'E-Mail (Datenschutz): info@medusa-tattoo.de',
+            'E-Mail (Allgemein): info@medusa-tattoo.de',
           ],
         },
       ],
@@ -124,15 +128,15 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
             'Contact details:',
             'Phone Munich: 089 910994',
             'Phone Ingolstadt: 0841 910994',
-            'Email (General): Medusa@in-tattoo.de',
-            'Email (Privacy): oliver@in-tattoo.de',
+            'Email (General): info@medusa-tattoo.de',
+            'Email (Privacy): info@medusa-tattoo.de',
             '',
             'Company registration number: 12052245',
             'VAT ID: DE 206 350 700',
             'Responsible person: Oliver Loichinger',
             '',
             'Data Protection Officer:',
-            'Email: stargate@in-tattoo.de',
+            'Email: info@medusa-tattoo.de',
           ],
         },
         {
@@ -147,8 +151,8 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
             'Contact person: Oliver Loichinger',
             'Address: Altheimer Eck 11, 80331 Munich',
             'Phone: 089 910994',
-            'Email (Privacy): stargate@in-tattoo.de',
-            'Email (General): oliver@in-tattoo.de',
+            'Email (Privacy): info@medusa-tattoo.de',
+            'Email (General): info@medusa-tattoo.de',
           ],
         },
       ],
@@ -158,60 +162,69 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
   const t = content[language];
 
   return (
-    <div className='min-h-screen bg-brand-background text-brand-white flex flex-col'>
-      <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
+    <>
+      <LocalizedMeta
+        titleKey='meta.datenschutz.title'
+        descriptionKey='meta.datenschutz.description'
+      />
+      <div className='min-h-screen bg-luxury-bg-dark text-luxury-text-inverse flex flex-col relative lg:pt-16 md:pt-24 max-md:pt-32'>
+        <MainNavigation />
 
-      <main className='flex-1'>
-        <section ref={sectionRef} className='section-padding relative z-10'>
-          <div className='responsive-container safe-area-padding'>
-            <div className='mx-auto w-full max-w-[1104px]'>
+        <main className='flex-1'>
+          <Section variant='default' spacing='normal'>
+            <Container size='default'>
+              <h1 className='sr-only'>{t.title}</h1>
               {/* Page Header - Standardized */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 40 }}
                 transition={{ duration: 0.8 }}
               >
-                <PageHeader
-                  eyebrow='Medusa München'
-                  title={t.title}
-                  subtitle={t.subtitle}
-                  alignment='center'
-                />
-                <p className='text-sm text-white/60 text-center'>{t.lastUpdated}</p>
+                <SectionHeading eyebrow='Medusa München' title={t.title} subtitle={t.subtitle} />
+                <p className='font-body text-(length:--text-xs) md:text-(length:--text-sm) uppercase tracking-widest text-luxury-text-inverse/60 mb-6 text-center'>
+                  {t.lastUpdated}
+                </p>
               </motion.div>
 
               {/* Introduction */}
               <motion.div
-                className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-8'
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                <p className='text-base text-white/70 leading-relaxed'>{t.introduction}</p>
+                <Card variant='default' size='default' asChild>
+                  <div>
+                    <p className='reading-measure font-body text-(length:--text-body) lg:text-(length:--text-sm) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal)'>
+                      {t.introduction}
+                    </p>
+                  </div>
+                </Card>
               </motion.div>
 
               {/* Definitions */}
               <motion.div
-                className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 mb-8'
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                 transition={{ duration: 0.8, delay: 0.15 }}
               >
-                <div className='flex items-center mb-8'>
-                  <FileText size={24} className='text-brand-gold mr-0' />
-                  <h2 className='text-headline-md font-headline text-brand-gold'>
-                    {t.definitions.title}
-                  </h2>
-                </div>
-                <div className='space-y-0'>
-                  {t.definitions.items.map((definition, index) => (
-                    <p key={index} className='text-body-small font-body text-brand-white'>
-                      <strong className='text-brand-gold'>{definition.split(':')[0]}:</strong>
-                      {definition.split(':').slice(1).join(':')}
-                    </p>
-                  ))}
-                </div>
+                <Card variant='default' size='default' asChild>
+                  <div>
+                    <div className='flex items-center mb-8'>
+                      <FileText size={24} className='text-brand-accent mr-0' />
+                      <h2 className='text-headline-md font-headline text-brand-accent'>
+                        {t.definitions.title}
+                      </h2>
+                    </div>
+                    <div className='reading-measure space-y-0'>
+                      {t.definitions.items.map((definition, index) => (
+                        <p key={index} className='text-body-small font-body text-brand-white'>
+                          <strong className='text-brand-accent'>{definition.split(':')[0]}:</strong>
+                          {definition.split(':').slice(1).join(':')}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </Card>
               </motion.div>
 
               {/* Content Sections */}
@@ -220,24 +233,27 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                 return (
                   <motion.div
                     key={section.id}
-                    className='bg-brand-background/60 backdrop-blur-sm border border-brand-chrome/20 rounded-2xl p-8 mb-8 last:mb-0'
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
                     transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
                   >
-                    <div className='flex items-center mb-8'>
-                      <IconComponent size={24} className='text-brand-gold mr-0' />
-                      <h2 className='text-headline-md font-headline text-brand-gold'>
-                        {section.title}
-                      </h2>
-                    </div>
-                    <div className='space-y-0'>
-                      {section.content.map((paragraph, pIndex) => (
-                        <p key={pIndex} className='text-body-small font-body text-brand-white'>
-                          {paragraph || <br />}
-                        </p>
-                      ))}
-                    </div>
+                    <Card variant='default' size='default' asChild>
+                      <div>
+                        <div className='flex items-center mb-8'>
+                          <IconComponent size={24} className='text-brand-accent mr-0' />
+                          <h2 className='text-headline-md font-headline text-brand-accent'>
+                            {section.title}
+                          </h2>
+                        </div>
+                        <div className='reading-measure space-y-0'>
+                          {section.content.map((paragraph, pIndex) => (
+                            <p key={pIndex} className='text-body-small font-body text-brand-white'>
+                              {paragraph || <br />}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </Card>
                   </motion.div>
                 );
               })}
@@ -249,13 +265,13 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                <h3 className='text-headline-md font-headline text-brand-gold mb-8'>
+                <h3 className='text-headline-md font-headline text-brand-accent mb-8'>
                   {language === 'DE' ? 'Kontakt aufnehmen' : 'Contact Us'}
                 </h3>
                 <div className='flex flex-wrap justify-center gap-8'>
                   <a
-                    href='mailto:stargate@in-tattoo.de'
-                    className='bg-brand-gold text-brand-background px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:bg-brand-gold-hover hover:shadow-gold-glow hover:scale-105 active:scale-95'
+                    href='mailto:info@medusa-tattoo.de'
+                    className='bg-brand-accent text-brand-background px-8 py-0 rounded-xl font-body font-bold transition-all duration-300 hover:bg-brand-accent-hover hover:shadow-chrome-glow hover:scale-105 active:scale-95'
                   >
                     {language === 'DE' ? 'E-Mail senden' : 'Send Email'}
                   </a>
@@ -267,13 +283,13 @@ export function DatenschutzPage({ language = 'DE' }: DatenschutzPageProps) {
                   </a>
                 </div>
               </motion.div>
-            </div>
-          </div>
-        </section>
-      </main>
+            </Container>
+          </Section>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

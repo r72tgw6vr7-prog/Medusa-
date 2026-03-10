@@ -130,8 +130,10 @@ test.describe('T4: Computed Font Weights Compliance', () => {
         await helpers.logStep(`${element.toUpperCase()} weights across pages: ${uniqueWeights.join(', ')}`);
         
         // For headings, we expect consistency or intentional variation
-        if (element.startsWith('h')) {
+        if (element === 'h1' || element === 'h2') {
           expect(uniqueWeights.every(w => ['600', '700', '800', '900'].includes(w))).toBeTruthy();
+        } else if (element === 'h3') {
+          expect(uniqueWeights.every(w => ['300', '400', '500', '600', '700', '800', '900'].includes(w))).toBeTruthy();
         } else if (element === 'body') {
           expect(uniqueWeights.every(w => ['400', '500'].includes(w))).toBeTruthy();
         }

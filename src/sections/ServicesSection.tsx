@@ -51,14 +51,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <button
                 key={index}
                 onClick={link.onClick}
-                className='flex flex-col items-center  w-[279px] py-8 rounded-[14px] border border-solid border-[#C0BFBF33]'
+                className='flex flex-col items-center  w-card py-8 rounded-(--radius-lg) border border-solid border-[rgba(var(--accent-chrome-rgb),0.2)]'
               >
                 <img
                   src={link.iconUrl}
                   alt={link.title}
-                  className='w-14 h-14 mb-8 rounded-[14px] object-fill'
+                  className='w-14 h-14 mb-8 rounded-(--radius-lg) object-fill'
                 />
-                <span className='text-[#D4AF37] text-[31px] font-bold text-center mb-8'>
+                <span className='text-(--accent-chrome) text-(length:--text-h3) font-bold text-center mb-8'>
                   {link.title}
                 </span>
                 <span className='text-white text-sm text-center'>{link.description}</span>
@@ -71,8 +71,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       {/* Packages Section */}
       {packages && packages.length > 0 && (
         <div className='flex flex-col items-center py-16 px-64'>
-          {title && <span className='text-[#D4AF37] text-[42px] font-bold mb-0.5'>{title}</span>}
-          {subtitle && <span className='text-white text-[15px] mb-16'>{subtitle}</span>}
+          {title && <span className='text-(--accent-chrome) text-(length:--text-h2) font-bold mb-2'>{title}</span>}
+          {subtitle && <span className='text-white text-[length:var(--text-sm)] mb-16'>{subtitle}</span>}
 
           {/* Service Packages */}
           <div className='flex items-stretch justify-center gap-8 flex-wrap'>

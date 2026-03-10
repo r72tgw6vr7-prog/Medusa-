@@ -7,42 +7,36 @@
 export interface AftercarePhase {
   id: string;
   phase: string;
-  day: string;
-  title: {
-    de: string;
-    en: string;
-  };
-  description: {
-    de: string;
-    en: string;
-  };
-  instructions: string[];
-  warnings: string[];
-  duration: string;
+  dayKey: string;
+  titleKey: string;
+  descriptionKey: string;
+  instructionKeys: string[];
+  warningKeys: string[];
+  durationKey: string;
 }
 
 export interface AftercareTip {
   id: string;
   category: 'do' | 'dont';
   icon: string;
-  text: {
-    de: string;
-    en: string;
-  };
+  textKey: string;
   critical: boolean;
 }
 
 export interface AftercareProduct {
   id: string;
-  name: string;
+  nameKey: string;
   category: 'cleaning' | 'healing' | 'protection';
-  description: {
-    de: string;
-    en: string;
-  };
+  descriptionKey: string;
   recommended: boolean;
   link?: string;
   price?: string;
+}
+
+export interface AftercareWarningSigns {
+  titleKey: string;
+  descriptionKey: string;
+  signKeys: string[];
 }
 
 // Healing Timeline (Phases)
@@ -50,162 +44,126 @@ export const AFTERCARE_PHASES: AftercarePhase[] = [
   {
     id: 'day-0',
     phase: 'initial',
-    day: 'Tag 0',
-    title: {
-      de: 'Unmittelbar nach dem Tattoo',
-      en: 'Immediately After Tattoo',
-    },
-    description: {
-      de: 'Die ersten Stunden sind entscheidend. Ihr Tattoo ist eine offene Wunde und muss entsprechend behandelt werden.',
-      en: 'The first hours are crucial. Your tattoo is an open wound and must be treated accordingly.',
-    },
-    instructions: [
-      'Folie für 2-4 Stunden drauf lassen',
-      'Nicht berühren oder kratzen',
-      'Lockere, saubere Kleidung tragen',
-      'Keine sportlichen Aktivitäten',
-      'Viel Wasser trinken',
+    dayKey: 'aftercare.phases.day-0.day',
+    titleKey: 'aftercare.phases.day-0.title',
+    descriptionKey: 'aftercare.phases.day-0.description',
+    durationKey: 'aftercare.phases.day-0.duration',
+    instructionKeys: [
+      'aftercare.phases.day-0.instructions.keepWrap',
+      'aftercare.phases.day-0.instructions.noTouch',
+      'aftercare.phases.day-0.instructions.looseClothing',
+      'aftercare.phases.day-0.instructions.noSports',
+      'aftercare.phases.day-0.instructions.drinkWater',
     ],
-    warnings: [
-      'Folie nicht vorzeitig entfernen',
-      'Nicht in der Sonne aufhalten',
-      'Kein Alkohol trinken',
+    warningKeys: [
+      'aftercare.phases.day-0.warnings.dontRemoveWrap',
+      'aftercare.phases.day-0.warnings.avoidSun',
+      'aftercare.phases.day-0.warnings.noAlcohol',
     ],
-    duration: '0-4 Stunden',
   },
   {
     id: 'day-1-3',
     phase: 'cleaning',
-    day: 'Tag 1-3',
-    title: {
-      de: 'Reinigungsphase',
-      en: 'Cleaning Phase',
-    },
-    description: {
-      de: 'Jetzt beginnt die wichtige Reinigungsphase. Regelmäßige, sanfte Pflege ist entscheidend für optimale Heilung.',
-      en: 'Now begins the important cleaning phase. Regular, gentle care is crucial for optimal healing.',
-    },
-    instructions: [
-      'Folie vorsichtig entfernen und Tattoo mit lauwarmem Wasser abspülen',
-      '3-4x täglich mit pH-neutraler Seife waschen',
-      'Mit sauberem Handtuch trocken tupfen (nicht reiben)',
-      'Dünne Schicht Heilsalbe auftragen',
-      'Keine Folie mehr verwenden (Haut muss atmen)',
-      'Lockere, atmungsaktive Kleidung tragen',
+    dayKey: 'aftercare.phases.day-1-3.day',
+    titleKey: 'aftercare.phases.day-1-3.title',
+    descriptionKey: 'aftercare.phases.day-1-3.description',
+    durationKey: 'aftercare.phases.day-1-3.duration',
+    instructionKeys: [
+      'aftercare.phases.day-1-3.instructions.removeWrap',
+      'aftercare.phases.day-1-3.instructions.washWithSoap',
+      'aftercare.phases.day-1-3.instructions.patDry',
+      'aftercare.phases.day-1-3.instructions.applyOintment',
+      'aftercare.phases.day-1-3.instructions.noMoreWrap',
+      'aftercare.phases.day-1-3.instructions.breathableClothing',
     ],
-    warnings: [
-      'Nicht in der Badewanne baden',
-      'Nicht schwimmen gehen',
-      'Nicht direkt in die Sonne',
-      'Nicht kratzen bei Juckreiz',
+    warningKeys: [
+      'aftercare.phases.day-1-3.warnings.noBath',
+      'aftercare.phases.day-1-3.warnings.noSwimming',
+      'aftercare.phases.day-1-3.warnings.avoidSun',
+      'aftercare.phases.day-1-3.warnings.noScratch',
     ],
-    duration: '1-3 Tage',
   },
   {
     id: 'day-4-7',
     phase: 'healing',
-    day: 'Tag 4-7',
-    title: {
-      de: 'Aktive Heilungsphase',
-      en: 'Active Healing Phase',
-    },
-    description: {
-      de: 'Ihr Tattoo beginnt zu schuppen und kann jucken. Das ist völlig normal und zeigt, dass die Heilung fortschreitet.',
-      en: 'Your tattoo starts to peel and may itch. This is completely normal and shows that healing is progressing.',
-    },
-    instructions: [
-      'Weiterhin 2-3x täglich waschen',
-      'Dünn mit Heilsalbe oder Lotion eincremen',
-      'Bei Juckreiz: sanft klopfen statt kratzen',
-      'Schuppende Haut nicht abziehen',
-      'Viel Feuchtigkeit (trinken & eincremen)',
-      'Vermeiden Sie enge Kleidung über dem Tattoo',
+    dayKey: 'aftercare.phases.day-4-7.day',
+    titleKey: 'aftercare.phases.day-4-7.title',
+    descriptionKey: 'aftercare.phases.day-4-7.description',
+    durationKey: 'aftercare.phases.day-4-7.duration',
+    instructionKeys: [
+      'aftercare.phases.day-4-7.instructions.keepWashing',
+      'aftercare.phases.day-4-7.instructions.applyLotion',
+      'aftercare.phases.day-4-7.instructions.tapInsteadScratch',
+      'aftercare.phases.day-4-7.instructions.dontPeelSkin',
+      'aftercare.phases.day-4-7.instructions.keepHydrated',
+      'aftercare.phases.day-4-7.instructions.avoidTightClothing',
     ],
-    warnings: [
-      'NICHT kratzen oder reiben',
-      'Schuppende Haut nicht entfernen',
-      'Keine Peelings oder Scrubs',
-      'Weiterhin kein Bad/Schwimmen',
+    warningKeys: [
+      'aftercare.phases.day-4-7.warnings.dontScratch',
+      'aftercare.phases.day-4-7.warnings.dontRemoveFlakes',
+      'aftercare.phases.day-4-7.warnings.noScrubs',
+      'aftercare.phases.day-4-7.warnings.noBathSwimming',
     ],
-    duration: '4-7 Tage',
   },
   {
     id: 'day-8-14',
     phase: 'stabilization',
-    day: 'Tag 8-14',
-    title: {
-      de: 'Stabilisierungsphase',
-      en: 'Stabilization Phase',
-    },
-    description: {
-      de: 'Die oberste Hautschicht ist fast verheilt. Das Tattoo sieht noch etwas matt aus, aber die Farben kommen zurück.',
-      en: 'The top layer of skin is almost healed. The tattoo still looks a bit dull, but the colors will return.',
-    },
-    instructions: [
-      'Weiterhin 2x täglich eincremen',
-      'Normale, parfümfreie Bodylotion verwenden',
-      'Leichte sportliche Aktivitäten möglich',
-      'Sonnenschutz (LSF 50+) bei Sonnenexposition',
-      'Viel Wasser trinken für Hautgesundheit',
+    dayKey: 'aftercare.phases.day-8-14.day',
+    titleKey: 'aftercare.phases.day-8-14.title',
+    descriptionKey: 'aftercare.phases.day-8-14.description',
+    durationKey: 'aftercare.phases.day-8-14.duration',
+    instructionKeys: [
+      'aftercare.phases.day-8-14.instructions.moisturizeTwice',
+      'aftercare.phases.day-8-14.instructions.useBodyLotion',
+      'aftercare.phases.day-8-14.instructions.lightExercise',
+      'aftercare.phases.day-8-14.instructions.sunProtection',
+      'aftercare.phases.day-8-14.instructions.drinkWater',
     ],
-    warnings: [
-      'Noch kein Solarium',
-      'Noch keine ausgedehnten Schwimmeinheiten',
-      'Vorsicht mit direkter Sonneneinstrahlung',
+    warningKeys: [
+      'aftercare.phases.day-8-14.warnings.noSolarium',
+      'aftercare.phases.day-8-14.warnings.noLongSwims',
+      'aftercare.phases.day-8-14.warnings.avoidDirectSun',
     ],
-    duration: '8-14 Tage',
   },
   {
     id: 'week-3-4',
     phase: 'final',
-    day: 'Woche 3-4',
-    title: {
-      de: 'Finale Heilung',
-      en: 'Final Healing',
-    },
-    description: {
-      de: 'Ihr Tattoo ist oberflächlich verheilt, aber die tieferen Hautschichten heilen noch. Farben werden lebendiger.',
-      en: 'Your tattoo is superficially healed, but the deeper skin layers are still healing. Colors become more vibrant.',
-    },
-    instructions: [
-      'Weiterhin täglich mit Feuchtigkeit versorgen',
-      'IMMER Sonnenschutz verwenden (LSF 50+)',
-      'Normale Aktivitäten wieder möglich',
-      'Baden und Schwimmen wieder erlaubt',
-      'Bei Bedenken: Studio kontaktieren',
+    dayKey: 'aftercare.phases.week-3-4.day',
+    titleKey: 'aftercare.phases.week-3-4.title',
+    descriptionKey: 'aftercare.phases.week-3-4.description',
+    durationKey: 'aftercare.phases.week-3-4.duration',
+    instructionKeys: [
+      'aftercare.phases.week-3-4.instructions.dailyMoisturize',
+      'aftercare.phases.week-3-4.instructions.alwaysSunProtection',
+      'aftercare.phases.week-3-4.instructions.normalActivities',
+      'aftercare.phases.week-3-4.instructions.bathingAllowed',
+      'aftercare.phases.week-3-4.instructions.contactStudio',
     ],
-    warnings: [
-      'UV-Schutz lebenslang wichtig',
-      'Keine aggressiven Chemikalien',
-      'Bei Rötung/Schwellung sofort melden',
+    warningKeys: [
+      'aftercare.phases.week-3-4.warnings.uvProtectionAlways',
+      'aftercare.phases.week-3-4.warnings.noHarshChemicals',
+      'aftercare.phases.week-3-4.warnings.reportRedness',
     ],
-    duration: '3-4 Wochen',
   },
   {
     id: 'longterm',
     phase: 'maintenance',
-    day: 'Langzeitpflege',
-    title: {
-      de: 'Langzeitpflege',
-      en: 'Long-term Care',
-    },
-    description: {
-      de: 'Vollständige Heilung dauert 3-6 Monate. Richtige Pflege erhält Ihr Tattoo lebendig und schön.',
-      en: 'Complete healing takes 3-6 months. Proper care keeps your tattoo vibrant and beautiful.',
-    },
-    instructions: [
-      'Täglich Bodylotion oder Tattoo-Pflegecreme verwenden',
-      'Immer Sonnenschutz auftragen (LSF 50+)',
-      'Haut hydratisiert halten',
-      'Gesunde Ernährung für Hautgesundheit',
-      'Touch-up nach 6-12 Monaten bei Bedarf',
+    dayKey: 'aftercare.phases.longterm.day',
+    titleKey: 'aftercare.phases.longterm.title',
+    descriptionKey: 'aftercare.phases.longterm.description',
+    durationKey: 'aftercare.phases.longterm.duration',
+    instructionKeys: [
+      'aftercare.phases.longterm.instructions.dailyLotion',
+      'aftercare.phases.longterm.instructions.alwaysSPF',
+      'aftercare.phases.longterm.instructions.keepHydrated',
+      'aftercare.phases.longterm.instructions.healthyDiet',
+      'aftercare.phases.longterm.instructions.touchUp',
     ],
-    warnings: [
-      'Sonne ist der größte Feind von Tattoos',
-      'Ohne UV-Schutz verblassen Farben schnell',
-      'Extreme Gewichtsschwankungen können Tattoo verzerren',
+    warningKeys: [
+      'aftercare.phases.longterm.warnings.sunBiggestEnemy',
+      'aftercare.phases.longterm.warnings.noUvColorsFade',
+      'aftercare.phases.longterm.warnings.weightChanges',
     ],
-    duration: 'Lebenslang',
   },
 ];
 
@@ -216,80 +174,56 @@ export const AFTERCARE_TIPS: AftercareTip[] = [
     id: 'do-1',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Regelmäßig mit pH-neutraler Seife waschen',
-      en: 'Wash regularly with pH-neutral soap',
-    },
+    textKey: 'aftercare.tips.do-1',
     critical: true,
   },
   {
     id: 'do-2',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Dünn mit Heilsalbe eincremen (3-4x täglich)',
-      en: 'Apply thin layer of healing ointment (3-4x daily)',
-    },
+    textKey: 'aftercare.tips.do-2',
     critical: true,
   },
   {
     id: 'do-3',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Haut atmen lassen (lockere Kleidung)',
-      en: 'Let skin breathe (loose clothing)',
-    },
+    textKey: 'aftercare.tips.do-3',
     critical: true,
   },
   {
     id: 'do-4',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Viel Wasser trinken für Hautgesundheit',
-      en: 'Drink lots of water for skin health',
-    },
+    textKey: 'aftercare.tips.do-4',
     critical: false,
   },
   {
     id: 'do-5',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Saubere, gewaschene Hände vor Berührung',
-      en: 'Clean, washed hands before touching',
-    },
+    textKey: 'aftercare.tips.do-5',
     critical: true,
   },
   {
     id: 'do-6',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Sonnenschutz (LSF 50+) nach Heilung',
-      en: 'Sun protection (SPF 50+) after healing',
-    },
+    textKey: 'aftercare.tips.do-6',
     critical: true,
   },
   {
     id: 'do-7',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Bei Juckreiz sanft klopfen',
-      en: 'Gently tap if itchy',
-    },
+    textKey: 'aftercare.tips.do-7',
     critical: false,
   },
   {
     id: 'do-8',
     category: 'do',
     icon: '✓',
-    text: {
-      de: 'Studio bei Problemen kontaktieren',
-      en: 'Contact studio if problems arise',
-    },
+    textKey: 'aftercare.tips.do-8',
     critical: true,
   },
 
@@ -298,100 +232,70 @@ export const AFTERCARE_TIPS: AftercareTip[] = [
     id: 'dont-1',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT kratzen oder reiben',
-      en: 'DO NOT scratch or rub',
-    },
+    textKey: 'aftercare.tips.dont-1',
     critical: true,
   },
   {
     id: 'dont-2',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT baden, schwimmen oder Sauna (2 Wochen)',
-      en: 'DO NOT bathe, swim, or sauna (2 weeks)',
-    },
+    textKey: 'aftercare.tips.dont-2',
     critical: true,
   },
   {
     id: 'dont-3',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT direkte Sonneneinstrahlung',
-      en: 'DO NOT expose to direct sunlight',
-    },
+    textKey: 'aftercare.tips.dont-3',
     critical: true,
   },
   {
     id: 'dont-4',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT Folie nach Tag 1 verwenden',
-      en: 'DO NOT use plastic wrap after day 1',
-    },
+    textKey: 'aftercare.tips.dont-4',
     critical: true,
   },
   {
     id: 'dont-5',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT zu viel Creme (Haut muss atmen)',
-      en: 'DO NOT over-moisturize (skin needs air)',
-    },
+    textKey: 'aftercare.tips.dont-5',
     critical: false,
   },
   {
     id: 'dont-6',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT Schorf oder Schuppen abziehen',
-      en: 'DO NOT pick scabs or peeling skin',
-    },
+    textKey: 'aftercare.tips.dont-6',
     critical: true,
   },
   {
     id: 'dont-7',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT Alkohol in ersten 24 Stunden',
-      en: 'DO NOT drink alcohol first 24 hours',
-    },
+    textKey: 'aftercare.tips.dont-7',
     critical: true,
   },
   {
     id: 'dont-8',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT Haustiere auf Tattoo lassen',
-      en: 'DO NOT let pets touch tattoo',
-    },
+    textKey: 'aftercare.tips.dont-8',
     critical: false,
   },
   {
     id: 'dont-9',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT enge/scheuernde Kleidung tragen',
-      en: 'DO NOT wear tight/abrasive clothing',
-    },
+    textKey: 'aftercare.tips.dont-9',
     critical: false,
   },
   {
     id: 'dont-10',
     category: 'dont',
     icon: '✗',
-    text: {
-      de: 'NICHT Parfüm oder parfümierte Produkte',
-      en: 'DO NOT use perfume or fragranced products',
-    },
+    textKey: 'aftercare.tips.dont-10',
     critical: false,
   },
 ];
@@ -400,100 +304,58 @@ export const AFTERCARE_TIPS: AftercareTip[] = [
 export const AFTERCARE_PRODUCTS: AftercareProduct[] = [
   {
     id: 'bepanthen',
-    name: 'Bepanthen Wund- und Heilsalbe',
+    nameKey: 'aftercare.products.items.bepanthen.name',
     category: 'healing',
-    description: {
-      de: 'Die klassische Wahl für Tattoo-Heilung. Fördert natürliche Heilung und hält die Haut geschmeidig.',
-      en: 'The classic choice for tattoo healing. Promotes natural healing and keeps skin supple.',
-    },
+    descriptionKey: 'aftercare.products.items.bepanthen.description',
     recommended: true,
     price: '~8-12€',
   },
   {
     id: 'ph-neutral-soap',
-    name: 'pH-neutrale Seife',
+    nameKey: 'aftercare.products.items.ph-neutral-soap.name',
     category: 'cleaning',
-    description: {
-      de: 'Sanfte, parfümfreie Seife für die tägliche Reinigung. Sebamed oder ähnliche Marken.',
-      en: 'Gentle, fragrance-free soap for daily cleaning. Sebamed or similar brands.',
-    },
+    descriptionKey: 'aftercare.products.items.ph-neutral-soap.description',
     recommended: true,
     price: '~3-5€',
   },
   {
     id: 'tattoo-balm',
-    name: 'Spezielle Tattoo-Pflegecreme',
+    nameKey: 'aftercare.products.items.tattoo-balm.name',
     category: 'healing',
-    description: {
-      de: 'Premium Tattoo-Balsam mit natürlichen Inhaltsstoffen. Fördert Heilung und erhält Farbbrillanz.',
-      en: 'Premium tattoo balm with natural ingredients. Promotes healing and maintains color vibrancy.',
-    },
+    descriptionKey: 'aftercare.products.items.tattoo-balm.description',
     recommended: true,
     price: '~15-25€',
   },
   {
     id: 'sun-protection',
-    name: 'Sonnenschutz LSF 50+',
+    nameKey: 'aftercare.products.items.sun-protection.name',
     category: 'protection',
-    description: {
-      de: 'Hochdosierter Sonnenschutz speziell für Tattoos. Verhindert Verblassen und Hautschäden.',
-      en: 'High-SPF sun protection specifically for tattoos. Prevents fading and skin damage.',
-    },
+    descriptionKey: 'aftercare.products.items.sun-protection.description',
     recommended: true,
     price: '~10-20€',
   },
   {
     id: 'body-lotion',
-    name: 'Parfümfreie Bodylotion',
+    nameKey: 'aftercare.products.items.body-lotion.name',
     category: 'healing',
-    description: {
-      de: 'Für die Langzeitpflege nach vollständiger Heilung. Hält die Haut hydratisiert und das Tattoo lebendig.',
-      en: 'For long-term care after complete healing. Keeps skin hydrated and tattoo vibrant.',
-    },
+    descriptionKey: 'aftercare.products.items.body-lotion.description',
     recommended: false,
     price: '~5-15€',
   },
 ];
 
 // Warning Signs
-export const WARNING_SIGNS = {
-  title: {
-    de: 'Warnsignale - Wann zum Arzt?',
-    en: 'Warning Signs - When to See a Doctor?',
-  },
-  description: {
-    de: 'Kontaktieren Sie sofort einen Arzt oder unser Studio, wenn Sie diese Symptome bemerken:',
-    en: 'Contact a doctor or our studio immediately if you notice these symptoms:',
-  },
-  signs: [
-    {
-      de: 'Starke, zunehmende Schmerzen nach 2-3 Tagen',
-      en: 'Severe, increasing pain after 2-3 days',
-    },
-    {
-      de: 'Übermäßige Rötung oder Schwellung',
-      en: 'Excessive redness or swelling',
-    },
-    {
-      de: 'Fieber oder Schüttelfrost',
-      en: 'Fever or chills',
-    },
-    {
-      de: 'Übelriechender Ausfluss oder Eiter',
-      en: 'Foul-smelling discharge or pus',
-    },
-    {
-      de: 'Rote Streifen von der Tätowierung weg',
-      en: 'Red streaks extending from tattoo',
-    },
-    {
-      de: 'Allergische Reaktion (starker Juckreiz, Ausschlag)',
-      en: 'Allergic reaction (severe itching, rash)',
-    },
-    {
-      de: 'Ungewöhnliche Blasenbildung',
-      en: 'Unusual blistering',
-    },
+export const WARNING_SIGNS: AftercareWarningSigns = {
+  titleKey: 'aftercare.warningSigns.title',
+  descriptionKey: 'aftercare.warningSigns.description',
+  signKeys: [
+    'aftercare.warningSigns.signs.pain',
+    'aftercare.warningSigns.signs.redness',
+    'aftercare.warningSigns.signs.fever',
+    'aftercare.warningSigns.signs.discharge',
+    'aftercare.warningSigns.signs.redStreaks',
+    'aftercare.warningSigns.signs.allergicReaction',
+    'aftercare.warningSigns.signs.blistering',
   ],
 };
 

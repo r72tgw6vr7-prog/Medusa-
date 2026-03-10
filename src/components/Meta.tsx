@@ -12,10 +12,11 @@ interface MetaProps {
   robots?: string;
   hreflang?: { [lang: string]: string };
   alternateLocale?: string[];
+  locale?: string; // e.g. 'de_DE' or 'en_US'
 }
 
 const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://www.muenchen-tattoo-studio.de';
-const DEFAULT_OG_IMAGE = '/images/og-medusa-tattoo-munich.jpg';
+const DEFAULT_OG_IMAGE = '/assets/images/icons/icon-192x192.png';
 
 function upsertMetaTag(attr: 'name' | 'property', key: string, content: string) {
   let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -37,6 +38,38 @@ function upsertLink(rel: string, href: string) {
   link.setAttribute('href', href);
 }
 
+function upsertAlternateLink(hreflang: string, href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${hreflang}"]`,
+  );
+  if (!link) {
+    link = document.createElement('link');
+    link.setAttribute('rel', 'alternate');
+    link.setAttribute('hreflang', hreflang);
+    document.head.appendChild(link);
+  }
+  link.setAttribute('href', href);
+}
+
+function clearAlternateLinks() {
+  document.head
+    .querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]')
+    .forEach((link) => link.remove());
+}
+
+function replaceAlternateLocales(locales: string[] = []) {
+  document.head
+    .querySelectorAll<HTMLMetaElement>('meta[property="og:locale:alternate"]')
+    .forEach((tag) => tag.remove());
+
+  locales.forEach((locale) => {
+    const tag = document.createElement('meta');
+    tag.setAttribute('property', 'og:locale:alternate');
+    tag.setAttribute('content', locale);
+    document.head.appendChild(tag);
+  });
+}
+
 export default function Meta({
   title,
   description,
@@ -49,6 +82,7 @@ export default function Meta({
   robots = 'index,follow',
   hreflang,
   alternateLocale,
+  locale,
 }: MetaProps) {
   useEffect(() => {
     const url = `${BASE_URL}${canonicalPath}`;
@@ -72,9 +106,10 @@ export default function Meta({
     upsertLink('canonical', url);
 
     // Hreflang alternate links
+    clearAlternateLinks();
     if (hreflang) {
       Object.entries(hreflang).forEach(([lang, href]) => {
-        upsertLink(`alternate hreflang="${lang}"`, href);
+        upsertAlternateLink(lang, href);
       });
     }
 
@@ -87,14 +122,10 @@ export default function Meta({
     upsertMetaTag('property', 'og:image', fullImageUrl);
     upsertMetaTag('property', 'og:image:width', '1200');
     upsertMetaTag('property', 'og:image:height', '630');
-    upsertMetaTag('property', 'og:locale', 'de_DE');
+    upsertMetaTag('property', 'og:locale', locale || 'de_DE');
 
     // Alternate locales
-    if (alternateLocale) {
-      alternateLocale.forEach((locale) => {
-        upsertMetaTag('property', 'og:locale:alternate', locale);
-      });
-    }
+    replaceAlternateLocales(alternateLocale);
 
     // Twitter
     upsertMetaTag('name', 'twitter:card', twitterCard);
@@ -106,7 +137,7 @@ export default function Meta({
 
     // Additional structured markup
     upsertMetaTag('name', 'application-name', 'Medusa Tattoo München');
-    upsertMetaTag('name', 'theme-color', 'rgb(212 175 55)'); // Gold theme
+    upsertMetaTag('name', 'theme-color', 'rgb(192 192 192)'); // Chrome theme
   }, [
     title,
     description,
@@ -119,6 +150,7 @@ export default function Meta({
     robots,
     hreflang,
     alternateLocale,
+    locale,
   ]);
 
   return null;

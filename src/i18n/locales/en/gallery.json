@@ -1,0 +1,21 @@
+{
+  "title": "Gallery",
+  "subtitle": "A collection of masterful artworks by our talented artists. Discover our studio's diversity.",
+  "intro": "Our gallery showcases recent tattoo and piercing work—from delicate fine-line details to full-scale pieces. Every motif is created in close collaboration with our artists and tailored to style, anatomy, and personality. The selection reflects studio sessions and completed projects so you can judge linework, shading, and color in real conditions.",
+  "styles": "Explore styles such as realism, blackwork, dotwork, traditional, Japanese, neo-traditional, and custom concepts. Use the filters to browse by style or artist and compare contrast, detail, and overall impact. This helps you identify the visual language that best fits your project.",
+  "ctaText": "If you already have an idea or want guidance on style and placement, review our artist profiles and get in touch for a consultation",
+  "ctaLink": "Meet the artists",
+  "noResults": "No artworks found",
+  "filters": {
+    "artistLabel": "Artist",
+    "styleLabel": "Style",
+    "allWorks": "All Works",
+    "allArtists": "All Artists",
+    "allStyles": "All Styles",
+    "allYears": "All Years",
+    "resultsCount": "{{count}} works shown",
+    "emptyState": "No works match the selected filter.",
+    "reset": "Reset filters",
+    "more": "Show more"
+  }
+}

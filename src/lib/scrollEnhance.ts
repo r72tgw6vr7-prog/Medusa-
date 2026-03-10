@@ -6,13 +6,39 @@
 import { initScroll, scrollController } from './scroll';
 import '../styles/scroll-enhance.css';
 
+const init = () => {
+  initScroll();
+};
+
 // Initialize on import
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    initScroll();
-  });
+  document.addEventListener('DOMContentLoaded', init);
 } else {
-  initScroll();
+  init();
+}
+
+const teardown = () => {
+  try {
+    scrollController.destroy();
+  } catch {
+    // no-op
+  }
+};
+
+// Ensure we clean up on dev HMR and on backgrounding/unload.
+// This avoids accumulating event listeners/RAF loops across hot reloads.
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    document.removeEventListener('DOMContentLoaded', init);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('pagehide', teardown);
+    }
+    teardown();
+  });
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('pagehide', teardown);
 }
 
 // Export the controller for direct access if needed

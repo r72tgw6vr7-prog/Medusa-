@@ -1,53 +1,59 @@
 .badgesContainer {
-  height: 64px !important;
-  min-height: 64px !important;
-  max-height: 64px !important;
-  padding: 8px 20px !important;
+  height: var(--space-8) !important;
+  min-height: var(--space-8) !important;
+  max-height: var(--space-8) !important;
+  padding: var(--space-1) var(--space-2-5) !important;
   background-color: var(--brand-background);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  border-bottom: 1px solid rgb(var(--color-accent-silver-rgb) / 0.1);
 }
 
 .badgesRow {
-  max-width: 1200px;
+  max-width: var(--container-narrow);
   margin: 0 auto;
   height: 100%;
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 16px !important;
+  gap: var(--space-2) !important;
   flex-wrap: nowrap !important;
 }
 
 .badge {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-1-5);
 }
 
 .badgeIcon {
-  width: 18px !important;
-  height: 18px !important;
-  color: var(--brand-gold);
+  width: calc(var(--space-2) + (var(--space-0-5) / 2)) !important;
+  height: calc(var(--space-2) + (var(--space-0-5) / 2)) !important;
+  color: var(--brand-accent);
 }
 
 .badgeContent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: var(--space-0-5);
 }
 
 .badgeNumber {
-  font-size: 18px !important;
-  font-weight: 600;
-  color: var(--brand-gold);
-  line-height: 1;
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-weight-semibold);
+  color: var(--brand-accent);
+  line-height: var(--line-height-tight);
 }
 
 .badgeLabel {
-  font-size: 11px !important;
-  color: #c0c0c0;
+  font-size: var(--text-xs) !important;
+  color: var(--chrome-silver);
   white-space: nowrap;
-  line-height: 1;
+  line-height: var(--line-height-tight);
+}
+
+@media (max-width: 63.9375em) {
+  .badgeLabel {
+    font-size: var(--text-body-small) !important;
+  }
 }

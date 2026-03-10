@@ -1,4 +1,3 @@
-export * from './BookingForm/BookingForm';
 export * from './ContactForm';
 export * from './FAQAccordion';
 export * from './GalleryGrid';

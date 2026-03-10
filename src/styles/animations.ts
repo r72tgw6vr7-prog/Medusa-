@@ -110,6 +110,24 @@ export const staggerChildren = (delayChildren = 0.1) => ({
   },
 });
 
+/**
+ * Services page animation variants
+ * Used by TattooServicesPage, PiercingServicesPage, ServicesPageInteractive
+ * Uses AnimatePresence-compatible state names (initial/animate/exit)
+ */
+export const servicesFadeInUpVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+  transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+} as const;
+
+export const servicesContainerVariants = {
+  animate: {
+    transition: { staggerChildren: 0.1 },
+  },
+} as const;
+
 // Function to check if reduced motion is preferred
 export const prefersReducedMotion =
   typeof window !== 'undefined'
@@ -140,6 +158,8 @@ export default {
   slideInLeftVariants,
   slideInRightVariants,
   staggerChildren,
+  servicesFadeInUpVariants,
+  servicesContainerVariants,
   prefersReducedMotion,
   getAccessibleAnimation,
 };

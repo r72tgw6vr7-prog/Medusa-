@@ -8,7 +8,7 @@
 // Colors
 export interface ColorTokens {
   background: string;
-  gold: {
+  accent: {
     primary: string;
     border: string;
   };
@@ -23,7 +23,7 @@ export interface ColorTokens {
     85: string;
     90: string;
   };
-  goldAlpha: {
+  accentAlpha: {
     10: string;
     15: string;
     20: string;
@@ -50,7 +50,7 @@ export interface FontTokens {
 
 // Brand Tokens
 export interface BrandColorTokens {
-  gold: {
+  accent: {
     primary: string;
     hover: string;
   };
@@ -108,9 +108,9 @@ export interface SpacingScaleTokens {
 
 export interface EffectsTokens {
   shadows: {
-    'gold-glow': string;
-    'gold-glow-strong': string;
-    'gold-glow-subtle': string;
+    'chrome-glow': string;
+    'chrome-glow-strong': string;
+    'chrome-glow-subtle': string;
   };
   glassmorphism: {
     blur: string;
@@ -206,7 +206,7 @@ export interface DesignTokens {
     accent: string;
     background: string;
     white: string;
-    gold: string;
+    accent: string;
     chrome: string;
     black: string;
     neutral: {

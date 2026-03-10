@@ -11,7 +11,6 @@ export * from './atoms/AccessibleButton';
 export * from './molecules/TrustBadgesBar';
 export * from './molecules/TrustBadgesMarquee';
 export * from './molecules/CookieConsentBanner';
-export * from './molecules/BookingCallToAction';
 export * from './molecules/FocusTrap';
 
 // Organisms

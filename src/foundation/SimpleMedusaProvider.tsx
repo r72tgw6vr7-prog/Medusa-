@@ -1,8 +1,4 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { designTokens } from '../design-tokens';
-
-// Use the design tokens directly
-export const designSystemTokens = designTokens;
 
 // Define the context type
 interface MedusaDesignSystemContextType {
@@ -10,7 +6,6 @@ interface MedusaDesignSystemContextType {
   setLanguage: (lang: 'DE' | 'EN') => void;
   theme: 'dark' | 'light';
   setTheme: (theme: 'dark' | 'light') => void;
-  tokens: typeof designSystemTokens;
 }
 
 // Export types for module augmentation
@@ -22,7 +17,6 @@ const MedusaDesignSystemContext = createContext<MedusaDesignSystemContextType>({
   setLanguage: () => {},
   theme: 'dark',
   setTheme: () => {},
-  tokens: designSystemTokens,
 });
 
 // Provider props
@@ -48,7 +42,6 @@ export const SimpleMedusaProvider = ({
         setLanguage,
         theme,
         setTheme,
-        tokens: designSystemTokens,
       }}
     >
       {children}

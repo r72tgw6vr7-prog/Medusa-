@@ -2,68 +2,140 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.muenchen-tattoo-studio.de/</loc>
-    <lastmod>2026-01-12</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.muenchen-tattoo-studio.de/artists</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.muenchen-tattoo-studio.de/services</loc>
-    <lastmod>2026-01-12</lastmod>
+    <loc>https://www.muenchen-tattoo-studio.de/about</loc>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.muenchen-tattoo-studio.de/gallery</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.muenchen-tattoo-studio.de/contact</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.muenchen-tattoo-studio.de/booking</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.muenchen-tattoo-studio.de/aftercare</loc>
-    <lastmod>2026-01-12</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.muenchen-tattoo-studio.de/faq</loc>
-    <lastmod>2026-01-12</lastmod>
+    <loc>https://www.muenchen-tattoo-studio.de/agb</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/artists</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/booking</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/contact</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/datenschutz</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/about</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/artists</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/booking</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/contact</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/faq</loc>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/gallery</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/services/piercings</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/en/services/tattoos</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/faq</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/gallery</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.muenchen-tattoo-studio.de/impressum</loc>
-    <lastmod>2026-01-12</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.muenchen-tattoo-studio.de/datenschutz</loc>
-    <lastmod>2026-01-12</lastmod>
+    <loc>https://www.muenchen-tattoo-studio.de/legal</loc>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.muenchen-tattoo-studio.de/agb</loc>
-    <lastmod>2026-01-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://www.muenchen-tattoo-studio.de/services/piercings</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.muenchen-tattoo-studio.de/services/tattoos</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>

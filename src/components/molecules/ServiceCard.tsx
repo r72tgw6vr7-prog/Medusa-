@@ -21,7 +21,7 @@ interface ServiceCardProps {
   backgroundImage?: string;
   backgroundImageAlt?: string;
   icon?: React.ComponentType<{ size?: number; className?: string }>; // Component Icon (SVG-like)
-  accentColor?: 'gold' | 'chrome';
+  accentColor?: 'chrome' | 'gold';  // gold is deprecated alias for chrome
   animationDelay?: number;
   isVisible?: boolean;
   isHovered?: boolean;
@@ -47,7 +47,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   popular = false,
   className = '',
   icon: IconComponent,
-  accentColor = 'gold',
+  accentColor = 'chrome',  // Default to chrome (v2.0 design system)
   isHovered = false,
   onMouseEnter,
   onMouseLeave,
@@ -58,42 +58,38 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
   // Modern design system classes (transparent, centered, compact)
   const baseClasses = [
-    'relative flex h-full w-full',
-    'max-w-[360px] lg:max-w-[380px]',
-    'flex-col justify-between rounded-2xl',
-    'border',
-    highlighted ? 'border-brand-gold' : 'border-[var(--brand-gold-hover)]/30',
-    'bg-black/60 backdrop-blur',
+    'cool-lines-card chrome-card relative flex h-full w-full',
+    'max-w-sm lg:max-w-sm',
+    'flex-col justify-between',
     'p-4 md:p-5',
     'mx-auto',
-    'shadow-gold-glow',
   ].join(' ');
   const borderClasses = '';
   const padding = '';
 
-  // Dynamic accent color classes
-  const accentColorClasses = {
+  // Static variant map - complete Tailwind class strings (no interpolation)
+  const ACCENT_VARIANTS = {
     gold: {
-      text: 'text-brand-gold',
-      border: 'border-brand-gold',
-      bg: 'bg-brand-gold',
-      shadow: 'shadow-gold-glow-subtle hover:shadow-gold-glow',
-      iconBg: 'bg-brand-gold/10',
-      hoverBg: 'hover:bg-brand-gold',
-      hoverText: 'hover:text-brand-background',
+      icon: 'w-14 h-14 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mb-6',
+      iconText: 'text-[var(--accent-chrome)]',
+      iconStroke: 'rgb(192 192 192)',
+      title: 'font-headline text-(--accent-chrome) text-(length:--text-h4) font-semibold leading-tight mb-2',
+      featureIcon: 'w-5 h-5 bg-[var(--accent-chrome)]/10 rounded-full flex items-center justify-center mr-3',
+      btnHighlighted: 'bg-[var(--accent-chrome)] text-[var(--deep-black)] shadow-chrome-glow-subtle hover:shadow-chrome-glow',
+      btnOutline: 'bg-transparent border border-[var(--accent-chrome)] text-[var(--accent-chrome)] hover:bg-[var(--accent-chrome)] hover:text-brand-background',
     },
     chrome: {
-      text: 'text-brand-chrome',
-      border: 'border-brand-chrome',
-      bg: 'bg-brand-chrome',
-      shadow: 'shadow-chrome-glow',
-      iconBg: 'bg-brand-chrome/10',
-      hoverBg: 'hover:bg-brand-chrome',
-      hoverText: 'hover:text-brand-background',
+      icon: 'w-14 h-14 bg-brand-chrome/10 rounded-full flex items-center justify-center mb-6',
+      iconText: 'text-brand-chrome',
+      iconStroke: 'rgb(192 192 192)',
+      title: 'font-headline text-brand-chrome text-(length:--text-h4) font-semibold leading-tight mb-2',
+      featureIcon: 'w-5 h-5 bg-brand-chrome/10 rounded-full flex items-center justify-center mr-3',
+      btnHighlighted: 'bg-brand-chrome text-brand-background shadow-chrome-glow',
+      btnOutline: 'bg-transparent border border-brand-chrome text-brand-chrome hover:bg-brand-chrome hover:text-brand-background',
     },
-  };
+  } as const;
 
-  const accent = accentColorClasses[accentColor];
+  const variant = ACCENT_VARIANTS[accentColor];
 
   return (
     <div
@@ -103,8 +99,8 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       role='group'
     >
       {popular && (
-        <div className='absolute -top-2 inset-x-0 mx-auto w-24 bg-brand-gold rounded-full py-0 text-center z-10'>
-          <span className='text-brand-background text-xs font-bold'>BELIEBT</span>
+        <div className='absolute -top-2 inset-x-0 mx-auto w-24 bg-[var(--accent-chrome)] rounded-full py-0 text-center z-10'>
+          <span className='text-brand-background text-(length:--text-label) font-bold'>BELIEBT</span>
         </div>
       )}
 
@@ -112,35 +108,35 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className='relative z-10 flex flex-col w-full'>
           {/* Service Icon */}
           {IconComponent && (
-            <div
-              className={`w-14 h-14 ${accent.iconBg} rounded-full flex items-center justify-center mb-6`}
-            >
-              <IconComponent size={24} className={accent.text} />
+            <div className={variant.icon}>
+              <IconComponent size={24} className={variant.iconText} />
             </div>
           )}
 
           {/* Title and Subtitle */}
-          <h3 className={`${accent.text} text-lg md:text-xl font-semibold leading-tight mb-2`}>
+          <h3 className={variant.title}>
             {title}
           </h3>
 
-          {subtitle && <h4 className='text-text-secondary text-lg mb-0'>{subtitle}</h4>}
+          {subtitle && (
+            <h4 className='font-body text-text-secondary text-(length:--text-lg) mb-0'>{subtitle}</h4>
+          )}
 
-          <p className='text-sm md:text-base leading-6 text-[#C0C0C0] line-clamp-4 md:line-clamp-5'>
+          <p className='text-(length:--text-body) leading-(--line-height-normal) text-brand-chrome line-clamp-4 md:line-clamp-5'>
             {description}
           </p>
 
           {/* Price */}
           {price && (
             <div className='mb-0'>
-              <span className='text-text-primary text-2xl font-bold'>{price}</span>
+              <span className='text-text-primary text-(length:--text-h3) font-bold'>{price}</span>
             </div>
           )}
 
           {/* Duration */}
           {duration && (
             <div className='mb-8'>
-              <span className='text-text-secondary text-sm'>{duration}</span>
+              <span className='text-text-secondary text-(length:--text-sm)'>{duration}</span>
             </div>
           )}
 
@@ -152,9 +148,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
                 return (
                   <li key={index} className='flex items-center'>
-                    <div
-                      className={`w-5 h-5 ${accent.iconBg} rounded-full flex items-center justify-center mr-3`}
-                    >
+                    <div className={variant.featureIcon}>
                       <svg
                         width='12'
                         height='12'
@@ -164,14 +158,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                       >
                         <path
                           d='M10 3L4.5 8.5L2 6'
-                          stroke={accentColor === 'gold' ? 'var(--brand-gold)' : '#C0C0C0'}
+                          stroke={variant.iconStroke}
                           strokeWidth='2'
                           strokeLinecap='round'
                           strokeLinejoin='round'
                         />
                       </svg>
                     </div>
-                    <span className='text-text-secondary text-sm'>{featureText}</span>
+                    <span className='text-text-secondary text-(length:--text-sm)'>{featureText}</span>
                   </li>
                 );
               })}
@@ -181,12 +175,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
           {/* CTA Button */}
           {buttonLabel && (
             <button
-              className={`w-full min-h-11 px-4 rounded-xl mt-4 transition-all duration-300
-                ${
-                  highlighted
-                    ? `${accent.bg} text-brand-background ${accent.shadow}`
-                    : `bg-transparent border ${accent.border} ${accent.text} ${accent.hoverBg} ${accent.hoverText}`
-                }`}
+              className={`w-full min-h-11 px-4 rounded-xl mt-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--brand-accent)] focus:ring-offset-2 focus:ring-offset-[var(--deep-black)] ${highlighted ? variant.btnHighlighted : variant.btnOutline}`}
               onClick={handleClick}
               role='button'
               tabIndex={0}
@@ -194,7 +183,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
                 (e.key === 'Enter' || e.key === ' ') && handleClick && handleClick()
               }
             >
-              <span className='font-medium'>{buttonLabel}</span>
+              <span className='font-medium text-(length:--text-body)'>{buttonLabel}</span>
             </button>
           )}
         </div>

@@ -1,419 +1,230 @@
 // ============================================
 // COMPONENT: Footer
 // ============================================
-// PURPOSE: Comprehensive footer with studio info, legal links, quick links, social follow section, newsletter signup, and map
+// PURPOSE: Clean, flat footer with studio info, links, social, and SEO location content
 
-import React, { useState } from 'react';
-import { MapPin, Clock, Phone, Mail, Instagram, Facebook, Star } from 'lucide-react';
-import GoogleMap from '../GoogleMap';
-
-// TypeScript interfaces
-interface StudioInfo {
-  address: { icon: string; text: string };
-  hours: { icon: string; text: string };
-  phone: { icon: string; text: string; href: string };
-  email: { icon: string; text: string; href: string };
-}
-
-interface Link {
-  text: string;
-  href: string;
-}
-
-interface SocialLink {
-  icon: string;
-  text: string;
-  href: string;
-}
+import React from 'react';
+import { MapPin, Clock, Phone, Mail, Instagram, Facebook, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import Container from '@/components/ui/Container';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 // Data structures
-const studioInfo: StudioInfo = {
-  address: {
-    icon: 'MapPin',
-    text: 'Altheimer Eck 11, 80331 München',
-  },
-  hours: {
-    icon: 'Clock',
-    text: 'Mo-Fr: 11:30-18:30, Sa: 11:00-18:00, So: Geschlossen',
-  },
-  phone: {
-    icon: 'Phone',
-    text: '+49 (0) 89 269 313',
-    href: 'tel:+4989269313',
-  },
-  email: {
-    icon: 'Mail',
-    text: 'info@medusa-tattoo.de',
-    href: 'mailto:info@medusa-tattoo.de',
-  },
+const studioInfo = {
+  phone: { text: '+49 (0) 89 269 313', href: 'tel:+4989269313' },
+  email: { text: 'info@medusa-tattoo.de', href: 'mailto:info@medusa-tattoo.de' },
 };
 
-const legalLinks: Link[] = [
-  { text: 'Datenschutz', href: '/datenschutz' },
-  { text: 'Impressum', href: '/impressum' },
-  { text: 'AGB', href: '/agb' },
-  { text: 'Nachsorge', href: '/aftercare' },
+const legalLinks = [
+  { i18nKey: 'common.footer.links.privacy', href: '/datenschutz' },
+  { i18nKey: 'common.footer.links.imprint', href: '/impressum' },
+  // { i18nKey: 'common.footer.links.terms', href: '/agb' },
+  // AGB temporarily hidden - draft content
+  { i18nKey: 'common.footer.links.aftercare', href: '/aftercare' },
 ];
 
-const quickLinks: Link[] = [
-  { text: 'Startseite', href: '/' },
-  { text: 'Leistungen', href: '/services' },
-  { text: 'Künstler', href: '/artists' },
-  { text: 'Galerie', href: '/gallery' },
-  { text: 'Preise', href: '/pricing' },
-  { text: 'FAQ', href: '/faq' },
-  { text: 'Kontakt', href: '/contact' },
+const quickLinks = [
+  { i18nKey: 'common.nav.home', href: '/' },
+  { i18nKey: 'common.nav.services', href: '/services' },
+  { i18nKey: 'common.nav.artists', href: '/artists' },
+  { i18nKey: 'common.nav.about', href: '/about' },
+  { i18nKey: 'common.nav.gallery', href: '/gallery' },
+  { i18nKey: 'common.nav.faq', href: '/faq' },
+  { i18nKey: 'common.nav.contact', href: '/contact' },
 ];
 
-const socialLinks: { [key: string]: SocialLink } = {
-  rating: {
-    icon: 'Star',
-    text: '4.9★ Google',
-    href: 'https://g.page/r/medusa-tattoo-munich/review',
-  },
+const socialLinks = {
   instagram: {
-    icon: 'Instagram',
-    text: '@medusa_tattoo_munich',
-    href: 'https://instagram.com/medusa_tattoo_munich',
+    href: 'https://www.instagram.com/medusa_tattoo_munich/',
+    label: 'Medusa Instagram',
   },
   facebook: {
-    icon: 'Facebook',
-    text: 'Medusa Tattoo München',
-    href: 'https://facebook.com/medusa.tattoo.munich',
+    href: 'https://www.facebook.com/MedusaTattooPiercingMuenchen/?locale=de_DE',
+    label: 'Medusa Facebook',
   },
 };
 
 const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [agreeMarketing, setAgreeMarketing] = useState(false);
-  const [language, setLanguage] = useState<'DE' | 'EN'>('DE');
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && agreeMarketing) {
-      // Handle newsletter subscription
-      // TODO: Implement newsletter API call
-      setEmail('');
-      setAgreeMarketing(false);
-    }
-  };
-
-  const IconComponent = ({ iconName }: { iconName: string }) => {
-    // Consistent 20px size for contact icons
-    switch (iconName) {
-      case 'MapPin':
-        return <MapPin size={20} className='text-(--brand-gold) shrink-0' />;
-      case 'Clock':
-        return <Clock size={20} className='text-(--brand-gold) shrink-0' />;
-      case 'Phone':
-        return <Phone size={20} className='text-(--brand-gold) shrink-0' />;
-      case 'Mail':
-        return <Mail size={20} className='text-(--brand-gold) shrink-0' />;
-      case 'Instagram':
-        return (
-          <Instagram
-            size={28} // Larger size for social icons
-            className='text-white hover:text-(--brand-gold) transition-colors duration-300 shrink-0'
-          />
-        );
-      case 'Facebook':
-        return (
-          <Facebook
-            size={28} // Larger size for social icons
-            className='text-white hover:text-(--brand-gold) transition-colors duration-300 shrink-0'
-          />
-        );
-      case 'Star':
-        return (
-          <Star
-            size={28} // Larger size for social icons
-            className='text-white hover:text-(--brand-gold) transition-colors duration-300 shrink-0'
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  const { language, t } = useLanguage();
 
   return (
-    <footer className='relative z-10 w-full py-16 md:py-16 lg:py-24'>
-      <div className='max-w-7xl mx-auto px-8 md:px-16 lg:px-16'>
-        {/* Logo and Tagline */}
-        <div className='mb-16'>
-          <h2 className='font-headline text-4xl font-bold text-(--brand-gold) mb-8'>MEDUSA</h2>
-          <p className='font-body text-base text-white/80'>
-            Münchens exklusivestes Tattoo-Studio für Kunst, die ein Leben lang hält.
-          </p>
-        </div>
+    <footer
+      className='relative z-10 w-full py-16 text-luxury-text-inverse'
+      style={{
+        background: 'var(--card-bg)',
+        borderTop: 'calc(var(--space-0-5) / 4) solid var(--card-border)',
+        boxShadow: 'var(--card-shadow-depth), var(--card-shadow-glow)',
+      }}
+    >
+      <div className='chrome-divider footer-divider' aria-hidden='true' />
+      <Container>
+        {/* Main Footer Content */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 max-md:grid-cols-2 max-md:gap-8'>
+          {/* Brand + Contact */}
+          <div className='lg:col-span-1 max-md:col-span-2 text-center'>
+            <h2 className='font-headline text-3xl font-bold text-white mb-4'>MEDUSA</h2>
+            <p className='reading-measure font-body text-base text-white/74 mb-6 leading-relaxed max-w-md mx-auto'>
+              {t('common.footer.brandDescription')}
+            </p>
 
-        {/* Four-column grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16'>
-          {/* Unser Studio */}
-          <div className='space-y-8'>
-            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
-              UNSER STUDIO
-            </h3>
-            <div className='space-y-8'>
-              <div className='flex items-start gap-8'>
-                <IconComponent iconName={studioInfo.address.icon} />
-                <span className='font-body text-sm text-white/80 leading-relaxed'>
-                  {studioInfo.address.text}
+            <div className='space-y-4 max-md:flex max-md:flex-col max-md:items-center'>
+              <div className='flex items-center gap-4 max-md:justify-center'>
+                <MapPin size={18} className='text-white/60 shrink-0' />
+                <span className='font-body text-base text-white max-md:text-center'>
+                  {t('common.footer.studio.address')}
                 </span>
               </div>
-              <div className='flex items-start gap-8'>
-                <IconComponent iconName={studioInfo.hours.icon} />
-                <span className='font-body text-sm text-white/80 leading-relaxed'>
-                  {studioInfo.hours.text}
-                </span>
+              <div className='flex flex-col h-full items-start gap-4 max-md:justify-center rounded-[24px] border border-white/8 bg-white/3 px-4 py-4'>
+                <Clock size={18} className='text-white/60 shrink-0 mt-2' />
+                <div className='flex flex-col gap-2 max-md:text-center'>
+                  <span className='font-body text-sm font-medium text-white/90'>
+                    {t('common.footer.hoursCard.heading')}
+                  </span>
+                  <div className='grid grid-cols-[auto_auto] gap-x-4 gap-y-2'>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.weekdaysLabel')}
+                      </span>
+                      <span className='font-body text-sm text-(--accent-chrome) font-medium'>
+                        {t('common.footer.hoursCard.weekdaysValue')}
+                      </span>
+                    </div>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.weekendLabel')}
+                      </span>
+                      <span className='font-body text-sm text-(--accent-chrome) font-medium'>
+                        {t('common.footer.hoursCard.weekendValue')}
+                      </span>
+                    </div>
+                    <div className='contents'>
+                      <span className='font-body text-sm text-white/70'>
+                        {t('common.footer.hoursCard.sundayLabel')}
+                      </span>
+                      <span className='font-body text-sm text-red-400 font-medium'>
+                        {t('common.footer.hoursCard.sundayValue')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className='flex items-start gap-8'>
-                <IconComponent iconName={studioInfo.phone.icon} />
+              <div className='flex items-center gap-4 max-md:justify-center'>
+                <Phone size={18} className='text-white/60 shrink-0' />
                 <a
                   href={studioInfo.phone.href}
-                  className='font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
+                  className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline max-md:text-center'
                 >
                   {studioInfo.phone.text}
                 </a>
               </div>
-              <div className='flex items-start gap-8'>
-                <IconComponent iconName={studioInfo.email.icon} />
+              <div className='flex items-center gap-4 max-md:justify-center'>
+                <Mail size={18} className='text-white/60 shrink-0' />
                 <a
                   href={studioInfo.email.href}
-                  className='font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
+                  className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline max-md:text-center'
                 >
                   {studioInfo.email.text}
+                </a>
+              </div>
+              <div className='flex items-center gap-4 max-md:justify-center'>
+                <MessageSquare size={18} className='text-green-400 shrink-0' />
+                <a
+                  href='https://wa.me/4917680196286?text=Hallo%20Medusa%20Tattoo'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='premium-link font-body text-base text-green-400 touch-target-mobile touch-target-mobile-inline max-md:text-center'
+                >
+                  WhatsApp: +49 176 80196286
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Rechtliches */}
-          <div className='space-y-8'>
-            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
-              RECHTLICHES
-            </h3>
-            <ul className='grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-0 md:space-y-8'>
-              {legalLinks.map((link, index) => (
-                <li key={`legal-${link.text}`}>
-                  <a
-                    href={link.href}
-                    className='block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
-                  >
-                    {link.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Quick Links */}
-          <div className='space-y-8'>
-            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
-              QUICK LINKS
+          <div>
+            <h3 className='font-headline text-lg font-semibold text-white mb-4'>
+              {t('common.footer.headings.quickLinks')}
             </h3>
-            <ul className='grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-0 md:space-y-8'>
-              {quickLinks.map((link, index) => (
-                <li key={`quick-${link.text}`}>
-                  <a
-                    href={link.href}
-                    className='block font-body text-sm text-white/80 hover:text-(--brand-gold) transition-colors duration-300'
+            <ul className='space-y-2'>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={localizePath(link.href, language)}
+                    className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline'
                   >
-                    {link.text}
-                  </a>
+                    {t(link.i18nKey)}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Folgen Sie uns */}
-          <div className='space-y-8'>
-            <h3 className='font-headline text-sm font-semibold tracking-wider uppercase text-(--brand-gold) mb-8'>
-              FOLGEN SIE UNS
+          {/* Legal Links */}
+          <div>
+            <h3 className='font-headline text-lg font-semibold text-white mb-4'>
+              {t('common.footer.headings.legal')}
             </h3>
-            {/* Social Icons */}
-            <div className='flex gap-8 mb-16'>
-              <a
-                href={socialLinks.instagram.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Instagram'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Instagram size={28} />
-              </a>
-              <a
-                href={socialLinks.facebook.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Facebook'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Facebook size={28} />
-              </a>
-              <a
-                href={socialLinks.rating.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Google Reviews'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Star size={28} />
-              </a>
-            </div>
-
-            <div className='space-y-8'>
-              {Object.entries(socialLinks).map(([key, social]) => (
-                <div key={key} className='flex items-center gap-8'>
-                  <IconComponent iconName={social.icon} />
-                  <a
-                    href={social.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='font-body text-sm text-white/80 hover:text-brand-gold transition-colors duration-300'
-                    aria-label={social.text}
+            <ul className='space-y-2'>
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={localizePath(link.href, language)}
+                    className='premium-link font-body text-base touch-target-mobile touch-target-mobile-inline'
                   >
-                    {social.text}
-                  </a>
-                </div>
+                    {t(link.i18nKey)}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
 
-            {/* Language Toggle */}
-            <div className='mt-16'>
-              <div className='flex gap-8'>
-                <button
-                  onClick={() => setLanguage('DE')}
-                  className={`px-8 py-8 text-sm font-medium rounded transition-all duration-300 ${
-                    language === 'DE'
-                      ? 'bg-(--brand-gold) text-black'
-                      : 'bg-transparent text-white border border-(--brand-gold)/40 hover:border-(--brand-gold)'
-                  }`}
+          {/* Newsletter + Social */}
+          <div className='max-md:col-span-2'>
+            <div className='flex flex-col h-full rounded-(--card-radius) border border-white/8 bg-white/3 p-6 shadow-[var(--premium-elevation)]'>
+              <h3 className='font-headline text-lg font-semibold text-white mb-4'>
+                {t('common.footer.headings.newsletter')}
+              </h3>
+              <p className='font-body text-base text-white/72 mb-6 reading-measure'>
+                {t('common.footer.newsletter.description')}
+              </p>
+
+              <div className='flex items-center gap-4 mb-6'>
+                <a
+                  href={socialLinks.instagram.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={socialLinks.instagram.label}
+                  className='premium-interactive flex flex-col h-full min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
                 >
-                  DE
-                </button>
-                <button
-                  onClick={() => setLanguage('EN')}
-                  className={`px-8 py-8 text-sm font-medium rounded transition-all duration-300 ${
-                    language === 'EN'
-                      ? 'bg-(--brand-gold) text-black'
-                      : 'bg-transparent text-white border border-(--brand-gold)/40 hover:border-(--brand-gold)'
-                  }`}
+                  <Instagram size={22} />
+                </a>
+                <a
+                  href={socialLinks.facebook.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={socialLinks.facebook.label}
+                  className='premium-interactive flex flex-col h-full min-h-12 min-w-12 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white/80 touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
                 >
-                  EN
-                </button>
+                  <Facebook size={22} />
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className='border-t border-white/20 pt-16 mb-16'>
-          <div className='text-center mb-8'>
-            <h3 className='font-headline text-2xl font-bold text-(--brand-gold) mb-8'>
-              Newsletter
-            </h3>
-            <p className='font-body text-base text-white/80 mb-8'>
-              Erhalten Sie exklusive Updates zu neuen Künstlern, Events und Aktionen.
-            </p>
-          </div>
-
-          <form onSubmit={handleNewsletterSubmit} className='max-w-md mx-auto mb-8'>
-            <div className='flex gap-8 mb-8'>
-              <div className='flex-1'>
-                <label htmlFor='newsletter-email' className='sr-only'>
-                  E-Mail-Adresse
-                </label>
-                <input
-                  id='newsletter-email'
-                  type='email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder='your.email@example.com'
-                  className='w-full px-8 py-8 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:border-(--brand-gold) focus:outline-none transition-colors duration-300'
-                  required
-                />
-              </div>
-              <button
-                type='submit'
-                disabled={!email || !agreeMarketing}
-                className='bg-(--brand-gold) text-black font-body font-medium py-8 px-8 rounded hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-(--brand-gold) focus:ring-offset-2 focus:ring-offset-[#1A1A1A]'
-              >
-                Abonnieren
-              </button>
-            </div>
-
-            <div className='flex items-center justify-center gap-8'>
-              <input
-                id='marketing-consent'
-                type='checkbox'
-                checked={agreeMarketing}
-                onChange={(e) => setAgreeMarketing(e.target.checked)}
-                className='w-4 h-4 text-(--brand-gold) bg-white/10 border-white/30 rounded focus:ring-(--brand-gold) focus:ring-0'
-                required
-              />
-              <label
-                htmlFor='marketing-consent'
-                className='font-body text-sm text-white/80'
-                aria-describedby='marketing-consent-description'
-              >
-                I agree to receive marketing communications from Medusa Tattoo München. You can
-                unsubscribe at any time.
-              </label>
-            </div>
-          </form>
-        </div>
-
-        {/* Map Section */}
-        <div className='border-t border-white/20 pt-16 mb-16 text-center'>
-          <h3 className='font-headline text-xl font-bold text-(--brand-gold) mb-8 flex items-center justify-center gap-8'>
-            <MapPin size={20} className='text-(--brand-gold)' />
-            Wegbeschreibung
-          </h3>
-
-          <div className='bg-white/10 rounded h-64 overflow-hidden'>
-            <GoogleMap width='100%' height='100%' className='' title='Medusa Studio Location Map' />
-          </div>
-        </div>
+        {/* Location section has been moved to a separate component */}
 
         {/* Bottom Bar */}
-        <div className='border-t border-white/20 pt-16'>
-          <div className='flex flex-col md:flex-row justify-between items-center gap-16'>
-            <p className='font-body text-sm text-white/50'>
-              © 2025 Medusa Tattoo München. Alle Rechte vorbehalten.
+        <div className='mt-8 pt-8 border-t border-white/10'>
+          <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+            <p className='font-body text-sm text-white/60'>
+              © {new Date().getFullYear()} {t('common.footer.bottomBar.rights')}
             </p>
-
-            <div className='flex items-center gap-16'>
-              <a
-                href={socialLinks.instagram.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Instagram'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Instagram size={28} />
-              </a>
-              <a
-                href={socialLinks.facebook.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Facebook'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Facebook size={28} />
-              </a>
-              <a
-                href={socialLinks.rating.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label='Google Reviews'
-                className='text-white hover:text-(--brand-gold) transition-colors duration-300'
-              >
-                <Star size={28} />
-              </a>
-            </div>
+            <p className='font-body text-sm text-white/60'>{t('common.footer.bottomBar.since')}</p>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

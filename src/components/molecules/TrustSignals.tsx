@@ -1,246 +1,156 @@
-import { Shield, Award, Heart } from 'lucide-react';
+import { Shield, Award, Heart, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
+import './TrustSignals.css';
 
 /**
- * TrustSignals Component
+ * TrustSignals Component - 4-Card Horizontal Metallic Neon Design
  *
- * Displays 3 trust badges horizontally on ALL screen sizes.
- *
- * MOBILE SPECS (iPhone 16 - 393px):
- * - Grid: 3 columns (grid-cols-3)
- * - Badge size: 100×80px
- * - Container padding: 16px (px-4)
- * - Gap: 16px (gap-4)
- * - Total width: 332px (fits in 361px available)
- *
- * TABLET (768px+):
- * - Same 3-column grid
- * - Badge size: Auto (scales up)
- * - Container padding: 24px (md:px-6)
- * - Gap: 24px (md:gap-6)
- *
- * DESKTOP (1200px+):
- * - Container padding: 32px (lg:px-8)
- * - Gap: 32px (lg:gap-8)
+ * Features:
+ * - 4 horizontal cards with metallic surface materials
+ * - World-class neon glowing light effects on hover
+ * - Premium hover states with light expansion
+ * - Responsive: desktop row → mobile stack
  *
  * BRAND COMPLIANCE:
- * - Background: var(--deep-black) only
- * - Text: #FFFFFF
- * - Gold: var(--brand-gold) (icons, titles, borders)
- * - Chrome: #C0C0C0 (not used here)
- * - Typography: Playfair Display (titles), Inter (descriptions)
- * - Effects: Gold glow only (no drop shadows)
- * - Accessibility: 48px+ touch targets, focus states
+ * - Black background (deep-black)
+ * - White text (brand-white)
+ * - Neon cyan glow effects
  */
+
+type TrustBadge = {
+  icon: typeof Shield;
+  title: string;
+  stat: string;
+  description: string;
+  ariaLabel: string;
+};
+
+const TRUST_BADGES: Record<'de' | 'en', TrustBadge[]> = {
+  de: [
+    {
+      icon: Shield,
+      title: 'Zertifizierte Qualität',
+      stat: '100%',
+      description: 'EU-hygienezertifiziertes Studio und anerkannte Branchenstandards.',
+      ariaLabel: 'Zertifiziert nach EU-Hygienestandards',
+    },
+    {
+      icon: Award,
+      title: 'Bewährte Erfahrung',
+      stat: '25+',
+      description: 'Über 25 Jahre preisgekrönte Tattoo-Expertise.',
+      ariaLabel: 'Über 25 Jahre Erfahrung',
+    },
+    {
+      icon: Heart,
+      title: 'Premium Nachsorge',
+      stat: '5000+',
+      description: 'Mehr als 5.000 Kundinnen und Kunden mit persönlicher Heilungshilfe begleitet.',
+      ariaLabel: 'Premium Nachsorge und Support',
+    },
+    {
+      icon: Star,
+      title: 'Qualitätsgarantie',
+      stat: '100%',
+      description: 'Lebenslange Garantie auf Farbe und Handwerkskunst.',
+      ariaLabel: 'Qualitätsgarantie',
+    },
+  ],
+  en: [
+    {
+      icon: Shield,
+      title: 'Certified Quality',
+      stat: '100%',
+      description: 'EU hygiene-certified studio with recognised professional standards.',
+      ariaLabel: 'Certified to EU hygiene standards',
+    },
+    {
+      icon: Award,
+      title: 'Proven Experience',
+      stat: '25+',
+      description: 'More than 25 years of award-winning tattoo expertise.',
+      ariaLabel: 'More than 25 years of experience',
+    },
+    {
+      icon: Heart,
+      title: 'Premium Aftercare',
+      stat: '5000+',
+      description: 'Over 5,000 clients supported with personal healing guidance.',
+      ariaLabel: 'Premium aftercare and support',
+    },
+    {
+      icon: Star,
+      title: 'Quality Guarantee',
+      stat: '100%',
+      description: 'Lifetime commitment to colour integrity and craftsmanship.',
+      ariaLabel: 'Quality guarantee',
+    },
+  ],
+};
+
 export function TrustSignals() {
+  const { language } = useLanguage();
+  const badges = TRUST_BADGES[language];
+
   return (
-    <section className='py-16' style={{ backgroundColor: 'var(--deep-black)' }}>
-      <div className='max-w-[1200px] mx-auto px-8 sm:px-8 lg:px-16'>
-        {/* 3-column grid on ALL screen sizes */}
-        <div className='grid grid-cols-3 gap-8 md:gap-8 lg:gap-8 max-w-4xl mx-auto'>
-          {/* Badge 1: Certified */}
-          <div
-            className='w-[100px] h-[80px] lg:w-auto lg:h-auto\n              flex flex-col items-center justify-center\n              border rounded-lg\n              text-center\n              transition-all duration-300\n              focus-visible:outline-2 focus-visible:outline-offset-2\n             h-full'
-            style={{
-              backgroundColor: 'var(--deep-black)',
-              borderColor: 'rgba(212, 175, 55, 0.2)',
-              borderWidth: '1px',
-              padding: '8px',
-              boxShadow: '0 0 24px rgba(212, 175, 55, 0.15)',
-            }}
-            tabIndex={0}
-            role='group'
-            aria-label='EU Health Standards Certified'
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 32px rgba(212, 175, 55, 0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
-              e.currentTarget.style.outlineOffset = '2px';
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.outline = 'none';
-            }}
-          >
-            {/* Icon container */}
-            <div className='flex justify-center mb-0 lg:mb-8'>
-              <div
-                className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
-                style={{ background: 'var(--brand-gold)' }}
-              >
-                <Shield
-                  size={16}
-                  className='lg:w-8 lg:h-8'
-                  style={{ color: 'var(--deep-black)' }}
-                />
-              </div>
-            </div>
-
-            {/* Title - Always visible */}
-            <h3
-              className='mb-0 lg:mb-8'
-              style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: '14px',
-                fontWeight: 700,
-                lineHeight: 1.1,
-                color: 'var(--brand-gold)',
-              }}
-            >
-              Certified
-            </h3>
-
-            {/* Description - Hidden on mobile, visible on desktop */}
-            <p
-              className='hidden lg:block'
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '18px',
-                lineHeight: 1.4,
-                color: 'rgba(255, 255, 255, 0.8)',
-              }}
-            >
-              EU Health Standards & Munich Tattoo Association certified artists
-            </p>
-          </div>
-
-          {/* Badge 2: 25+ Years */}
-          <div
-            className='w-[100px] h-[80px] lg:w-auto lg:h-auto\n              flex flex-col items-center justify-center\n              border rounded-lg\n              text-center\n              transition-all duration-300\n              focus-visible:outline-2 focus-visible:outline-offset-2\n             h-full'
-            style={{
-              backgroundColor: 'var(--deep-black)',
-              borderColor: 'rgba(212, 175, 55, 0.2)',
-              borderWidth: '1px',
-              padding: '8px',
-              boxShadow: '0 0 24px rgba(212, 175, 55, 0.15)',
-            }}
-            tabIndex={0}
-            role='group'
-            aria-label='25 Plus Years of Excellence'
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 32px rgba(212, 175, 55, 0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
-              e.currentTarget.style.outlineOffset = '2px';
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.outline = 'none';
-            }}
-          >
-            {/* Icon container */}
-            <div className='flex justify-center mb-0 lg:mb-8'>
-              <div
-                className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
-                style={{
-                  background:
-                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+    <section className='py-32'>
+      <div className='max-w-7xl mx-auto px-8'>
+        {/* 4-Card Horizontal Grid */}
+        <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12'>
+          {badges.map((badge, index) => {
+            const Icon = badge.icon;
+            return (
+              <motion.div
+                key={badge.title}
+                className='cool-lines-card chrome-card premium-interactive group relative flex h-full flex-col items-center rounded-(--card-radius) border border-(--card-border) bg-(--card-bg) p-(--space-4) text-center md:p-8'
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  },
                 }}
-              >
-                <Award size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
-              </div>
-            </div>
-
-            {/* Title - Always visible */}
-            <h3
-              className='mb-0 lg:mb-8'
-              style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: '14px',
-                fontWeight: 700,
-                lineHeight: 1.1,
-                color: 'var(--brand-gold)',
-              }}
-            >
-              25+ Years
-            </h3>
-
-            {/* Description - Hidden on mobile, visible on desktop */}
-            <p
-              className='hidden lg:block'
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '18px',
-                lineHeight: 1.4,
-                color: 'rgba(255, 255, 255, 0.8)',
-              }}
-            >
-              Quarter-century of excellence and trusted artistry in Munich
-            </p>
-          </div>
-
-          {/* Badge 3: Premium Aftercare */}
-          <div
-            className='w-[100px] h-[80px] lg:w-auto lg:h-auto\n              flex flex-col items-center justify-center\n              border rounded-lg\n              text-center\n              transition-all duration-300\n              focus-visible:outline-2 focus-visible:outline-offset-2\n             h-full'
-            style={{
-              backgroundColor: 'var(--deep-black)',
-              borderColor: 'rgba(212, 175, 55, 0.2)',
-              borderWidth: '1px',
-              padding: '8px',
-              boxShadow: '0 0 24px rgba(212, 175, 55, 0.15)',
-            }}
-            tabIndex={0}
-            role='group'
-            aria-label='Premium Aftercare Support'
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 32px rgba(212, 175, 55, 0.25)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 24px rgba(212, 175, 55, 0.15)';
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.outline = '2px solid var(--brand-gold)';
-              e.currentTarget.style.outlineOffset = '2px';
-            }}
-            onBlur={(e) => {
-              e.currentTarget.style.outline = 'none';
-            }}
-          >
-            {/* Icon container */}
-            <div className='flex justify-center mb-0 lg:mb-8'>
-              <div
-                className='w-8 h-8 lg:w-16 lg:h-16 rounded-full flex items-center justify-center flex-col h-full'
+                viewport={{ once: true, margin: '-50px' }}
                 style={{
-                  background:
-                    'linear-gradient(to right, var(--brand-gold-hover), var(--brand-gold))',
+                  boxShadow: 'var(--premium-elevation), inset 0 1px 0 rgba(255, 255, 255, 0.04)',
                 }}
+                whileHover={{
+                  boxShadow:
+                    'var(--premium-elevation-hover), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+                }}
+                role='group'
+                aria-label={badge.ariaLabel}
               >
-                <Heart size={16} className='lg:w-8 lg:h-8' style={{ color: 'var(--deep-black)' }} />
-              </div>
-            </div>
+                {/* Icon */}
+                <motion.div
+                  className='mb-(--space-4) md:mb-8 flex items-center justify-center'
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Icon className='trust-signals__icon-glow w-8 h-8 text-white' />
+                </motion.div>
 
-            {/* Title - Always visible */}
-            <h3
-              className='mb-0 lg:mb-8'
-              style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: '14px',
-                fontWeight: 700,
-                lineHeight: 1.1,
-                color: 'var(--brand-gold)',
-              }}
-            >
-              Premium Aftercare
-            </h3>
+                {/* Stat */}
+                <div className='font-headline text-(length:--text-h3) md:text-(length:--text-h2) font-light text-white mb-4 leading-(--line-height-tight)'>
+                  {badge.stat}
+                </div>
 
-            {/* Description - Hidden on mobile, visible on desktop */}
-            <p
-              className='hidden lg:block'
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '18px',
-                lineHeight: 1.4,
-                color: 'rgba(255, 255, 255, 0.8)',
-              }}
-            >
-              Comprehensive healing support with medical-grade products
-            </p>
-          </div>
+                {/* Title */}
+                <h3 className='font-body text-(length:--text-label) uppercase tracking-widest text-brand-chrome/80 font-semibold mb-2 transition-colors duration-500'>
+                  {badge.title}
+                </h3>
+
+                {/* Description */}
+                <p className='font-body text-(length:--text-sm) lg:text-(length:--text-xs) text-brand-chrome/70 leading-(--line-height-normal)'>
+                  {badge.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

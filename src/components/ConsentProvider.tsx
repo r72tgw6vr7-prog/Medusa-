@@ -129,8 +129,9 @@ function initializeAnalytics() {
 
   // Initialize gtag
   window.dataLayer = window.dataLayer || [];
-  function gtag(...args: any[]) {
-    window.dataLayer.push(args);
+  function gtag(...args: unknown[]) {
+    const dataLayer = (window.dataLayer ||= []);
+    dataLayer.push(args);
   }
   window.gtag = gtag;
 
@@ -287,7 +288,7 @@ function CookieSettings() {
 // Extend window type for gtag
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }

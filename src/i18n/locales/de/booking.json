@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Buchung",
+  "title": "Termin vereinbaren",
+  "subtitle": "Vereinbaren Sie einen Beratungstermin für Ihr nächstes Tattoo oder Piercing.",
+  "labels": {
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefonnummer",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "guests": "Anzahl Gäste",
+    "specialRequests": "Sonderwünsche (optional)"
+  },
+  "placeholders": {
+    "name": "John Doe",
+    "email": "ihre.email@beispiel.de",
+    "phone": "+49 (0) 89 269 313",
+    "time": "Uhrzeit wählen",
+    "specialRequests": "Kurzbeschreibung (z.B. Stil, Körperstelle, Größe, Referenzen)"
+  },
+  "submit": "Termin vereinbaren",
+  "submitting": "Wird gesendet...",
+  "maxChars": "Maximal 500 Zeichen",
+  "toasts": {
+    "success": "Buchungsanfrage gesendet",
+    "successBody": "Wir melden uns in Kürze zur Bestätigung Ihrer Reservierung.",
+    "error": "Buchungsanfrage fehlgeschlagen",
+    "errorBody": "Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt."
+  },
+  "modal": {
+    "title": "Termin buchen",
+    "personalTitle": "Deine Daten",
+    "serviceQuestion": "Was möchtest du buchen?",
+    "projectLabel": "Was genau? (optional)",
+    "next": "Weiter",
+    "back": "Zurück",
+    "close": "Schließen"
+  },
+  "payment": {
+    "title": "Zahlung",
+    "methodLabel": "Bezahlmethode",
+    "cash": "Bar",
+    "card": "Karte",
+    "bankTransfer": "Überweisung",
+    "submitBooking": "Termin anfragen"
+  },
+  "loading": {
+    "submitting": "Ihre Buchung wird übermittelt..."
+  },
+  "error": {
+    "title": "Fehler",
+    "retry": "Erneut versuchen",
+    "retryLoading": "Versuche erneut zu senden...",
+    "completeAllSteps": "Bitte vervollständigen Sie alle Schritte",
+    "submitFailed": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch."
+  },
+  "confirmation": {
+    "title": "Vielen Dank!",
+    "subtitle": "Ihre Buchungsanfrage wurde gesendet.",
+    "bookingNumber": "Buchungsnummer:",
+    "service": "Service:",
+    "date": "Datum:",
+    "emailNote": "Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+    "closeButton": "Schließen"
+  },
+  "gdpr": {
+    "consent": "Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.*"
+  },
+  "services": {
+    "tattoo": {
+      "title": "Tattoo",
+      "price": "ab €150/Std",
+      "features": {
+        "custom": "Individuelle Designs",
+        "experienced": "Erfahrene Künstler",
+        "hygiene": "Höchste Hygienestandards",
+        "consultation": "Persönliche Beratung"
+      }
+    },
+    "piercing": {
+      "title": "Piercing",
+      "price": "ab €30",
+      "features": {
+        "consultation": "Professionelle Beratung",
+        "quality": "Hochwertiger Schmuck",
+        "sterile": "Steriles Arbeiten",
+        "aftercare": "Umfassende Nachsorge"
+      }
+    }
+  }
+}

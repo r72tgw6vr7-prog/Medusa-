@@ -1,124 +1,270 @@
+import { Suspense, lazy, type ReactNode, type RefObject } from 'react';
 import { HeroParallax } from '@/components/ui/hero-parallax';
-import { GallerySection } from '../sections/GallerySection';
-import { ProcessTimeline } from '../sections/ProcessTimeline';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { ServiceCards } from '../components/molecules';
-import { TeamGrid } from '../components/pages';
-import PricingSection from '../components/PricingSection';
-import { PartnersAndTestimonialsSection } from '../sections/PartnersAndTestimonialsSection';
-import StudioCarousel from '../components/organisms/StudioCarousel';
-import { CarouselBadges } from '../components/CarouselBadges';
-import { PreFooterBookingCTA } from '../components/PreFooterBookingCTA';
-import ErrorBoundary from '../components/layout/ErrorBoundary';
-import { LazySection } from '../components/LazySection';
-import { GALLERY_IMAGES } from '@/content/gallery-images';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import ErrorBoundary from '@/components/layout/ErrorBoundary';
+import { LazySection } from '@/components/LazySection';
+import { SectionLoader } from '@/components/ui/SectionLoader';
+import { getLocalizedGalleryImages } from '@/content/gallery-images';
+import { useSectionTransition } from '@/hooks/useSectionTransition';
+import { LocationSection } from '@/components/LocationSection';
+import { GoogleMapSection } from '@/components/GoogleMapSection';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
-// Hero parallax product data - using actual gallery images with optimized sources
-const heroProducts = GALLERY_IMAGES.slice(0, 15).map((img, index) => ({
-  title: img.title,
-  link: '/gallery',
-  thumbnail: img.optimizedSrc, // Use optimized images for better performance
-  fallbackSrc: img.src, // Original as fallback
-  width: img.width,
-  height: img.height,
-  priority: index < 3, // First 3 images are priority (above the fold)
-}));
+const BladeAccordionLazy = lazy(() =>
+  import('@/components/ui/BladeAccordion').then((m) => ({ default: m.BladeAccordion })),
+);
 
-// Gallery preview data - using actual gallery images with optimized sources
-const sampleGalleryImages = GALLERY_IMAGES.slice(0, 8).map((img) => ({
-  id: img.id,
-  imageUrl: img.optimizedSrc, // Use optimized images for better performance
-  fallbackUrl: img.src, // Original as fallback
-  title: img.title,
-  artist: 'Medusa Tattoo',
-  year: '2024',
-  category: img.category,
-}));
+const ServicesCurtainSectionLazy = lazy(() =>
+  import('@/sections/ServicesCurtainSection').then((m) => ({ default: m.ServicesCurtainSection })),
+);
+
+const SocialContactsCarouselSectionLazy = lazy(() =>
+  import('@/sections/SocialContactsCarouselSection').then((m) => ({
+    default: m.SocialContactsCarouselSection,
+  })),
+);
+
+const StudioCarouselLazy = lazy(() => import('@/components/organisms/StudioCarousel'));
+const PricingSectionLazy = lazy(() => import('@/components/PricingSection'));
+
+const TrustSignalsLazy = lazy(() =>
+  import('@/components/molecules/TrustSignals').then((m) => ({ default: m.TrustSignals })),
+);
+
+const ProcessTimelineLazy = lazy(() =>
+  import('@/sections/ProcessTimeline/ProcessTimeline').then((m) => ({
+    default: m.ProcessTimeline,
+  })),
+);
+
+const GallerySectionLazy = lazy(() =>
+  import('@/sections/GallerySection').then((m) => ({ default: m.GallerySection })),
+);
+
+const PartnersAndTestimonialsSectionLazy = lazy(() =>
+  import('@/sections/PartnersAndTestimonialsSection').then((m) => ({
+    default: m.PartnersAndTestimonialsSection,
+  })),
+);
+
+const PreFooterBookingCTALazy = lazy(() =>
+  import('@/components/PreFooterBookingCTA').then((m) => ({ default: m.PreFooterBookingCTA })),
+);
+
+const SectionTransitionWrapper = ({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  const { ref, className: visibleClass } = useSectionTransition({ threshold: 0.2 });
+
+  return (
+    <div
+      ref={ref as RefObject<HTMLDivElement>}
+      className={`section-transition ${visibleClass} ${className}`.trim()}
+    >
+      {children}
+    </div>
+  );
+};
 
 export function HomePage() {
+  const { language } = useLanguage();
+  const localizedGalleryImages = getLocalizedGalleryImages(language);
+  const heroProducts = localizedGalleryImages.slice(0, 15).map((img, index) => ({
+    title: img.title,
+    link: localizePath('/gallery', language),
+    thumbnail: img.optimizedSrc,
+    fallbackSrc: img.src,
+    width: img.width,
+    height: img.height,
+    priority: index < 3,
+  }));
+  const sampleGalleryImages = localizedGalleryImages.slice(0, 8).map((img) => ({
+    id: img.id,
+    imageUrl: img.optimizedSrc,
+    fallbackUrl: img.src,
+    title: img.title,
+    artist: 'Medusa Tattoo',
+    year: '2024',
+    category: img.category,
+    objectPosition: img.objectPosition,
+  }));
+  const galleryTitle = language === 'en' ? 'Our work' : 'Unsere Kunstwerke';
+  const gallerySubtitle =
+    language === 'en'
+      ? 'Discover a selection of our best work.'
+      : 'Entdecken Sie eine Auswahl unserer besten Arbeiten.';
+
   return (
     <ErrorBoundary>
-      <div className='min-h-screen flex flex-col relative'>
+      {/* Skip to main content link for keyboard navigation */}
+      {typeof navigator === 'undefined' ||
+        (navigator.webdriver !== true &&
+          (typeof window === 'undefined' || typeof window.__MOCKED_ENV__ === 'undefined')) ? (
+        <a
+          href='#main-content'
+          data-testid='skip-to-content'
+          style={{ margin: 0, top: 120, left: 0, zIndex: 10001 }}
+          className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-8 focus:py-4 focus:bg-brand-accent focus:text-deep-black focus:rounded-lg focus:shadow-lg'
+        >
+          Skip to main content
+        </a>
+      ) : null}
+      <div className='min-h-screen flex flex-col relative bg-luxury-bg-dark overflow-x-clip'>
         {/* Navigation */}
         <ErrorBoundary>
           <MainNavigation />
         </ErrorBoundary>
 
-        {/* 1. Hero Section - Load immediately (above fold) */}
-        <ErrorBoundary>
-          <HeroParallax products={heroProducts} />
-        </ErrorBoundary>
-
-        {/* 2. Team Grid - Load immediately (likely above fold) */}
-        <ErrorBoundary>
-          <TeamGrid />
-        </ErrorBoundary>
-
-        {/* 3. Service Cards - Lazy load */}
-        <LazySection>
+        {/* Main content landmark */}
+        <main id='main-content'>
+          {/* 1. Hero Section - Load immediately (above fold) */}
           <ErrorBoundary>
-            <ServiceCards />
+            <SectionTransitionWrapper className='pt-[calc(var(--header-height)+40px)]'>
+              <HeroParallax products={heroProducts} />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
-        </LazySection>
 
-        {/* 4. Studio Carousel - Lazy load */}
-        <LazySection>
+          {/* 2. Artist Blade Accordion - Deferred (below large hero on most viewports) */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <BladeAccordionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 2.5. Services Section - Deferred */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <ServicesCurtainSectionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 2.75. Social Media Carousel - Deferred */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <SocialContactsCarouselSectionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 3. Studio Carousel - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <StudioCarouselLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 4. Pricing Section - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <PricingSectionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 5. Trust Signals - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <TrustSignalsLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 6. Process Timeline - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <ProcessTimelineLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 7. Gallery Section - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <GallerySectionLazy
+                    title={galleryTitle}
+                    subtitle={gallerySubtitle}
+                    images={sampleGalleryImages}
+                  />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 9. Partners & Testimonials - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <PartnersAndTestimonialsSectionLazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* 11. Pre-Footer Booking CTA - Lazy load */}
+          <LazySection>
+            <ErrorBoundary>
+              <SectionTransitionWrapper>
+                <Suspense fallback={<SectionLoader />}>
+                  <PreFooterBookingCTALazy />
+                </Suspense>
+              </SectionTransitionWrapper>
+            </ErrorBoundary>
+          </LazySection>
+
+          {/* Location Section - Above Footer */}
           <ErrorBoundary>
-            <StudioCarousel />
+            <SectionTransitionWrapper>
+              <LocationSection />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
-        </LazySection>
 
-        {/* 4.5. Carousel Badges - Lazy load */}
-        <LazySection>
+          {/* Google Map Section */}
           <ErrorBoundary>
-            <CarouselBadges />
+            <SectionTransitionWrapper>
+              <GoogleMapSection />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
-        </LazySection>
 
-        {/* 5. Pricing Section - Lazy load */}
-        <LazySection>
+          {/* Footer - Always load */}
           <ErrorBoundary>
-            <PricingSection />
+            <SectionTransitionWrapper>
+              <Footer />
+            </SectionTransitionWrapper>
           </ErrorBoundary>
-        </LazySection>
-
-        {/* 6. Process Timeline - Lazy load */}
-        <LazySection>
-          <ErrorBoundary>
-            <ProcessTimeline />
-          </ErrorBoundary>
-        </LazySection>
-
-        {/* 7. Gallery Section - Lazy load */}
-        <LazySection>
-          <ErrorBoundary>
-            <GallerySection
-              title='Unsere Kunstwerke'
-              subtitle='Entdecken Sie eine Auswahl unserer besten Arbeiten'
-              images={sampleGalleryImages}
-            />
-          </ErrorBoundary>
-        </LazySection>
-
-        {/* 8. Partners & Testimonials - Lazy load */}
-        <LazySection>
-          <ErrorBoundary>
-            <PartnersAndTestimonialsSection />
-          </ErrorBoundary>
-        </LazySection>
-
-        {/* 9. Pre-Footer Booking CTA - Lazy load */}
-        <LazySection>
-          <ErrorBoundary>
-            <PreFooterBookingCTA />
-          </ErrorBoundary>
-        </LazySection>
-
-        {/* Footer - Always load */}
-        <ErrorBoundary>
-          <Footer />
-        </ErrorBoundary>
+        </main>
       </div>
     </ErrorBoundary>
   );

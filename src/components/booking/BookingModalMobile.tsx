@@ -1,155 +1,106 @@
 import { useState, useCallback, useEffect } from 'react';
-import './BookingModalMobile.css';
+import { X } from 'lucide-react';
+import { submitBooking, validateBookingData } from '@/services/bookingService';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useApp } from '@/core/state/AppContext';
+import { Meteors } from '@/components/ui/meteors';
 import {
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Crown,
-  Star,
-  Shield,
-  Award,
-  Loader2,
-  CheckCircle2,
-  AlertCircle,
-} from 'lucide-react';
-import Button from '../atoms/Button';
-import ArtistCard from '../molecules/Card/ArtistCard';
-import FormInput from '../atoms/Input/FormInput';
+  SERVICE_CONFIG,
+  INITIAL_FORM_DATA,
+  type BookingStep,
+  type BookingFormData,
+  type PaymentMethod,
+  type BookingResult,
+} from './bookingConfig';
+import {
+  ServiceSelectionStep,
+  PersonalInfoStep,
+  PaymentStep,
+  ConfirmationStep,
+  LoadingOverlay,
+  ErrorState,
+} from './steps';
+import './BookingModalMobile.css';
 
-// Interface for team.json data
-interface TeamArtist {
-  id: string;
-  name: string;
-  role: string;
-  category: string;
-  photo: string;
-  specialties: string[];
-  bookable: boolean;
-  featured: boolean;
-  bio: string;
-  experience: string;
-  instagram: string;
-}
-import { submitBooking, validateBookingData } from '../../services/bookingService';
-
-type Service = {
-  id: string;
-  title: string;
-  price: string;
-  features: { icon: React.ElementType; text: string }[];
-};
-
-type Artist = {
-  id: string;
-  name: string;
-  role: string;
-  photo: string;
-  specialty: string;
-};
-
-type BookingStep = 'service' | 'artist' | 'contact' | 'confirmation' | 'error';
-
-const SERVICES: Service[] = [
-  {
-    id: 'tattoo',
-    title: 'Tattoo Artistry',
-    price: 'ab €150/Std',
-    features: [
-      { icon: Crown, text: 'Individuelle Designs' },
-      { icon: Star, text: 'Erfahrene Künstler' },
-      { icon: Shield, text: 'Höchste Hygienestandards' },
-      { icon: Award, text: 'Persönliche Beratung' },
-    ],
-  },
-  {
-    id: 'piercing',
-    title: 'Piercing',
-    price: 'ab €30',
-    features: [
-      { icon: Crown, text: 'Professionelle Beratung' },
-      { icon: Star, text: 'Hochwertiger Schmuck' },
-      { icon: Shield, text: 'Steriles Arbeiten' },
-      { icon: Award, text: 'Umfassende Nachsorge' },
-    ],
-  },
-];
-
-export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const [artists, setArtists] = useState<Artist[]>([]);
-  const [step, setStep] = useState<BookingStep>('service');
-
-  useEffect(() => {
-    // Fetch artists data
-    fetch('/team.json')
-      .then((res) => res.json())
-      .then((data: { team: TeamArtist[] }) => {
-        // Filter only bookable artists and transform data to match Artist type
-        const bookableArtists = data.team
-          .filter((artist) => artist.bookable)
-          .map((artist) => ({
-            id: artist.id,
-            name: artist.name,
-            role: artist.role,
-            photo: artist.photo,
-            specialty: artist.specialties.join(', '),
-          }));
-        setArtists(bookableArtists);
-      })
-      .catch((error) => {
-        console.error('Error loading artists:', error);
-      });
-  }, []);
+export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
+  const { t, language } = useLanguage();
+  const { state, closeBooking } = useApp();
+  const [step, setStep] = useState<BookingStep>('details');
   const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedArtist, setSelectedArtist] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    message: '',
-    gdprConsent: false,
-  });
-
+  const [specificService, setSpecificService] = useState<string | null>(null); // The specific service (e.g., "ohr", "ohrlochzauberer")
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
+  const [projectDetails, setProjectDetails] = useState('');
+  const [formData, setFormData] = useState<BookingFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-  const [bookingResult, setBookingResult] = useState<{
-    bookingNumber: string;
-    artistName: string;
-    serviceName: string;
-    date: string;
-  } | null>(null);
+  const [bookingResult, setBookingResult] = useState<BookingResult | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  // Map service IDs to booking system service types
+  const mapServiceToBookingType = useCallback((serviceId: string): string => {
+    // Specific piercing services map to 'piercing'
+    const piercingServices = ['ohr', 'mund', 'gesicht', 'koerper', 'intim', 'ohrlochzauberer'];
+    if (piercingServices.includes(serviceId)) {
+      return 'piercing';
+    }
+
+    // Tattoo services (any ID containing 'tattoo') map to 'tattoo'
+    if (serviceId.includes('tattoo')) {
+      return 'tattoo';
+    }
+
+    // Piercing services (any ID containing 'piercing') map to 'piercing'
+    if (serviceId.includes('piercing')) {
+      return 'piercing';
+    }
+
+    // Services pages use generic service IDs that should map to 'tattoo' or 'piercing' based on context
+    // For now, default to 'tattoo' for unknown services
+    return 'tattoo';
+  }, []);
+
+  // Initialize state based on preselected service - keep first step but pre-select service
+  useEffect(() => {
+    if (state.preselectedService) {
+      const bookingServiceType = mapServiceToBookingType(state.preselectedService);
+      setSelectedService(bookingServiceType);
+      // Store the specific service (e.g., "ohr", "ohrlochzauberer") for the email
+      setSpecificService(state.preselectedService);
+      // Stay on first step ('details') so user can see their selection and modify if needed
+    }
+  }, [state.preselectedService, mapServiceToBookingType]);
 
   const canProceedStep1 = selectedService !== null;
-  const canProceedStep2 = selectedArtist !== null;
-  const canProceedStep3 =
-    formData.name.trim() !== '' &&
-    formData.email.trim() !== '' &&
-    formData.phone.trim() !== '' &&
-    formData.date.trim() !== '' &&
-    formData.gdprConsent;
+  const canProceedStep2 =
+    formData.name.trim() !== '' && formData.email.trim() !== '' && formData.date.trim() !== '';
+  const canProceedStep3 = paymentMethod !== null;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
+  const resetForm = useCallback(() => {
+    setStep('details');
+    setSelectedService(null);
+    setSpecificService(null);
+    setPaymentMethod(null);
+    setProjectDetails('');
+    setFormData(INITIAL_FORM_DATA);
+    setSubmissionError(null);
+    setBookingResult(null);
+    setSuccessMessage(null);
+  }, []);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
 
-      if (!selectedService || !selectedArtist) {
-        setSubmissionError('Bitte vervollständigen Sie alle Schritte');
+      if (!selectedService || !paymentMethod) {
+        setSubmissionError(t('booking.error.completeAllSteps'));
         return;
       }
 
       const bookingData = {
         serviceId: selectedService,
-        artistId: selectedArtist,
+        specificService: specificService || undefined, // Include in email
+        paymentMethod,
+        projectDetails,
         ...formData,
       };
 
@@ -162,327 +113,149 @@ export const BookingModalMobile: React.FC<{ onClose: () => void }> = ({ onClose 
       try {
         setIsSubmitting(true);
         setSubmissionError(null);
+        setSuccessMessage(null);
 
-        const service = SERVICES.find((s) => s.id === selectedService);
-        const artist = artists.find((a) => a.id === selectedArtist);
-
+        const serviceConfig = SERVICE_CONFIG.find((s) => s.id === selectedService);
         const response = await submitBooking(bookingData);
 
         setBookingResult({
           bookingNumber: response.bookingNumber,
-          artistName: artist?.name || '',
-          serviceName: service?.title || '',
+          serviceName: serviceConfig ? t(serviceConfig.titleKey) : '',
           date: formData.date,
         });
 
+        setSuccessMessage(t('booking.confirmation.subtitle'));
+
         setStep('confirmation');
+
+        // Reset state for the next booking request (while keeping confirmation visible)
+        setSelectedService(null);
+        setSpecificService(null);
+        setPaymentMethod(null);
+        setProjectDetails('');
+        setFormData(INITIAL_FORM_DATA);
       } catch (error) {
         console.error('Booking failed:', error);
-        setSubmissionError(
-          'Buchung konnte nicht übermittelt werden. Bitte versuchen Sie es später erneut.',
-        );
+        setSubmissionError(t('booking.error.submitFailed'));
         setStep('error');
       } finally {
         setIsSubmitting(false);
       }
     },
-    [selectedService, selectedArtist, formData, artists],
+    [selectedService, specificService, paymentMethod, projectDetails, formData, t],
   );
+
+  const handleClose = useCallback(() => {
+    resetForm();
+    closeBooking();
+    onClose?.();
+  }, [onClose, resetForm, closeBooking]);
 
   return (
     <div className='booking-modal-mobile'>
-      <div className='modal-header'>
-        <h2>Termin buchen</h2>
-        <button className='close-button' onClick={onClose} aria-label='Schließen'>
-          <X size={24} />
-        </button>
+      <div
+        aria-hidden='true'
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden',
+          opacity: 0.18,
+          zIndex: 0,
+        }}
+      >
+        <Meteors number={12} />
       </div>
-
-      <div className='modal-body'>
-        {step === 'service' && (
-          <div className='step-container'>
-            <h3>Service auswählen</h3>
-            <div className='service-grid'>
-              {SERVICES.map((service) => (
-                <button
-                  key={service.id}
-                  className={`service-card ${selectedService === service.id ? 'selected' : ''}`}
-                  onClick={() => setSelectedService(service.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setSelectedService(service.id);
-                    }
-                  }}
-                  type='button'
-                >
-                  <div className='service-icon'>
-                    {service.id === 'tattoo' ? (
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='24'
-                        height='24'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                      >
-                        <path d='M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z'></path>
-                        <path d='m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18'></path>
-                        <path d='m2.3 2.3 7.286 7.286'></path>
-                        <circle cx='11' cy='11' r='2'></circle>
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='24'
-                        height='24'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                      >
-                        <circle cx='12' cy='12' r='10'></circle>
-                        <circle cx='12' cy='12' r='6'></circle>
-                        <circle cx='12' cy='12' r='2'></circle>
-                      </svg>
-                    )}
-                  </div>
-                  <h4>{service.title}</h4>
-                  <p className='price'>{service.price}</p>
-                  <ul className='features'>
-                    {service.features.map((feature) => {
-                      const Icon = feature.icon;
-                      return (
-                        <li key={`${service.id}-${feature.text}`}>
-                          <Icon size={20} />
-                          <span>{feature.text}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </button>
-              ))}
-            </div>
-            <Button
-              variant='primary'
-              disabled={!canProceedStep1}
-              onClick={() => setStep('artist')}
-              className='w-full'
-              icon={<ChevronRight size={20} />}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div className='modal-header'>
+          <h2>{t('booking.modal.title') || 'Termin buchen'}</h2>
+          {onClose && (
+            <button
+              className='close-button touch-target-mobile'
+              onClick={handleClose}
+              aria-label={t('booking.modal.close') || 'Close'}
             >
-              Weiter
-            </Button>
-          </div>
+              <X size={24} />
+            </button>
+          )}
+        </div>
+
+        <div className='booking-progress' aria-label='Buchung Fortschritt'>
+          {/* Always show 3-step progress */}
+          <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
+            1/3
+          </span>
+          <span className='booking-progress__divider' aria-hidden='true' />
+          <span className={`booking-progress__step ${step === 'personal' ? 'is-active' : ''}`}>
+            2/3
+          </span>
+          <span className='booking-progress__divider' aria-hidden='true' />
+          <span className={`booking-progress__step ${step === 'payment' ? 'is-active' : ''}`}>
+            3/3
+          </span>
+        </div>
+
+        <div className='modal-body'>
+          {step === 'details' && (
+            <ServiceSelectionStep
+              t={t}
+              selectedService={selectedService}
+              setSelectedService={setSelectedService}
+              specificService={specificService}
+              setSpecificService={setSpecificService}
+              projectDetails={projectDetails}
+              setProjectDetails={setProjectDetails}
+              canProceed={canProceedStep1}
+              onNext={() => setStep('personal')}
+            />
+          )}
+
+          {step === 'personal' && (
+            <PersonalInfoStep
+              t={t}
+              formData={formData}
+              setFormData={setFormData}
+              canProceed={canProceedStep2}
+              onBack={() => setStep('details')}
+              onNext={() => setStep('payment')}
+              onSubmit={handleSubmit}
+            />
+          )}
+
+          {step === 'payment' && (
+            <PaymentStep
+              t={t}
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+              submissionError={submissionError}
+              canProceed={canProceedStep3}
+              onBack={() => setStep('personal')}
+              onSubmit={handleSubmit}
+            />
+          )}
+        </div>
+
+        {isSubmitting && <LoadingOverlay t={t} />}
+
+        {step === 'error' && submissionError && (
+          <ErrorState
+            t={t}
+            error={submissionError}
+            isSubmitting={isSubmitting}
+            onRetry={() => setStep('payment')}
+          />
         )}
 
-        {step === 'artist' && (
-          <div className='step-container'>
-            <div className='step-header'>
-              <Button
-                variant='secondary'
-                onClick={() => setStep('service')}
-                className='p-0'
-                aria-label='Zurück zu Service auswählen'
-              >
-                <ChevronLeft size={24} />
-              </Button>
-              <h3>Künstler:in auswählen</h3>
-            </div>
-            <div className='artist-grid'>
-              {artists.map((artist) => (
-                <ArtistCard
-                  key={artist.id}
-                  name={artist.name}
-                  role={{ name: artist.role, icon: '' }}
-                  specialties={artist.specialty ? [artist.specialty] : []}
-                  experience={''}
-                  instagramHandle={''}
-                  imageUrl={artist.photo}
-                  isSelected={selectedArtist === artist.id}
-                  onClick={() => setSelectedArtist(artist.id)}
-                />
-              ))}
-            </div>
-            <Button
-              variant='primary'
-              disabled={!canProceedStep2}
-              onClick={() => setStep('contact')}
-              className='w-full'
-              icon={<ChevronRight size={20} />}
-            >
-              Weiter
-            </Button>
-          </div>
-        )}
-
-        {step === 'contact' && (
-          <form className='step-container' onSubmit={handleSubmit}>
-            <div className='step-header'>
-              <Button
-                type='button'
-                variant='secondary'
-                onClick={() => setStep('artist')}
-                className='p-0'
-                aria-label='Zurück zu Künstler:in auswählen'
-              >
-                <ChevronLeft size={24} />
-              </Button>
-              <h3>Kontaktdaten</h3>
-            </div>
-
-            <FormInput
-              id='name'
-              label='Name*'
-              type='text'
-              value={formData.name}
-              onChange={(value) => setFormData((prev) => ({ ...prev, name: value }))}
-              required
-              fieldContainerClass='form-group'
-            />
-
-            <FormInput
-              id='email'
-              label='E-Mail*'
-              type='email'
-              value={formData.email}
-              onChange={(value) => setFormData((prev) => ({ ...prev, email: value }))}
-              required
-              fieldContainerClass='form-group'
-            />
-
-            <FormInput
-              id='phone'
-              label='Telefon*'
-              type='tel'
-              value={formData.phone}
-              onChange={(value) => setFormData((prev) => ({ ...prev, phone: value }))}
-              required
-              fieldContainerClass='form-group'
-            />
-
-            <FormInput
-              id='date'
-              label='Gewünschter Termin*'
-              type='date'
-              value={formData.date}
-              onChange={(value) => setFormData((prev) => ({ ...prev, date: value }))}
-              required
-              fieldContainerClass='form-group'
-            />
-
-            <div className='form-group'>
-              <label htmlFor='message'>Nachricht (optional)</label>
-              <textarea
-                id='message'
-                name='message'
-                rows={3}
-                value={formData.message}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className='form-group checkbox-group'>
-              <input
-                type='checkbox'
-                id='gdpr-consent'
-                name='gdprConsent'
-                checked={formData.gdprConsent}
-                onChange={handleInputChange}
-                required
-              />
-              <label htmlFor='gdpr-consent'>
-                Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.*
-              </label>
-            </div>
-
-            <Button type='submit' variant='primary' disabled={!canProceedStep3} className='w-full'>
-              Termin anfragen
-            </Button>
-          </form>
+        {step === 'confirmation' && bookingResult && (
+          <ConfirmationStep
+            t={t}
+            language={language}
+            bookingResult={bookingResult}
+            messageOverride={successMessage ?? undefined}
+            onClose={handleClose}
+          />
         )}
       </div>
-
-      {/* Loading Overlay */}
-      {isSubmitting && (
-        <div className='loading-overlay'>
-          <div className='loading-spinner'>
-            <Loader2 className='animate-spin' size={48} />
-            <p>Ihre Buchung wird übermittelt...</p>
-          </div>
-        </div>
-      )}
-
-      {/* Error State */}
-      {step === 'error' && submissionError && (
-        <div className='error-state'>
-          <AlertCircle size={48} className='error-icon' />
-          <h3>Etwas ist schiefgelaufen</h3>
-          <p>{submissionError}</p>
-          <Button
-            variant='primary'
-            onClick={() => setStep('contact')}
-            disabled={isSubmitting}
-            isLoading={isSubmitting}
-            aria-label={isSubmitting ? 'Versuche erneut zu senden...' : 'Erneut versuchen'}
-          >
-            Erneut versuchen
-          </Button>
-        </div>
-      )}
-
-      {/* Confirmation Screen */}
-      {step === 'confirmation' && bookingResult && (
-        <div className='confirmation-screen'>
-          <CheckCircle2 size={64} className='success-icon' />
-          <h3>Termin bestätigt!</h3>
-          <p>Ihre Terminbuchung wurde erfolgreich übermittelt.</p>
-
-          <div className='booking-details'>
-            <div className='detail-row'>
-              <span className='detail-label'>Buchungsnummer:</span>
-              <span className='detail-value'>{bookingResult.bookingNumber}</span>
-            </div>
-            <div className='detail-row'>
-              <span className='detail-label'>Service:</span>
-              <span className='detail-value'>{bookingResult.serviceName}</span>
-            </div>
-            <div className='detail-row'>
-              <span className='detail-label'>Künstler:in:</span>
-              <span className='detail-value'>{bookingResult.artistName}</span>
-            </div>
-            <div className='detail-row'>
-              <span className='detail-label'>Datum:</span>
-              <span className='detail-value'>
-                {new Date(bookingResult.date).toLocaleDateString('de-DE', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </span>
-            </div>
-          </div>
-
-          <p className='confirmation-note'>
-            Wir haben eine Bestätigungs-E-Mail mit allen Details gesendet. Bitte überprüfen Sie Ihr
-            Postfach und den Spam-Ordner.
-          </p>
-
-          <Button
-            variant='primary'
-            onClick={onClose}
-            className='w-full'
-            aria-label='Modal schließen'
-          >
-            Schließen
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

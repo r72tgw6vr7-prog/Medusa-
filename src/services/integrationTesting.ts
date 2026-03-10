@@ -7,7 +7,7 @@ interface TestResult {
   service: string;
   status: 'success' | 'error' | 'warning';
   message: string;
-  details?: any;
+  details?: unknown;
 }
 
 interface TestSuite {
@@ -59,37 +59,19 @@ export async function testEnvironmentConfig(): Promise<TestSuite> {
   }
 
   // Test email service configuration
-  const emailServices = [
-    { name: 'SendGrid', key: 'VITE_SENDGRID_API_KEY' },
-    { name: 'Mailgun', key: 'VITE_MAILGUN_API_KEY' },
-    { name: 'Amazon SES', key: 'VITE_AWS_SES_ACCESS_KEY' },
-    { name: 'SMTP', key: 'VITE_SMTP_HOST' },
-  ];
-
-  const configuredEmailServices = emailServices.filter((service) => {
-    const value = import.meta.env[service.key];
-    return value && value !== 'your_key_here';
-  });
-
-  if (configuredEmailServices.length === 0) {
+  const selectedProvider = import.meta.env.VITE_EMAIL_PROVIDER;
+  if (!selectedProvider || selectedProvider === 'your_key_here') {
     results.push({
       service: 'Email Service',
       status: 'error',
-      message: 'No email service configured',
+      message: 'No email provider configured (VITE_EMAIL_PROVIDER missing)',
     });
     suite.failed++;
-  } else if (configuredEmailServices.length > 1) {
-    results.push({
-      service: 'Email Service',
-      status: 'warning',
-      message: `Multiple email services configured: ${configuredEmailServices.map((s) => s.name).join(', ')}`,
-    });
-    suite.warnings++;
   } else {
     results.push({
       service: 'Email Service',
       status: 'success',
-      message: `${configuredEmailServices[0].name} configured`,
+      message: `${selectedProvider} selected`,
     });
     suite.passed++;
   }
@@ -161,6 +143,7 @@ export async function testEmailService(): Promise<TestSuite> {
 
 /**
  * Test Payment Service Integration
+ * Payment processing is not currently active — skipped.
  */
 export async function testPaymentService(): Promise<TestSuite> {
   const results: TestResult[] = [];
@@ -172,57 +155,12 @@ export async function testPaymentService(): Promise<TestSuite> {
     warnings: 0,
   };
 
-  try {
-    const { GERMAN_PAYMENT_METHODS, validatePaymentMethod } = await import(
-      '../services/paymentService'
-    );
-
-    // Test each payment method configuration
-    for (const method of GERMAN_PAYMENT_METHODS) {
-      const isValid = validatePaymentMethod(method);
-
-      if (isValid) {
-        results.push({
-          service: `${method.name} (${method.provider})`,
-          status: 'success',
-          message: 'Configuration valid',
-        });
-        suite.passed++;
-      } else {
-        results.push({
-          service: `${method.name} (${method.provider})`,
-          status: 'warning',
-          message: 'Missing API keys - will be hidden from users',
-        });
-        suite.warnings++;
-      }
-    }
-
-    // Check if at least one payment method is configured
-    const validMethods = GERMAN_PAYMENT_METHODS.filter(validatePaymentMethod);
-    if (validMethods.length === 0) {
-      results.push({
-        service: 'Payment Methods',
-        status: 'error',
-        message: 'No payment methods configured',
-      });
-      suite.failed++;
-    } else {
-      results.push({
-        service: 'Payment Methods',
-        status: 'success',
-        message: `${validMethods.length} payment methods ready`,
-      });
-      suite.passed++;
-    }
-  } catch (error) {
-    results.push({
-      service: 'Payment Service',
-      status: 'error',
-      message: `Integration error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-    });
-    suite.failed++;
-  }
+  results.push({
+    service: 'Payment Service',
+    status: 'warning',
+    message: 'Payment processing not active — skipped',
+  });
+  suite.warnings++;
 
   return suite;
 }
@@ -275,7 +213,7 @@ export async function testZohoCRM(): Promise<TestSuite> {
     }
 
     // Test contact creation (dry run)
-    const testContact = {
+    const _testContact = {
       firstName: 'Test',
       lastName: 'Contact',
       email: 'test@example.com',
@@ -375,7 +313,9 @@ export async function runAllTests(): Promise<{
     readiness: 'ready' | 'needs_setup' | 'critical_issues';
   };
 }> {
-  console.log('🧪 Running integration tests...');
+  if (!import.meta.env.PROD) {
+    console.warn('🧪 Running integration tests...');
+  }
 
   const suites = await Promise.all([
     testEnvironmentConfig(),
@@ -402,10 +342,12 @@ export async function runAllTests(): Promise<{
     summary.readiness = 'ready';
   }
 
-  console.log(`✅ ${summary.passed} passed`);
-  console.log(`⚠️ ${summary.warnings} warnings`);
-  console.log(`❌ ${summary.failed} failed`);
-  console.log(`🎯 Readiness: ${summary.readiness}`);
+  if (!import.meta.env.PROD) {
+    console.warn(`✅ ${summary.passed} passed`);
+    console.warn(`⚠️ ${summary.warnings} warnings`);
+    console.warn(`❌ ${summary.failed} failed`);
+    console.warn(`🎯 Readiness: ${summary.readiness}`);
+  }
 
   return { suites, summary };
 }
@@ -415,7 +357,7 @@ export async function runAllTests(): Promise<{
  */
 export async function testFormSubmission(testData: {
   type: 'booking' | 'contact';
-  data: any;
+  data: unknown;
 }): Promise<TestResult> {
   try {
     const endpoint = testData.type === 'booking' ? '/api/booking' : '/api/contact';

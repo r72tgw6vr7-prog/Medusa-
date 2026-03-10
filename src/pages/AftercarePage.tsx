@@ -4,9 +4,14 @@
 // Comprehensive tattoo aftercare guide with healing timeline, tips, products, and warnings
 
 import React, { useState } from 'react';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { Footer } from '@/components/pages';
+import { PageHeading } from '@/components/PageHeading';
+import { SectionHeading } from '@/components/SectionHeading';
+import { Card } from '@/components/ui/Card';
+import LocalizedMeta from '@/components/LocalizedMeta';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
 import {
   CheckCircle,
   AlertTriangle,
@@ -25,11 +30,13 @@ import {
   AFTERCARE_TIPS,
   AFTERCARE_PRODUCTS,
   WARNING_SIGNS,
-} from '../data/aftercare';
+} from '@/data/aftercare';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { localizePath } from '@/i18n/utils/localizePath';
 
 export const AftercarePage: React.FC = () => {
   const [activePhase, setActivePhase] = useState<string | null>(null);
-  const [language] = useState<'de' | 'en'>('de');
+  const { language, t } = useLanguage();
 
   // Phase icons mapping
   const phaseIcons = [
@@ -46,354 +53,353 @@ export const AftercarePage: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen bg-deep-black'>
-      <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
+    <>
+      <LocalizedMeta titleKey='meta.aftercare.title' descriptionKey='meta.aftercare.description' />
+      <div className='min-h-screen bg-luxury-bg-dark lg:pt-16 md:pt-24 max-md:pt-32'>
+        <MainNavigation />
 
-      {/* Page Header - Matches Services page exactly */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px] flex flex-col gap-16'>
-            <div className='text-center'>
-              <PageHeader
-                eyebrow='Medusa München'
-                title='Tattoo Nachsorge'
-                subtitle='Ihr Leitfaden für perfekte Heilung und langanhaltende Schönheit'
-                alignment='center'
-              />
-              <div className='flex items-center justify-center gap-8 text-white/70 -mt-8'>
-                <Clock size={20} />
-                <span className='text-base'>
-                  Heilungsdauer: 2-4 Wochen oberflächlich, 3-6 Monate vollständig
-                </span>
+        {/* Page Header - Matches Services page exactly */}
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            <div className='flex flex-col gap-16'>
+              <div className='text-center'>
+                <PageHeading
+                  eyebrow={t('aftercare.pageHeading.eyebrow')}
+                  title={t('aftercare.pageHeading.title')}
+                  subtitle={t('aftercare.pageHeading.subtitle')}
+                />
+                <div className='flex items-center justify-center gap-8 text-luxury-text-inverse/70 -mt-8'>
+                  <Clock size={20} />
+                  <span className='text-(length:--text-body) font-body'>
+                    {t('aftercare.pageHeading.healingDuration')}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </Container>
+        </Section>
 
-      {/* Healing Timeline Section - Container → Section → List */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px]'>
-            <div className='text-center space-y-8 mb-16'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Prozess
-              </p>
-              <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-                Heilungsphasen
-              </h2>
+        {/* Healing Timeline Section - Container → Section → List */}
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            <div className='mb-16'>
+              <SectionHeading
+                eyebrow={t('aftercare.timeline.eyebrow')}
+                title={t('aftercare.timeline.title')}
+              />
             </div>
 
             <div className='relative'>
-              {/* Gold connecting line */}
+              {/* Chrome connecting line */}
               <div
                 className='absolute left-8 top-0 bottom-0 w-0.5 hidden md:block'
                 style={{
                   background:
-                    'linear-gradient(to bottom, transparent, var(--brand-gold) 10%, var(--brand-gold) 90%, transparent)',
+                    'linear-gradient(to bottom, transparent, var(--accent-chrome) 10%, var(--accent-chrome) 90%, transparent)',
                 }}
               />
 
               {AFTERCARE_PHASES.map((phase, index) => (
                 <div key={phase.id} className='relative md:pl-24 pb-16 last:pb-0'>
                   {/* Phase icon */}
-                  <div className='md:absolute md:left-0 w-14 h-14 bg-[var(--brand-gold)] rounded-full flex items-center justify-center text-black mb-8 md:mb-0 mx-auto md:mx-0'>
-                    <span className='hidden md:block font-bold text-xl'>{index + 1}</span>
+                  <div className='md:absolute md:left-0 w-14 h-14 bg-(--accent-chrome) rounded-full flex items-center justify-center text-luxury-text-primary mb-8 md:mb-0 mx-auto md:mx-0'>
+                    <span className='hidden md:block font-bold text-(length:--text-lg)'>
+                      {index + 1}
+                    </span>
                     <span className='md:hidden'>{phaseIcons[index]}</span>
                   </div>
 
                   {/* Phase content */}
-                  <div className='rounded-3xl border-2 border-white/10 bg-[#222222] p-8 hover:border-[var(--brand-gold)]/50 transition-all duration-200'>
+                  <Card variant='default' size='default' asChild>
                     <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-0'>
                       <div>
-                        <span className='inline-block bg-brand-gold/10 text-brand-gold px-0 py-0 rounded-full text-xs font-bold mb-0'>
-                          {phase.day}
+                        <span className='inline-block bg-brand-accent/10 text-brand-accent px-0 py-0 rounded-full text-(length:--text-sm) lg:text-(length:--text-label) font-bold mb-0'>
+                          {t(phase.dayKey)}
                         </span>
-                        <h3 className='font-headline text-2xl text-brand-gold'>
-                          {phase.title[language]}
+                        <h3 className='font-headline text-(length:--text-h4) text-brand-accent'>
+                          {t(phase.titleKey)}
                         </h3>
                       </div>
-                      <span className='text-[#C0C0C0] text-sm flex items-center gap-0'>
+                      <span className='text-(--chrome-silver) text-(length:--text-body) lg:text-(length:--text-sm) flex items-center gap-0'>
                         <Clock size={16} />
-                        {phase.duration}
+                        {t(phase.durationKey)}
                       </span>
                     </div>
 
-                    <p className='text-white/80 mb-8 leading-relaxed'>
-                      {phase.description[language]}
+                    <p className='text-(length:--text-body) text-luxury-text-inverse/80 mb-8 leading-(--line-height-normal) font-body'>
+                      {t(phase.descriptionKey)}
                     </p>
 
-                    <button
-                      onClick={() => togglePhase(phase.id)}
-                      className='text-brand-gold hover:text-brand-gold-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
-                      aria-expanded={activePhase === phase.id ? 'true' : 'false'}
-                      aria-controls={`phase-details-${phase.id}`}
-                    >
-                      {activePhase === phase.id ? 'Weniger anzeigen' : 'Details anzeigen'}
-                      <span className='text-lg'>{activePhase === phase.id ? '↑' : '→'}</span>
-                    </button>
+                    {activePhase === phase.id ? (
+                      <button
+                        onClick={() => togglePhase(phase.id)}
+                        className='text-brand-accent hover:text-brand-accent-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
+                        aria-expanded='true'
+                        aria-controls={`phase-details-${phase.id}`}
+                      >
+                        {t('aftercare.timeline.showLess')}
+                        <span className='text-(length:--text-lg)'>↑</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => togglePhase(phase.id)}
+                        className='text-brand-accent hover:text-brand-accent-hover font-medium flex items-center gap-0 transition-colors duration-200 ease-out'
+                        aria-expanded='false'
+                        aria-controls={`phase-details-${phase.id}`}
+                      >
+                        {t('aftercare.timeline.showDetails')}
+                        <span className='text-(length:--text-lg)'>→</span>
+                      </button>
+                    )}
 
                     {activePhase === phase.id && (
                       <div
                         id={`phase-details-${phase.id}`}
-                        className='mt-8 space-y-8 border-t border-[#C0C0C0]/20 pt-8'
+                        className='mt-8 space-y-8 border-t border-[rgba(var(--color-accent-silver-rgb),0.2)] pt-8'
                       >
                         <div>
-                          <h4 className='text-brand-gold font-bold mb-0 flex items-center gap-0'>
+                          <h4 className='text-brand-accent text-(length:--text-body) font-bold mb-0 flex items-center gap-0'>
                             <CheckCircle size={20} />
-                            Anweisungen:
+                            {t('aftercare.timeline.instructionsLabel')}
                           </h4>
                           <ul className='space-y-0'>
-                            {phase.instructions.map((instruction, i) => (
-                              <li key={i} className='flex items-start gap-0 text-white/80'>
-                                <span className='text-brand-gold shrink-0 mt-0'>•</span>
-                                <span>{instruction}</span>
+                            {phase.instructionKeys.map((instructionKey, i) => (
+                              <li
+                                key={i}
+                                className='flex items-start gap-0 text-(length:--text-body) text-luxury-text-inverse/80 leading-(--line-height-normal) font-body'
+                              >
+                                <span className='text-brand-accent shrink-0 mt-0'>•</span>
+                                <span>{t(instructionKey)}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
-
-                        {phase.warnings.length > 0 && (
-                          <div>
-                            <h4 className='text-red-400 font-bold mb-0 flex items-center gap-0'>
-                              <AlertTriangle size={20} />
-                              Warnungen:
-                            </h4>
-                            <ul className='space-y-0'>
-                              {phase.warnings.map((warning, i) => (
-                                <li key={i} className='flex items-start gap-0 text-white/80'>
-                                  <span className='text-red-400 shrink-0'>⚠️</span>
-                                  <span>{warning}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
                       </div>
                     )}
-                  </div>
+                  </Card>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </Container>
+        </Section>
 
-      {/* Do's & Don'ts Section - Container → Section → Grid → Cards */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px]'>
-            <div className='text-center space-y-8 mb-16'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Anleitung
-              </p>
-              <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-                Do's & Don'ts
-              </h2>
+        {/* Do's & Don'ts Section - Container → Section → Grid → Cards */}
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            <div className='mb-16'>
+              <SectionHeading
+                eyebrow={t('aftercare.dosDonts.eyebrow')}
+                title={t('aftercare.dosDonts.title')}
+              />
             </div>
 
             <div className='grid md:grid-cols-2 gap-8'>
               {/* DO's */}
               <div>
-                <h3 className='font-headline text-2xl text-green-400 mb-8 flex items-center gap-0'>
-                  <div className='w-10 rounded-full bg-green-400/20 flex items-center justify-center h-10 flex-col h-full'>
+                <h3 className='font-headline text-(length:--text-h3) text-green-400 mb-8 flex items-center gap-0'>
+                  <div className='w-10 min-h-10 rounded-full bg-green-400/20 flex flex-col h-full items-center justify-center'>
                     <CheckCircle size={24} />
                   </div>
-                  Was Sie TUN sollten
+                  {t('aftercare.dosDonts.dosTitle')}
                 </h3>
                 <div className='space-y-8'>
                   {AFTERCARE_TIPS.filter((tip) => tip.category === 'do').map((tip) => (
-                    <div
+                    <Card
                       key={tip.id}
-                      className={`bg-white/5 border rounded-lg p-4 transition-all duration-300 ${
-                        tip.critical
-                          ? 'border-[var(--brand-gold)] shadow-[0_0_10px_rgba(212,175,55,0.2)]'
-                          : 'border-green-400/30 hover:border-green-400/50'
-                      }`}
+                      variant={tip.critical ? 'featured' : 'default'}
+                      size='sm'
+                      asChild
                     >
-                      <div className='flex items-start gap-0'>
-                        <span className='text-2xl shrink-0'>{tip.icon}</span>
-                        <div className='flex-1'>
-                          <p className='text-white/90'>{tip.text[language]}</p>
-                          {tip.critical && (
-                            <span className='inline-block mt-0 text-xs text-[var(--brand-gold)] font-bold'>
-                              WICHTIG
-                            </span>
-                          )}
+                      <div>
+                        <div className='flex items-start gap-0'>
+                          <span className='text-(length:--text-h4) shrink-0'>{tip.icon}</span>
+                          <div className='flex-1'>
+                            <p className='text-(length:--text-body) text-luxury-text-inverse/90 leading-(--line-height-normal) font-body'>
+                              {t(tip.textKey)}
+                            </p>
+                            {tip.critical && (
+                              <span className='inline-block mt-0 text-(length:--text-sm) lg:text-(length:--text-label) text-(--brand-accent) font-bold'>
+                                {t('aftercare.dosDonts.importantLabel')}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   ))}
                 </div>
               </div>
 
               {/* DON'Ts */}
               <div>
-                <h3 className='font-headline text-2xl text-red-400 mb-8 flex items-center gap-0'>
-                  <div className='w-10 rounded-full bg-red-400/20 flex items-center justify-center flex-col h-10 h-full'>
-                    <span className='text-3xl leading-none'>✕</span>
+                <h3 className='font-headline text-(length:--text-h3) text-red-400 mb-8 flex items-center gap-0'>
+                  <div className='w-10 min-h-10 rounded-full bg-red-400/20 flex flex-col h-full items-center justify-center'>
+                    <span className='text-(length:--text-h3) leading-none'>✕</span>
                   </div>
-                  Was Sie NICHT tun sollten
+                  {t('aftercare.dosDonts.dontsTitle')}
                 </h3>
                 <div className='space-y-8'>
                   {AFTERCARE_TIPS.filter((tip) => tip.category === 'dont').map((tip) => (
-                    <div
+                    <Card
                       key={tip.id}
-                      className={`bg-white/5 border rounded-lg p-4 transition-all duration-300 ${
-                        tip.critical
-                          ? 'border-[var(--brand-gold)] shadow-[0_0_10px_rgba(212,175,55,0.2)]'
-                          : 'border-red-400/30 hover:border-red-400/50'
-                      }`}
+                      variant={tip.critical ? 'featured' : 'default'}
+                      size='sm'
+                      asChild
                     >
-                      <div className='flex items-start gap-0'>
-                        <span className='text-2xl shrink-0'>{tip.icon}</span>
-                        <div className='flex-1'>
-                          <p className='text-white/90'>{tip.text[language]}</p>
-                          {tip.critical && (
-                            <span className='inline-block mt-0 text-xs text-[var(--brand-gold)] font-bold'>
-                              WICHTIG
-                            </span>
-                          )}
+                      <div>
+                        <div className='flex items-start gap-0'>
+                          <span className='text-(length:--text-h4) shrink-0'>{tip.icon}</span>
+                          <div className='flex-1'>
+                            <p className='text-(length:--text-body) text-luxury-text-inverse/90 leading-(--line-height-normal) font-body'>
+                              {t(tip.textKey)}
+                            </p>
+                            {tip.critical && (
+                              <span className='inline-block mt-0 text-(length:--text-sm) lg:text-(length:--text-label) text-(--brand-accent) font-bold'>
+                                {t('aftercare.dosDonts.importantLabel')}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </Container>
+        </Section>
 
-      {/* Products Section - Container → Section → Grid → Cards */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px]'>
-            <div className='text-center space-y-8 mb-16'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Produkte
-              </p>
-              <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-                Empfohlene Produkte
-              </h2>
+        {/* Products Section - Container → Section → Grid → Cards */}
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            <div className='mb-16'>
+              <SectionHeading
+                eyebrow={t('aftercare.products.eyebrow')}
+                title={t('aftercare.products.title')}
+              />
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8'>
               {AFTERCARE_PRODUCTS.map((product) => (
-                <div
+                <Card
                   key={product.id}
-                  className={`bg-white/5 border rounded-xl p-6 hover:border-[var(--brand-gold-hover)]/40 transition-all duration-300 flex flex-col ${
-                    product.recommended ? 'border-[var(--brand-gold)]/30' : 'border-white/10'
-                  }`}
+                  variant={product.recommended ? 'featured' : 'default'}
+                  size='default'
+                  asChild
                 >
-                  {product.recommended && (
-                    <div className='bg-(--brand-gold) text-black px-0 py-0 rounded-full text-xs font-bold mb-8 self-start flex flex-col h-full'>
-                      Empfohlen
-                    </div>
-                  )}
+                  <div className='flex flex-col'>
+                    {product.recommended && (
+                      <div className='flex flex-col h-full bg-(--brand-accent) text-luxury-text-primary px-2 py-2 lg:py-(--space-0-5) rounded-full text-(length:--text-sm) lg:text-(length:--text-label) font-bold mb-4 self-start'>
+                        {t('aftercare.products.recommendedLabel')}
+                      </div>
+                    )}
 
-                  <h3 className='font-bold text-white mb-0'>{product.name}</h3>
-                  <p className='text-[#C0C0C0] text-sm mb-0 capitalize'>{product.category}</p>
-                  <p className='text-white/70 text-sm mb-8 flex-1'>
-                    {product.description[language]}
-                  </p>
+                    <h3 className='font-bold text-(length:--text-body) text-luxury-text-inverse mb-0'>
+                      {t(product.nameKey)}
+                    </h3>
+                    <p className='text-(--chrome-silver) text-(length:--text-sm) mb-0 capitalize'>
+                      {t(`aftercare.productCategories.${product.category}`)}
+                    </p>
+                    <p className='text-(length:--text-sm) text-luxury-text-inverse/70 mb-4 flex-1 leading-(--line-height-normal) font-body'>
+                      {t(product.descriptionKey)}
+                    </p>
 
-                  {product.price && (
-                    <p className='text-(--brand-gold) font-bold mb-8'>{product.price}</p>
-                  )}
+                    {product.price && (
+                      <p className='text-(--brand-accent) text-(length:--text-body) font-bold mb-4'>
+                        {product.price}
+                      </p>
+                    )}
 
-                  {product.link && (
-                    <a
-                      href={product.link}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='text-(--brand-gold) hover:text-(--brand-gold-hover) text-sm font-medium transition-colors duration-200 ease-out'
-                    >
-                      Mehr erfahren →
-                    </a>
-                  )}
-                </div>
+                    {product.link && (
+                      <a
+                        href={product.link}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='text-(--accent-chrome) hover:text-(--accent-chrome)/80 text-(length:--text-sm) font-medium transition-colors duration-200 ease-out'
+                      >
+                        {t('aftercare.products.learnMore')}
+                      </a>
+                    )}
+                  </div>
+                </Card>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </Container>
+        </Section>
 
-      {/* Warning Signs Section */}
-      <section className='py-16 px-8 sm:px-8 lg:px-8 bg-red-500/10'>
-        <div className='max-w-4xl mx-auto'>
-          <div className='bg-red-500/20 border-2 border-red-500 rounded-xl p-8'>
-            <h2 className='font-sans text-3xl text-red-400 mb-8 flex items-center gap-0'>
-              <AlertTriangle size={36} />
-              Warnzeichen
-            </h2>
-
-            <p className='text-white mb-8 text-lg'>{WARNING_SIGNS.description[language]}</p>
-
-            <ul className='space-y-0 mb-8'>
-              {WARNING_SIGNS.signs.map((sign, index) => (
-                <li key={index} className='flex items-start gap-0 text-white'>
-                  <span className='text-red-400 shrink-0 mt-0'>⚠️</span>
-                  <span>{sign[language]}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className='bg-black/30 rounded-lg p-8 border border-red-400/30'>
-              <p className='text-(--brand-gold) font-bold mb-0 flex items-center gap-0'>
-                <Phone size={20} />
-                Notfallkontakt:
-              </p>
-              <a
-                href='tel:+4989269313'
-                className='text-white text-2xl md:text-3xl font-bold hover:text-[var(--brand-gold-hover)] transition-colors block transition duration-200 ease-out'
-              >
-                +49 (0) 89 269 313
-              </a>
-              <p className='text-white/60 text-sm mt-0'>Mo-Fr: 11:30-18:30, Sa: 11:00-18:00</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className='section-padding relative z-10'>
-        <div className='responsive-container safe-area-padding'>
-          <div className='mx-auto w-full max-w-[1104px]'>
-            <div className='text-center space-y-8'>
-              <p className='text-sm uppercase tracking-[0.3em] text-white/50 font-semibold'>
-                Unterstützung
-              </p>
-              <h2 className='font-headline text-3xl md:text-4xl text-[var(--brand-gold)]'>
-                Noch Fragen?
+        {/* Warning Signs Section */}
+        <Section variant='default' spacing='normal' className='bg-red-500/10'>
+          <Container size='narrow'>
+            <div className='bg-red-500/20 border-2 border-red-500 rounded-xl p-8'>
+              <h2 className='font-headline text-(length:--text-h2) text-red-400 mb-8 flex items-center gap-0'>
+                <AlertTriangle size={36} />
+                {t(WARNING_SIGNS.titleKey)}
               </h2>
-              <p className='text-base text-white/70 max-w-2xl mx-auto font-body leading-relaxed mb-16'>
-                Unser Team steht Ihnen jederzeit zur Verfügung. Kontaktieren Sie uns bei Fragen zur
-                Nachsorge.
+
+              <p className='text-luxury-text-inverse mb-8 text-(length:--text-lg) leading-(--line-height-normal) font-body'>
+                {t(WARNING_SIGNS.descriptionKey)}
               </p>
-              <div className='flex flex-col sm:flex-row gap-8 justify-center'>
+
+              <ul className='space-y-0 mb-8'>
+                {WARNING_SIGNS.signKeys.map((signKey, index) => (
+                  <li
+                    key={index}
+                    className='flex items-start gap-0 text-(length:--text-body) text-luxury-text-inverse leading-(--line-height-normal) font-body'
+                  >
+                    <span className='text-red-400 shrink-0 mt-0'>⚠️</span>
+                    <span>{t(signKey)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className='bg-luxury-bg-dark/30 rounded-lg p-8 border border-red-400/30'>
+                <p className='text-(--brand-accent) text-(length:--text-body) font-bold mb-0 flex items-center gap-0'>
+                  <Phone size={20} />
+                  {t('aftercare.warningSigns.emergencyLabel')}
+                </p>
                 <a
-                  href='/contact'
-                  className='inline-flex items-center justify-center px-8 py-8 bg-[var(--brand-gold)] hover:bg-[var(--brand-gold-hover)] text-black font-semibold text-lg rounded-xl transition-all duration-200 min-w-[200px]'
+                  href='tel:+4989269313'
+                  className='text-luxury-text-inverse text-(length:--text-h3) font-bold hover:text-(--brand-accent-hover) transition-colors duration-200 ease-out block'
                 >
-                  Kontaktieren Sie uns
+                  +49 (0) 89 269 313
                 </a>
-                <a
-                  href='/booking'
-                  className='inline-flex items-center justify-center gap-8 px-8 py-8 border-2 border-[var(--brand-gold)] text-[var(--brand-gold)] hover:bg-[var(--brand-gold)] hover:text-black font-semibold text-lg rounded-xl transition-all duration-200 min-w-[200px]'
-                >
-                  <Calendar size={20} />
-                  Termin buchen
-                </a>
+                <p className='text-luxury-text-inverse/60 text-(length:--text-sm) mt-0'>
+                  {t('aftercare.warningSigns.hours')}
+                </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </Container>
+        </Section>
 
-      <Footer />
-    </div>
+        {/* CTA Section */}
+        <Section variant='default' spacing='normal'>
+          <Container size='default'>
+            <SectionHeading
+              eyebrow={t('aftercare.cta.eyebrow')}
+              title={t('aftercare.cta.title')}
+              subtitle={t('aftercare.cta.subtitle')}
+            />
+            <div className='flex flex-col md:flex-row gap-8 justify-center'>
+              <a
+                href={localizePath('/contact', language)}
+                className='inline-flex items-center justify-center px-8 py-8 bg-(--accent-chrome) hover:bg-(--accent-chrome)/80 text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
+              >
+                {t('aftercare.cta.contact')}
+              </a>
+              <a
+                href={localizePath('/booking', language)}
+                className='inline-flex items-center justify-center gap-8 px-8 py-8 border-2 border-(--brand-accent) text-(--brand-accent) hover:bg-(--brand-accent) hover:text-luxury-text-primary font-semibold text-(length:--text-lg) rounded-xl transition-all duration-200 min-w-50'
+              >
+                <Calendar size={20} />
+                {t('aftercare.cta.booking')}
+              </a>
+            </div>
+          </Container>
+        </Section>
+
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ export type PageType =
   | 'services'
   | 'leistungen' // German alias for services
   | 'artists'
+  | 'about'
   | 'gallery'
   | 'portfolio' // German alias for gallery
   | 'booking'

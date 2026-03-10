@@ -1,1 +1,79 @@
-/* Intentionally left blank. Filter button styling lives in src/styles/system.css. */
+/* ============================================
+   GALLERY FRAMES - Full Viewport Packed Layout
+   Token-based design with subtle hover elevation
+   Edge-to-edge frame packing on desktop/iPad
+   ============================================ */
+
+/* Mobile: Force single column full-width */
+@media (max-width: 767px) {
+  .gallery-grid-mobile {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tablet: Optimize for 2-3 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery-grid-tablet {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+  }
+}
+
+/* Gallery frame hover - subtle elevation with chrome accent */
+.gallery-frame:hover {
+  border-color: var(--brand-accent);
+}
+
+/* Image styling — subtle desaturation for cohesive portfolio look */
+.gallery-frame img {
+  filter: saturate(0.85) contrast(1.05);
+  transition: filter 0.4s ease-out, transform 0.3s ease-out;
+}
+
+.gallery-frame:hover img,
+.gallery-frame:focus-visible img {
+  filter: saturate(1) contrast(1);
+  transform: scale(1.02);
+}
+
+/* Subtle film grain overlay on gallery grid */
+.gallery-grid {
+  position: relative;
+}
+
+.gallery-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* Reduced motion: disable animations */
+@media (prefers-reduced-motion: reduce) {
+  .void-overlay {
+    display: none !important;
+  }
+
+  .gallery-frame,
+  .gallery-frame img {
+    transition: none !important;
+  }
+
+  .gallery-frame:hover {
+    transform: none !important;
+  }
+
+  .gallery-frame:hover img {
+    transform: none !important;
+  }
+}
+
+/* Touch devices: ensure full visibility and no spotlight */
+@media (hover: none) and (pointer: coarse) {
+  .void-overlay {
+    display: none !important;
+  }
+}

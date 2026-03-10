@@ -18,24 +18,24 @@
  * </Section>
  */
 
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
 // ============================================
 // Types
 // ============================================
 
-type SectionSpacing = 'none' | 'sm' | 'md' | 'lg' | 'xl';
-type SectionContainer = 'none' | 'default' | 'wide' | 'narrow';
-type SectionBackground = 'transparent' | 'dark' | 'darker' | 'gold-subtle';
+type SectionVariant = 'narrow' | 'default' | 'wide';
+type SectionSpacing = 'tight' | 'normal' | 'loose' | 'none';
+type SectionBg = 'none' | 'dark' | 'darker' | 'darkest';
 
-interface SectionProps {
+type SectionElement = 'section' | 'div' | 'article' | 'aside';
+
+interface SectionProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
   children: React.ReactNode;
+  variant?: SectionVariant;
   spacing?: SectionSpacing;
-  container?: SectionContainer;
-  background?: SectionBackground;
-  className?: string;
-  id?: string;
-  as?: 'section' | 'div' | 'article' | 'aside';
+  bg?: SectionBg;
+  as?: SectionElement;
 }
 
 // ============================================
@@ -47,32 +47,17 @@ interface SectionProps {
  * All values are multiples of 8px
  */
 const SPACING_STYLES: Record<SectionSpacing, string> = {
-  none: 'py-0',
-  sm: 'py-32 md:py-48 lg:py-64', // 32/48/64 = 4×8 / 6×8 / 8×8
-  md: 'py-48 md:py-64 lg:py-96', // 48/64/96 = 6×8 / 8×8 / 12×8
-  lg: 'py-64 md:py-96 lg:py-128', // 64/96/128 = 8×8 / 12×8 / 16×8
-  xl: 'py-96 md:py-128 lg:py-160', // 96/128/160 = 12×8 / 16×8 / 20×8
+  none: '',
+  tight: 'py-8 md:py-12 lg:py-16',
+  normal: 'py-12 md:py-16 lg:py-24',
+  loose: 'py-16 md:py-24 lg:py-32',
 };
 
-/**
- * Container width variants
- * max-w-7xl is the approved design system container
- */
-const CONTAINER_STYLES: Record<SectionContainer, string> = {
-  none: 'w-full',
-  default: 'max-w-7xl mx-auto px-16 sm:px-32 lg:px-48', // 16/32/48 = 2×8 / 4×8 / 6×8
-  wide: 'max-w-screen-xl mx-auto px-16 sm:px-32 lg:px-64', // 16/32/64 = 2×8 / 4×8 / 8×8
-  narrow: 'max-w-5xl mx-auto px-16 sm:px-32 lg:px-48', // 16/32/48 = 2×8 / 4×8 / 6×8
-};
-
-/**
- * Background variants
- */
-const BACKGROUND_STYLES: Record<SectionBackground, string> = {
-  transparent: 'bg-transparent',
-  dark: 'bg-[#1A1A1A]',
-  darker: 'bg-black',
-  'gold-subtle': 'bg-gradient-to-b from-[var(--brand-gold)]/5 to-transparent',
+const BG_STYLES: Record<SectionBg, string> = {
+  none: 'bg-transparent',
+  dark: 'bg-luxury-bg-dark',
+  darker: 'bg-luxury-bg-dark',
+  darkest: 'bg-luxury-bg-dark',
 };
 
 // ============================================
@@ -81,29 +66,33 @@ const BACKGROUND_STYLES: Record<SectionBackground, string> = {
 
 export const Section: React.FC<SectionProps> = ({
   children,
-  spacing = 'md',
-  container = 'default',
-  background = 'transparent',
+  variant = 'default',
+  spacing = 'normal',
+  bg = 'none',
   className = '',
   id,
   as: Component = 'section',
+  ...props
 }) => {
   const spacingClass = SPACING_STYLES[spacing];
-  const containerClass = CONTAINER_STYLES[container];
-  const backgroundClass = BACKGROUND_STYLES[background];
+  const bgClass = BG_STYLES[bg];
 
   return (
     <Component
       id={id}
       className={`
-        ${backgroundClass}
+        w-full
+        ${bgClass}
         ${spacingClass}
+        relative z-10
         ${className}
       `
         .trim()
         .replace(/\s+/g, ' ')}
+      data-section-variant={variant}
+      {...props}
     >
-      <div className={containerClass}>{children}</div>
+      {children}
     </Component>
   );
 };

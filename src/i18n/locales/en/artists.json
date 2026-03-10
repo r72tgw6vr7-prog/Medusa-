@@ -1,0 +1,18 @@
+{
+  "bladeAccordion": {
+    "title": "Our Artists",
+    "sectionAriaLabel": "Our Artists",
+    "loading": "Loading artists...",
+    "viewProfile": "View profile",
+    "defaultDiscipline": "Tattoo Artist"
+  },
+  "teamGrid": {
+    "title": "Our Artists",
+    "subtitle": "Meet our experienced team of tattoo artists and piercing specialists.",
+    "loading": "Loading the team...",
+    "empty": "No team members found."
+  },
+  "profile": {
+    "backToAll": "Back to all artists"
+  }
+}

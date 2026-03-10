@@ -1,24 +1,32 @@
-// TODO: Re-enable error monitoring after deployment
-// import * as Sentry from '@sentry/browser';
-// import LogRocket from 'logrocket';
-
-// Add type declaration for Vite's import.meta.env
-interface ImportMetaEnv {
-  DEV: boolean;
-  PROD: boolean;
-  MODE: string;
-}
-
 export function initErrorMonitoring() {
-  // Error monitoring disabled until deployment
   if (import.meta.env.DEV) {
-    console.info('Error monitoring disabled in development');
+    console.warn('Error monitoring: development mode — logging to console');
   }
+
+  // Catch uncaught errors
+  window.addEventListener('error', (event) => {
+    captureError(
+      event.error instanceof Error ? event.error : new Error(event.message),
+      { source: event.filename, line: event.lineno, col: event.colno },
+    );
+  });
+
+  // Catch unhandled promise rejections
+  window.addEventListener('unhandledrejection', (event) => {
+    const error =
+      event.reason instanceof Error
+        ? event.reason
+        : new Error(String(event.reason));
+    captureError(error, { type: 'unhandledrejection' });
+  });
 }
 
-export function captureError(error: Error, context?: Record<string, any>) {
-  // Error monitoring disabled until deployment
-  if (import.meta.env.DEV) {
-    console.error('Error:', error, context);
-  }
+export function captureError(error: Error, context?: Record<string, unknown>) {
+  console.error('[Error Report]:', {
+    message: error.message,
+    stack: error.stack,
+    url: window.location.href,
+    timestamp: new Date().toISOString(),
+    ...context,
+  });
 }

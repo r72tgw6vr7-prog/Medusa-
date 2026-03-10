@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import './ArtistBioModal.css';
 
 interface Artist {
@@ -12,7 +12,6 @@ interface Artist {
   photoAlt?: string;
   specialties: string[];
   experience: string;
-  instagram: string;
   bio?: {
     de: string;
     en: string;
@@ -82,17 +81,10 @@ export const ArtistBioModal = ({ artist, onClose }: ArtistBioModalProps) => {
   const isGerman = lang === 'de';
 
   return (
-    <div
-      className='artist-modal-overlay'
-      onClick={onClose}
-      onKeyDown={(e) => e.key === 'Enter' && onClose()}
-      role='button'
-      tabIndex={0}
-      aria-label={t('common.close')}
-    >
+    <div className='artist-modal-overlay' onMouseDown={onClose} role='presentation'>
       <div
         className='artist-modal-content'
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
         role='dialog'
         aria-modal='true'
         aria-labelledby='modal-title'
@@ -125,16 +117,6 @@ export const ArtistBioModal = ({ artist, onClose }: ArtistBioModalProps) => {
 
           <div className='modal-artist-meta'>
             <span className='modal-experience'>{artist.experience}</span>
-            {artist.instagram && (
-              <a
-                href={`https://instagram.com/${artist.instagram.replace('@', '')}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='modal-instagram'
-              >
-                {artist.instagram}
-              </a>
-            )}
           </div>
 
           <div className='modal-specialties'>

@@ -37,10 +37,7 @@ export const getImageWithFallback = (
         target.src = fallbackPath;
       }
     },
-    onLoad: () => {
-      // eslint-disable-next-line no-console
-      console.log(`✓ Image loaded successfully: ${primaryPath}`);
-    },
+    onLoad: () => {},
   };
 };
 

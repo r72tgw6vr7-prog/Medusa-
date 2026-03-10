@@ -39,8 +39,3 @@ export interface HomePageProps {
   onBookService?: (serviceId: string) => void;
   onBookArtist?: (artistId: string) => void;
 }
-
-export interface BookingCallToActionProps {
-  className?: string;
-  onBook?: () => void;
-}

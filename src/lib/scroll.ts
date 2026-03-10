@@ -5,7 +5,7 @@
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 declare global {
   interface Window {
@@ -13,8 +13,14 @@ declare global {
   }
 }
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// Lazy registration — only register when actually needed
+let scrollTriggerRegistered = false;
+function ensureScrollTrigger() {
+  if (!scrollTriggerRegistered) {
+    gsap.registerPlugin(ScrollTrigger);
+    scrollTriggerRegistered = true;
+  }
+}
 
 // Configuration
 interface ScrollConfig {
@@ -27,12 +33,12 @@ interface ScrollConfig {
 }
 
 const defaultConfig: ScrollConfig = {
-  smoothScroll: true,
+  smoothScroll: false, // DISABLED - Using native CSS smooth scroll for better performance
   debugMode: false, // Toggle with window.__SCROLL_DEBUG
   mobileDisabled: true, // Disable smooth scroll on mobile
-  parallaxEnabled: true,
-  sectionElevationEnabled: true,
-  revealOnScrollEnabled: true,
+  parallaxEnabled: false, // DISABLED - Too heavy, causes slowness
+  sectionElevationEnabled: false, // DISABLED - Too heavy, causes slowness
+  revealOnScrollEnabled: false, // DISABLED - Too heavy, causes slowness
 };
 
 // Main scroll controller
@@ -41,9 +47,10 @@ class ScrollController {
   private config: ScrollConfig;
   private isMobile: boolean;
   private prefersReducedMotion: boolean;
+  private textAnimationsEnabled: boolean = false;
+  private textAnimationsContext: gsap.Context | null = null;
   private initialized: boolean = false;
   private rafId: number = 0;
-  private gsapTickerCallback: ((time: number) => void) | null = null;
   private scrollTweens: gsap.core.Tween[] = [];
   private scrollTriggers: ScrollTrigger[] = [];
 
@@ -77,7 +84,11 @@ class ScrollController {
     this.setupDebugMode();
 
     // Initialize scroll-driven animations regardless of smooth scroll setting
-    this.initScrollAnimations();
+    // Only register ScrollTrigger if any feature needs it
+    if (this.config.parallaxEnabled || this.config.sectionElevationEnabled || this.config.revealOnScrollEnabled || this.textAnimationsEnabled) {
+      ensureScrollTrigger();
+    }
+    void this.initScrollAnimations();
 
     // Add event listeners for resize and visibility changes
     this.addEventListeners();
@@ -100,36 +111,80 @@ class ScrollController {
     // Add Lenis classes to document
     document.documentElement.classList.add('lenis', 'lenis-smooth');
 
-    // Initialize Lenis
+    // Initialize Lenis with PERFORMANCE-OPTIMIZED settings (faster, less smooth but snappier)
     this.lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Improved exponential easing
+      duration: 0.8, // REDUCED from 1.4 - Faster response
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out (faster)
+      gestureOrientation: 'vertical',
       orientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      // Lower smoothing on mobile if not disabled entirely
-      ...(this.isMobile && { duration: 0.8, touchMultiplier: 1.5 }),
+      wheelMultiplier: 1.2, // INCREASED from 0.8 - Faster scrolling
+      touchMultiplier: 1.8, // INCREASED from 1.5 - More responsive touch
+      infinite: false,
+      // Faster on mobile too
+      ...(this.isMobile && { duration: 0.6, touchMultiplier: 2.0 }),
     });
 
+    // Drive Lenis from native RAF (avoid GSAP ticker hijacking)
+    const raf = (time: number) => {
+      if (!this.lenis) return;
+      this.lenis.raf(time);
+      this.rafId = requestAnimationFrame(raf);
+    };
+    this.rafId = requestAnimationFrame(raf);
+
     // Keep ScrollTrigger in sync with Lenis
+    ensureScrollTrigger();
     this.lenis.on('scroll', ScrollTrigger.update);
 
-    // Drive Lenis from GSAP ticker (single frame loop)
-    gsap.ticker.lagSmoothing(0);
-    this.gsapTickerCallback = (time) => {
-      if (!this.lenis) return;
-      this.lenis.raf(time * 1000); // Convert GSAP time to milliseconds
-    };
-    gsap.ticker.add(this.gsapTickerCallback);
+    // Configure ScrollTrigger defaults - MINIMAL refreshing
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+    });
   }
 
   /**
    * Initialize all scroll-driven animations using GSAP ScrollTrigger
    */
-  private initScrollAnimations(): void {
+  private async initScrollAnimations(): Promise<void> {
     // Apply effects only if motion is not reduced
     if (this.prefersReducedMotion) return;
+
+    // FONT GATE - prevents font swap jank for any GSAP text animations
+    try {
+      await document.fonts?.ready;
+    } catch {
+      // ignore font readiness failures
+    }
+
+    // Default behavior preserves current site visuals: do nothing unless explicitly enabled.
+    if (!this.textAnimationsEnabled) return;
+
+    const nodes = document.querySelectorAll('[data-gsap-text]');
+    if (nodes.length === 0) return;
+
+    // Ensure we don't accumulate text triggers across SPA navigation.
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = gsap.context(() => {
+      nodes.forEach((node) => {
+        gsap.fromTo(
+          node,
+          { autoAlpha: 0, y: 20 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: node,
+              start: 'top 85%',
+              once: true,
+            },
+          },
+        );
+      });
+    }, document.documentElement);
 
     // Initialize different animation types based on config
     if (this.config.parallaxEnabled) {
@@ -175,7 +230,7 @@ class ScrollController {
         speedFactor = parseFloat(layer.dataset.parallaxSpeed);
       }
 
-      // Create parallax effect
+      // Create parallax effect with smooth scrubbing
       const tween = gsap.to(layer, {
         y: () => {
           const scrollDistance = window.scrollY;
@@ -185,7 +240,7 @@ class ScrollController {
         scrollTrigger: {
           start: 'top bottom',
           end: 'bottom top',
-          scrub: true,
+          scrub: 1.2, // Smooth scrub - higher = smoother but more lag
         },
       });
 
@@ -261,7 +316,8 @@ class ScrollController {
         end: '+=120%', // Pin for 120% of viewport height
         pin: true,
         pinSpacing: true,
-        scrub: 0.6, // Smooth scrubbing effect
+        scrub: 1.5, // Smoother scrubbing (higher = smoother)
+        anticipatePin: 1, // Prevents jump when pinning starts
       });
 
       this.scrollTriggers.push(trigger);
@@ -278,7 +334,8 @@ class ScrollController {
           end: `+=${pinDuration}`,
           pin: true,
           pinSpacing: true,
-          scrub: 0.6,
+          scrub: 1.5,
+          anticipatePin: 1,
         });
 
         this.scrollTriggers.push(trigger);
@@ -296,14 +353,26 @@ class ScrollController {
     // If motion is reduced, we keep everything disabled.
     if (this.prefersReducedMotion) return;
 
-    // Kill only triggers/tweens created by this controller.
+    // Kill controller-owned triggers/tweens first
     this.scrollTriggers.forEach((trigger) => trigger.kill());
     this.scrollTriggers = [];
 
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
 
-    this.initScrollAnimations();
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = null;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.refresh();
+    }, document.documentElement);
+    ctx.revert();
+
+    void this.initScrollAnimations();
+  }
+
+  public setTextAnimationsEnabled(enabled: boolean): void {
+    this.textAnimationsEnabled = enabled;
   }
 
   /**
@@ -362,6 +431,13 @@ class ScrollController {
       // Resume animations when tab is visible again
       if (this.lenis) {
         this.lenis.start();
+        const raf = (time: number) => {
+          if (!this.lenis) return;
+          this.lenis.raf(time);
+          this.rafId = requestAnimationFrame(raf);
+        };
+        cancelAnimationFrame(this.rafId);
+        this.rafId = requestAnimationFrame(raf);
       }
     }
   };
@@ -401,10 +477,6 @@ class ScrollController {
    * Clean up Lenis instance
    */
   private destroyLenis(): void {
-    if (this.gsapTickerCallback) {
-      gsap.ticker.remove(this.gsapTickerCallback);
-      this.gsapTickerCallback = null;
-    }
     if (this.lenis) {
       this.lenis.destroy();
       this.lenis = null;
@@ -432,9 +504,8 @@ class ScrollController {
     this.scrollTweens.forEach((tween) => tween.kill());
     this.scrollTweens = [];
 
-    // Kill all ScrollTrigger instances
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    ScrollTrigger.refresh();
+    this.textAnimationsContext?.revert();
+    this.textAnimationsContext = null;
 
     // Remove debug overlay
     const overlay = document.querySelector('.scroll-debug-overlay');
@@ -482,6 +553,14 @@ class ScrollController {
         window.scrollTo({ top: target, behavior: 'smooth', ...options });
       }
     }
+
+  }
+
+  /**
+   * Get the Lenis instance for direct access
+   */
+  public getLenis(): Lenis | null {
+    return this.lenis;
   }
 }
 
@@ -489,8 +568,30 @@ class ScrollController {
 export const scrollController = new ScrollController();
 
 // Export initialization function for easy import and use
-export const initScroll = (): void => {
+const initScrollMinimal = (): void => {
+  scrollController.setTextAnimationsEnabled(false);
   scrollController.init();
+};
+
+const initScrollFull = (): void => {
+  scrollController.setTextAnimationsEnabled(true);
+  scrollController.init();
+};
+
+export const scrollModes = {
+  'scroll-minimal': initScrollMinimal,
+  'scroll-full': initScrollFull,
+} as const;
+
+export const initScroll = (mode: keyof typeof scrollModes | string = 'scroll-minimal'): void => {
+  const resolvedMode: keyof typeof scrollModes =
+    typeof mode === 'string' && mode in scrollModes ? (mode as keyof typeof scrollModes) : 'scroll-minimal';
+
+  document.documentElement.style.setProperty(
+    '--gsap-text-enabled',
+    resolvedMode === 'scroll-full' ? '1' : '0',
+  );
+  scrollModes[resolvedMode]();
 };
 
 // Export for direct access if needed

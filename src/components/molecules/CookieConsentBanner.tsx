@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import type { PageType } from '../../types/page-types';
+import type { PageType } from '@/types/page-types';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
+import { Card } from '@/components/ui/Card';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CookieConsentBannerProps {
   onNavigate: (page: PageType) => void;
@@ -14,6 +16,7 @@ export interface CookiePreferences {
 }
 
 export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavigate }) => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -31,7 +34,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
       try {
         const parsed = JSON.parse(storedConsent);
         setPreferences(parsed);
-      } catch (e) {
+      } catch {
         setIsVisible(true);
       }
     }
@@ -77,41 +80,41 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
   return (
     <>
       {/* Main Banner */}
-      <div className='fixed bottom-0 left-0 right-0 bg-[rgba(34,34,34,0.95)] backdrop-blur-lg border-t border-brand-gold/20 p-8 z-50'>
-        <div className='max-w-[1104px] mx-auto'>
+      <div className='fixed bottom-0 left-0 right-0 bg-(--color-surface-dark)/95 backdrop-blur-lg border-t border-(--accent-chrome)/20 p-8 z-50'>
+        <div className='max-w-container-main mx-auto'>
           <div className='flex flex-col md:flex-row items-start md:items-center justify-between gap-8'>
             <div className='flex-1'>
-              <h2 className='text-xl font-headline text-brand-gold mb-0'>Cookie-Einstellungen</h2>
+              <h2 className='text-xl font-headline text-(--accent-chrome) mb-0'>
+                {t('common.cookies.title')}
+              </h2>
               <p className='text-brand-white text-sm mb-8 md:mb-0'>
-                Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu
-                bieten. Essentielle Cookies sind für die Grundfunktionen erforderlich. Optional
-                können Sie Analyse- und Marketing-Cookies zulassen.{' '}
+                {t('common.cookies.body')}{' '}
                 <button
                   onClick={() => onNavigate('datenschutz')}
-                  className='text-brand-gold hover:text-brand-gold-hover underline transition duration-200 ease-out'
+                  className='text-(--accent-chrome) hover:text-(--accent-chrome)/80 underline transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline'
                 >
-                  Mehr erfahren
+                  {t('common.cookies.learnMore')}
                 </button>
               </p>
             </div>
             <div className='flex flex-col sm:flex-row gap-0 w-full md:w-auto'>
               <button
                 onClick={() => setShowPreferences(true)}
-                className='px-8 py-0 border border-brand-gold text-brand-gold hover:bg-brand-gold-hover/10 rounded-lg transition-colors transition duration-200 ease-out'
+                className='px-8 py-0 border border-(--accent-chrome) text-(--accent-chrome) hover:bg-(--accent-chrome)/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Anpassen
+                {t('common.cookies.customize')}
               </button>
               <button
                 onClick={handleRejectAll}
-                className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition-colors transition duration-200 ease-out'
+                className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Ablehnen
+                {t('common.cookies.rejectAll')}
               </button>
               <button
                 onClick={handleAcceptAll}
-                className='px-8 py-0 bg-brand-gold text-brand-background hover:bg-brand-gold-hover rounded-lg transition-colors transition duration-200 ease-out'
+                className='px-8 py-0 bg-(--accent-chrome) text-(--deep-black) hover:bg-(--accent-chrome)/80 rounded-lg transition duration-200 ease-out touch-target-mobile'
               >
-                Alle akzeptieren
+                {t('common.cookies.acceptAll')}
               </button>
             </div>
           </div>
@@ -121,16 +124,16 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
       {/* Preferences Dialog */}
       <Dialog.Root open={showPreferences} onOpenChange={setShowPreferences}>
         <Dialog.Portal>
-          <Dialog.Overlay className='fixed inset-0 bg-black/50 z-50' />
-          <Dialog.Content className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-brand-background border border-brand-chrome/20 rounded-xl p-8 z-50 max-h-[90vh] overflow-y-auto'>
+          <Dialog.Overlay className='fixed inset-0 bg-luxury-bg-dark/50 z-50' />
+          <Dialog.Content className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-brand-background border border-brand-chrome/20 rounded-xl p-8 z-50 max-h-screen overflow-y-auto'>
             <div className='flex items-center justify-between mb-8'>
-              <Dialog.Title className='text-2xl font-headline text-brand-gold'>
-                Cookie-Einstellungen
+              <Dialog.Title className='text-2xl font-headline text-brand-accent'>
+                {t('common.cookies.dialogTitle')}
               </Dialog.Title>
               <Dialog.Close asChild>
                 <button
-                  className='text-brand-chrome hover:text-brand-white transition-colors transition duration-200 ease-out'
-                  aria-label='Schließen'
+                  className='text-brand-chrome hover:text-brand-white transition duration-200 ease-out touch-target-mobile touch-target-mobile-inline touch-target-mobile-center'
+                  aria-label={t('common.cookies.closeAria')}
                 >
                   <X size={24} />
                 </button>
@@ -139,71 +142,84 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ onNavi
 
             <div className='space-y-8'>
               {/* Essential Cookies */}
-              <div className='p-8 bg-brand-chrome/5 rounded-lg'>
-                <div className='flex items-center justify-between mb-0'>
-                  <h3 className='text-lg font-headline text-brand-gold'>Essentielle Cookies</h3>
-                  <input
-                    type='checkbox'
-                    checked={preferences.essential}
-                    disabled
-                    className='h-5 w-5 rounded border-brand-chrome/20'
-                  />
+              <Card variant='default' size='default' asChild>
+                <div>
+                  <div className='flex items-center justify-between mb-0'>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.essential.title')}
+                    </h3>
+                    <input
+                      type='checkbox'
+                      checked={preferences.essential}
+                      disabled
+                      aria-label={t('common.cookies.essential.aria')}
+                      className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
+                    />
+                  </div>
+                  <p className='text-sm text-brand-chrome'>
+                    {t('common.cookies.essential.description')}
+                  </p>
                 </div>
-                <p className='text-sm text-brand-chrome'>
-                  Diese Cookies sind für die Grundfunktionen der Website erforderlich und können
-                  nicht deaktiviert werden.
-                </p>
-              </div>
+              </Card>
 
               {/* Analytics Cookies */}
-              <div className='p-8 bg-brand-chrome/5 rounded-lg'>
-                <div className='flex items-center justify-between mb-0'>
-                  <h3 className='text-lg font-headline text-brand-gold'>Analyse-Cookies</h3>
-                  <input
-                    type='checkbox'
-                    checked={preferences.analytics}
-                    onChange={(e) =>
-                      setPreferences({ ...preferences, analytics: e.target.checked })
-                    }
-                    className='h-5 w-5 rounded border-brand-chrome/20'
-                  />
+              <Card variant='default' size='default' asChild>
+                <div>
+                  <div className='flex items-center justify-between mb-0'>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.analytics.title')}
+                    </h3>
+                    <input
+                      type='checkbox'
+                      checked={preferences.analytics}
+                      onChange={(e) =>
+                        setPreferences({ ...preferences, analytics: e.target.checked })
+                      }
+                      className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
+                      aria-label={t('common.cookies.analytics.aria')}
+                    />
+                  </div>
+                  <p className='text-sm text-brand-chrome'>
+                    {t('common.cookies.analytics.description')}
+                  </p>
                 </div>
-                <p className='text-sm text-brand-chrome'>
-                  Diese Cookies ermöglichen es uns, die Nutzung der Website zu analysieren und zu
-                  verbessern.
-                </p>
-              </div>
+              </Card>
 
               {/* Marketing Cookies */}
-              <div className='p-8 bg-brand-chrome/5 rounded-lg'>
-                <div className='flex items-center justify-between mb-0'>
-                  <h3 className='text-lg font-headline text-brand-gold'>Marketing-Cookies</h3>
-                  <input
-                    type='checkbox'
-                    checked={preferences.marketing}
-                    onChange={(e) =>
-                      setPreferences({ ...preferences, marketing: e.target.checked })
-                    }
-                    className='h-5 w-5 rounded border-brand-chrome/20'
-                  />
+              <Card variant='default' size='default' asChild>
+                <div>
+                  <div className='flex items-center justify-between mb-0'>
+                    <h3 className='text-lg font-headline text-brand-accent'>
+                      {t('common.cookies.marketing.title')}
+                    </h3>
+                    <input
+                      type='checkbox'
+                      checked={preferences.marketing}
+                      onChange={(e) =>
+                        setPreferences({ ...preferences, marketing: e.target.checked })
+                      }
+                      className='h-5 w-5 rounded border-brand-chrome/20 touch-target-mobile'
+                      aria-label={t('common.cookies.marketing.aria')}
+                    />
+                  </div>
+                  <p className='text-sm text-brand-chrome'>
+                    {t('common.cookies.marketing.description')}
+                  </p>
                 </div>
-                <p className='text-sm text-brand-chrome'>
-                  Diese Cookies werden verwendet, um Ihnen personalisierte Werbung anzuzeigen.
-                </p>
-              </div>
+              </Card>
             </div>
 
             <div className='flex justify-end gap-0 mt-8'>
               <Dialog.Close asChild>
-                <button className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition-colors transition duration-200 ease-out'>
-                  Abbrechen
+                <button className='px-8 py-0 border border-brand-chrome text-brand-chrome hover:bg-brand-chrome/10 rounded-lg transition-colors duration-200 ease-out touch-target-mobile'>
+                  {t('common.cookies.cancel')}
                 </button>
               </Dialog.Close>
               <button
                 onClick={handleSavePreferences}
-                className='px-8 py-0 bg-brand-gold text-brand-background hover:bg-brand-gold-hover rounded-lg transition-colors transition duration-200 ease-out'
+                className='px-4 py-2 text-base lg:text-sm font-medium bg-luxury-accent-chrome text-luxury-text-primary rounded hover:bg-luxury-accent-chrome-hover transition-colors duration-200 ease-out touch-target-mobile'
               >
-                Einstellungen speichern
+                {t('common.cookies.save')}
               </button>
             </div>
           </Dialog.Content>

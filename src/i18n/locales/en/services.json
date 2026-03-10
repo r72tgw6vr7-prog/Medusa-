@@ -1,0 +1,260 @@
+{
+  "pricing": {
+    "fromShort": "from",
+    "fromPriceRange": "from €{{price}}{{unit}}"
+  },
+  "tattooServicesPage": {
+    "heading": {
+      "eyebrow": "Medusa Munich",
+      "title": "Tattoo",
+      "subtitle": "Choose from our signature offerings and explore premium options tailored to your project."
+    },
+    "categories": {
+      "tattoo": {
+        "title": "Tattoo artistry",
+        "subtitle": "From essentials to exclusive pieces",
+        "priceFrom": "80€"
+      },
+      "piercing": {
+        "title": "Custom design",
+        "subtitle": "Bespoke concepts developed to your brief",
+        "priceFrom": "20€"
+      },
+      "products": {
+        "title": "Ink Solutions",
+        "subtitle": "Professional solutions for your tattoo projects",
+        "priceFrom": "TBD"
+      }
+    },
+    "labels": {
+      "serviceCategoriesAria": "Service categories",
+      "choosePackage": "Choose the right package",
+      "selectCategoryAria": "Select {{category}} category",
+      "showingServicesAria": "Showing {{category}} services",
+      "bookServiceAria": "{{cta}} for {{title}}"
+    },
+    "services": {
+      "tattoo": {
+        "packet-s": {
+          "title": "Package S",
+          "description": "Small tattoos—symbols, lettering, and keepsakes. Ideal if you already have a clear idea.",
+          "duration": "30 minutes",
+          "priceUnit": "–€150",
+          "features": "Personal consultation\nSmall motifs\nEfficient execution",
+          "cta": "Book now"
+        },
+        "packet-m": {
+          "title": "Package M",
+          "description": "Bespoke projects and unique designs. Includes an aftercare guide and recommended products.",
+          "duration": "1-3 hours",
+          "priceUnit": "–€480",
+          "features": "One-of-a-kind design\nAftercare guide\nPremium products",
+          "cta": "Book now"
+        },
+        "packet-l": {
+          "title": "Package L",
+          "description": "Larger projects with detailed refinement. Includes an aftercare guide and recommended products.",
+          "duration": "4-7 hours",
+          "priceUnit": "+",
+          "features": "Detailed work\nAftercare guide\nPremium products",
+          "cta": "Book now"
+        },
+        "day-session": {
+          "title": "Full day session",
+          "description": "A full-day session for larger projects and sleeves.",
+          "duration": "Full day",
+          "priceUnit": "On request",
+          "features": "Individual planning\nVIP support\nFlexible composition",
+          "cta": "Let’s talk"
+        }
+      },
+      "piercing": {
+        "dynamic-pricing": {
+          "title": "Dynamic pricing",
+          "description": "From €20 for simple motifs, symbols, or lettering. Pricing increases with size and complexity.",
+          "duration": "Up to 2 hours",
+          "priceUnit": "+",
+          "features": "Simple motifs from €20\nPricing based on complexity\nSmall to standard designs up to 2 hours",
+          "cta": "Request a consultation"
+        },
+        "free-design": {
+          "title": "Design service",
+          "description": "Get tattooed at Medusa and your design is free. Bespoke concepts included.",
+          "duration": "By appointment",
+          "priceUnit": "FREE with tattoo",
+          "features": "Design free with tattoo\nBespoke concepts\nUnlimited revisions",
+          "cta": "Enquire now"
+        },
+        "design-only": {
+          "title": "Design only",
+          "description": "Design without tattooing. Pricing depends on size and complexity.",
+          "duration": "Time as required",
+          "priceUnit": "+",
+          "features": "Digital template\nAll styles\nFast delivery",
+          "cta": "Enquire"
+        }
+      },
+      "products": {
+        "ink-solutions-info": {
+          "title": "Ink Solutions",
+          "description": "More information coming soon.",
+          "duration": "",
+          "priceUnit": "TBD",
+          "features": "Coming soon\nFurther details to follow\nContact us",
+          "cta": "Enquire"
+        }
+      }
+    }
+  }
+  ,
+  "piercingServicesPage": {
+    "heading": {
+      "eyebrow": "Medusa Munich",
+      "title": "Piercing",
+      "subtitle": "Professional piercing with over five years’ experience and the highest hygiene standards."
+    },
+    "consultation": {
+      "title": "Free consultation",
+      "subtitle": "We’ll help you choose the right piercing and placement.",
+      "whatsAppAria": "Start WhatsApp consultation"
+    },
+    "categories": {
+      "stechen": {
+        "title": "Piercing",
+        "subtitle": "Professional piercing with titanium jewellery",
+        "priceFrom": "€35"
+      },
+      "jewelry": {
+        "title": "Jewellery",
+        "subtitle": "Titanium jewellery in silver, gold & rose",
+        "priceFrom": "Included"
+      },
+      "extras": {
+        "title": "Extra services",
+        "subtitle": "Changes, removals & aftercare",
+        "priceFrom": "€5"
+      }
+    },
+    "labels": {
+      "serviceCategoriesAria": "Service categories",
+      "selectCategoryAria": "Select {{category}} category",
+      "showingServicesAria": "Showing {{category}} services",
+      "chooseOption": "Choose your option",
+      "area": "Area",
+      "option": "Option",
+      "flexible": "Flexible",
+      "hidePriceList": "Hide price list",
+      "showAllPrices": "Show all prices",
+      "priceGridName": "Piercing",
+      "priceGridFirst": "1",
+      "priceGridSecond": "2",
+      "examplePhotosAria": "Show example photos for {{name}}",
+      "photoAlt": "Example photo {{category}} {{index}}",
+      "bookServiceAria": "{{cta}} for {{title}}"
+    },
+    "services": {
+      "stechen": {
+        "ohr": {
+          "title": "Ear",
+          "description": "Lobe, helix, tragus, conch, rook, daith, industrial, and more.",
+          "duration": "15–30 min",
+          "priceUnit": "–€110",
+          "features": "Titanium jewellery included\nSterile single-use materials\nAftercare advice",
+          "cta": "Book now"
+        },
+        "mund": {
+          "title": "Mouth",
+          "description": "Lip, cheek, dahlia, lip frenulum, tongue, snake eye.",
+          "duration": "15–30 min",
+          "priceUnit": "–€150",
+          "features": "Titanium jewellery included\nMouth rinse included\nAftercare guidance",
+          "cta": "Book now"
+        },
+        "gesicht": {
+          "title": "Face",
+          "description": "Eyebrow, bridge, nose, septum, anti-eyebrow, dermal anchor.",
+          "duration": "15–30 min",
+          "priceUnit": "–€150",
+          "features": "Titanium jewellery included\nSterile environment\nFollow-up available",
+          "cta": "Book now"
+        },
+        "koerper": {
+          "title": "Body",
+          "description": "Nipple, navel, surface, dermal anchor, skindiver.",
+          "duration": "20–45 min",
+          "priceUnit": "–€160",
+          "features": "Titanium jewellery included\nAnatomy check\nPremium aftercare",
+          "cta": "Book now"
+        },
+        "intim": {
+          "title": "Intimate",
+          "description": "Professional intimate piercings. Minimum age 18.",
+          "duration": "30–45 min",
+          "priceUnit": "–€170",
+          "features": "Titanium jewellery included\nPrivate setting\nMinimum age 18",
+          "cta": "Request a consultation"
+        },
+        "ohrlochzauberer": {
+          "title": "Ear piercing wizard",
+          "description": "Child-friendly ear piercing with Aaron as the “Ear Piercing Wizard”.",
+          "duration": "20–30 min",
+          "priceUnit": "–€80",
+          "features": "Designed for children\nA magical experience\nTitanium jewellery included",
+          "cta": "Ask Aaron"
+        }
+      },
+      "jewelry": {
+        "titanium": {
+          "title": "Titanium jewellery",
+          "description": "High-quality titanium jewellery in silver—included with every piercing.",
+          "duration": "",
+          "priceUnit": "Included",
+          "features": "Hypoallergenic\nImplant-grade titanium\nSilver finish",
+          "cta": "Learn more"
+        },
+        "upgrades": {
+          "title": "Upgrades",
+          "description": "Upgrade your jewellery with gold, rose, or sparkle.",
+          "duration": "",
+          "priceUnit": "€+",
+          "features": "Titanium gold: +€5\nTitanium rose: +€5\nSparkle: +€5",
+          "cta": "Choose upgrade"
+        }
+      },
+      "extras": {
+        "entfernen": {
+          "title": "Removal",
+          "description": "Professional removal of piercings and implants.",
+          "duration": "5–15 min",
+          "priceUnit": "–€25",
+          "features": "Standard: €5\nDermal/skindiver: €10\nImplant: €25",
+          "cta": "Book appointment"
+        },
+        "service": {
+          "title": "Service",
+          "description": "Insertion, changes, shortening, and help with issues.",
+          "duration": "5–20 min",
+          "priceUnit": "–€15",
+          "features": "Insertion: €5–10\nChange: €5–10\nShortening: €5–10",
+          "cta": "Book appointment"
+        },
+        "probleme": {
+          "title": "Issues & aftercare",
+          "description": "Support for ingrown piercings and irritation bumps.",
+          "duration": "10–20 min",
+          "priceUnit": "–€15",
+          "features": "Ingrown: €5–15\nIrritation bumps: €5–15\nConsultation included",
+          "cta": "Request help"
+        },
+        "implantat": {
+          "title": "Implant",
+          "description": "Professional insertion and removal of implants.",
+          "duration": "20–45 min",
+          "priceUnit": "–€50",
+          "features": "Insertion: €50\nRemoval: €25\nConsultation beforehand",
+          "cta": "Request a consultation"
+        }
+      }
+    }
+  }
+}

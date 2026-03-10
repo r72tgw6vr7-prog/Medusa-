@@ -1,3 +1,18 @@
+/**
+ * MEDUSA DESIGN SYSTEM - CHROME EDITION
+ *
+ * UNIFIED TOKENS - Use these canonical names:
+ *
+ * Backgrounds:  --bg-page, --bg-surface, --bg-elevated
+ * Text:         --text-primary, --text-secondary, --text-tertiary
+ * Accents:      --accent-chrome (PRIMARY - NO GOLD)
+ * Cards:        --card-bg, --card-border, --card-shadow, --card-radius, --card-padding
+ * Effects:      --glow-chrome, --shadow-ambient, --shadow-elevated
+ *
+ * IMPORTANT: All gold colors have been migrated to chrome.
+ * DO NOT add gold variants. Use chrome for all accents.
+ */
+
 /* ==============================================
    MEDUSA-WEB: NORMALIZED DESIGN SYSTEM
    November 7, 2025
@@ -11,24 +26,95 @@
 
 /* 1) TOKENS */
 :root {
-  /* colors */
-  --color-brand-gold: #d4af37;
-  --brand-gold: #d4af37;
-  --brand-white: #ffffff;
-  --shadow-gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
-  --color-brand-gold-hover: #c9a961;
-  --color-brand-gold-dark: #a68646;
-  --color-brand-gold-light: #e8d4b8;
-  --color-brand-gold-rgb: 212, 175, 55;
-  --brand-gold-hover: #e5c158; /* hover gold as per spec */
-  --deep-black: #1a1a1a; /* surface darker */
-  --base-white: #ffffff;
+  font-size: 16px;
+
+  /* === PRIMARY ACCENT - CHROME (NO GOLD) === */
+  --accent-chrome: #c0c0c0;
+  --accent-chrome-rgb: 192, 192, 192;
   --chrome-silver: #c0c0c0;
-  --shadow-gold-intense: 0 4px 20px rgba(var(--color-brand-gold-rgb), 0.3);
-  --color-surface-dark: #222222;
+  --chrome-primary: #c0c0c0;
+  --chrome-subtle: rgba(192, 192, 192, 0.8);
+  --chrome-border: rgba(192, 192, 192, 0.91);
+
+  /* Chrome glow variants */
+  --chrome-glow: rgba(192, 192, 192, 0.3);
+  --chrome-glow-bright: rgba(192, 192, 192, 0.4);
+  --chrome-glow-subtle: rgba(192, 192, 192, 0.1);
+  --chrome-glow-soft: var(--chrome-glow);
+  --chrome-glow-border: var(--chrome-glow-bright);
+  --surface-atmosphere:
+    radial-gradient(circle at top, rgba(192, 192, 192, 0.08), transparent 34%),
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.03), transparent 28%),
+    linear-gradient(180deg, rgba(17, 17, 18, 0.94) 0%, rgba(10, 10, 10, 1) 28%);
+  --surface-vignette: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.26) 72%,
+    rgba(0, 0, 0, 0.46) 100%
+  );
+  --premium-hairline: rgba(255, 255, 255, 0.08);
+  --premium-hairline-strong: rgba(192, 192, 192, 0.22);
+  --premium-surface-toplight: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 22%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --premium-elevation:
+    0 18px 48px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --premium-elevation-hover:
+    0 28px 70px rgba(0, 0, 0, 0.42), 0 0 28px rgba(192, 192, 192, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  /* Brand accent tokens (chrome-based) */
+  --brand-accent: #c0c0c0;
+  --brand-accent-rgb: var(--accent-chrome-rgb);
+  --brand-accent-hover: #e8e8e8;
+  --brand-accent-muted: rgba(192, 192, 192, 0.8);
+
+  /* Base colors */
+  --brand-white: #ffffff;
+  --base-white: #ffffff;
+  --deep-black: #1a1a1a;
+
+  /* === CARD SYSTEM (FROM PRICING PAGE - SOURCE OF TRUTH) === */
+  --card-bg: #000000;
+  --card-bg-elevated: #0a0a0a;
+  --card-border: rgba(192, 192, 192, 0.91);
+  --card-shadow-depth: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  --card-shadow-glow: 0px 0px 20px rgba(192, 192, 192, 0.3);
+  --card-shadow-hover-glow: 0px 0px 25px rgba(192, 192, 192, 0.4);
+  --card-shadow-inner: inset 0px 1px 0px 2px rgba(192, 192, 192, 0.1);
+  --card-shadow: var(--card-shadow-depth), var(--card-shadow-glow), var(--card-shadow-inner);
+  --card-radius: 32px;
+  --card-padding: 32px;
+
+  --pricing-card-size: 140px;
+  --pricing-text-tier: clamp(1.125rem, 2.5vw, 1.5rem);
+  --pricing-text-price: clamp(1.5rem, 3.5vw, 1.875rem);
+  --pricing-glow-breath: rgba(192, 192, 192, 0.15);
+  --pricing-glow-pulse-duration: 3s;
+  --pricing-glow-pulse: glow-breath var(--pricing-glow-pulse-duration) ease-in-out infinite;
+
+  /* Surface card aliases */
+  --surface-card-bg: var(--card-bg);
+  --surface-card-border: var(--card-border);
+  --surface-card-border-featured: var(--card-border);
+  --surface-card-shadow: var(--card-shadow);
+  --surface-card-shadow-featured: var(--card-shadow);
+
+  /* LEGACY GOLD ALIASES - Map to chrome for backward compatibility */
+  --color-brand-gold: var(--accent-chrome);
+  --brand-gold: var(--accent-chrome);
+  --color-brand-gold-hover: rgba(192, 192, 192, 0.9);
+  --brand-gold-hover: rgba(192, 192, 192, 0.9);
+  --color-brand-gold-rgb: 192, 192, 192;
+  --shadow-gold-glow: 0 0 15px rgba(192, 192, 192, 0.3);
+  --color-surface-dark: #1a1a1a;
   --color-surface-darker: #1a1a1a;
   --color-surface-darker-rgb: 26, 26, 26;
-  --color-surface-medium: #2a2a2a;
+  --color-surface-medium: #1a1a1a;
   --color-surface-light: #3a3a3a;
   --color-text-primary: #ffffff;
   --color-text-primary-rgb: 255, 255, 255;
@@ -37,6 +123,39 @@
   --color-accent-silver: #c0c0c0;
   --color-accent-silver-rgb: 192, 192, 192;
   --color-accent-grey: #a8a8a8;
+
+  /* === SPACING SYSTEM === */
+  --section-padding-mobile: 48px;
+  --section-padding-tablet: 64px;
+  --section-padding-desktop: 96px;
+  --section-padding-lg-mobile: 64px;
+  --section-padding-lg-tablet: 96px;
+  --section-padding-lg-desktop: 144px;
+  --section-shell-padding-mobile: 24px;
+  --section-shell-padding-tablet: 32px;
+  --section-shell-padding-desktop: 48px;
+
+  /* === CONTAINER SYSTEM === */
+  /* Container Max-Widths */
+  --container-full: 100vw;
+  --container-wide: 1600px;
+  --container-max-width: 1440px; /* default */
+  --container-narrow: 1024px; /* updated from 960px */
+  --container-form: 800px;
+
+  /* Container Padding (Responsive) */
+  --container-padding-sm: 24px; /* mobile */
+  --container-padding-md: 32px; /* tablet */
+  --container-padding-lg: 48px; /* desktop */
+
+  /* === FOCUS & INTERACTION === */
+  --focus-ring: 0 0 0 3px rgba(192, 192, 192, 0.4);
+  --focus-ring-offset: 2px;
+
+  /* === ANIMATION === */
+  --ripple-duration: 600ms;
+  --ripple-delay: 0ms;
+  --glow-intensity: 0.8;
 
   /* Status Colors */
   --color-error-red: #dc2626;
@@ -65,19 +184,23 @@
   --space-56: 448px; /* 56 units */
   --space-65: 520px; /* 65 units */
 
-  /* type */
+  /* === TYPOGRAPHY SYSTEM (INCREASED DESKTOP SIZES) === */
   --font-family-primary: 'Inter', -apple-system, sans-serif;
   --font-family-heading: 'Playfair Display', serif;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --text-h1: clamp(28px, 6vw, 48px);
-  --text-h2: clamp(24px, 4.8vw, 40px);
-  --text-h2-desktop: 40px;
-  --text-h3: clamp(20px, 4vw, 32px);
+
+  /* Font sizes - INCREASED for desktop */
+  --text-h1: clamp(32px, 6vw, 56px); /* Was 28-48, now 32-56 */
+  --text-h2: clamp(28px, 5vw, 48px); /* Was 24-40, now 28-48 */
+  --text-h2-desktop: 48px;
+  --text-h3: clamp(24px, 4vw, 36px); /* Was 20-32, now 24-36 */
+  --text-h4: clamp(20px, 3.5vw, 28px);
   --text-lg: 18px;
   --text-body: 16px;
+  --text-sm: 14px;
   --text-body-small: 14px;
   --text-label: 12px;
   --text-xs: 11px;
@@ -94,24 +217,38 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.2);
 
-  /* Gold glow shadows */
-  --shadow-gold-sm: 0 0 8px 2px rgba(var(--color-brand-gold-rgb), 0.3);
-  --shadow-gold-md: 0 0 12px 4px rgba(var(--color-brand-gold-rgb), 0.4);
-  --shadow-gold-lg: 0 0 16px 6px rgba(var(--color-brand-gold-rgb), 0.5);
-  --shadow-gold: 0 4px 12px rgba(var(--color-brand-gold-rgb), 0.3);
-  --shadow-gold-hover: 0 6px 16px rgba(var(--color-brand-gold-rgb), 0.4);
-  --shadow-gold-active: 0 2px 8px rgba(var(--color-brand-gold-rgb), 0.5);
+  /* Chrome glow shadows (replacing gold) */
+  --shadow-chrome-sm: 0 0 8px 2px rgba(var(--accent-chrome-rgb), 0.3);
+  --shadow-chrome-md: 0 0 12px 4px rgba(var(--accent-chrome-rgb), 0.4);
+  --shadow-chrome-lg: 0 0 16px 6px rgba(var(--accent-chrome-rgb), 0.5);
+  --shadow-chrome: 0 4px 12px rgba(var(--accent-chrome-rgb), 0.3);
+  --shadow-chrome-hover: 0 6px 16px rgba(var(--accent-chrome-rgb), 0.4);
+  --shadow-chrome-active: 0 2px 8px rgba(var(--accent-chrome-rgb), 0.5);
 
-  /* Silver/Chrome shadows */
-  --shadow-silver-sm: 0 0 8px 2px rgba(var(--color-accent-silver-rgb), 0.3);
+  /* Legacy gold shadow aliases - now use chrome */
+  --shadow-gold-sm: var(--shadow-chrome-sm);
+  --shadow-gold-md: var(--shadow-chrome-md);
+  --shadow-gold-lg: var(--shadow-chrome-lg);
+  --shadow-gold: var(--shadow-chrome);
+  --shadow-gold-hover: var(--shadow-chrome-hover);
+  --shadow-gold-active: var(--shadow-chrome-active);
 
-  /* Focus rings */
-  --shadow-focus-ring: 0 0 0 3px rgba(var(--color-brand-gold-rgb), 0.4);
+  /* Chrome/Silver shadows */
+  --shadow-silver-sm: 0 0 8px 2px rgba(var(--accent-chrome-rgb), 0.3);
+
+  /* Chrome Glow System (shared with artist cards) */
+  --artist-chrome: rgba(192, 192, 192, 0.6);
+  --artist-chrome-glow: rgba(192, 192, 192, 0.25);
+  --artist-chrome-glow-bright: rgba(192, 192, 192, 0.45);
+  --artist-shadow-dark: rgba(0, 0, 0, 0.6);
+
+  /* Focus rings - chrome */
+  --shadow-focus-ring: 0 0 0 3px rgba(var(--accent-chrome-rgb), 0.4);
   --shadow-focus-ring-white: 0 0 0 2px var(--color-text-primary);
 
-  /* Combined shadows */
+  /* Combined shadows - chrome */
   --shadow-card-premium:
-    0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--color-brand-gold-rgb), 0.15);
+    0 4px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(var(--accent-chrome-rgb), 0.15);
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 16px;
@@ -140,9 +277,30 @@
   --z-modal: 1000;
   --z-navigation: 2000;
   --z-tooltip: 3000;
+  --z-skiplink: 9999;
 
   /* Legacy z-index aliases (for backward compatibility) */
   --z-index-header: var(--z-navigation);
+
+  /* === UNIFIED NAMING (CHROME PRIMARY) === */
+  /* Use these names going forward. */
+
+  /* Background colors - UNIFIED */
+  --bg-page: #1a1a1a; /* Canonical page background */
+  --bg-surface: #1a1a1a; /* Unified surface background */
+  --bg-elevated: #1a1a1a; /* Unified elevated background */
+
+  /* Primary accent is chrome - all gold references map to chrome */
+  --accent-gold: var(--accent-chrome); /* Maps to chrome for compatibility */
+  --accent-gold-hover: rgba(192, 192, 192, 0.9);
+  --glow-gold: var(--shadow-gold-glow); /* Now uses chrome */
+  --glow-chrome: var(--artist-chrome-glow); /* rgba(192, 192, 192, 0.25) */
+
+  /* Text colors using chrome for secondary */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(192, 192, 192, 0.8);
+  --text-tertiary: rgba(192, 192, 192, 0.6);
+  --text-muted: rgba(192, 192, 192, 0.5);
 }
 
 /* Container Definitions */
@@ -212,14 +370,14 @@
 /* stylelint-disable */
 /* @theme is Tailwind v4 syntax - required for theme customization */
 @theme {
-  /* Brand colors - primary gold palette */
-  --color-brand-500: var(--color-brand-gold);
-  --color-brand-600: var(--color-brand-gold-hover);
-  --color-brand-700: var(--color-brand-gold-dark);
+  /* Brand colors - primary chrome palette */
+  --color-brand-500: var(--accent-chrome);
+  --color-brand-600: rgba(192, 192, 192, 0.9);
+  --color-brand-700: rgba(192, 192, 192, 0.8);
 
   /* Surface colors - backgrounds */
   --color-surface-900: var(--color-surface-dark);
-  --color-surface-950: var(--color-surface-darker);
+  --color-surface-950: var(--bg-page);
   --color-surface-800: var(--color-surface-medium);
   --color-surface-700: var(--color-surface-light);
 
@@ -252,6 +410,8 @@
     font-weight: 400; /* Base text weight for T4 tests */
     line-height: var(--line-height-normal);
     background-color: var(--color-surface-dark);
+    background-image: var(--surface-atmosphere), var(--surface-vignette);
+    background-attachment: fixed;
     color: var(--color-text-primary);
   }
 
@@ -347,13 +507,13 @@
   }
 
   :where(a) {
-    color: var(--color-brand-gold);
+    color: var(--accent-chrome);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   :where(a:hover) {
-    color: var(--color-brand-gold-hover);
+    color: #ffffff;
   }
 
   :where(button, .button) {
@@ -361,7 +521,7 @@
     font-family: inherit;
   }
 
-  /* Enhanced focus styles for accessibility */
+  /* Enhanced focus styles for accessibility - chrome */
   :where(
     a:focus-visible,
     button:focus-visible,
@@ -369,7 +529,149 @@
     select:focus-visible,
     textarea:focus-visible
   ) {
-    outline: 2px solid var(--color-brand-gold);
+    outline: 2px solid var(--accent-chrome);
     outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .chrome-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: var(--card-radius);
+  }
+
+  .gallery-frame {
+    aspect-ratio: 3 / 4;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+
+  :where(.grid.grid-cols-2.md\:grid-cols-3.lg\:grid-cols-4.gap-8) > :where(.aspect-square) {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    aspect-ratio: 3 / 4;
+  }
+
+  .portfolio-card-image-container {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    aspect-ratio: 3 / 4;
+  }
+
+  .service-card-image-container {
+    filter: brightness(1.15) contrast(1.1);
+  }
+
+  .hero-text-glow {
+    text-shadow:
+      0 0 12px rgba(var(--accent-chrome-rgb), 0.55),
+      0 0 32px rgba(var(--accent-chrome-rgb), 0.25);
+  }
+
+  .chrome-divider,
+  .piercing-section-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(var(--space-3) * 2);
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 600ms cubic-bezier(0.22, 1, 0.36, 1) 1000ms forwards;
+  }
+
+  .chrome-divider.services-section-divider {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .chrome-divider::before,
+  .piercing-section-divider::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(var(--accent-chrome-rgb), 0.4),
+      transparent
+    );
+    box-shadow: 0 0 12px var(--chrome-glow-soft);
+    transition: box-shadow 200ms ease;
+  }
+
+  .chrome-divider:hover::before,
+  .piercing-section-divider:hover::before {
+    box-shadow: 0 0 12px var(--chrome-glow-border);
+  }
+
+  .navigation-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    pointer-events: none;
+  }
+
+  .navigation-divider::before {
+    height: 1px;
+  }
+
+  .footer-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    pointer-events: none;
+  }
+
+  .footer-divider::before {
+    height: 1px;
+  }
+
+  /* Accessibility: Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only-focusable:focus,
+  .sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Accessibility: Mobile tap targets (WCAG 2.1 AA - 44x44px minimum) */
+  @media (max-width: 768px) {
+    button,
+    .btn,
+    a[role='button'],
+    [role='button'] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Ensure interactive elements have adequate spacing on mobile */
+    button:not(:last-child),
+    .btn:not(:last-child),
+    a[role='button']:not(:last-child) {
+      margin-right: 8px;
+    }
   }
 }

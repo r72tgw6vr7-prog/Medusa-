@@ -1,8 +1,11 @@
 import React from 'react';
+import Container from '../components/ui/Container';
+import InfiniteLogoCarousel from '@/components/organisms/InfiniteLogoCarousel';
 import TestimonialsCarousel from '@/components/organisms/TestimonialsCarousel';
-import './PartnersAndTestimonialsSection.css';
+import { SectionHeading } from '@/components/SectionHeading';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-// PARTNER LOGOS - REFINEMENT #4: Only 4 real partners - FIXED WITH CORRECT PATHS
+// PARTNER LOGOS - Updated list with latest partners
 const partnerLogos = [
   {
     id: 'iamrobot',
@@ -11,16 +14,40 @@ const partnerLogos = [
     alt: 'I AM ROBOT NFC Chip Implants Logo',
   },
   {
-    id: 'nannybag',
-    name: 'nannybag',
-    src: '/assets/images/photos/partners/nannybag-logo.svg',
-    alt: 'nannybag Logo',
+    id: 'partner-1',
+    name: 'Partner 1',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.34.53%201.svg',
+    alt: 'Partner Logo 1',
   },
   {
-    id: 'bqla',
-    name: 'BQLA',
-    src: '/assets/images/photos/partners/bqla-logo.svg',
-    alt: 'BQLA Partner Logo',
+    id: 'partner-2',
+    name: 'Partner 2',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.35.16%201.svg',
+    alt: 'Partner Logo 2',
+  },
+  {
+    id: 'partner-3',
+    name: 'Partner 3',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.36.16%201.svg',
+    alt: 'Partner Logo 3',
+  },
+  {
+    id: 'upgraded-humans',
+    name: 'Upgraded Humans',
+    src: '/assets/images/icons/Simplification.svg',
+    alt: 'Upgraded Humans Partner Logo',
+  },
+  {
+    id: 'wepiercing',
+    name: 'Wepiercing',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.50.07%201_layerstyle.svg',
+    alt: 'Wepiercing Partner Logo',
+  },
+  {
+    id: 'tutto-tattoo',
+    name: 'Tutto Tattoo',
+    src: '/assets/images/icons/Screenshot%202026-02-02%20at%2008.49.30%201_layerstyle.svg',
+    alt: 'Tutto Tattoo Partner Logo',
   },
 ];
 
@@ -31,54 +58,31 @@ export interface PartnersAndTestimonialsSectionProps {
 }
 
 export const PartnersAndTestimonialsSection: React.FC<PartnersAndTestimonialsSectionProps> = ({
-  titlePartners = 'Unsere Partner & Presse',
-  subtitlePartners = 'Vertrauensvolle Partnerschaften mit führenden Marken der Branche',
-  titleTestimonials = 'Was Kunden sagen',
+  titlePartners,
+  subtitlePartners,
+  titleTestimonials,
 }) => {
-  // REFINEMENT #4: Duplicate array × 3 for seamless loop
-  const scrollItems = [...partnerLogos, ...partnerLogos, ...partnerLogos];
+  const { t } = useLanguage();
+  const resolvedTitlePartners = titlePartners ?? t('common.partners.title');
+  const resolvedSubtitlePartners = subtitlePartners ?? t('common.partners.subtitle');
+  const resolvedTitleTestimonials = titleTestimonials ?? t('common.testimonials.title');
 
   return (
     <section className='w-full relative z-10' aria-label='Partners and Testimonials'>
-      <div className='max-w-[1200px] mx-auto px-8 sm:px-8 lg:px-16 py-16 md:py-24 lg:py-24'>
+      <Container className='py-16 md:py-24 lg:py-24'>
         {/* PARTNERS */}
-        <div className='text-center mb-8'>
-          <h2 className="font-['Playfair_Display'] text-[32px] lg:text-[48px] font-semibold leading-tight text-[#D4AF37]">
-            {titlePartners}
-          </h2>
-        </div>
-        <p className='text-center text-white/70 text-[14px] mb-16 font-[Inter]'>
-          {subtitlePartners}
-        </p>
+        <SectionHeading
+          title={resolvedTitlePartners}
+          subtitle={resolvedSubtitlePartners}
+          level='secondary'
+        />
 
-        {/* Partner Logos Carousel - Restored with gold styling */}
-        <div className='partners-carousel-wrapper'>
-          <div
-            className='partners-carousel-container'
-            role='region'
-            aria-label='Partners and Press carousel'
-          >
-            <div className='partners-carousel-track' aria-hidden='true'>
-              {scrollItems.map((logo, idx) => (
-                <div key={`${logo.id}-${idx}`} className='partners-logo' title={logo.name}>
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      console.error('Failed to load logo:', logo.src);
-                      target.style.display = 'none';
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+        {/* Partner Logos Carousel */}
+        <InfiniteLogoCarousel items={partnerLogos} ariaLabel={t('common.partners.carouselAria')} />
+      </Container>
 
       {/* TESTIMONIALS */}
-      <TestimonialsCarousel title={titleTestimonials} />
+      <TestimonialsCarousel title={resolvedTitleTestimonials} />
     </section>
   );
 };

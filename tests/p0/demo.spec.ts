@@ -7,6 +7,13 @@ import { test, expect } from '@playwright/test';
  * It can run without a local dev server by testing against a simple webpage.
  */
 
+declare global {
+  interface Window {
+    __TEST_EVENTS__: string[];
+    trackEvent: (event: string) => void;
+  }
+}
+
 test.describe('P0 Framework Demo', () => {
   test('should validate test framework setup', async ({ page }) => {
     // Navigate to a simple test page
@@ -20,7 +27,7 @@ test.describe('P0 Framework Demo', () => {
     await page.screenshot({ path: 'tests/p0/artifacts/demo-framework-test.png' });
     
     // Test computed styles (T4 style)
-    const h1FontWeight = await page.locator('h1').evaluate(el => 
+    const h1FontWeight = await page.locator('h1').evaluate((el) => 
       window.getComputedStyle(el).fontWeight
     );
     
@@ -33,8 +40,6 @@ test.describe('P0 Framework Demo', () => {
     }));
     
     expect(scrollPosition.y).toBe(0);
-    
-    console.log('✅ P0 Test Framework validation complete');
   });
 
   test('should validate helper functions', async ({ page }) => {
@@ -53,21 +58,19 @@ test.describe('P0 Framework Demo', () => {
     
     // Test analytics-style event tracking (mocked)
     await page.addInitScript(() => {
-      (window as any).__TEST_EVENTS__ = [];
-      (window as any).trackEvent = (event: string) => {
-        (window as any).__TEST_EVENTS__.push(event);
+      window.__TEST_EVENTS__ = [];
+      window.trackEvent = (event: string) => {
+        window.__TEST_EVENTS__.push(event);
       };
     });
     
     await page.reload(); // Reload to apply the init script
     
     await page.evaluate(() => {
-      (window as any).trackEvent('test_button_click');
+      window.trackEvent('test_button_click');
     });
     
-    const events = await page.evaluate(() => (window as any).__TEST_EVENTS__);
+    const events = await page.evaluate(() => window.__TEST_EVENTS__);
     expect(events).toContain('test_button_click');
-    
-    console.log('✅ Helper functions validation complete');
   });
 });

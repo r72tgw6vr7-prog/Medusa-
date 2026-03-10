@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { TrustBadge } from '../atoms/TrustBadge';
+import { TrustBadge } from '@/components/atoms/TrustBadge';
 
 interface TrustBadge {
   icon: string;
@@ -24,37 +24,87 @@ export const TrustBadgeCarousel: React.FC<TrustBadgeCarouselProps> = ({
   useEffect(() => {
     if (!autoScroll || !scrollRef.current) return;
 
+    const prefersReducedMotion =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches || false;
+    if (prefersReducedMotion) return;
+
     const scrollContainer = scrollRef.current;
-    const scrollWidth = scrollContainer.scrollWidth;
-    const clientWidth = scrollContainer.clientWidth;
 
-    // Only animate if content is wider than container
-    if (scrollWidth <= clientWidth) return;
+    let scrollWidth = 0;
+    let clientWidth = 0;
 
-    let animationId: number;
+    const measure = () => {
+      scrollWidth = scrollContainer.scrollWidth;
+      clientWidth = scrollContainer.clientWidth;
+    };
+
+    measure();
+
+    let animationId = 0;
     let startTime: number | null = null;
-    let currentPosition = 0;
+    let running = false;
+
+    const start = () => {
+      if (!running || animationId) return;
+      if (scrollWidth <= clientWidth) return;
+      startTime = null;
+      animationId = requestAnimationFrame(animate);
+    };
 
     const animate = (timestamp: number) => {
+      if (!running) return;
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
 
-      // Calculate position based on elapsed time
-      currentPosition = (elapsed / speed) * scrollWidth;
+      // Only animate if content is wider than container
+      if (scrollWidth <= clientWidth) {
+        animationId = 0;
+        return;
+      }
+
+      const currentPosition = (elapsed / speed) * scrollWidth;
 
       // Reset when we've scrolled through the full width
       if (currentPosition >= scrollWidth - clientWidth) {
         startTime = timestamp;
-        currentPosition = 0;
       }
 
       scrollContainer.scrollLeft = currentPosition % (scrollWidth - clientWidth);
       animationId = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(animate);
+    const ro = 'ResizeObserver' in globalThis ? new ResizeObserver(() => {
+      measure();
+      start();
+    }) : null;
+
+    ro?.observe(scrollContainer);
+    window.addEventListener('resize', measure);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        running = entry.isIntersecting;
+
+        if (running) {
+          measure();
+          start();
+          return;
+        }
+
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = 0;
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    io.observe(scrollContainer);
 
     return () => {
+      io.disconnect();
+      window.removeEventListener('resize', measure);
+      ro?.disconnect();
       if (animationId) cancelAnimationFrame(animationId);
     };
   }, [autoScroll, speed]);
@@ -62,7 +112,7 @@ export const TrustBadgeCarousel: React.FC<TrustBadgeCarouselProps> = ({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {/* Gradient fade on left side */}
-      <div className='absolute left-0 top-0 h-full w-12 bg-linear-to-r from-[var(--deep-black)] to-transparent z-10'></div>
+      <div className='absolute left-0 top-0 h-full w-12 bg-linear-to-r from-(--deep-black) to-transparent z-10'></div>
 
       <div
         ref={scrollRef}
@@ -88,7 +138,7 @@ export const TrustBadgeCarousel: React.FC<TrustBadgeCarouselProps> = ({
       </div>
 
       {/* Gradient fade on right side */}
-      <div className='absolute right-0 top-0 h-full w-12 bg-linear-to-l from-[var(--deep-black)] to-transparent z-10'></div>
+      <div className='absolute right-0 top-0 h-full w-12 bg-linear-to-l from-(--deep-black) to-transparent z-10'></div>
     </div>
   );
 };

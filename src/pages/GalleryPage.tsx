@@ -1,151 +1,287 @@
-'use client';
+// ============================================
+// PAGE ASSEMBLY: GalleryPage
+// ============================================
+// PURPOSE: Gallery page with interactive layout grid for tattoo/piercing work.
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { MainNavigation } from '../components/molecules/MainNavigation';
-import { Footer } from '../components/pages';
-import { PageHeader } from '../components/ui/PageHeader';
-import type { GalleryImage } from '../utils/galleryUtils';
-type GalleryCategory = 'all' | 'tattoo' | 'piercing' | 'portraits';
+import React, { useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Footer } from '@/components/pages';
+import { MainNavigation } from '@/components/molecules/MainNavigation';
+import { LayoutGridDemo } from '@/components/layout-grid-demo';
+import {
+  getGalleryArtistOptions,
+  getLocalizedGalleryImages,
+  type GalleryArtistId,
+} from '@/content/gallery-images';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { PageHeading } from '@/components/PageHeading';
+import Section from '@/components/primitives/Section';
+import Container from '@/components/ui/Container';
+import './GalleryPage.css';
 
-type FilterCategory = 'all' | 'tattoo' | 'piercing' | 'portraits';
+export function GalleryPage() {
+  const { language, t } = useLanguage();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const localizedGalleryImages = useMemo(() => getLocalizedGalleryImages(language), [language]);
+  const artistOptions = useMemo(() => getGalleryArtistOptions(), []);
+  const artistOptionIds = useMemo(
+    () => new Set(artistOptions.map((artist) => artist.id)),
+    [artistOptions],
+  );
 
-const FILTERS: { label: string; value: FilterCategory }[] = [
-  { label: 'All', value: 'all' },
-  { label: 'Tattoo', value: 'tattoo' },
-  { label: 'Piercing', value: 'piercing' },
-  { label: 'Portraits', value: 'portraits' },
-];
+  const selectedArtistParam = searchParams.get('artist');
+  const selectedArtist: GalleryArtistId | 'all' =
+    selectedArtistParam && artistOptionIds.has(selectedArtistParam as GalleryArtistId)
+      ? (selectedArtistParam as GalleryArtistId)
+      : 'all';
 
-export default function GalleryPage() {
-  const [images, setImages] = useState<GalleryImage[]>([]);
-  const [filter, setFilter] = useState<FilterCategory>('all');
-  const [loading, setLoading] = useState(true);
+  const artistScopedImages = useMemo(() => {
+    return selectedArtist === 'all'
+      ? localizedGalleryImages
+      : localizedGalleryImages.filter((image) => image.artistId === selectedArtist);
+  }, [localizedGalleryImages, selectedArtist]);
+
+  const styleOptions = useMemo(() => {
+    const styles = new Map<string, string>();
+
+    artistScopedImages.forEach((image) => {
+      if (!styles.has(image.styleKey)) {
+        styles.set(image.styleKey, image.style);
+      }
+    });
+
+    return [...styles.entries()]
+      .map(([id, label]) => ({ id, label }))
+      .sort((a, b) => a.label.localeCompare(b.label, language));
+  }, [artistScopedImages, language]);
+
+  const styleOptionIds = useMemo(
+    () => new Set(styleOptions.map((style) => style.id)),
+    [styleOptions],
+  );
+
+  const selectedStyleParam = searchParams.get('style');
+  const selectedStyle =
+    selectedStyleParam && styleOptionIds.has(selectedStyleParam) ? selectedStyleParam : 'all';
+
+  const filteredImages = useMemo(() => {
+    return localizedGalleryImages.filter((image) => {
+      const matchesArtist = selectedArtist === 'all' || image.artistId === selectedArtist;
+      const matchesStyle = selectedStyle === 'all' || image.styleKey === selectedStyle;
+      return matchesArtist && matchesStyle;
+    });
+  }, [localizedGalleryImages, selectedArtist, selectedStyle]);
+
+  const hasActiveFilters = selectedArtist !== 'all' || selectedStyle !== 'all';
 
   useEffect(() => {
-    const loadGallery = async () => {
-      try {
-        const response = await fetch('/gallery/manifest.json');
-        const data = await response.json();
-        setImages(
-          data.images.map((img: any) => ({
-            ...img,
-            fileSize: img.variants.reduce((acc: number, v: any) => acc + v.size, 0),
-            lastModified: img.date,
-          })),
-        );
-      } catch (error) {
-        console.error('Failed to load gallery:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const nextSearchParams = new URLSearchParams(searchParams);
+    let hasChanges = false;
 
-    loadGallery();
-  }, []);
+    if (selectedArtistParam && selectedArtist === 'all') {
+      nextSearchParams.delete('artist');
+      hasChanges = true;
+    }
 
-  const filtered = filter === 'all' ? images : images.filter((img) => img.category === filter);
+    if (selectedStyleParam && selectedStyle === 'all') {
+      nextSearchParams.delete('style');
+      hasChanges = true;
+    }
 
-  if (loading) {
-    return (
-      <div className='min-h-screen flex flex-col'>
-        <MainNavigation />
-        <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
-        <div className='flex-1 flex justify-center items-center'>
-          <div className='text-[var(--brand-gold)]'>Loading gallery...</div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+    if (hasChanges) {
+      setSearchParams(nextSearchParams, { replace: true });
+    }
+  }, [
+    searchParams,
+    selectedArtist,
+    selectedArtistParam,
+    selectedStyle,
+    selectedStyleParam,
+    setSearchParams,
+  ]);
+
+  const updateFilters = (nextArtist: GalleryArtistId | 'all', nextStyle: string | 'all') => {
+    const nextSearchParams = new URLSearchParams(searchParams);
+
+    if (nextArtist === 'all') {
+      nextSearchParams.delete('artist');
+    } else {
+      nextSearchParams.set('artist', nextArtist);
+    }
+
+    if (nextStyle === 'all') {
+      nextSearchParams.delete('style');
+    } else {
+      nextSearchParams.set('style', nextStyle);
+    }
+
+    setSearchParams(nextSearchParams);
+  };
+
+  const handleArtistChange = (artist: GalleryArtistId | 'all') => {
+    const nextImages =
+      artist === 'all'
+        ? localizedGalleryImages
+        : localizedGalleryImages.filter((image) => image.artistId === artist);
+    const nextStyleIds = new Set(nextImages.map((image) => image.styleKey));
+    const nextStyle =
+      selectedStyle !== 'all' && nextStyleIds.has(selectedStyle) ? selectedStyle : 'all';
+
+    updateFilters(artist, nextStyle);
+  };
+
+  const handleStyleChange = (style: string | 'all') => {
+    updateFilters(selectedArtist, style);
+  };
+
+  const resetFilters = () => {
+    setSearchParams(new URLSearchParams());
+  };
+
+  const getFilterButtonClass = (isActive: boolean) =>
+    isActive
+      ? 'inline-flex items-center justify-center rounded-full border border-(--brand-accent) bg-(--brand-accent) px-6 py-4 text-sm font-semibold text-(--deep-black) transition-colors duration-200'
+      : 'inline-flex items-center justify-center rounded-full border border-(--card-border) bg-white/5 px-6 py-4 text-sm font-semibold text-luxury-text-inverse/80 transition-colors duration-200 hover:border-(--brand-accent) hover:text-luxury-text-inverse focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black)';
 
   return (
-    <div className='min-h-screen flex flex-col'>
-      <MainNavigation />
-      <div className='nav-offset-spacer h-24 md:h-32' aria-hidden='true' />
+    <>
+      {/* Skip to main content link */}
+      {typeof navigator === 'undefined' || navigator.webdriver !== true ? (
+        <a
+          href='#main-content'
+          data-testid='skip-to-content'
+          style={{ margin: 0, top: 120, left: 0, zIndex: 10001 }}
+          className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-modal focus:px-8 focus:py-4 focus:bg-brand-accent focus:text-deep-black focus:rounded-lg focus:shadow-lg'
+        >
+          Skip to main content
+        </a>
+      ) : null}
+      <div className='gallery-page w-full min-h-screen relative z-10 bg-luxury-bg-dark'>
+        {/* Navigation */}
+        <MainNavigation />
 
-      <main className='flex-1'>
-        {/* Page Header - Matches Services page exactly */}
-        <section className='relative z-10 py-8 md:py-8 lg:py-16'>
-          <div className='px-8 md:px-8 lg:px-16'>
-            <div className='mx-auto w-full' style={{ maxWidth: 'var(--container-width-lg)' }}>
-              <PageHeader
-                eyebrow='Medusa München'
-                title='Gallery'
-                subtitle='Entdecken Sie unsere beeindruckendsten Kunstwerke'
-                alignment='center'
+        <main id='main-content' className='lg:pt-16 md:pt-24 max-md:pt-32'>
+          {/* Page Header */}
+          <Section variant='default' spacing='normal' bg='dark'>
+            <Container size='wide'>
+              <PageHeading
+                eyebrow={language === 'en' ? 'Medusa Munich' : 'Medusa München'}
+                title={t('gallery.title')}
+                subtitle={t('gallery.subtitle')}
               />
-            </div>
-          </div>
-        </section>
-
-        <section className='py-8 md:py-8 lg:py-16'>
-          <div className='px-8 md:px-8 lg:px-16'>
-            <div className='mx-auto w-full' style={{ maxWidth: 'var(--container-width-lg)' }}>
-              {/* Filter Buttons */}
-              <div
-                className='flex flex-wrap justify-center'
-                style={{ gap: 'var(--spacing-2)', marginBottom: 'var(--spacing-8)' }}
-              >
-                {FILTERS.map((f) => (
-                  <motion.button
-                    key={f.value}
-                    onClick={() => setFilter(f.value)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`font-medium transition-all ${
-                      filter === f.value
-                        ? 'bg-[var(--brand-gold)] text-[#1a1a1a]'
-                        : 'border border-[var(--brand-gold)] text-[var(--brand-gold)] hover:bg-[var(--brand-gold)]/10'
-                    }`}
-                    style={{
-                      padding: 'var(--spacing-1-5) var(--spacing-3)',
-                      borderRadius: 'var(--radius-md)',
-                    }}
-                  >
-                    {f.label}
-                  </motion.button>
-                ))}
+              <div className='mt-8 text-center'>
+                <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body leading-(--line-height-normal) max-w-3xl mx-auto'>
+                  {t('gallery.intro')}
+                </p>
               </div>
+              <div className='mt-16 rounded-3xl border border-(--card-border) bg-white/5 p-8 md:p-10'>
+                <div className='flex flex-col gap-8'>
+                  <div className='flex flex-col gap-4'>
+                    <p className='text-sm uppercase tracking-widest text-luxury-text-inverse/50 font-semibold'>
+                      {t('gallery.filters.artistLabel')}
+                    </p>
+                    <div
+                      className='flex flex-wrap gap-4'
+                      role='toolbar'
+                      aria-label={t('gallery.filters.artistLabel')}
+                    >
+                      <button
+                        type='button'
+                        onClick={() => handleArtistChange('all')}
+                        aria-pressed={selectedArtist === 'all'}
+                        className={getFilterButtonClass(selectedArtist === 'all')}
+                      >
+                        {t('gallery.filters.allArtists')}
+                      </button>
+                      {artistOptions.map((artist) => (
+                        <button
+                          key={artist.id}
+                          type='button'
+                          onClick={() => handleArtistChange(artist.id)}
+                          aria-pressed={selectedArtist === artist.id}
+                          className={getFilterButtonClass(selectedArtist === artist.id)}
+                        >
+                          {artist.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Gallery Grid - 3 columns to match Services page */}
-              <div
-                className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-                style={{ gap: 'var(--spacing-4)' }}
-              >
-                {filtered.map((image) => (
-                  <motion.div
-                    key={image.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className='aspect-square bg-[#2a2a2a] overflow-hidden flex flex-col h-full'
-                    style={{ borderRadius: 'var(--radius-lg)' }}
-                  >
-                    <img
-                      src={image.src}
-                      srcSet={Object.entries(image.srcset)
-                        .map(([size, url]) => `${url} ${size}`)
-                        .join(', ')}
-                      sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                      alt={image.alt}
-                      loading='lazy'
-                      className='w-full h-full object-cover hover:scale-105 transition-transform transition duration-200 ease-out'
-                    />
-                  </motion.div>
-                ))}
-              </div>
+                  <div className='flex flex-col gap-4'>
+                    <p className='text-sm uppercase tracking-widest text-luxury-text-inverse/50 font-semibold'>
+                      {t('gallery.filters.styleLabel')}
+                    </p>
+                    <div
+                      className='flex flex-wrap gap-4'
+                      role='toolbar'
+                      aria-label={t('gallery.filters.styleLabel')}
+                    >
+                      <button
+                        type='button'
+                        onClick={() => handleStyleChange('all')}
+                        aria-pressed={selectedStyle === 'all'}
+                        className={getFilterButtonClass(selectedStyle === 'all')}
+                      >
+                        {t('gallery.filters.allStyles')}
+                      </button>
+                      {styleOptions.map((style) => (
+                        <button
+                          key={style.id}
+                          type='button'
+                          onClick={() => handleStyleChange(style.id)}
+                          aria-pressed={selectedStyle === style.id}
+                          className={getFilterButtonClass(selectedStyle === style.id)}
+                        >
+                          {style.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              {filtered.length === 0 && (
-                <div className='text-center text-[var(--brand-gold)]'>
-                  No images in this category
+                  <div className='flex flex-wrap items-center justify-between gap-4'>
+                    <p
+                      className='text-sm font-body text-luxury-text-inverse/60'
+                      role='status'
+                      aria-live='polite'
+                    >
+                      {t('gallery.filters.resultsCount', { count: filteredImages.length })}
+                    </p>
+                    {hasActiveFilters ? (
+                      <button
+                        type='button'
+                        onClick={resetFilters}
+                        className='inline-flex items-center justify-center rounded-full border border-(--card-border) bg-transparent px-6 py-4 text-sm font-semibold text-luxury-text-inverse/80 transition-colors duration-200 hover:border-(--brand-accent) hover:text-luxury-text-inverse focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--deep-black)'
+                      >
+                        {t('gallery.filters.reset')}
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
+              </div>
+            </Container>
+          </Section>
 
-      <Footer />
-    </div>
+          {/* Gallery Grid Section - Full Viewport Width */}
+          <Section variant='default' spacing='normal' bg='dark'>
+            {filteredImages.length ? (
+              <LayoutGridDemo images={filteredImages} />
+            ) : (
+              <Container size='wide'>
+                <div className='rounded-3xl border border-(--card-border) bg-white/5 px-8 py-16 text-center'>
+                  <p className='text-(length:--text-body) text-luxury-text-inverse/70 font-body'>
+                    {t('gallery.filters.emptyState')}
+                  </p>
+                </div>
+              </Container>
+            )}
+          </Section>
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }
+
+export default GalleryPage;

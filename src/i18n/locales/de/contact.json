@@ -1,0 +1,84 @@
+{
+  "eyebrow": "Kontaktieren Sie uns",
+  "title": "Kontakt",
+  "subtitle": "Wir begleiten Sie von der ersten Idee bis zum finalen Meisterwerk. Schreiben Sie uns – wir melden uns zeitnah zurück.",
+  "sections": {
+    "directEmail": "Direkte E-Mail",
+    "otherWays": "Oder kontaktieren Sie uns direkt",
+    "quickMessage": "Nachricht senden"
+  },
+  "reasons": {
+    "label": "Was möchten Sie anfragen?",
+    "tattoo": {
+      "title": "Tattoo",
+      "subtitle": "Beratung & Termine"
+    },
+    "piercing": {
+      "title": "Piercing",
+      "subtitle": "Schmuck & Pflege"
+    },
+    "general": {
+      "title": "Allgemein",
+      "subtitle": "Fragen & Sonstiges"
+    }
+  },
+  "actions": {
+    "clickToCopy": "Klicken zum Kopieren",
+    "copied": "Kopiert!"
+  },
+  "otherWays": {
+    "calendly": {
+      "subtitle": "30 Min. buchen"
+    },
+    "whatsapp": {
+      "subtitle": "Direkt schreiben"
+    }
+  },
+  "privacyConsent": {
+    "prefix": "Ich habe die",
+    "linkText": "Datenschutzerklärung",
+    "suffix": "gelesen und akzeptiere sie *"
+  },
+  "submit": {
+    "sending": "Wird gesendet...",
+    "send": "→ Senden"
+  },
+  "errors": {
+    "submitFailed": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "nameRequired": "Bitte geben Sie Ihren Namen ein",
+    "emailInvalid": "Bitte geben Sie eine gültige E-Mail ein",
+    "messageRequired": "Bitte geben Sie eine Nachricht ein (min. 10 Zeichen)"
+  },
+  "trustBadges": {
+    "euCertified": {
+      "title": "EU Zertifiziert",
+      "subtitle": "Höchste Standards"
+    },
+    "award2024": {
+      "title": "Preisgekrönt 2024",
+      "subtitle": "Ausgezeichnet"
+    },
+    "sterileEquipment": {
+      "title": "Sterile Ausrüstung",
+      "subtitle": "100% Hygiene"
+    },
+    "experience": {
+      "title": "27 Jahre Erfahrung",
+      "subtitle": "Seit 1994"
+    }
+  },
+  "labels": {
+    "name": "Name",
+    "email": "E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht"
+  },
+  "placeholders": {
+    "name": "Ihr Name",
+    "email": "ihre.email@beispiel.de",
+    "subject": "Worum geht es?",
+    "message": "Ihre Nachricht an uns..."
+  },
+  "successTitle": "Nachricht gesendet!",
+  "successBody": "Vielen Dank für Ihre Nachricht. Wir melden uns so schnell wie möglich bei Ihnen."
+}
