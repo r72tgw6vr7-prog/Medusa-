@@ -180,16 +180,16 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Newsletter + Social */}
-          <div className='max-md:col-span-2'>
-            <div className='flex flex-col h-full rounded-(--card-radius) border border-white/8 bg-white/3 p-6 shadow-[var(--premium-elevation)]'>
-              <h3 className='font-headline text-lg font-semibold text-white mb-4'>
+          <div className='max-md:col-span-2 self-start'>
+            <div className='flex flex-col items-start rounded-(--card-radius) border border-white/8 bg-white/3 p-5 shadow-[var(--premium-elevation)]'>
+              <h3 className='mb-3 font-headline text-lg font-semibold text-white'>
                 {t('common.footer.headings.newsletter')}
               </h3>
-              <p className='font-body text-base text-white/72 mb-6 reading-measure'>
+              <p className='mb-4 font-body text-base text-white/72 reading-measure'>
                 {t('common.footer.newsletter.description')}
               </p>
 
-              <div className='flex items-center gap-4 mb-6'>
+              <div className='flex items-center gap-3'>
                 <a
                   href={socialLinks.instagram.href}
                   target='_blank'
