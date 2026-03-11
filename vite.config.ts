@@ -95,16 +95,8 @@ export default defineConfig(({ mode }) => {
               if (id.includes('/components/primitives/')) return 'primitives';
               return undefined;
             }
-            // React core — smallest possible critical chunk
-            if (
-              id.includes('/react-dom/') ||
-              id.includes('/react/') ||
-              id.includes('/react-router') ||
-              id.includes('/scheduler/')
-            ) {
-              return 'vendor-react';
-            }
-            // i18n bundle — loaded async, never blocks paint
+            // Keep i18n isolated because it loads lazily and doesn't need to
+            // participate in the main vendor graph.
             if (
               id.includes('i18next') ||
               id.includes('react-i18next') ||
@@ -112,13 +104,12 @@ export default defineConfig(({ mode }) => {
             ) {
               return 'vendor-i18n';
             }
-            // Animation — lazy, never blocks FCP
+            // Animation stays separate because it is mostly lazy-loaded.
             if (id.includes('framer-motion')) return 'vendor-framer';
-            // UI primitives
-            if (id.includes('@radix-ui')) return 'vendor-radix';
-            // Icons — tree-shaken but still sizeable
-            if (id.includes('lucide-react')) return 'vendor-icons';
-            // Everything else
+            // Collapse the remaining node_modules graph into one shared vendor
+            // chunk. The previous vendor-react split created a circular
+            // dependency with react-router's non-React dependencies and caused
+            // production-only white screens.
             return 'vendor';
           },
         },
