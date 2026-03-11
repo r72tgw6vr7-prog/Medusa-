@@ -5,6 +5,11 @@ node_modules
 coverage/
 *.log
 .DS_Store
+build.log
+eslint-report.json
+lighthouse-report.json
+.qa/
+docs/verification/
 
 # Environment files (CRITICAL: Never commit these!)
 .env
