@@ -16,8 +16,14 @@
 ## Current production-critical client variables
 
 - `VITE_WEB3FORMS_KEY`
-- `VITE_GOOGLE_MAPS_API_KEY` if embedded maps are enabled
-- `VITE_GA_MEASUREMENT_ID` if analytics is enabled
+- `VITE_GOOGLE_MAPS_API_KEY` if Google Maps Embed API is required
+- `VITE_GA4_MEASUREMENT_ID` if analytics is enabled
+
+## Maps behavior note
+
+- The shared map component is used on both home and contact pages.
+- If `VITE_GOOGLE_MAPS_API_KEY` is missing, the app falls back to a no-key Google Maps embed URL.
+- If map loading fails, the app shows the built-in map fallback panel.
 
 ## Verification after env changes
 

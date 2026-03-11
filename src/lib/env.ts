@@ -114,7 +114,7 @@ function parseEnv() {
         console.warn('⚠️ GA4_MEASUREMENT_ID not set - analytics disabled');
       }
       if (!parsed.VITE_GOOGLE_MAPS_API_KEY) {
-        console.warn('⚠️ GOOGLE_MAPS_API_KEY not set - maps will show fallback');
+        console.warn('⚠️ GOOGLE_MAPS_API_KEY not set - using no-key Google Maps embed URL');
       }
     }
 

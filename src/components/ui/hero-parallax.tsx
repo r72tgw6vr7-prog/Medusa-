@@ -73,12 +73,12 @@ export const HeroParallax = ({
   const prefersReducedMotion = false;
 
   // ===========================================
-  // UNIFIED BACKGROUND: deep-black (matches Artist page)
+  // UNIFIED BACKGROUND: match page shell (bg-luxury-bg-dark)
   // ===========================================
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ['var(--deep-black)', 'var(--deep-black)', 'var(--deep-black)'],
+    ['#0a0a0a', '#0a0a0a', '#0a0a0a'],
   );
 
   const springConfig = ANIMATION.SMOOTH_SPRING;
@@ -124,8 +124,8 @@ export const HeroParallax = ({
           perspective: '1000px',
           transformStyle: 'preserve-3d',
           position: 'relative',
-          // Unified background: canonical dark value
-          background: prefersReducedMotion ? 'var(--deep-black)' : undefined,
+          // Keep reduced-motion fallback aligned with page shells.
+          background: prefersReducedMotion ? '#0a0a0a' : undefined,
           '--hero-height': '180vh',
           '--hero-header-shift': 'calc(-1.2 * var(--space-8))',
           '--hero-text-force-offset': 'calc(var(--space-12) + var(--space-0-5))',

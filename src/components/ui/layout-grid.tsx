@@ -103,7 +103,8 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
       onMouseLeave={() => setIsHovering(false)}
       style={
         {
-          background: 'var(--bg-page)',
+          // Match gallery base with page shell dark tone.
+          background: '#0a0a0a',
           gap: 'var(--space-2)',
           '--spotlight-x': `${mousePos.x}px`,
           '--spotlight-y': `${mousePos.y}px`,
@@ -111,6 +112,16 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
         } as React.CSSProperties
       }
     >
+      {/* Ambient depth layer for subtle chrome glow over the dark base. */}
+      <div
+        className='pointer-events-none absolute inset-0 z-10'
+        style={{
+          background:
+            'radial-gradient(circle at 18% 10%, rgba(var(--accent-chrome-rgb), 0.08) 0%, transparent 36%), radial-gradient(circle at 84% 86%, rgba(var(--accent-chrome-rgb), 0.06) 0%, transparent 40%)',
+        }}
+        aria-hidden='true'
+      />
+
       {/* Default dim overlay (80%) always on; spotlight reveals on hover */}
       <div
         className={cn(
@@ -118,7 +129,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
           overlayEnabled ? 'opacity-100' : 'opacity-0',
         )}
         style={{
-          background: overlayEnabled ? 'rgba(var(--color-surface-darker-rgb), 0.8)' : 'transparent',
+          background: overlayEnabled ? 'rgba(0, 0, 0, 0.72)' : 'transparent',
           maskImage: spotlightEnabled
             ? `radial-gradient(circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y), transparent 0%, transparent 45%, #000 65%, #000 100%)`
             : undefined,
@@ -143,7 +154,8 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
               lastSelected?.id === card.id ? 'z-40' : '',
             )}
             style={{
-              boxShadow: 'var(--surface-card-shadow)',
+              boxShadow:
+                'var(--surface-card-shadow), 0 0 22px rgba(var(--accent-chrome-rgb), 0.12)',
               background: 'transparent',
             }}
             layoutId={`card-${card.id}`}

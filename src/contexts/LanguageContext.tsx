@@ -51,13 +51,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const setLanguage = useCallback(
     (lang: Language) => {
       const nextLanguage = normalizeLocale(lang);
-      if (language === nextLanguage && i18n.language === nextLanguage) return;
+      if (normalizeLocale(i18n.language) === nextLanguage) return;
 
       startTransition(() => {
         void setLocale(nextLanguage);
       });
     },
-    [language, i18n],
+    [i18n],
   );
 
   useEffect(() => {

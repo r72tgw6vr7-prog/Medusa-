@@ -23,7 +23,7 @@ pnpm run deploy:production
 
 - `VITE_WEB3FORMS_KEY`
 - `VITE_GOOGLE_MAPS_API_KEY` when embedded maps are enabled
-- `VITE_GA_MEASUREMENT_ID` when analytics is enabled
+- `VITE_GA4_MEASUREMENT_ID` when analytics is enabled
 
 Use `.env.example` for local examples. Production and preview values live in Vercel.
 

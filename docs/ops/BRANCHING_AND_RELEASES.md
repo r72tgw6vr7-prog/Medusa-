@@ -28,6 +28,8 @@
 - `pnpm run prepare-deploy`
 - Smoke check the critical routes
 - Smoke check booking and contact if their code or env changed
+- Verify production aliases point to the latest deployment
+- Verify live routes on the official domain: `/`, `/booking`, `/contact`
 
 ## Naming conventions
 

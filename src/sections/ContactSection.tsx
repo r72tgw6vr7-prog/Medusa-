@@ -1,4 +1,5 @@
 import React, { FormEvent } from 'react';
+import GoogleMap from '@/components/GoogleMap';
 
 export interface ContactInfo {
   icon: string;
@@ -221,15 +222,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             {/* Map or Additional Content */}
             <div className='rounded-lg overflow-hidden min-h-72 flex flex-col h-full'>
-              <iframe
-                title='Location Map'
-                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...'
-                width='100%'
-                height='100%'
-                style={{ border: 0 }}
-                allowFullScreen
-                loading='lazy'
-              />
+              <GoogleMap height='288px' className='w-full' title='Medusa Tattoo München Location' />
             </div>
           </div>
         </div>

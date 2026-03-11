@@ -16,12 +16,15 @@ const GoogleMap: React.FC<Props> = ({
   title = 'Medusa Studio Location Map',
 }) => {
   const [mapError, setMapError] = React.useState(false);
-  const [showFallback, setShowFallback] = React.useState(!env.VITE_GOOGLE_MAPS_API_KEY);
+  const [showFallback, setShowFallback] = React.useState(false);
 
   const apiKey = env.VITE_GOOGLE_MAPS_API_KEY;
+  const locationQuery = encodeURIComponent(
+    'Medusa Tattoo München, Altheimer Eck 11, 80331 München',
+  );
   const mapUrl = apiKey
-    ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Medusa+Tattoo+München,+Altheimer+Eck+11,+80331+München&zoom=15&maptype=roadmap`
-    : null;
+    ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${locationQuery}&zoom=15&maptype=roadmap`
+    : `https://www.google.com/maps?q=${locationQuery}&z=15&output=embed`;
 
   const handleMapError = () => {
     console.error('Map failed to load');
@@ -69,7 +72,7 @@ const GoogleMap: React.FC<Props> = ({
     <div data-testid='map-embed' style={{ width, height }} className={`relative ${className}`}>
       <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '300px' }}>
         <iframe
-          src={mapUrl || undefined}
+          src={mapUrl}
           style={{
             border: 0,
             position: 'absolute',
@@ -77,6 +80,7 @@ const GoogleMap: React.FC<Props> = ({
             left: 0,
             width: '100%',
             height: '100%',
+            filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.9) contrast(1.05)',
           }}
           allowFullScreen
           loading='lazy'

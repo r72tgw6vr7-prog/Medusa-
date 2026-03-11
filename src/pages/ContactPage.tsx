@@ -141,11 +141,9 @@ export const ContactPage: React.FC = () => {
       <MainNavigation />
 
       <main id='main-content' className='flex-1'>
-        <Container size='form'>
-          <div className='w-full' data-testid='map-embed'>
-            <GoogleMapSection />
-          </div>
-        </Container>
+        <div className='w-full' data-testid='map-embed'>
+          <GoogleMapSection />
+        </div>
 
         {/* Hero Section */}
         <Section variant='default' spacing='normal' bg='dark'>
