@@ -14,6 +14,9 @@ Core policy:
 
 - `main` is the single production branch.
 - The public domain must always point to a commit on `origin/main`.
+- Official production domains are:
+  - `https://www.muenchen-tattoo-studio.de`
+  - `https://muenchen-tattoo-studio.de`
 - Local primary worktree should stay on `main` and stay clean.
 - Feature work belongs on short-lived branches or temporary worktrees.
 - Generated reports and verification artifacts are local-only and must not be committed.

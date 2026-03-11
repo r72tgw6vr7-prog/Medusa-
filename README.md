@@ -6,6 +6,7 @@ Production website for Medusa Tattoo München, built with React, TypeScript, Vit
 
 - `main` is the only production branch
 - the public domain must always reflect a commit on `origin/main`
+- official production domains are `https://www.muenchen-tattoo-studio.de` and `https://muenchen-tattoo-studio.de`
 - the primary local worktree should stay aligned with `main`
 - feature work belongs on short-lived branches or temporary worktrees
 
