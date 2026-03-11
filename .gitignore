@@ -4,6 +4,7 @@ node_modules
 /.vite
 coverage/
 *.log
+.DS_Store
 
 # Environment files (CRITICAL: Never commit these!)
 .env
@@ -22,6 +23,15 @@ coverage/
 # Test artifacts and reports
 chromewebdata_*.report.html
 *.report.html
+reports/
+tests/p0/artifacts/
+tests/p0/report/
+test-results/
+
+# Generated gallery derivatives
+public/assets/images/photos/gallery/tattoo/*.webp
+public/assets/images/photos/gallery/tattoo/*@*w.jpg
+public/assets/images/photos/gallery/tattoo/*@*w.webp
 
 # Debug/test files
 public/test-*.html

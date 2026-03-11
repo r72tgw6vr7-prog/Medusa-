@@ -17,6 +17,9 @@ const CONFIG = {
   outputDir: './public/assets/images',
   formats: ['webp', 'jpg'], // WebP primary, JPG fallback
   sizes: [400, 800, 1200, 2400], // Responsive sizes
+  skipDirs: [
+    './public/assets/images/photos/gallery/tattoo',
+  ],
   quality: {
     webp: 85,
     jpg: 90
@@ -37,11 +40,18 @@ const stats = {
 async function getImageFiles(dir) {
   const files = [];
   const items = await fs.readdir(dir, { withFileTypes: true });
+  const resolvedSkipDirs = CONFIG.skipDirs.map((skipDir) => path.resolve(skipDir));
   
   for (const item of items) {
     const fullPath = path.join(dir, item.name);
     
     if (item.isDirectory()) {
+      // Gallery originals are optimized by a dedicated workflow. Skipping them
+      // here prevents deploy-time junk files from being generated next to source images.
+      if (resolvedSkipDirs.includes(path.resolve(fullPath))) {
+        continue;
+      }
+
       // Recursively get files from subdirectories
       const subFiles = await getImageFiles(fullPath);
       files.push(...subFiles);
