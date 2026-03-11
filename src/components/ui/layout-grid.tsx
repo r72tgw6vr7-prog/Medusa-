@@ -96,7 +96,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
   return (
     <div
       ref={containerRef}
-      className='w-full h-full px-4 md:px-6 py-6 md:py-8 relative grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+      className='relative grid h-full w-full content-start justify-items-start grid-cols-2 px-4 py-6 md:grid-cols-3 md:px-6 md:py-8 lg:grid-cols-4'
       role='presentation'
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
@@ -130,7 +130,7 @@ export function LayoutGrid({ cards }: LayoutGridProps) {
       />
 
       {cards.map((card, i) => (
-        <div key={i} className={cn('relative', card.className)}>
+        <div key={i} className={cn('relative w-full justify-self-start', card.className)}>
           <motion.div
             onClick={() => handleClick(card)}
             className={cn(

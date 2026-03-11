@@ -117,7 +117,7 @@ const formatPrice = (priceFrom: number, priceUnit: string) => {
   return `ab ${priceFrom} €${suffix}`;
 };
 
-const CARD_HEIGHT_COLLAPSED = '520px';
+const CARD_HEIGHT_COLLAPSED = '660px';
 const BACKDROP_BLUR = '8px';
 const OVERLAY_EASE = [0.4, 0, 0.2, 1] as const;
 
@@ -378,14 +378,14 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
         key={service.id}
         variant={isSelected ? 'featured' : 'default'}
         size='default'
-        className={`bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) h-auto! piercing-service-card ${
+        className={`bg-(--card-bg) border-(--card-border) shadow-(--card-shadow) piercing-service-card ${
           isExpanded ? 'paket-card--expanded' : 'paket-card--collapsed'
         }`}
         asChild
       >
         <motion.div
           variants={fadeInUpVariants}
-          className='paket-card flex flex-col h-auto self-start cursor-pointer text-center'
+          className='paket-card flex h-full flex-col self-start cursor-pointer text-center'
           onClick={() => {
             setSelectedPacket(isSelected ? null : service.id);
             if (!isSelected) setExpandedCard(null);
@@ -393,35 +393,48 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
           whileHover={isDesktop && !isExpanded ? { scale: 1.02 } : undefined}
           whileTap={isDesktop && !isExpanded ? { scale: 0.98 } : undefined}
         >
-          <div className='flex flex-col gap-8'>
-            <div className='flex items-center justify-between'>
-              <span className='font-semibold text-(length:--text-sm) tracking-wide uppercase text-(--text-secondary)'>
-                {activeCategory === 'stechen'
-                  ? t('services.piercingServicesPage.labels.area')
-                  : t('services.piercingServicesPage.labels.option')}
-              </span>
-              <span className='font-normal text-(length:--text-sm) tracking-wider uppercase text-white/60'>
-                {service.duration || t('services.piercingServicesPage.labels.flexible')}
-              </span>
-            </div>
+          <div className='flex h-full flex-col gap-8'>
+            <div className='flex flex-1 flex-col gap-8'>
+              <div className='flex items-center justify-between'>
+                <span className='font-semibold text-(length:--text-sm) tracking-wide uppercase text-(--text-secondary)'>
+                  {activeCategory === 'stechen'
+                    ? t('services.piercingServicesPage.labels.area')
+                    : t('services.piercingServicesPage.labels.option')}
+                </span>
+                <span className='font-normal text-(length:--text-sm) tracking-wider uppercase text-white/60'>
+                  {service.duration || t('services.piercingServicesPage.labels.flexible')}
+                </span>
+              </div>
 
-            <h3 className='font-headline font-normal text-(length:--text-h3) leading-(--line-height-headline) text-white wrap-break-word'>
-              {service.title}
-            </h3>
+              <h3 className='font-headline font-normal text-(length:--text-h3) leading-(--line-height-headline) text-white wrap-break-word'>
+                {service.title}
+              </h3>
 
-            <p className='font-normal text-(length:--text-sm) leading-(--line-height-body) text-white/70'>
-              {service.description}
-            </p>
+              <p className='font-normal text-(length:--text-sm) leading-(--line-height-body) text-white/70'>
+                {service.description}
+              </p>
 
-            <div className='flex items-center gap-2'>
-              <Euro size={18} className='text-(--text-secondary)' />
-              <span className='font-semibold text-(length:--text-xl) leading-(--line-height-body) text-(--text-secondary)'>
-                {formatPrice(service.priceFrom, service.priceUnit)}
-              </span>
+              <div className='flex items-center gap-2'>
+                <Euro size={18} className='text-(--text-secondary)' />
+                <span className='font-semibold text-(length:--text-xl) leading-(--line-height-body) text-(--text-secondary)'>
+                  {formatPrice(service.priceFrom, service.priceUnit)}
+                </span>
+              </div>
+
+              <ul className='space-y-4 text-(length:--text-sm) text-white/80'>
+                {service.features.map((feature: string, featureIndex: number) => (
+                  <li key={featureIndex} className='flex items-center gap-4'>
+                    <ChevronRight size={16} className='text-(--text-secondary) shrink-0 mt-2' />
+                    <span className='font-normal text-(length:--text-base) leading-(--line-height-body)'>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {hasDetails && (
-              <div className='relative'>
+              <div className='relative mt-auto'>
                 <button
                   type='button'
                   onPointerDown={(e) => e.stopPropagation()}
@@ -512,17 +525,6 @@ export const PiercingServicesPage: React.FC<PiercingServicesPageProps> = ({ clas
                 </AnimatePresence>
               </div>
             )}
-
-            <ul className='space-y-4 text-(length:--text-sm) text-white/80'>
-              {service.features.map((feature: string, featureIndex: number) => (
-                <li key={featureIndex} className='flex items-center gap-4'>
-                  <ChevronRight size={16} className='text-(--text-secondary) shrink-0 mt-2' />
-                  <span className='font-normal text-(length:--text-base) leading-(--line-height-body)'>
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
 
             <button
               onPointerDown={(e) => e.stopPropagation()}

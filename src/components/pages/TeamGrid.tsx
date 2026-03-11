@@ -217,7 +217,6 @@ const TeamGrid: React.FC = () => {
       spacing='normal'
       bg='dark'
       className='min-h-screen'
-      style={{ marginTop: 'var(--first-section-offset)' }}
     >
       <Container size='default'>
         {/* Section header - exact template structure */}

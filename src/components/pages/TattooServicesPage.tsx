@@ -232,38 +232,43 @@ export const TattooServicesPage: React.FC<TattooServicesPageProps> = ({ classNam
           </span>
           <div className='pricing-card-overlay' aria-hidden='true' />
           <div className='pricing-card-curtain' aria-hidden='true' />
-          <div className='pricing-card-content'>
-            {/* Title */}
-            <h3 className='font-semibold text-3xl leading-10 text-white mb-4'>{title}</h3>
+          <div className='pricing-card-content flex h-full flex-col justify-between'>
+            <div className='flex flex-1 flex-col'>
+              {/* Title */}
+              <h3 className='mb-4 font-semibold text-3xl leading-10 text-white'>{title}</h3>
 
-            {/* Description */}
-            <p className='font-normal text-sm leading-7 text-white/70 mb-8 flex-1'>{description}</p>
+              {/* Description */}
+              <p className='mb-8 flex-1 font-normal text-sm leading-7 text-white/70'>
+                {description}
+              </p>
 
-            {/* Price */}
-            <div className='flex items-center gap-2 mb-8'>
-              <Euro size={18} className='text-[color:var(--text-secondary)]' />
-              <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
-                {formatPriceI18n(service.priceFrom, priceUnit)}
-              </span>
+              {/* Price */}
+              <div className='mb-8 flex items-center gap-2'>
+                <Euro size={18} className='text-[color:var(--text-secondary)]' />
+                <span className='font-semibold text-xl leading-7 text-[color:var(--text-secondary)]'>
+                  {formatPriceI18n(service.priceFrom, priceUnit)}
+                </span>
+              </div>
+
+              {/* List */}
+              <ul className='space-y-4'>
+                {features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className='flex items-start gap-4'>
+                    <ChevronRight
+                      size={16}
+                      className='text-[color:var(--text-secondary)] flex-shrink-0 mt-2'
+                    />
+                    <span className='font-normal text-base leading-6 text-white/80'>{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            {/* List */}
-            <ul className='space-y-4 mb-8'>
-              {features.map((feature, featureIndex) => (
-                <li key={featureIndex} className='flex items-start gap-4'>
-                  <ChevronRight
-                    size={16}
-                    className='text-[color:var(--text-secondary)] flex-shrink-0 mt-2'
-                  />
-                  <span className='font-normal text-base leading-6 text-white/80'>{feature}</span>
-                </li>
-              ))}
-            </ul>
 
             {/* Button */}
             <button
               onClick={() => handleServiceBooking(service.id)}
               className='
+                mt-8
                 w-full h-12
                 border border-[color:var(--text-secondary)]
                 rounded-3xl

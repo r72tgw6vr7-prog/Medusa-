@@ -278,8 +278,8 @@ export const ServicesPageInteractive: React.FC<ServicesPageInteractiveProps> = (
               const IconComponent = category.icon;
               const isActive = activeCategory === category.id;
               const buttonClass = isActive
-                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(var(--accent-chrome-rgb),0.4)] scale-[1.02]'
-                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--accent-chrome)]/80 hover:scale-[1.02]';
+                ? 'flex flex-col h-full rounded-2xl border-2 border-[var(--accent-chrome)] px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] shadow-[0_0_32px_rgba(var(--accent-chrome-rgb),0.4)]'
+                : 'flex flex-col h-full rounded-2xl border-2 border-white/10 px-8 py-10 text-left transition-transform duration-300 focus-visible:ring-2 focus-visible:ring-brand-chrome focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--deep-black)] hover:border-[var(--accent-chrome)]/80';
 
               return (
                 <button

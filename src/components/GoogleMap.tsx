@@ -33,19 +33,19 @@ const GoogleMap: React.FC<Props> = ({
     return (
       <div
         data-testid='map-fallback'
-        className='flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border-2 border-[var(--brand-gold)]/20'
+        className='flex flex-col items-center justify-center rounded-lg border-2 border-[var(--brand-gold)]/20 bg-[#0a0a0a] p-8 text-center'
         style={{ minHeight: height }}
       >
         <MapPin className='text-[var(--brand-gold)] w-16 h-16 mb-8' />
         <h3 className='text-white text-xl font-semibold mb-0'>Medusa Tattoo München</h3>
         <p className='text-white/70 text-sm mb-8 max-w-xs'>Altheimer Eck 11, 80331 München</p>
-        <div className='flex flex-col sm:flex-row gap-0'>
+        <div className='flex flex-col gap-0 sm:flex-row'>
           <a
             href='https://maps.google.com/?q=Medusa+Tattoo+München+Altheimer+Eck+11+80331+München'
             target='_blank'
             rel='noopener noreferrer'
             data-testid='map-fallback-link'
-            className='inline-flex items-center gap-0 bg-[var(--brand-gold)] text-black px-8 py-0 rounded-lg hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex h-12 items-center justify-center gap-0 rounded-full bg-[var(--brand-gold)] px-8 text-black hover:bg-[#B8941F] transition-colors font-medium transition duration-200 ease-out'
           >
             <ExternalLink size={16} />
             Karte öffnen
@@ -55,7 +55,7 @@ const GoogleMap: React.FC<Props> = ({
             target='_blank'
             rel='noopener noreferrer'
             data-testid='map-fallback-link'
-            className='inline-flex items-center gap-0 border border-[var(--brand-gold)] text-[var(--brand-gold)] px-8 py-0 rounded-lg hover:bg-[var(--brand-gold)]/10 transition-colors font-medium transition duration-200 ease-out'
+            className='inline-flex h-12 items-center justify-center gap-0 rounded-full border border-[var(--brand-gold)] px-8 text-[var(--brand-gold)] hover:bg-[var(--brand-gold)]/10 transition-colors font-medium transition duration-200 ease-out'
           >
             Route planen
           </a>
