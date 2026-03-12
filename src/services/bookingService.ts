@@ -3,6 +3,27 @@ import { v4 as uuidv4 } from 'uuid';
 const _BOOKING_API_URL =
   'https://script.google.com/macros/s/AKfycbxV1TCVR-lZK4HjHA5aTQxkhUPVkDb76TUX95SV_AgSs-pIJlpcCscy20DbGvno_cjoiw/exec';
 
+const BOOKING_SUBMIT_TIMEOUT_MS = 15000;
+
+export type BookingSubmitErrorCode =
+  | 'missing_config'
+  | 'network'
+  | 'timeout'
+  | 'invalid_response'
+  | 'submission_rejected';
+
+export class BookingSubmitError extends Error {
+  code: BookingSubmitErrorCode;
+  details?: string;
+
+  constructor(code: BookingSubmitErrorCode, details?: string) {
+    super(details ?? code);
+    this.name = 'BookingSubmitError';
+    this.code = code;
+    this.details = details;
+  }
+}
+
 export interface BookingRequest {
   serviceId: string;
   specificService?: string; // The specific service selected (e.g., "ohr", "ohrlochzauberer")
@@ -78,10 +99,41 @@ const mapPaymentLabel = (paymentMethod?: BookingRequest['paymentMethod']): strin
   return '';
 };
 
+const parseWeb3FormsResponse = async (
+  response: Response,
+): Promise<{ success?: boolean; message?: string }> => {
+  const rawBody = await response.text();
+
+  if (!rawBody.trim()) {
+    throw new BookingSubmitError('invalid_response');
+  }
+
+  try {
+    return JSON.parse(rawBody) as { success?: boolean; message?: string };
+  } catch {
+    throw new BookingSubmitError('invalid_response');
+  }
+};
+
+const classifyRejectedResponse = (message?: string): BookingSubmitErrorCode => {
+  const normalized = message?.toLowerCase() ?? '';
+  if (
+    normalized.includes('access key') ||
+    normalized.includes('api key') ||
+    normalized.includes('invalid key') ||
+    normalized.includes('unauthorized') ||
+    normalized.includes('forbidden')
+  ) {
+    return 'missing_config';
+  }
+
+  return 'submission_rejected';
+};
+
 export const submitBooking = async (data: BookingRequest): Promise<BookingResponse> => {
   const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY;
   if (!web3FormsKey) {
-    throw new Error('Das Buchungsformular ist derzeit nicht konfiguriert.');
+    throw new BookingSubmitError('missing_config');
   }
 
   const formData = new FormData();
@@ -140,12 +192,16 @@ Medusa Tattoo Team
   `,
   );
 
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), BOOKING_SUBMIT_TIMEOUT_MS);
+
   try {
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: formData,
+      signal: controller.signal,
     });
-    const result = await response.json();
+    const result = await parseWeb3FormsResponse(response);
     console.log('✅ Booking response:', {
       ok: response.ok,
       status: response.status,
@@ -153,7 +209,10 @@ Medusa Tattoo Team
     });
 
     if (!response.ok || !result.success) {
-      throw new Error(result?.message || 'Übermittlung fehlgeschlagen');
+      throw new BookingSubmitError(
+        classifyRejectedResponse(result?.message),
+        result?.message || undefined,
+      );
     }
 
     return {
@@ -163,8 +222,22 @@ Medusa Tattoo Team
       createdAt: new Date().toISOString(),
     };
   } catch (error) {
+    if (error instanceof BookingSubmitError) {
+      throw error;
+    }
+
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new BookingSubmitError('timeout');
+    }
+
+    if (error instanceof TypeError) {
+      throw new BookingSubmitError('network');
+    }
+
     console.error('❌ Error:', error);
-    throw error;
+    throw new BookingSubmitError('submission_rejected');
+  } finally {
+    window.clearTimeout(timeoutId);
   }
 };
 

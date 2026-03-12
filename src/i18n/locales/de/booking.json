@@ -52,7 +52,12 @@
     "retry": "Erneut versuchen",
     "retryLoading": "Versuche erneut zu senden...",
     "completeAllSteps": "Bitte vervollständigen Sie alle Schritte",
-    "submitFailed": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch."
+    "submitFailed": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.",
+    "missingConfig": "Das Buchungssystem ist derzeit nicht verfügbar. Bitte rufen Sie uns an oder schreiben Sie uns direkt.",
+    "network": "Ihre Anfrage konnte das Buchungssystem nicht erreichen. Bitte prüfen Sie Ihre Verbindung oder deaktivieren Sie Blocker und versuchen Sie es erneut.",
+    "timeout": "Die Buchungsanfrage hat zu lange gedauert. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+    "invalidResponse": "Der Buchungsdienst hat keine gültige Antwort gesendet. Bitte kontaktieren Sie uns direkt.",
+    "submitRejected": "Die Buchungsanfrage wurde nicht angenommen. Bitte prüfen Sie Ihre Angaben oder kontaktieren Sie uns direkt."
   },
   "confirmation": {
     "title": "Vielen Dank!",

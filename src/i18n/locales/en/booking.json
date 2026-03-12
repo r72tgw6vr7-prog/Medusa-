@@ -52,7 +52,12 @@
     "retry": "Try again",
     "retryLoading": "Trying to resend...",
     "completeAllSteps": "Please complete all steps",
-    "submitFailed": "Your request could not be sent. Please try again or contact us by telephone."
+    "submitFailed": "Your request could not be sent. Please try again or contact us by telephone.",
+    "missingConfig": "The booking system is currently unavailable. Please call us or contact us directly.",
+    "network": "Your request could not reach the booking service. Please check your connection or disable blockers and try again.",
+    "timeout": "The booking request took too long. Please try again or contact us directly.",
+    "invalidResponse": "The booking service returned an invalid response. Please contact us directly.",
+    "submitRejected": "The booking request was not accepted. Please review your details or contact us directly."
   },
   "confirmation": {
     "title": "Thank you!",

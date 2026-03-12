@@ -1,6 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { submitBooking, validateBookingData } from '@/services/bookingService';
+import {
+  BookingSubmitError,
+  submitBooking,
+  validateBookingData,
+} from '@/services/bookingService';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/core/state/AppContext';
 import { Meteors } from '@/components/ui/meteors';
@@ -87,6 +91,28 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
     setSuccessMessage(null);
   }, []);
 
+  const getSubmissionErrorMessage = useCallback(
+    (error: unknown) => {
+      if (error instanceof BookingSubmitError) {
+        switch (error.code) {
+          case 'missing_config':
+            return t('booking.error.missingConfig');
+          case 'network':
+            return t('booking.error.network');
+          case 'timeout':
+            return t('booking.error.timeout');
+          case 'invalid_response':
+            return t('booking.error.invalidResponse');
+          case 'submission_rejected':
+            return t('booking.error.submitRejected');
+        }
+      }
+
+      return t('booking.error.submitFailed');
+    },
+    [t],
+  );
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
@@ -136,13 +162,21 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         setFormData(INITIAL_FORM_DATA);
       } catch (error) {
         console.error('Booking failed:', error);
-        setSubmissionError(t('booking.error.submitFailed'));
+        setSubmissionError(getSubmissionErrorMessage(error));
         setStep('error');
       } finally {
         setIsSubmitting(false);
       }
     },
-    [selectedService, specificService, paymentMethod, projectDetails, formData, t],
+    [
+      selectedService,
+      specificService,
+      paymentMethod,
+      projectDetails,
+      formData,
+      t,
+      getSubmissionErrorMessage,
+    ],
   );
 
   const handleClose = useCallback(() => {
