@@ -289,8 +289,8 @@ export function RecentWorkGallery({}: RecentWorkGalleryProps) {
                     <img
                       {...getImageProps(image.src, `${image.artist} - ${image.style} work`, {
                         sizes: isLarge
-                          ? '(max-width: 768px) 100vw, 520px'
-                          : '(max-width: 768px) 100vw, 244px',
+                          ? '(max-width: 767px) 100vw, 520px'
+                          : '(max-width: 767px) 100vw, 244px',
                         priority: index < 3, // Load first 3 images eagerly
                       })}
                       className='w-full h-full object-cover transition-all duration-700 group-hover:scale-110'

@@ -39,6 +39,11 @@ const ANIMATION = {
   SMOOTH_SPRING: { stiffness: 300, damping: 30, bounce: 100 },
 };
 
+const getDesktopHeaderOffset = () =>
+  typeof window === 'undefined'
+    ? -530
+    : Math.min(0, -530 + Math.max(0, 900 - window.innerHeight) * 0.9);
+
 export const HeroParallax = ({
   products,
 }: {
@@ -52,7 +57,7 @@ export const HeroParallax = ({
   const secondRow = products.slice(5, 10);
   const thirdRow = products.slice(10, 15);
   const isMobileViewport =
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1023px)').matches : false;
 
   const mobileFirstRow = products.slice(0, 4);
   const mobileSecondRow = products.slice(4, 8);
@@ -204,7 +209,8 @@ export const HeroParallax = ({
 
 export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) => {
   const isMobileViewport =
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1023px)').matches : false;
+  const [desktopHeaderOffset, setDesktopHeaderOffset] = useState(getDesktopHeaderOffset);
   const { language, t } = useLanguage();
   const headlinePrimary = t('home.hero.headlinePrimary');
   const headlineSecondary = t('home.hero.headlineSecondary');
@@ -213,6 +219,21 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
   const ctaPrimary = t('home.hero.ctaPrimary');
   const ctaSecondary = t('home.hero.ctaSecondary');
   const eyebrow = language === 'en' ? 'Medusa Munich' : 'Medusa München';
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const updateDesktopHeaderOffset = () => {
+      setDesktopHeaderOffset(getDesktopHeaderOffset());
+    };
+
+    updateDesktopHeaderOffset();
+    window.addEventListener('resize', updateDesktopHeaderOffset);
+
+    return () => {
+      window.removeEventListener('resize', updateDesktopHeaderOffset);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -225,7 +246,7 @@ export const Header = ({ opacity }: { opacity: MotionValue<number> | number }) =
       {!isMobileViewport ? (
         <div
           className='max-w-7xl w-full flex flex-col items-center text-center gap-(--space-6) pointer-events-auto max-md:hidden'
-          style={{ transform: 'translateY(-530px)' }}
+          style={{ transform: `translateY(${desktopHeaderOffset}px)` }}
         >
           <p className='premium-eyebrow'>{eyebrow}</p>
           {/* Heading - design system typography */}
@@ -317,7 +338,7 @@ export const ProductCard = ({
 }) => {
   // Check if on mobile viewport
   const isMobileViewport =
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false;
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1023px)').matches : false;
   const cardRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);

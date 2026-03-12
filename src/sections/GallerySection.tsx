@@ -122,14 +122,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     srcSet={[400, 640, 960]
                       .map((size) => `${encodeURI(`${image.imageUrl}-${size}w.avif`)} ${size}w`)
                       .join(', ')}
-                    sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
+                    sizes='(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   />
                   <source
                     type='image/webp'
                     srcSet={[400, 640, 960]
                       .map((size) => `${encodeURI(`${image.imageUrl}-${size}w.webp`)} ${size}w`)
                       .join(', ')}
-                    sizes='(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
+                    sizes='(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 25vw'
                   />
                   <img
                     src={encodeURI(

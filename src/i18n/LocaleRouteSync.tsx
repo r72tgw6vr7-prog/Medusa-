@@ -7,13 +7,12 @@ export default function LocaleRouteSync() {
   const location = useLocation();
 
   useEffect(() => {
-    // URL path is the single source of truth for locale.
-    // /en and /en/* → English (these redirect in App.tsx, but guard here too).
-    // Everything else → German, always. localStorage is never allowed to
-    // override a German URL with an English locale.
-    const isEnglishPath =
-      location.pathname === '/en' || location.pathname.startsWith('/en/');
-    setLanguage(isEnglishPath ? 'en' : 'de');
+    if (typeof window === 'undefined') return;
+
+    const persistedLanguage = window.localStorage.getItem('language');
+    if (persistedLanguage === 'de' || persistedLanguage === 'en') return;
+
+    setLanguage('de');
   }, [location.pathname, setLanguage]);
 
   return null;

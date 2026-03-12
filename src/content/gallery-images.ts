@@ -1865,7 +1865,7 @@ export const generateSrcSet = (
  */
 export const getImageSources = (
   image: GalleryImage,
-  sizes: string = '(max-width: 768px) 100vw, 50vw',
+  sizes: string = '(max-width: 767px) 100vw, 50vw',
 ) => {
   return {
     avifSrcSet: generateSrcSet(image.optimizedSrc, 'avif'),

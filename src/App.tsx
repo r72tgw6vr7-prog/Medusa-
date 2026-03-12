@@ -72,6 +72,22 @@ function EnglishRouteRedirect() {
 
 function App() {
   // Texture background is now handled in main.tsx
+  const location = useLocation();
+  const hasPageLevelSkipLink =
+    location.pathname === '/' ||
+    location.pathname === '/artists' ||
+    location.pathname === '/gallery' ||
+    location.pathname.startsWith('/artists/');
+
+  const handleSkipToContent = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById('main-content') ?? document.querySelector('main');
+    if (!(target instanceof HTMLElement)) return;
+
+    event.preventDefault();
+    target.tabIndex = -1;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ block: 'start' });
+  };
 
   return (
     <SimpleMedusaProvider>
@@ -85,6 +101,15 @@ function App() {
             }}
           >
             <LocaleRouteSync />
+            {!hasPageLevelSkipLink ? (
+              <a
+                href='#main-content'
+                onClick={handleSkipToContent}
+                className='sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1000] rounded-md bg-luxury-bg-dark px-4 py-3 text-sm font-medium text-luxury-text-inverse outline-none ring-2 ring-luxury-accent-chrome'
+              >
+                Skip to main content
+              </a>
+            ) : null}
             <ScrollToTop />
             <GDPRCompliance />
             <AnalyticsProvider>
@@ -224,9 +249,6 @@ function App() {
                         </>
                       }
                     />
-
-                    <Route path='/en' element={<EnglishRouteRedirect />} />
-                    <Route path='/en/*' element={<EnglishRouteRedirect />} />
 
                     {/* 404 Route */}
                     <Route path='*' element={<NotFoundPage />} />

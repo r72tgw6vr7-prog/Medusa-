@@ -463,14 +463,10 @@ class ScrollController {
   };
 
   /**
-   * Detect if device is mobile or touch
+   * Detect if the current viewport is in the mobile/tablet band.
    */
   private checkIsMobile(): boolean {
-    return (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-      (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) ||
-      'ontouchstart' in window
-    );
+    return window.matchMedia?.('(max-width: 1023px)')?.matches ?? false;
   }
 
   /**

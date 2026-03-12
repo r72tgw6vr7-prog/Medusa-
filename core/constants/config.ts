@@ -60,7 +60,7 @@ export const APP_CONFIG = {
   stickyNavOffset: 80,
   mobileBreakpoint: 768,
   tabletBreakpoint: 1024,
-  desktopBreakpoint: 1200,
+  desktopBreakpoint: 1200, // LEGACY ORPHAN: root-level config is not imported by the active src app.
   
   // Grid system
   gridColumns: 12,
