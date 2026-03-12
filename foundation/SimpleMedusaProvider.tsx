@@ -71,7 +71,7 @@ export function SimpleMedusaProvider({
 
     const width = window.innerWidth;
     let deviceType: DeviceType = 'mobile';
-    if (width >= 1200) deviceType = 'desktop';
+    if (width >= 1200) deviceType = 'desktop'; // LEGACY ORPHAN: root-level provider is not imported by the active src app.
     else if (width >= 768) deviceType = 'tablet';
 
     return {

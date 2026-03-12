@@ -5,7 +5,6 @@ export * from './FAQItem';
 export * from './NewsletterForm';
 export * from './PriceCard';
 export * from './ReviewCard';
-export * from './ServiceCard';
 export * from './CookieConsentBanner';
 export * from './FocusTrap';
 export * from './GDPRCompliance';

@@ -11,7 +11,6 @@ export * from './Grid';
 // export * from './ImageWithFallback'; // DISABLED - replaced with plain img tags
 export * from './MicroInteractions';
 export * from './PlaceholderImage';
-export * from './Section';
 export * from './TrustBadge';
 export * from './PageBackground';
 export * from './PageTitle';

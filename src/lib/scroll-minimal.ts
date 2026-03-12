@@ -129,11 +129,7 @@ class ScrollController {
   };
 
   private checkIsMobile(): boolean {
-    return (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-      (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) ||
-      'ontouchstart' in window
-    );
+    return window.matchMedia?.('(max-width: 1023px)')?.matches ?? false;
   }
 
   private destroyLenis(): void {

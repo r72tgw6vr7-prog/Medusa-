@@ -7,5 +7,4 @@ export * from './ContactSection';
 export * from './GallerySection';
 // export * from './PricingSection'; // File does not exist
 export * from './ProcessTimeline';
-export * from './ServicesSection';
 export * from './TrustSignalsSection';

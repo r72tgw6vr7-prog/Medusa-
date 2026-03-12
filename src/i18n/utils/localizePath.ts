@@ -1,6 +1,6 @@
 import type { Language } from '@/contexts/LanguageContext';
 
-export function localizePath(path: string, _language: Language) {
+export function localizePath(path: string, language: Language) {
   if (!path || path.startsWith('#') || /^[a-z]+:/i.test(path)) {
     return path;
   }
@@ -8,6 +8,10 @@ export function localizePath(path: string, _language: Language) {
   const match = path.match(/^([^?#]*)(.*)$/);
   const pathname = match?.[1] || path;
   const suffix = match?.[2] || '';
+
+  if (language === 'en') {
+    return `${pathname}${suffix}`;
+  }
 
   if (pathname === '/en' || pathname.startsWith('/en/')) {
     return `${pathname === '/en' ? '/' : pathname.slice(3)}${suffix}`;

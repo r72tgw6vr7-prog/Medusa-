@@ -18,7 +18,7 @@ export function useSimpleResponsive() {
   const [device, setDevice] = React.useState<'mobile' | 'tablet' | 'desktop'>(() => {
     if (typeof window === 'undefined') return 'mobile';
     const width = window.innerWidth;
-    if (width >= 1200) return 'desktop';
+    if (width >= 1200) return 'desktop'; // LEGACY ORPHAN: root-level utility is not imported by the active src app.
     if (width >= 768) return 'tablet';
     return 'mobile';
   });
@@ -30,7 +30,7 @@ export function useSimpleResponsive() {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         const width = window.innerWidth;
-        const newDevice = width >= 1200 ? 'desktop' : width >= 768 ? 'tablet' : 'mobile';
+        const newDevice = width >= 1200 ? 'desktop' : width >= 768 ? 'tablet' : 'mobile'; // LEGACY ORPHAN: root-level utility is not imported by the active src app.
         setDevice(prev => prev !== newDevice ? newDevice : prev);
       }, 250);
     };
