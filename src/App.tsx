@@ -58,18 +58,6 @@ const ArtistProfilePage = lazy(() =>
   import('./pages/ArtistProfilePage').then((m) => ({ default: m.ArtistProfilePage })),
 );
 
-function EnglishRouteRedirect() {
-  const location = useLocation();
-  const pathname =
-    location.pathname === '/en'
-      ? '/'
-      : location.pathname.startsWith('/en/')
-        ? location.pathname.slice(3)
-        : '/';
-
-  return <Navigate to={`${pathname}${location.search}${location.hash}`} replace />;
-}
-
 function App() {
   // Texture background is now handled in main.tsx
   const location = useLocation();
