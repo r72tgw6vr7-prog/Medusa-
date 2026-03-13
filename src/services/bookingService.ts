@@ -7,6 +7,7 @@ const BOOKING_SUBMIT_TIMEOUT_MS = 15000;
 
 export type BookingSubmitErrorCode =
   | 'missing_config'
+  | 'invalid_config'
   | 'network'
   | 'timeout'
   | 'invalid_response'
@@ -99,6 +100,11 @@ const mapPaymentLabel = (paymentMethod?: BookingRequest['paymentMethod']): strin
   return '';
 };
 
+export const getBookingConfigIssue = (): BookingSubmitErrorCode | null => {
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY?.trim();
+  return web3FormsKey ? null : 'missing_config';
+};
+
 const parseWeb3FormsResponse = async (
   response: Response,
 ): Promise<{ success?: boolean; message?: string }> => {
@@ -118,23 +124,30 @@ const parseWeb3FormsResponse = async (
 const classifyRejectedResponse = (message?: string): BookingSubmitErrorCode => {
   const normalized = message?.toLowerCase() ?? '';
   if (
+    normalized.includes('missing access key') ||
+    normalized.includes('access key is required') ||
+    normalized.includes('access_key') && normalized.includes('required')
+  ) {
+    return 'missing_config';
+  }
+
+  if (
     normalized.includes('access key') ||
     normalized.includes('api key') ||
     normalized.includes('invalid key') ||
+    normalized.includes('invalid access key') ||
     normalized.includes('unauthorized') ||
     normalized.includes('forbidden')
   ) {
-    return 'missing_config';
+    return 'invalid_config';
   }
 
   return 'submission_rejected';
 };
 
 export const submitBooking = async (data: BookingRequest): Promise<BookingResponse> => {
-  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY;
-  if (!web3FormsKey) {
-    throw new BookingSubmitError('missing_config');
-  }
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY?.trim();
+  if (!web3FormsKey) throw new BookingSubmitError('missing_config');
 
   const formData = new FormData();
   formData.append('access_key', web3FormsKey);
@@ -202,11 +215,6 @@ Medusa Tattoo Team
       signal: controller.signal,
     });
     const result = await parseWeb3FormsResponse(response);
-    console.log('✅ Booking response:', {
-      ok: response.ok,
-      status: response.status,
-      result,
-    });
 
     if (!response.ok || !result.success) {
       throw new BookingSubmitError(
@@ -234,19 +242,28 @@ Medusa Tattoo Team
       throw new BookingSubmitError('network');
     }
 
-    console.error('❌ Error:', error);
+    if (error instanceof Error && error.message) {
+      throw new BookingSubmitError('submission_rejected', error.message);
+    }
+
     throw new BookingSubmitError('submission_rejected');
   } finally {
     window.clearTimeout(timeoutId);
   }
 };
 
-export const validateBookingData = (data: Partial<BookingRequest>): string | null => {
+export const validateBookingData = (
+  data: Partial<BookingRequest>,
+  messages: { gdprRequired?: string } = {},
+): string | null => {
   if (!data.serviceId) return 'Bitte wählen Sie eine Leistung aus';
   if (!data.paymentMethod) return 'Bitte wählen Sie eine Zahlungsart aus';
   if (!data.name?.trim()) return 'Name ist erforderlich';
   if (!data.email?.trim()) return 'E-Mail ist erforderlich';
   if (!/\S+@\S+\.\S+/.test(data.email)) return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
   if (!data.date) return 'Bitte wählen Sie ein Datum aus';
+  if (!data.gdprConsent) {
+    return messages.gdprRequired ?? 'Bitte stimmen Sie der Datenschutzerklärung zu, bevor Sie fortfahren';
+  }
   return null;
 };

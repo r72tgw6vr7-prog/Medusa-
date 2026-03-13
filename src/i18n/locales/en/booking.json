@@ -54,10 +54,15 @@
     "completeAllSteps": "Please complete all steps",
     "submitFailed": "Your request could not be sent. Please try again or contact us by telephone.",
     "missingConfig": "The booking system is currently unavailable. Please call us or contact us directly.",
+    "invalidConfig": "The booking system rejected its configuration. Please call us or email us directly so we can handle your booking manually.",
     "network": "Your request could not reach the booking service. Please check your connection or disable blockers and try again.",
     "timeout": "The booking request took too long. Please try again or contact us directly.",
     "invalidResponse": "The booking service returned an invalid response. Please contact us directly.",
-    "submitRejected": "The booking request was not accepted. Please review your details or contact us directly."
+    "submitRejected": "The booking request was not accepted. Please review your details or contact us directly.",
+    "gdprRequired": "Please accept the privacy policy before continuing.",
+    "contactHint": "If online booking is unavailable, contact us directly and we will handle your request manually.",
+    "callStudio": "Call studio",
+    "emailStudio": "Send email"
   },
   "confirmation": {
     "title": "Thank you!",

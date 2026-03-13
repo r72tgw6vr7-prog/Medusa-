@@ -8,9 +8,9 @@ interface PersonalInfoStepProps {
   formData: BookingFormData;
   setFormData: React.Dispatch<React.SetStateAction<BookingFormData>>;
   canProceed: boolean;
+  validationError: string | null;
   onBack: () => void;
   onNext: () => void;
-  onSubmit: (e: React.FormEvent) => void;
 }
 
 export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
@@ -18,9 +18,9 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
   formData,
   setFormData,
   canProceed,
+  validationError,
   onBack,
   onNext,
-  onSubmit,
 }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
@@ -32,8 +32,13 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
     }));
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onNext();
+  };
+
   return (
-    <form className='step-container booking-contact-step' onSubmit={onSubmit}>
+    <form className='step-container booking-contact-step' onSubmit={handleFormSubmit}>
       <h3>{t('booking.modal.personalTitle') || 'Deine Daten'}</h3>
 
       <MedusaInput
@@ -89,31 +94,36 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
         fullWidth
       />
 
-      <div className='form-group checkbox-group'>
+      <div
+        className='form-group checkbox-group'
+        data-invalid={validationError ? 'true' : 'false'}
+      >
         <input
           type='checkbox'
           id='gdpr-consent'
           name='gdprConsent'
           checked={formData.gdprConsent}
           onChange={handleInputChange}
-          required
+          aria-invalid={validationError ? 'true' : undefined}
+          aria-describedby={validationError ? 'gdpr-consent-error' : undefined}
         />
-        <label htmlFor='gdpr-consent' className='touch-target-mobile touch-target-mobile-inline'>
-          {t('booking.gdpr.consent')}
-        </label>
+        <div className='checkbox-group__content'>
+          <label htmlFor='gdpr-consent' className='touch-target-mobile touch-target-mobile-inline'>
+            {t('booking.gdpr.consent')}
+          </label>
+          {validationError ? (
+            <p id='gdpr-consent-error' className='form-error checkbox-group__error' role='alert'>
+              {validationError}
+            </p>
+          ) : null}
+        </div>
       </div>
 
       <div className='booking-actions'>
         <Button type='button' variant='outlineChrome' className='w-full' onClick={onBack}>
           {t('booking.modal.back') || 'Zurück'}
         </Button>
-        <Button
-          type='button'
-          variant='chrome'
-          className='w-full'
-          disabled={!canProceed}
-          onClick={onNext}
-        >
+        <Button type='submit' variant='chrome' className='w-full' disabled={!canProceed}>
           {t('booking.modal.next') || 'Weiter'}
         </Button>
       </div>

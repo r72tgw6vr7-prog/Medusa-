@@ -54,10 +54,15 @@
     "completeAllSteps": "Bitte vervollständigen Sie alle Schritte",
     "submitFailed": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.",
     "missingConfig": "Das Buchungssystem ist derzeit nicht verfügbar. Bitte rufen Sie uns an oder schreiben Sie uns direkt.",
+    "invalidConfig": "Das Buchungssystem wurde abgelehnt. Bitte rufen Sie uns an oder schreiben Sie uns direkt, damit wir Ihren Termin manuell aufnehmen können.",
     "network": "Ihre Anfrage konnte das Buchungssystem nicht erreichen. Bitte prüfen Sie Ihre Verbindung oder deaktivieren Sie Blocker und versuchen Sie es erneut.",
     "timeout": "Die Buchungsanfrage hat zu lange gedauert. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
     "invalidResponse": "Der Buchungsdienst hat keine gültige Antwort gesendet. Bitte kontaktieren Sie uns direkt.",
-    "submitRejected": "Die Buchungsanfrage wurde nicht angenommen. Bitte prüfen Sie Ihre Angaben oder kontaktieren Sie uns direkt."
+    "submitRejected": "Die Buchungsanfrage wurde nicht angenommen. Bitte prüfen Sie Ihre Angaben oder kontaktieren Sie uns direkt.",
+    "gdprRequired": "Bitte stimmen Sie der Datenschutzerklärung zu, bevor Sie fortfahren.",
+    "contactHint": "Wenn die Online-Buchung nicht funktioniert, kontaktieren Sie uns direkt und wir übernehmen die Anfrage manuell.",
+    "callStudio": "Studio anrufen",
+    "emailStudio": "E-Mail senden"
   },
   "confirmation": {
     "title": "Vielen Dank!",

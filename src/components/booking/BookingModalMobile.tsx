@@ -2,9 +2,11 @@ import { useState, useCallback, useEffect } from 'react';
 import { X } from 'lucide-react';
 import {
   BookingSubmitError,
+  getBookingConfigIssue,
   submitBooking,
   validateBookingData,
 } from '@/services/bookingService';
+import { env } from '@/lib/env';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/core/state/AppContext';
 import { Meteors } from '@/components/ui/meteors';
@@ -36,9 +38,17 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
   const [projectDetails, setProjectDetails] = useState('');
   const [formData, setFormData] = useState<BookingFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionErrorCode, setSubmissionErrorCode] = useState<BookingSubmitError['code'] | null>(
+    null,
+  );
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [bookingResult, setBookingResult] = useState<BookingResult | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [hasAttemptedPersonalNext, setHasAttemptedPersonalNext] = useState(false);
+  const phoneHref = `tel:${env.VITE_BUSINESS_PHONE.replace(/[^\d+]/g, '')}`;
+  const emailHref = `mailto:${env.VITE_BUSINESS_EMAIL}?subject=${encodeURIComponent(
+    language === 'en' ? 'Booking request' : 'Buchungsanfrage',
+  )}`;
 
   // Map service IDs to booking system service types
   const mapServiceToBookingType = useCallback((serviceId: string): string => {
@@ -75,9 +85,12 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
   }, [state.preselectedService, mapServiceToBookingType]);
 
   const canProceedStep1 = selectedService !== null;
-  const canProceedStep2 =
+  const hasRequiredPersonalInfo =
     formData.name.trim() !== '' && formData.email.trim() !== '' && formData.date.trim() !== '';
+  const canProceedStep2 = hasRequiredPersonalInfo;
   const canProceedStep3 = paymentMethod !== null;
+  const personalStepError =
+    hasAttemptedPersonalNext && !formData.gdprConsent ? t('booking.error.gdprRequired') : null;
 
   const resetForm = useCallback(() => {
     setStep('details');
@@ -86,26 +99,48 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
     setPaymentMethod(null);
     setProjectDetails('');
     setFormData(INITIAL_FORM_DATA);
+    setSubmissionErrorCode(null);
     setSubmissionError(null);
     setBookingResult(null);
     setSuccessMessage(null);
+    setHasAttemptedPersonalNext(false);
+  }, []);
+
+  const handlePersonalNext = useCallback(() => {
+    setHasAttemptedPersonalNext(true);
+
+    if (!hasRequiredPersonalInfo || !formData.gdprConsent) {
+      return;
+    }
+
+    setSubmissionError(null);
+    setHasAttemptedPersonalNext(false);
+    setStep('payment');
+  }, [formData.gdprConsent, hasRequiredPersonalInfo]);
+
+  const getSubmissionErrorCode = useCallback((error: unknown): BookingSubmitError['code'] => {
+    if (error instanceof BookingSubmitError) {
+      return error.code;
+    }
+
+    return 'submission_rejected';
   }, []);
 
   const getSubmissionErrorMessage = useCallback(
-    (error: unknown) => {
-      if (error instanceof BookingSubmitError) {
-        switch (error.code) {
-          case 'missing_config':
-            return t('booking.error.missingConfig');
-          case 'network':
-            return t('booking.error.network');
-          case 'timeout':
-            return t('booking.error.timeout');
-          case 'invalid_response':
-            return t('booking.error.invalidResponse');
-          case 'submission_rejected':
-            return t('booking.error.submitRejected');
-        }
+    (errorCode: BookingSubmitError['code']) => {
+      switch (errorCode) {
+        case 'missing_config':
+          return t('booking.error.missingConfig');
+        case 'invalid_config':
+          return t('booking.error.invalidConfig');
+        case 'network':
+          return t('booking.error.network');
+        case 'timeout':
+          return t('booking.error.timeout');
+        case 'invalid_response':
+          return t('booking.error.invalidResponse');
+        case 'submission_rejected':
+          return t('booking.error.submitRejected');
       }
 
       return t('booking.error.submitFailed');
@@ -113,11 +148,31 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
     [t],
   );
 
+  useEffect(() => {
+    const configIssue = getBookingConfigIssue();
+    if (!configIssue) {
+      return;
+    }
+
+    setSubmissionErrorCode(configIssue);
+    setSubmissionError(getSubmissionErrorMessage(configIssue));
+    setStep('error');
+  }, [getSubmissionErrorMessage]);
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
 
+      const configIssue = getBookingConfigIssue();
+      if (configIssue) {
+        setSubmissionErrorCode(configIssue);
+        setSubmissionError(getSubmissionErrorMessage(configIssue));
+        setStep('error');
+        return;
+      }
+
       if (!selectedService || !paymentMethod) {
+        setSubmissionErrorCode(null);
         setSubmissionError(t('booking.error.completeAllSteps'));
         return;
       }
@@ -130,7 +185,16 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         ...formData,
       };
 
-      const validationError = validateBookingData(bookingData);
+      if (!bookingData.gdprConsent) {
+        setSubmissionError(null);
+        setHasAttemptedPersonalNext(true);
+        setStep('personal');
+        return;
+      }
+
+      const validationError = validateBookingData(bookingData, {
+        gdprRequired: t('booking.error.gdprRequired'),
+      });
       if (validationError) {
         setSubmissionError(validationError);
         return;
@@ -138,6 +202,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
 
       try {
         setIsSubmitting(true);
+        setSubmissionErrorCode(null);
         setSubmissionError(null);
         setSuccessMessage(null);
 
@@ -161,8 +226,9 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
         setProjectDetails('');
         setFormData(INITIAL_FORM_DATA);
       } catch (error) {
-        console.error('Booking failed:', error);
-        setSubmissionError(getSubmissionErrorMessage(error));
+        const errorCode = getSubmissionErrorCode(error);
+        setSubmissionErrorCode(errorCode);
+        setSubmissionError(getSubmissionErrorMessage(errorCode));
         setStep('error');
       } finally {
         setIsSubmitting(false);
@@ -175,6 +241,7 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
       projectDetails,
       formData,
       t,
+      getSubmissionErrorCode,
       getSubmissionErrorMessage,
     ],
   );
@@ -185,8 +252,11 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
     onClose?.();
   }, [onClose, resetForm, closeBooking]);
 
+  const isConfirmationStep = step === 'confirmation' && bookingResult !== null;
+  const isWizardStep = step === 'details' || step === 'personal' || step === 'payment';
+
   return (
-    <div className='booking-modal-mobile'>
+    <div className={`booking-modal-mobile ${isConfirmationStep ? 'booking-modal-mobile--confirmation' : ''}`}>
       <div
         aria-hidden='true'
         style={{
@@ -200,74 +270,80 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
       >
         <Meteors number={12} />
       </div>
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <div className='modal-header'>
-          <h2>{t('booking.modal.title') || 'Termin buchen'}</h2>
-          {onClose && (
-            <button
-              className='close-button touch-target-mobile'
-              onClick={handleClose}
-              aria-label={t('booking.modal.close') || 'Close'}
-            >
-              <X size={24} />
-            </button>
-          )}
-        </div>
+      <div className='booking-modal-mobile__content'>
+        {!isConfirmationStep && (
+          <>
+            <div className='modal-header'>
+              <h2>{t('booking.modal.title') || 'Termin buchen'}</h2>
+              {onClose && (
+                <button
+                  className='close-button touch-target-mobile'
+                  onClick={handleClose}
+                  aria-label={t('booking.modal.close') || 'Close'}
+                >
+                  <X size={24} />
+                </button>
+              )}
+            </div>
 
-        <div className='booking-progress' aria-label='Buchung Fortschritt'>
-          {/* Always show 3-step progress */}
-          <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
-            1/3
-          </span>
-          <span className='booking-progress__divider' aria-hidden='true' />
-          <span className={`booking-progress__step ${step === 'personal' ? 'is-active' : ''}`}>
-            2/3
-          </span>
-          <span className='booking-progress__divider' aria-hidden='true' />
-          <span className={`booking-progress__step ${step === 'payment' ? 'is-active' : ''}`}>
-            3/3
-          </span>
-        </div>
+            <div className='booking-progress' aria-label='Buchung Fortschritt'>
+              {/* Always show 3-step progress */}
+              <span className={`booking-progress__step ${step === 'details' ? 'is-active' : ''}`}>
+                1/3
+              </span>
+              <span className='booking-progress__divider' aria-hidden='true' />
+              <span className={`booking-progress__step ${step === 'personal' ? 'is-active' : ''}`}>
+                2/3
+              </span>
+              <span className='booking-progress__divider' aria-hidden='true' />
+              <span className={`booking-progress__step ${step === 'payment' ? 'is-active' : ''}`}>
+                3/3
+              </span>
+            </div>
+          </>
+        )}
 
-        <div className='modal-body'>
-          {step === 'details' && (
-            <ServiceSelectionStep
-              t={t}
-              selectedService={selectedService}
-              setSelectedService={setSelectedService}
-              specificService={specificService}
-              setSpecificService={setSpecificService}
-              projectDetails={projectDetails}
-              setProjectDetails={setProjectDetails}
-              canProceed={canProceedStep1}
-              onNext={() => setStep('personal')}
-            />
-          )}
+        {isWizardStep && (
+          <div className='modal-body'>
+            {step === 'details' && (
+              <ServiceSelectionStep
+                t={t}
+                selectedService={selectedService}
+                setSelectedService={setSelectedService}
+                specificService={specificService}
+                setSpecificService={setSpecificService}
+                projectDetails={projectDetails}
+                setProjectDetails={setProjectDetails}
+                canProceed={canProceedStep1}
+                onNext={() => setStep('personal')}
+              />
+            )}
 
-          {step === 'personal' && (
-            <PersonalInfoStep
-              t={t}
-              formData={formData}
-              setFormData={setFormData}
-              canProceed={canProceedStep2}
-              onBack={() => setStep('details')}
-              onNext={() => setStep('payment')}
-              onSubmit={handleSubmit}
-            />
-          )}
+            {step === 'personal' && (
+              <PersonalInfoStep
+                t={t}
+                formData={formData}
+                setFormData={setFormData}
+                canProceed={canProceedStep2}
+                validationError={personalStepError}
+                onBack={() => setStep('details')}
+                onNext={handlePersonalNext}
+              />
+            )}
 
-          {step === 'payment' && (
-            <PaymentStep
-              t={t}
-              paymentMethod={paymentMethod}
-              setPaymentMethod={setPaymentMethod}
-              submissionError={submissionError}
-              canProceed={canProceedStep3}
-              onBack={() => setStep('personal')}
-              onSubmit={handleSubmit}
-            />
-          )}
-        </div>
+            {step === 'payment' && (
+              <PaymentStep
+                t={t}
+                paymentMethod={paymentMethod}
+                setPaymentMethod={setPaymentMethod}
+                submissionError={submissionError}
+                canProceed={canProceedStep3}
+                onBack={() => setStep('personal')}
+                onSubmit={handleSubmit}
+              />
+            )}
+          </div>
+        )}
 
         {isSubmitting && <LoadingOverlay t={t} />}
 
@@ -276,11 +352,19 @@ export const BookingModalMobile: React.FC<{ onClose?: () => void }> = ({ onClose
             t={t}
             error={submissionError}
             isSubmitting={isSubmitting}
+            showRetry={
+              submissionErrorCode !== 'missing_config' && submissionErrorCode !== 'invalid_config'
+            }
             onRetry={() => setStep('payment')}
+            phoneHref={phoneHref}
+            emailHref={emailHref}
+            phoneLabel={t('booking.error.callStudio')}
+            emailLabel={t('booking.error.emailStudio')}
+            contactHint={t('booking.error.contactHint')}
           />
         )}
 
-        {step === 'confirmation' && bookingResult && (
+        {isConfirmationStep && (
           <ConfirmationStep
             t={t}
             language={language}
